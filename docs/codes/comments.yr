@@ -11,5 +11,4 @@ def main () {
     // None of the line of comment will be read by the compiler
 
     let x = 1 + /* 2 + */  3;
-    assert (x == 4);
 }
