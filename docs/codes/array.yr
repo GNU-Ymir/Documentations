@@ -1,6 +1,6 @@
 
 // Compute the sum of an array of int
-def foo (a : [int]) : int {
+def foo (a : [int]) -> int {
     let sum = 0;
     for it in a {
         sum = sum + it;

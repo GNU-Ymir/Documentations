@@ -1,4 +1,4 @@
-def reverse (a : t!(uint, bool)) : t!(bool, uint) {
+def reverse (a : t!(uint, bool)) -> t!(bool, uint) {
     let (r, v) = a;
     return (v, r);
 }
