@@ -1,0 +1,6 @@
+extern (C) printf (const c : p!char, ...);
+
+def main() {
+    let test = "Hello World !";
+    printf ("%s\n".ptr, test);
+}
