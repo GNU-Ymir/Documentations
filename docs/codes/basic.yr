@@ -7,7 +7,7 @@ def main () {
 
     // A suffix can be used to specify the type
     // Here c is an uint, d a bool and, e a char
-    let c = 12U, d = false, e = 'r';
+    let c = 12U, d = int::max, e = 'r';
 
     // Error, cannot change type of variables.
     c = false;
