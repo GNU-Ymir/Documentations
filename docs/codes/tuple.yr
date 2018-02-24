@@ -1,6 +1,6 @@
-def reverse (a : t!(uint, bool)) -> t!(bool, uint) {
-    let (r, v) = a;
-    return (v, r);
+def reverse (tu : t!(uint, bool)) -> t!(bool, uint) {
+    let (f, s) = tu;
+    return (s, f);
 }
 
 def simple (a : uint, b : bool, c : string) {
