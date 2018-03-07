@@ -2,13 +2,8 @@
 
 **Ymir **support differents types of comments. Those comments will be ignored by the compiler.
 
-```
-// Line comments which go to the end of the line
-```
-
-```
- /* Multiple lines comments which go to the closing delimiter. */
-```
+* > `// Line comments wich go to the end of the line `
+* > `/* Multiple lines comments which go to the closing delimiter */`
 
 ```
 def main () {
@@ -26,7 +21,6 @@ def main () {
     let x = 1 + /* 2 + */  3;
     assert (x == 4);
 }
-
 ```
 
 
