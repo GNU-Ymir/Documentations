@@ -1,3 +1,8 @@
-# First Chapter
+# Install Ymir locally
 
-GitBook allows you to organize your book into chapters, each chapter is stored in a separate file like this one.
+The **Ymir **programming language reference compiler is call **GYC**, and is based on **GCC**.
+
+## Download and install
+
+**TODO**
+
