@@ -5,10 +5,10 @@
 * > `// Line comments wich go to the end of the line `
 * > `/* Multiple lines comments which go to the closing delimiter */`
 
-```
+```ymir
 def main () {
     // This is an example of line comment
-
+	
     /*
      * This is another type of comment
      * Where the stars are optional
