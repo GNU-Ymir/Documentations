@@ -1,3 +1,4 @@
+
 # Ymir Tour
 	
 **Ymir** is a modern programming language, which aims to help developpers
@@ -14,8 +15,5 @@ library.
 ## Installation 
 
 The **Ymir **programming language reference compiler is call **GYC**, and is based on **GCC**.
-
-
-
 
 
