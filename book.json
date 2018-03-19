@@ -3,11 +3,6 @@
     "pluginsConfig": {
 	"code": {
 	    "copyButtons": true
-	},
-	"prism": {
-	    "css": [
-		"prismjs/themes/prism-atelier.css"
-	    ]
 	}
     }
 }
