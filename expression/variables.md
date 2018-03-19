@@ -1,4 +1,5 @@
 #Variables
+<hr>
 
 Like many language **Ymir** allows you to store data in
 variables. There are few differents kind of variables with different

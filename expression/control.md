@@ -1,4 +1,5 @@
-## Control structures
+# Control structures
+<hr>
 
 To create a programm, you need to be able to make decision, iterate  
 over items, or repeat instruction multiple times.  This part will  

@@ -1,4 +1,5 @@
 # Comments
+<hr>
 
 **Ymir **support differents types of comments. Those comments will be ignored by the compiler.
 
@@ -9,7 +10,7 @@
 def main () {
     // This is an example of line comment
 	
-    /*
+    /* 
      * This is another type of comment
      * Where the stars are optional
      */

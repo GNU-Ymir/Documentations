@@ -1,4 +1,5 @@
 # Literals
+<hr>
 
 ## Bool Literals
 

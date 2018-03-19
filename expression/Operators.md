@@ -1,4 +1,5 @@
 # Operators
+<hr>
 
 The precedence of the operator is similar to other C-like language.
 

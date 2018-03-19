@@ -1,8 +1,5 @@
 {
-    "plugins": ["prism", "-highlight", "code"],
+    "plugins": ["prism", "-highlight", "copy"],
     "pluginsConfig": {
-	"code": {
-	    "copyButtons": true
-	}
     }
 }
