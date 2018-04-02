@@ -1,0 +1,34 @@
+#Arrays and slices
+<hr>
+
+An array is a collection of values of the same type, stored in contiguous memory. An array has a size and a pointer to the data. It can be represented as the tuple ```(ulong, p!(void))```. Slice can be used to borrow a section of an array.
+
+```ymir
+// Compute the sum of an array of int
+def foo (a : [int]) -> int {
+    let sum = 0;
+    for it in a {
+        sum = sum + it;
+    }
+    return sum;
+}
+
+def main () {
+    // array is [int ; 5U]
+    let array = [1, 2, 3, 4, 5];
+    
+    // Allocate an array of int of size 100U
+    let aux = [int ; 100U]; 
+    
+
+    println ("First element is ", array [0]);
+    println ("Last element is ", array [array.length - 1U]);
+
+    // Borrow a section of array.
+    let slice = array [1 .. 3];
+    println ("foo ([2, 3]) = ",  foo (slice));
+
+    slice [0] = 42;
+    println ("array [1] = 42 ? ", array [1] == 42);        
+}
+```
