@@ -21,16 +21,19 @@ let b = 34;
 println (c); // Illegal, c doesn't exist anymore
 ```
 
-### Const and Immutable
+### Compile Time variable
 
-Immutable variables have a value known at compile time. You can't
-change their values. The keyword `imut` allows you to declare some
-immutable variables.
+Compile time variables have a value known at compile time. You can
+change their value with a value known at compile time. 
+The keyword `cte` allows you to declare some compile time variables.
 
 ```ymir
-let imut a = 12;
-a = 45; // Illegal
+let cte a = 12;
+a = 45; // Ok
+a = some_runtime_function (); // Illegal
 ```
+
+### Const
 
 The `const` keyword denotes that a variable can't change value, but it
 can be unknown at compile time. 

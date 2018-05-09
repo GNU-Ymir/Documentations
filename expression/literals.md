@@ -1,27 +1,26 @@
-# Literals
+# Literaux
 <hr>
 
-## Bool Literals
+## literaux booléens 
 
-The two literals to form a bool are `true` and `false`.
+Les deux literaux qui permettent de former un `bool` sont `true` et `false`.
 
-## Numeric literals
+## Literaux numérique 
 
-Integers literals can be used to create any signed or unsigned integer  
-or floating point number. In all case **Ymir** is able to infer the  
-right type of the literal, thanks to type suffix.
+Les literaux entiers peuvent être utilisés pour créer des entiers signés ou non-signés, ou encore des nombre flottants.
+Dans tout les cas, **Ymir** va déduire le type des literaux en fonction de leurs suffixe. 
 
-Suffix for signed and unsigned integers are :
+Les suffixes pour les entiers signés et non-signés sont :
 
 | Suffix | Size | Type |
 | --- | --- | --- |
-| `B`, `UB` | 8-bits | i8, u8 |
-| `S`, `US` | 16-bits | i16, u16 |
-| `U` | 32-bits | u32 |
-| `L`, `UL` | 64-bits | i64, u64 |
+| `B`, `UB` | 8-bits | `i8`, `u8` |
+| `S`, `US` | 16-bits | `i16`, `u16` |
+| `U` | 32-bits | `u32` |
+| `L`, `UL` | 64-bits | `i64`, `u64` |
 
-Whithout suffix integer literals are infered to `i32`.  
-The token `_` can be used to enhance readability.
+Si le literal n'a pas de suffixe, il sera considéré comme étant du type `i32`. 
+Le jeton `_` peut être utilisé pour améliorer la lisibilité des literaux dans le cas de grand nombre.
 
 ```ymir
 let a = 45; // i32
@@ -31,8 +30,8 @@ let d = 10_000S; // i16
 let f = 0x10B; // i8, with the value 16
 ```
 
-For floating point literals, there only one suffix `f`. It will force  
-the type to be `f32`, instead of `f64` without the suffix.
+Pour les literaux de nombre flottant, il n'y a qu'un seul suffixe `f`. Celui-ci force le type du literal a ếtre `f32`, au lieu de `f64` lorsqu'il n'y a pas de suffixe.
+
 
 ```ymir
 let a = 3.; // f64, 3.0
