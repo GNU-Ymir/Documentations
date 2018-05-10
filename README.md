@@ -1,19 +1,27 @@
 
 # Ymir Tour
-	
-**Ymir** is a modern programming language, which aims to help developpers
-to gain type safety and fast developpment. The language is focused on
-safety, concurrency and speed.  It can accomplish this goals due to
-its expressivness and its direct compilation to efficient native
-machine code.
 
-**Ymir** Tour is an overview of the **Ymir** language. It will illustrate Ymir
-concepts with a collection of examples, and present the standard
-library.
+**Ymir** est un langage moderne haut niveau fortement typé qui a pour
+objectif d'aider les developpeurs à gagner du temps en proposant un
+système de sureté de typage.  Le langage est axé sur la sureté, la
+concurrence et la vitesse d'execution. Ces objectifs peuvent être
+atteint grâce à son expressivité et la compilation direct vers un
+langage machine natif performant.
 
+**Ymir** Tour parcours les différents concept de **Ymir** grâce à un
+collection d'exemples afin de démontrer les apports du langage.  Cette
+exploration sera également l'occasion de présenter la bibliothèque
+standart.
 
 ## Installation 
 
-The **Ymir **programming language reference compiler is call **GYC**, and is based on **GCC**.
+Le compilateur de référence de **Ymir** est basé sur le compilateur
+**GCC** qui offre des optimisations statique performantes ainsi qu'un
+vaste ensemble d'architecture supportée.
+
+Le compilateur est toujours en version beta, ce qui ne lui permet pas
+pour le moment d'avoir un release et une installation simple. Vous
+pouvez néamoins (pour les plus courageux) suivre les instructions
+d'installation de **GCC**.
 
 

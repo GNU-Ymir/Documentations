@@ -1,21 +1,23 @@
-# Operators
+# Operateurs
 <hr>
 
-The precedence of the operator is similar to other C-like language.
+La priorité des operateurs est similaire aux autres langages proche du C.
 
 ```ymir
 let a = 1 + 3 * 4;
 assert (a == 13);
 ```
 
-## Type promotion
+## Promotion de type
 
-The operations on primitives types are allowed in **Ymir** language
-only if they don't create lost of precision. This is called type
-promotions : A type *x* can be transform to type *y*, if and only
-if the size of *x* is smaller than the size of *y*, and *x* and
-*y* are of the same nature. That is to say, *x* and *y* are both
-unsigned, or both signed, or they are both floating point types.
+Les operations sur les types primitifs sont autorisées par le langage
+**Ymir** seulement si elles ne générent pas de perte de précision.
+Ceci s'appelle promotion de types, et se définis par : Un type *x*
+peut être transformé en type *y* si et seulement si la taille du type
+*x* est plus petite que la taille de *y* et *x* et *y* sont de même
+nature. C'est à dire que *x* et *y* sont tout les deux non signés, ou
+tout les deux signés, ou encore qu'il sont tout les deux de type
+flottants.
 
 ```ymir
 let a = 12; // i32

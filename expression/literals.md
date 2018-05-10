@@ -41,9 +41,9 @@ let c = .2f; // f32, 0.2f
 
 ## Character literals
 
-Character literals are enclosed with single quote `'`.  The character  
-literals are infered to type `char`, which have a size of `8-bits` and  
-is unsigned.
+Les literaux formant des caractères sont entouré de apostrophe
+`'`. Ces literaux sont inféré avec le type char, qui a une taille de
+`8 bits` est est non signé.
 
 ```ymir
 let a = 'A'; 
@@ -53,24 +53,25 @@ assert (a == b);
 let c = '\n';
 ```
 
-The following escape characters are supported
+Les caractères suivant sont les caractère d'échappement disponnible dans le langage **Ymir**.
 
 * `\0x00\` .. `\0xFF`, hexadecimal notation from `0` to `255`.
 * `\a`, `\b`, `\f`, `\n`, `\r`, `\t`, `\v`, `\\`, `\'`, `\"`, `\?`, `\0`
 
 ## String literals
 
-String literals are enclosed with double quotes `"`. They can contains  
-any kind of bytes and escape sequences.
+Les literaux formant des chaines de caractères sont entourés de
+`"`. Il peuvent contenir n'importe quel type d'octet et de séquence de
+caractère.
+
+On peut également utiliser `q: {}` pour former un chaine de caractère sur plusieurs ligne.
 
 ```ymir
 let a = "Hi there !!";
 let b = q: { 
-    This is a macro to get a multiple line string
-    It will force the text editor to keep the syntax highlighting
-
-    it can be usefull to express some external language 
-
+    C'est une marco pour former une chaine de caractère de plusieurs ligne
+    Ceci permet de forcer l'éditeur de texte à garder la coloration syntaxique
+   
     void some_c_function () {
         int a = 12;
         printf ("%d\n", a);
@@ -78,29 +79,30 @@ let b = q: {
 };
 ```
 
-## Array literals
+## Literaux de tableau
 
-In **Ymir**, there two types of array _dynamic_ and _static_ ones.  
-The static ones have an immutable size, which is known at compile time.  
-Array literals allows to express this types of arrays.
+En **Ymir**, il y a deux types de tableau primitif les tableau __dynamique__ et les tableau __statique__.
+Les tableaux statiques possèdent une taille connu à la compilation, et qui ne peut pas être modifié. 
+Grâçe aux literaux, il est possible de former des tableaux statiques.
 
 ```ymir
-let my_first_array = [1, 2, 3]; // [i32; 3]
-let my_second_array = ["hi", "is", "this", "working", "?"]; // [const (string); 5];
+let tableau_un = [1, 2, 3]; // [i32; 3UL]
+let tableau_deux = ["hi", "is", "this", "working", "?"]; // [string ; 5UL];
 ```
 
-The type string is an alias to the array of char type `[char]`.
+Le type string est un alias du type tableau de caractère constant : `[const (char)]`.
 
-## Block literals
+## Les literaux de bloc
 
-A block is sequence of instruction, and it can be used as an expression.
+Un bloc est une séquence d'instruction, qui peut être utilisé comme une expression.
 
 ```ymir
 let a = {
    println ("some intructions ...");
    12;
-}; // a will be equal to 12
+}; // a va être égale à 12
 ```
 
-The last expression of a block is used as its value.
+La dernière expression du bloc est utilisé comme la valeur du bloc.
+
 

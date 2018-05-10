@@ -1,20 +1,20 @@
 #Ranges
 <hr>
 
-Range is a pair of values of the same type. Range can be of integer, floating or character type.
+Le type range est une paire de valeurs du même type. Ces types peuvent être soit entier, flottant ou de type char.
 
 ```ymir
 def main () {
     // rng is r!(i32);
-    let rng = 1 .. 3; // equivalent to the interval [1, 3[
+    let rng = 1 .. 3; // equivalent à l'interval [1, 3[
 
-    // Range is an iterable type.
+    // Range est un type iterable
     // 
     for it in 0 .. 6 {
-        print (it, ", "); // prints "1, 2, 3, 4, 5, "
+        print (it, ", "); // affiche "1, 2, 3, 4, 5, "
     }
 
-    // We can get the values
+    // On peut récuperer les valeurs de l'intervalle
     println ("Range (", rng.fst, " .. ", rng.scd, ')');        
 }
 ```

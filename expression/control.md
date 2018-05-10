@@ -1,4 +1,4 @@
-# Control structures
+# Structure de contrôles
 <hr>
 
 Pour créer un programme fonctionnel, il vous faut être en mesure de prendre des décision, d'itérer sur des ensembles, ou de répéter des instructions plusieurs fois.

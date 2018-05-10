@@ -1,19 +1,26 @@
 # Primitive types
 
-Every value have a type, which tell how the value will be used and computed. In this section we will discuss about the types which are built into the language. 
+En **Ymir** toutes les valeurs ont un type, celui ci va servir à définir le comportement que le compilateur doit adopter et comment la valeur va être utiliser pour les différents calculs. Dans cette partie nous présentons les différents types qui font partie intégrente du langage.
 
-## Scalar types 
+## Les types scalaires
+
+   Les types scalaires représente tous les types qui ne dispose que d'une seule valeur. Il peuvent faire différentes tailles en fonction de leurs besoins.
 	
-### Integer types
+### Types entier
 
-An integer is a number without fractional part. There are different integer types in **Ymir**, signed or unsigned. Signed and unsigned refers to the possibility of a number to be negative. The following table lists all the integer types in **Ymir**.
+Un entier est un nombre qui ne possède pas de partie décimal. Il y a différent types d'entier en **Ymir** les signés et les non-signés. Signés et non-signés se rapporte à la possibilité d'un nombre d'être négatif. Le tableau suivant liste les différents types entiers présent en **Ymir**, et les classe en fonction de leur taille en mémoire.
 
-| Size | Signed | Unsigned |
+
+| Taille | Type | Valeurs possible |
 | --- | --- | --- |
-| 8-bits | i8 | u8 |
-| 16-bits | i16 | u16 |
-| 32-bits | i32 | u32 |
-| 64-bits | i64 | u64 |
+| 8-bits | `i8` | `-128 .. 127` |
+| 8-bits | `u8` | `0 .. 255` |
+| 16-bits | `i16` |  `-32768 .. 32767` |
+| 16-bits | `u16` |  `0 .. 65535` |
+| 32-bits | `i32` | `-2147483648 .. 2147483647` |
+| 32-bits | `u32` | `0 .. 4294967295` |
+| 64-bits | `i64` | `-9223372036854775808 .. 9223372036854775807` |
+| 64-bits | `u64` | `0 .. 18446744073709551615` |
 
 ### Floating-point types
 
