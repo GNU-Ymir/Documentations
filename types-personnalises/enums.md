@@ -1,17 +1,18 @@
 # Enums
 
-Enum are created by the keyword `enum`. Enum declaration are used to define a group of constants.
+Les enum sont des types spéciaux possédant un ensemble de valeurs constantes. Le mot clé `enum` permet de définir un type enumeré, dont le type des champs est inféré à la compilation. Il est obligatoire que chacun des champs possède le même type.
 
 ```ymir
-// This enum is typed as string, but any type can be used
-enum Person {
-    Engineer : "eng",
-    Scientist : "sci"
-}
+// Cette enum est de type string
+enum 
+| Engineer : "eng",
+| Scientist : "sci"
+ -> Person;
 
-// This function take an enum as an argument 
+// Cette fonction prend un enum de type Person en paramètre
 def inspect (p : Person) {
-    // Match are used to branch over multiple values
+
+	// On utilise le pattern matching pour choisir entre plusieurs valeur
     match p {
         Person::Engineer => println ("Engineer");
         Person::Scientist => println ("Scientist");

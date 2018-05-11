@@ -1,38 +1,61 @@
 # Structures
 
-Structures are tuple with a name and type descriptor. This descriptor is created with the keyword `struct`.
+Une structure est un type personnalisé, permettant de regrouper plusieurs valeurs dans un type ayant un nom. Leur composition est équivalente à celle des tuples, on peut voir les tuples comme des structures anonymes. Le mot clé `struct` permet de définir un nouveau type.
 
 ```ymir
-/* Two possible syntaxes */
 
-// A structure with two fields
-struct Point {
-    x : double,
-    y : double
-}
+// Une structure avec deux champ
+struct  
+| x : double,
+| y : double
+-> Point;
 
-// Struct can be field of another struct
+// Une structure peut contenir des champ dont le type est une structure
 struct
 | a : Point
 | b : Point
 -> Rectangle;
 
 def main () {
-    // all values are needed
+    // Il faut remplir toutes les données pour construire une structure
     let point = Point { 1.1, 1.7 };
 
-    // // A struct can be constructed without value either
-    // // All fields are set two 0x0.
+    // Il est également possible de construire une structure sans lui donner de valeur
+    // Tout les champs seront remplis avec leur valeur ::init
     let point2 = Point::init; 
 
-    // // We can get a tuple from a structure
+    // Il est possible de transformer une structure en tuple
     let (x, y) = point.tupleof;
     println ("(", x, ", ", y, ")");
 
     let rect = Rectangle { point, Point { 3.3, 4.5 } };
 
-    // // Structure are printable.
-    println (rect);    
+    // Les structure sont des éléments affichables
+    println (rect);
 }
 ```
 
+## Attribut de structure
+
+Il est possible de modifier l'alignement des types dans une structure. Pour ça, il faut utiliser un attribut de structure, qui se déclare en même temps que la structure grâce au jeton `@`.
+
+```ymir
+
+struct @packed
+| a : char 
+| b : i32
+| c : char
+ -> Packed;
+ 
+struct 
+| a : char
+| b : i32 
+| c : char 
+ -> Unpacked;
+ 
+def main () {
+	println (Packed::sizeof); // 6
+	println (Unpacked::sizeof); // 12
+} 
+ 
+```

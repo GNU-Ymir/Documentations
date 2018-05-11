@@ -13,12 +13,12 @@
   * [Tuples](expressions/tuples.md)
   * [Structures de contrôle](expressions/structures-de-controle.md)
   * Pattern maching
-* Types personnalisés
+* [Types personnalisés](types-personnalises/main.md)
   * [Structures](types-personnalises/structures.md)
+  * [Unions](types-personnalises/unions.md)
   * [Enums](types-personnalises/enums.md)
-  * Unions
-* Fonctions
-  * Attributs
+* [Fonctions](fonctions/main.md)
+  * [Attributs](fonctions/attributs.md)
   * Lambdas
 * Modules
 * Templates
