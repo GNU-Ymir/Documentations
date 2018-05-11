@@ -2,19 +2,15 @@
 
 Le code source suivant est la version **Ymir** du celebre programme Hello World.
 
-{% code-tabs %}
-{% code-tabs-item title="hello-world.yr" %}
-```rust
-// This is a comment
+```ymir
+// C'est une commentaire
 
-// The first function that will be called at execution
+// Cette fonction est la première fonction appelé par l'exécution du programme
 def main () {
-    // Print test to the console
+    // Affiche 'Hello World !!' sur la console
     println ("Hello World !!");
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
 
 L'exécutable peut être généré grâce au compilateur **GYC**
 

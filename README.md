@@ -2,7 +2,7 @@
 
 **Ymir** est un langage moderne haut niveau fortement typé qui a pour objectif d'aider les developpeurs à gagner du temps en proposant un système de sureté de typage. Le langage est axé sur la sureté, la concurrence et la vitesse d'execution. Ces objectifs peuvent être atteint grâce à son expressivité et la compilation direct vers un langage machine natif performant.
 
-**Ymir** Tour parcours les différents concept de **Ymir** grâce à un collection d'exemples afin de démontrer les apports du langage. Cette exploration sera également l'occasion de présenter la bibliothèque standart.
+**Ymir** Tour parcours les différents concept de **Ymir** grâce à un collection d'exemples afin de démontrer les apports du langage. Cette exploration sera également l'occasion de présenter la bibliothèque standard.
 
 ## Installation
 
