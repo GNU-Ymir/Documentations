@@ -4,7 +4,7 @@
 
 Un tableau est une collection de valeurs du même type, stockés dans un espace mémoire contigu. Un tableau possède une taille ainsi qu'un pointeur vers les données. Il peut être représenté comme étant la structure suivante `{u64 size; p!T data}`, où `T` est le type des données stocké par le tableau.
 
-```text
+```ymir
 // Calcule la sum d'un tableau d'entier
 def foo (a : [i32]) -> i32 {
     let sum = 0;
@@ -34,7 +34,7 @@ def main () {
 
 Les slices sont des éléments présent dans le langage qui présente un comportement différents des tableaux, et qui servent à accéder à une section d'un tableau. Il ont une taille, qui ne peut pas être modifié.
 
-```text
+```ymir
 def foo (a : [i32]) -> i32 {
     let sum = 0;
     for it in a {

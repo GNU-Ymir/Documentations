@@ -6,7 +6,7 @@ Pour créer un programme fonctionnel, il vous faut être en mesure de prendre de
 
 La structure de contrôle la plus simple est la construction `if` `else`.
 
-```text
+```ymir
 if a < b 
     println (a);
 else if a == b
@@ -19,7 +19,7 @@ En **Ymir**, une condition doit être du type `bool`, il est impossible d'utilis
 
 La construction `if` `else` peut être utilisé comme une expression, vous pouvez par conséquent récupérer la valeur d'une expression conditionnel.
 
-```text
+```ymir
 let x = true;
 let a = 1 + if (x) 100 else 2;
 ```
@@ -32,7 +32,7 @@ Le langage **Ymir** propose plusieurs structure de controle permettant de boucle
 
 La boucle `while` est très similaire à celle d'autres langages proche du C.
 
-```text
+```ymir
 let i = 0;
 while i < 100 {
     println (i);
@@ -44,7 +44,7 @@ while i < 100 {
 
 Parfois, il est pratique de pouvoir stopper une boucle avant que sa condition ne la force à s'arrêter. Le mot clé `break` vous permet de le faire.
 
-```text
+```ymir
 let i = 0;
 while i < 100 {
     println (i);
@@ -55,7 +55,7 @@ while i < 100 {
 
 Vous pouvez utiliser le mot clé `break` pour stopper une boucle parent en utilisant un tag.
 
-```text
+```ymir
 let i = 0;
 let j = 0;
 while: firstLoop (i < 100) {
@@ -72,7 +72,7 @@ assert (j == 2 && i == 0);
 
 La boucle `for` vous permet d'itérer sur une collection d'élément comme un tableau, ou un range.
 
-```text
+```ymir
 for i in ["One", "Two", "Three"] {
     print (i, ","); 
 } // One, Two, Three,
@@ -93,7 +93,7 @@ for i in 3 .. 0 {
 
 Tout comme pour les boucle `while`, il est possible de tagger une boucle `for` afin de pouvoir y faire référence dans une instruction `break`.
 
-```text
+```ymir
 for:loop (i in [1, 2, 3]) {
     break loop;
 }

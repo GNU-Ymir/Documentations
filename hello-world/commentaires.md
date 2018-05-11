@@ -5,7 +5,7 @@
 * > `// Une ligne de commentaire qui s'arrête à la fin de la ligne`
 * > `/* Plusieurs lignes de commentaire qui s'arrête au caractère de fermeture */`
 
-```text
+```ymir
 def main () {
     // Ceci est un exemple de commentaire
 

@@ -2,7 +2,7 @@
 
 Structures are tuple with a name and type descriptor. This descriptor is created with the keyword `struct`.
 
-```text
+```ymir
 /* Two possible syntaxes */
 
 // A structure with two fields

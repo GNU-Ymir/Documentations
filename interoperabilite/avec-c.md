@@ -6,7 +6,7 @@ It would be sensless, to ignore the vast array of C API's available, that's why 
 
 The `extern (C)` keyword allows you to declare extern C function.
 
-```text
+```ymir
 extern (C) pow (base : double, exponent : double) -> double;
 
 def main() {
@@ -35,7 +35,7 @@ Ymir structs and unions are analog to C ones.
 
 C globals have the C naming convention, so they must be declared as `extern (C)`.
 
-```text
+```ymir
 /*
  * C file : 
  * int x;

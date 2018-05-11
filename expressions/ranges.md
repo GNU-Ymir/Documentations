@@ -2,7 +2,7 @@
 
 Le type range est une paire de valeurs du même type. Ces types peuvent être soit entier, flottant ou de type char.
 
-```text
+```ymir
 def main () {
     // rng is r!(i32);
     let rng = 1 .. 3; // equivalent à l'interval [1, 3[

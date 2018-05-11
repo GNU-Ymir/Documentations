@@ -2,7 +2,7 @@
 
 Enum are created by the keyword `enum`. Enum declaration are used to define a group of constants.
 
-```text
+```ymir
 // This enum is typed as string, but any type can be used
 enum Person {
     Engineer : "eng",
