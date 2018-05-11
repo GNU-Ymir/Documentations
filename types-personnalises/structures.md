@@ -1,9 +1,8 @@
-#Structures
-<hr>
+# Structures
 
-Structures are tuple with a name and type descriptor. This descriptor is created with the keyword ```struct```.
+Structures are tuple with a name and type descriptor. This descriptor is created with the keyword `struct`.
 
-```ymir
+```text
 /* Two possible syntaxes */
 
 // A structure with two fields
@@ -29,10 +28,11 @@ def main () {
     // // We can get a tuple from a structure
     let (x, y) = point.tupleof;
     println ("(", x, ", ", y, ")");
-    
+
     let rect = Rectangle { point, Point { 3.3, 4.5 } };
 
     // // Structure are printable.
     println (rect);    
 }
 ```
+

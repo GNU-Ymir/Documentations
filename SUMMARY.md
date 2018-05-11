@@ -1,29 +1,30 @@
-# Summary
+# Table of contents
 
 * [Introduction](README.md)
-* [Hello World](hello-world.md)
-  * [Commentaires](hello-world/21-comments.md)
-* [Types primitifs](prim-types.md)
-* [Expressions](expression.md)
-  * [Literaux](expression/literals.md)
-  * [Variables](expression/variables.md)
-  * [Operateurs](expression/Operators.md)
-  * [Tableaux et slices](expression/arrays.md)
-  * [Ranges](expression/ranges.md)
-  * [Tuples](expression/tuples.md)
-  * [Structures de contrôle](expression/control.md)
-  * [Pattern maching](expression/match.md)
-* [Types personnalisés](custom-types.md)
-  * [Structures](custom-types/structures.md)
-  * [Enums](custom-types/enums.md)
-  * [Unions](custom-types/unions.md)
-* [Fonctions](functions.md)
-  * [Attributs](functions/attributes.md)
-  * [Lambdas](functions/lambdas.md)
-* [Modules](modules.md)
-* [Templates](templates.md)
-* [Macros](macros.md)
-* [Interoperabilité](interoperability.md)
-  * [Avec C](interop/c.md)
-  * [Avec C++](interop/cpp.md)
-  * [Avec D](interop/d.md)
+* [Hello World](hello-world/README.md)
+  * [Commentaires](hello-world/commentaires.md)
+* [Types primitifs](types-primitifs.md)
+* [Expressions](expressions/README.md)
+  * [Literaux](expressions/literaux.md)
+  * [Variables](expressions/variables.md)
+  * [Operateurs](expressions/operateurs.md)
+  * [Tableaux et slices](expressions/tableaux-et-slices.md)
+  * [Ranges](expressions/ranges.md)
+  * [Tuples](expressions/tuples.md)
+  * [Structures de contrôle](expressions/structures-de-controle.md)
+  * Pattern maching
+* Types personnalisés
+  * [Structures](types-personnalises/structures.md)
+  * [Enums](types-personnalises/enums.md)
+  * Unions
+* Fonctions
+  * Attributs
+  * Lambdas
+* Modules
+* Templates
+* Macros
+* [Interoperabilité](interoperabilite/README.md)
+  * [Avec C](interoperabilite/avec-c.md)
+  * Avec C++
+  * Avec D
+
