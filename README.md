@@ -36,5 +36,5 @@ Le compilateur est installé, et se nomme `gyc-7` (en référence à la version 
 Comme pour tout les paquets debian, la desinstallation se fait de la manière suivante : 
 ```
 dpkg -r gyc-7
-dpkg -r libmidgard-7-dev
+dpkg -r libgmidgard-7-dev
 ```
