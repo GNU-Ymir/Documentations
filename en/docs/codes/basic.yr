@@ -1,0 +1,16 @@
+def main () {
+    // We create a float with a default value
+    let a = float::init;
+    
+    // Variable types are infered
+    let b = 12; // b is an int
+
+    // A suffix can be used to specify the type
+    // Here c is an uint, d a bool and, e a char
+    let c = 12U, d = int::max, e = 'r';
+
+    println ("test"::typeid); // will print const([char])
+    
+    // Error, cannot change type of variables.
+    c = false;
+}
