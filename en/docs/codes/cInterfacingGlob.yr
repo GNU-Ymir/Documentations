@@ -1,0 +1,6 @@
+/*
+ * C file : 
+ * int x;
+ *
+ */
+extern (C) x : int;
