@@ -1,5 +1,5 @@
 {
-    "plugins": ["prism", "-highlight", "copy-code-button"],
+    "plugins": ["prism", "-highlight", "copy-code-button", "mathjax"],
     "pluginsConfig": {
 	"prism": {
 	    "css": [

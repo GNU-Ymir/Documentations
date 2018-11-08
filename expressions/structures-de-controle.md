@@ -1,10 +1,10 @@
-# Structures de contrôle
+# Control structures
 
-Pour créer un programme fonctionnel, il vous faut être en mesure de prendre des décision, d'itérer sur des ensembles, ou de répéter des instructions plusieurs fois. Cette partie va présenter les structures de contrôles offertes par le langage **Ymir**.
+To create a valid program, you must be able to make decisions, iterate on sets, or repeat instructions several times. This section will present the control structures offered by the **Ymir** language.
 
 ## Condition
 
-La structure de contrôle la plus simple est la construction `if` `else`.
+The simplest control structure is the `if` `else` construction.
 
 ```ymir
 if a < b 
@@ -15,22 +15,26 @@ else
     println (b);
 ```
 
-En **Ymir**, une condition doit être du type `bool`, il est impossible d'utiliser d'autres types comme des entiers comme on pourrait le faire dans d'autre langage proche du C. Le contenu d'une instruction `if` est un bloc d'instruction, où la création d'un bloc contenant plusieurs instructions avec les jetons `{` `}` est optionnel, si vous voulez n'executer qu'une seule instruction.
+In **Ymir**, a condition must be of the `bool` type, it is impossible
+to use other types as integers as one could do in other C-like
+language. The content of an `if` instruction is an instruction block,
+where creating a block containing several instructions with `{}`
+tokens is optional, if you want to execute only one instruction.
 
-La construction `if` `else` peut être utilisé comme une expression, vous pouvez par conséquent récupérer la valeur d'une expression conditionnel.
+The `if``else`` construct can be used as an expression, so you can retrieve the value of a conditional expression.
 
 ```ymir
 let x = true;
 let a = 1 + if (x) 100 else 2;
 ```
 
-## Boucle
+## Loops
 
-Le langage **Ymir** propose plusieurs structure de controle permettant de boucler, ou d'iterer sur un ensemble
+The **Ymir** language offers several control structures to loop, or iter on sets.
 
 ### While
 
-La boucle `while` est très similaire à celle d'autres langages proche du C.
+The `while' loop is very similar to that of other languages close to C.
 
 ```ymir
 let i = 0;
@@ -42,7 +46,7 @@ while i < 100 {
 
 #### Break
 
-Parfois, il est pratique de pouvoir stopper une boucle avant que sa condition ne la force à s'arrêter. Le mot clé `break` vous permet de le faire.
+Sometimes it is convenient to be able to stop a loop before its condition forces it to stop. The keyword `break` allows you to do this.
 
 ```ymir
 let i = 0;
@@ -53,7 +57,7 @@ while i < 100 {
 }
 ```
 
-Vous pouvez utiliser le mot clé `break` pour stopper une boucle parent en utilisant un tag.
+You can use the keyword `break` to stop a parent loop using a tag.
 
 ```ymir
 let i = 0;
@@ -70,7 +74,7 @@ assert (j == 2 && i == 0);
 
 ### For
 
-La boucle `for` vous permet d'itérer sur une collection d'élément comme un tableau, ou un range.
+The `for' loop allows you to iterate on a collection of elements such as an array, or a range.
 
 ```ymir
 for i in ["One", "Two", "Three"] {
@@ -91,10 +95,10 @@ for i in 3 .. 0 {
 } // 3, 2, 1,
 ```
 
-Tout comme pour les boucle `while`, il est possible de tagger une boucle `for` afin de pouvoir y faire référence dans une instruction `break`.
+As with `while' loops, it is possible to tag a `for' loop so that it can be referred to in a `break' instruction.
 
 ```ymir
-for:loop (i in [1, 2, 3]) {
+for:loop (i in [1, 2, 3]) {U
     break loop;
 }
 ```

@@ -1,18 +1,18 @@
 # Enums
 
-Les enum sont des types spéciaux possédant un ensemble de valeurs constantes. Le mot clé `enum` permet de définir un type enumeré, dont le type des champs est inféré à la compilation. Il est obligatoire que chacun des champs possède le même type.
+Enums are special types with a set of values. The keyword `enum` allows to define a enumerated type, whose field type is inferred from the compilation. It is mandatory that each field has the same type.
 
 ```ymir
-// Cette enum est de type string
+// This enum is a string type enum
 enum 
 | Engineer : "eng",
 | Scientist : "sci"
  -> Person;
 
-// Cette fonction prend un enum de type Person en paramètre
+// This function takes a Person enum as a parameter
 def inspect (p : Person) {
 
-	// On utilise le pattern matching pour choisir entre plusieurs valeur
+	// 	We can use pattern matching to choose between several values
     match p {
         Person::Engineer => println ("Engineer");
         Person::Scientist => println ("Scientist");

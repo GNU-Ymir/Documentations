@@ -1,24 +1,23 @@
 # Variables
 
-Comme dans beaucoup de langage **Ymir** permet de stocker des données dans des variables. Il y a différent type de variables, avec différent type de durée de vie.
+As in many languages **Ymir** allows to store data in variables. There are different types of variables, with different types of lifetime.
 
-## Variables locales
+## Local variables
 
-Le mot clé `let` vous donne la possibilité de crée une nouvelle variable. Une variable existe pendant la durée d'un scope, qui est une portion de code dans laquelle la variable est accessible.
+The keyword `let` gives you the possibility to create a new variable. A variable exists during the duration of a scope, which is a portion of code in which the variable is accessible.
 
 ```ymir
 let a = 12;
 let b = 34;
-{ // Ouvre un nouveau scope
+{ // open a new scope
     let c = a * b;
 } 
 
-println (c); // Illegale, c n'existe plus dans ce scope
-```
+println (c); // Illegal, c no longer exists in this scope```
 
-### Variable de compilation
+### Compilation variable
 
-`cte` \(**C**ompile **T**ime **E**xecution\) variables sont des variables dont la valeur est connu à la compilation. Vous pouvez changer leurs valeurs si la nouvelle valeur est également connu à la compilation. Le mot clé `cte` vous permet de déclarer des variables connu à la compilation.
+`cte` \(**C**compile **T**ime **E**xecution\) variables are variables whose value is known at compilation. You can change their values if the new value is also known at compile time. The `cte' keyword allows you to declare variables known at compile time.
 
 ```ymir
 let cte a = 12;
@@ -28,14 +27,14 @@ a = some_runtime_function (); // Illegal
 
 ### Const
 
-Le mot clé `const` permet de rendre la variable immutable et d'empêcher sa modification.
+The keyword `const` makes it possible to make the variable immutable and prevent its modification.
 
 ```ymir
 let const a = some_function_returning_i32 ();
 a = 45; // Illegal
 ```
 
-L'information `const` est transitive, par exemple pour un pointeur constant on ne peut ni changer la valeur du pointeur ni la valeur des éléments pointés.
+The `const` information is transitive, for example for a constant pointer you can neither change the value of the pointer nor the value of the pointed elements.
 
 ```ymir
 let array = some_function_returing_array () // [ [char] ];

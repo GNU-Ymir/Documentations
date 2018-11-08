@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Expressions · GitBook</title>
+        <title>Arrays and slices · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="literaux.html" />
+    <link rel="next" href="ranges.html" />
     
     
-    <link rel="prev" href="../types-primitifs.html" />
+    <link rel="prev" href="operateurs.html" />
     
 
     </head>
@@ -147,7 +147,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.4" data-path="./">
+        <li class="chapter " data-level="1.4" data-path="./">
             
                 <a href="./">
             
@@ -200,7 +200,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.4" data-path="arrays.html">
+        <li class="chapter active" data-level="1.4.4" data-path="arrays.html">
             
                 <a href="arrays.html">
             
@@ -571,7 +571,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Expressions</a>
+        <a href=".." >Arrays and slices</a>
     </h1>
 </div>
 
@@ -586,17 +586,53 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="expressions">Expressions</h1>
-<p>This chapter will present the different types of expression present in the <strong>Ymir</strong> language. The set of expressions groups together all the elements that can be used as operands for another expression.</p>
-<p>In <strong>Ymir</strong> this set includes:</p>
-<ul>
-<li>the literals</li>
-<li>the variables</li>
-<li>the operators</li>
-<li>the tuples</li>
-<li>the ranges</li>
-<li>some control structures</li>
-</ul>
+                                <h1 id="arrays-and-slices">Arrays and slices</h1>
+<h2 id="arrays">Arrays</h2>
+<p>An array is a collection of values of the same type, stored in a contiguous memory space. An array has a size and a pointer to the data. It can be represented as the following structure <code>{u64 size; p!T data}</code>, where <code>T</code> is the type of data stored by the table.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token comment">// Compute the sum of an array of integers</span>
+<span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>a <span class="token punctuation">:</span> <span class="token punctuation">[</span>i32<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> i32 <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> sum <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> it <span class="token keyword">in</span> a <span class="token punctuation">{</span>
+        sum <span class="token operator">=</span> sum <span class="token operator">+</span> it<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> sum<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// array is [i32 ; 5U]</span>
+    <span class="token keyword">let</span> array <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// Allocate an array of i32 of size 100U</span>
+    <span class="token keyword">let</span> aux <span class="token operator">=</span> <span class="token punctuation">[</span>i32 <span class="token punctuation">;</span> new 100U<span class="token punctuation">]</span><span class="token punctuation">;</span> 
+
+    <span class="token comment">// Static table of 10 integer, in the stack</span>
+    <span class="token keyword">let</span> aux2 <span class="token operator">=</span> <span class="token punctuation">[</span>i32 <span class="token punctuation">;</span> 10U<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;The first element is&quot;</span><span class="token punctuation">,</span> array <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;The last element is&quot;</span><span class="token punctuation">,</span> array <span class="token punctuation">[</span>array<span class="token punctuation">.</span>len <span class="token operator">-</span> 1U<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;The sum of the array =&quot;</span><span class="token punctuation">,</span> <span class="token function">foo</span> <span class="token punctuation">(</span>array<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="slice">Slice</h2>
+<p>Slices are elements present in the language that present a different behavior from the arrays, and are used to access a section of an array:. They have a size, which cannot be modified.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>a <span class="token punctuation">:</span> <span class="token punctuation">[</span>i32<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> i32 <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> sum <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> it <span class="token keyword">in</span> a <span class="token punctuation">{</span>
+        sum <span class="token operator">+=</span> it<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> sum<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    a <span class="token punctuation">[</span><span class="token number">0</span> <span class="token punctuation">..</span> <span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">// Ok</span>
+    a <span class="token punctuation">[</span><span class="token number">0</span> <span class="token punctuation">..</span> <span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">// Assert Error, size mismatch</span>
+    a <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">// Ok</span>
+
+    a <span class="token punctuation">[</span><span class="token number">0</span> <span class="token punctuation">..</span> <span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> a <span class="token punctuation">[</span><span class="token number">2</span> <span class="token punctuation">..</span> <span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token function">foo</span> <span class="token punctuation">(</span>a <span class="token punctuation">[</span><span class="token number">2</span> <span class="token punctuation">..</span> a<span class="token punctuation">.</span>len<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    
+<span class="token punctuation">}</span>
+</code></pre>
 
                                 
                                 </section>
@@ -624,12 +660,12 @@
 
             
                 
-                <a href="../types-primitifs.html" class="navigation navigation-prev " aria-label="Previous page: Primitive types">
+                <a href="operateurs.html" class="navigation navigation-prev " aria-label="Previous page: Operators">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="literaux.html" class="navigation navigation-next " aria-label="Next page: Literals">
+                <a href="ranges.html" class="navigation navigation-next " aria-label="Next page: Ranges">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -640,7 +676,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Expressions","level":"1.4","depth":1,"next":{"title":"Literals","level":"1.4.1","depth":2,"path":"expressions/literaux.md","ref":"expressions/literaux.md","articles":[]},"previous":{"title":"Primitive types","level":"1.3","depth":1,"path":"types-primitifs.md","ref":"types-primitifs.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"copy-code-button":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"expressions/README.md","mtime":"2018-11-07T09:20:30.294Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-11-08T09:23:44.193Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Arrays and slices","level":"1.4.4","depth":2,"next":{"title":"Ranges","level":"1.4.5","depth":2,"path":"expressions/ranges.md","ref":"expressions/ranges.md","articles":[]},"previous":{"title":"Operators","level":"1.4.3","depth":2,"path":"expressions/operateurs.md","ref":"expressions/operateurs.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"copy-code-button":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"expressions/arrays.md","mtime":"2018-11-07T09:47:43.959Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-11-08T09:23:44.193Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

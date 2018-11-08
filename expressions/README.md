@@ -1,13 +1,13 @@
 # Expressions
 
-Ce chapitre va présenter les différents types d'expression présent dans la langage **Ymir**. L'ensemble des expressions regroupe tous les éléments qui peuvent servir d'opérande à une autre expression.
 
-En **Ymir** cet ensemble comprend :
+This chapter will present the different types of expression present in the **Ymir** language. The set of expressions groups together all the elements that can be used as operands for another expression.
 
-* les literaux
-* les variables
-* les operateurs
-* les tuples
-* les ranges
-* des structures de controles
+In **Ymir** this set includes:
 
+* the literals
+* the variables
+* the operators
+* the tuples
+* the ranges
+* some control structures

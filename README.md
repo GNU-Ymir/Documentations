@@ -1,40 +1,53 @@
 # Introduction
 
-**Ymir** est un langage moderne haut niveau fortement typé qui a pour objectif d'aider les developpeurs à gagner du temps en proposant un système de sureté de typage. Le langage est axé sur la sureté, la concurrence et la vitesse d'execution. Ces objectifs peuvent être atteint grâce à son expressivité et la compilation direct vers un langage machine natif performant.
+**Ymir** is a high level programming language, with static typing,
+  aiming to help developpers to gain time by proposing type safety,
+  and strong and safe semantic. The semantic of this language is
+  oriented on safety, concurrency and execution speed. Those
+  objectives are achieved thanks to its high expressivity and its
+  direct compilation to a efficient native machine language.
 
-**Ymir** Tour parcours les différents concept de **Ymir** grâce à un collection d'exemples afin de démontrer les apports du langage. Cette exploration sera également l'occasion de présenter la bibliothèque standard.
+
+This documentation explores the main concept of **Ymir**, by proposing
+a collection of examples that demonstrates the assets of this new
+language. This travel, will presents some part of the standard library
+as well.
 
 ## Installation
 
-Le compilateur de référence de **Ymir** est basé sur le compilateur **GCC** qui offre des optimisations statique performantes ainsi qu'un vaste ensemble d'architecture supportée.
+The reference compiler of **Ymir** is based on the compiler **GCC**,
+which offer strong static optimization, as well as a vast set of
+supported target architectures.
 
-Le compilateur est toujours en version bétâ, mais il est possible de l'installer sur un linux debian. 
-Il faut pour cela, installer la bibliothèque standard, qui permet au compilateur de lier les symboles, et aux programmes générés de s'exécuter. 
-- [libgmidgard-7-dev](https://github.com/GNU-Ymir/Ymir-release/raw/master/7.3.0/libgmidgard_7.3.0_amd64.deb)
 
-La procédure d'installation est très simple : 
-- ```bash
-sudo dpkg -i libgmidgard_7.3.0_amd64.deb
+This compiler can be installed on linux debian system, by following those simple steps: 
+- First, you need to downloads the packages : 
+  - [libmidgard-7-dev](https://github.com/GNU-Ymir/Ymir-release/raw/master/7.3.0/libgmidgard_7.3.0_amd64.deb)
+  - [GYC](https://github.com/GNU-Ymir/Ymir-release/raw/master/7.3.0/gyc-7_7.3.0_amd64.deb)
+
+- And then, you need to install them using dpkg : 
+
+```bash
+$ sudo dpkg -i libgmidgard_7.3.0_amd64.deb
+$ sudo dpkg -i gyc-7_7.3.0_amd64.deb
 ```
 
-Certaine dépendance peuvent être manquantes, elles sont affiché, il suffit de les installer.
+The compiler is now installed and is named `gyc-7`
 
-Ensuite, un fois la bibliothèque installé, on peut installer le compilateur : 
+```bash
+$ gyc-7 --version
 
-- [GYC](https://github.com/GNU-Ymir/Ymir-release/raw/master/7.3.0/gyc-7_7.3.0_amd64.deb)
-
-Comme pour la bibliothèque, la procédure d'installation est très simple : 
-
-- ```bash
-sudo dpkg -i gyc-7_7.3.0_amd64.deb
+gyc-7 (Ubuntu 7.3.0-16ubuntu3) 7.3.0
+Copyright (C) 2017 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 ```
 
-Le compilateur est installé, et se nomme `gyc-7` (en référence à la version de GCC utilisée).
+## Uninstallation
 
-## Désinstallation 
+As for any debian package, the uninstall is done as follows : 
 
-Comme pour tout les paquets debian, la desinstallation se fait de la manière suivante : 
-```
-dpkg -r gyc-7
-dpkg -r libgmidgard-7-dev
+```bash
+$ dpkg -r gyc-7
+$ dpkg -r libgmidgard-7-dev
 ```

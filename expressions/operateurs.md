@@ -1,15 +1,20 @@
 # Operateurs
 
-La priorité des operateurs est similaire aux autres langages proche du C.
+The priority of the operators is similar to other languages close to C.
 
 ```ymir
 let a = 1 + 3 * 4;
 assert (a == 13);
 ```
 
-## Promotion de type
+## Type promotion
 
-Les operations sur les types primitifs sont autorisées par le langage **Ymir** seulement si elles ne générent pas de perte de précision. Ceci s'appelle promotion de types, et se définis par : Un type _x_ peut être transformé en type _y_ si et seulement si la taille du type _x_ est plus petite que la taille de _y_ et _x_ et _y_ sont de même nature. C'est à dire que _x_ et _y_ sont tout les deux non signés, ou tout les deux signés, ou encore qu'il sont tout les deux de type flottants.
+Operations on primitive types are allowed by the **Ymir** language
+only if they do not generate a loss of accuracy. This is called type
+promotion, and is defined by: A type _x_ can be transformed into type
+_y_ if and only if the size of the type _x_ is smaller than the size
+of _y_ and _x_ and _y_ are of the same nature. That is, _x_ and _y_
+are both unsigned, or both signed, or both are floating.
 
 ```ymir
 let a = 12; // i32
@@ -22,3 +27,37 @@ b = c; // Illegal
 a = c; // Illegal
 ```
 
+## Special type promotion
+
+
+It is possible to override promotions of types that can be
+sometimes annoying to do some calculations. For this purpose, there are
+two ways. The first one is quite classic, it is the cast of the type
+. An example is shown below, but the cast is explained more in
+detail in this section [Type cast](expressions/cast.md).
+
+```ymir
+let a = 12; // i32
+let b = 12B; // i8
+b = cast!i8 (a); // Ok
+
+let c = 34UB;
+b = cast!i8 (c); // Ok
+a = cast!i32 (c); // Ok
+```
+
+The cast can sometimes be a little too verbose, which is why **Ymir**
+also offers an automatic cast system for types from a typed
+operation. To do this, it is possible to type an operator in order to
+define which type of operation you want to perform.
+
+```ymir
+let a = 12;
+let b = 12B;
+
+let c = a + b; // Illegal
+let d = a +:i32 b; // Okay, an i32 operation will be applied
+
+// This operation will be rewritten by the compiler into
+// let d = cast!i32 (a) + cast!i32 (b); 
+```

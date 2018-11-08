@@ -1,27 +1,27 @@
 # Commentaires
 
-**Ymir** propose différent types de commentaires. Ces commentaires sont pour le moment ignoré à la compilation, mais vont - dans un futur proche - servir à écrire la documentation.
+**Ymir** offers different types of comments. 
 
-* > `// Une ligne de commentaire qui s'arrête à la fin de la ligne`
-* > `/* Plusieurs lignes de commentaire qui s'arrête au caractère de fermeture */`
+* > `// A line of comment that stop at the end of the line`
+* > `/* Multiple ling comments that go the closing delimiter */`
 
 ```ymir
 def main () {
-    // Ceci est un exemple de commentaire
+    // This is an example of comment
 
     /* 
-     * Ceci est un autre type de commentaire 
-     * Où les étoiles sont optionnel
+     * This is another example of comment
+     * Where, the stars are optionnal
      */
 
     /*
-    Ceci en est la preuve    
+	And this is the proof
     */  
 
-    // Aucune de ces lignes ne va influencer la compilation
+    // None of the line will influence the compilation
 
     let x = 1 + /* 2 + */  3;
-    assert (x == 4); // assert fait planter le programme si le test est faux.
+    assert (x == 4); // assert force the program to end if the test if false
 }
 ```
 

@@ -1,16 +1,21 @@
 # Types primitifs
 
-En **Ymir** toutes les valeurs ont un type, celui ci va servir à définir le comportement que le compilateur doit adopter et comment la valeur va être utiliser pour les différents calculs. Dans cette partie nous présentons les différents types qui font partie intégrente du langage.
+In **Ymir** language everything is typed. In this part, different
+types that are directly integrated into the language are summed up.
 
-## Les types scalaires
+## Scalar types
 
-Les types scalaires représente tous les types qui ne dispose que d'une seule valeur. Il peuvent faire différentes tailles en fonction de leurs besoins.
+Scalar types represents all the types having only one value. They can have different size for different purposes. 
 
-### Types entier
+### Integer types
 
-Un entier est un nombre qui ne possède pas de partie décimal. Il y a différent types d'entier en **Ymir** les signés et les non-signés. Signés et non-signés se rapporte à la possibilité d'un nombre d'être négatif. Le tableau suivant liste les différents types entiers présent en **Ymir**, et les classe en fonction de leur taille en mémoire.
+An integer is a number whithout decimal part. There are differents
+integer types in **Ymir**, the signed one, and the unsigned
+one. Signed and unsigned refers to the possibilty of a number to be
+negative. The following table lists all the different integer types,
+and sort them by memory size.
 
-| Taille | Type | Valeurs possible |
+| Size | Type | Possible Values |
 | --- | --- | --- |
 | 8-bits | `i8` | `-128 .. 127` |
 | 8-bits | `u8` | `0 .. 255` |
@@ -21,7 +26,7 @@ Un entier est un nombre qui ne possède pas de partie décimal. Il y a différen
 | 64-bits | `i64` | `-9223372036854775808 .. 9223372036854775807` |
 | 64-bits | `u64` | `0 .. 18446744073709551615` |
 
-Chacun des types entiers possèdent des attributs de types accéssible via l'operateur `::`, à partir du type ou d'un expression.
+Each integer type has type attributs, which are accessible using the operator `::`, from a type directly or using an expression.
 
 ```ymir
 
@@ -29,78 +34,99 @@ let a = i32::init;  // i32 (0)
 let b = (10)::init; // i32 (0)
 ```
 
-Le tableaux suivant liste les attributs disponible : 
+The following table lists the integer attributs :
 
-| Nom | valeur |
+| Name | Meaning |
 | --- | --- |
-| `init` | La valeur d'initialisation du type (0) |
-| `max` | La valeur maximale possible |
-| `min` | La valeur minimale possible |
-| `sizeof` | Un `u8` contenant la taille du type en octet |
-| `typeid` | Le nom du type encodé dans un élément de type `string` |
+| `init` | The initial value (0) |
+| `max` | The maximal value |
+| `min` | The minimal value |
+| `sizeof` | A `u32`, containing the size of the type in bytes |
+| `typeid` | The name of the type, encoded in a `string` |
 
 ### Floating-point types
 
-Les nombre flottants sont les nombres possédants une partie décimal. **Ymir** propose deux type différents permettant de représenter les nombres flottants, `f32` et `f64`. 
-Ces deux types sont respectivement de 32 bits et de 64 bits, ils sont similaire au type `float` et `double` du langage C.
+The floating point types, refers to the number having a decimal
+part. **Ymir** offers two floating point types, `f32` and `f64`, that
+have a respective size of `32` bits and `64` bits.
 
-Comme pour les types entiers, les types flottants possèdent des attributs de types : 
+As for integer types, floating point types have type attributs : 
 
-| Nom | Signification | 
+| Name | Meaning | 
 | --- | --- |
-| `init` | La valeur initial - `0` | 
-| `max` | La valeur maximale finie que peut prendre le type | 
-| `min` | La valeur minimale finie que peut prendre le type | 
-| `nan` | Le nombre __Not a Number__ |
-| `dig` | Nombre de decimal qui peuvent être arrondis dans un nombre flottant sans changer le nombre de chiffre de la partie décimale | 
-| `infinity` | La valeur infinie positive | 
-| `epsilon` | La différence entre `1` et la plus petite valeur représentable supérieur à `1` |
-| `mant_dig` | Le nombre de chiffre qui composent la __mantisse__ |
-| `max_10_exp` | La valeur maximale positive possible pour un exposant en base 10 |
-| `max_exp` | La valeur maximale possible pour un exposant qui forme un nombre flottant normalisé | 
-| `min_10_exp` | La valeur minimale négative pour un exposant en base 10 | 
-| `min_exp` | La valeur minimale négative possible pour un exposant qui forme un nombre flottant normalisé | 
-| `sizeof` | La taille du type dans un `u8` | 
-| `typeid` | Le nom du type encodé dans un élément de type `string` |
+| `init` | The initial value - `0.0` | 
+| `max` | The maximal finite value that this type can encode| 
+| `min` | The minimal finite value that this type can encode| 
+| `nan` | The value __Not a Number__ |
+| `dig` | The number of decimal digit of precision | 
+| `infinity` | The value positive infinity | 
+| `epsilon` | The smallest increment to the value `1` |
+| `mant_dig` | Number of bits in the  __mantissa__ |
+| `max_10_exp` | 	maximum int value such that $$10^{max\_10\_exp}$$ is representable |
+| `max_exp` | maximum int value such that $$2^{max\_exp-1}$$ is representable| 
+| `min_10_exp` | minimum int value such that $$10^{min\_10\_exp}$$ is representable as a normalized value| 
+| `min_exp` | minimum int value such that $$2^{min\_exp-1}$$ is representable as a normalized value| 
+| `sizeof` | The size of the type encoded in a `u32`| 
+| `typeid` | The name of the type encoded in a `string` |
 
-### Type booléen
+### Boolean type 
 
-Un booléen est un type très simple qui peut prendre deux valeur, soit `true` soit `false`.
-Le type `bool` possède également des attributs de type : 
+A Boolean is a very simple type that can take two values, either `true` or `false`.
+The `bool` type also has attributes of type : 
 
-| Nom | Signification |
+| Name | Meaning |
 | --- | --- |
-| `init` | La valeur d'initialisation - `false` | 
-| `sizeof` | Un `u8` contenant la taille du type en octet - `1` | 
-| `typeid` | Un chaine de caractère de type `string` contenant le nom du type |
+| `init` | The initialization value - `false` | 
+| `sizeof` | An `u8` containing the size of the type in bytes - `1`. | 
+| `typeid` | A string containing the name of the type |
 
-### Type `char`
+### Character type 
 
-Le type `char` est le type permettant d'encoder un caractère ascii. 
-Ce type possède les même attributs de type que le type `bool` : 
+The `char` type is the type used to encode an ascii character. 
+This type has the same type attributes as the `bool` type: 
 
-| Nom | Significations |
+| Name | Meaning |
 | --- | --- |
-| `init` | La valeur d'initialisation - `\0` | 
-| `sizeof` | Un `u8` contenant la taille du type en octet - `1` | 
-| `typeid` | Un chaine de caractère de type `string` contenant le nom du type| 
+| `init` | The initialization value - `\0` | 
+| `sizeof` | An `u8` containing the size of the type in bytes - `1`. | 
+| `typeid` | A string containing the name of the type | 
 
+## Compound types 
 
-## Types composés 
-
-Le langage **Ymir** possèdent également des types composés, ou autrement appelés `tuple`. Un tuple est une collection de valeur de type différent, et se note entre parenthèse, par exemple : 
- - `(char, i32)`, est un tuple composé d'un `char` et d'un `i32`.
+The **Ymir** language also has compound types, or otherwise called `tuple`. A tuple is a collection of different types of value, and is noted in brackets, for example : 
+ - (char, i32), is a tuple composed of a `char` and an `i32`.
  
-Comme pour tout les types de **Ymir**, les tuples possèdent des attributs de types : 
+As with all types of **Ymir**, tuples have attributes of types : 
  
-| Nom | Signification |
+| Name | Meaning |
 | --- | --- |
-| `init` | Un tuple initialisé avec les valeur initial des types le composant | 
-| `arity` | Un `u32` contenant le nombre de type qui composent le tuple | 
-| `sizeof` | La taille en mémoire du tuple, l'alignement du tuple est dépendant de l'architecture | 
-| `typeid` | Le nom du type encodé dans un élément de type `string` |
+| `init` | A tuple initialized with initial values of the types composing it |
+| `arity` | A `u32` containing the number of types that make up the tuple | 
+| `sizeof` | The size in memory of the tuple, the data alignment of the tuple is dependent on the architecture | 
+| `typeid` | The name of the type encoded in a `string` type element |
 
+## String type 
 
-## Autres types
+The `string` type allows to encode a sequence of characters and is a
+syntactic simplification of the array type `[const char]`. He owns
+therefore the same type attributes as an array but
+also the same value attributes.
 
-Tous les types de **Ymir** qu'ils soit primitif ou non, possèdent les attributs de types `init`, `sizeof` et `typeid`.
+The value attributes are accessible through the operator `.`, on a typed expression.
+
+```ymir
+let a = "hi !!";
+println (a.len, " ", a); // 5 hi !!
+```
+
+The `string` type has two value attributes like all table types: 
+
+| Name | Meaning |
+| --- | --- |
+| `len` | The size of the array (number of elements) encoded in a `u64` |
+| `ptr` | The pointer to the first element of the array |
+
+## Other types
+
+All types of **Ymir**, whether primitive or not, have the attributes of types `init`, `sizeof` and `typeid`.
+

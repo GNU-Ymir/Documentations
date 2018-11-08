@@ -1,8 +1,9 @@
-# Les types personnalisés
+# Custom types
 
-Cette section va présenter différentes constructions permettant d'ajouter de nouveaux types. 
+This section will present different constructions to add new types. 
 
-Elle regroupe : 
-- Les structures
-- Les unions 
-- Les enums
+It includes: 
+- The structures
+- The unions 
+- The enums
+

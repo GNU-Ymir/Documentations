@@ -1,14 +1,14 @@
-# Literaux
+# Literals
 
-## literaux booléens
+## Boolean literals
 
-Les deux literaux qui permettent de former un `bool` sont `true` et `false`.
+The two literals that form a `bool` are `true` and `false`.
 
-## Literaux numérique
+## Digital Literals
 
-Les literaux entiers peuvent être utilisés pour créer des entiers signés ou non-signés, ou encore des nombre flottants. Dans tout les cas, **Ymir** va déduire le type des literaux en fonction de leurs suffixe.
+Whole literals can be used to create signed or unsigned integers or floating numbers. In any case, **Ymir** will deduce the type of literals according to their suffixes.
 
-Les suffixes pour les entiers signés et non-signés sont :
+Suffixes for signed and unsigned integers are:
 
 | Suffix | Size | Type |
 | --- | --- | --- |
@@ -17,7 +17,7 @@ Les suffixes pour les entiers signés et non-signés sont :
 | `U` | 32-bits | `u32` |
 | `L`, `UL` | 64-bits | `i64`, `u64` |
 
-Si le literal n'a pas de suffixe, il sera considéré comme étant du type `i32`. Le jeton `_` peut être utilisé pour améliorer la lisibilité des literaux dans le cas de grand nombre.
+If the literal does not have a suffix, it will be considered to be of the type `i32`. The `_` token can be used to improve the readability of literals in the case of large numbers.
 
 ```ymir
 let a = 45; // i32
@@ -27,7 +27,7 @@ let d = 10_000S; // i16
 let f = 0x10B; // i8, with the value 16
 ```
 
-Pour les literaux de nombre flottant, il n'y a qu'un seul suffixe `f`. Celui-ci force le type du literal a ếtre `f32`, au lieu de `f64` lorsqu'il n'y a pas de suffixe.
+For floating number literals, there is only one suffix `f`. This forces the literal type to be `f32`, instead of `f64` when there is no suffix.
 
 ```ymir
 let a = 3.; // f64, 3.0
@@ -37,7 +37,7 @@ let c = .2f; // f32, 0.2f
 
 ## Character literals
 
-Les literaux formant des caractères sont entouré de apostrophe `'`. Ces literaux sont inféré avec le type char, qui a une taille de `8 bits` est est non signé.
+The literals forming characters are surrounded by quotes `'`'. These literals are inferred with the `char` type, which has a size of `8 bits` and is unsigned.
 
 ```ymir
 let a = 'A'; 
@@ -47,22 +47,22 @@ assert (a == b);
 let c = '\n';
 ```
 
-Les caractères suivant sont les caractère d'échappement disponnible dans le langage **Ymir**.
+The following characters are the escape characters available in the **Ymir** language.
 
 * `\0x00\` .. `\0xFF`, hexadecimal notation from `0` to `255`.
 * `\a`, `\b`, `\f`, `\n`, `\r`, `\t`, `\v`, `\\`, `\'`, `\"`, `\?`, `\0`
 
 ## String literals
 
-Les literaux formant des chaines de caractères sont entourés de `"`. Il peuvent contenir n'importe quel type d'octet et de séquence de caractère.
+The literals forming strings of characters are surrounded by `"`. They can contain any type of byte and character sequence.
 
-On peut également utiliser `q: {}` pour former un chaine de caractère sur plusieurs ligne.
+The macro `q: {}` can also be used to form a string on several lines.
 
 ```ymir
 let a = "Hi there !!";
 let b = q: { 
-    C'est une marco pour former une chaine de caractère de plusieurs ligne
-    Ceci permet de forcer l'éditeur de ymire à garder la coloration syntaxique
+    It is a marco to form a character string of several lines
+    This allows you to force the text editor to keep the syntax highlighting
 
     void some_c_function () {
         int a = 12;
@@ -71,27 +71,28 @@ let b = q: {
 };
 ```
 
-## Literaux de tableau
+## Table literals
 
-En **Ymir**, il y a deux types de tableau primitif les tableau **dynamique** et les tableau **statique**. Les tableaux statiques possèdent une taille connu à la compilation, et qui ne peut pas être modifié. Grâçe aux literaux, il est possible de former des tableaux statiques.
+In **Ymir**, there are two types of primitive tables: the **dynamic** and the **static** tables. Static tables have a size known at compile time, which cannot be modified. Thanks to the literals, it is possible to form static tables.
 
 ```ymir
 let tableau_un = [1, 2, 3]; // [i32; 3UL]
 let tableau_deux = ["hi", "is", "this", "working", "?"]; // [string ; 5UL];
 ```
 
-Le type string est un alias du type tableau de caractère constant : `[const (char)]`.
+The string type is an alias of the array type of constant character: `[const (char)]`.
 
-## Les literaux de bloc
+## The block literals
 
-Un bloc est une séquence d'instruction, qui peut être utilisé comme une expression.
+A block is an instruction sequence, which can be used as an expression.
+
 
 ```ymir
 let a = {
    println ("some intructions ...");
    12;
-}; // a va être égale à 12
+}; // a will be equal to 12
 ```
 
-La dernière expression du bloc est utilisé comme la valeur du bloc.
+The last expression of the block is used as the value of the block.
 

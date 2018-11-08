@@ -1,21 +1,28 @@
 # Hello World
 
-Le code source suivant est la version **Ymir** du celebre programme Hello World.
+The following source code, is the **Ymir** version of the famous `Hello World!!` program.
 
 ```ymir
-// C'est une commentaire
+// This is a comment 
 
-// Cette fonction est la première fonction appelé par l'exécution du programme
+// This is a function declaration 
+// The main function, is the first one called 
 def main () {
-    // Affiche 'Hello World !!' sur la console
+    // Print 'Hello World !!' to the console
     println ("Hello World !!");
 }
 ```
 
-L'exécutable peut être généré grâce au compilateur **GYC**
+
+A binary can be generated using **GYC**.
 
 ```bash
 $ gyc hello.yr
+``` 
+
+This command produce a binary `a.out` that can be executed 
+
+```
 $ ./a.out
 Hello World !!
 ```

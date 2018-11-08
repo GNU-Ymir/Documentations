@@ -1,43 +1,43 @@
 # Structures
 
-Une structure est un type personnalisé, permettant de regrouper plusieurs valeurs dans un type ayant un nom. Leur composition est équivalente à celle des tuples, on peut voir les tuples comme des structures anonymes. Le mot clé `struct` permet de définir un nouveau type.
+A structure is a custom type, allowing you to group several values into a type with a name. Their composition is equivalent to that of the tuples, we can see the tuples as anonymous structures. The keyword `struct` allows you to define a new structure.
 
 ```ymir
 
-// Une structure avec deux champ
-struct  
-| x : double,
-| y : double
--> Point;
+// A structure with two fields
+struct 
+| x : f64,
+| y : f64
+ -> Point;
 
-// Une structure peut contenir des champ dont le type est une structure
+// A structure can contain fields whose type is a structure
 struct
 | a : Point
 | b : Point
--> Rectangle;
+ -> Rectangle;
 
 def main () {
-    // Il faut remplir toutes les données pour construire une structure
+    // You must fill in all the data to build a structure
     let point = Point { 1.1, 1.7 };
 
-    // Il est également possible de construire une structure sans lui donner de valeur
-    // Tout les champs seront remplis avec leur valeur ::init
+	// It is also possible to build a structure without giving it any value
+    // All fields will be filled with their value::init
     let point2 = Point::init; 
 
-    // Il est possible de transformer une structure en tuple
+    // It is possible to transform a structure into a tuple
     let (x, y) = point.tupleof;
     println ("(", x, ", ", y, ")");
 
     let rect = Rectangle { point, Point { 3.3, 4.5 } };
 
-    // Les structure sont des éléments affichables
+	// Structures are displayable elements
     println (rect);
 }
 ```
 
-## Attribut de structure
+## Structure attributes
 
-Il est possible de modifier l'alignement des types dans une structure. Pour ça, il faut utiliser un attribut de structure, qui se déclare en même temps que la structure grâce au jeton `@`.
+It is possible to modify the alignment of types in a structure. To do this, you must use a structure attribute, which is declared at the same time as the structure using the `@` token.
 
 ```ymir
 

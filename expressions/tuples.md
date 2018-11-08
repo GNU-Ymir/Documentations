@@ -1,6 +1,9 @@
 # Tuples
 
-Un tuple est une collection de valeurs de types différents. Il est possible de construire un tuple en utilisant les parenthèses ```(``)```. Il est possible de passer un tuple en tant que paramètre d'un fonction, ou en tant que retour de fonction pour retourner plusieurs valeurs.
+A tuple is a collection of values of different types. It is possible
+to build a tuple using the parentheses `()`. It is possible to pass
+a tuple as a parameter of a function, or as a function return value to
+return several values.
 
 ```ymir
 def reverse (pair : (i32, bool)) -> (bool, i32) {
@@ -14,7 +17,7 @@ def main () {
 }
 ```
 
-Le mot clé `expand` permet de deconstruire un tuple, et de le passer en tant que paramètres de fonction, ou lors de la création d'un tuple plus grand.
+The keyword `expand` allows you to deconstruct a tuple, and pass it on as function parameters, or when creating a larger tuple.
 
 ```ymir
 def foo (a : i32, b : char) {
@@ -28,7 +31,7 @@ def main () {
 }
 ```
 
-Il est possible de récupérer une valeur d'un tuple en utilisant l'operateur `.`.
+It is possible to retrieve a value from a tuple by using the `.` operator.
 
 ```ymir
 def main () {
@@ -37,3 +40,8 @@ def main () {
 }
 ```
 
+Tuples are also very useful for creating variadic templates functions, but this part will be explained later when we discuss templates.
+
+## Union tuples
+
+Work in progress !!...
