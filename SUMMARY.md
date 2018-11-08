@@ -22,7 +22,7 @@
   * [Enums](types-personnalises/enums.md)
   * [Objects](types-personnalises/objects.md)
 	* [Attributes](types-personnalises/objects/attrs.md)
-	* [Construction and deconstruction](types-personnalises/objects/constr.md)
+	* [Construction and deconstruction](types-personnalises/objects/constrs.md)
 	* [Methods](types-personnalises/objects/methods.md)
 	* [Inheritance](types-personnalises/objects/inher.md)
 * Modules
