@@ -1,84 +1,95 @@
-# Fonctions 
+# Functions 
 
-## Les fonctions pures 
+## Pure functions 
 
-Les fonctions pure sont des fonctions, dont on connaît toutes les informations nécessaire pour qu'elle soit compilé, c'est à dire que : 
-- tous les types des paramètres sont connu
-- elle possède un corps
+Pure functions are functions, of which we know all the information necessary for it to be compiled, i. e.: 
+- all types of parameters are known
+- it has a body
 
-Le type de retour n'est pas nécessaire pour qu'une fonction soit pure, il sera inféré lors de sa compilation.
+The type of return is not necessary for a function to be pure, it will be inferred during its compilation.
 
-La fonction `main` est toujours pure, même si le type du paramètre d'entrée n'est pas donné, il sera inféré à `[ [char] ]`.
+The `main` function is always pure, even if the type of the input parameter is not given, it will be inferred from `[[char]\]`.
 
 ```ymir
-def maPremiereFonctionPure (a : i32, b : f32) -> f32 {
+def myFirstPureFunction (a : i32, b : f32) -> f32 {
 	return cast!f32 (a) + b;
 }
 
-def maDeuxiemeFonctionPure (a : i32, b : [char]) {
-	return b [a]; // le type de retour n'est pas donné, mais inféré à char
+def mySecondPureFunction (a : i32, b : [char]) {
+	return b [a]; // the type of return is not given, but inferred to char
 }
 ```
 
-Une fonction ne peut retourner qu'un seul type qui doit être connu à la compilation.
+A function can only return one type that must be known at compile time.
 
 ```ymir
-def maFonctionImpossible (a : i32) {
+def myImpossibleFunction (a : i32) {
 	if a < 10 {
 		return a;
 	} else {
-		return [1, 2]; // Erreur type incompatible [i32 ; 2UL] et i32
+		return [1, 2]; // Error types [i32; 2U] and i32 are incompatible 
 	}
 }
 ```
 
-### Cas particulier 
+### Special case 
 
-Il existe un cas particulier où le type de retour d'une fonction pure ne peut pas être déduis, le cas des fonction récursive.
+There is a particular case where the type of return of a pure function cannot be deduced, the case of recursive functions.
 
 ```ymir
 def fibo (n : i32) {
-   if n < 2 { return n; } // n est de type _i32_, le type de la fonction est _i32_
-   else return fibo (n - 1) + fibo (n - 2); // pas de problème le type de fibo a été déduit
+   if n < 2 { return n; } // n is of type _i32_, the type of the function is _i32_
+   else return fibo (n - 1) + fibo (n - 2); // no problem, the type of fibo has been deduced
 }
 
 def facto (n : i32) {
-  if n >= 1 { return facto (n - 1) * n; } // Erreur, on ne connaît pas le type de facto
+  if n >= 1 { return facto (n - 1) * n; } // Error, we don't know the type of the function
   else return 1;
 }
 ```
 
-Une fonction pure provenant d'un autre module que celui en cours de compilation (cf. [Modules](modules/main.md)) sera importé comme étant une fonction externe, par conséquent, si son type de retour n'est pas définis, il sera définis comme étant `void`.
+A pure function from another module than the one being compiled (see [Modules](modules/main.md)) will be imported as an external function, so if its return type is not defined, it will be defined as `void`.
 
-## Les fonction impures 
+## Impure functions 
 
-Les fonction impures contrairement au fonction pure, manque d'information pour être compilé directement, mais possèdent un corp. Ces fonction vont donc être compilé uniquement lorsqu'elle seront référencé (généralement par un appel).
+Impure functions, unlike pure functions, lack of information to be compiled directly, but have a body. These functions will therefore only be compiled when they are referenced (usually by a call).
 
-Le types des paramètres qui ne sont pas connu vont alors être inféré grâce à ceux des paramètre de l'appel. 
+The types of parameters that are not known will then be inferred from those of the call parameters. 
 
 ```ymir
-def foo (a, b : i32, c) { // a et c n'ont pas de type
+def foo (a, b : i32, c) { // a and c do not have a type
    // ...
 } 
 
 // ...
-foo (10, 2, "salut"); // OK, avec a : i32 et c : string
-foo (10, "salut", 1); // Erreur, b doit être de type i32
+foo (10, 2, "salut"); // OK, with a : i32 and c : string
+foo (10, "salut", 1); // Error, b must be of type i32
 ```
 
-## Les fonctions externes
+## External functions
 
-Les fonctions externes sont des fonctions dont on connaît le type de tout les paramètres, mais qui ne possède pas de corp. Elle sont utilisable comme tous les autres types de fonctions. Le type de retour des fonctions externes doit être donné, si ce n'est pas le cas, elle sera considéré comme `void`.
+External functions are functions for which the type of all parameters is known, but which do not have a body. They can be used like all other types of functions. The type of return of external functions must be given, if not, it will be considered as `void`.
+
 
 ```ymir
 extern foo (a : i32) -> i32; 
 
-println (foo (10)); // Ok
+println (foo (10)); // Ok```
 
-```
-## Surcharge
+### Variadics external function
 
-Toutes les fonctions peuvent être surchargé, qu'elle soit pure ou non. Lors de l'appel, la fonction la plus proche des types passé en paramètre sera appelé.
+External functions can sometimes come from the C language, which offers a specific variadic function system. This system can be used in ymir, thanks to the operator `...`.
+A very simple example in C, is the call of the function *printf*, which is a variadic function, and therefore takes an arbitrary number of arguments as input.
+
+```ymir
+extern (C) printf (const format : p!char, ...); 
+
+let i = 0, j = 12.3f;
+printf ("My int is equals to %d, and my float to %f".ptr, i, j);```
+
+## Function overloading
+
+All functions can be overloaded, whether pure or not. During the call, the function closest to the types passed as parameter will be called.
 
 ```ymir
 def foo (a : i32, b) {
@@ -90,16 +101,18 @@ def foo (a, b : i32) {
 }
 
 //...
-foo (10, "salut"); // la première fonction est appelé
-foo ("salut", 10); // la deuxième fonction est appelé
-foo (10, 10); // Erreur, la surcharge fonctionne autant avec les deux prototypes.
+foo (10, "salut"); // the first function is called
+foo ("salut", 10); // the second function is called
+foo (10, 10); // Error, the overload works as well with both prototypes.
 ```
 
-## Décorateur de paramètres
 
-Il existe deux décorateur de paramètre pour spécifié un comportement 
-- `const`, le paramètre ne pourra pas être modifié quel que soit son type (cf. [Variables](expressions/variables.md))
-- `ref`, le paramètre est passé par référence, une lvalue est requise. Toute modification de la variable dans la fonction appelé modifira également la variable de la fonction appellante.
+## Parameter decorator
+
+There are two parameter decorators to specify a behavior 
+- Const`, the parameter cannot be modified whatever its type (cf.[Variables](expressions/variables.md))
+- ref`, the parameter is passed by reference, a lvalue is required. Any modification of the variable in the called function will also modify the variable of the calling function.
+- - We can also consider the `lazy' decorator, which will be detailed in another section
 
 ```ymir
 def foo (ref a) {
@@ -107,18 +120,18 @@ def foo (ref a) {
 }
 
 def bar (const a : [i32]) {
-	a [0] = 8; // Erreur le tableau est constant
+	a [0] = 8; // Error the table is constant
 }
 
 let a = 1;
-foo (10); // Erreur 10 n'est pas une lvalue
+foo (10); // Error, 10 is not a lvalue
 foo (a);
 assert (a == 12);
 
 bar ([1, 2, 3]); // Ok
 ```
 
-Le décorateur `const` est transitif et n'est pas ôtable.
+The `const` decorator is transitive and not removable.
 
 ```ymir
 def foo (a : [char]) {
@@ -130,10 +143,10 @@ def bar (const a : [char]) {
 }
 
 let a = "test"; // [const (char)];
-foo (a); // Erreur, on perd le const
-bar (a); // Ok, le const est transitif, const ([char]) est plus global que [const (char)]
+foo (a); // Error, we lose the const
+bar (a); // Ok, the const is transitive, const ([char]) is more global than [const (char)]
 
 let b = [char ; new 10U]; // [char]
-bar (b); // Ok, on peut passer un élément non constant en tant qu'élément constant
+bar (b); // Okay, you can pass a non-constant element as a constant element
 ```
 

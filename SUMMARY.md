@@ -15,7 +15,7 @@
   * [Pattern maching](expressions/pattern_matching.md)
 * [Fonctions](fonctions/main.md)
   * [Attributs](fonctions/attributs.md)
-  * Lambdas
+  * [Lambdas](fonctions/lambdas.md)
 * [Custom types](types-personnalises/main.md)
   * [Structures](types-personnalises/structures.md)
   * [Unions](types-personnalises/unions.md)

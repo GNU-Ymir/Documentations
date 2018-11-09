@@ -1,15 +1,16 @@
-# Héritage
+# Inheritance
 
-L'héritage est un système qui permet d'appliquer un traitement différent à des versions étendu d'un type. L'héritage en ymir est sécurisé, ne requiert aucune allocation mémoire et par conséquent garantie que le programme ne va pas connaître d'échec. Il donc possible d'utiliser l'héritage et le polymorphisme dans un contexte `safe`. 
+Inheritance is a system that allows you to apply different treatment to extended versions of a type. The inheritance in ymir is secure, requires no memory allocation and therefore guarantees that the program will not fail. It is therefore possible to use inheritance and polymorphism in a `safe' context. 
 
-Contrairement à d'autre language objet, l'héritage en ymir ne concernent que les méthodes, et ne permet pas de modifier les attributs. En effet la modification des attributs entrainerait un changement de la taille du type des héritier et ne permettrait plus de faire de polymorphisme sans allocation.
+Unlike other object languages, inheritance in ymir only concerns methods, and does not allow to modify attributes. Indeed, the modification of the attributes would lead to a change in the size of the type of heir and would no longer allow polymorphism without an allocation.
 
-Il existe néamoins d'autre forme d'héritage en **Ymir**, qui garantisse également la sécurité des types mais possèdent d'autre limitation et ne permettent pas de polymorphisme comme on pourrait le faire dans d'autre language objet comme le Java ou le C++. Ce système sera détaillé dans une autre section et se nomme le [mixin](../../mixin/main.md).
+There are however other forms of inheritance in **Ymir**, which also guarantee the security of the types but have other limitations and do not allow polymorphism as could be done in other object languages such as Java or C++. This system will be detailed in another section and is called the[mixin](.../../mixin/main.md).
 
-## Héritage et construction 
 
-L'héritage se fait grâce au mot clé `over`. Un type héritier va posséder tout les attributs `protected` et `public` de la classe parent, ainsi que toutes les méthodes également `protected` ou `public`. 
-Un constructeur doit être définis dans l'héritier et celui ci doit appeler le constructeur de la classe parent avant d'effectuer une quelconque opération.
+## Heritage and construction 
+
+Inheritance is done through the keyword `over'. An heir type will have all the `protected` and `public` attributes of the parent class, as well as all the methods also `protected` or `public`. 
+A constructor must be defined in the heir and the heir must call the constructor of the parent class before performing any operation.
 
 
 ```ymir
@@ -28,10 +29,176 @@ type MyInheriter over MyAncestor {
 
 	self () {
 		self.super::init (12); // super give access to ancestor type
-		println (self.0); // Error, parent fields are private
+		println (self.0); // Ok, parent fields are protected
 		println (self._x); // Ok, _x is protected
 	}
 
 }
 
+```
+
+## Fields aliases
+
+As when declaring a class implementing a type, heir classes can access the data field using the tuple access syntax. These classes can also redefine new aliases to easily access the data fields.
+
+
+```ymir
+type A impl (i32 | u64) {
+
+    let _x : self.0;
+
+    self () { self._x = 10; }
+    
+}
+
+
+type B over A {
+
+    let _z : self.1;
+
+    self () {
+        self.super::init ();
+        self._z = 10UL;
+    }
+    
+}
+```
+
+It is impossible to replace an alias. Calling an alias with the same name as an alias defined in a parent class generates an error.
+
+```ymir
+type A impl (i32 | u64) {
+
+    let _x : self.0;
+    // ...
+}
+
+
+type B over A {
+
+    let _x : self.1; // Error, Identifier '_x' is already used
+    // ...
+}
+```
+
+## Inheritance of the heir class
+
+The inheritance of a class inheriting from another class is quite possible.
+
+
+```ymir
+type A impl (void) { 
+	// ... 
+}
+
+type B over A { 
+	// ... 
+}
+
+type C over B {
+	// ...
+}
+```
+
+
+## Method overload
+
+The main interest of inheritance is to be able to modify the behavior of an extended version of a type.
+The keyword `over` can be used to define a new method in an inherited class, already defined in a parent class. This allows you to modify the content of the function in order to apply different processing.
+
+
+```ymir
+type A impl (void) {
+	// ...
+	
+	def foo (self, x : i32) {
+		println ("A : ", x);
+	}	
+}
+
+type B over A {
+	// ... 
+	
+	over foo (self, x : i32) {
+		println ("B : ", x);
+	}
+}
+
+let b = B::init ();
+b.foo (2); // B : 2
+```
+
+It is not possible to implicitly override a method, the keyword `over` is mandatory.
+
+```ymir
+// ...
+type B over A {
+	// ... 
+	
+	def foo (self, x : i32) { // Error, Cannot implicitly override method
+		println ("B : ", x);
+	}
+}
+```
+
+Pure methods are the only methods that can be overloaded, since they are the only virtual methods. It is impossible to overload an impure method, because when creating a class, it is impossible to know how many functions will be generated by this impure function, and therefore to define the size of the virtual table of the type.
+
+## Polymorphism
+
+The heir types of a class are compatible with the ancestor type. In other words, it is possible to store a heritage-class value in a variable whose type is the ancestor class. The opposite is obviously not possible.
+
+```ymir
+let a = A::init (); // a is of type A
+a = B::init (); // Ok, no problem
+
+let b = B::init ();
+b = A::init (); // Error, Operator '=' between types 'main.B' and 'main.A' doesn't exist
+```
+
+The advantage of being able to perform this type of operation is to create so-called polymorphic types. For example, you can create an array of type `[A]`, and put elements of type `B` in it.
+
+```ymir
+let myArray = [A ; 2U];
+myArray [0] = A::init ();
+myArray [1] = B::init ();
+
+for it in myArray {
+	it.foo (1); 
+} // A : 1, B : 1 
+```
+
+## Destruction
+
+The destructors are always virtual, which means that the destructor of an ancestor is called just after the destructor of the heir class.
+The following code: 
+
+```ymir 
+
+type A impl (i32 | u64) {
+	// ...
+    ~self () {
+        println ("~A");
+    }
+}
+
+type B over A {
+	//...
+    ~self () {
+        println ("~B");
+    }    
+}
+
+
+def main () {
+    let a  = B::init ();
+}
+```
+
+Will therefore generate the following display: 
+
+```ymir
+~B
+~A
+~B
+~A
 ```

@@ -1,10 +1,10 @@
-# Construction et durée de vie
+# Construction and Lifetime
 
-Cette partie va présenter la création d'un objet, le déroulement de sa vie, jusqu'a sa déstruction.
+This part will present the creation of an object, the course of its life, until its destruction.
 
-## Constructeur
+## Builder
 
-Un objet est crée à partir d'une classe. Ils est possible de définir les opération qui vont être appliqué lors de la création d'un nouvelle objet, grâce à la notion de constructeur. Les constructeurs sont des méthodes particulière qui vont être appelé une et une seule fois sur un objet, lors de sa création. La syntaxe d'un constructeur est la suivante :
+An object is created from a class. It is possible to define the operations that will be applied when creating a new object, thanks to the notion of constructor. Builders are particular methods that will be called once and only once on an object, when it is created. The syntax of a constructor is as follows:
 
 ```ymir
 
@@ -22,34 +22,37 @@ type MyType impl (void) { // A type with no fields
 
 ```
 
-Une fois les constructeurs définis il est possible de créer une variable possédant le type personnalisé que nous venons de définir.
+Once the constructors have been defined, it is possible to create a variable with the custom type we have just defined.
 
 ```ymir
 let myVar = MyType::init (); // Constructor with no parameter
 let mySecondVar = MyType::init (10); // Constructor with 1 parameter
 ```
 
-Comme pour les types primitif, il est possible de construire un type avec `init` sans utiliser de parenthèse, si le type possède un constructeur sans paramètre.
+As with primitive types, it is possible to build a type with `init` without using a parenthesis, if the type has a constructor without parameters.
 
 ```ymir
 let myvar = MyType::init; // Ok
 ```
 
-### Initialisation des champs de données 
-
-Les champs de données doivent être initialisé dans les constructeurs. Si il ne le sont pas, il ne seront pas affecté à leurs valeur `init`, ce qui est un bug qui va être corrigé ultérieurement. En gros Work in progress !!
+There is no default constructor in **Ymir**, if a class does not have a constructor, it will simply be impossible to instantiate an object of its type.
 
 
-## Durée de vie 
+### Data field initialization 
 
-Les objets sont des types spéciaux, mais ils respectent les conventions établie par les types primitifs.
-La durée de vie d'une variable de type objets, ne différent pas de celle d'une variable de type primitifs.
-Les objets sont placé sur la pile, comme toutes les variables locales (non allouées).
+The data fields must be initialized in the constructors. If they are not, they will not be affected to their `init` value, which is a bug that will be fixed later. Basically Work in progress!!
 
-## Destructeur
 
-Les déstructeur sont des méthodes appelé une et une seule fois sur les objets lors de leurs destruction.
-Il sont définissable dans une classe grâce au mot clé `~self`. Une classe ne peut posséder qu'un seule destructeur.
+## Life time 
+
+Objects are special types, but they respect the conventions established by the primitive types.
+The lifetime of an object variable does not differ from that of an primitive variable.
+Objects are placed on the stack, as are all local variables (unallocated).
+
+## Destructor
+
+Destructors are methods called once and only once on objects when they are destroyed.
+They can be defined in a class thanks to the keyword `~self`. A class can only have one destructor.
 
 ```ymir
 type MyType impl (i32) {
@@ -66,7 +69,8 @@ type MyType impl (i32) {
 }
 ```
 
-Il n'est pas possible d'appeler un destructeur, il est appelé automatiquement lorsqu'une variable de type objet arrive en fin de vie.
+It is not possible to call a destructor, it is called automatically when an object variable reaches the end of its life.
+
 
 ```ymir
 def main () {
@@ -78,7 +82,7 @@ def main () {
 
 ```
 
-Le programme précédant va génerer l'affichage suivant : 
+The previous program will generate the following display: 
 ```ymir
 Construct 1 // The local constant MyType::init (1)
 Construct 2 // The local constant MyType::init (2)
@@ -88,11 +92,11 @@ Destruct 1 // The local constant MyType::init (1)
 Destruct 1 // The variable a
 ```
 
-## Constructeur par copie 
+## Constructor by copy 
 
-Comme on peut le voir dans l'exemple ci-dessus, la construction d'un type objet par copie est définis par défaut comme une copie de tout les champs d'un type vers un autre, comme pour les copie d'une structure.
+As can be seen in the example above, the construction of an object type by copy is defined by default as a copy of all fields from one type to another, as for copies of a structure.
 
-Il est néamoins possible de surcharger la construction d'un type par copie grâce à la définition d'un constructeur spécialisé.
+However, it is possible to overload the construction of a type by copying it with the definition of a specialized builder.
 
 
 ```ymir
@@ -116,7 +120,7 @@ type MyType impl (i32) {
 }
 ```
 
-Avec cette déclaration de classe, le code définis précédemment rappelé ci-dessous : 
+With this class declaration, the code defined above recalled below: 
 
 
 ```ymir
@@ -128,7 +132,7 @@ def main () {
 }
 ```
 
-Va générer l'affichage suivant : 
+Will generate the following display: 
 ```
 Construct 1 // The local constant MyType::init (1)
 Copy -1 // The variable a
@@ -140,6 +144,6 @@ Destruct 1 // The local constant MyType::init (1)
 Destruct -1 // The variable a
 ```
 
-## Attention
+### Caution
 
-Si l'objet est déjà construit, ce n'est pas le constructeur par copie qui est appelé lors d'une affectation, mais l'operateur d'affectation. Celui peut être surchargé comme nous le verrons dans la partie suivante sur les méthodes. 
+If the object is already built, it is not the copy constructor that is called during an assignment, but the assignment operator. This can be overloaded as we will see in the next section on methods. 

@@ -1,12 +1,12 @@
-# Méthodes
+# Methods
 
-Les méthodes sont des fonctions particulière qui s'applique à des instances d'objets. Elle permettent d'appliquer un traitement particulier à un type et facilite la structuration du code.
+Methods are special functions that apply to instances of objects. They make it possible to apply a particular treatment to a type and facilitate the structuring of the code.
 
-## Méthodes pures
+## Pure methods
 
-Comme pour les fonctions, les méthodes sont séparé en deux catégories, les méthodes pures et les méthodes impures (cf .[Fonctions](../../fonctions/main.md)).
+As for functions, methods are separated into two categories, pure methods and impure methods (see[Functions](.../../functions/main.md)).
 
-Les méthodes pures sont définis dans une classe grâce au mot clé `def`. Le premier paramètre d'une méthode est toujours `self`, son type est une référence d'un objet, et est toujours inféré.
+Pure methods are defined in a class using the keyword `def`. The first parameter of a method is always `self`, its type is a reference of an object, and is always inferred.
 
 ```ymir
 
@@ -24,22 +24,16 @@ type MyType impl (i32) {
 // ...
 
 let myvar = MyType::init (10);
-myvar.foo (12); // This prints : 'Replace 10 by 12'
+myvar.foo (12); // This prints : 'Replace 10 by 12'```
 
-```
+It is possible to define several methods with the same name, as for functions. The method that is closest to type specialization during a call, or reference, will be used.
 
-Il est possible de définir plusieurs méthodes avec le même nom, comme
-pour les fonctions. La méthodes qui est le plus proche de la
-spécialisation de types lors d'un appel, ou d'une référence sera
-utilisé.
+We will see later that it is also possible to override a method with inheritance.
+Only pure methods can be overrided by inheritance, because they alone are virtual.
 
-Nous verrons plus tard qu'il est également possible de surcharger une méthodes par l'héritage.
-Seule les méthodes pures peuvent être surchargé par héritage, car elles seules sont virtuelles.
+## Impure methods
 
-
-## Méthodes impures
-
-Comme pour la déclaration des méthodes pures, le mot clé `def` permet de déclarer une méthodes impures. La différence entre une méthode pure et une méthode impure est la même que la différence entre les fonctions pures et impures, par conséquent vous pouvez vous référer à la section [Fonction](../../fonctions/main.md), pour de plus ample détail.
+As for the declaration of pure methods, the keyword `def` allows to declare an impure method. The difference between a pure method and an impure method is the same as the difference between pure and impure functions, so you can refer to the section[Function](.../../functions/main.md), for more details.
 
 ```ymir
 
@@ -53,16 +47,16 @@ type MyType impl (i32) {
 }
 ```
 
-Comme spécifié plus haut, les méthodes impures ne sont pas virtuelles et ne peuvent donc pas être surchargé par héritage.
+As specified above, impure methods are not virtual and therefore cannot be overloaded by inheritance.
 
 
-# Méthodes statiques
+## Static methods
 
-Le nom "méthode statique" est un abus de language pour définir des fonctions définis à l'intérieur d'une classe et qui sont utilisable sans instance d'objet.
+The name "static method" is an abuse of language to define functions defined within a class and which can be used without an object instance.
 
-Une méthode statique est accéssible grâce à l'operateur `::`.
+A static method is accessible through the operator `::`.
 
-Contrairement au méthodes, ces fonctions ne prennent pas le paramètre `self` comme premier argument.
+Unlike methods, these functions do not take the `self' parameter as the first argument.
 
 ```ymir
 type MyType impl (i32) {
@@ -88,5 +82,13 @@ myvar::foo (12); // Ok
 myvar.foo (12); // Error, type MyType does not have any method named foo
 ```
 
-Comme pour toutes déclaration de fonction, les méthodes statiques peuvent être pure ou impure, et également template comme nous le verrons dans la section consacré au [templates](../../templates/fonctions.md).
 
+As with any function declaration, static methods can be pure or impure, and also template as we will see in the section dedicated to[templates](../.../templates/fonctions.md).
+
+#### Limitations 
+
+Since the constructor of an object is called in the same way as a static method, it is impossible to define a static method called `init`.
+
+## Operator overloading
+
+Operator overloading can be defined within a class. Nevertheless, the operation of these overloads is fully similar to that defined outside a class. Therefore, the details of these overloads are defined in the following section[Operator overloading](.../../templates/operators.md).
