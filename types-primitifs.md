@@ -1,4 +1,4 @@
-# Types primitifs
+# Primitives types
 
 In **Ymir** language everything is typed. In this part, different
 types that are directly integrated into the language are summed up.

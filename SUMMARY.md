@@ -25,7 +25,9 @@
 	* [Construction and deconstruction](types-personnalises/objects/constrs.md)
 	* [Methods](types-personnalises/objects/methods.md)
 	* [Inheritance](types-personnalises/objects/inher.md)
-* Modules
+* [Modules](modules/main.md)
+  * [Declaration and filesystems](modules/creation.md)
+  * [Declaration and filesystems](modules/access.md)
 * Templates
 * Macros
 * [Interoperabilité](interoperabilite/README.md)

@@ -1,4 +1,4 @@
-# Commentaires
+# Comments
 
 **Ymir** offers different types of comments. 
 

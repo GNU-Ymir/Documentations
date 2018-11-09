@@ -109,10 +109,10 @@ foo (10, 10); // Error, the overload works as well with both prototypes.
 
 ## Parameter decorator
 
-There are two parameter decorators to specify a behavior 
-- Const`, the parameter cannot be modified whatever its type (cf.[Variables](expressions/variables.md))
-- ref`, the parameter is passed by reference, a lvalue is required. Any modification of the variable in the called function will also modify the variable of the calling function.
-- - We can also consider the `lazy' decorator, which will be detailed in another section
+There are three parameter decorators to specify a behavior 
+- `const`, the parameter cannot be modified whatever its type (cf.[Variables](../expressions/variables.md))
+- `ref`, the parameter is passed by reference, a lvalue is required. Any modification of the variable in the called function will also modify the variable of the calling function.
+- We can also consider the `lazy` decorator, which will be detailed in another section
 
 ```ymir
 def foo (ref a) {

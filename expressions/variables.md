@@ -15,9 +15,9 @@ let b = 34;
 
 println (c); // Illegal, c no longer exists in this scope```
 
-### Compilation variable
+### Compile time variable
 
-`cte` \(**C**compile **T**ime **E**xecution\) variables are variables whose value is known at compilation. You can change their values if the new value is also known at compile time. The `cte' keyword allows you to declare variables known at compile time.
+`cte` \(**C**ompile **T**ime **E**xecution\) variables are variables whose value is known at compilation. You can change their values if the new value is also known at compile time. The `cte' keyword allows you to declare variables known at compile time.
 
 ```ymir
 let cte a = 12;

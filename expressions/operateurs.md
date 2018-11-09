@@ -1,4 +1,4 @@
-# Operateurs
+# Operators
 
 The priority of the operators is similar to other languages close to C.
 

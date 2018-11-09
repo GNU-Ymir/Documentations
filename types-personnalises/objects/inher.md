@@ -4,10 +4,10 @@ Inheritance is a system that allows you to apply different treatment to extended
 
 Unlike other object languages, inheritance in ymir only concerns methods, and does not allow to modify attributes. Indeed, the modification of the attributes would lead to a change in the size of the type of heir and would no longer allow polymorphism without an allocation.
 
-There are however other forms of inheritance in **Ymir**, which also guarantee the security of the types but have other limitations and do not allow polymorphism as could be done in other object languages such as Java or C++. This system will be detailed in another section and is called the[mixin](.../../mixin/main.md).
+There are however other forms of inheritance in **Ymir**, which also guarantee the security of the types but have other limitations and do not allow polymorphism as could be done in other object languages such as Java or C++. This system will be detailed in another section and is called the [mixin](.../../mixin/main.md).
 
 
-## Heritage and construction 
+## Inheritance and construction 
 
 Inheritance is done through the keyword `over'. An heir type will have all the `protected` and `public` attributes of the parent class, as well as all the methods also `protected` or `public`. 
 A constructor must be defined in the heir and the heir must call the constructor of the parent class before performing any operation.
