@@ -25,13 +25,15 @@
 	* [Construction and deconstruction](types-personnalises/objects/constrs.md)
 	* [Methods](types-personnalises/objects/methods.md)
 	* [Inheritance](types-personnalises/objects/inher.md)
+  * [Traits](types-personnalises/traits.md)
 * [Modules](modules/main.md)
   * [Declaration and filesystems](modules/creation.md)
   * [Access specifiers and visibility](modules/access.md)
-* Templates
+* [Templates](templates/main.md)
+  * [Types constraints](templates/types.md)
 * Macros
-* [Interoperabilité](interoperabilite/README.md)
-  * [Avec C](interoperabilite/avec-c.md)
-  * Avec C++
-  * Avec D
+* [Interoperability](interoperabilite/README.md)
+  * [With C](interoperabilite/avec-c.md)
+  * With C++
+  * With D
 

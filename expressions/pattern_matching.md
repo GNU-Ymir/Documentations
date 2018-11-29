@@ -6,7 +6,7 @@ expressive and quite intuitive syntax.
 
 ## Simple patterns 
 
-You can use literals directly as in a classic `switch` case`.
+You can use literals directly as in a classical C language `switch` `case`.
 
 ```ymir
 let x = 2;
@@ -128,7 +128,6 @@ Works in progress !!
 ## Mixing all that 
 
 ```ymir
-
 struct
 | entry : Point
 | len : i32
@@ -149,7 +148,6 @@ def main () {
         }
     }
     
-    println (z); // main.SquareS(main.PointS(1, 8), 54)
-    
+    println (z); // main.SquareS(main.PointS(1, 8), 54)    
 }
 ```

@@ -8,7 +8,7 @@ Pure functions are functions, of which we know all the information necessary for
 
 The type of return is not necessary for a function to be pure, it will be inferred during its compilation.
 
-The `main` function is always pure, even if the type of the input parameter is not given, it will be inferred from `[[char]\]`.
+The `main` function is always pure, even if the type of the input parameter is not given, it will be inferred from `[[char]]`.
 
 ```ymir
 def myFirstPureFunction (a : i32, b : f32) -> f32 {

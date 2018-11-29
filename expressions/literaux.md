@@ -37,7 +37,7 @@ let c = .2f; // f32, 0.2f
 
 ## Character literals
 
-The literals forming characters are surrounded by quotes `'`'. These literals are inferred with the `char` type, which has a size of `8 bits` and is unsigned.
+The literals forming characters are surrounded by quotes `'`. These literals are inferred with the `char` type, which has a size of `8 bits` and is unsigned.
 
 ```ymir
 let a = 'A'; 

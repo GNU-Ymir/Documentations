@@ -29,7 +29,6 @@ and sort them by memory size.
 Each integer type has type attributs, which are accessible using the operator `::`, from a type directly or using an expression.
 
 ```ymir
-
 let a = i32::init;  // i32 (0)
 let b = (10)::init; // i32 (0)
 ```

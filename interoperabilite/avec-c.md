@@ -1,6 +1,6 @@
-# Avec C
+# With C
 
-It would be sensless, to ignore the vast array of C API's available, that's why Ymir is designed to fit perfectly with C language.
+It would be sensless, to ignore the vast array of C API's available, that's why **Ymir** is designed to fit perfectly with C language.
 
 ## Calling C function
 
@@ -44,3 +44,34 @@ C globals have the C naming convention, so they must be declared as `extern (C)`
 extern (C) x : int;
 ```
 
+## Call Ymir from C language
+
+Les fonctions définis dans le language **Ymir** vont être renommé à la compilation, afin d'éviter des conflits de symbole lors de l'édition des liens. Il est possible de forcer le nommage de la fonction à la manière du C, afin de pouvoir y faire référence dans un programme C.
+
+
+```ymir:foo.yr
+extern (C) {
+	
+	def foo (a : i32) {
+		println ("In function foo : ", a);
+	}	
+
+}
+```
+
+```c:main.c
+void foo (int);
+
+def main () {
+	foo (10);
+}
+```
+
+La compilation se fait ensuite comme suit : 
+
+```bash
+$ gyc -c foo.yr
+$ gcc main.c foo.o
+$ ./a.out
+In function foo : 10
+```

@@ -20,7 +20,7 @@ def main () {
 
 ## Different range types
 
-There are two types of operators to build a range, the operator `...` which means that the second value of the range is not included in the interval, and the operator `...`, which on the contrary allows him to include the second value in the interval.
+There are two types of operators to build a range, the operator `..` which means that the second value of the range is not included in the interval, and the operator `...`, which on the contrary allows him to include the second value in the interval.
 
 
 ```ymir
@@ -61,7 +61,7 @@ for i in 4 ... 0 {
 
 ## Cte range
 
-A range can be used as a compilation expression for cte `for` loops, if the elements that compose it are known at compilation.
+A range can be used as a compilation expression for `cte` `for` loops, if the elements that compose it are known at compilation.
 
 ```ymir
 cte for i in 0 .. 100 {

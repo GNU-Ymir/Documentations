@@ -19,18 +19,16 @@ We have the declaration of 3 different global modules, one per file. Their names
 The `import` instruction allows you to import a global module (defined by a file) from another module.
 This instruction can be placed anywhere in a program, and its lifetime corresponds to that of the scope in which it was executed.
 
-```ymir
-// main.yr
-
-import shapes.rectangle; // Global import, shapes.rectangle declarations are accessible throughout the module
+```ymir:main.yr
+import shapes.rectangle; 
+// Global import, shapes.rectangle declarations are accessible throughout the module
 
 def foo () {
 	{
 		import shapes.square; // all declaration of shapes.square are now accessible
 	} 
-	// 	// This is no longer the case here, the shapes.square declarations are no longer defined
+	// This is no longer the case here, the shapes.square declarations are no longer defined
 }
-
 ```
 
 ## Caution
@@ -51,11 +49,10 @@ type Shape impl (void) {
 Local modules are modules defined by the keyword `mod` when it has a body.
 
 ```ymir
-
 mod myLocalModule {
-	
+
 	def foo () {
-	}
+	}	
 	
 }
 ```
@@ -87,7 +84,6 @@ It can happen that two modules declare the same function, and there are collisio
 In the `main` module, it is possible to specify which of these functions to refer to, using the operator `::`.
 
 ```ymir
-
 import shapes.square;
 import shapes.rectangle; // No problem, the definition is located at the module, no collision
 
@@ -96,5 +92,4 @@ bar (); // Error, Impossible to know which function is referred to
 shapes::square::bar (); // Ok, the function in the shapes.square module will be called
 
 shapes::rectangle::bar (); // Ok, same as above but with shapes.rectangle
-
 ```

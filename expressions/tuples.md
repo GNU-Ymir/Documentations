@@ -1,7 +1,7 @@
 # Tuples
 
 A tuple is a collection of values of different types. It is possible
-to build a tuple using the parentheses `()`. It is possible to pass
+to build a tuple using the parentheses `(` `)`. It is possible to pass
 a tuple as a parameter of a function, or as a function return value to
 return several values.
 

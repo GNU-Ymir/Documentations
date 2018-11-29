@@ -51,7 +51,6 @@ let ld2 = (x) => x + 1; // Error, we can't create a pointer to a function if we 
 The `closure` are particular lambda functions called so because it closes their environment. They are also called `delegate` and the keyword `dg` refers to a pointer to a closure.
 
 ```ymir
-
 let num = 10;
 let closure = (x : i32) => x + num;
 

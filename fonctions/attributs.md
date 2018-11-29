@@ -3,11 +3,14 @@
 The functions can be configured using attributes. Attributes are defined with the `@` token. 
 
 ```ymir
-// 
+// Declare a function with multiple attributes
 def @{safe, inline} foo () {
+	// ...
 }
 
+// Or with only one attribute
 def @inline bar () {
+	// ...
 }
 ```
 

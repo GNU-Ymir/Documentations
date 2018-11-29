@@ -12,7 +12,7 @@ code[class*="language-"],
 pre[class*="language-"] {
     font-family: Consolas, Menlo, Monaco, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", "Courier New", Courier, monospace;
     font-size: 14px;
-    line-height: 1.375;
+    line-height: 1.1;
     direction: ltr;
     text-align: left;
     white-space: pre;
@@ -29,6 +29,8 @@ pre[class*="language-"] {
     hyphens: none;
     background: #fefbec;
     color: #6e6b5e;
+    
+    border: 2px solid #cbc8b9;
 }
 
 pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
@@ -45,16 +47,27 @@ code[class*="language-"]::selection, code[class*="language-"] ::selection {
 
 /* Code blocks */
 pre[class*="language-"] {
-    padding: 1em;
-    margin: .5em 0;
+    margin: 0;
+    margin-bottom : 1em;
     overflow: auto;
+    padding: .4em;
 }
 
 /* Inline code */
 :not(pre) > code[class*="language-"] {
-    padding: .1em;
-    border-radius: .3em;
+    padding: .08em;
+    border: .05em solid #000000;
+    color : #000000;
 }
+
+
+/* Inline code */
+:not(pre) > code[class*="language- key"] {
+    padding: .08em;
+    border: .05em solid #000000;
+    color : #60ac39;
+}
+
 
 .token.comment,
 .token.prolog,

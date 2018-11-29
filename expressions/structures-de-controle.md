@@ -18,10 +18,10 @@ else
 In **Ymir**, a condition must be of the `bool` type, it is impossible
 to use other types as integers as one could do in other C-like
 language. The content of an `if` instruction is an instruction block,
-where creating a block containing several instructions with `{}`
+where creating a block containing several instructions with `{` `}`
 tokens is optional, if you want to execute only one instruction.
 
-The `if``else`` construct can be used as an expression, so you can retrieve the value of a conditional expression.
+The `if` `else` construct can be used as an expression, so you can retrieve the value of a conditional expression.
 
 ```ymir
 let x = true;
@@ -74,7 +74,7 @@ assert (j == 2 && i == 0);
 
 ### For
 
-The `for' loop allows you to iterate on a collection of elements such as an array, or a range.
+The `for` loop allows you to iterate on a collection of elements such as an array, or a range.
 
 ```ymir
 for i in ["One", "Two", "Three"] {
@@ -95,7 +95,7 @@ for i in 3 .. 0 {
 } // 3, 2, 1,
 ```
 
-As with `while' loops, it is possible to tag a `for' loop so that it can be referred to in a `break' instruction.
+As with `while` loops, it is possible to tag a `for` loop so that it can be referred to in a `break` instruction.
 
 ```ymir
 for:loop (i in [1, 2, 3]) {U
