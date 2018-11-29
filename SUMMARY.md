@@ -27,7 +27,7 @@
 	* [Inheritance](types-personnalises/objects/inher.md)
 * [Modules](modules/main.md)
   * [Declaration and filesystems](modules/creation.md)
-  * [Declaration and filesystems](modules/access.md)
+  * [Access specifiers and visibility](modules/access.md)
 * Templates
 * Macros
 * [Interoperabilité](interoperabilite/README.md)
