@@ -18,7 +18,7 @@ def main () {
 }
 ```
 
-## Different type of range
+## Different range types
 
 There are two types of operators to build a range, the operator `...` which means that the second value of the range is not included in the interval, and the operator `...`, which on the contrary allows him to include the second value in the interval.
 
