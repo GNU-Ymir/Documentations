@@ -33,7 +33,7 @@ def foo () {
 
 ## Caution
 
-The `mod` instruction allows to define the name of a module and to avoid any confusion by the compiler (at the time of link edition). These confusions can occur when importing a module from a different directory using an absolute path defined by the `-I` compilation option (see[Compilation options]()).
+The `mod` instruction allows to define the name of a module and to avoid any confusion by the compiler (at the time of link edition). These confusions can occur when importing a module from a different directory using an absolute path defined by the `-I` compilation option (see [Compilation options]()).
 
 ```ymir
 mod shapes.shape;

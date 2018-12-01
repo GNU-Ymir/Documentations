@@ -31,7 +31,7 @@ myModule::foo (); // No
 myModule::myInnerModule::baz (); // No
 ```
 
-Declarations can be set to several in a private block.
+Private declarations can be a block to define multiple elements.
 
 ```ymir
 	private {

@@ -2,7 +2,7 @@
 
 Traits are special types that have no value. They are used to test other types and verify that they share characteristics.
 
-A trait has a set of methods and attributes.
+A `trait` has a set of methods and attributes.
 
 ```ymir
 trait isCallable {
@@ -46,4 +46,4 @@ def main () {
 }
 ```
 
-The traits only allow to test public elements (from a context) of an object type, since their objective is to verify that the type is usable from this context.
+The `trait` only allow to test public elements (from a context) of an object type, since their objective is to verify that the type is usable from this context.

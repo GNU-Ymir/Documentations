@@ -47,6 +47,7 @@ The three operations prohibited in a safe context are:
 - Calling a non-safe function
 - Unsubscribe a pointer
 - Allocate memory
+- throw error
 
 All other operations are allowed.
 

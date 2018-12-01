@@ -4,7 +4,7 @@ Methods are special functions that apply to instances of objects. They make it p
 
 ## Pure methods
 
-As for functions, methods are separated into two categories, pure methods and impure methods (see[Functions](.../../functions/main.md)).
+As for functions, methods are separated into two categories, pure methods and impure methods (see [Functions](.../../functions/main.md)).
 
 Pure methods are defined in a class using the keyword `def`. The first parameter of a method is always `self`, its type is a reference of an object, and is always inferred.
 
@@ -33,7 +33,7 @@ Only pure methods can be overrided by inheritance, because they alone are virtua
 
 ## Impure methods
 
-As for the declaration of pure methods, the keyword `def` allows to declare an impure method. The difference between a pure method and an impure method is the same as the difference between pure and impure functions, so you can refer to the section[Function](.../../functions/main.md), for more details.
+As for the declaration of pure methods, the keyword `def` allows to declare an impure method. The difference between a pure method and an impure method is the same as the difference between pure and impure functions, so you can refer to the section [Function](.../../functions/main.md), for more details.
 
 ```ymir
 
@@ -83,7 +83,7 @@ myvar.foo (12); // Error, type MyType does not have any method named foo
 ```
 
 
-As with any function declaration, static methods can be pure or impure, and also template as we will see in the section dedicated to[templates](../.../templates/fonctions.md).
+As with any function declaration, static methods can be pure or impure, and also template as we will see in the section dedicated to [Templates](../.../templates/fonctions.md).
 
 #### Limitations 
 
@@ -91,4 +91,4 @@ Since the constructor of an object is called in the same way as a static method,
 
 ## Operator overloading
 
-Operator overloading can be defined within a class. Nevertheless, the operation of these overloads is fully similar to that defined outside a class. Therefore, the details of these overloads are defined in the following section[Operator overloading](.../../templates/operators.md).
+Operator overloading can be defined within a class. Nevertheless, the operation of these overloads is fully similar to that defined outside a class. Therefore, the details of these overloads are defined in the following section [Operator overloading](.../../templates/operators.md).

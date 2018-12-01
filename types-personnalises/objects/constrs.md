@@ -2,7 +2,7 @@
 
 This part will present the creation of an object, the course of its life, until its destruction.
 
-## Builder
+## Constructor
 
 An object is created from a class. It is possible to define the operations that will be applied when creating a new object, thanks to the notion of constructor. Builders are particular methods that will be called once and only once on an object, when it is created. The syntax of a constructor is as follows:
 
@@ -146,4 +146,4 @@ Destruct -1 // The variable a
 
 ### Caution
 
-If the object is already built, it is not the copy constructor that is called during an assignment, but the assignment operator. This can be overloaded as we will see in the next section on methods. 
+If the object is already built, it is not the copy constructor that is called during an assignment, but the assignment operator. This can be overloaded as we will see in the section on [Operator overloading](../../templates/operators.md). 

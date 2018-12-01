@@ -9,7 +9,7 @@ There are however other forms of inheritance in **Ymir**, which also guarantee t
 
 ## Inheritance and construction 
 
-Inheritance is done through the keyword `over'. An heir type will have all the `protected` and `public` attributes of the parent class, as well as all the methods also `protected` or `public`. 
+Inheritance is done through the keyword `over`. An heir type will have all the `protected` and `public` attributes of the parent class, as well as all the methods also `protected` or `public`. 
 A constructor must be defined in the heir and the heir must call the constructor of the parent class before performing any operation.
 
 

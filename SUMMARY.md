@@ -31,6 +31,10 @@
   * [Access specifiers and visibility](modules/access.md)
 * [Templates](templates/main.md)
   * [Types constraints](templates/types.md)
+  * [Compile time value](templates/value.md)
+  * [Operator overloading](templates/operators.md)
+* [Error handling](errors/main.md) 
+  * [Scope guards](errors/scope_guards.md)
 * Macros
 * [Interoperability](interoperabilite/README.md)
   * [With C](interoperabilite/avec-c.md)
