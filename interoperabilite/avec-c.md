@@ -46,7 +46,9 @@ extern (C) x : int;
 
 ## Call Ymir from C language
 
-Les fonctions définis dans le language **Ymir** vont être renommé à la compilation, afin d'éviter des conflits de symbole lors de l'édition des liens. Il est possible de forcer le nommage de la fonction à la manière du C, afin de pouvoir y faire référence dans un programme C.
+
+The functions defined in the language **Ymir** will be renamed at compile time, in order to avoid symbol conflicts when editing links. It is possible to force the naming of the function in the same way as C, in order to be able to refer to it in a C program.
+
 
 
 ```ymir:foo.yr
@@ -67,7 +69,7 @@ def main () {
 }
 ```
 
-La compilation se fait ensuite comme suit : 
+The compilation is then done as follows: 
 
 ```bash
 $ gyc -c foo.yr

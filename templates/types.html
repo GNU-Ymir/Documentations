@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Hello World · GitBook</title>
+        <title>Types constraints · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -61,10 +61,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="commentaires.html" />
+    <link rel="next" href="value.html" />
     
     
-    <link rel="prev" href="../" />
+    <link rel="prev" href="main.html" />
     
 
     </head>
@@ -106,9 +106,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.2" data-path="./">
+        <li class="chapter " data-level="1.2" data-path="../hello-world/">
             
-                <a href="./">
+                <a href="../hello-world/">
             
                     
                     Hello World
@@ -120,9 +120,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.2.1" data-path="commentaires.html">
+        <li class="chapter " data-level="1.2.1" data-path="../hello-world/commentaires.html">
             
-                <a href="commentaires.html">
+                <a href="../hello-world/commentaires.html">
             
                     
                     Comments
@@ -506,9 +506,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.8" data-path="../templates/main.html">
+        <li class="chapter " data-level="1.8" data-path="main.html">
             
-                <a href="../templates/main.html">
+                <a href="main.html">
             
                     
                     Templates
@@ -520,9 +520,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.8.1" data-path="../templates/types.html">
+        <li class="chapter active" data-level="1.8.1" data-path="types.html">
             
-                <a href="../templates/types.html">
+                <a href="types.html">
             
                     
                     Types constraints
@@ -533,9 +533,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.8.2" data-path="../templates/value.html">
+        <li class="chapter " data-level="1.8.2" data-path="value.html">
             
-                <a href="../templates/value.html">
+                <a href="value.html">
             
                     
                     Compile time value
@@ -546,9 +546,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.8.3" data-path="../templates/operators.html">
+        <li class="chapter " data-level="1.8.3" data-path="operators.html">
             
-                <a href="../templates/operators.html">
+                <a href="operators.html">
             
                     
                     Operator overloading
@@ -697,7 +697,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Hello World</a>
+        <a href=".." >Types constraints</a>
     </h1>
 </div>
 
@@ -712,24 +712,90 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="hello-world">Hello World</h1>
-<p>The following source code, is the <strong>Ymir</strong> version of the famous <code class="language-">Hello World!!</code> program.</p>
-<pre class="language-"><code class="lang-ymir"><span class="token comment">// This is a comment </span>
+                                <h1 id="template-type-constraints">Template type constraints</h1>
+<p>Type constraints are used to verify that a type passed in
+as long as the template parameter respects the defined constraints, in order to
+specialize treatments. For example, define a function
+applicable to any type of table.</p>
+<h2 id="type-deduction">Type deduction</h2>
+<p>The deduction of template types is done according to several rules:</p>
+<p><strong>1.</strong> The types of template parameters are established by the template arguments at the same positions: : </p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">mod</span> <span class="token function">Mod</span> <span class="token punctuation">(</span>T<span class="token punctuation">,</span> U<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
 
-<span class="token comment">// This is a function declaration </span>
-<span class="token comment">// The main function, is the first one called </span>
-<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment">// Print &apos;Hello World !!&apos; to the console</span>
-    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Hello World !!&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">Mod!</span><span class="token punctuation">(</span>i32<span class="token punctuation">,</span> f64<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// T is i32, U is f64</span>
+</code></pre>
+<p><strong>2.</strong> If the template parameter is a specialization, it sets the type of all the template parameters on which it depends:</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">mod</span> <span class="token function">Mod</span> <span class="token punctuation">(</span>T of <span class="token punctuation">[</span>U<span class="token punctuation">]</span><span class="token punctuation">,</span> U<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+<span class="token function">Mod!</span><span class="token punctuation">(</span><span class="token punctuation">[</span>i32<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// T is [i32], U is i32</span>
+<span class="token function">Mod!</span><span class="token punctuation">(</span><span class="token punctuation">[</span>i32<span class="token punctuation">]</span><span class="token punctuation">,</span> i32<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Ok, no conflict</span>
+</code></pre>
+<p><strong>3.</strong> If after that there are still some template parameters that are not defined: </p>
+<ul>
+<li>In the case of a function, the template parameters are deduced from the runtime parameters</li>
+</ul>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>T<span class="token punctuation">,</span> U<span class="token punctuation">)</span> <span class="token punctuation">(</span>a <span class="token punctuation">:</span> U<span class="token punctuation">)</span> <span class="token punctuation">{</span>
 <span class="token punctuation">}</span>
+
+foo<span class="token operator">!</span><span class="token function">i32</span> <span class="token punctuation">(</span><span class="token string">&apos;r&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// T is i32, U is char</span>
 </code></pre>
-<p>A binary can be generated using <strong>GYC</strong>.</p>
-<pre class="language-"><code class="lang-bash">$ gyc hello.yr
+<ul>
+<li>In all other cases, specialization does not work</li>
+</ul>
+<p>If the previous rules do not allow the types to be deduced for all the template parameters, the specialization does not work.</p>
+<h2 id="of-constraint">Of constraint</h2>
+<p>The keyword <code class="language-">of</code> defines that the type given in the left operand must be of the same form as the expression given in the right operand. </p>
+<pre class="language-"><code class="lang-ymir"><span class="token comment">// This function take an array of any type in parameters</span>
+<span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>T of <span class="token punctuation">[</span>U<span class="token punctuation">]</span><span class="token punctuation">,</span> U<span class="token punctuation">)</span> <span class="token punctuation">(</span>a <span class="token punctuation">:</span> T<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// ...</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// T is deduced to [i32], and U to i32</span>
+<span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">&quot;1&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;2&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;3&quot;</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// T is deduced to [string], and U to string</span>
 </code></pre>
-<p>This command produce a binary <code class="language-">a.out</code> that can be executed </p>
-<pre class="language-"><code>$ ./a.out
-Hello World !!
+<p>The <code class="language-">of</code> constraint can be used on any type, and can deconstruct at any level.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">struct</span> <span class="token punctuation">(</span>T<span class="token punctuation">)</span> 
+<span class="token operator">|</span> a <span class="token punctuation">:</span> T
+ <span class="token punctuation">-&gt;</span> MySt<span class="token punctuation">;</span>
+
+<span class="token comment">// This is not really a template function, as it will only work for MySt!(MySt!([i32]))</span>
+ <span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>T of <span class="token function">MySt!</span><span class="token punctuation">(</span>U<span class="token punctuation">)</span><span class="token punctuation">,</span> U of <span class="token punctuation">[</span>V<span class="token punctuation">]</span><span class="token punctuation">,</span> V of i32<span class="token punctuation">)</span> <span class="token punctuation">(</span>a <span class="token punctuation">:</span> MySt<span class="token operator">!</span>T<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// ...</span>
+ <span class="token punctuation">}</span>
+
+ <span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token function">MySt!</span><span class="token punctuation">(</span><span class="token function">MySt!</span><span class="token punctuation">(</span><span class="token punctuation">[</span>i32<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token punctuation">:</span>init<span class="token punctuation">;</span>
+ <span class="token function">foo</span> <span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
+<h2 id="overloading">Overloading</h2>
+<p>When several template elements are defined, the one with the best specialization will be used. The more precise the specializations are, the higher the score of this specialization will be. The element with the highest score will be the one used.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>T<span class="token punctuation">)</span> <span class="token punctuation">(</span>a <span class="token punctuation">:</span> T<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;scalar&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>T of <span class="token punctuation">[</span>U<span class="token punctuation">]</span><span class="token punctuation">,</span> U<span class="token punctuation">)</span> <span class="token punctuation">(</span>a <span class="token punctuation">:</span> T<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;array&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>T of <span class="token punctuation">[</span>U<span class="token punctuation">]</span><span class="token punctuation">,</span> U of i32<span class="token punctuation">)</span> <span class="token punctuation">(</span>a <span class="token punctuation">:</span> T<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;array of int&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">foo</span> <span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// scalar</span>
+<span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">dup</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// array of int</span>
+<span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">&apos;r&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;t&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;y&apos;</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">dup</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// array</span>
+</code></pre>
+<p>Specialization using the keyword <code class="language-">of</code> generates a higher score than specialization by a specific type. For example:</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>T of <span class="token punctuation">[</span>i32<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;First&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>T of <span class="token punctuation">[</span>U<span class="token punctuation">]</span><span class="token punctuation">,</span> U of i32<span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Second&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">foo!</span><span class="token punctuation">(</span><span class="token punctuation">[</span>i32<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Second</span>
+</code></pre>
+
                                 
                                 </section>
                             
@@ -756,12 +822,12 @@ Hello World !!
 
             
                 
-                <a href="../" class="navigation navigation-prev " aria-label="Previous page: Introduction">
+                <a href="main.html" class="navigation navigation-prev " aria-label="Previous page: Templates">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="commentaires.html" class="navigation navigation-next " aria-label="Next page: Comments">
+                <a href="value.html" class="navigation navigation-next " aria-label="Next page: Compile time value">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -772,7 +838,7 @@ Hello World !!
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Hello World","level":"1.2","depth":1,"next":{"title":"Comments","level":"1.2.1","depth":2,"path":"hello-world/commentaires.md","ref":"hello-world/commentaires.md","articles":[]},"previous":{"title":"Introduction","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"hello-world/README.md","mtime":"2018-12-01T18:27:05.171Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-12-01T18:39:00.470Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Types constraints","level":"1.8.1","depth":2,"next":{"title":"Compile time value","level":"1.8.2","depth":2,"path":"templates/value.md","ref":"templates/value.md","articles":[]},"previous":{"title":"Templates","level":"1.8","depth":1,"path":"templates/main.md","ref":"templates/main.md","articles":[{"title":"Types constraints","level":"1.8.1","depth":2,"path":"templates/types.md","ref":"templates/types.md","articles":[]},{"title":"Compile time value","level":"1.8.2","depth":2,"path":"templates/value.md","ref":"templates/value.md","articles":[]},{"title":"Operator overloading","level":"1.8.3","depth":2,"path":"templates/operators.md","ref":"templates/operators.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"templates/types.md","mtime":"2018-12-01T18:27:05.175Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-12-01T18:39:00.470Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

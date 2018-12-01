@@ -1,0 +1,963 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Inheritance · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-prism/prism-atelier.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-codeblock-filename/block.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../traits.html" />
+    
+    
+    <link rel="prev" href="methods.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../hello-world/">
+            
+                <a href="../../hello-world/">
+            
+                    
+                    Hello World
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../../hello-world/commentaires.html">
+            
+                <a href="../../hello-world/commentaires.html">
+            
+                    
+                    Comments
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../types-primitifs.html">
+            
+                <a href="../../types-primitifs.html">
+            
+                    
+                    Primitive types
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../expressions/">
+            
+                <a href="../../expressions/">
+            
+                    
+                    Expressions
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../expressions/literaux.html">
+            
+                <a href="../../expressions/literaux.html">
+            
+                    
+                    Literals
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../../expressions/variables.html">
+            
+                <a href="../../expressions/variables.html">
+            
+                    
+                    Variables
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../../expressions/operateurs.html">
+            
+                <a href="../../expressions/operateurs.html">
+            
+                    
+                    Operators
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../../expressions/arrays.html">
+            
+                <a href="../../expressions/arrays.html">
+            
+                    
+                    Arrays and slices
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../../expressions/ranges.html">
+            
+                <a href="../../expressions/ranges.html">
+            
+                    
+                    Ranges
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../../expressions/tuples.html">
+            
+                <a href="../../expressions/tuples.html">
+            
+                    
+                    Tuples
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="../../expressions/structures-de-controle.html">
+            
+                <a href="../../expressions/structures-de-controle.html">
+            
+                    
+                    Control structures
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8" data-path="../../expressions/pattern_matching.html">
+            
+                <a href="../../expressions/pattern_matching.html">
+            
+                    
+                    Pattern maching
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../../fonctions/main.html">
+            
+                <a href="../../fonctions/main.html">
+            
+                    
+                    Fonctions
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../../fonctions/attributs.html">
+            
+                <a href="../../fonctions/attributs.html">
+            
+                    
+                    Attributs
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../../fonctions/lambdas.html">
+            
+                <a href="../../fonctions/lambdas.html">
+            
+                    
+                    Lambdas
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../main.html">
+            
+                <a href="../main.html">
+            
+                    
+                    Custom types
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../structures.html">
+            
+                <a href="../structures.html">
+            
+                    
+                    Structures
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../unions.html">
+            
+                <a href="../unions.html">
+            
+                    
+                    Unions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../enums.html">
+            
+                <a href="../enums.html">
+            
+                    
+                    Enums
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../objects.html">
+            
+                <a href="../objects.html">
+            
+                    
+                    Objects
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.4.1" data-path="attrs.html">
+            
+                <a href="attrs.html">
+            
+                    
+                    Attributes
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4.2" data-path="constrs.html">
+            
+                <a href="constrs.html">
+            
+                    
+                    Construction and deconstruction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4.3" data-path="methods.html">
+            
+                <a href="methods.html">
+            
+                    
+                    Methods
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.6.4.4" data-path="inher.html">
+            
+                <a href="inher.html">
+            
+                    
+                    Inheritance
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.5" data-path="../traits.html">
+            
+                <a href="../traits.html">
+            
+                    
+                    Traits
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../../modules/main.html">
+            
+                <a href="../../modules/main.html">
+            
+                    
+                    Modules
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../../modules/creation.html">
+            
+                <a href="../../modules/creation.html">
+            
+                    
+                    Declaration and filesystems
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../../modules/access.html">
+            
+                <a href="../../modules/access.html">
+            
+                    
+                    Access specifiers and visibility
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../../templates/main.html">
+            
+                <a href="../../templates/main.html">
+            
+                    
+                    Templates
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../../templates/types.html">
+            
+                <a href="../../templates/types.html">
+            
+                    
+                    Types constraints
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../../templates/value.html">
+            
+                <a href="../../templates/value.html">
+            
+                    
+                    Compile time value
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../../templates/operators.html">
+            
+                <a href="../../templates/operators.html">
+            
+                    
+                    Operator overloading
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../../errors/main.html">
+            
+                <a href="../../errors/main.html">
+            
+                    
+                    Error handling
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../../errors/scope_guards.html">
+            
+                <a href="../../errors/scope_guards.html">
+            
+                    
+                    Scope guards
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" >
+            
+                <span>
+            
+                    
+                    Macros
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="../../interoperabilite/">
+            
+                <a href="../../interoperabilite/">
+            
+                    
+                    Interoperability
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.11.1" data-path="../../interoperabilite/avec-c.html">
+            
+                <a href="../../interoperabilite/avec-c.html">
+            
+                    
+                    With C
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.2" >
+            
+                <span>
+            
+                    
+                    With C++
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.3" >
+            
+                <span>
+            
+                    
+                    With D
+            
+                </span>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >Inheritance</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="inheritance">Inheritance</h1>
+<p>Inheritance is a system that allows you to apply different treatment to extended versions of a type. The inheritance in ymir is secure, requires no memory allocation and therefore guarantees that the program will not fail. It is therefore possible to use inheritance and polymorphism in a `safe&apos; context. </p>
+<p>Unlike other object languages, inheritance in ymir only concerns methods, and does not allow to modify attributes. Indeed, the modification of the attributes would lead to a change in the size of the type of heir and would no longer allow polymorphism without an allocation.</p>
+<p>There are however other forms of inheritance in <strong>Ymir</strong>, which also guarantee the security of the types but have other limitations and do not allow polymorphism as could be done in other object languages such as Java or C++. This system will be detailed in another section and is called the <a href="mixin/main.md">mixin</a>.</p>
+<h2 id="inheritance-and-construction">Inheritance and construction</h2>
+<p>Inheritance is done through the keyword <code class="language-">over</code>. An heir type will have all the <code class="language-">protected</code> and <code class="language-">public</code> attributes of the parent class, as well as all the methods also <code class="language-">protected</code> or <code class="language-">public</code>. 
+A constructor must be defined in the heir and the heir must call the constructor of the parent class before performing any operation.</p>
+<pre class="language-"><code class="lang-ymir">
+type MyAncestor <span class="token function">impl</span> <span class="token punctuation">(</span>i32<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    protected <span class="token keyword">let</span> _x <span class="token punctuation">:</span> <span class="token keyword">self</span><span class="token punctuation">.</span><span class="token number">0</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">self</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> i32<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">self</span><span class="token punctuation">.</span>_x <span class="token operator">=</span> x<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+
+type MyInheriter <span class="token keyword">over</span> MyAncestor <span class="token punctuation">{</span>
+
+    <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">self</span><span class="token punctuation">.</span><span class="token keyword">super</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">init</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// super give access to ancestor type</span>
+        <span class="token function">println</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">.</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Ok, parent fields are protected</span>
+        <span class="token function">println</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">.</span>_x<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Ok, _x is protected</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="fields-aliases">Fields aliases</h2>
+<p>As when declaring a class implementing a type, heir classes can access the data field using the tuple access syntax. These classes can also redefine new aliases to easily access the data fields.</p>
+<pre class="language-"><code class="lang-ymir">type A <span class="token function">impl</span> <span class="token punctuation">(</span>i32 <span class="token operator">|</span> u64<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">let</span> _x <span class="token punctuation">:</span> <span class="token keyword">self</span><span class="token punctuation">.</span><span class="token number">0</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">self</span><span class="token punctuation">.</span>_x <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+
+
+type B <span class="token keyword">over</span> A <span class="token punctuation">{</span>
+
+    <span class="token keyword">let</span> _z <span class="token punctuation">:</span> <span class="token keyword">self</span><span class="token punctuation">.</span><span class="token number">1</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">self</span><span class="token punctuation">.</span><span class="token keyword">super</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">init</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">self</span><span class="token punctuation">.</span>_z <span class="token operator">=</span> 10UL<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+</code></pre>
+<p>It is impossible to replace an alias. Calling an alias with the same name as an alias defined in a parent class generates an error.</p>
+<pre class="language-"><code class="lang-ymir">type A <span class="token function">impl</span> <span class="token punctuation">(</span>i32 <span class="token operator">|</span> u64<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">let</span> _x <span class="token punctuation">:</span> <span class="token keyword">self</span><span class="token punctuation">.</span><span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token comment">// ...</span>
+<span class="token punctuation">}</span>
+
+
+type B <span class="token keyword">over</span> A <span class="token punctuation">{</span>
+
+    <span class="token keyword">let</span> _x <span class="token punctuation">:</span> <span class="token keyword">self</span><span class="token punctuation">.</span><span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment">// Error, Identifier &apos;_x&apos; is already used</span>
+    <span class="token comment">// ...</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="inheritance-of-the-heir-class">Inheritance of the heir class</h2>
+<p>The inheritance of a class inheriting from another class is quite possible.</p>
+<pre class="language-"><code class="lang-ymir">type A <span class="token function">impl</span> <span class="token punctuation">(</span>void<span class="token punctuation">)</span> <span class="token punctuation">{</span> 
+    <span class="token comment">// ... </span>
+<span class="token punctuation">}</span>
+
+type B <span class="token keyword">over</span> A <span class="token punctuation">{</span> 
+    <span class="token comment">// ... </span>
+<span class="token punctuation">}</span>
+
+type C <span class="token keyword">over</span> B <span class="token punctuation">{</span>
+    <span class="token comment">// ...</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="method-overload">Method overload</h2>
+<p>The main interest of inheritance is to be able to modify the behavior of an extended version of a type.
+The keyword <code class="language-">over</code> can be used to define a new method in an inherited class, already defined in a parent class. This allows you to modify the content of the function in order to apply different processing.</p>
+<pre class="language-"><code class="lang-ymir">type A <span class="token function">impl</span> <span class="token punctuation">(</span>void<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// ...</span>
+
+    <span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">,</span> x <span class="token punctuation">:</span> i32<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;A : &quot;</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>    
+<span class="token punctuation">}</span>
+
+type B <span class="token keyword">over</span> A <span class="token punctuation">{</span>
+    <span class="token comment">// ... </span>
+
+    <span class="token keyword">over</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">,</span> x <span class="token punctuation">:</span> i32<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;B : &quot;</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">let</span> b <span class="token operator">=</span> <span class="token macro-rules function">B:</span><span class="token punctuation">:</span><span class="token function">init</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+b<span class="token punctuation">.</span><span class="token function">foo</span> <span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// B : 2</span>
+</code></pre>
+<p>It is not possible to implicitly override a method, the keyword <code class="language-">over</code> is mandatory.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token comment">// ...</span>
+type B <span class="token keyword">over</span> A <span class="token punctuation">{</span>
+    <span class="token comment">// ... </span>
+
+    <span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">,</span> x <span class="token punctuation">:</span> i32<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// Error, Cannot implicitly override method</span>
+        <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;B : &quot;</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Pure methods are the only methods that can be overloaded, since they are the only virtual methods. It is impossible to overload an impure method, because when creating a class, it is impossible to know how many functions will be generated by this impure function, and therefore to define the size of the virtual table of the type.</p>
+<h2 id="polymorphism">Polymorphism</h2>
+<p>The heir types of a class are compatible with the ancestor type. In other words, it is possible to store a heritage-class value in a variable whose type is the ancestor class. The opposite is obviously not possible.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token macro-rules function">A:</span><span class="token punctuation">:</span><span class="token function">init</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// a is of type A</span>
+a <span class="token operator">=</span> <span class="token macro-rules function">B:</span><span class="token punctuation">:</span><span class="token function">init</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Ok, no problem</span>
+
+<span class="token keyword">let</span> b <span class="token operator">=</span> <span class="token macro-rules function">B:</span><span class="token punctuation">:</span><span class="token function">init</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+b <span class="token operator">=</span> <span class="token macro-rules function">A:</span><span class="token punctuation">:</span><span class="token function">init</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Error, Operator &apos;=&apos; between types &apos;main.B&apos; and &apos;main.A&apos; doesn&apos;t exist</span>
+</code></pre>
+<p>The advantage of being able to perform this type of operation is to create so-called polymorphic types. For example, you can create an array of type <code class="language-">[A]</code>, and put elements of type <code class="language-">B</code> in it.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">let</span> myArray <span class="token operator">=</span> <span class="token punctuation">[</span>A <span class="token punctuation">;</span> 2U<span class="token punctuation">]</span><span class="token punctuation">;</span>
+myArray <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token macro-rules function">A:</span><span class="token punctuation">:</span><span class="token function">init</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+myArray <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token macro-rules function">B:</span><span class="token punctuation">:</span><span class="token function">init</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">for</span> it <span class="token keyword">in</span> myArray <span class="token punctuation">{</span>
+    it<span class="token punctuation">.</span><span class="token function">foo</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token punctuation">}</span> <span class="token comment">// A : 1, B : 1</span>
+</code></pre>
+<h2 id="destruction">Destruction</h2>
+<p>The destructors are always virtual, which means that the destructor of an ancestor is called just after the destructor of the heir class.
+The following code: </p>
+<pre class="language-"><code class="lang-ymir">
+type A <span class="token function">impl</span> <span class="token punctuation">(</span>i32 <span class="token operator">|</span> u64<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// ...</span>
+    ~<span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;~A&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+type B <span class="token keyword">over</span> A <span class="token punctuation">{</span>
+    <span class="token comment">//...</span>
+    ~<span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;~B&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>    
+<span class="token punctuation">}</span>
+
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> a  <span class="token operator">=</span> <span class="token macro-rules function">B:</span><span class="token punctuation">:</span><span class="token function">init</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Will therefore generate the following display: </p>
+<pre class="language-"><code class="lang-ymir">~B
+~A
+~B
+~A
+</code></pre>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="methods.html" class="navigation navigation-prev " aria-label="Previous page: Methods">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../traits.html" class="navigation navigation-next " aria-label="Next page: Traits">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Inheritance","level":"1.6.4.4","depth":3,"next":{"title":"Traits","level":"1.6.5","depth":2,"path":"types-personnalises/traits.md","ref":"types-personnalises/traits.md","articles":[]},"previous":{"title":"Methods","level":"1.6.4.3","depth":3,"path":"types-personnalises/objects/methods.md","ref":"types-personnalises/objects/methods.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"types-personnalises/objects/inher.md","mtime":"2018-12-01T18:27:05.175Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-12-01T18:39:00.470Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="https://cdn.mathjax.org/mathjax/2.6-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-mathjax/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

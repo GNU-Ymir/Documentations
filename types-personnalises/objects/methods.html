@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Attributes · GitBook</title>
+        <title>Methods · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -61,10 +61,10 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="constrs.html" />
+    <link rel="next" href="inher.html" />
     
     
-    <link rel="prev" href="../objects.html" />
+    <link rel="prev" href="constrs.html" />
     
 
     </head>
@@ -386,7 +386,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="1.6.4.1" data-path="attrs.html">
+        <li class="chapter " data-level="1.6.4.1" data-path="attrs.html">
             
                 <a href="attrs.html">
             
@@ -412,7 +412,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6.4.3" data-path="methods.html">
+        <li class="chapter active" data-level="1.6.4.3" data-path="methods.html">
             
                 <a href="methods.html">
             
@@ -697,7 +697,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../.." >Attributes</a>
+        <a href="../.." >Methods</a>
     </h1>
 </div>
 
@@ -712,115 +712,75 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="objects-attributes">Objects attributes</h1>
-<p>As mentioned above, objects are built from a
-predefined type.  This type will be used as a basis for the construction of the
-new object type, and therefore this predefined type will be used to
-define the data fields of the type.</p>
-<p>This data can be accessed as one would access the elements of a tuple, with the operator <code class="language-">.</code>.
-These attributes are private and can only be accessed from the type.</p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">struct</span> 
-<span class="token operator">|</span> x <span class="token punctuation">:</span> i32
-<span class="token operator">|</span> y <span class="token punctuation">:</span> i32
- <span class="token punctuation">-&gt;</span> Point<span class="token punctuation">;</span> 
+                                <h1 id="methods">Methods</h1>
+<p>Methods are special functions that apply to instances of objects. They make it possible to apply a particular treatment to a type and facilitate the structuring of the code.</p>
+<h2 id="pure-methods">Pure methods</h2>
+<p>As for functions, methods are separated into two categories, pure methods and impure methods (see <a href="functions/main.md">Functions</a>).</p>
+<p>Pure methods are defined in a class using the keyword <code class="language-">def</code>. The first parameter of a method is always <code class="language-">self</code>, its type is a reference of an object, and is always inferred.</p>
+<pre class="language-"><code class="lang-ymir">
+type MyType <span class="token function">impl</span> <span class="token punctuation">(</span>i32<span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
+    <span class="token keyword">self</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> i32<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">self</span><span class="token punctuation">.</span><span class="token number">0</span> <span class="token operator">=</span> x<span class="token punctuation">;</span> <span class="token punctuation">}</span>
 
-type MyType impl Point <span class="token punctuation">{</span>
-
-    <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// type constructor</span>
-        <span class="token keyword">self</span><span class="token punctuation">.</span><span class="token number">0</span><span class="token punctuation">.</span>x <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
-        <span class="token keyword">self</span><span class="token punctuation">.</span><span class="token number">0</span><span class="token punctuation">.</span>y <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+    <span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">,</span> z <span class="token punctuation">:</span> i32<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Replace &quot;</span><span class="token punctuation">,</span> <span class="token keyword">self</span><span class="token punctuation">.</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token string">&quot; by &quot;</span><span class="token punctuation">,</span> z<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">self</span><span class="token punctuation">.</span><span class="token number">0</span> <span class="token operator">=</span> z<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 
 <span class="token punctuation">}</span>
 
-<span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token macro-rules function">MyType:</span><span class="token punctuation">:</span><span class="token function">init</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Construct the type</span>
-a<span class="token number">.0</span><span class="token punctuation">.</span>x <span class="token operator">=</span> <span class="token number">20</span><span class="token punctuation">;</span> <span class="token comment">// Error, fields are private</span>
-</code></pre>
-<p>Since only one field has an <code class="language-">x</code> attribute, it can be accessed directly.</p>
-<pre class="language-"><code class="lang-ymir"><span class="token comment">// ...</span>
-    <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">self</span><span class="token punctuation">.</span>x <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span> <span class="token comment">// Ok</span>
-    <span class="token punctuation">}</span>
 <span class="token comment">// ...</span>
+
+<span class="token keyword">let</span> myvar <span class="token operator">=</span> <span class="token macro-rules function">MyType:</span><span class="token punctuation">:</span><span class="token function">init</span> <span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+myvar<span class="token punctuation">.</span><span class="token function">foo</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// This prints : &apos;Replace 10 by 12&apos;</span>
 </code></pre>
-<p>In the case where several fields have the same field name, this kind of fast access is not possible and an error would be returned.</p>
-<h2 id="aliases-of-data-fields">Aliases of data fields</h2>
-<p>Since it can be complicated to write a data access, and since the
-naming of attribute variables is an important point for the
-readability of the source code, the alias of data fields allows to
-name the accesses to these data.</p>
+<p>It is possible to define several methods with the same name, as for functions. The method that is closest to type specialization during a call, or reference, will be used.</p>
+<p>We will see later that it is also possible to override a method with inheritance.
+Only pure methods can be overrided by inheritance, because they alone are virtual.</p>
+<h2 id="impure-methods">Impure methods</h2>
+<p>As for the declaration of pure methods, the keyword <code class="language-">def</code> allows to declare an impure method. The difference between a pure method and an impure method is the same as the difference between pure and impure functions, so you can refer to the section <a href="functions/main.md">Function</a>, for more details.</p>
 <pre class="language-"><code class="lang-ymir">
-type Square <span class="token function">impl</span> <span class="token punctuation">(</span>u64<span class="token punctuation">,</span> Point<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+type MyType <span class="token function">impl</span> <span class="token punctuation">(</span>i32<span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
-    <span class="token keyword">let</span> len <span class="token punctuation">:</span> <span class="token keyword">self</span><span class="token punctuation">.</span><span class="token number">0</span><span class="token punctuation">;</span>
-    <span class="token keyword">let</span> x <span class="token punctuation">:</span> <span class="token keyword">self</span><span class="token punctuation">.</span><span class="token number">1</span><span class="token punctuation">.</span>x<span class="token punctuation">;</span>
-    <span class="token keyword">let</span> y <span class="token punctuation">:</span> <span class="token keyword">self</span><span class="token punctuation">.</span><span class="token number">1</span><span class="token punctuation">.</span>y<span class="token punctuation">;</span>
+    <span class="token comment">// ...</span>
 
-    <span class="token keyword">self</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> i32<span class="token punctuation">,</span> y <span class="token punctuation">:</span> i32<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">self</span><span class="token punctuation">.</span>x <span class="token operator">=</span> x<span class="token punctuation">;</span>
-        <span class="token keyword">self</span><span class="token punctuation">.</span>y <span class="token operator">=</span> y<span class="token punctuation">;</span>
-        <span class="token keyword">self</span><span class="token punctuation">.</span>len <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-<span class="token punctuation">}</span>
-
-<span class="token keyword">let</span> sq <span class="token operator">=</span> <span class="token macro-rules function">Square:</span><span class="token punctuation">:</span><span class="token function">init</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token function">println</span> <span class="token punctuation">(</span>sq<span class="token punctuation">.</span>x<span class="token punctuation">,</span> <span class="token string">&quot; &quot;</span><span class="token punctuation">,</span> sq<span class="token punctuation">.</span>y<span class="token punctuation">,</span> <span class="token string">&quot; &quot;</span><span class="token punctuation">,</span> sq<span class="token punctuation">.</span>len<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Ok, by default aliases are public</span>
-</code></pre>
-<p>It is possible to specify data protection, using the keyword <code class="language-">private</code>
-and <code class="language-">protected</code>.  By default the protection is considered public and
-therefore the fields are accessible from outside the type.  The
-keyword <code class="language-">private</code> specifies that access is exclusive to the type, and
-<code class="language-">protects</code> that access is exclusive to the type and its heirs.</p>
-<pre class="language-"><code class="lang-ymir">
-type Square <span class="token function">impl</span> <span class="token punctuation">(</span>u64<span class="token punctuation">,</span> Point<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-
-    <span class="token keyword">private</span> <span class="token keyword">let</span> _len <span class="token punctuation">:</span> <span class="token keyword">self</span><span class="token punctuation">.</span><span class="token number">0</span><span class="token punctuation">;</span> <span class="token comment">// To comply with the naming convention recommended in ymir, the private fields must be preceded by a _</span>
-
-    <span class="token keyword">private</span> <span class="token punctuation">{</span><span class="token comment">// Multiple line private block</span>
-        <span class="token keyword">let</span> _x <span class="token punctuation">:</span> <span class="token keyword">self</span><span class="token punctuation">.</span><span class="token number">1</span><span class="token punctuation">.</span>x<span class="token punctuation">;</span>
-        <span class="token keyword">let</span> _y <span class="token punctuation">:</span> <span class="token keyword">self</span><span class="token punctuation">.</span><span class="token number">1</span><span class="token punctuation">.</span>y<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token keyword">self</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> i32<span class="token punctuation">,</span> y <span class="token punctuation">:</span> i32<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">self</span><span class="token punctuation">.</span>_x <span class="token operator">=</span> x<span class="token punctuation">;</span>
-        <span class="token keyword">self</span><span class="token punctuation">.</span>_y <span class="token operator">=</span> y<span class="token punctuation">;</span>
-        <span class="token keyword">self</span><span class="token punctuation">.</span>_len <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-<span class="token punctuation">}</span>
-
-<span class="token keyword">let</span> sq <span class="token operator">=</span> <span class="token macro-rules function">Square:</span><span class="token punctuation">:</span><span class="token function">init</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token function">println</span> <span class="token punctuation">(</span>sq<span class="token punctuation">.</span>_x<span class="token punctuation">,</span> <span class="token string">&quot; &quot;</span><span class="token punctuation">,</span> sq<span class="token punctuation">.</span>_y<span class="token punctuation">,</span> <span class="token string">&quot; &quot;</span><span class="token punctuation">,</span> sq<span class="token punctuation">.</span>_len<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Error, fields are private</span>
-</code></pre>
-<h2 id="union-implementation">Union implementation</h2>
-<p>Union types can be implemented without any problems. Moreover, it sometimes happens, for heritage reasons (which will be explained later), that we need a type to be of several different types without wanting to create a union type.</p>
-<p>To do this, it is possible with the `||&apos; token to create a tuple union, and implement it.</p>
-<pre class="language-"><code class="lang-ymir">
-type MySpecialInteger <span class="token function">impl</span> <span class="token punctuation">(</span>i8 <span class="token operator">|</span> i16 <span class="token operator">|</span> i32 <span class="token operator">|</span> i64<span class="token punctuation">,</span> u8 <span class="token operator">|</span> u16 <span class="token operator">|</span> u32 <span class="token operator">|</span> u64<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-
-    <span class="token keyword">private</span> <span class="token keyword">let</span> _signed <span class="token punctuation">:</span> <span class="token keyword">self</span><span class="token punctuation">.</span><span class="token number">0</span><span class="token punctuation">;</span>
-    <span class="token keyword">private</span> <span class="token keyword">let</span> _unsigned <span class="token punctuation">:</span> <span class="token keyword">self</span><span class="token punctuation">.</span><span class="token number">1</span><span class="token punctuation">;</span>
-
-    <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">self</span><span class="token punctuation">.</span>_signed<span class="token number">.3</span> <span class="token operator">=</span> 8L<span class="token punctuation">;</span>
-        <span class="token keyword">self</span><span class="token punctuation">.</span>_unsigned<span class="token number">.0</span> <span class="token operator">=</span> 8B<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token keyword">def</span> <span class="token function">print</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// A method</span>
-        <span class="token function">println</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">.</span>_signed<span class="token number">.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
-    <span class="token punctuation">}</span>
-
-<span class="token punctuation">}</span>
-
-<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token macro-rules function">MySpecialInteger:</span><span class="token punctuation">:</span><span class="token function">init</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    a<span class="token punctuation">.</span><span class="token function">print</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 8</span>
+    <span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// Foo is an impure method</span>
+        <span class="token comment">// ...</span>
+    <span class="token punctuation">}</span>    
 <span class="token punctuation">}</span>
 </code></pre>
-<p>Of course tuple unions can be used in other contexts, the section
-<a href="../../expressions/tuples.html">Tuples</a> presents in detail their use.</p>
+<p>As specified above, impure methods are not virtual and therefore cannot be overloaded by inheritance.</p>
+<h2 id="static-methods">Static methods</h2>
+<p>The name &quot;static method&quot; is an abuse of language to define functions defined within a class and which can be used without an object instance.</p>
+<p>A static method is accessible through the operator <code class="language-">::</code>.</p>
+<p>Unlike methods, these functions do not take the `self&apos; parameter as the first argument.</p>
+<pre class="language-"><code class="lang-ymir">type MyType <span class="token function">impl</span> <span class="token punctuation">(</span>i32<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token comment">// ...</span>
+
+    <span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> i32<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// This method is static</span>
+        <span class="token comment">// ...</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+
+<span class="token comment">// The type can be directly used to call static methods</span>
+<span class="token macro-rules function">MyType:</span><span class="token punctuation">:</span><span class="token function">foo</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Ok</span>
+
+
+<span class="token keyword">let</span> myvar <span class="token operator">=</span> <span class="token macro-rules function">MyType:</span><span class="token punctuation">:</span><span class="token function">init</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// We can also use a variable of this type </span>
+<span class="token macro-rules function">myvar:</span><span class="token punctuation">:</span><span class="token function">foo</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Ok</span>
+
+<span class="token comment">// The static method cannot be accessed using the dot operator</span>
+myvar<span class="token punctuation">.</span><span class="token function">foo</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Error, type MyType does not have any method named foo</span>
+</code></pre>
+<p>As with any function declaration, static methods can be pure or impure, and also template as we will see in the section dedicated to <a href="../.../templates/fonctions.md">Templates</a>.</p>
+<h4 id="limitations">Limitations</h4>
+<p>Since the constructor of an object is called in the same way as a static method, it is impossible to define a static method called <code class="language-">init</code>.</p>
+<h2 id="operator-overloading">Operator overloading</h2>
+<p>Operator overloading can be defined within a class. Nevertheless, the operation of these overloads is fully similar to that defined outside a class. Therefore, the details of these overloads are defined in the following section <a href="templates/operators.md">Operator overloading</a>.</p>
 
                                 
                                 </section>
@@ -848,12 +808,12 @@ type MySpecialInteger <span class="token function">impl</span> <span class="toke
 
             
                 
-                <a href="../objects.html" class="navigation navigation-prev " aria-label="Previous page: Objects">
+                <a href="constrs.html" class="navigation navigation-prev " aria-label="Previous page: Construction and deconstruction">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="constrs.html" class="navigation navigation-next " aria-label="Next page: Construction and deconstruction">
+                <a href="inher.html" class="navigation navigation-next " aria-label="Next page: Inheritance">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -864,7 +824,7 @@ type MySpecialInteger <span class="token function">impl</span> <span class="toke
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Attributes","level":"1.6.4.1","depth":3,"next":{"title":"Construction and deconstruction","level":"1.6.4.2","depth":3,"path":"types-personnalises/objects/constrs.md","ref":"types-personnalises/objects/constrs.md","articles":[]},"previous":{"title":"Objects","level":"1.6.4","depth":2,"path":"types-personnalises/objects.md","ref":"types-personnalises/objects.md","articles":[{"title":"Attributes","level":"1.6.4.1","depth":3,"path":"types-personnalises/objects/attrs.md","ref":"types-personnalises/objects/attrs.md","articles":[]},{"title":"Construction and deconstruction","level":"1.6.4.2","depth":3,"path":"types-personnalises/objects/constrs.md","ref":"types-personnalises/objects/constrs.md","articles":[]},{"title":"Methods","level":"1.6.4.3","depth":3,"path":"types-personnalises/objects/methods.md","ref":"types-personnalises/objects/methods.md","articles":[]},{"title":"Inheritance","level":"1.6.4.4","depth":3,"path":"types-personnalises/objects/inher.md","ref":"types-personnalises/objects/inher.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"types-personnalises/objects/attrs.md","mtime":"2018-12-01T18:27:05.175Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-12-01T18:39:00.470Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Methods","level":"1.6.4.3","depth":3,"next":{"title":"Inheritance","level":"1.6.4.4","depth":3,"path":"types-personnalises/objects/inher.md","ref":"types-personnalises/objects/inher.md","articles":[]},"previous":{"title":"Construction and deconstruction","level":"1.6.4.2","depth":3,"path":"types-personnalises/objects/constrs.md","ref":"types-personnalises/objects/constrs.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"types-personnalises/objects/methods.md","mtime":"2018-12-01T18:27:05.175Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-12-01T18:39:00.470Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

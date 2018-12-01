@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Attributs · GitBook</title>
+        <title>Lambdas · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -61,10 +61,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="lambdas.html" />
+    <link rel="next" href="../types-personnalises/main.html" />
     
     
-    <link rel="prev" href="main.html" />
+    <link rel="prev" href="attributs.html" />
     
 
     </head>
@@ -288,7 +288,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="1.5.1" data-path="attributs.html">
+        <li class="chapter " data-level="1.5.1" data-path="attributs.html">
             
                 <a href="attributs.html">
             
@@ -301,7 +301,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.5.2" data-path="lambdas.html">
+        <li class="chapter active" data-level="1.5.2" data-path="lambdas.html">
             
                 <a href="lambdas.html">
             
@@ -697,7 +697,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Attributs</a>
+        <a href=".." >Lambdas</a>
     </h1>
 </div>
 
@@ -712,48 +712,74 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="function-attributes">Function attributes</h1>
-<p>The functions can be configured using attributes. Attributes are defined with the <code class="language-">@</code> token. </p>
-<pre class="language-"><code class="lang-ymir"><span class="token comment">// Declare a function with multiple attributes</span>
-<span class="token keyword">def</span> <span class="token operator">@</span><span class="token punctuation">{</span>safe<span class="token punctuation">,</span> inline<span class="token punctuation">}</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment">// ...</span>
+                                <h1 id="the-lambdas-functions">The lambdas functions</h1>
+<p>Lambda functions are anonymous functions. They are declared in the body of other functions, and can be assigned in variables.  These functions can be <code class="language-">cte</code> under certain conditions, and under other conditions allow the management of an environment named <code class="language-">closure</code>.</p>
+<h2 id="definition-of-a-lambda-function">Definition of a lambda function</h2>
+<p>The syntax of a lambda function is as follows: </p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">let</span> ld <span class="token operator">=</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> i32<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> x <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+
+<span class="token keyword">assert</span> <span class="token punctuation">(</span><span class="token function">ld</span> <span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>The variable <code class="language-">ld</code>, is a pointer to a function, of the type <code class="language-">fn (i32)-&gt; i32</code>. As the value of this variable is a function, it can be considered as known at compile time.
+Therefore it is also possible to write: </p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">let</span> cte ld <span class="token operator">=</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> i32<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> x <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+
+<span class="token keyword">assert</span> <span class="token punctuation">(</span><span class="token function">ld</span> <span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>The difference in the second case is how the call will be handled. When in the first case, the call is made via the dereferencing of a pointer to function (which is unsafe), in the second case the call is written directly during the compilation phase.</p>
+<p>It is possible to describe a lambda function on several lines, so that it performs more than one operation.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">let</span> ld <span class="token operator">=</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> i32<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token number">0</span> <span class="token punctuation">..</span> x <span class="token punctuation">{</span>
+        <span class="token function">println</span> <span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> x <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token function">println</span> <span class="token punctuation">(</span><span class="token function">ld</span> <span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 0 1 3</span>
+</code></pre>
+<p>The lambda functions can also be impure, and the type of parameters is optional. However, when an impure lambda is declared, it must be annotated as known at compilation and cannot be assigned to a dynamic variable.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">let</span> cte ld1 <span class="token operator">=</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> x <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+
+<span class="token keyword">assert</span> <span class="token punctuation">(</span><span class="token function">ld1</span> <span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">let</span> ld2 <span class="token operator">=</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> x <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment">// Error, we can&apos;t create a pointer to a function if we don&apos;t know the type of parameters</span>
+</code></pre>
+<h2 id="closure">Closure</h2>
+<p>The <code class="language-">closure</code> are particular lambda functions called so because it closes their environment. They are also called <code class="language-">delegate</code> and the keyword <code class="language-">dg</code> refers to a pointer to a closure.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">let</span> num <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> closure <span class="token operator">=</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> i32<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> x <span class="token operator">+</span> num<span class="token punctuation">;</span>
+
+<span class="token keyword">assert</span> <span class="token punctuation">(</span><span class="token function">closure</span> <span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>The <code class="language-">num</code> variable is copied to the lambda function, which allows the function to recover its value. Copy closures can be returned without any problem from a function.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">retClosure</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token keyword">dg</span> <span class="token punctuation">(</span>i32<span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> i32 <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> num <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> i32<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> x <span class="token operator">+</span> num<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
-<span class="token comment">// Or with only one attribute</span>
-<span class="token keyword">def</span> <span class="token operator">@</span>inline <span class="token function">bar</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment">// ...</span>
-<span class="token punctuation">}</span>
+<span class="token keyword">let</span> closure <span class="token operator">=</span> <span class="token function">retClosure</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">assert</span> <span class="token punctuation">(</span><span class="token function">closure</span> <span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
-<h2 id="inline">Inline</h2>
-<p>As its name indicates, the attribute <code class="language-">inline</code> will allow to inline the function. In other words, unlike a normal function call, the body of the function will be pasted into the caller&apos;s function. </p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token operator">@</span>inline <span class="token function">foo</span> <span class="token punctuation">(</span>a <span class="token punctuation">:</span> i32<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">return</span> a <span class="token operator">+</span> <span class="token number">12</span><span class="token punctuation">;</span>
+<h3 id="closure-by-reference">Closure by reference</h3>
+<p>Closures by reference are closures that access their environment by reference. This access allows you to modify the value of local variables in an environment.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">transform</span> <span class="token punctuation">(</span>closure <span class="token punctuation">:</span> <span class="token keyword">dg</span> <span class="token punctuation">(</span>i32<span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> void<span class="token punctuation">,</span> len <span class="token punctuation">:</span> i32<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token number">0</span> <span class="token punctuation">..</span> len <span class="token punctuation">{</span>
+        <span class="token function">closure</span> <span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 
-<span class="token function">println</span> <span class="token punctuation">(</span><span class="token function">foo</span> <span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> myArray <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> closure <span class="token operator">=</span> <span class="token keyword">ref</span> <span class="token punctuation">(</span>i <span class="token punctuation">:</span> i32<span class="token punctuation">)</span> <span class="token punctuation">{</span> myArray <span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token function">transform</span> <span class="token punctuation">(</span>closure<span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">assert</span> <span class="token punctuation">(</span>myArray <span class="token operator">==</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
-<p>Will be rewritten in : </p>
-<pre class="language-"><code class="lang-ymir"><span class="token function">println</span> <span class="token punctuation">(</span><span class="token number">22</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
-<p>It is impossible to inline a recursive function, but all other functions can be inlined. The inline, unlike other C-like languages, is a mandatory directive, the compiler is obliged to inline the function.</p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token operator">@</span>inline <span class="token function">fibo</span> <span class="token punctuation">(</span>n <span class="token punctuation">:</span> i32<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">if</span> n <span class="token operator">&lt;</span> <span class="token number">2</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> n<span class="token punctuation">;</span> <span class="token punctuation">}</span>
-    <span class="token keyword">else</span> <span class="token keyword">return</span> <span class="token function">fibo</span> <span class="token punctuation">(</span>n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token function">fibo</span> <span class="token punctuation">(</span>n <span class="token operator">-</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Error</span>
+<p>Unlike copy closure, reference closures sometimes cannot be returned from a function. Indeed, the lifetime of the local variables at the function never exceeds the lifetime of the function.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token keyword">dg</span> <span class="token punctuation">(</span>i32<span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> void <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">12</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token keyword">ref</span> <span class="token punctuation">(</span>i <span class="token punctuation">:</span> i32<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token function">println</span> <span class="token punctuation">(</span>i <span class="token operator">+</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">;</span> <span class="token comment">// Error, Closure var &apos;x&apos; does not live long enough</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<h2 id="safe">Safe</h2>
-<p>The <code class="language-">safe</code> keyword adds semantic verification to the function, specifying that it cannot perform certain dangerous operations. A <code class="language-">safe</code> function cannot crash a program.</p>
-<p>The three operations prohibited in a safe context are:</p>
-<ul>
-<li>Calling a non-safe function</li>
-<li>Unsubscribe a pointer</li>
-<li>Allocate memory</li>
-<li>throw error</li>
-</ul>
-<p>All other operations are allowed.</p>
-<h2 id="trusted">Trusted</h2>
-<p>The <code class="language-">trusted</code> attribute makes it possible to link low-level functions to safe functions. It should not be used lightly. It defines that a nonsafe function can still be called from a safe context, because the function has been manually checked before. </p>
-<p><strong>This attribute is highly deprecated.</strong></p>
 
                                 
                                 </section>
@@ -781,12 +807,12 @@
 
             
                 
-                <a href="main.html" class="navigation navigation-prev " aria-label="Previous page: Fonctions">
+                <a href="attributs.html" class="navigation navigation-prev " aria-label="Previous page: Attributs">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="lambdas.html" class="navigation navigation-next " aria-label="Next page: Lambdas">
+                <a href="../types-personnalises/main.html" class="navigation navigation-next " aria-label="Next page: Custom types">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -797,7 +823,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Attributs","level":"1.5.1","depth":2,"next":{"title":"Lambdas","level":"1.5.2","depth":2,"path":"fonctions/lambdas.md","ref":"fonctions/lambdas.md","articles":[]},"previous":{"title":"Fonctions","level":"1.5","depth":1,"path":"fonctions/main.md","ref":"fonctions/main.md","articles":[{"title":"Attributs","level":"1.5.1","depth":2,"path":"fonctions/attributs.md","ref":"fonctions/attributs.md","articles":[]},{"title":"Lambdas","level":"1.5.2","depth":2,"path":"fonctions/lambdas.md","ref":"fonctions/lambdas.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"fonctions/attributs.md","mtime":"2018-12-01T18:27:05.167Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-12-01T18:39:00.470Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Lambdas","level":"1.5.2","depth":2,"next":{"title":"Custom types","level":"1.6","depth":1,"path":"types-personnalises/main.md","ref":"types-personnalises/main.md","articles":[{"title":"Structures","level":"1.6.1","depth":2,"path":"types-personnalises/structures.md","ref":"types-personnalises/structures.md","articles":[]},{"title":"Unions","level":"1.6.2","depth":2,"path":"types-personnalises/unions.md","ref":"types-personnalises/unions.md","articles":[]},{"title":"Enums","level":"1.6.3","depth":2,"path":"types-personnalises/enums.md","ref":"types-personnalises/enums.md","articles":[]},{"title":"Objects","level":"1.6.4","depth":2,"path":"types-personnalises/objects.md","ref":"types-personnalises/objects.md","articles":[{"title":"Attributes","level":"1.6.4.1","depth":3,"path":"types-personnalises/objects/attrs.md","ref":"types-personnalises/objects/attrs.md","articles":[]},{"title":"Construction and deconstruction","level":"1.6.4.2","depth":3,"path":"types-personnalises/objects/constrs.md","ref":"types-personnalises/objects/constrs.md","articles":[]},{"title":"Methods","level":"1.6.4.3","depth":3,"path":"types-personnalises/objects/methods.md","ref":"types-personnalises/objects/methods.md","articles":[]},{"title":"Inheritance","level":"1.6.4.4","depth":3,"path":"types-personnalises/objects/inher.md","ref":"types-personnalises/objects/inher.md","articles":[]}]},{"title":"Traits","level":"1.6.5","depth":2,"path":"types-personnalises/traits.md","ref":"types-personnalises/traits.md","articles":[]}]},"previous":{"title":"Attributs","level":"1.5.1","depth":2,"path":"fonctions/attributs.md","ref":"fonctions/attributs.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"fonctions/lambdas.md","mtime":"2018-12-01T18:27:05.167Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-12-01T18:39:00.470Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

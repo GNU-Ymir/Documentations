@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Hello World · GitBook</title>
+        <title>Compile time value · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -61,10 +61,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="commentaires.html" />
+    <link rel="next" href="operators.html" />
     
     
-    <link rel="prev" href="../" />
+    <link rel="prev" href="types.html" />
     
 
     </head>
@@ -106,9 +106,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.2" data-path="./">
+        <li class="chapter " data-level="1.2" data-path="../hello-world/">
             
-                <a href="./">
+                <a href="../hello-world/">
             
                     
                     Hello World
@@ -120,9 +120,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.2.1" data-path="commentaires.html">
+        <li class="chapter " data-level="1.2.1" data-path="../hello-world/commentaires.html">
             
-                <a href="commentaires.html">
+                <a href="../hello-world/commentaires.html">
             
                     
                     Comments
@@ -506,9 +506,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.8" data-path="../templates/main.html">
+        <li class="chapter " data-level="1.8" data-path="main.html">
             
-                <a href="../templates/main.html">
+                <a href="main.html">
             
                     
                     Templates
@@ -520,9 +520,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.8.1" data-path="../templates/types.html">
+        <li class="chapter " data-level="1.8.1" data-path="types.html">
             
-                <a href="../templates/types.html">
+                <a href="types.html">
             
                     
                     Types constraints
@@ -533,9 +533,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.8.2" data-path="../templates/value.html">
+        <li class="chapter active" data-level="1.8.2" data-path="value.html">
             
-                <a href="../templates/value.html">
+                <a href="value.html">
             
                     
                     Compile time value
@@ -546,9 +546,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.8.3" data-path="../templates/operators.html">
+        <li class="chapter " data-level="1.8.3" data-path="operators.html">
             
-                <a href="../templates/operators.html">
+                <a href="operators.html">
             
                     
                     Operator overloading
@@ -697,7 +697,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Hello World</a>
+        <a href=".." >Compile time value</a>
     </h1>
 </div>
 
@@ -712,24 +712,72 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="hello-world">Hello World</h1>
-<p>The following source code, is the <strong>Ymir</strong> version of the famous <code class="language-">Hello World!!</code> program.</p>
-<pre class="language-"><code class="lang-ymir"><span class="token comment">// This is a comment </span>
+                                <h1 id="template-value-parameter">Template value parameter</h1>
+<p>Template parameters can define not only types, but also values. The values defined by the template parameters must be <code class="language-">cte</code>. 
+The values passed in template parameters can be used to specify an element, or to define constants in the scope of the generated template element.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">cteFibo</span> <span class="token punctuation">(</span>n <span class="token punctuation">:</span> i32<span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> i32 <span class="token punctuation">{</span>
+    cte <span class="token keyword">if</span> n <span class="token operator">&lt;</span> <span class="token number">2</span> 
+        <span class="token keyword">return</span> n<span class="token punctuation">;</span> 
+    <span class="token keyword">else</span> <span class="token keyword">return</span> <span class="token function">cteFibo!</span><span class="token punctuation">(</span>n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token function">cteFibo!</span><span class="token punctuation">(</span>n <span class="token operator">-</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-<span class="token comment">// This is a function declaration </span>
-<span class="token comment">// The main function, is the first one called </span>
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment">// Print &apos;Hello World !!&apos; to the console</span>
-    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Hello World !!&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> cte x <span class="token operator">=</span> <span class="token function">cteFibo!</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    cte <span class="token keyword">assert</span> <span class="token punctuation">(</span>x <span class="token operator">==</span> <span class="token number">55</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>A binary can be generated using <strong>GYC</strong>.</p>
-<pre class="language-"><code class="lang-bash">$ gyc hello.yr
+<p>Since template specialization only defines elements once, we can see recursive <code class="language-">cte</code> templates functions as memoizing functions. They are therefore relatively fast, for example: </p>
+<pre class="language-"><code class="lang-ymir">cte <span class="token keyword">assert</span> <span class="token punctuation">(</span><span class="token function">cteFibo!</span><span class="token punctuation">(</span><span class="token number">45</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">1134903170</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
-<p>This command produce a binary <code class="language-">a.out</code> that can be executed </p>
-<pre class="language-"><code>$ ./a.out
-Hello World !!
+<p>Template value specialization is used for operator overloading and will be discussed in more detail in the section <a href="operators.html">Operator overloading</a>. </p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">struct</span> 
+<span class="token operator">|</span> a <span class="token punctuation">:</span> i32
+ <span class="token punctuation">-&gt;</span> A<span class="token punctuation">;</span>
+
+<span class="token keyword">def</span> <span class="token function">opBinary</span> <span class="token punctuation">(</span><span class="token string">&quot;+&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> A<span class="token punctuation">,</span> y <span class="token punctuation">:</span> A<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> A <span class="token punctuation">{</span>x<span class="token punctuation">.</span>a <span class="token operator">+</span> y<span class="token punctuation">.</span>a<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">let</span> x <span class="token operator">=</span> A <span class="token punctuation">{</span><span class="token number">10</span><span class="token punctuation">}</span><span class="token punctuation">,</span> y <span class="token operator">=</span> A <span class="token punctuation">{</span><span class="token number">12</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">assert</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>x <span class="token operator">+</span> y<span class="token punctuation">)</span><span class="token punctuation">.</span>a <span class="token operator">==</span> <span class="token number">22</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
+<p>The size of the static arrays can also be deduced using a template parameter by value: </p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>T of <span class="token punctuation">[</span>U <span class="token punctuation">;</span> N<span class="token punctuation">]</span><span class="token punctuation">,</span> U<span class="token punctuation">,</span> N <span class="token punctuation">:</span> u64<span class="token punctuation">)</span> <span class="token punctuation">(</span>a <span class="token punctuation">:</span> T<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;array of &quot;</span><span class="token punctuation">,</span> <span class="token macro-rules function">U:</span><span class="token punctuation">:</span>typeid<span class="token punctuation">,</span> <span class="token string">&quot; of size &quot;</span><span class="token punctuation">,</span> N<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// array of i32 of size 3</span>
+</code></pre>
+<h2 id="function-value">Function value</h2>
+<p>Lambda functions are `cte&apos;, which means that we have the right to use them as template parameters.
+This can be done either by directly deducting the type : </p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">map</span><span class="token punctuation">(</span>FUN <span class="token punctuation">:</span> U<span class="token punctuation">,</span> U<span class="token punctuation">)</span> <span class="token punctuation">(</span>a <span class="token punctuation">:</span> <span class="token punctuation">[</span>i32<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> res <span class="token operator">=</span> <span class="token punctuation">[</span>i32<span class="token punctuation">;</span> new a<span class="token punctuation">.</span>len<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> 0UL <span class="token punctuation">..</span> a<span class="token punctuation">.</span>len
+        res <span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">FUN</span> <span class="token punctuation">(</span>a <span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> res<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+
+<span class="token function">println</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map!</span><span class="token punctuation">(</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> a <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// [2, 3, 4];</span>
+</code></pre>
+<p>It can be noted that runtime parameter parentheses are optional in the case of a call by the <code class="language-">.</code> operator of a template function.</p>
+<p>The deduction can also be made thanks to a specialization of function:</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">map</span> <span class="token punctuation">(</span>FUN <span class="token punctuation">:</span> <span class="token keyword">fn</span> <span class="token punctuation">(</span>i32<span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> i32<span class="token punctuation">)</span> <span class="token punctuation">(</span>a <span class="token punctuation">:</span> <span class="token punctuation">[</span>i32<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> res <span class="token operator">=</span> <span class="token punctuation">[</span>R<span class="token punctuation">;</span> new a<span class="token punctuation">.</span>len<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> 0UL <span class="token punctuation">..</span> a<span class="token punctuation">.</span>len
+        res <span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">FUN</span> <span class="token punctuation">(</span>a <span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> res<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">println</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map!</span><span class="token punctuation">(</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> a <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>A standard function can be used instead of the lambda function: </p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">plusOne</span> <span class="token punctuation">(</span>a <span class="token punctuation">:</span> i32<span class="token punctuation">)</span> <span class="token keyword">return</span> a <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+
+<span class="token function">println</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">.</span>map<span class="token operator">!</span>plusOne<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+
                                 
                                 </section>
                             
@@ -756,12 +804,12 @@ Hello World !!
 
             
                 
-                <a href="../" class="navigation navigation-prev " aria-label="Previous page: Introduction">
+                <a href="types.html" class="navigation navigation-prev " aria-label="Previous page: Types constraints">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="commentaires.html" class="navigation navigation-next " aria-label="Next page: Comments">
+                <a href="operators.html" class="navigation navigation-next " aria-label="Next page: Operator overloading">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -772,7 +820,7 @@ Hello World !!
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Hello World","level":"1.2","depth":1,"next":{"title":"Comments","level":"1.2.1","depth":2,"path":"hello-world/commentaires.md","ref":"hello-world/commentaires.md","articles":[]},"previous":{"title":"Introduction","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"hello-world/README.md","mtime":"2018-12-01T18:27:05.171Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-12-01T18:39:00.470Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Compile time value","level":"1.8.2","depth":2,"next":{"title":"Operator overloading","level":"1.8.3","depth":2,"path":"templates/operators.md","ref":"templates/operators.md","articles":[]},"previous":{"title":"Types constraints","level":"1.8.1","depth":2,"path":"templates/types.md","ref":"templates/types.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"templates/value.md","mtime":"2018-12-01T18:27:05.175Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-12-01T18:39:00.470Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
