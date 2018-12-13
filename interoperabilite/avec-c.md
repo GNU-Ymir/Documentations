@@ -24,8 +24,8 @@ Ymir and C function prototype equivalence :
 
 | \# | Ymir Type | C Type |
 | --- | --- | --- |
-| 1. | p!T | T\[\] |
-| 2. | ref \[T ; dim\] | T\[dim\] |
+| 1. | `p!T` | `T[]` |
+| 2. | `ref [T ; dim]` | `T [dim]` |
 
 ## Structs And Unions
 
@@ -64,7 +64,7 @@ extern (C) {
 ```c:main.c
 void foo (int);
 
-def main () {
+int main () {
 	foo (10);
 }
 ```
@@ -72,8 +72,9 @@ def main () {
 The compilation is then done as follows: 
 
 ```bash
-$ gyc -c foo.yr
-$ gcc main.c foo.o
+$ gyc main.c foo.yr
 $ ./a.out
 In function foo : 10
 ```
+ 
+The GYC compiler is a frontend of the GCC compiler, so when a `C` language source file (with a `.c` extension) is given as an option, it compiles it using `gcc`.

@@ -40,8 +40,19 @@ There is no default constructor in **Ymir**, if a class does not have a construc
 
 ### Data field initialization 
 
-The data fields must be initialized in the constructors. If they are not, they will not be affected to their `init` value, which is a bug that will be fixed later. Basically Work in progress!!
+It is not mandatory to initialize all attributes in the constructor. Attributes that are not initialized are assigned to their `init` value.
 
+```ymir
+type A impl (i32, p!void) {
+	let ptr : self.1;
+	let x : self.0;
+
+	self () {} 	
+}
+
+let a = A::init ();
+assert (a.ptr is null && a.x == 0);
+```
 
 ## Life time 
 

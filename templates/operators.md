@@ -275,13 +275,13 @@ type Set impl ([i32]) {
 
     self (len : i32) {
         self.0 = [i32 ; new cast!u32 (len)];
-	for i in 0 .. len {
-	    self.0 [i] = i;
-	}
+		for i in 0 .. len {
+			self.0 [i] = i;
+		}
     }
     
     def opIter (1) (self) {
-	return Iterator {0, self.0};
+		return Iterator {0, self.0};
     }
 }
 

@@ -105,8 +105,7 @@ match x {
 	}
 }
 
-println (x); // 21
-```
+println (x); // 21```
 
 ## Ignoring the pattern 
 
@@ -117,9 +116,78 @@ let x = Point {1, 2};
 
 match x {
 	Point {_, _} => println ("Any point");
+	_ {_, _} => println ("Any structure with at least 2 fields");
 	_ => println ("Anything");
 } // This prints 'Any point'
 ```
+
+## Named binding
+
+It can sometimes be interesting to test the value of an attribute of a structure without having to test the value of all the attributes that precede it. To do this, it is possible to name a binding, in order to specify the element to which we refer.
+
+```ymir
+let x = Point {1, 2};
+
+match x {
+	Point { y -> 12 } => println ("The value y is equal to 12");
+	Point { y -> ref y : i32 } => { // No shadowing, y does not exists before 
+		println (y);
+		y = 78;
+	}
+}
+println (x); // main.Point(1, 78)
+```
+
+## Object matching
+
+Matching on objects is also possible. It allows you to test two things: 
+- The attribute values
+- The type in the case of a polymorphic type object
+
+It is mandatory to use named binding to test the value of attributes.
+
+```ymir
+type A impl (i32, i32) {
+	let a : self.0;
+	let b : self.1;
+	
+	self (x, y) {
+		self.a = x;
+		self.b = y;
+	}
+	
+}
+
+let a = A::init (1, 2);
+match a {
+	A { b -> 2, a -> 3 } => println ("A (3, 2)");
+	A { b -> 3 } => println ("A (_, 3)");
+	A { b -> ref x : i32, a -> 1 } => println ("A (1, ", x, ")");
+}```
+
+As mentioned above, pattern matching can be used to test the type of an object.
+
+```ymir
+type A impl (i32, i32) { /* ... */ }
+type B over A { /* ... */ }
+type C over A { /* ... */ }
+
+def foo (i) -> A {
+	if i == 0 { return B :: init (); }
+	else return C :: init ();
+}
+
+let a = foo (0);
+assert (is (a : A)); 
+
+match a {
+	B {} => println ("Returned a B object");
+	C {} => println ("Returned a C object"); 
+	A {} => println ("Returned a A object"); // Work for A, B and C
+}
+```
+
+This program will print `Returned a B object`.
 
 ## Guards
 
@@ -148,6 +216,6 @@ def main () {
         }
     }
     
-    println (z); // main.SquareS(main.PointS(1, 8), 54)    
+    println (z); // main.Square(main.Point(1, 8), 54)    
 }
 ```
