@@ -19,35 +19,67 @@ The reference compiler of **Ymir** is based on the compiler **GCC**,
 which offer strong static optimization, as well as a vast set of
 supported target architectures.
 
+There are two ways to install the **gyc**, natively **which is not very recommended, the compiler being in beta version**. Or by using a docker.
+
+### Native installation 
 
 This compiler can be installed on linux debian system, by following those simple steps: 
 - First, you need to downloads the packages : 
-  - [libmidgard-7-dev](https://github.com/GNU-Ymir/Ymir-release/raw/master/7.3.0/libgmidgard_7.3.0_amd64.deb)
-  - [GYC](https://github.com/GNU-Ymir/Ymir-release/raw/master/7.3.0/gyc-7_7.3.0_amd64.deb)
+  - [libmidgard-8-dev](https://www.dropbox.com/s/rrjg6vhnhhnoamf/libgmidgard_8.2.0_amd64.deb?dl=0)
+  - [GYC](https://www.dropbox.com/s/bt9svmud6vyujsn/gyc-8_8.2.0_amd64.deb?dl=0)
 
 - And then, you need to install them using dpkg : 
 
 ```bash
-$ sudo dpkg -i libgmidgard_7.3.0_amd64.deb
-$ sudo dpkg -i gyc-7_7.3.0_amd64.deb
-```
+$ sudo dpkg -i libgmidgard_8.2.0_amd64.deb
+$ sudo dpkg -i gyc-8_8.2.0_amd64.deb```
 
-The compiler is now installed and is named `gyc-7`
+The compiler is now installed and is named `gyc-8`
 
 ```bash
-$ gyc-7 --version
+$ gyc-8 --version
 
-gyc-7 (Ubuntu 7.3.0-16ubuntu3) 7.3.0
-Copyright (C) 2017 Free Software Foundation, Inc.
+gyc-8 (GCC) 8.2.0
+Copyright (C) 2018 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
-warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-```
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.```
 
-## Uninstallation
+### Uninstallation of the native version
 
 As for any debian package, the uninstall is done as follows : 
 
 ```bash
-$ dpkg -r gyc-7
-$ dpkg -r libgmidgard-7-dev
+$ dpkg -r gyc-8
+$ dpkg -r libgmidgard-8-dev
 ```
+**Caution** The uninstallation can remove your gcc installation.
+
+## Docker installation
+
+To start you have to install docker.
+```bash
+$ sudo apt install docker.io
+```
+
+Then retrieve the docker image from the repository :
+```bash
+$ docker pull gnuymir/8.2.0
+```
+
+The compiler is now accessible via the container.
+```bash
+$ docker run -t -v $(pwd):/tmp -w /tmp gnuymir/8.2.0 --version 
+gyc-8 (GCC) 8.2.0
+Copyright (C) 2018 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.```
+
+To make it easier to use, you can add an alias in the `~/.bashrc` file.
+
+```bash
+gyc-8 () {
+	docker run -t -v $(pwd):/tmp -w /tmp gnuymir/8.2.0 $*
+}
+```
+
+Once a new terminal is opened, the `gyc-8` command gives you access to the compiler.
