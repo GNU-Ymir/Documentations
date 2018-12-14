@@ -74,12 +74,16 @@ Copyright (C) 2018 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.```
 
-To make it easier to use, you can add an alias in the `~/.bashrc` file.
+To make it easier to use, you can add an alias in the `~/.local/bin` directory.
 
 ```bash
-gyc-8 () {
-	docker run -t -v $(pwd):/tmp -w /tmp gnuymir/8.2.0 $*
-}
+$ echo "docker run -t -v $(pwd):/tmp -w /tmp gnuymir/8.2.0 $*" > ~/.local/bin/gyc-8
+$ chmod +x ~/.local/bin/gyc-8
+$ gyc-8 --version
+
+gyc-8 (GCC) 8.2.0
+Copyright (C) 2018 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 ```
 
-Once a new terminal is opened, the `gyc-8` command gives you access to the compiler.

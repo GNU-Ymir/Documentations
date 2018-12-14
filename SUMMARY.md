@@ -33,6 +33,7 @@
   * [Types constraints](templates/types.md)
   * [Compile time value](templates/value.md)
   * [Operator overloading](templates/operators.md)
+  * [Variadic templates](templates/variadic.md)
   * [Is expression](templates/is.md)
 * [Error handling](errors/main.md) 
   * [Scope guards](errors/scope_guards.md)
