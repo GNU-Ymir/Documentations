@@ -25,8 +25,8 @@ There are two ways to install the **gyc**, natively **which is not very recommen
 
 This compiler can be installed on linux debian system, by following those simple steps: 
 - First, you need to downloads the packages : 
-  - [libmidgard-8-dev](https://www.dropbox.com/s/rrjg6vhnhhnoamf/libgmidgard_8.2.0_amd64.deb?dl=0)
-  - [GYC](https://www.dropbox.com/s/bt9svmud6vyujsn/gyc-8_8.2.0_amd64.deb?dl=0)
+  - [libmidgard-8-dev](https://www.dropbox.com/s/e61d2f8eizasro1/libgmidgard_8.2.0_amd64.deb?dl=0)
+  - [GYC](https://www.dropbox.com/s/9gdacrnub63bpdj/gyc-8_8.2.0_amd64.deb?dl=0)
 
 - And then, you need to install them using dpkg : 
 
