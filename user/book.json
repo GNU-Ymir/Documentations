@@ -1,0 +1,7 @@
+{
+    "plugins": ["prism", "-highlight", "copy-code-button", "mathjax", "codeblock-filename"],
+    "pluginsConfig": {
+	"prism": {
+	}
+    }
+}
