@@ -61,7 +61,7 @@ def foo () {
 The above program, can be represented in memory as illustrated in the
 following figure. 
 
-![Image](https://gnu-ymir.github.io/Documentations/advanced/memory_x_ref_y_foo.png)
+![Image](https://gnu-ymir.github.io/Documentations/advanced/memory_x__ref_y_foo.png)
 
 **`y`**, is a pointer to x, that can be used as it was directly
 **`x`**. Which means, that **`y`** must have the same mutability
