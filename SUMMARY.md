@@ -8,4 +8,4 @@
   * [Data types](primitives/types.md)
   * [Functions](primitives/functions.md)
   * [Control flows](primitives/control.md)
-  
+* [Alias and References](advanced/references.md)

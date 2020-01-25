@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Hello World · GitBook</title>
+        <title>Alias and References · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -61,10 +61,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="commentaires.html" />
     
-    
-    <link rel="prev" href="../" />
+    <link rel="prev" href="../primitives/control.html" />
     
 
     </head>
@@ -106,9 +104,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.2" data-path="./">
+        <li class="chapter " data-level="1.2" data-path="../hello-world/">
             
-                <a href="./">
+                <a href="../hello-world/">
             
                     
                     Hello World
@@ -120,9 +118,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.2.1" data-path="commentaires.html">
+        <li class="chapter " data-level="1.2.1" data-path="../hello-world/commentaires.html">
             
-                <a href="commentaires.html">
+                <a href="../hello-world/commentaires.html">
             
                     
                     Comments
@@ -209,9 +207,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4" data-path="../advanced/references.html">
+        <li class="chapter active" data-level="1.4" data-path="references.html">
             
-                <a href="../advanced/references.html">
+                <a href="references.html">
             
                     
                     Alias and References
@@ -252,7 +250,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Hello World</a>
+        <a href=".." >Alias and References</a>
     </h1>
 </div>
 
@@ -267,24 +265,36 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="hello-world">Hello World</h1>
-<p>The following source code, is the <strong>Ymir</strong> version of the famous <code>Hello World!!</code> program.</p>
-<pre class="language-"><code class="lang-ymir"><span class="token comment">// This is a comment </span>
-
-<span class="token comment">// This is a function declaration </span>
-<span class="token comment">// The main function, is the first one called </span>
-<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment">// Print &apos;Hello World !!&apos; to the console</span>
-    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Hello World !!&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                                <h1 id="alias-and-references">Alias and References</h1>
+<p>Alias and reference is one of the most important feature of the
+language <strong>Ymir</strong>, that enable it to make guarantees on the data
+mutability, and explicit memory movement. It is important to
+understand how memory works in <strong>Ymir</strong>, in order to understand the
+error message, you could get when trying to move data from one
+variable to another.</p>
+<h2 id="standard-and-aliasable-types">Standard and Aliasable types</h2>
+<p>In <strong>Ymir</strong>, there are two kinds of types, standard types and
+aliasable types. The standard type, can be copied without explicitly
+informing the compiler. These types, are all primitive types, except
+the slices. On the other hand, aliasable types, are types that have
+borrowed data, which will not be copied, if not explicitly written
+into the code, to avoid performance loss.</p>
+<p>To understand how data is represented in a program, you need to know
+the difference between heap and stack. The stack is a space allocated
+by the program when entering a function, which is released when the
+function is exited. On the other hand, the heap is a space that is
+allocated when certain instructions in the program require it, such as
+creating a new array, creating a new object instance, and so on.</p>
+<p>When an array is created, all its data is stored in the heap, and the
+address of this data is stored in the stack, where the variables are
+located. The following figure shows the data representation for this
+program:</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>A binary can be generated using <strong>GYC</strong>.</p>
-<pre class="language-"><code class="lang-bash">$ gyc hello.yr
-</code></pre>
-<p>This command produce a binary <code>a.out</code> that can be executed </p>
-<pre class="language-"><code>$ ./a.out
-Hello World !!
-</code></pre>
+<p><img src="https://gnu-ymir.github.io/Documentations/advanced/memory_x_foo.png" alt="Image"></p>
+
                                 
                                 </section>
                             
@@ -311,14 +321,10 @@ Hello World !!
 
             
                 
-                <a href="../" class="navigation navigation-prev " aria-label="Previous page: Introduction">
+                <a href="../primitives/control.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Control flows">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
-                
-                <a href="commentaires.html" class="navigation navigation-next " aria-label="Next page: Comments">
-                    <i class="fa fa-angle-right"></i>
-                </a>
                 
             
         
@@ -327,7 +333,7 @@ Hello World !!
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Hello World","level":"1.2","depth":1,"next":{"title":"Comments","level":"1.2.1","depth":2,"path":"hello-world/commentaires.md","ref":"hello-world/commentaires.md","articles":[]},"previous":{"title":"Introduction","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"hello-world/README.md","mtime":"2020-01-24T08:57:10.325Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-25T18:29:12.517Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Alias and References","level":"1.4","depth":1,"previous":{"title":"Control flows","level":"1.3.4","depth":2,"path":"primitives/control.md","ref":"primitives/control.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"advanced/references.md","mtime":"2020-01-25T18:28:57.847Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-25T18:29:12.517Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

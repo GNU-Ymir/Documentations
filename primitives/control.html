@@ -61,6 +61,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
+    <link rel="next" href="../advanced/references.html" />
+    
     
     <link rel="prev" href="functions.html" />
     
@@ -207,6 +209,19 @@
             
         </li>
     
+        <li class="chapter " data-level="1.4" data-path="../advanced/references.html">
+            
+                <a href="../advanced/references.html">
+            
+                    
+                    Alias and References
+            
+                </a>
+            
+
+            
+        </li>
+    
 
     
 
@@ -253,19 +268,20 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="control-flows">Control flows</h1>
-<p>When writting a program, the possibility of deciding to run a section
-of code under condition, or repeat a part of a code, is a basic
-pattern that can be really useful. </p>
+<p>When writing a program, the ability to decide to execute part of the
+code conditionally, or to repeat part of the code, is a basic schema
+that can be really useful.</p>
 <p>In <strong>Ymir</strong> unlike many <em>C-like</em> language, there is no such things as
-a statement, everything is an expression and can be evaluated as a
-value. You can therefore initialise variable with a <code>if</code>, a <code>while</code> or
-even a <code>for</code> expression.</p>
+a statement, everything is an expression and can be evaluated. So, you
+can initialize variable with a <code>if</code>, a <code>while</code> or even a <code>for</code>
+expression.</p>
 <h1 id="if-expression">If expression</h1>
-<p>A if allows you to branch your code by making decision based on
-conditions. A if expression is composed by a <code>if</code> keyword, followed by
-an expression that has to be typed as a <code>bool</code>, followed by a
-expression. You can add an <code>else</code> after an <em>if expression</em>, to perform
-a code, if the condition of the <em>if expression</em> is not respected.</p>
+<p>An <em>if expression</em> allows you to branch in your code by making
+decisions based on conditions. A if expression is composed by a <code>if</code>
+keyword, followed by an expression that has to be typed as a <code>bool</code>,
+followed by a expression. You can add an <code>else</code> after an <em>if
+expression</em>, to execute code, if the condition of the <em>if expression</em>
+is not respected.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
 
@@ -287,9 +303,9 @@ a code, if the condition of the <em>if expression</em> is not respected.</p>
 <span class="token punctuation">}</span>
 </code></pre>
 <p>As said above, since everything is an expression, you can use <em>if
-expressions as value</em>. For an if expression to have a value that is
-not typed <strong><code>void</code></strong>, every branch of the <strong><code>if</code></strong> must have the same
-type. </p>
+expressions</em> as values. Every branch of the <em>if expression</em> must have
+the same type, otherwise an error while be returned by the
+compiler. The value of an if, can of course be of type <strong><code>void</code></strong>.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">let</span> condition <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">;</span>
     <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token keyword">if</span> condition <span class="token punctuation">{</span>
@@ -330,7 +346,7 @@ compilation terminated.
 be repeated forever.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     loop <span class="token punctuation">{</span>
-        <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;I will be printed an infinite number of time&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;I will be printed an infinite number of times&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre>
@@ -373,11 +389,10 @@ content expression, at the last iteration, or by the value given by a
 <p>While produced the following results : </p>
 <pre class="language-"><code>X is : 10
 </code></pre><h3 id="for-loops-to-iterate-over-a-value">For loops to iterate over a value</h3>
-<p>The last type of loop is the <code>for</code> loop. It is applicable on an
-iterable type. The value of a <code>for</code> loop works exactly like the value
-of a while loop.</p>
-<p>Ranges, Slice, and Tuple are iterable types. 
-For example for range : </p>
+<p>The last type of loop is the &quot;for&quot; loop. It is applicable on an
+iterable type. The value of a &quot;for&quot; loop works exactly like the value
+evaluation of a &quot;while&quot; loop. Ranges, Slice and Tuple are iterable
+types.  For example, for range :</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>io
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -390,10 +405,19 @@ For example for range : </p>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>For slices, this is a bit more complex, you can iterate by value like that : </p>
+<p>You can iterate one slice per value, by defining only one iterator on
+the for loop. This variable, will make a copy of each element of the
+slice, at each iteration. Of course, you can choose to iterate by
+reference, and even make it mutable. Or get the index at the same
+time. Or get the index finger at the same time. When using an index,
+its type is a <strong><code>usize</code></strong>.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span>
 </code></pre>
-<p>Or get the index at the same time </p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">let</span> <span class="token keyword">mut</span> x <span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token keyword">mut</span> i32<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span> <span class="token keyword">ref</span> <span class="token keyword">mut</span> i <span class="token keyword">in</span> x <span class="token punctuation">{</span>
+    i <span class="token operator">=</span> <span class="token number">8</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">for</span> index<span class="token punctuation">,</span> value <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span>
 </code></pre>
 <p>If the slice on which you are iterating is mutable, you can have a mutable ref access to its values.</p>
@@ -451,10 +475,14 @@ and is equivalent to a static rewrite.</p>
 
             
                 
-                <a href="functions.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Functions">
+                <a href="functions.html" class="navigation navigation-prev " aria-label="Previous page: Functions">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
+                
+                <a href="../advanced/references.html" class="navigation navigation-next " aria-label="Next page: Alias and References">
+                    <i class="fa fa-angle-right"></i>
+                </a>
                 
             
         
@@ -463,7 +491,7 @@ and is equivalent to a static rewrite.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Control flows","level":"1.3.4","depth":2,"previous":{"title":"Functions","level":"1.3.3","depth":2,"path":"primitives/functions.md","ref":"primitives/functions.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"primitives/control.md","mtime":"2020-01-22T13:43:23.337Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-24T08:45:46.734Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Control flows","level":"1.3.4","depth":2,"next":{"title":"Alias and References","level":"1.4","depth":1,"path":"advanced/references.md","ref":"advanced/references.md","articles":[]},"previous":{"title":"Functions","level":"1.3.3","depth":2,"path":"primitives/functions.md","ref":"primitives/functions.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"primitives/control.md","mtime":"2020-01-25T16:35:02.496Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-25T18:29:12.517Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

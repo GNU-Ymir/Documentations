@@ -1,21 +1,23 @@
 # Control flows
 
-When writting a program, the possibility of deciding to run a section
-of code under condition, or repeat a part of a code, is a basic
-pattern that can be really useful. 
+
+When writing a program, the ability to decide to execute part of the
+code conditionally, or to repeat part of the code, is a basic schema
+that can be really useful.
 
 In **Ymir** unlike many *C-like* language, there is no such things as
-a statement, everything is an expression and can be evaluated as a
-value. You can therefore initialise variable with a `if`, a `while` or
-even a `for` expression.
+a statement, everything is an expression and can be evaluated. So, you
+can initialize variable with a `if`, a `while` or even a `for`
+expression.
 
 # If expression
 
-A if allows you to branch your code by making decision based on
-conditions. A if expression is composed by a `if` keyword, followed by
-an expression that has to be typed as a `bool`, followed by a
-expression. You can add an `else` after an *if expression*, to perform
-a code, if the condition of the *if expression* is not respected.
+An *if expression* allows you to branch in your code by making
+decisions based on conditions. A if expression is composed by a `if`
+keyword, followed by an expression that has to be typed as a `bool`,
+followed by a expression. You can add an `else` after an *if
+expression*, to execute code, if the condition of the *if expression*
+is not respected.
 
 ```ymir
 def main () {
@@ -43,9 +45,9 @@ def main () {
 ```
 
 As said above, since everything is an expression, you can use *if
-expressions as value*. For an if expression to have a value that is
-not typed **`void`**, every branch of the **`if`** must have the same
-type. 
+expressions* as values. Every branch of the *if expression* must have
+the same type, otherwise an error while be returned by the
+compiler. The value of an if, can of course be of type **`void`**.
 
 ```ymir
 def main () {
@@ -102,7 +104,7 @@ be repeated forever.
 ```ymir
 def main () {
 	loop {
-		println ("I will be printed an infinite number of time");
+		println ("I will be printed an infinite number of times");
 	}
 }
 ```
@@ -161,12 +163,10 @@ X is : 10
 
 ### For loops to iterate over a value
 
-The last type of loop is the `for` loop. It is applicable on an
-iterable type. The value of a `for` loop works exactly like the value
-of a while loop.
-
-Ranges, Slice, and Tuple are iterable types. 
-For example for range : 
+The last type of loop is the "for" loop. It is applicable on an
+iterable type. The value of a "for" loop works exactly like the value
+evaluation of a "while" loop. Ranges, Slice and Tuple are iterable
+types.  For example, for range :
 
 ```ymir
 import std::io
@@ -182,12 +182,22 @@ def main () {
 }
 ```
 
-For slices, this is a bit more complex, you can iterate by value like that : 
+You can iterate one slice per value, by defining only one iterator on
+the for loop. This variable, will make a copy of each element of the
+slice, at each iteration. Of course, you can choose to iterate by
+reference, and even make it mutable. Or get the index at the same
+time. Or get the index finger at the same time. When using an index,
+its type is a **`usize`**.
+
 ```ymir
 for i in [1, 2, 3]
 ```
-
-Or get the index at the same time 
+```ymir
+let mut x : [mut i32] = [1, 2, 3];
+for ref mut i in x {
+	i = 8;
+}
+```
 ```ymir
 for index, value in [1, 2, 3]
 ```
