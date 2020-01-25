@@ -73,7 +73,7 @@ import std::io
 
 def main () {
 	let mut x : [mut i32] = [1, 2, 3];
-	let ref mut y : [dmut i32] = ref x;
+	let ref mut y : [mut i32] = ref x;
 	y = [7, 8, 9];
 	println (x); 
 }
