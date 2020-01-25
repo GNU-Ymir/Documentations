@@ -35,3 +35,56 @@ def foo () {
 ```
 
 ![Image](https://gnu-ymir.github.io/Documentations/advanced/memory_x_foo.png)
+
+## Memory borrowing
+
+When you want to make a copy of a value whose type is aliasable, you
+must tell the compiler how you want to make the copy. There are four
+ways of moving memory, or referencing memory, which are provided with
+the four keywords "ref", "alias", "copy" and "copy".
+
+### Reference
+
+This is propably the easiest of the four way. The `ref` keyword, will
+make a reference of a variable, it is applicable on a variable
+declaration. 
+
+ 
+```ymir
+def foo () {
+	let x = [1, 2, 3];
+	let ref y = ref x;
+	//          ^^^    
+	// Try to remove the keyword ref.
+}
+```
+The above program, can be represented in memory as illustrated in the
+following figure. 
+
+![Image](https://gnu-ymir.github.io/Documentations/advanced/memory_x_ref_y_foo.png)
+
+**`y`**, is a pointer to x, that can be used as it was directly
+**`x`**. Which means, that **`y`** must have the same mutability
+properties as **`x`**. And that, if `x` is mutable, modify `y` would
+also modify `x`.
+
+```ymir
+import std::io
+
+def main () {
+	let mut x : [mut i32] = [1, 2, 3];
+	let ref mut y : [dmut i32] = ref x;
+	y = [7, 8, 9];
+	println (x); 
+}
+```
+
+The above program should display the following output once launched:
+
+```
+[7, 8, 9]
+```
+
+A reference is not a type, it is only a type of variable,
+you can't store references in sub types (for example, you can't make
+an array of reference, or a tuple containing a reference to a value).
