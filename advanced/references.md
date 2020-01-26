@@ -1,54 +1,7 @@
-# Alias and References
-
-Alias and reference is one of the most important feature of the
-language **Ymir**, that enable it to make guarantees on the data
-mutability, and explicit memory movement. It is important to
-understand how memory works in **Ymir**, in order to understand the
-error message, you could get when trying to move data from one
-variable to another.
-
-## Standard and Aliasable types
-
-In **Ymir**, there are two kinds of types, standard types and
-aliasable types. The standard type, can be copied without explicitly
-informing the compiler. These types, are all primitive types, except
-the slices. On the other hand, aliasable types, are types that have
-borrowed data, which will not be copied, if not explicitly written
-into the code, to avoid performance loss.
-
-To understand how data is represented in a program, you need to know
-the difference between heap and stack. The stack is a space allocated
-by the program when entering a function, which is released when the
-function is exited. On the other hand, the heap is a space that is
-allocated when certain instructions in the program require it, such as
-creating a new array, creating a new object instance, and so on.
-
-When an array is created, all its data is stored in the heap, and the
-address of this data is stored in the stack, where the variables are
-located. The following figure shows the data representation for this
-program:
-
-```ymir
-def foo () {
-	let x = [1, 2, 3];
-}
-```
-
-![Image](https://gnu-ymir.github.io/Documentations/advanced/memory_x_foo.png)
-
-## Memory borrowing
-
-When you want to make a copy of a value whose type is aliasable, you
-must tell the compiler how you want to make the copy. There are four
-ways of moving memory, or referencing memory, which are provided with
-the four keywords "ref", "alias", "copy" and "copy".
-
-### Reference
-
-This is propably the easiest of the four way. The `ref` keyword, will
-make a reference of a variable, it is applicable on a variable
-declaration. 
-
+# Reference
+The keyword**`ref`**is a keyword that is placed before the declaration
+of a variable. It is used to refer to a value, which is usually
+borrowed from another variable.
  
 ```ymir
 def foo () {
@@ -88,3 +41,82 @@ The above program should display the following output once launched:
 A reference is not a type, it is only a type of variable,
 you can't store references in sub types (for example, you can't make
 an array of reference, or a tuple containing a reference to a value).
+
+## Reference as function parameter
+
+A parameter of a function can be a reference. As with the local
+variable, when a value is passed to it, you must tell the compiler
+that you understand that you are passing the value by reference, and
+accept the side effects it may have on your values.
+
+
+```ymir
+import std::io
+
+def foo (ref mut x : i32) {
+	x = 123;
+}
+
+def main () {
+	let mut x = 12;
+	//  ^^^
+	// Try to remove the mut
+	foo (ref x);
+	//   ^^^
+	// Try to remove the ref
+	println (x); 
+}
+```
+
+The following figure shows the memory status of the previous code: 
+
+![Image](https://gnu-ymir.github.io/Documentations/advanced/memory_x_main_ref_x_foo.png)
+
+The keyword `ref` is not always associated with a mutable variable, it
+can be used to pass a complex type to a function more efficiently,
+when you don't want to make a complete copy, which would be much less
+efficient. In this case, you still need to specify that you pass the
+variable by reference, to distinguish it from the function which
+passes the variable directly by value.
+
+**Exercice :** Try to guess the output of the following program : 
+
+```ymir
+import std::io
+
+def foo ( x : i32) {
+//       ^
+// Try to add mut here
+	println ("By value : ", x);
+}
+
+def foo (ref x : i32) {
+	println ("By reference : ", x);
+}
+
+def main () {
+	let x = 89;
+	foo (x);
+	foo (ref x);
+}
+```
+
+If you have done the exercise, and added the keyword `mut` in the
+signature of the first function `foo`, you should get the following
+error:
+
+```
+Error : a parameter cannot be mutable, if it is not a reference
+ --> main.yr:(4,14)
+    | 
+ 4  | def foo (mut x : i32) {
+    |              ^
+
+ymir1: fatal error: 
+compilation terminated.
+```
+
+This error means that the type of x is not aliasable, so if it is not
+a reference, marking it as mutable will have no effect on the program,
+and therefore the compiler does not allow it.
+

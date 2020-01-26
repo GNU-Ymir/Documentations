@@ -8,4 +8,7 @@
   * [Data types](primitives/types.md)
   * [Functions](primitives/functions.md)
   * [Control flows](primitives/control.md)
-* [Alias and References](advanced/references.md)
+* [Alias and References](advanced/README.md)
+  * [References](advanced/references.md)
+  * [Aliases](advanced/alias.md)
+  * [Copy and Deep copy](advanced/copies.md)

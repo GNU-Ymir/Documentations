@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Basic programming concepts · GitBook</title>
+        <title>Alias and References · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -61,10 +61,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="variables.html" />
+    <link rel="next" href="references.html" />
     
     
-    <link rel="prev" href="../hello-world/commentaires.html" />
+    <link rel="prev" href="../primitives/control.html" />
     
 
     </head>
@@ -138,9 +138,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.3" data-path="./">
+        <li class="chapter " data-level="1.3" data-path="../primitives/">
             
-                <a href="./">
+                <a href="../primitives/">
             
                     
                     Basic programming concepts
@@ -152,9 +152,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.3.1" data-path="variables.html">
+        <li class="chapter " data-level="1.3.1" data-path="../primitives/variables.html">
             
-                <a href="variables.html">
+                <a href="../primitives/variables.html">
             
                     
                     Variable and Mutability
@@ -165,9 +165,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.2" data-path="types.html">
+        <li class="chapter " data-level="1.3.2" data-path="../primitives/types.html">
             
-                <a href="types.html">
+                <a href="../primitives/types.html">
             
                     
                     Data types
@@ -178,9 +178,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.3" data-path="functions.html">
+        <li class="chapter " data-level="1.3.3" data-path="../primitives/functions.html">
             
-                <a href="functions.html">
+                <a href="../primitives/functions.html">
             
                     
                     Functions
@@ -191,9 +191,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.4" data-path="control.html">
+        <li class="chapter " data-level="1.3.4" data-path="../primitives/control.html">
             
-                <a href="control.html">
+                <a href="../primitives/control.html">
             
                     
                     Control flows
@@ -209,9 +209,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4" data-path="../advanced/">
+        <li class="chapter active" data-level="1.4" data-path="./">
             
-                <a href="../advanced/">
+                <a href="./">
             
                     
                     Alias and References
@@ -223,9 +223,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.4.1" data-path="../advanced/references.html">
+        <li class="chapter " data-level="1.4.1" data-path="references.html">
             
-                <a href="../advanced/references.html">
+                <a href="references.html">
             
                     
                     References
@@ -236,7 +236,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.2" data-path="../advanced/alias.md">
+        <li class="chapter " data-level="1.4.2" data-path="alias.md">
             
                 <span>
             
@@ -249,7 +249,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.3" data-path="../advanced/copies.md">
+        <li class="chapter " data-level="1.4.3" data-path="copies.md">
             
                 <span>
             
@@ -297,7 +297,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Basic programming concepts</a>
+        <a href=".." >Alias and References</a>
     </h1>
 </div>
 
@@ -312,10 +312,40 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="basic-programming-concepts">Basic programming concepts</h1>
-<p>This chapter will cover the basic <strong>Ymir</strong> programming
-concept. Specifically, you will learn about variable, mutability,
-native types, functions and control flows.</p>
+                                <h1 id="alias-and-references">Alias and References</h1>
+<p>Alias and reference is one of the most important feature of the
+language <strong>Ymir</strong>, that enable it to make guarantees on the data
+mutability, and explicit memory movement. It is important to
+understand how memory works in <strong>Ymir</strong>, in order to understand the
+error message, you could get when trying to move data from one
+variable to another.</p>
+<h2 id="standard-and-aliasable-types">Standard and Aliasable types</h2>
+<p>In <strong>Ymir</strong>, there are two kinds of types, standard types and
+aliasable types. The standard type, can be copied without explicitly
+informing the compiler. These types, are all primitive types, except
+the slices. On the other hand, aliasable types, are types that have
+borrowed data, which will not be copied, if not explicitly written
+into the code, to avoid performance loss.</p>
+<p>To understand how data is represented in a program, you need to know
+the difference between heap and stack. The stack is a space allocated
+by the program when entering a function, which is released when the
+function is exited. On the other hand, the heap is a space that is
+allocated when certain instructions in the program require it, such as
+creating a new array, creating a new object instance, and so on.</p>
+<p>When an array is created, all its data is stored in the heap, and the
+address of this data is stored in the stack, where the variables are
+located. The following figure shows the data representation for this
+program:</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><img src="https://gnu-ymir.github.io/Documentations/advanced/memory_x_foo.png" alt="Image"></p>
+<h2 id="memory-borrowing">Memory borrowing</h2>
+<p>When you want to make a copy of a value whose type is aliasable, you
+must tell the compiler how you want to make the copy. There are four
+ways of moving memory, or referencing memory, which are provided with
+the four keywords <code>ref</code>, <code>alias</code>, <code>copy</code> and <code>dcopy</code>.</p>
 
                                 
                                 </section>
@@ -343,12 +373,12 @@ native types, functions and control flows.</p>
 
             
                 
-                <a href="../hello-world/commentaires.html" class="navigation navigation-prev " aria-label="Previous page: Comments">
+                <a href="../primitives/control.html" class="navigation navigation-prev " aria-label="Previous page: Control flows">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="variables.html" class="navigation navigation-next " aria-label="Next page: Variable and Mutability">
+                <a href="references.html" class="navigation navigation-next " aria-label="Next page: References">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -359,7 +389,7 @@ native types, functions and control flows.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Basic programming concepts","level":"1.3","depth":1,"next":{"title":"Variable and Mutability","level":"1.3.1","depth":2,"path":"primitives/variables.md","ref":"primitives/variables.md","articles":[]},"previous":{"title":"Comments","level":"1.2.1","depth":2,"path":"hello-world/commentaires.md","ref":"hello-world/commentaires.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"primitives/README.md","mtime":"2020-01-25T19:00:17.339Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-26T16:06:13.344Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Alias and References","level":"1.4","depth":1,"next":{"title":"References","level":"1.4.1","depth":2,"path":"advanced/references.md","ref":"advanced/references.md","articles":[]},"previous":{"title":"Control flows","level":"1.3.4","depth":2,"path":"primitives/control.md","ref":"primitives/control.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"advanced/README.md","mtime":"2020-01-26T15:32:43.413Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-26T16:06:13.344Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

@@ -7,7 +7,7 @@
                      '(("inputenc" "utf8") ("fontenc" "T1") ("algpseudocode" "noend")))
    (TeX-run-style-hooks
     "latex2e"
-    "figures/memory_x_ref_y"
+    "figures/memory_x_ref_x_foo"
     "standalone"
     "standalone10"
     "lmodern"
