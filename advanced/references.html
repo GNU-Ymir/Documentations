@@ -61,7 +61,7 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="alias.md" />
+    <link rel="next" href="alias.html" />
     
     
     <link rel="prev" href="./" />
@@ -236,9 +236,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.2" data-path="alias.md">
+        <li class="chapter " data-level="1.4.2" data-path="alias.html">
             
-                <span>
+                <a href="alias.html">
             
                     
                     Aliases
@@ -341,10 +341,7 @@ also modify <code>x</code>.</p>
 </code></pre>
 <p>The above program should display the following output once launched:</p>
 <pre class="language-"><code>[7, 8, 9]
-</code></pre><p>A reference is not a type, it is only a type of variable,
-you can&apos;t store references in sub types (for example, you can&apos;t make
-an array of reference, or a tuple containing a reference to a value).</p>
-<h2 id="reference-as-function-parameter">Reference as function parameter</h2>
+</code></pre><h2 id="reference-as-function-parameter">Reference as function parameter</h2>
 <p>A parameter of a function can be a reference. As with the local
 variable, when a value is passed to it, you must tell the compiler
 that you understand that you are passing the value by reference, and
@@ -366,7 +363,7 @@ accept the side effects it may have on your values.</p>
 <span class="token punctuation">}</span>
 </code></pre>
 <p>The following figure shows the memory status of the previous code: </p>
-<p><img src="https://gnu-ymir.github.io/Documentations/advanced/memory_x_main_ref_x_foo.png" alt="Image"></p>
+<p><img src="https://gnu-ymir.github.io/Documentations/advanced/memory_x_main_ref_x_foo.png" alt="drawing" width="450"></p>
 <p>The keyword <code>ref</code> is not always associated with a mutable variable, it
 can be used to pass a complex type to a function more efficiently,
 when you don&apos;t want to make a complete copy, which would be much less
@@ -406,6 +403,49 @@ compilation terminated.
 </code></pre><p>This error means that the type of x is not aliasable, so if it is not
 a reference, marking it as mutable will have no effect on the program,
 and therefore the compiler does not allow it.</p>
+<h2 id="reference-as-a-value">Reference as a value</h2>
+<p>A reference is not a type, it is only a type of variable, you can&apos;t
+store references in sub types (for example, you can&apos;t make an array of
+reference, or a tuple containing a reference to a value). It means
+that with the following code, you should get an error.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">12</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> y <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token keyword">ref</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<pre class="language-"><code>Warning : the creation of ref has no effect on left operand
+ --&gt; main.yr:(3,19)
+    | 
+ 3  |     let y = (10, ref x);
+    |                      ^
+
+ymir1: fatal error: 
+compilation terminated.
+</code></pre><h2 id="reference-as-function-return">Reference as function return</h2>
+<p>This part is a bit tricky, and I recommend you never do this unless
+you really know what you&apos;re doing. A function can return a reference
+to a variable, but <strong>Ymir</strong> does not provide any verification to
+ensure that the variable will still exist when the function ends, and
+therefore the reference will still point to a valid value. This is a
+major defect in the static verification of <strong>Ymir</strong>, which is
+currently under development.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>io
+
+<span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token keyword">ref</span> x <span class="token punctuation">:</span> i32<span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token keyword">ref</span> i32 <span class="token punctuation">{</span>
+    <span class="token keyword">ref</span> x
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">12</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> <span class="token keyword">ref</span> y <span class="token operator">=</span> <span class="token keyword">ref</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token keyword">ref</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token punctuation">}</span>
+</code></pre>
+<p>You may be skeptical about the interest of returning a reference to a
+variable that is a parameter, and I agree with you, but the ability to
+return a reference can be useful sometimes, especially when it comes
+to objects, which are described in the chapter
+<a href="class/README.md">Class</a>.</p>
 
                                 
                                 </section>
@@ -438,7 +478,7 @@ and therefore the compiler does not allow it.</p>
                 </a>
                 
                 
-                <a href="alias.md" class="navigation navigation-next " aria-label="Next page: Aliases">
+                <a href="alias.html" class="navigation navigation-next " aria-label="Next page: Aliases">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -449,7 +489,7 @@ and therefore the compiler does not allow it.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"References","level":"1.4.1","depth":2,"next":{"title":"Aliases","level":"1.4.2","depth":2,"path":"advanced/alias.md","ref":"advanced/alias.md","articles":[]},"previous":{"title":"Alias and References","level":"1.4","depth":1,"path":"advanced/README.md","ref":"advanced/README.md","articles":[{"title":"References","level":"1.4.1","depth":2,"path":"advanced/references.md","ref":"advanced/references.md","articles":[]},{"title":"Aliases","level":"1.4.2","depth":2,"path":"advanced/alias.md","ref":"advanced/alias.md","articles":[]},{"title":"Copy and Deep copy","level":"1.4.3","depth":2,"path":"advanced/copies.md","ref":"advanced/copies.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"advanced/references.md","mtime":"2020-01-26T16:08:24.051Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-26T16:08:41.546Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"References","level":"1.4.1","depth":2,"next":{"title":"Aliases","level":"1.4.2","depth":2,"path":"advanced/alias.md","ref":"advanced/alias.md","articles":[]},"previous":{"title":"Alias and References","level":"1.4","depth":1,"path":"advanced/README.md","ref":"advanced/README.md","articles":[{"title":"References","level":"1.4.1","depth":2,"path":"advanced/references.md","ref":"advanced/references.md","articles":[]},{"title":"Aliases","level":"1.4.2","depth":2,"path":"advanced/alias.md","ref":"advanced/alias.md","articles":[]},{"title":"Copy and Deep copy","level":"1.4.3","depth":2,"path":"advanced/copies.md","ref":"advanced/copies.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"advanced/references.md","mtime":"2020-01-26T16:39:00.998Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-26T16:39:20.065Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

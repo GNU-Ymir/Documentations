@@ -74,7 +74,7 @@ X is equal to : 3
 The mutability of variable can be very useful, but sometimes a bit
 hard to tackle when dealing with complex types. **Ymir** introduce
 **aliases** types, that are explained in details in the chapter
-[Alias and References]()
+[Alias and References](https://gnu-ymir.github.io/Documentations/advanced/)
 
 ## Global variables
 
@@ -101,7 +101,7 @@ All the variable that are not global, have a lifetime that is defined
 by their scope. A scope is a segment of code, that have a begin and an
 end, in which statement are made. More informations about scope will
 be given in the chapter about function bodies, in
-[Functions](primitives/functions.md). 
+[Functions](https://gnu-ymir.github.io/Documentations/primitives/functions.html). 
 
 Two variable with the same name cannot be declared in colliding
 scopes, that is to say, if a variable is declared with a name of a

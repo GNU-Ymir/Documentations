@@ -38,10 +38,6 @@ The above program should display the following output once launched:
 [7, 8, 9]
 ```
 
-A reference is not a type, it is only a type of variable,
-you can't store references in sub types (for example, you can't make
-an array of reference, or a tuple containing a reference to a value).
-
 ## Reference as function parameter
 
 A parameter of a function can be a reference. As with the local
@@ -70,7 +66,7 @@ def main () {
 
 The following figure shows the memory status of the previous code: 
 
-![Image](https://gnu-ymir.github.io/Documentations/advanced/memory_x_main_ref_x_foo.png)
+<img src="https://gnu-ymir.github.io/Documentations/advanced/memory_x_main_ref_x_foo.png" alt="drawing" width="450"/>
 
 The keyword `ref` is not always associated with a mutable variable, it
 can be used to pass a complex type to a function more efficiently,
@@ -120,3 +116,58 @@ This error means that the type of x is not aliasable, so if it is not
 a reference, marking it as mutable will have no effect on the program,
 and therefore the compiler does not allow it.
 
+
+## Reference as a value 
+
+A reference is not a type, it is only a type of variable, you can't
+store references in sub types (for example, you can't make an array of
+reference, or a tuple containing a reference to a value). It means
+that with the following code, you should get an error.
+
+```ymir 
+def main () {
+	let x = 12;
+	let y = (10, ref x);
+}
+```
+
+```
+Warning : the creation of ref has no effect on left operand
+ --> main.yr:(3,19)
+    | 
+ 3  | 	let y = (10, ref x);
+    | 	                 ^
+
+ymir1: fatal error: 
+compilation terminated.
+```
+
+## Reference as function return
+
+This part is a bit tricky, and I recommend you never do this unless
+you really know what you're doing. A function can return a reference
+to a variable, but **Ymir** does not provide any verification to
+ensure that the variable will still exist when the function ends, and
+therefore the reference will still point to a valid value. This is a
+major defect in the static verification of **Ymir**, which is
+currently under development.
+
+```ymir
+import std::io
+
+def foo (ref x : i32) -> ref i32 {
+	ref x
+}
+
+def main () {
+	let x = 12;
+	let ref y = ref foo (ref x);
+	println (y); 
+}
+```
+
+You may be skeptical about the interest of returning a reference to a
+variable that is a parameter, and I agree with you, but the ability to
+return a reference can be useful sometimes, especially when it comes
+to objects, which are described in the chapter
+[Class](class/README.md).
