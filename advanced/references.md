@@ -102,8 +102,8 @@ def main () {
 ```
 
 If you have done the exercise, and added the keyword `mut` in the
-signature of the first function `foo`, you should get the following
-error:
+signature of the first function `foo`, you should have got the
+following error:
 
 ```
 Error : a parameter cannot be mutable, if it is not a reference
