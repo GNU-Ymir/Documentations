@@ -61,7 +61,7 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="copies.md" />
+    <link rel="next" href="copies.html" />
     
     
     <link rel="prev" href="references.html" />
@@ -249,9 +249,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.3" data-path="copies.md">
+        <li class="chapter " data-level="1.4.3" data-path="copies.html">
             
-                <span>
+                <a href="copies.html">
             
                     
                     Copy and Deep copy
@@ -333,7 +333,7 @@ understand that a new variable will borrow values.</p>
 <span class="token punctuation">}</span>
 </code></pre>
 <p>This source code can be represented in memory by the following figure.</p>
-<p><img src="https://gnu-ymir.github.io/Documentations/advanced/memory_x_alias_main.png" alt="drawing" width="450"></p>
+<p><img src="https://gnu-ymir.github.io/Documentations/advanced/memory_x_alias_main.png" alt="drawing" width="700"></p>
 <p>The alias keyword is mandatory only when the variable that will borrow
 the data is mutable, and can have an impact on the value. You
 evidently can&apos;t borrow immutable data in a variable that is
@@ -347,6 +347,137 @@ following code.</p>
     <span class="token comment">//                      ^^^^^</span>
     <span class="token comment">// Try to remove the alias</span>
     <span class="token function">println</span> <span class="token punctuation">(</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<pre class="language-"><code>Error : discard the constant qualifier is prohibited, left operand mutability level is 2 but must be at most 1
+ --&gt; main.yr:(5,13)
+    | 
+ 5  |     let mut y : [mut i32] = alias x;
+    |             ^
+Note : 
+ --&gt; main.yr:(5,29)
+    | 
+ 5  |     let mut y : [mut i32] = alias x;
+    |                             ^
+
+Error : undefined symbol y
+ --&gt; main.yr:(8,14)
+    | 
+ 8  |     println (y);
+    |              ^
+
+ymir1: fatal error: 
+compilation terminated.
+</code></pre><p>However, if the variable that will borrow the data is not mutable,
+there is no need to add the <code>alias</code> keyword, and the compiler will
+make an implicit alias, that will have no consequence.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>io
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> y <span class="token operator">=</span> x<span class="token punctuation">;</span> 
+    <span class="token function">println</span> <span class="token punctuation">(</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>In the last example, <strong><code>y</code></strong> can be mutable, as long as its internal
+value is immutable, i.e. its type is <code>mut [i32]</code>, you can change the
+value of <code>y</code>, but not the value it borrows. There is no problem, the
+values of <code>x</code> will not be changed, no matter what you do with <code>y</code>.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>io
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> <span class="token keyword">mut</span> y <span class="token operator">=</span> x<span class="token punctuation">;</span> 
+    <span class="token comment">// y [0] = 9;</span>
+    <span class="token comment">// Try to add the above line </span>
+
+    y <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="deep-mutability">Deep mutability</h2>
+<p>Earlier we have introduce the keyword <code>dmut</code>, this keyword is used to
+avoid very verbose type declaration, and tell that every sub type from
+this point will be mutable. This keyword is applicable on every type,
+but will have only effect on arrays and tuple. The following table
+shows example of that, on an array type :</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Verbose equivalent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dmut [i32]</td>
+<td>mut [mut i32]</td>
+</tr>
+<tr>
+<td>dmut [[[i32]]]</td>
+<td>mut [mut [mut [mut i32]]]</td>
+</tr>
+</tbody>
+</table>
+<p>We define the mutability level, as the deeper level in the type that
+is mutable. An example of mutability level is presented in the
+following table : </p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Level</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mut [i32]</td>
+<td>1</td>
+</tr>
+<tr>
+<td>[i32]</td>
+<td>0</td>
+</tr>
+<tr>
+<td>mut [mut i32]</td>
+<td>2</td>
+</tr>
+<tr>
+<td>dmut [[[i32]]]</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
+<h2 id="alias-a-function-parameter">Alias a function parameter</h2>
+<p>As you have noticed, the keyword &quot;alias&quot;, unlike the keyword &quot;ref&quot;,
+does not characterize a variable. The type of a variable will tell
+whether the type must be passed through alias or not, and therefore
+there is no change in the definition of the function.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>io
+
+<span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token keyword">mut</span> x <span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token keyword">mut</span> i32<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    x <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> x <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> dmut x <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token function">foo</span> <span class="token punctuation">(</span>alias x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">//   ^^^^^</span>
+    <span class="token comment">// Try to remove the alias</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Like for the variable, if the parameter of the function cannot have
+effect on the values that are borrowed, the alias keyword is not
+mandatory.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>io
+
+<span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> <span class="token punctuation">[</span>i32<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> dmut x <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token function">foo</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
 
@@ -381,7 +512,7 @@ following code.</p>
                 </a>
                 
                 
-                <a href="copies.md" class="navigation navigation-next " aria-label="Next page: Copy and Deep copy">
+                <a href="copies.html" class="navigation navigation-next " aria-label="Next page: Copy and Deep copy">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -392,7 +523,7 @@ following code.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Aliases","level":"1.4.2","depth":2,"next":{"title":"Copy and Deep copy","level":"1.4.3","depth":2,"path":"advanced/copies.md","ref":"advanced/copies.md","articles":[]},"previous":{"title":"References","level":"1.4.1","depth":2,"path":"advanced/references.md","ref":"advanced/references.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"advanced/alias.md","mtime":"2020-01-26T16:39:09.102Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-26T16:39:20.065Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Aliases","level":"1.4.2","depth":2,"next":{"title":"Copy and Deep copy","level":"1.4.3","depth":2,"path":"advanced/copies.md","ref":"advanced/copies.md","articles":[]},"previous":{"title":"References","level":"1.4.1","depth":2,"path":"advanced/references.md","ref":"advanced/references.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"advanced/alias.md","mtime":"2020-01-26T17:13:40.521Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-26T17:21:00.998Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

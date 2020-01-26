@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.5.4)  26 JAN 2020 17:38
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.5.4)  26 JAN 2020 18:19
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1524,7 +1524,7 @@ ick labels; missing features). Consider writing \pgfplotsset{compat=1.15} into
 your preamble.
  on input line 35.
 
-(./figures/memory_x_alias_main.tex
+(./figures/memory_x_copy_main.tex
 LaTeX Font Info:    Try loading font information for OT1+lmr on input line 36.
  (/usr/share/texmf/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
@@ -1571,12 +1571,16 @@ Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 42.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 42.
 Package rerunfilecheck Info: File `memory.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
  ) 
 Here is how much of TeX's memory you used:
- 31639 strings out of 494821
- 742624 string characters out of 6177892
- 896574 words of memory out of 7999999
- 34397 multiletter control sequences out of 15000+600000
+ 31642 strings out of 494821
+ 742704 string characters out of 6177892
+ 899574 words of memory out of 7999999
+ 34400 multiletter control sequences out of 15000+600000
  31177 words of font info for 35 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
  62i,7n,96p,795b,755s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1584,7 +1588,7 @@ Here is how much of TeX's memory you used:
 ips/lm/lm-ec.enc}</usr/share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share
 /texmf/fonts/type1/public/lm/lmbxi10.pfb></usr/share/texmf/fonts/type1/public/l
 m/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm/lmri10.pfb>
-Output written on memory.pdf (1 page, 66980 bytes).
+Output written on memory.pdf (1 page, 67758 bytes).
 PDF statistics:
  36 PDF objects out of 1000 (max. 8388607)
  28 compressed objects within 1 object stream
