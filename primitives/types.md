@@ -89,7 +89,7 @@ attributs specific to integer :
 | `min` | The minimal value |
 
 A capacity overflow verification is made on the literals, and an error
-is returned by the compiler if the type of integer you have choose is
+is returned by the compiler if the type of integer you have chosen is
 not large enough to contain the value. For example : 
 
 ```ymir
@@ -169,7 +169,7 @@ character literal is **`c8`**, if nothing is specified the character
 type will be **`c32`**. 
 
 **`c32`** character has a size of four bytes and can store any unicode
-value.  Character literals can have to forms, and are always surronded
+value.  Character literals can have two forms, and are always surronded
 by the token **`'`**. The first form is the character itself **`r`**, and the
 second the unicode value in integer form `\u{12}` or `\u{0xB}`.
 
@@ -214,7 +214,7 @@ three type of compound type: tuple, range and arrays.
 A tuple is a collection of values of different types. Tuples have
 fixed arity, once it has been set at compile time, it cannot be
 changed. Each element of a tuple has a type, and its order equally
-cannot be changed. Tuple are constructed inside parentheses, by a list
+cannot be changed. Tuples are constructed inside parentheses, by a list
 of values separated by commas.
 
 ```ymir
@@ -253,7 +253,7 @@ def main () {
 }
 ```
 
-In the last example, we can that the tuple destructuring syntax allows
+In the last example, we can see that the tuple destructuring syntax allows
 to extract only some of the values of the tuple. The value of **`e`**
 in this example will be **`('r', 3.14)`**.
 
@@ -315,13 +315,13 @@ The section [Control flow]() shows a usage of those types.
 
 ### Arrays 
 
- An array is a collection of value of the same type, stored in
- contiguous memory.  Unlike Tuple, the size of an array is unknown at
+ An array is a collection of values of the same type, stored in
+ contiguous memory.  Unlike Tuples, the size of an array is unknown at
  compile time, and in **Ymir** they are therefore similar to Slices.
  
- A slice is a two word object, the first word is the length of the
+ A slice is a two-word object, the first word is the length of the
  slice, and the second a pointer to the data stored in the slice. A
- slice is an aliasable type, its mutability has is a bit more
+ slice is an aliasable type, its mutability is a bit more
  complicated than the mutability of scalar types, as it borrows memory
  that is not automatically copied when a affectation is made. This
  section will not talk about inner type mutability and aliasable
