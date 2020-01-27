@@ -103,7 +103,7 @@ end, in which statement are made. More informations about scope will
 be given in the chapter about function bodies, in
 [Functions](https://gnu-ymir.github.io/Documentations/primitives/functions.html). 
 
-Two variable with the same name cannot be declared in colliding
+Two variables with the same name cannot be declared in colliding
 scopes, that is to say, if a variable is declared with a name of a
 variable currently alive in the current scope, a shadowing error will
 be raised.
