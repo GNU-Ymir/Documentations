@@ -4,7 +4,7 @@ Function is a largely accepted concept to divide a program in small
 parts. An ymir program start with the function `main` that you have
 already seen in the previous chapters.
 
-All function are declared using the keyword **`def`**. And are called
+All functions are declared using the keyword **`def`**. And are called
 using parameters separated by commas inside parentheses.
 
 ```ymir 
@@ -32,7 +32,7 @@ after the `main` function, it can be called without any problem.
 
 ## Parameters 
 
-The parameters of a function a declared after its name, and the syntax
+The parameters of a function are declared after its name, and the syntax
 is similar to a declaration of a variable, but the **`let`** keyword
 is ommitted as it is obvious.
 
@@ -74,9 +74,9 @@ def main () {
 ```
 
 The named expression can equally be used for parameters that does not
-have default value. A named expression, will allow you to specify the
+have default value. A named expression will allow you to specify the
 parameter in the order you want. The algorithm, to determine which
-parameter an argument is refering to, illustrated by the example : 
+parameter an argument is refering to, is illustrated by the example : 
 
 ```ymir
 def foo (x : i32, y : i32 = 9, z : i32) {
@@ -128,7 +128,7 @@ def add (x : i32, y : i32)-> i32
 ```
 
 Or using a more complex expression, as block, which is an expression
-containing a set of statement. A block is surronded by the token `{}`,
+containing a set of statements. A block is surronded by the tokens `{}`,
 and the last expression in a block is its value. 
 
 ```ymir
@@ -142,7 +142,7 @@ def main () {
 
 The token `;`, is a way of specifying that an expression ends in a
 block, and that the value of the block is the expression that
-follows. If no expression follows the value of the block is evaluated
+follows. If no expression follows the value of the block, it is evaluated
 to nothing and its type is **`void`**. For example, if we write the
 following code :
 
@@ -198,9 +198,9 @@ def isDivisable (x : i32, z : i32) -> bool {
 }
 ```
 
-If the value of the body of the function is not equivalent to the type
+If the value of function's body is not equivalent to the type
 of the function, and if there is a possibility that the function never
-encounter a return statement an error is returned by the compiler. For
+encounter a return statement, an error is returned by the compiler. For
 example with the following code :
 
 ```ymir
