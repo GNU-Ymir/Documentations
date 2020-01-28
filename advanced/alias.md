@@ -102,29 +102,11 @@ def main () {
 }
 ```
 
-## Deep mutability
-
-Earlier we have introduce the keyword `dmut`, this keyword is used to
-avoid very verbose type declaration, and tell that every sub type from
-this point will be mutable. This keyword is applicable on every type,
-but will have only effect on arrays and tuple. The following table
-shows example of that, on an array type :
-
-| Type | Verbose equivalent |
-| --- | --- |
-| dmut [i32] | mut [mut i32] |
-| dmut [[[i32]]] | mut [mut [mut [mut i32]]] |
-
-We define the mutability level, as the deeper level in the type that
-is mutable. An example of mutability level is presented in the
-following table : 
-
-| Type | Level |
-| --- | --- |
-| mut [i32] | 1 |
-| [i32] | 0 |
-| mut [mut i32] | 2 |
-| dmut [[[i32]]] | 4 |
+You may have noticed, that even if the literal is actually the element
+that create the data, we do not consider that it is the owner of the
+data, and therefore the keyword `alias` is implicit when dealing with
+literal. We consider that the data have an owner only once it has been
+affected to a variable.
 
 ## Alias a function parameter
 
@@ -164,6 +146,24 @@ def main () {
 	foo (x);
 }
 ```
+
+## Special case of struct and tuple
+
+In the chapter [Structure]() you will learn how to create structure
+containing multiple field of different type. You already learn how to
+make tuple. Those type are sometime aliasable, depending on the inner
+type they possess. If a tuple, or a struct has a field, whose type is
+aliasable, then the tuple or the struct is also aliasable.
+
+The table bellow present some example of aliasable tuple : 
+
+| Type | Aliasable |
+| --- | --- |
+| (i32, i32) | false |
+| ([i32],) | true |
+| ([i32], f64) | true |
+| (([i32], i32), f64) | true |
+
 
 
 

@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Comments · GitBook</title>
+        <title>Objects · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -61,10 +61,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../primitives/" />
+    <link rel="next" href="class.html" />
     
     
-    <link rel="prev" href="./" />
+    <link rel="prev" href="../modules/" />
     
 
     </head>
@@ -106,9 +106,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2" data-path="./">
+        <li class="chapter " data-level="1.2" data-path="../hello-world/">
             
-                <a href="./">
+                <a href="../hello-world/">
             
                     
                     Hello World
@@ -120,9 +120,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="1.2.1" data-path="commentaires.html">
+        <li class="chapter " data-level="1.2.1" data-path="../hello-world/commentaires.html">
             
-                <a href="commentaires.html">
+                <a href="../hello-world/commentaires.html">
             
                     
                     Comments
@@ -293,9 +293,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7" data-path="../objects/">
+        <li class="chapter active" data-level="1.7" data-path="./">
             
-                <a href="../objects/">
+                <a href="./">
             
                     
                     Objects
@@ -307,9 +307,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.7.1" data-path="../objects/class.html">
+        <li class="chapter " data-level="1.7.1" data-path="class.html">
             
-                <a href="../objects/class.html">
+                <a href="class.html">
             
                     
                     Class
@@ -320,9 +320,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7.2" data-path="../objects/inheritance.html">
+        <li class="chapter " data-level="1.7.2" data-path="inheritance.html">
             
-                <a href="../objects/inheritance.html">
+                <a href="inheritance.html">
             
                     
                     Inheritance
@@ -333,9 +333,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7.3" data-path="../objects/traits.html">
+        <li class="chapter " data-level="1.7.3" data-path="traits.html">
             
-                <a href="../objects/traits.html">
+                <a href="traits.html">
             
                     
                     Traits
@@ -346,9 +346,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7.4" data-path="../objects/example.html">
+        <li class="chapter " data-level="1.7.4" data-path="example.html">
             
-                <a href="../objects/example.html">
+                <a href="example.html">
             
                     
                     Example program
@@ -459,7 +459,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Comments</a>
+        <a href=".." >Objects</a>
     </h1>
 </div>
 
@@ -474,36 +474,13 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="comments">Comments</h1>
-<p><strong>Ymir</strong> offers different types of comments. </p>
-<ul>
-<li><blockquote>
-<p><code>// A line of comment that stop at the end of the line</code></p>
-</blockquote>
-</li>
-<li><blockquote>
-<p><code>/* Multiple ling comments that go the closing delimiter */</code></p>
-</blockquote>
-</li>
-</ul>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment">// This is an example of comment</span>
-
-    <span class="token comment">/* 
-     * This is another example of comment
-     * Where, the stars are optionnal
-     */</span>
-
-    <span class="token comment">/*
-    And this is the proof
-    */</span>  
-
-    <span class="token comment">// None of the line will influence the compilation</span>
-
-    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">+</span> <span class="token comment">/* 2 + */</span>  <span class="token number">3</span><span class="token punctuation">;</span>
-    <span class="token keyword">assert</span> <span class="token punctuation">(</span>x <span class="token operator">==</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// assert force the program to end if the test if false</span>
-<span class="token punctuation">}</span>
-</code></pre>
+                                <h1 id="objects">Objects</h1>
+<p><strong>Ymir</strong> is a object oriented language. But unlike many oriented
+language, it is statically typed, and safe. Unlike <code>java</code> or <code>D</code>, the
+class does not inherit the global class <code>Object</code>, and an object
+instance can&apos;t be null. Every variable that contains object are
+assured to contain a value, and that access to that value won&apos;t
+produce any crash of the program.</p>
 
                                 
                                 </section>
@@ -531,12 +508,12 @@
 
             
                 
-                <a href="./" class="navigation navigation-prev " aria-label="Previous page: Hello World">
+                <a href="../modules/" class="navigation navigation-prev " aria-label="Previous page: Modules">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="../primitives/" class="navigation navigation-next " aria-label="Next page: Basic programming concepts">
+                <a href="class.html" class="navigation navigation-next " aria-label="Next page: Class">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -547,7 +524,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Comments","level":"1.2.1","depth":2,"next":{"title":"Basic programming concepts","level":"1.3","depth":1,"path":"primitives/README.md","ref":"primitives/README.md","articles":[{"title":"Variable and Mutability","level":"1.3.1","depth":2,"path":"primitives/variables.md","ref":"primitives/variables.md","articles":[]},{"title":"Data types","level":"1.3.2","depth":2,"path":"primitives/types.md","ref":"primitives/types.md","articles":[]},{"title":"Functions","level":"1.3.3","depth":2,"path":"primitives/functions.md","ref":"primitives/functions.md","articles":[]},{"title":"Control flows","level":"1.3.4","depth":2,"path":"primitives/control.md","ref":"primitives/control.md","articles":[]}]},"previous":{"title":"Hello World","level":"1.2","depth":1,"path":"hello-world/README.md","ref":"hello-world/README.md","articles":[{"title":"Comments","level":"1.2.1","depth":2,"path":"hello-world/commentaires.md","ref":"hello-world/commentaires.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"hello-world/commentaires.md","mtime":"2020-01-27T20:39:27.109Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-28T20:28:27.125Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Objects","level":"1.7","depth":1,"next":{"title":"Class","level":"1.7.1","depth":2,"path":"objects/class.md","ref":"objects/class.md","articles":[]},"previous":{"title":"Modules","level":"1.6","depth":1,"path":"modules/README.md","ref":"modules/README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"objects/README.md","mtime":"2020-01-28T13:18:50.877Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-28T20:28:27.125Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

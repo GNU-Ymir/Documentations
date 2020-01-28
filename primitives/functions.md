@@ -1,11 +1,12 @@
 # Functions
 
-Function is a largely accepted concept to divide a program in small
-parts. An ymir program start with the function `main` that you have
-already seen in the previous chapters.
+Function is a widely accepted concept for dividing a program into
+small parts. A ymir program starts with the `main` function that you
+have already seen in previous chapters.
 
 All functions are declared using the keyword **`def`**. And are called
-using parameters separated by commas inside parentheses.
+using parameters separated by commas in parentheses.
+
 
 ```ymir 
 import std::io 
@@ -25,16 +26,37 @@ def bar () {
 }
 ```
 
-The declaration of a function can be made anywhere in the program, the
+The declaration of a function can be done anywhere in the program, the
 order is not important for the compiler, so even if `foo` is declared
 after the `main` function, it can be called without any problem.
 
+You can also call a function using dotcall syntax, by placing the
+first parameter of the function on the left. This is a syntax used to
+perform continuous data processing and to make the source code easier
+to read.
+
+```ymir
+import std::io
+
+def plusOne (i : i32) -> i32 
+	i + 1
+
+def plusTwo (i : i32) -> i32
+	i + 2
+	
+def main () {
+	let x = 12;
+	x.plusOne ()
+	 .plusTwo ()
+	 .println ();
+}	
+```
 
 ## Parameters 
 
-The parameters of a function are declared after its name, and the syntax
-is similar to a declaration of a variable, but the **`let`** keyword
-is ommitted as it is obvious.
+The parameters of a function are declared after its name, and the
+syntax is similar to the declaration of a variable, but the keyword
+**`let`** is omitted because it is obvious.
 
 ```ymir 
 import std::io 
@@ -103,9 +125,9 @@ for each p in params :
 			found = true
 			break
 	if not found : 
-		final_args = final_args ~ [args [0]]
+		final_args = final_args ~ firstUnamedArg (args)
 		remove p in params
-		remove args [0] in args	
+		remove firstUnamedArg (args) in args	
 ```
 
 In this example, the result of each step will be : 
@@ -254,3 +276,4 @@ def main () {
 ```
 
 The compiler won't return any error.
+

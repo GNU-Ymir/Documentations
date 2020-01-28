@@ -75,7 +75,7 @@ efficient. In this case, you still need to specify that you pass the
 variable by reference, to distinguish it from the function which
 passes the variable directly by value.
 
-**Exercice :** Try to guess the output of the following program : 
+**Exercise :** Try to guess the output of the following program : 
 
 ```ymir
 import std::io

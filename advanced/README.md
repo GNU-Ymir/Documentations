@@ -36,6 +36,105 @@ def foo () {
 
 ![Image](https://gnu-ymir.github.io/Documentations/advanced/memory_x_foo.png)
 
+## Mutability level 
+
+We define the mutability level, as the deeper level in the type that
+is mutable. An example of mutability level is presented in the
+following table : 
+
+| Type | Level |
+| --- | --- |
+| mut [i32] | 1 |
+| [i32] | 0 |
+| mut [mut i32] | 2 |
+| dmut [[[i32]]] | 4 |
+
+This is mainly used to ensure that borrowed data is not modified by
+another variable, in external part of the program. The user has the
+complete control on the data he created. The example bellow shows an
+utilisation of the mutability level, to ensure that the content of an
+array is never modified.
+
+```ymir
+import std::io
+
+def main () {
+	let mut x = [1, 2, 3];
+	x = [2, 3, 4];
+	// Try to add the following line : 
+	// x [0] = 8;
+}
+```
+
+The type of `x` in the previous example is `mut [i32]`, we did not
+specify mutability for the inner part of the array, so the compiler
+assumed that you don't want it to be mutable, for safety reasons. If
+you have done the previous exercise, you should have got the following
+error:
+
+```
+Error : left operand of type i32 is immutable
+ --> main.yr:(7,7)
+    | 
+ 7  |     x [0] = 8;
+    |       ^
+
+ymir1: fatal error: 
+compilation terminated.
+```
+It means that the data borrowed by **`x`** (and in this case are
+located in the Heap) are not mutable. 
+
+### Deep mutability
+
+Earlier we have introduce the keyword `dmut`, this keyword is used to
+avoid very verbose type declaration, and tell that every sub type from
+this point will be mutable. This keyword is applicable on every type,
+but will have only effect on arrays and tuple. The following table
+shows example of that, on an array type :
+
+| Type | Verbose equivalent |
+| --- | --- |
+| dmut [i32] | mut [mut i32] |
+| dmut [[[i32]]] | mut [mut [mut [mut i32]]] |
+
+If we modify the example given above, and change the `mut` keyword by
+a `dmut` keyword, the type of `x` become `mut [mut i32]`, and
+therefore `x[0] = 8` is valid statement.
+
+### String literal 
+
+String literal unlike array literal are located in the text. It means
+that the type of a string literal is `[c32]` (or `[c8]` if the suffix
+`s8` is specified), when the type of an array literal (of `i32` for
+example) is `mut [mut i32]`. So, if you write the following code : 
+
+```ymir
+import std::io
+
+def main () {
+	let dmut x = "Try to make me mutable !?";
+}
+```
+
+You should get the following error : 
+
+```
+Error : discard the constant qualifier is prohibited, left operand mutability level is 2 but must be at most 1
+ --> main.yr:(4,11)
+    | 
+ 4  | 	let dmut x = "Try to make me mutable !?";
+    | 	         ^
+Note : 
+ --> main.yr:(4,15)
+    | 
+ 4  | 	let dmut x = "Try to make me mutable !?";
+    | 	             ^
+
+ymir1: fatal error: 
+compilation terminated.
+```
+
 ## Memory borrowing
 
 When you want to make a copy of a value whose type is aliasable, you

@@ -32,6 +32,18 @@ def main () {
 
 <img src="https://gnu-ymir.github.io/Documentations/advanced/memory_x_copy_main.png" alt="drawing" width="700"/>
 
+**Exercise :** Make of modification on `x` that is initialised with an imutable string literal : 
+
+```ymir
+import std::io
+
+def main () {
+	let x = "Hello !";
+	x [0] = 'h'; // Make this line work
+	println (x);
+}
+```
+
 ## Deep copy
 
 The deep copy will make a copy of the value and all the internal
