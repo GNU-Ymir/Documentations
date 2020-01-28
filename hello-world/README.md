@@ -3,6 +3,8 @@
 The following source code, is the **Ymir** version of the famous `Hello World!!` program.
 
 ```ymir
+import std::io
+
 // This is a comment 
 
 // This is a function declaration 
