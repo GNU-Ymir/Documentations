@@ -108,3 +108,67 @@ def main () {
 	println (point2);
 }
 ```
+
+## Packed and Union
+
+This part only concern advanced programming paradigms, and are close
+to the machine level. I don't think you'll ever need them unless you
+try to optimize your code at a binary level.
+
+The size of a structure is calculated by the compiler, which decides
+the alignment of the different fields. This is why the size of a
+structure containing an `i64` and a `c8` is `16` bytes and not `9`. To
+force the compiler to remove the optimized alignment, you can use the
+`packed` modifier.
+
+```ymir
+import std::io
+
+struct @packed
+| x : i64
+| c : c8
+ -> Packed;
+ 
+struct 
+| x : i64
+| c : c8
+ -> Unpacked;
+
+
+def main () {
+	println ("Size of packed : ", sizeof Packed);
+	println ("Size of unpacked : ", sizeof Unpacked);
+}
+```
+
+```
+Size of packed : 9
+Size of unpacked : 16
+```
+
+The `union` modifier, on the other hand, tells the compiler that all
+fields in the structure must share the same memory location. The size
+of the structure will then be the size of its largest field.
+
+```ymir
+import std::io
+
+struct @union
+| x : i32
+| y : f32
+ -> Dummy;
+
+def main () {
+    let x = Dummy (y-> 12.0f);
+    println (x.x);
+}
+```
+
+```
+1094713344
+```
+
+As you can see, the construction of the Union requires only one
+argument. You cannot give multiple arguments when building an union,
+as they would be contradictory. The argument must also be passed as a
+named expression (using the `->` token).

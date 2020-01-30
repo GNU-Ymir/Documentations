@@ -277,3 +277,33 @@ def main () {
 
 The compiler won't return any error.
 
+## Block declaration
+
+You can declare functions, structs, etc. in a function. This is used
+to create symbol that are useful only for the current function. Sub
+function don't enclose the scope of the parent function.
+
+```ymir
+def foo () {
+	import std::io;	
+	let x = 12;
+	
+	def bar () -> i32 {
+		// Try to add the following line 
+		// println (x);
+		12
+	}
+	println (x + bar ());
+}
+
+def main () {
+	foo ();
+	
+	// Try to add the following lines : 
+	// bar ();
+	// println ("In the main function !");
+}
+```
+
+There is no way to retreive the symbol `bar` from outside the function
+`foo`. The function is not a module Cf. [Modules]()

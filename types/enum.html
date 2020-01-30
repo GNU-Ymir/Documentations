@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Structure · GitBook</title>
+        <title>Enum · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -64,7 +64,7 @@
     <link rel="next" href="../modules/" />
     
     
-    <link rel="prev" href="../advanced/copies.html" />
+    <link rel="prev" href="struct.html" />
     
 
     </head>
@@ -267,9 +267,23 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.5" data-path="./">
+        <li class="chapter " data-level="1.5" data-path="./">
             
                 <a href="./">
+            
+                    
+                    User define types
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="struct.html">
+            
+                <a href="struct.html">
             
                     
                     Structure
@@ -277,6 +291,24 @@
                 </a>
             
 
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.5.2" data-path="enum.html">
+            
+                <a href="enum.html">
+            
+                    
+                    Enum
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
             
         </li>
     
@@ -364,14 +396,14 @@
             
         </li>
     
-        <li class="chapter " data-level="1.8" >
+        <li class="chapter " data-level="1.8" data-path="../functions/">
             
-                <span>
+                <a href="../functions/">
             
                     
-                    Closure
+                    Function advanced
             
-                </span>
+                </a>
             
 
             
@@ -459,7 +491,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Structure</a>
+        <a href=".." >Enum</a>
     </h1>
 </div>
 
@@ -474,92 +506,59 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="structure">Structure</h1>
-<p>Structure is a common pattern used in many languages to define
-users&apos; custom types, which contains multiple values of different
-types. Structures are similar to tuples, in terms of memory management
-(always located in the stack). Unlike tuples, structures have a name,
-and all their internal fields also have a name.</p>
+                                <h1 id="enumeration">Enumeration</h1>
+<p>Enumerations are user-defined types that have a set of values. The
+keyword <code>enum</code> is used to define an enumerated type, from which the
+field type is deduced at compile time. It is mandatory that each field
+shares the same type.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>io
 
-<span class="token keyword">struct</span> 
-<span class="token operator">|</span> x <span class="token punctuation">:</span> i32
-<span class="token operator">|</span> y <span class="token punctuation">:</span> i32 
- <span class="token punctuation">-&gt;</span> Point<span class="token punctuation">;</span>
+<span class="token keyword">enum</span>
+<span class="token operator">|</span> MONDAY <span class="token operator">=</span> <span class="token string">&quot;Mon&quot;</span>
+<span class="token operator">|</span> TUESDAY <span class="token operator">=</span> <span class="token string">&quot;Tue&quot;</span>
+<span class="token operator">|</span> WEDNESDAY <span class="token operator">=</span> <span class="token string">&quot;Wed&quot;</span>
+<span class="token operator">|</span> THURSDAY <span class="token operator">=</span> <span class="token string">&quot;Thu&quot;</span>
+<span class="token operator">|</span> FRIDAY <span class="token operator">=</span> <span class="token string">&quot;Fri&quot;</span>
+<span class="token operator">|</span> SATURDAY <span class="token operator">=</span> <span class="token string">&quot;Sat&quot;</span>
+<span class="token operator">|</span> SUNDAY <span class="token operator">=</span> <span class="token string">&quot;Sun&quot;</span>
+ <span class="token punctuation">-&gt;</span> Day<span class="token punctuation">;</span>
+
+<span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>day <span class="token punctuation">:</span> Day<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span>day<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> point <span class="token operator">=</span> <span class="token function">Point</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">println</span> <span class="token punctuation">(</span>point<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> d <span class="token operator">=</span> <span class="token macro-rules function">Day:</span><span class="token punctuation">:</span>MONDAY<span class="token punctuation">;</span>
+    <span class="token function">inspect</span> <span class="token punctuation">(</span>d<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>As you can see structure are printable.</p>
-<h2 id="structure-mutability">Structure mutability</h2>
-<p>The mutability of the field of a structure is defined within the
-structure declaration. As for any variable declaration, by default the
-fields of a structure are immutable. You can of course add the keyword
-<code>mut</code> before the field declaration, to make it mutable. Its mutability
-is therefore dependent on the mutability of the variable that borrows
-the data from the structure.</p>
+<p>Enum can be cast to the type of its value, but the reverse is not
+possible.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>io
 
-<span class="token keyword">struct</span> 
-<span class="token operator">|</span> x <span class="token punctuation">:</span> i32
-<span class="token operator">|</span> <span class="token keyword">mut</span> y <span class="token punctuation">:</span> i32
- <span class="token punctuation">-&gt;</span> Point<span class="token punctuation">;</span>
+<span class="token keyword">enum</span>
+<span class="token operator">|</span> MONDAY <span class="token operator">=</span> <span class="token string">&quot;Mon&quot;</span>
+<span class="token operator">|</span> TUESDAY <span class="token operator">=</span> <span class="token string">&quot;Tue&quot;</span>
+<span class="token operator">|</span> WEDNESDAY <span class="token operator">=</span> <span class="token string">&quot;Wed&quot;</span>
+<span class="token operator">|</span> THURSDAY <span class="token operator">=</span> <span class="token string">&quot;Thu&quot;</span>
+<span class="token operator">|</span> FRIDAY <span class="token operator">=</span> <span class="token string">&quot;Fri&quot;</span>
+<span class="token operator">|</span> SATURDAY <span class="token operator">=</span> <span class="token string">&quot;Sat&quot;</span>
+<span class="token operator">|</span> SUNDAY <span class="token operator">=</span> <span class="token string">&quot;Sun&quot;</span>
+ <span class="token punctuation">-&gt;</span> Day<span class="token punctuation">;</span>
 
-<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> <span class="token keyword">mut</span> point <span class="token operator">=</span> <span class="token function">Point</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token comment">//  ^^^</span>
-    <span class="token comment">// Try to remove the mut here</span>
-    point<span class="token punctuation">.</span>y <span class="token operator">=</span> <span class="token number">98</span><span class="token punctuation">;</span>
-
-    <span class="token comment">// Try to add the following line </span>
-    <span class="token comment">// point.x = 34;</span>
-
-    <span class="token function">println</span> <span class="token punctuation">(</span>point<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>day <span class="token punctuation">:</span> <span class="token punctuation">[</span>c32<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span>day<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-</code></pre>
-<h2 id="memory-borrowing-of-structure">Memory borrowing of structure</h2>
-<p>As explained in the <a href="">Alias</a> chapter, structures are only aliasable
-if they contain a field whose type is aliasable. All fields in a
-structure are copied each time an assignment is made.</p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>io
 
-<span class="token keyword">struct</span> 
-<span class="token operator">|</span> <span class="token keyword">mut</span> x <span class="token punctuation">:</span> i32
-<span class="token operator">|</span> <span class="token keyword">mut</span> y <span class="token punctuation">:</span> i32
- <span class="token punctuation">-&gt;</span> Point<span class="token punctuation">;</span>
-
-<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> p <span class="token operator">=</span> <span class="token function">Point</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">let</span> <span class="token keyword">mut</span> p2 <span class="token operator">=</span> x<span class="token punctuation">;</span>
-    p2<span class="token punctuation">.</span>y <span class="token operator">=</span> <span class="token number">12</span><span class="token punctuation">;</span> 
-    <span class="token function">println</span> <span class="token punctuation">(</span>p<span class="token punctuation">,</span> <span class="token string">&quot; &quot;</span><span class="token punctuation">,</span> p2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">def</span> <span class="token function">bar</span> <span class="token punctuation">(</span>day <span class="token punctuation">:</span> Day<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span>day<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-</code></pre>
-<p>The above program should compile and display the following output : </p>
-<pre class="language-"><code>main::Point(1, 2) main::Point(1, 12)
-</code></pre><h2 id="default-value">Default value</h2>
-<p>You can add a default value for a field in a structure, like a
-function call, it can be changed when creating a new structure, using
-a named expression, which is constructed with the `-&gt;&apos; token.</p>
-<p>The algorithm for determining to which field an argument is associated
-is the same as the one used for the function call, and is presented in
-<a href="">Function</a>.</p>
-<p><strong>Exercise :</strong> Try to guess the output of the following program : </p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>io
-
-<span class="token keyword">struct</span> 
-<span class="token operator">|</span> x <span class="token punctuation">:</span> i32 <span class="token operator">=</span> <span class="token number">0</span>
-<span class="token operator">|</span> y <span class="token punctuation">:</span> i32 
- <span class="token punctuation">-&gt;</span> Point<span class="token punctuation">;</span>
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> point <span class="token operator">=</span> <span class="token function">Point</span> <span class="token punctuation">(</span>y<span class="token punctuation">-&gt;</span> <span class="token number">12</span><span class="token punctuation">,</span> x<span class="token punctuation">-&gt;</span> <span class="token number">98</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">println</span> <span class="token punctuation">(</span>point<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-    <span class="token keyword">let</span> point2 <span class="token operator">=</span> <span class="token function">Point</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">println</span> <span class="token punctuation">(</span>point2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token macro-rules function">Day:</span><span class="token punctuation">:</span>MONDAY<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">bar</span> <span class="token punctuation">(</span><span class="token macro-rules function">Day:</span><span class="token punctuation">:</span>MONDAY<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// Try to add the line </span>
+    <span class="token comment">// bar (&quot;Mon&quot;)</span>
 <span class="token punctuation">}</span>
 </code></pre>
 
@@ -589,7 +588,7 @@ is the same as the one used for the function call, and is presented in
 
             
                 
-                <a href="../advanced/copies.html" class="navigation navigation-prev " aria-label="Previous page: Copy and Deep copy">
+                <a href="struct.html" class="navigation navigation-prev " aria-label="Previous page: Structure">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
@@ -605,7 +604,7 @@ is the same as the one used for the function call, and is presented in
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Structure","level":"1.5","depth":1,"next":{"title":"Modules","level":"1.6","depth":1,"path":"modules/README.md","ref":"modules/README.md","articles":[]},"previous":{"title":"Copy and Deep copy","level":"1.4.3","depth":2,"path":"advanced/copies.md","ref":"advanced/copies.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"structure/README.md","mtime":"2020-01-28T10:24:12.063Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-28T20:28:27.125Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Enum","level":"1.5.2","depth":2,"next":{"title":"Modules","level":"1.6","depth":1,"path":"modules/README.md","ref":"modules/README.md","articles":[]},"previous":{"title":"Structure","level":"1.5.1","depth":2,"path":"types/struct.md","ref":"types/struct.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"types/enum.md","mtime":"2020-01-30T12:33:25.646Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-30T12:43:55.138Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
