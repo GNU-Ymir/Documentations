@@ -22,7 +22,7 @@
   * [Traits](objects/traits.md)
   * [Example program](objects/example.md)
 * [Function advanced](functions/README.md)
-* [Pattern matching]()
+* [Pattern matching](pattern/README.md)
 * [Templates]()
 * [Error handling]()
 * [Documentation]()

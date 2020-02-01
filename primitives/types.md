@@ -136,12 +136,12 @@ The following table list the attributes specific to floating point types.
 
 | Name | Meaning | 
 | --- | --- |
-| `init` | The initial value - `0.0` | 
+| `init` | The initial value - `nan` | 
 | `max` | The maximal finite value that this type can encode| 
 | `min` | The minimal finite value that this type can encode| 
 | `nan` | The value __Not a Number__ |
 | `dig` | The number of decimal digit of precision | 
-| `infinity` | The value positive infinity | 
+| `inf` | The value positive infinity | 
 | `epsilon` | The smallest increment to the value `1` |
 | `mant_dig` | Number of bits in the  __mantissa__ |
 | `max_10_exp` | 	maximum int value such that $$10^{max\_10\_exp}$$ is representable |

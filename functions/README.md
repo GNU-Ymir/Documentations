@@ -258,3 +258,40 @@ def main () {
 }
 ```
  
+
+### Ref closure
+
+A ref closure is declared with the keyword ref instead of the keyword
+move. As its name implies, a ref closure has access to the parent
+environment by reference. All included values are always immutable,
+but a change in the parent environment will also have an impact on the
+enclosed environment. To clearly illustrate this behavior, the following
+source code shows the difference between a ref closure and a move
+closure.
+
+```ymir
+import std::io
+
+def main () {
+	let mut z = 1;
+	
+	let m = move |x : i32| => x + z;
+	let r = ref  |x : i32| => x + z;
+	
+	z = 30;
+	println (m (12));
+	println (r (12));
+}
+```
+
+```
+13
+42
+```
+
+A ref closure is not safe to be returned, it enclose refence to local
+variable. For the moment **gyc** does not provide static verification
+to ensure that no ref closure is returned, or at least that the ref
+closure that is returned does not enclosed local variable whose
+lifetime will end with the end of the parent environment.
+
