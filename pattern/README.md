@@ -313,7 +313,7 @@ def main () {
 		Circle (center-> center : _) => center
 		_ => {
 			println ("That's not a circle, foo lied!");
-			0 // No need to have confidence is foo 
+			0 // No need to have confidence in foo 
 		}
 	};
 	println ("The center of the circle is : ", center);
