@@ -184,8 +184,8 @@ def main () {
 }
 ```
 
-You can of course with a variable pattern to refer to the values later
-in the pattern, for both the structure or even its fields. Reference
+You can of course with a variable pattern refer to the values later in
+the pattern, for both the structure or even its fields. Reference
 variable works the same as well.
 
 ```ymir
