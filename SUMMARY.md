@@ -23,7 +23,9 @@
   * [Example program](objects/example.md)
 * [Function advanced](functions/README.md)
 * [Pattern matching](pattern/README.md)
-* [Templates]()
+* [Templates](templates/README.md)
+  * [Specialization](templates/special.md)
+  * [Template as values](templates/values.md)
 * [Error handling]()
 * [Documentation]()
  

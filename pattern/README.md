@@ -136,7 +136,7 @@ Call syntax. When you want to destructure a tuple, you will just have
 to use parentheses that will surround any patterns, that are presented
 in this section.
 
-```
+```ymir
 import std::io
 
 def main () {

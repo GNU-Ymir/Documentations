@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Variable and Mutability · GitBook</title>
+        <title>Templates · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -61,10 +61,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="types.html" />
+    <link rel="next" href="special.html" />
     
     
-    <link rel="prev" href="./" />
+    <link rel="prev" href="../pattern/" />
     
 
     </head>
@@ -138,9 +138,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3" data-path="./">
+        <li class="chapter " data-level="1.3" data-path="../primitives/">
             
-                <a href="./">
+                <a href="../primitives/">
             
                     
                     Basic programming concepts
@@ -152,9 +152,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="1.3.1" data-path="variables.html">
+        <li class="chapter " data-level="1.3.1" data-path="../primitives/variables.html">
             
-                <a href="variables.html">
+                <a href="../primitives/variables.html">
             
                     
                     Variable and Mutability
@@ -165,9 +165,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.2" data-path="types.html">
+        <li class="chapter " data-level="1.3.2" data-path="../primitives/types.html">
             
-                <a href="types.html">
+                <a href="../primitives/types.html">
             
                     
                     Data types
@@ -178,9 +178,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.3" data-path="functions.html">
+        <li class="chapter " data-level="1.3.3" data-path="../primitives/functions.html">
             
-                <a href="functions.html">
+                <a href="../primitives/functions.html">
             
                     
                     Functions
@@ -191,9 +191,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.4" data-path="control.html">
+        <li class="chapter " data-level="1.3.4" data-path="../primitives/control.html">
             
-                <a href="control.html">
+                <a href="../primitives/control.html">
             
                     
                     Control flows
@@ -422,9 +422,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.10" data-path="../templates/">
+        <li class="chapter active" data-level="1.10" data-path="./">
             
-                <a href="../templates/">
+                <a href="./">
             
                     
                     Templates
@@ -436,9 +436,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.10.1" data-path="../templates/special.html">
+        <li class="chapter " data-level="1.10.1" data-path="special.html">
             
-                <a href="../templates/special.html">
+                <a href="special.html">
             
                     
                     Specialization
@@ -449,7 +449,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.10.2" data-path="../templates/values.md">
+        <li class="chapter " data-level="1.10.2" data-path="values.md">
             
                 <span>
             
@@ -523,7 +523,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Variable and Mutability</a>
+        <a href=".." >Templates</a>
     </h1>
 </div>
 
@@ -538,108 +538,118 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="variables-and-mutability">Variables and Mutability</h1>
-<p>The variable are declared with the keyword <strong><code>let</code></strong>, the type of the
-variable is inferred from the value associated to it. The type can be
-forced with the token <code>:</code>, but it must be compatible with the value. </p>
-<p>If a variable is declared immutable, once a value is bound to it, it
-cannot change. In addition a variable must have an initial value, and
-cannot be declared without it.</p>
-<p>To illustrate the variable declaration, you can try to run the following code. </p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>io
-
-<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>    
-    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;X is equal to : &quot;</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span> 
-
-    x <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span> 
-    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;X is equal to : &quot;</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                                <h1 id="templates">Templates</h1>
+<p>The templates system provide the possibility to reuse source code,
+that is valid for multiple types. The template system of <strong>Ymir</strong> is
+powerful, and allows you to generate code, that will be used
+many times for many purpose, by writting minimal source code. </p>
+<h2 id="template-argument-syntax">Template argument syntax</h2>
+<p>The template arguments are declared using the token <code>!</code>, followed by
+one are multiple arguments, enclosed inside parentheses. Template
+arguments are elements that must be known by the compiler at compile
+time, in order to produce the template specialization and symbol
+definition. </p>
+<pre class="language-"><code class="lang-ymir">foo<span class="token operator">!</span><span class="token function">i32</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// One template argument (i32)</span>
+<span class="token function">foo!</span><span class="token punctuation">(</span>i32<span class="token punctuation">,</span> f64<span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Two template arguments</span>
+</code></pre>
+<p>When the arguments, are also template, the parentheses are mandatory
+even if there is only one parameter, to avoid ambiguity.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token function">foo!</span><span class="token punctuation">(</span>foo<span class="token operator">!</span>i32<span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Ok</span>
+foo<span class="token operator">!</span>foo<span class="token operator">!</span><span class="token function">i32</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// No</span>
+</code></pre>
+<h2 id="template-definition-syntax">Template definition syntax</h2>
+<p>Multiple symbols in <strong>Ymir</strong> can be templates. Every template symbol
+has a name, and the template parameters are following that name. For
+example, function can be templates :</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>T<span class="token punctuation">)</span> <span class="token punctuation">(</span>a <span class="token punctuation">:</span> T<span class="token punctuation">)</span> <span class="token punctuation">{</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>You should get the following error from the compiler : </p>
-<pre class="language-"><code>Error : left operand of type i32 is immutable
- --&gt; main.yr:(7,5)
+<p>In the above example, we can see two set of parentheses, the first one
+define the template parameters, and the second one the parameters of
+the function <code>foo</code>. Structure, class, enum and internal modules, can
+also be templates.</p>
+<pre class="language-"><code class="lang-ymir">class <span class="token function">A</span> <span class="token punctuation">(</span>T<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> value <span class="token punctuation">:</span> T<span class="token punctuation">;</span>
+    <span class="token comment">// ...</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">struct</span> 
+<span class="token operator">|</span> x <span class="token punctuation">:</span> T
+<span class="token punctuation">-&gt;</span> <span class="token function">S</span> <span class="token punctuation">(</span>T<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">enum</span> 
+<span class="token operator">|</span> X <span class="token operator">=</span> cast<span class="token operator">!</span><span class="token function">T</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span>
+<span class="token punctuation">-&gt;</span> <span class="token function">F</span> <span class="token punctuation">(</span>T<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">mod</span> <span class="token function">Inner</span> <span class="token punctuation">(</span>T<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    pub <span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>a <span class="token punctuation">:</span> T<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// ...</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="template-instanciation">Template instanciation</h2>
+<p>When a template symbol is defined, and the syntax of template call is
+used, a specialization is performed. The symbol, that match the most
+the template arguments to the template parameter is chosen, and
+instanciated. </p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>io<span class="token punctuation">;</span>
+
+<span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>T<span class="token punctuation">)</span> <span class="token punctuation">(</span>a <span class="token punctuation">:</span> T<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">foo!</span><span class="token punctuation">(</span>i32<span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>When the template symbol is a function, it can happened that the
+template parameters can be infered from the parameters of the
+function. For example in the above example, there is no need to
+specify a template call, and you can write as follows :</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>io<span class="token punctuation">;</span>
+
+<span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>T<span class="token punctuation">)</span> <span class="token punctuation">(</span>a <span class="token punctuation">:</span> T<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// T, will be infered to i32</span>
+    <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token string">&quot;Hi !!&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// T, will be infered to [c32]</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>This cannot be done for class, structure or module. However, there is
+a work in progress to implement that behavior for structure and class.</p>
+<p>When a template call is made on a function that take only one
+argument, you can use the DotCall syntax and forget the parameter
+parentheses. This can be used to simplify the syntax that is obvious
+anyway.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>T<span class="token punctuation">,</span> X<span class="token punctuation">)</span> <span class="token punctuation">(</span>_ <span class="token punctuation">:</span> X<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">.</span>foo<span class="token operator">!</span>i32<span class="token punctuation">;</span> 
+    <span class="token comment">// It is exaclty the same as : </span>
+    <span class="token comment">// (12).foo!(i32) (); </span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>You can note that only one argument has been passed to the template
+function. The second one is optionnal, since it can be infered from
+the function parameter. If the function definition was <code>foo (X, T)
+(_ : X)</code>, the inference could no more be done, the template call is
+checked first, so X will be set to <code>i32</code>, and <code>T</code> could not be infered
+from anything, so you should get the following error :</p>
+<pre class="language-"><code>Error : call operator is not defined for type none and {i32}
+ --&gt; main.yr:(5,6)
     | 
- 7  |     x = 3;
-    |     ^
-
-ymir1: fatal error: 
-compilation terminated.
-</code></pre><p>In Ymir, the variable mutability and furthermore the type mutability
-guarantee by static verifications, that when you state that the value
-of a variable won&apos;t change it really won&apos;t change. Even if it can be a
-bit frustrating for the user sometimes.</p>
-<p>A variable is immutable by default, but sometime it can be useful to
-make it mutable. To do so, you can use the keyword <strong><code>mut</code></strong> and
-<strong><code>dmut</code></strong>.  Mutability is applicable on types, and not only on
-variables. The difference between these two keyword, is that
-<strong><code>dmut</code></strong> means the type of the variable is deeply mutable. The
-immutability of a type is transitive, but this transitivity and what
-it implies will be explained in details in another chapter, since it
-is an advanced knowledge of the language <strong>Ymir</strong>.</p>
-<p>If we take the same example as above, but with adding the keyword <code>mut</code> to the variable <code>x</code>.</p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>io
-
-<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> <span class="token keyword">mut</span> x <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>    
-    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;X is equal to : &quot;</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span> 
-
-    x <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span> 
-    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;X is equal to : &quot;</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-</code></pre>
-<p>This time, you will not get any error, and the following output should
-appear when you run the program.</p>
-<pre class="language-"><code>X is equal to : 2
-X is equal to : 3
-</code></pre><p>The mutability of variable can be very useful, but sometimes a bit
-hard to tackle when dealing with complex types. <strong>Ymir</strong> introduce
-<strong>aliases</strong> types, that are explained in details in the chapter
-<a href="https://gnu-ymir.github.io/Documentations/advanced/" target="_blank">Alias and References</a></p>
-<h2 id="global-variables">Global variables</h2>
-<p>Global variable are variables that are declared outside a function,
-they can be used for multiple reasons. Those kind of variable are
-declared using the keyword <code>static</code>. </p>
-<p>As for every variables, those one can be either mutable or not, but
-are immutable by default.</p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>io
-
-<span class="token keyword">static</span> pi <span class="token operator">=</span> <span class="token number">3.14159265359</span>
-
-<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Pi value is : &quot;</span><span class="token punctuation">,</span> pi<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-</code></pre>
-<h2 id="shadowing-and-scope">Shadowing and scope</h2>
-<p>All the variable that are not global, have a lifetime that is defined
-by their scope. A scope is a segment of code, that have a begin and an
-end, in which statement are made. More informations about scope will
-be given in the chapter about function bodies, in
-<a href="https://gnu-ymir.github.io/Documentations/primitives/functions.html" target="_blank">Functions</a>. </p>
-<p>Two variables with the same name cannot be declared in colliding
-scopes, that is to say, if a variable is declared with a name of a
-variable currently alive in the current scope, a shadowing error will
-be raised.</p>
-<p>To illustrate that, copy and run the following program. </p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>io
-
-<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">9</span><span class="token punctuation">;</span>
-
-    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">12</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-</code></pre>
-<p>You should get the following error, when compiling.</p>
-<pre class="language-"><code>Error : declaration of x shadow another declaration
- --&gt; main.yr:(6,9)
-    | 
- 6  |     let x = 12;
+ 5  |     (12).foo!i32; 
     |         ^
-Note : 
- --&gt; main.yr:(4,9)
-    | 
- 4  |     let x = 9;
-    |         ^
+    | Note : candidate foo --&gt; main.yr:(1,5) : none
+    | Error : unresolved template
+    |  --&gt; main.yr:(1,13)
+    |     | 
+    |  1  | def foo (X, T) (_ : X) {
+    |     |             ^
+    |------------------------------ 
 
 ymir1: fatal error: 
 compilation terminated.
@@ -670,12 +680,12 @@ compilation terminated.
 
             
                 
-                <a href="./" class="navigation navigation-prev " aria-label="Previous page: Basic programming concepts">
+                <a href="../pattern/" class="navigation navigation-prev " aria-label="Previous page: Pattern matching">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="types.html" class="navigation navigation-next " aria-label="Next page: Data types">
+                <a href="special.html" class="navigation navigation-next " aria-label="Next page: Specialization">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -686,7 +696,7 @@ compilation terminated.
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Variable and Mutability","level":"1.3.1","depth":2,"next":{"title":"Data types","level":"1.3.2","depth":2,"path":"primitives/types.md","ref":"primitives/types.md","articles":[]},"previous":{"title":"Basic programming concepts","level":"1.3","depth":1,"path":"primitives/README.md","ref":"primitives/README.md","articles":[{"title":"Variable and Mutability","level":"1.3.1","depth":2,"path":"primitives/variables.md","ref":"primitives/variables.md","articles":[]},{"title":"Data types","level":"1.3.2","depth":2,"path":"primitives/types.md","ref":"primitives/types.md","articles":[]},{"title":"Functions","level":"1.3.3","depth":2,"path":"primitives/functions.md","ref":"primitives/functions.md","articles":[]},{"title":"Control flows","level":"1.3.4","depth":2,"path":"primitives/control.md","ref":"primitives/control.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"primitives/variables.md","mtime":"2020-02-01T17:12:01.901Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-10T13:19:09.647Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Templates","level":"1.10","depth":1,"next":{"title":"Specialization","level":"1.10.1","depth":2,"path":"templates/special.md","ref":"templates/special.md","articles":[]},"previous":{"title":"Pattern matching","level":"1.9","depth":1,"path":"pattern/README.md","ref":"pattern/README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"templates/README.md","mtime":"2020-02-10T12:57:32.385Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-10T13:19:09.647Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

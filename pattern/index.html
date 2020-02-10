@@ -61,6 +61,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
+    <link rel="next" href="../templates/" />
+    
     
     <link rel="prev" href="../functions/" />
     
@@ -420,16 +422,48 @@
             
         </li>
     
-        <li class="chapter " data-level="1.10" >
+        <li class="chapter " data-level="1.10" data-path="../templates/">
             
-                <span>
+                <a href="../templates/">
             
                     
                     Templates
             
-                </span>
+                </a>
             
 
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="../templates/special.html">
+            
+                <a href="../templates/special.html">
+            
+                    
+                    Specialization
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.2" data-path="../templates/values.md">
+            
+                <span>
+            
+                    
+                    Template as values
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
             
         </li>
     
@@ -617,21 +651,22 @@ pattern inside parenthese, or for structure and classes by using a
 Call syntax. When you want to destructure a tuple, you will just have
 to use parentheses that will surround any patterns, that are presented
 in this section.</p>
-<pre class="language-"><code>import std::io
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>io
 
-def main () {
-    let tuple = (1, &apos;x&apos;, 3.14)
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> tuple <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">&apos;x&apos;</span><span class="token punctuation">,</span> <span class="token number">3.14</span><span class="token punctuation">)</span>
 
-    match tuple {
-        (_ : i32 = 1, _, _) =&gt; {
-            println (&quot;This tuple has an arity of three and its first element is an i32, whose value is 1&quot;);
-        } 
-        (x : _, y : _, z : _) =&gt; {
-            println (&quot;This tuple has an arity of three, and its values are : (&quot;, x, &quot;, &quot;, y, &quot;, &quot;, z, &quot;)&quot;);
-        }        
-    }
-}
-</code></pre><h3 id="destructuring-structure">Destructuring structure</h3>
+    <span class="token keyword">match</span> tuple <span class="token punctuation">{</span>
+        <span class="token punctuation">(</span>_ <span class="token punctuation">:</span> i32 <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> _<span class="token punctuation">,</span> _<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+            <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;This tuple has an arity of three and its first element is an i32, whose value is 1&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> 
+        <span class="token punctuation">(</span>x <span class="token punctuation">:</span> _<span class="token punctuation">,</span> y <span class="token punctuation">:</span> _<span class="token punctuation">,</span> z <span class="token punctuation">:</span> _<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+            <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;This tuple has an arity of three, and its values are : (&quot;</span><span class="token punctuation">,</span> x<span class="token punctuation">,</span> <span class="token string">&quot;, &quot;</span><span class="token punctuation">,</span> y<span class="token punctuation">,</span> <span class="token string">&quot;, &quot;</span><span class="token punctuation">,</span> z<span class="token punctuation">,</span> <span class="token string">&quot;)&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>        
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="destructuring-structure">Destructuring structure</h3>
 <p>The destructurating of a structure is made like a call of the
 structure. But you don&apos;t have to secify all the fields, but only those
 you want to check.</p>
@@ -808,10 +843,14 @@ class Circle <span class="token keyword">over</span> Shape <span class="token pu
 
             
                 
-                <a href="../functions/" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Function advanced">
+                <a href="../functions/" class="navigation navigation-prev " aria-label="Previous page: Function advanced">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
+                
+                <a href="../templates/" class="navigation navigation-next " aria-label="Next page: Templates">
+                    <i class="fa fa-angle-right"></i>
+                </a>
                 
             
         
@@ -820,7 +859,7 @@ class Circle <span class="token keyword">over</span> Shape <span class="token pu
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Pattern matching","level":"1.9","depth":1,"next":{"title":"Templates","level":"1.10","depth":1,"ref":"","articles":[]},"previous":{"title":"Function advanced","level":"1.8","depth":1,"path":"functions/README.md","ref":"functions/README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"pattern/README.md","mtime":"2020-02-01T17:15:11.270Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-01T17:15:34.850Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Pattern matching","level":"1.9","depth":1,"next":{"title":"Templates","level":"1.10","depth":1,"path":"templates/README.md","ref":"templates/README.md","articles":[{"title":"Specialization","level":"1.10.1","depth":2,"path":"templates/special.md","ref":"templates/special.md","articles":[]},{"title":"Template as values","level":"1.10.2","depth":2,"path":"templates/values.md","ref":"templates/values.md","articles":[]}]},"previous":{"title":"Function advanced","level":"1.8","depth":1,"path":"functions/README.md","ref":"functions/README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"pattern/README.md","mtime":"2020-02-10T12:01:04.437Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-10T13:19:09.647Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
