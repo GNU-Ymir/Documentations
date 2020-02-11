@@ -1,6 +1,6 @@
 # Templates 
 
-The templates system provide the possibility to reuse source code,
+The templates system provides the possibility to reuse source code,
 that is valid for multiple types. The template system of **Ymir** is
 powerful, and allows you to generate code, that will be used
 many times for many purpose, by writting minimal source code. 
@@ -8,7 +8,7 @@ many times for many purpose, by writting minimal source code.
 ## Template argument syntax
 
 The template arguments are declared using the token `!`, followed by
-one are multiple arguments, enclosed inside parentheses. Template
+one or multiple arguments, enclosed inside parentheses. Template
 arguments are elements that must be known by the compiler at compile
 time, in order to produce the template specialization and symbol
 definition. 
@@ -37,9 +37,9 @@ def foo (T) (a : T) {
 }
 ```
 
-In the above example, we can see two set of parentheses, the first one
-define the template parameters, and the second one the parameters of
-the function `foo`. Structure, class, enum and internal modules, can
+In the above example, we can see two sets of parentheses, the first one
+defines the template parameters, and the second one the parameters of
+the function `foo`. Structures, class, enum and internal modules, can
 also be templates.
 
 ```ymir
@@ -100,8 +100,8 @@ def main () {
 }
 ```
 
-This cannot be done for class, structure or module. However, there is
-a work in progress to implement that behavior for structure and class.
+This cannot be done for class, structures or modules. However, there is
+a work in progress to implement that behavior for structures and class.
 
 When a template call is made on a function that take only one
 argument, you can use the DotCall syntax and forget the parameter
