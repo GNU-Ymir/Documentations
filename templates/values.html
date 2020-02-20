@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Example program · GitBook</title>
+        <title>Template as values · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -61,10 +61,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../functions/" />
+    <link rel="next" href="operators.html" />
     
     
-    <link rel="prev" href="traits.html" />
+    <link rel="prev" href="cte.html" />
     
 
     </head>
@@ -325,9 +325,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7" data-path="./">
+        <li class="chapter " data-level="1.7" data-path="../objects/">
             
-                <a href="./">
+                <a href="../objects/">
             
                     
                     Objects
@@ -339,9 +339,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.7.1" data-path="class.html">
+        <li class="chapter " data-level="1.7.1" data-path="../objects/class.html">
             
-                <a href="class.html">
+                <a href="../objects/class.html">
             
                     
                     Class
@@ -352,9 +352,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7.2" data-path="inheritance.html">
+        <li class="chapter " data-level="1.7.2" data-path="../objects/inheritance.html">
             
-                <a href="inheritance.html">
+                <a href="../objects/inheritance.html">
             
                     
                     Inheritance
@@ -365,9 +365,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7.3" data-path="traits.html">
+        <li class="chapter " data-level="1.7.3" data-path="../objects/traits.html">
             
-                <a href="traits.html">
+                <a href="../objects/traits.html">
             
                     
                     Traits
@@ -378,9 +378,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.7.4" data-path="example.html">
+        <li class="chapter " data-level="1.7.4" data-path="../objects/example.html">
             
-                <a href="example.html">
+                <a href="../objects/example.html">
             
                     
                     Example program
@@ -422,9 +422,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.10" data-path="../templates/">
+        <li class="chapter " data-level="1.10" data-path="./">
             
-                <a href="../templates/">
+                <a href="./">
             
                     
                     Templates
@@ -436,9 +436,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.10.1" data-path="../templates/special.html">
+        <li class="chapter " data-level="1.10.1" data-path="special.html">
             
-                <a href="../templates/special.html">
+                <a href="special.html">
             
                     
                     Specialization
@@ -449,9 +449,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.10.2" data-path="../templates/cte.html">
+        <li class="chapter " data-level="1.10.2" data-path="cte.html">
             
-                <a href="../templates/cte.html">
+                <a href="cte.html">
             
                     
                     Compile time execution
@@ -462,9 +462,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.10.3" data-path="../templates/values.html">
+        <li class="chapter active" data-level="1.10.3" data-path="values.html">
             
-                <a href="../templates/values.html">
+                <a href="values.html">
             
                     
                     Template as values
@@ -480,9 +480,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.11" data-path="../templates/operators.html">
+        <li class="chapter " data-level="1.11" data-path="operators.html">
             
-                <a href="../templates/operators.html">
+                <a href="operators.html">
             
                     
                     Operator overloading
@@ -549,7 +549,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Example program</a>
+        <a href=".." >Template as values</a>
     </h1>
 </div>
 
@@ -564,78 +564,52 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="example-program">Example program</h1>
-<p>This chapter presents an example of a program that implements a linked
-list using the class system. You will see that even if you can&apos;t set
-an object instance to <code>null</code>, you can still implement the behavior,
-without risk of the program crashing.</p>
-<p>First of all, we have to define an element of the list, this element
-can have a value, or be the end of the list.</p>
-<pre class="language-"><code class="lang-ymir">class <span class="token operator">@</span>abstract Node <span class="token punctuation">{</span>
-    <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+                                <h1 id="template-values">Template values</h1>
+<p>In the previous chapter, we saw that some values can be known at the
+time of compilation. These values can be used for the compiler to
+decide which part of the code should be compiled and which part should
+not.</p>
+<p>It can also be used to compute complexe values, that won&apos;t change
+during the program.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>io
 
-    <span class="token keyword">def</span> <span class="token function">append</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">,</span> i <span class="token punctuation">:</span> i32<span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> Node<span class="token punctuation">;</span>
+<span class="token keyword">def</span> <span class="token function">fibo</span> <span class="token punctuation">(</span>N <span class="token punctuation">:</span> i32<span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> i32 <span class="token punctuation">{</span>
+    cte <span class="token keyword">if</span> <span class="token punctuation">(</span>N <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token number">0</span>
+    <span class="token keyword">else</span> cte <span class="token keyword">if</span> <span class="token punctuation">(</span>N <span class="token operator">&lt;=</span> <span class="token number">2</span><span class="token punctuation">)</span>
+        <span class="token number">1</span>
+    <span class="token keyword">else</span> 
+        <span class="token function">fibo!</span><span class="token punctuation">(</span>N <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token function">fibo!</span><span class="token punctuation">(</span>N <span class="token operator">-</span> <span class="token number">2</span><span class="token punctuation">)</span>    
+<span class="token punctuation">}</span>
 
-    impl Printable<span class="token punctuation">;</span>
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token function">cte</span> <span class="token punctuation">(</span><span class="token function">fibo!</span><span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+    <span class="token function">println</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// will be rewritten into :</span>
+    <span class="token comment">// println (144) </span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>This class is the ancestor of all things that can be found in a linked
-list.  The append method, while creating a copy of the list, returns a
-new list with element i appended at the end of the list. There are two
-types of nodes, a value or the end of the list. Let&apos;s start with the
-simplest, the end of the list :</p>
-<pre class="language-"><code class="lang-ymir">class None <span class="token keyword">over</span> Node <span class="token punctuation">{</span>
-    <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<p><strong>Exercise :</strong> Try to remove the <code>cte</code> keywords in the example above.</p>
+<p>The compilation time execution is really efficient, for example the following
+code will compile without any problem.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>io
 
-    <span class="token keyword">over</span> <span class="token function">append</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">,</span> i <span class="token punctuation">:</span> i32<span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> Node <span class="token punctuation">{</span>
-        <span class="token comment">// We are at the end of the list</span>
-        <span class="token comment">// we just have to return a node that contains the value</span>
-
-        <span class="token macro-rules function">Some:</span><span class="token punctuation">:</span><span class="token function">new</span> <span class="token punctuation">(</span>i<span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">fibo</span> <span class="token punctuation">(</span>N <span class="token punctuation">:</span> u64<span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> u64 <span class="token punctuation">{</span>
+    cte <span class="token keyword">if</span> <span class="token punctuation">(</span>N <span class="token operator">==</span> <span class="token number">0u64</span><span class="token punctuation">)</span>
+        <span class="token number">0u64</span>
+    <span class="token keyword">else</span> cte <span class="token keyword">if</span> <span class="token punctuation">(</span>N <span class="token operator">&lt;=</span> <span class="token number">2u64</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token number">1u64</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token function">fibo!</span><span class="token punctuation">(</span>N <span class="token operator">-</span> <span class="token number">1u64</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token function">fibo!</span><span class="token punctuation">(</span>N <span class="token operator">-</span> <span class="token number">2u64</span><span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
-    <span class="token keyword">over</span> <span class="token function">print</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token function">print</span> <span class="token punctuation">(</span><span class="token string">&quot;END&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>    
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token function">cte</span> <span class="token punctuation">(</span><span class="token function">fibo!</span><span class="token punctuation">(</span>fibo<span class="token operator">!</span><span class="token number">12u64</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+    <span class="token function">println</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>And the class Some, which contains a value: </p>
-<pre class="language-"><code class="lang-ymir">class Some <span class="token keyword">over</span> Node <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> _value <span class="token punctuation">:</span> i32<span class="token punctuation">;</span>
-    <span class="token keyword">let</span> _next <span class="token punctuation">:</span> Node<span class="token punctuation">;</span>
 
-    <span class="token comment">/**
-     * This constructor is used when this node is the last value of the list
-     * It is followed by a None value
-    */</span>
-    <span class="token keyword">self</span> <span class="token punctuation">(</span>v <span class="token punctuation">:</span> i32<span class="token punctuation">)</span> with _value <span class="token operator">=</span> v<span class="token punctuation">,</span> _next <span class="token operator">=</span> <span class="token macro-rules function">None:</span><span class="token punctuation">:</span><span class="token function">new</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
-
-    <span class="token keyword">self</span> <span class="token punctuation">(</span>v <span class="token punctuation">:</span> i32<span class="token punctuation">,</span> x <span class="token punctuation">:</span> Node<span class="token punctuation">)</span> with _value <span class="token operator">=</span> v<span class="token punctuation">,</span> _next <span class="token operator">=</span> x <span class="token punctuation">{</span><span class="token punctuation">}</span>
-
-
-    <span class="token keyword">over</span> <span class="token function">append</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">,</span> i <span class="token punctuation">:</span> i32<span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> Node <span class="token punctuation">{</span>
-        <span class="token macro-rules function">Some:</span><span class="token punctuation">:</span><span class="token function">new</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">.</span>_value<span class="token punctuation">,</span> <span class="token keyword">self</span><span class="token punctuation">.</span>_next<span class="token punctuation">.</span><span class="token function">append</span> <span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>        
-
-    <span class="token keyword">over</span> <span class="token function">print</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token function">print</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">.</span>_value<span class="token punctuation">,</span> <span class="token string">&quot;::&quot;</span><span class="token punctuation">,</span> <span class="token keyword">self</span><span class="token punctuation">.</span>_next<span class="token punctuation">)</span><span class="token punctuation">;</span>        
-    <span class="token punctuation">}</span>    
-<span class="token punctuation">}</span>
-</code></pre>
-<p>There we are, the list is now usable:</p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> x <span class="token punctuation">:</span> Node <span class="token operator">=</span> <span class="token macro-rules function">None:</span><span class="token punctuation">:</span><span class="token function">new</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">let</span> y <span class="token operator">=</span> x<span class="token punctuation">.</span><span class="token function">append</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span> <span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span> <span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span> <span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">println</span> <span class="token punctuation">(</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-</code></pre>
-<p>You should get the following output.</p>
-<pre class="language-"><code>12::8::3::9::END
-</code></pre><p><strong>Exercise:</strong> Without changing the main function, generate the
-  following result. In other words, change the append function, to
-  make sorted insertions.</p>
-<pre class="language-"><code>3::8::9::12::END
-</code></pre>
                                 
                                 </section>
                             
@@ -662,12 +636,12 @@ simplest, the end of the list :</p>
 
             
                 
-                <a href="traits.html" class="navigation navigation-prev " aria-label="Previous page: Traits">
+                <a href="cte.html" class="navigation navigation-prev " aria-label="Previous page: Compile time execution">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="../functions/" class="navigation navigation-next " aria-label="Next page: Function advanced">
+                <a href="operators.html" class="navigation navigation-next " aria-label="Next page: Operator overloading">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -678,7 +652,7 @@ simplest, the end of the list :</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Example program","level":"1.7.4","depth":2,"next":{"title":"Function advanced","level":"1.8","depth":1,"path":"functions/README.md","ref":"functions/README.md","articles":[]},"previous":{"title":"Traits","level":"1.7.3","depth":2,"path":"objects/traits.md","ref":"objects/traits.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"objects/example.md","mtime":"2020-02-10T13:26:12.123Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-20T20:00:44.190Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Template as values","level":"1.10.3","depth":2,"next":{"title":"Operator overloading","level":"1.11","depth":1,"path":"templates/operators.md","ref":"templates/operators.md","articles":[]},"previous":{"title":"Compile time execution","level":"1.10.2","depth":2,"path":"templates/cte.md","ref":"templates/cte.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"templates/values.md","mtime":"2020-02-20T13:52:34.374Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-20T20:00:44.190Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

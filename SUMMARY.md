@@ -25,7 +25,9 @@
 * [Pattern matching](pattern/README.md)
 * [Templates](templates/README.md)
   * [Specialization](templates/special.md)
+  * [Compile time execution](templates/cte.md)
   * [Template as values](templates/values.md)
+* [Operator overloading](templates/operators.md)
 * [Error handling]()
 * [Documentation]()
  

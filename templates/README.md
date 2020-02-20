@@ -143,3 +143,48 @@ Error : call operator is not defined for type none and {i32}
 ymir1: fatal error: 
 compilation terminated.
 ```
+
+### Template class instanciation
+
+When a class template is declared, the compiler is sometimes able to
+infer the type of the templates from the argument passed to the
+constructors. The rule is the same as for function
+instanciation. 
+
+```ymir
+import std::io;
+
+class X (T, U) {
+	let x : T, y : U;
+
+	pub self (x : T, y : U) with x = x, y = y {}	
+}
+
+def main () {
+	let a = X::new (1, 'r');
+	let b = X::new ([1, 2], "foo");
+	
+	println (a::typeinfo.name);
+	println (b::typeinfo.name);
+}
+```
+
+Like functions you can make a two times validation of the templates of
+a class. You don't have to give all the template parameters when
+invoking a template call, but all the templates must be validated at
+the end.
+
+```ymir
+import std::io;
+
+class X (T, U) {
+	let y : U;
+
+	pub self (y : U) with y = y {}	
+}
+
+def main () {
+	let x = X!(i32)::new ('r');
+	println (x::typeinfo.name);
+}
+```

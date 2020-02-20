@@ -116,7 +116,7 @@ def foo (T impl Getter!X, X) (a : T) -> X {
 
 def main () {
     let a = A::new ();
-    println (foo (a));    
+    println (foo (a));
 }
 ```
 
@@ -158,12 +158,3 @@ def main () {
 	println (x.foo (12, 30));
 }
 ```
-
-## Conclusion 
-
-Templates in **Ymir** are very powerful and can offer a multitude of
-possibilities. They are very useful, and most part of the standard
-librarie is written exclusively with templates. They should be used
-whenever possible, to provide reusable code, which can be shared
-between several types, to do code factorization and avoid error
-propagation.
