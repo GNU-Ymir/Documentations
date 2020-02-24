@@ -28,6 +28,7 @@
   * [Compile time execution](templates/cte.md)
   * [Template as values](templates/values.md)
 * [Operator overloading](templates/operators.md)
-* [Error handling]()
+* [Error handling](errors/main.md)
+  * [Scope guards](errors/scope.md)
 * [Documentation]()
  

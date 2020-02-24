@@ -123,7 +123,7 @@ def main () {
 You should get the following error, when compiling.
 
 ```
-Error : declaration of x shadow another declaration
+Error : declaration of x shadows another declaration
  --> main.yr:(6,9)
     | 
  6  |     let x = 12;
