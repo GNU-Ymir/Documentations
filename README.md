@@ -13,6 +13,13 @@ a collection of examples that demonstrates the assets of this new
 language. This travel, will presents some part of the standard library
 as well.
 
+# Important
+
+Before we start the explanations of the language, please keep in mind
+that it is under development and that sometimes things might just
+**not work as expected**. If you encounter errors that you can't
+understand, or that appears false to you, please concact us at <gnu.ymir@mail.com>. We would be happy to receive mail from you !
+
 ## Installation
 
 The reference compiler of **Ymir** is based on the compiler **GCC**,
@@ -110,10 +117,3 @@ Copyright (C) 2018 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 ```
-
-# Important
-
-Before we start the explanations of the language, please keep in mind
-that it is under development and that sometimes things might just
-**not work as expected**. If you encounter errors that you can't
-understand, or that appears false to you, please concact us at <gnu.ymir@mail.com>. We would be happy to receive mail from you !
