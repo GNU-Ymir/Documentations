@@ -17,7 +17,7 @@ as well.
 
 Before we start the explanations of the language, please keep in mind
 that it is under development and that sometimes things might just
-**not work as expected**. If you encounter errors that you can't
+**don't work as expected**. If you encounter errors that you can't
 understand, or that appears false to you, please concact us at <gnu.ymir@mail.com>. We would be happy to receive mail from you !
 
 ## Installation
