@@ -26,7 +26,7 @@ The reference compiler of **Ymir** is based on the compiler **GCC**,
 which offer strong static optimization, as well as a vast set of
 supported target architectures.
 
-There are two ways to install the **gyc** (Gnu Ymir Compiler), natively. Or by using a docker.
+There are two ways to install the **gyc** (Gnu Ymir Compiler), natively. Or by using a docker container.
 
 ### Native installation 
 
