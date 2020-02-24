@@ -3,10 +3,12 @@
 **Ymir** offers different types of comments. 
 
 * > `// A line of comment that stop at the end of the line`
-* > `/* Multiple ling comments that go the closing delimiter */`
+* > `/* Multiple line comments that go the closing delimiter */`
 
 ```ymir
-def main () {
+def main () 
+	throws AssertError
+{
     // This is an example of comment
 
     /* 
@@ -16,12 +18,16 @@ def main () {
 
     /*
 	And this is the proof
-    */  
+    */
 
     // None of the line will influence the compilation
 
     let x = 1 + /* 2 + */  3;
-    assert (x == 4); // assert force the program to end if the test if false
+    assert (x == 4); 
 }
 ```
+
+In the above pogram, calling `assert` will force the program to stop
+if the test is false. Errors are presented in the [Error Handling]()
+chapter.
 

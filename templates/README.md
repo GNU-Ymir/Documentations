@@ -39,8 +39,8 @@ def foo (T) (a : T) {
 
 In the above example, we can see two set of parentheses, the first one
 define the template parameters, and the second one the parameters of
-the function `foo`. Structure, class, enum and internal modules, can
-also be templates.
+the function `foo`. Structure, class, enum, traits and internal
+modules, can also be templates.
 
 ```ymir
 class A (T) {
@@ -60,6 +60,10 @@ mod Inner (T) {
 	pub def foo (a : T) {
 		// ...
 	}
+}
+
+trait Z (T) {
+	pub def foo (self, a : T)-> T;
 }
 ```
 
@@ -100,8 +104,9 @@ def main () {
 }
 ```
 
-This cannot be done for class, structure or module. However, there is
-a work in progress to implement that behavior for structure and class.
+This cannot be done for structure or module. However, this is possible
+to do on classes, and this will be presented a little later, in the
+following section of the document.
 
 When a template call is made on a function that take only one
 argument, you can use the DotCall syntax and forget the parameter
@@ -127,12 +132,12 @@ checked first, so X will be set to `i32`, and `T` could not be infered
 from anything, so you should get the following error :
 
 ```
-Error : call operator is not defined for type none and {i32}
- --> main.yr:(5,6)
+Error : call operator is not defined for type foo (T)(_ : X)-> void and {i32}
+ --> main.yr:(5,9)
     | 
- 5  | 	(12).foo!i32; 
-    | 	    ^
-    | Note : candidate foo --> main.yr:(1,5) : none
+ 5  |     (12).foo!i32; 
+    |         ^
+    | Note : candidate foo --> main.yr:(1,5) : foo (T)(_ : X)-> void
     | Error : unresolved template
     |  --> main.yr:(1,13)
     |     | 

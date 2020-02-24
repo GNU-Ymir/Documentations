@@ -15,10 +15,11 @@ as well.
 
 # Important
 
-Before we start the explanations of the language, please keep in mind
-that it is under development and that sometimes things might just
-**don't work as expected**. If you encounter errors that you can't
-understand, or that appears false to you, please concact us at <gnu.ymir@mail.com>. We would be happy to receive mail from you !
+Before we start explanations of the language, please keep in mind that
+it is still being developed and that sometimes things may not work as
+planned. If you come across errors that you cannot understand or that
+you think are wrong, please contact us at <gnu.ymir@mail.com>. We look
+forward to receiving mail from you!
 
 ## Installation
 
@@ -26,7 +27,11 @@ The reference compiler of **Ymir** is based on the compiler **GCC**,
 which offer strong static optimization, as well as a vast set of
 supported target architectures.
 
-There are two ways to install the **gyc** (Gnu Ymir Compiler), natively. Or by using a docker container.
+The **Ymir** reference compiler is based on the **GCC** compiler,
+which offers strong static optimization, as well as a large set of
+supported target architectures.
+
+There are two ways to install the **gyc** (Gnu Ymir Compiler), natively or by using a docker container.
 
 ### Native installation 
 
@@ -55,7 +60,7 @@ These packages depend on :
 - zlib1g >= 1:1.2.0
 - libgc-dev >= 1:7.4.2
 
-If one of them is not installed, you will get an error, that can be resolved by launching the command : 
+If one of them is not installed, you will get an error, that can be resolved by running the following command : 
 ```bash
 sudo apt --fix-broken install
 ```
@@ -80,7 +85,7 @@ $ dpkg -r gyc-8
 $ dpkg -r libgmidgard-8-dev
 ```
 **Caution** The uninstallation can remove your gcc installation.
-But you can still reinstall it easily if there is problem, by typing : 
+But you can still reinstall it easily if there is any problem, by typing : 
 ```ymir
 sudo apt install --reinstall gcc-8 
 ```
@@ -106,9 +111,13 @@ This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.```
 
 To make it easier to use, you can add an alias in the `~/.local/bin` directory.
+First open the file `~/.local/bin/gyc-8` and paste the following line :
+```bash
+docker run -t -v $(pwd):/tmp -w /tmp gnuymir/8.2.0 $*
+```
+Then open a new shell, and run the following commands :
 
 ```bash
-$ echo "docker run -t -v $(pwd):/tmp -w /tmp gnuymir/8.2.0 $*" > ~/.local/bin/gyc-8
 $ chmod +x ~/.local/bin/gyc-8
 $ gyc-8 --version
 

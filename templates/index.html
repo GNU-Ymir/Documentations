@@ -611,8 +611,8 @@ example, function can be templates :</p>
 </code></pre>
 <p>In the above example, we can see two set of parentheses, the first one
 define the template parameters, and the second one the parameters of
-the function <code>foo</code>. Structure, class, enum and internal modules, can
-also be templates.</p>
+the function <code>foo</code>. Structure, class, enum, traits and internal
+modules, can also be templates.</p>
 <pre class="language-"><code class="lang-ymir">class <span class="token function">A</span> <span class="token punctuation">(</span>T<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">let</span> value <span class="token punctuation">:</span> T<span class="token punctuation">;</span>
     <span class="token comment">// ...</span>
@@ -630,6 +630,10 @@ also be templates.</p>
     pub <span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>a <span class="token punctuation">:</span> T<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token comment">// ...</span>
     <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+trait <span class="token function">Z</span> <span class="token punctuation">(</span>T<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    pub <span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">,</span> a <span class="token punctuation">:</span> T<span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> T<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
 <h2 id="template-instanciation">Template instanciation</h2>
@@ -662,8 +666,9 @@ specify a template call, and you can write as follows :</p>
     <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token string">&quot;Hi !!&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// T, will be infered to [c32]</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>This cannot be done for class, structure or module. However, there is
-a work in progress to implement that behavior for structure and class.</p>
+<p>This cannot be done for structure or module. However, this is possible
+to do on classes, and this will be presented a little later, in the
+following section of the document.</p>
 <p>When a template call is made on a function that take only one
 argument, you can use the DotCall syntax and forget the parameter
 parentheses. This can be used to simplify the syntax that is obvious
@@ -683,12 +688,12 @@ the function parameter. If the function definition was <code>foo (X, T)
 (_ : X)</code>, the inference could no more be done, the template call is
 checked first, so X will be set to <code>i32</code>, and <code>T</code> could not be infered
 from anything, so you should get the following error :</p>
-<pre class="language-"><code>Error : call operator is not defined for type none and {i32}
- --&gt; main.yr:(5,6)
+<pre class="language-"><code>Error : call operator is not defined for type foo (T)(_ : X)-&gt; void and {i32}
+ --&gt; main.yr:(5,9)
     | 
  5  |     (12).foo!i32; 
     |         ^
-    | Note : candidate foo --&gt; main.yr:(1,5) : none
+    | Note : candidate foo --&gt; main.yr:(1,5) : foo (T)(_ : X)-&gt; void
     | Error : unresolved template
     |  --&gt; main.yr:(1,13)
     |     | 
@@ -779,7 +784,7 @@ class <span class="token function">X</span> <span class="token punctuation">(</s
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Templates","level":"1.10","depth":1,"next":{"title":"Specialization","level":"1.10.1","depth":2,"path":"templates/special.md","ref":"templates/special.md","articles":[]},"previous":{"title":"Pattern matching","level":"1.9","depth":1,"path":"pattern/README.md","ref":"pattern/README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"templates/README.md","mtime":"2020-02-24T19:08:03.580Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-24T19:08:28.145Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Templates","level":"1.10","depth":1,"next":{"title":"Specialization","level":"1.10.1","depth":2,"path":"templates/special.md","ref":"templates/special.md","articles":[]},"previous":{"title":"Pattern matching","level":"1.9","depth":1,"path":"pattern/README.md","ref":"pattern/README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"templates/README.md","mtime":"2020-02-24T20:27:30.473Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-24T21:37:19.367Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

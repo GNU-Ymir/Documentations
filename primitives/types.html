@@ -584,28 +584,29 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="primitives-types">Primitives types</h1>
-<p>In <strong>Ymir</strong> language every value has a certain data type, which tells
-the behavior of the program, and how to operate with the
-value. <strong>Ymir</strong> is statically typed language, which means that all the
-type of all values must be known at compile time. Usually the compiler
-is able to infer the data types of the values, and there is no need to
-specify them when declaring a variable. But sometimes, when dealing
-with variable mutability, or class inheritance, for example, the
-inference could be wrong, and the behavior not adapted to what you
-could want to do.</p>
-<p>Therefore, the type can be added when declaring a variable, as in the
+<p>In <strong>Ymir</strong> language, each value has a certain type of data, which
+indicates how the program must behave and how it should operate with
+the value. <strong>Ymir</strong> is a statically typed language, which means that
+all types of all values must be known at compile time. Usually, the
+compiler is able to deduce the data types from the values, and it is
+not necessary to specify them when declaring a variable. But
+sometimes, when it comes to the mutability of a variable or the
+inheritance of a class, for example, the inference can be wrong and
+the behavior not adapted to what you might want to do.</p>
+<p>Therefore, the type may be added when declaring a variable, as in the
 following code.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">let</span> <span class="token keyword">mut</span> x <span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token keyword">mut</span> i32<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 <span class="token keyword">let</span> <span class="token keyword">mut</span> y <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 </code></pre>
-<p>To understand the difference, between the type of <strong><code>x</code></strong>, and the
-type of <strong><code>y</code></strong>, I invite you to read the chapter
-<a href="">Alias and References</a>.</p>
-<p>Each integer type has type attributs, which are accessible using the
-operator <code>::</code>, on a type.</p>
+<p>To understand the difference between the type of <strong><code>x</code></strong> and the type
+of <strong><code>y</code></strong>, we invite you to read the chapter
+<a href="">Aliases and References</a>.</p>
+<p>Each type has type attributes, which can be accessed by using the <code>::</code>
+operator on a type.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token macro-rules function">i32:</span><span class="token punctuation">:</span>init<span class="token punctuation">;</span>  <span class="token comment">// i32 (0)</span>
 </code></pre>
-<p>Every primitive types have common attributes that are listed in the table bellow : </p>
+<p>All primitive types have common attributes that are listed in the
+table below:</p>
 <table>
 <thead>
 <tr>
@@ -625,17 +626,16 @@ operator <code>::</code>, on a type.</p>
 </tbody>
 </table>
 <h2 id="scalar-types">Scalar types</h2>
-<p>Scalar types represents all the types containing a single
-value. <strong>Ymir</strong> has four primitive scalar types : integers, floating
-point, characters, and boolean. They can have different size for
-different purposes.</p>
+<p>Scalar types represent all types containing a single value. <strong>Ymir</strong>
+has four primitive scalar types: integers, floating point, characters,
+and booleans. They can have different sizes for different purposes.</p>
 <h3 id="integer-types">Integer types</h3>
-<p>An integer is a number whithout decimal part. There are differents
-integer types in <strong>Ymir</strong>, the signed one, and the unsigned
-one. Signed and unsigned refers to the possibilty of a number to be
-negative. The signed integer types begins with the letter <strong><code>i</code></strong>,
-when the unsigned ones begin with the letter <strong><code>u</code></strong>. The following
-table lists all the different integer types, and sort them by memory
+<p>An integer is a number without decimal points. There are different
+types of integers in <strong>Ymir</strong>, the signed one and the unsigned
+one. Signed and unsigned refers to the possibility for a number to be
+negative. Signed integer types begin with the letter <strong><code>i</code></strong>, while
+unsigned integers begin with the letter <strong><code>u</code></strong>. The following table
+lists all the different types of integers, and sorts them by memory
 size.</p>
 <table>
 <thead>
@@ -673,23 +673,22 @@ size.</p>
 </tr>
 </tbody>
 </table>
-<p>The type <code>usize</code> and <code>isize</code> are types that are architecture
-dependent, and have the size of a pointer.</p>
-<p>Each signed integer types, can store values from <em>-(2 <sup>n - 1</sup>)</em> to
-<em>2 <sup>n - 1</sup> - 1</em>, where <em>n</em> is the size of the integer in
-memory. Unsigned types, in the other hand, can store number going from
-<em>0</em> to <em>2 <sup>n</sup> - 1</em>. For example, the type <strong><code>i8</code></strong>, can store values
-from <em>-128</em> to <em>127</em>, and the type <strong><code>u8</code></strong> values from <em>0</em> to <em>255</em>.</p>
-<p>You can write literal for integer in two forms, decimal <code>9_234</code> and
-hexadecimal <code>0x897A</code>. The token <code>_</code>, is simply ignored in a integer
-literal.</p>
-<p>To ensure that the literal has the type you want, you will need to add
-the type as a prefix of the literal. For example, to get a <strong><code>i8</code></strong> with
-the value <em>7</em>, you will have to write <code>7i8</code>. By default, if no
-prefix is added at the end of the literal, its type is considered to
-be a <strong><code>i32</code></strong>.</p>
-<p>As said above, each type has attributs, the following table lists the
-attributs specific to integer :</p>
+<p>The <code>usize</code> and <code>isize</code> types are architecture dependent, and have the
+size of a pointer.</p>
+<p>Each type of signed integer can store values ranging from <em>-(2
+<sup>n - 1</sup>)</em> to <em>2 <sup>n - 1</sup> - 1</em>, where <em>n</em> is the size
+of the integer in memory. Unsigned types, on the other hand, can store
+numbers ranging from <em>0</em> to <em>2 <sup>n</sup> - 1</em>. For example, type
+<strong><code>i8</code></strong>, can store values from <em>-128</em> to <em>127</em>, and type <strong><code>u8</code></strong> can
+store values from <em>0</em> to <em>255</em>.</p>
+<p>You can write an integer in two forms, decimal <code>9_234</code> and hexadecimal
+<code>0x897A</code>. The <code>_</code> token, is simply ignored in a literal integer.</p>
+<p>To make sure the literal has the type you want, you will need to add
+the type as a prefix to the literal. For example, to get a <strong><code>i8</code></strong>
+with the value <em>7</em>, you would write <code>7i8</code>. By default, if no prefix is
+added at the end of the literal, its type is considered a <strong><code>i32</code></strong>.</p>
+<p>As indicated above, each type has attributes, the following table
+lists the integer-specific attributes:</p>
 <table>
 <thead>
 <tr>
@@ -708,9 +707,9 @@ attributs specific to integer :</p>
 </tr>
 </tbody>
 </table>
-<p>A capacity overflow verification is made on the literals, and an error
-is returned by the compiler if the type of integer you have chosen is
-not large enough to contain the value. For example : </p>
+<p>An overflow check is performed on literals, and an error is returned
+by the compiler if the type of integer you chose is not large enough
+to contain the value. For example:</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">let</span> x <span class="token punctuation">:</span> i8 <span class="token operator">=</span> <span class="token number">934i8</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
@@ -724,15 +723,15 @@ not large enough to contain the value. For example : </p>
 
 ymir1: fatal error: 
 compilation terminated.
-</code></pre><p>However, if the value cannot be known at the compile time the overflow
-is not checked and can results in strange behaviour. For example, if
-you try to add 1 to a variable of type <strong><code>i16</code></strong> that contains the
-value <code>32767</code>, the result will be <code>-32768</code>.</p>
+</code></pre><p>However, if the value cannot be known at compile time, the overflow is
+not checked and can lead to strange behavior. For example, if you try
+to add 1 to a variable of type <strong><code>i16</code></strong> that contains the value
+<code>32767</code>, the result will be <code>-32768</code>.</p>
 <h3 id="floating-point-types">Floating-point types</h3>
-<p>The floating point types, refers to the number having a decimal
-part. <strong>Ymir</strong> offers two floating point types, <strong><code>f32</code></strong> and <strong><code>f64</code></strong>, that
-have a respective size of <code>32</code> bits and <code>64</code> bits.</p>
-<p>You can add the prefix <strong><code>f</code></strong>, at the end of a floating point literal
+<p>Floating-point types, refer to the number having a decimal
+part. <strong>Ymir</strong> provides two types of floating point numbers, <strong><code>f32</code></strong>
+and <strong><code>f64</code></strong>, which have a size of 32 bits and 64 bits respectively.</p>
+<p>You can add the prefix <strong><code>f</code></strong>, at the end of a literal floating point
 to specify that you want a <strong><code>f32</code></strong>, instead of a <strong><code>f64</code></strong> as it is
 by default.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -740,7 +739,8 @@ by default.</p>
     <span class="token keyword">let</span> y <span class="token punctuation">:</span> f32 <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">.</span>0f<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>The following table list the attributes specific to floating point types.</p>
+<p>The following table lists the attributes specific to floating point
+types.</p>
 <table>
 <thead>
 <tr>
@@ -800,36 +800,37 @@ by default.</p>
 </tbody>
 </table>
 <h3 id="boolean-type">Boolean type</h3>
-<p>A Boolean is a very simple type that can take two values, either <code>true</code> or <code>false</code>.
-For example : </p>
+<p>A boolean is a very simple type that can take two values, either <code>true</code> or <code>false</code>.  For example:</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">let</span> b <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">;</span>
     <span class="token keyword">let</span> f <span class="token punctuation">:</span> bool <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
 <h3 id="character-type">Character type</h3>
-<p>The <strong><code>c8</code></strong> and <strong><code>c32</code></strong> are the types used to encode characters.
-As for integer literal, the prefix used to specify the type of a
-character literal is <strong><code>c8</code></strong>, if nothing is specified the character
-type will be <strong><code>c32</code></strong>. </p>
-<p><strong><code>c32</code></strong> character has a size of four bytes and can store any unicode
-value.  Character literals can have two forms, and are always surronded
-by the token <strong><code>&apos;</code></strong>. The first form is the character itself <strong><code>r</code></strong>, and the
-second the unicode value in integer form <code>\u{12}</code> or <code>\u{0xB}</code>.</p>
+<p>The <strong><code>c8</code></strong> and <strong><code>c32</code></strong> are the types used to encode the
+characters.  As with literal integers, it is necessary to add a prefix
+to define the type of a literal. The prefix used to specify the type
+of a literal character is <strong><code>c8</code></strong>, if nothing is specified, the
+character type will be <strong><code>c32</code></strong>.</p>
+<p>The <strong><code>c32</code></strong> character has a size of four bytes and can store any
+unicode value.  Literal characters can have two forms, and are always
+surrounded by the <strong><code>&apos;</code></strong> token. The first form is the character
+itself <strong><code>r</code></strong>, and the second is the unicode value in the integer
+form <code>\u{12}</code> or <code>\u{0xB}</code>.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token string">&apos;&#x263A;&apos;</span><span class="token punctuation">;</span>    
     <span class="token keyword">let</span> y <span class="token operator">=</span> <span class="token string">&apos;\u{0x263A}&apos;</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>If the characted literal is to long to be stored in the dezired type,
+<p>If the loaded literal is too long to be stored in the character type,
 an error will be returned by the compiler. For example :</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token string">&apos;&#x263A;&apos;</span>c8<span class="token punctuation">;</span> 
 <span class="token punctuation">}</span>
 </code></pre>
-<p>The error should be the following, and it means that you will need at
-least 3 <strong><code>c8</code></strong> to store the value, and therefore it does not fit in
-a single <strong><code>c8</code></strong> :</p>
+<p>The error should be as follows, and this means that you will need at
+least 3 <strong><code>c8</code></strong> to store the value, so it doesn&apos;t fit into one
+<strong><code>c8</code></strong> :</p>
 <pre class="language-"><code>Error : malformed literal, number of c8 is 3
  --&gt; main.yr:(2,10)
     | 
@@ -839,23 +840,24 @@ a single <strong><code>c8</code></strong> :</p>
 ymir1: fatal error: 
 compilation terminated.
 </code></pre><h2 id="compound-types">Compound types</h2>
-<p>Unlike the scalar types, compound contains multiple values.  There are
-three type of compound type: tuple, range and arrays.</p>
+<p>Unlike scalar types, the compound contains multiple values.  There are
+three types of compounds: the tuple, the range and the arrays.</p>
 <h3 id="tuple">Tuple</h3>
-<p>A tuple is a collection of values of different types. Tuples have
-fixed arity, once it has been set at compile time, it cannot be
-changed. Each element of a tuple has a type, and its order equally
-cannot be changed. Tuples are constructed inside parentheses, by a list
-of values separated by commas.</p>
+<p>A tuple is a set of values of different types. Tuples have a fixed
+arity, once it has been defined at compile time, it cannot be
+modified. Each element of a tuple has a type, and its order cannot be
+changed either. Tuples are built between parentheses, by a
+comma-separated list of values.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">let</span> t <span class="token punctuation">:</span> <span class="token punctuation">(</span>i32<span class="token punctuation">,</span> c32<span class="token punctuation">,</span> f64<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">&apos;r&apos;</span><span class="token punctuation">,</span> <span class="token number">3.14</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
 <span class="token punctuation">}</span>
 </code></pre>
-<p>The tuple t, is a single element, and can be passed as function
-parameter or as a return value of a function. It also can be
-destructured, in order to retreive the values of its composing
-elements. There is three ways to do that, the first one is by using the
-dot operator <strong><code>.</code></strong>, and an integer compile time known value.</p>
+<p>The tuple <code>t</code>, is a single element, and can be passed as a function
+parameter or as a return value of a function. It can also be
+destructured, in order to retrieve the values of its component
+elements. There are three ways to do this, the first one is to use the
+dot operator <strong><code>.</code></strong>, and an integer whose value is known at
+compilation time.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>io<span class="token punctuation">;</span>
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -865,8 +867,8 @@ dot operator <strong><code>.</code></strong>, and an integer compile time known 
     <span class="token function">println</span> <span class="token punctuation">(</span>t<span class="token number">.2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>The other method is to used the tuple destructuring syntax, that will
-create new variables and therefore begins with the keyword <strong><code>let</code></strong>.</p>
+<p>The other method is to use the tuple destructuring syntax, which will
+create new variables and therefore starts with the keyword <strong><code>let</code></strong>.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">let</span> t <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">&apos;r&apos;</span><span class="token punctuation">,</span> <span class="token number">3.14</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">let</span> <span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> z<span class="token punctuation">)</span> <span class="token operator">=</span> t<span class="token punctuation">;</span>
@@ -875,12 +877,12 @@ create new variables and therefore begins with the keyword <strong><code>let</co
     <span class="token function">println</span> <span class="token punctuation">(</span>f<span class="token punctuation">,</span> <span class="token string">&quot; &quot;</span><span class="token punctuation">,</span> e<span class="token number">.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>In the last example, we can see that the tuple destructuring syntax allows
-to extract only some of the values of the tuple. The value of <strong><code>e</code></strong>
-in this example will be <strong><code>(&apos;r&apos;, 3.14)</code></strong>.</p>
-<p>The last method to extract values from tuple is with the keyword
-<strong><code>expand</code></strong>, this keyword is a compile time rewrite and the following
-example demonstrate how you can use it.</p>
+<p>In the last example, we can see that the tuple destructuring syntax
+allows to extract only a part of the tuple values. The value of
+<strong><code>e</code></strong> in this example will be <strong><code>(&apos;r&apos;, 3.14)</code></strong>.</p>
+<p>The last method to extract values from the tuple is with the keyword
+<strong><code>expand</code></strong>, this keyword is a compile-time rewrite and the following
+example shows how you can use it.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>io
 
 <span class="token keyword">def</span> <span class="token function">add</span> <span class="token punctuation">(</span>a <span class="token punctuation">:</span> i32<span class="token punctuation">,</span> b <span class="token punctuation">:</span> i32<span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> i32 
@@ -899,11 +901,11 @@ example demonstrate how you can use it.</p>
 <span class="token punctuation">}</span>
 </code></pre>
 <h3 id="ranges">Ranges</h3>
-<p>Range are types that contains two values defining an interval, and are
-named <strong><code>r!(T)</code></strong>, where <strong><code>T</code></strong> is the type of the bounds of the interval. They
-are created by the token <strong><code>..</code></strong> or <strong><em><code>...</code></em></strong>. A range is composed
-of four values, that are stored in the fields presented in the
-following table.</p>
+<p>Ranges are types that contain two values defining a range, and are
+named <strong><code>r!(T)</code></strong>, where <strong><code>T</code></strong> is the type of the range limits. They
+are created by the token <strong><code>..</code></strong> or <strong><code>...</code></strong>. A range consists
+of four values, which are stored in the fields shown in the following
+table.</p>
 <table>
 <thead>
 <tr>
@@ -940,28 +942,28 @@ following table.</p>
     <span class="token keyword">let</span> c_range <span class="token punctuation">:</span> <span class="token function">r!</span><span class="token punctuation">(</span>i32<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">1</span> <span class="token punctuation">...</span> <span class="token number">8</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>The function <code>step_by</code> take an interval as parameters and return a new
-one, with a modified step.</p>
+<p>The <code>step_by</code> function takes a range as a parameter and returns a
+new range, with a modified step.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> 
     <span class="token keyword">let</span> range <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token punctuation">..</span> <span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">step_by</span> <span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
 <span class="token punctuation">}</span>
 </code></pre>
-<p>The section <a href="">Control flow</a> shows a usage of those types. </p>
+<p>The <a href="">Flow Control</a> section shows a use of these types.. </p>
 <h3 id="arrays">Arrays</h3>
-<p> An array is a collection of values of the same type, stored in
- contiguous memory.  Unlike Tuples, the size of an array is unknown at
- compile time, and in <strong>Ymir</strong> they are therefore similar to Slices.</p>
-<p> A slice is a two-word object, the first word is the length of the
- slice, and the second a pointer to the data stored in the slice. A
- slice is an aliasable type, its mutability is a bit more
- complicated than the mutability of scalar types, as it borrows memory
- that is not automatically copied when a affectation is made. This
- section will not talk about inner type mutability and aliasable
- types, so I recommand that you read the chapter
- <a href="">Alias and References</a>.</p>
-<p> The field <strong><code>len</code></strong> stores the length of the slice and can be
- retreived by the dot operator <strong><code>.</code></strong>.  The length of the slice is
- stored in a <strong><code>usize</code></strong>.</p>
+<p>An array is a collection of values of the same type, stored in
+contiguous memory.  Unlike tuples, the size of an array is unknown at
+compile time, and in <strong>Ymir</strong>, they are similar to slices.</p>
+<p>A slice is a two-word object, the first word is the length of the
+slice, and the second is a pointer to the data stored in the
+slice. A slice is an aliasable type, its mutability is a bit more
+complicated than the mutability of scalar types, because it borrows
+memory which is not automatically copied when an assignment is
+made. This section will not discuss the mutability of internal types
+or aliasable types, so we recommend you read the
+<a href="">Aliases and References</a> chapter.</p>
+<p>The field <strong><code>len</code></strong> records the length of the slice and can be
+retrieved by the point operator <strong><code>.</code></strong>.  The length of the slice is
+stored in a <strong><code>usize</code></strong> field.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>io
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -970,13 +972,16 @@ one, with a modified step.</p>
    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;The length of x : &quot;</span><span class="token punctuation">,</span> x<span class="token punctuation">.</span>len<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>Equally, the field <strong><code>ptr</code></strong>, give access to the pointer, of the slice
-and its types depend inner type of the slice, and is never mutable.</p>
-<p>To access array elements, the operator <strong><code>[]</code></strong> is used. It will take
-either a integer value, or a range value. If a range value is given, a
-second slice that borrow a section of the first one is created. For
-the moment, the step of the interval does not affect the borrowing of
-the array.</p>
+<p>Similarly, the <strong><code>ptr</code></strong> field, gives access to the pointer of the
+slice and its types depend on the inner type of the slice, and is
+never mutable. Pointer type are absolutely not important for a
+<strong>Ymir</strong> program, and we suspect that you will never have use of
+them. But they are defined just in case.</p>
+<p>To access the elements of an array, the <strong><code>[]</code></strong> operator is used. It
+will take either an integer value or a range value. If a range value
+is given, a second slice that borrows a section of the first is
+created. For now, the range step does not affect the borrowing of the
+array.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>io
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> 
     throws OutOfArray 
@@ -988,12 +993,15 @@ the array.</p>
     <span class="token function">println</span> <span class="token punctuation">(</span>x<span class="token punctuation">,</span> <span class="token string">&quot; &quot;</span><span class="token punctuation">,</span> y<span class="token punctuation">,</span> <span class="token string">&quot; &quot;</span><span class="token punctuation">,</span> z<span class="token punctuation">)</span><span class="token punctuation">;</span> 
 <span class="token punctuation">}</span>
 </code></pre>
-<p>The access of a slice is not safe, and might fail at runtime. That&apos;s
-why the function main of the above example rethrows OutOfArray
-exception. The system of exception is detailed in the
-<a href="">Error handling</a> chapter.</p>
-<p>The operator <code>~</code> is used to make a concatenation of two arrays of the
-same type :</p>
+<p>Access to a slice is not secure, and may fail at runtime. This is why
+the main function in the above example throws the OutOfArray
+exception. The exception system is detailed in the <a href="">Error Handling</a>
+chapter.</p>
+<p>The &quot;~&quot; operator is used to concatenate two arrays of the same
+type. We did not use the <code>+</code> operator as in many languages, because it
+creates ambiguities. For example, the following line <code>`&quot;string: 1 +
+2&quot;</code>, is unclear, maybe the user wanted to add <code>1</code> and <code>2</code> and then
+make the concatenation , but the result will be <code>&quot;string : 12&quot;</code>.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>io
 
 <span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token punctuation">[</span>i32<span class="token punctuation">]</span> <span class="token punctuation">{</span>
@@ -1004,9 +1012,9 @@ same type :</p>
     <span class="token function">println</span> <span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span> ~ <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>You can also create a new array by using the allocation syntax. This
-will allocate a new array in the heap, with an initial value at each
-index of the slice. The size can be unkown at compilation time.</p>
+<p>You can also create a new table using the allocation syntax. This will
+allow you to allocate a new array in the heap, with an initial value
+for each index in the slice. The size may be unknown at compile time.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>io
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -1015,10 +1023,10 @@ index of the slice. The size can be unkown at compilation time.</p>
 <span class="token punctuation">}</span>
 </code></pre>
 <h3 id="static-arrays">Static Arrays</h3>
-<p>Unlike slice, static arrays are stored on the stack instead of in the
-heap, and their size are known at compile time. They are instanciated
-with a syntax close to the allocating syntax of slice, but by
-omitting the keywork <code>new</code>.</p>
+<p>Unlike the slice, static arrays are stored on the stack rather than in
+the heap, and their size is known at compile time. They are
+instantiated with a syntax close to the slice allocation syntax, but
+omitting the <code>new</code> keywork.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>io
 
 <span class="token comment">/**
@@ -1042,9 +1050,9 @@ omitting the keywork <code>new</code>.</p>
     <span class="token function">foo</span> <span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>You can transform a static array into a slice by using the keywork
-<code>alias</code>, <code>copy</code> and <code>dcopy</code>. The chapter <a href="">Aliases and References</a>
-explain the difference between those keywords.</p>
+<p>You can transform a static array into a slice using the <code>alias</code>,
+<code>copy</code> and <code>dcopy</code> keywords. The chapter <a href="">Aliases and references</a>
+explains the difference between these keywords.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>io
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -1099,7 +1107,7 @@ explain the difference between those keywords.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Data types","level":"1.3.2","depth":2,"next":{"title":"Functions","level":"1.3.3","depth":2,"path":"primitives/functions.md","ref":"primitives/functions.md","articles":[]},"previous":{"title":"Variable and Mutability","level":"1.3.1","depth":2,"path":"primitives/variables.md","ref":"primitives/variables.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"primitives/types.md","mtime":"2020-02-24T19:08:03.576Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-24T19:08:28.145Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Data types","level":"1.3.2","depth":2,"next":{"title":"Functions","level":"1.3.3","depth":2,"path":"primitives/functions.md","ref":"primitives/functions.md","articles":[]},"previous":{"title":"Variable and Mutability","level":"1.3.1","depth":2,"path":"primitives/variables.md","ref":"primitives/variables.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"primitives/types.md","mtime":"2020-02-24T21:36:09.273Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-24T21:37:19.367Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

@@ -1,6 +1,6 @@
 # Basic programming concepts
 
-This chapter will cover the basic **Ymir** programming
-concept. Specifically, you will learn about variable, mutability,
+This chapter covers the basic concepts of **Ymir** programming
+language. Specifically, you will learn about variables, mutability,
 native types, functions and control flows.
 

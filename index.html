@@ -593,15 +593,19 @@ a collection of examples that demonstrates the assets of this new
 language. This travel, will presents some part of the standard library
 as well.</p>
 <h1 id="important">Important</h1>
-<p>Before we start the explanations of the language, please keep in mind
-that it is under development and that sometimes things might just
-<strong>don&apos;t work as expected</strong>. If you encounter errors that you can&apos;t
-understand, or that appears false to you, please concact us at <a href="mailto:gnu.ymir@mail.com" target="_blank">gnu.ymir@mail.com</a>. We would be happy to receive mail from you !</p>
+<p>Before we start explanations of the language, please keep in mind that
+it is still being developed and that sometimes things may not work as
+planned. If you come across errors that you cannot understand or that
+you think are wrong, please contact us at <a href="mailto:gnu.ymir@mail.com" target="_blank">gnu.ymir@mail.com</a>. We look
+forward to receiving mail from you!</p>
 <h2 id="installation">Installation</h2>
 <p>The reference compiler of <strong>Ymir</strong> is based on the compiler <strong>GCC</strong>,
 which offer strong static optimization, as well as a vast set of
 supported target architectures.</p>
-<p>There are two ways to install the <strong>gyc</strong> (Gnu Ymir Compiler), natively. Or by using a docker container.</p>
+<p>The <strong>Ymir</strong> reference compiler is based on the <strong>GCC</strong> compiler,
+which offers strong static optimization, as well as a large set of
+supported target architectures.</p>
+<p>There are two ways to install the <strong>gyc</strong> (Gnu Ymir Compiler), natively or by using a docker container.</p>
 <h3 id="native-installation">Native installation</h3>
 <p>This compiler can be installed on linux debian system, by following those simple steps: </p>
 <ul>
@@ -632,7 +636,7 @@ $ <span class="token function">sudo</span> dpkg -i gyc-8_8.2.0_amd64.deb
 <li>zlib1g &gt;= 1:1.2.0</li>
 <li>libgc-dev &gt;= 1:7.4.2</li>
 </ul>
-<p>If one of them is not installed, you will get an error, that can be resolved by launching the command : </p>
+<p>If one of them is not installed, you will get an error, that can be resolved by running the following command : </p>
 <pre class="language-"><code class="lang-bash"><span class="token function">sudo</span> <span class="token function">apt</span> --fix-broken <span class="token function">install</span>
 </code></pre>
 <p>And then reinstall the package that has previously failed (dpkg).
@@ -650,7 +654,7 @@ warranty<span class="token punctuation">;</span> not even <span class="token key
 $ dpkg -r libgmidgard-8-dev
 </code></pre>
 <p><strong>Caution</strong> The uninstallation can remove your gcc installation.
-But you can still reinstall it easily if there is problem, by typing : </p>
+But you can still reinstall it easily if there is any problem, by typing : </p>
 <pre class="language-"><code class="lang-ymir">sudo apt install <span class="token operator">-</span><span class="token operator">-</span>reinstall gcc<span class="token number">-8</span>
 </code></pre>
 <h2 id="docker-installation">Docker installation</h2>
@@ -667,9 +671,12 @@ Copyright <span class="token punctuation">(</span>C<span class="token punctuatio
 This is <span class="token function">free</span> software<span class="token punctuation">;</span> see the <span class="token builtin class-name">source</span> <span class="token keyword">for</span> copying conditions.  There is NO
 warranty<span class="token punctuation">;</span> not even <span class="token keyword">for</span> MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 </code></pre>
-<p>To make it easier to use, you can add an alias in the <code>~/.local/bin</code> directory.</p>
-<pre class="language-"><code class="lang-bash">$ <span class="token builtin class-name">echo</span> <span class="token string">&quot;docker run -t -v <span class="token variable"><span class="token variable">$(</span><span class="token builtin class-name">pwd</span><span class="token variable">)</span></span>:/tmp -w /tmp gnuymir/8.2.0 <span class="token variable">$*</span>&quot;</span> <span class="token operator">&gt;</span> ~/.local/bin/gyc-8
-$ <span class="token function">chmod</span> +x ~/.local/bin/gyc-8
+<p>To make it easier to use, you can add an alias in the <code>~/.local/bin</code> directory.
+First open the file <code>~/.local/bin/gyc-8</code> and paste the following line :</p>
+<pre class="language-"><code class="lang-bash">docker run -t -v <span class="token variable"><span class="token variable">$(</span><span class="token builtin class-name">pwd</span><span class="token variable">)</span></span>:/tmp -w /tmp gnuymir/8.2.0 <span class="token variable">$*</span>
+</code></pre>
+<p>Then open a new shell, and run the following commands :</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">chmod</span> +x ~/.local/bin/gyc-8
 $ gyc-8 --version
 
 gyc-8 <span class="token punctuation">(</span>GCC<span class="token punctuation">)</span> <span class="token number">8.2</span>.0
@@ -716,7 +723,7 @@ warranty<span class="token punctuation">;</span> not even <span class="token key
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Hello World","level":"1.2","depth":1,"path":"hello-world/README.md","ref":"hello-world/README.md","articles":[{"title":"Comments","level":"1.2.1","depth":2,"path":"hello-world/commentaires.md","ref":"hello-world/commentaires.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"README.md","mtime":"2020-02-24T19:08:22.304Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-24T19:08:28.145Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Hello World","level":"1.2","depth":1,"path":"hello-world/README.md","ref":"hello-world/README.md","articles":[{"title":"Comments","level":"1.2.1","depth":2,"path":"hello-world/commentaires.md","ref":"hello-world/commentaires.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"README.md","mtime":"2020-02-24T20:36:37.631Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-24T21:37:19.367Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
