@@ -11,9 +11,9 @@ the value of the scope to which they are attached.
 
 ## Success scope guard
 
-The success scope guard is the simplest scope guard that exist, it is
+The success scope guard is the simplest scope guard that exists, it is
 just a way to perform operation at the end of a scope if everything
-went as wanted, and no exception have been thrown.
+went as wanted, and no exception has been thrown.
 
 ```ymir
 import std::io
