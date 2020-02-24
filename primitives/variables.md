@@ -128,11 +128,12 @@ Error : declaration of x shadow another declaration
     | 
  6  |     let x = 12;
     |         ^
-Note : 
- --> main.yr:(4,9)
-    | 
- 4  |     let x = 9;
-    |         ^
+    | Note : 
+    |  --> main.yr:(4,9)
+    |     | 
+    |  4  |     let x = 9;
+    |     |         ^
+    |------------------------------ 
 
 ymir1: fatal error: 
 compilation terminated.

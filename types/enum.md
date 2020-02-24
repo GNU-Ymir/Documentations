@@ -24,7 +24,7 @@ def foo (day : Day) {
 
 def main () {
 	let d = Day::MONDAY;
-	inspect (d);
+	foo (d);
 }
 ```
 

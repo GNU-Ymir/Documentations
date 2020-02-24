@@ -578,34 +578,34 @@ class Circle <span class="token keyword">over</span> Shape <span class="token pu
 </code></pre>
 <h2 id="attributes">Attributes</h2>
 <p>The attributes of an ancestor cannot be redeclared by an heir
-class. All attributes are private by default, so the heir cannot
-access the attribute of an ancestor. You can use the <code>prot</code> keyword to
-make them protected and then accessible to the heirs, but not
-globally.</p>
-<pre class="language-"><code>class Shape {
-    prot let _x : i32 = 0;
-//  ^^^^
-// Try to remove prot
+class. All attributes are protected by default, so the heir can access
+the attribute of an ancestor. You can use the <code>prv</code> keyword to make
+them private and then inaccessible to the heirs.</p>
+<pre class="language-"><code class="lang-ymir">class Shape <span class="token punctuation">{</span>
+        <span class="token keyword">let</span> _x <span class="token punctuation">:</span> i32 <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token comment">//  ^^^</span>
+<span class="token comment">// Try to add prv</span>
 
-    self () {}
-}
+    pub <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
-class Circle over Shape {
-    // Try to add the following line 
-    // let _x : i32;
+class Circle <span class="token keyword">over</span> Shape <span class="token punctuation">{</span>
+    <span class="token comment">// Try to add the following line </span>
+    <span class="token comment">// let _x : i32;</span>
 
-    self () {
-        import std::io;
-        println (self._x);
-    }    
-}
-</code></pre><h2 id="constructor">Constructor</h2>
+    pub <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>io<span class="token punctuation">;</span>
+        <span class="token function">println</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">.</span>_x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>    
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="constructor">Constructor</h2>
 <p>The constructor of the parent class must be called, when constructing
 a heir class. The <code>with</code> syntax is used to perform that.</p>
 <pre class="language-"><code class="lang-ymir">class Shape <span class="token punctuation">{</span>    
-    <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    pub <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
 
-    <span class="token keyword">self</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> i32<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    pub <span class="token keyword">self</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> i32<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token function">println</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
@@ -613,9 +613,9 @@ a heir class. The <code>with</code> syntax is used to perform that.</p>
 class Circle <span class="token keyword">over</span> Shape <span class="token punctuation">{</span>
     <span class="token comment">// ... attributes </span>
 
-    <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token comment">// Same as : with super ()</span>
+    pub <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token comment">// Same as : with super ()</span>
 
-    <span class="token keyword">self</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> i32<span class="token punctuation">)</span> with <span class="token keyword">super</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    pub <span class="token keyword">self</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> i32<span class="token punctuation">)</span> with <span class="token keyword">super</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre>
 <h2 id="method-overriding">Method overriding</h2>
@@ -630,14 +630,14 @@ and public methods.</p>
 class Shape <span class="token punctuation">{</span>
     <span class="token comment">// ... attributes and constructors</span>
 
-    <span class="token keyword">def</span> <span class="token function">area</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> i32 
+    pub <span class="token keyword">def</span> <span class="token function">area</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> i32 
         <span class="token number">0</span>
 <span class="token punctuation">}</span>
 
 class Circle <span class="token keyword">over</span> Shape <span class="token punctuation">{</span>
     <span class="token comment">// ... attributes and constructors</span>
 
-    <span class="token keyword">over</span> <span class="token function">area</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> i32 <span class="token punctuation">{</span>
+    pub <span class="token keyword">over</span> <span class="token function">area</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> i32 <span class="token punctuation">{</span>
         <span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>math<span class="token punctuation">;</span>
         <span class="token macro-rules function">Math:</span><span class="token punctuation">:</span>PI <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">.</span>_radius <span class="token operator">*</span> <span class="token keyword">self</span><span class="token punctuation">.</span>_radius<span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
@@ -646,7 +646,7 @@ class Circle <span class="token keyword">over</span> Shape <span class="token pu
 class Square <span class="token keyword">over</span> Shape <span class="token punctuation">{</span>
     <span class="token comment">// ... attributes and constructors</span>
 
-    <span class="token keyword">over</span> <span class="token function">area</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> i32 <span class="token punctuation">{</span>
+    pub <span class="token keyword">over</span> <span class="token function">area</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> i32 <span class="token punctuation">{</span>
         <span class="token keyword">self</span><span class="token punctuation">.</span>_side <span class="token operator">*</span> <span class="token keyword">self</span><span class="token punctuation">.</span>_side
     <span class="token punctuation">}</span>
 
@@ -667,16 +667,16 @@ methods without body, these methods must be overriden by heir
 classes. In the above example, there is no reason why we can
 instantiate a <code>Shape</code>, so just mark the class as abstract.</p>
 <pre class="language-"><code class="lang-ymir">class <span class="token operator">@</span>abstract Shape <span class="token punctuation">{</span>
-    <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token comment">// need a constructor to be heritable</span>
+    pub <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token comment">// need a constructor to be heritable</span>
 
-    <span class="token keyword">def</span> <span class="token function">area</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> i32<span class="token punctuation">;</span> <span class="token comment">// Method has no body</span>
+    pub <span class="token keyword">def</span> <span class="token function">area</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> i32<span class="token punctuation">;</span> <span class="token comment">// Method has no body</span>
 <span class="token punctuation">}</span>
 
 class Circle <span class="token keyword">over</span> Shape <span class="token punctuation">{</span>
     <span class="token comment">// ... attributes and constructors</span>
 
     <span class="token comment">// Try to remove this method definition</span>
-    <span class="token keyword">over</span> <span class="token function">area</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> i32 <span class="token punctuation">{</span>
+    pub <span class="token keyword">over</span> <span class="token function">area</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> i32 <span class="token punctuation">{</span>
         <span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>math<span class="token punctuation">;</span>
         <span class="token macro-rules function">Math:</span><span class="token punctuation">:</span>PI <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">.</span>_radius <span class="token operator">*</span> <span class="token keyword">self</span><span class="token punctuation">.</span>_radius<span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
@@ -731,7 +731,7 @@ class Circle <span class="token keyword">over</span> Shape <span class="token pu
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Inheritance","level":"1.7.2","depth":2,"next":{"title":"Traits","level":"1.7.3","depth":2,"path":"objects/traits.md","ref":"objects/traits.md","articles":[]},"previous":{"title":"Class","level":"1.7.1","depth":2,"path":"objects/class.md","ref":"objects/class.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"objects/inheritance.md","mtime":"2020-02-10T13:26:12.123Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-20T20:00:44.190Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Inheritance","level":"1.7.2","depth":2,"next":{"title":"Traits","level":"1.7.3","depth":2,"path":"objects/traits.md","ref":"objects/traits.md","articles":[]},"previous":{"title":"Class","level":"1.7.1","depth":2,"path":"objects/class.md","ref":"objects/class.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"objects/inheritance.md","mtime":"2020-02-21T15:36:38.596Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-24T08:08:16.729Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

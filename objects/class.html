@@ -570,7 +570,7 @@ keyword <code>class</code>. </p>
 <pre class="language-"><code class="lang-ymir">class Foo <span class="token punctuation">{</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<h2 id="attributs">Attributs</h2>
+<h2 id="attributes">Attributes</h2>
 <p>A class can contain attributes, which are equivalent to fields for a
 structure.  An attribute is declared as a variable, using the keyword
 <code>let</code>. You must give at least the type to the declaration, but the
@@ -580,27 +580,26 @@ value is not mandatory.</p>
     <span class="token keyword">let</span> _y <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>All attributes are private by default, i.e. only the methods declared
-in the class will have access to them. You can use the <code>pub</code> keyword
-to make them public and usable everywhere.</p>
+<p>All attributes are protected by default, i.e. only this class and its
+heirs will have access to them. You can use the <code>pub</code> keyword to make
+them public and usable everywhere.</p>
 <h2 id="constructor">Constructor</h2>
-<p>To be instancible, a class must declare a minimum on the
-constructor. The constructor is always named <code>self</code>, and takes
-parameters to build the object. The constructor must give a value to
-all the attributes of the class, the attributes are initialized using
-the <code>with</code> keyword.</p>
+<p>To be instancible, a class must declare at least one constructor. The
+constructor is always named <code>self</code>, and takes parameters to build the
+object. The constructor must give a value to all the attributes of the
+class, the attributes are initialized using the <code>with</code> keyword.</p>
 <pre class="language-"><code class="lang-ymir">class Point <span class="token punctuation">{</span>
     <span class="token keyword">let</span> _x <span class="token punctuation">:</span> i32<span class="token punctuation">;</span>
     <span class="token keyword">let</span> _y <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
 
     <span class="token comment">// _y is already initialized</span>
     <span class="token comment">// it is not mandatory to add it in the with initialization</span>
-    <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> with _x <span class="token operator">=</span> <span class="token number">12</span> <span class="token punctuation">{</span>
+    pub <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> with _x <span class="token operator">=</span> <span class="token number">12</span> <span class="token punctuation">{</span>
         <span class="token comment">// Try to print the attribute _x </span>
         <span class="token comment">// You will need to use self </span>
     <span class="token punctuation">}</span>
 
-    <span class="token keyword">self</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> i32<span class="token punctuation">,</span> y <span class="token punctuation">:</span> i32<span class="token punctuation">)</span> with _x <span class="token operator">=</span> x<span class="token punctuation">,</span> _y <span class="token operator">=</span> y <span class="token punctuation">{</span>
+    pub <span class="token keyword">self</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> i32<span class="token punctuation">,</span> y <span class="token punctuation">:</span> i32<span class="token punctuation">)</span> with _x <span class="token operator">=</span> x<span class="token punctuation">,</span> _y <span class="token operator">=</span> y <span class="token punctuation">{</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre>
@@ -611,8 +610,8 @@ syntax :</p>
 <span class="token comment">// Try to add the following line : </span>
 <span class="token comment">// let p3 : Point = null;</span>
 </code></pre>
-<p>Constructors, like methods are public by default, you can use the
-keyword <code>prv</code> to make them private.</p>
+<p>Constructors, like methods are protected by default, you can use the
+keyword <code>pub</code> to make them public and <code>prv</code> to make them private.</p>
 <p>A class is not a pointer, you can&apos;t make it <code>null</code>, that has no sense
 in <strong>Ymir</strong>.</p>
 <p>You can call another constructor with the syntax <code>with</code>. When you call
@@ -621,20 +620,20 @@ initialize them again.</p>
 <pre class="language-"><code class="lang-ymir">class Point <span class="token punctuation">{</span>
     <span class="token comment">// ... attributes</span>
 
-    <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> with <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    pub <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> with <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
 
-    <span class="token keyword">self</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> i32<span class="token punctuation">,</span> y <span class="token punctuation">:</span> i32<span class="token punctuation">)</span> with _x <span class="token operator">=</span> x<span class="token punctuation">,</span> _y <span class="token operator">=</span> y <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    pub <span class="token keyword">self</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> i32<span class="token punctuation">,</span> y <span class="token punctuation">:</span> i32<span class="token punctuation">)</span> with _x <span class="token operator">=</span> x<span class="token punctuation">,</span> _y <span class="token operator">=</span> y <span class="token punctuation">{</span><span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre>
 <h2 id="methods">Methods</h2>
 <p>Methods of a class are functions that are applicable to an object
 instance. The methods are declared like function, but take the <code>self</code>
-as first parameter. The <code>self</code> type is not specified because it is
+as first parameter. The type of <code>self</code> is not specified because it is
 obvious.</p>
 <pre class="language-"><code class="lang-ymir">class Point <span class="token punctuation">{</span>
     <span class="token comment">// ... the same declaration as above</span>
 
-    <span class="token keyword">def</span> <span class="token function">vector</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">,</span> other <span class="token punctuation">:</span> Point<span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> Point <span class="token punctuation">{</span>
+    pub <span class="token keyword">def</span> <span class="token function">vector</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">,</span> other <span class="token punctuation">:</span> Point<span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> Point <span class="token punctuation">{</span>
         <span class="token macro-rules function">Point:</span><span class="token punctuation">:</span><span class="token function">new</span> <span class="token punctuation">(</span>other<span class="token punctuation">.</span>_x <span class="token operator">-</span> <span class="token keyword">self</span><span class="token punctuation">.</span>_x<span class="token punctuation">,</span> other<span class="token punctuation">.</span>_y <span class="token operator">-</span> <span class="token keyword">self</span><span class="token punctuation">.</span>_y<span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
 
@@ -645,17 +644,18 @@ obvious.</p>
     <span class="token keyword">let</span> v <span class="token operator">=</span> p1<span class="token punctuation">.</span><span class="token function">vector</span> <span class="token punctuation">(</span>p2<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>The <code>self</code> instance is an <code>alias</code> of the object (Cf. <a href="">Aliases</a>),
-that is immutable by default. You can make it mutable by using the
-keyword <code>mut</code>. As for structure, the attributes mutability is defined
-when declaring them. If an attribute is mutable, its mutability
-depends on the mutability of the object instance that posses it.</p>
+<p>The <code>self</code> instance is an <code>alias</code> of the object (Cf. <a href="">Alias</a>), which
+is imutable by default. You can make it mutable by using the <code>mut</code>
+keyword. As for structures, the mutability of the attributes is
+defined when they are declared. If an attribute is mutable, its
+mutability depends on the mutability of the instance of the object
+that contains it.</p>
 <pre class="language-"><code class="lang-ymir">class Point <span class="token punctuation">{</span>
     <span class="token keyword">let</span> <span class="token keyword">mut</span> _x <span class="token punctuation">:</span> i32<span class="token punctuation">,</span> <span class="token keyword">mut</span> _y <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
 
     <span class="token comment">// ... the same constructors as above</span>
 
-    <span class="token keyword">def</span> <span class="token function">addOne</span> <span class="token punctuation">(</span><span class="token keyword">mut</span> <span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    pub <span class="token keyword">def</span> <span class="token function">addOne</span> <span class="token punctuation">(</span><span class="token keyword">mut</span> <span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment">//          ^^^</span>
     <span class="token comment">// Try to remove the mut </span>
 
@@ -678,7 +678,7 @@ and is therefore a aliasable type. Everything that is applicable to
 aliasable type <a href="">Aliases</a> is applicable to objects.</p>
 <h2 id="destructors">Destructors</h2>
 <p>There is no destructor in <strong>Ymir</strong>, the object instances are destroyed
-by the garbage collector.</p>
+by the garbage collector. </p>
 
                                 
                                 </section>
@@ -722,7 +722,7 @@ by the garbage collector.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Class","level":"1.7.1","depth":2,"next":{"title":"Inheritance","level":"1.7.2","depth":2,"path":"objects/inheritance.md","ref":"objects/inheritance.md","articles":[]},"previous":{"title":"Objects","level":"1.7","depth":1,"path":"objects/README.md","ref":"objects/README.md","articles":[{"title":"Class","level":"1.7.1","depth":2,"path":"objects/class.md","ref":"objects/class.md","articles":[]},{"title":"Inheritance","level":"1.7.2","depth":2,"path":"objects/inheritance.md","ref":"objects/inheritance.md","articles":[]},{"title":"Traits","level":"1.7.3","depth":2,"path":"objects/traits.md","ref":"objects/traits.md","articles":[]},{"title":"Example program","level":"1.7.4","depth":2,"path":"objects/example.md","ref":"objects/example.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"objects/class.md","mtime":"2020-02-10T13:26:12.123Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-20T20:00:44.190Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Class","level":"1.7.1","depth":2,"next":{"title":"Inheritance","level":"1.7.2","depth":2,"path":"objects/inheritance.md","ref":"objects/inheritance.md","articles":[]},"previous":{"title":"Objects","level":"1.7","depth":1,"path":"objects/README.md","ref":"objects/README.md","articles":[{"title":"Class","level":"1.7.1","depth":2,"path":"objects/class.md","ref":"objects/class.md","articles":[]},{"title":"Inheritance","level":"1.7.2","depth":2,"path":"objects/inheritance.md","ref":"objects/inheritance.md","articles":[]},{"title":"Traits","level":"1.7.3","depth":2,"path":"objects/traits.md","ref":"objects/traits.md","articles":[]},{"title":"Example program","level":"1.7.4","depth":2,"path":"objects/example.md","ref":"objects/example.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"objects/class.md","mtime":"2020-02-21T15:36:13.108Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-24T08:08:16.729Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

@@ -17,25 +17,24 @@ class Circle over Shape {
 ## Attributes
 
 The attributes of an ancestor cannot be redeclared by an heir
-class. All attributes are private by default, so the heir cannot
-access the attribute of an ancestor. You can use the `prot` keyword to
-make them protected and then accessible to the heirs, but not
-globally.
+class. All attributes are protected by default, so the heir can access
+the attribute of an ancestor. You can use the `prv` keyword to make
+them private and then inaccessible to the heirs.
 
-```
+```ymir
 class Shape {
-	prot let _x : i32 = 0;
-//  ^^^^
-// Try to remove prot
+	    let _x : i32 = 0;
+//  ^^^
+// Try to add prv
 	
-	self () {}
+	pub self () {}
 }
 
 class Circle over Shape {
 	// Try to add the following line 
 	// let _x : i32;
 	
-	self () {
+	pub self () {
 		import std::io;
 		println (self._x);
 	}	
@@ -50,9 +49,9 @@ a heir class. The `with` syntax is used to perform that.
 
 ```ymir
 class Shape {	
-	self () {}
+	pub self () {}
 	
-	self (x : i32) {
+	pub self (x : i32) {
 		println (x);
 	}
 }
@@ -60,9 +59,9 @@ class Shape {
 class Circle over Shape {
 	// ... attributes 
 	
-	self () {} // Same as : with super ()
+	pub self () {} // Same as : with super ()
 	
-	self (x : i32) with super (x) {}
+	pub self (x : i32) with super (x) {}
 }
 ```
 
@@ -81,14 +80,14 @@ import std::io
 class Shape {
 	// ... attributes and constructors
 	
-	def area (self) -> i32 
+	pub def area (self) -> i32 
 		0
 }
 
 class Circle over Shape {
 	// ... attributes and constructors
 	
-	over area (self) -> i32 {
+	pub over area (self) -> i32 {
 		import std::math;
 		Math::PI * (self._radius * self._radius)
 	}
@@ -97,7 +96,7 @@ class Circle over Shape {
 class Square over Shape {
 	// ... attributes and constructors
 		
-	over area (self) -> i32 {
+	pub over area (self) -> i32 {
 		self._side * self._side
 	}
 	
@@ -122,16 +121,16 @@ instantiate a `Shape`, so just mark the class as abstract.
 
 ```ymir
 class @abstract Shape {
-	self () {} // need a constructor to be heritable
+	pub self () {} // need a constructor to be heritable
 	
-	def area (self)-> i32; // Method has no body
+	pub def area (self)-> i32; // Method has no body
 }
 
 class Circle over Shape {
 	// ... attributes and constructors
 	
 	// Try to remove this method definition
-	over area (self) -> i32 {
+	pub over area (self) -> i32 {
 		import std::math;
 		Math::PI * (self._radius * self._radius)
 	}

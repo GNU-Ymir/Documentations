@@ -569,7 +569,7 @@
 class. The keyword <code>trait</code> is used to create a new Trait. A trait is
 not a type, you cannot have variable whose type is a trait. </p>
 <pre class="language-"><code class="lang-ymir">trait Printable <span class="token punctuation">{</span>
-    <span class="token keyword">def</span> <span class="token function">print</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    
+    pub <span class="token keyword">def</span> <span class="token function">print</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    
 <span class="token punctuation">}</span>
 </code></pre>
 <p>A class can implement a trait. All the method declared in the traits
@@ -582,7 +582,7 @@ class Point <span class="token punctuation">{</span>
 
     impl Printable <span class="token punctuation">{</span>
         <span class="token comment">// Try to remove the following definition</span>
-        <span class="token keyword">over</span> <span class="token function">print</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        pub <span class="token keyword">over</span> <span class="token function">print</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token function">print</span> <span class="token punctuation">(</span><span class="token string">&quot;Point {&quot;</span><span class="token punctuation">,</span> <span class="token keyword">self</span><span class="token punctuation">.</span>_x<span class="token punctuation">,</span> <span class="token string">&quot;, &quot;</span><span class="token punctuation">,</span> <span class="token keyword">self</span><span class="token punctuation">.</span>_y<span class="token punctuation">,</span> <span class="token string">&quot;}&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>    
@@ -591,7 +591,7 @@ class Point <span class="token punctuation">{</span>
 <p>A trait can provide a default behavior. The function inside a trait
 are not checked before being implemented by a class. </p>
 <pre class="language-"><code class="lang-ymir">trait Printable <span class="token punctuation">{</span>
-    <span class="token keyword">def</span> <span class="token function">print</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    pub <span class="token keyword">def</span> <span class="token function">print</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>io<span class="token punctuation">;</span>
         <span class="token function">print</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token punctuation">:</span>typeid<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token comment">// Here we don&apos;t know the type yet</span>
@@ -618,7 +618,7 @@ heir class can override them without any problem.</p>
 class Circle <span class="token keyword">over</span> Shape <span class="token punctuation">{</span>
     <span class="token comment">// ... Constructors and attributes</span>
 
-    <span class="token keyword">over</span> <span class="token function">print</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    pub <span class="token keyword">over</span> <span class="token function">print</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre>
 <h2 id="copy-trait">Copy trait</h2>
@@ -627,7 +627,7 @@ make a copy. It is up to the user to define the copy method, by
 implementing the trait <code>core::duplication::Copiable</code>. The definition
 of this trait is the following :</p>
 <pre class="language-"><code class="lang-ymir">trait Copiable <span class="token punctuation">{</span>
-    <span class="token keyword">def</span> <span class="token function">deepCopy</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> <span class="token keyword">mut</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token keyword">self</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    pub <span class="token keyword">def</span> <span class="token function">deepCopy</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> <span class="token keyword">mut</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token keyword">self</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
 <p>There is no need to import anything, since the trait is located in a
@@ -637,7 +637,7 @@ follows :</p>
      <span class="token comment">// ... Constructors and attributes</span>
 
     impl Copiable <span class="token punctuation">{</span>
-        <span class="token keyword">over</span> <span class="token function">deepCopy</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token keyword">mut</span> Point <span class="token punctuation">{</span>
+        pub <span class="token keyword">over</span> <span class="token function">deepCopy</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token keyword">mut</span> Point <span class="token punctuation">{</span>
             <span class="token macro-rules function">Point:</span><span class="token punctuation">:</span><span class="token function">new</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">.</span>_x<span class="token punctuation">,</span> <span class="token keyword">self</span><span class="token punctuation">.</span>_y<span class="token punctuation">)</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
@@ -660,7 +660,7 @@ class Point <span class="token punctuation">{</span>
     <span class="token comment">// ... Constructors and attributes</span>
 
     impl Printable <span class="token punctuation">{</span>
-        <span class="token keyword">over</span> <span class="token function">print</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        pub <span class="token keyword">over</span> <span class="token function">print</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token function">print</span> <span class="token punctuation">(</span><span class="token string">&quot;Point {&quot;</span><span class="token punctuation">,</span> <span class="token keyword">self</span><span class="token punctuation">.</span>_x<span class="token punctuation">,</span> <span class="token string">&quot;, &quot;</span><span class="token punctuation">,</span> <span class="token keyword">self</span><span class="token punctuation">.</span>_y<span class="token punctuation">,</span> <span class="token string">&quot;}&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
@@ -714,7 +714,7 @@ class Point <span class="token punctuation">{</span>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Traits","level":"1.7.3","depth":2,"next":{"title":"Example program","level":"1.7.4","depth":2,"path":"objects/example.md","ref":"objects/example.md","articles":[]},"previous":{"title":"Inheritance","level":"1.7.2","depth":2,"path":"objects/inheritance.md","ref":"objects/inheritance.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"objects/traits.md","mtime":"2020-02-10T13:26:12.123Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-20T20:00:44.190Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Traits","level":"1.7.3","depth":2,"next":{"title":"Example program","level":"1.7.4","depth":2,"path":"objects/example.md","ref":"objects/example.md","articles":[]},"previous":{"title":"Inheritance","level":"1.7.2","depth":2,"path":"objects/inheritance.md","ref":"objects/inheritance.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"objects/traits.md","mtime":"2020-02-21T15:37:14.340Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-24T08:08:16.729Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

@@ -6,7 +6,7 @@ not a type, you cannot have variable whose type is a trait.
 
 ```ymir
 trait Printable {
-	def print (self);	
+	pub def print (self);	
 }
 ```
 
@@ -22,7 +22,7 @@ class Point {
 	
 	impl Printable {
 		// Try to remove the following definition
-		over print (self) {
+		pub over print (self) {
 			print ("Point {", self._x, ", ", self._y, "}");
 		}
 	}	
@@ -34,7 +34,7 @@ are not checked before being implemented by a class.
 
 ```ymir
 trait Printable {
-	def print (self) {
+	pub def print (self) {
 		import std::io;
 		print (typeof (self)::typeid);
 		// Here we don't know the type yet
@@ -65,7 +65,7 @@ class @abstract Shape {
 class Circle over Shape {
 	// ... Constructors and attributes
 	
-	over print (self) {}
+	pub over print (self) {}
 }
 ```
 
@@ -78,7 +78,7 @@ of this trait is the following :
 
 ```ymir
 trait Copiable {
-    def deepCopy (self)-> mut (typeof self);
+    pub def deepCopy (self)-> mut (typeof self);
 }
 ```
 
@@ -91,7 +91,7 @@ class Point {
  	// ... Constructors and attributes
 
 	impl Copiable {
-		over deepCopy (self) -> mut Point {
+		pub over deepCopy (self) -> mut Point {
 			Point::new (self._x, self._y)
 		}
 	}
@@ -118,7 +118,7 @@ class Point {
 	// ... Constructors and attributes
 	
 	impl Printable {
-		over print (self) {
+		pub over print (self) {
 			print ("Point {", self._x, ", ", self._y, "}");
 		}
 	}

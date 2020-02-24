@@ -10,9 +10,9 @@ can have a value, or be the end of the list.
 
 ```ymir
 class @abstract Node {
-	self () {}
+	pub self () {}
 		
-	def append (self, i : i32)-> Node;
+	pub def append (self, i : i32)-> Node;
 	
 	impl Printable;
 }
@@ -26,16 +26,16 @@ simplest, the end of the list :
 
 ```ymir
 class None over Node {
-	self () {}
+	pub self () {}
 
-	over append (self, i : i32) -> Node {
+	pub over append (self, i : i32) -> Node {
 		// We are at the end of the list
 		// we just have to return a node that contains the value
 		
 		Some::new (i)
 	}
 
-	over print (self) {
+	pub over print (self) {
 		print ("END");
 	}	
 }
@@ -48,22 +48,24 @@ class Some over Node {
 	let _value : i32;
 	let _next : Node;
 	
-	/**
-	 * This constructor is used when this node is the last value of the list
-	 * It is followed by a None value
-	*/
-	self (v : i32) with _value = v, _next = None::new () {}
+	pub {
+		/**
+		 * This constructor is used when this node is the last value of the list
+		 * It is followed by a None value
+		 */
+		 self (v : i32) with _value = v, _next = None::new () {}
 	
-	self (v : i32, x : Node) with _value = v, _next = x {}
+		 self (v : i32, x : Node) with _value = v, _next = x {}
 	
 
-	over append (self, i : i32) -> Node {
-		Some::new (self._value, self._next.append (i))
-	}		
+	     over append (self, i : i32) -> Node {
+			 Some::new (self._value, self._next.append (i))
+		 }		
 	
-	over print (self) {
-		print (self._value, "::", self._next);		
-	}	
+		over print (self) {
+			print (self._value, "::", self._next);		
+		}	
+	}
 }
 ```
 

@@ -23,7 +23,9 @@ def baz () -> i32
 ```
 
 To see if a value can be known at compilation time a simple test is to use
-it as a template parameter. **Exercise :** Try to compile the
+it as a template parameter. 
+
+**Exercise :** Try to compile the
 following source code with the option `-fdump-tree-gimple`.
 
 ```ymir
@@ -49,7 +51,8 @@ def main () {
 
 This will generate a file named `main.yr.004t.gimple` containing a
 precompiled version of the code. You should get in this file a
-definition of the function `printTemplate`.
+definition of the function `printTemplate`, that prints the value
+`42`.
 
 This chapter does not cover compilation time values, which will be
 detailed in the next chapter, but it is important to know what a

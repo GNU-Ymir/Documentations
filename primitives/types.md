@@ -343,29 +343,7 @@ def main () {
 ```
 
 Equally, the field **`ptr`**, give access to the pointer, of the slice
-and its types depend inner type of the slice, and is never mutable. For example : 
-
-```ymir
-import std::io
- 
-def main () {
-   let mut x : [mut i32] = [1, 2, 3];
-   *(x.ptr) = 8; 
-}
-```
-
-You should get the following error : 
-
-```
-Error : left operand of type i32 is immutable
- --> main.yr:(6,4)
-    | 
- 6  |    *(x.ptr) = 8;
-    |    ^
-
-ymir1: fatal error: 
-compilation terminated.
-```
+and its types depend inner type of the slice, and is never mutable.
 
 To access array elements, the operator **`[]`** is used. It will take
 either a integer value, or a range value. If a range value is given, a
@@ -375,7 +353,9 @@ the array.
  
 ```ymir
 import std::io
-def main () {
+def main () 
+	throws OutOfArray 
+{
 	let x = [1, 2, 3];
 	let y = x [0..2];
 	let z = x [0];
@@ -384,7 +364,14 @@ def main () {
 }
 ```
 
-The operator `~` is used to make a concatenation of two arrays of the same type : 
+The access of a slice is not safe, and might fail at runtime. That's
+why the function main of the above example rethrows OutOfArray
+exception. The system of exception is detailed in the
+[Error handling]() chapter.
+
+The operator `~` is used to make a concatenation of two arrays of the
+same type :
+
 ```ymir
 import std::io
 
@@ -396,3 +383,67 @@ def main ()  {
 	println ([1, 2, 3] ~ foo ());
 }
 ```
+
+You can also create a new array by using the allocation syntax. This
+will allocate a new array in the heap, with an initial value at each
+index of the slice. The size can be unkown at compilation time.
+
+```ymir
+import std::io
+
+def main () {
+	let a = [0 ; new 100u64]; 
+	println (a);
+}
+```
+
+### Static Arrays
+
+Unlike slice, static arrays are stored on the stack instead of in the
+heap, and their size are known at compile time. They are instanciated
+with a syntax close to the allocating syntax of slice, but by
+omitting the keywork `new`.
+
+```ymir
+import std::io
+
+/**
+  * Takes an array of size twelve as parameter
+  */
+def foo (a : [i32 ; 12]) {
+    println (a);
+}
+
+def main ()
+    throws OutOfArray
+{
+    let mut a : [mut i32 ; 12] = [0 ; 12];
+
+    for i in 0 .. 12
+        a [i] = i
+
+    let b = [1; 12];
+
+    foo (a);
+    foo (b);
+}
+```
+
+You can transform a static array into a slice by using the keywork
+`alias`, `copy` and `dcopy`. The chapter [Aliases and References]()
+explain the difference between those keywords.
+
+```ymir
+import std::io
+
+def main () {
+	let x = [0; 12];
+	
+	let a = alias x;
+	let b = copy x;
+	
+	println (a, " ", b);
+}
+```
+
+
