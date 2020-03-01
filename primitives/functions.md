@@ -1,6 +1,6 @@
 # Functions
 
-Function is a widely accepted concept for dividing a program into
+Functions are a widely accepted concept for dividing a program into
 small parts. A ymir program starts with the `main` function that you
 have already seen in previous chapters.
 
@@ -31,7 +31,7 @@ order is not important for the compiler, so even if `foo` is declared
 after the `main` function, it can be called without any problem.
 
 You can also call a function using dotcall syntax, by placing the
-first parameter of the function on the left. This is a syntax used to
+first parameter of the function on the left. This syntax is used to
 perform continuous data processing and to make the source code easier
 to read.
 
@@ -75,12 +75,11 @@ def main () {
 }
 ```
 
-Values can be specified on a function parameter. If a parameter has a
-value, it is the value that is used by default, and it is therefore
-optionnal to specify value when calling the function for that
-particular parameter. If you still want to specify a value, you will
-have to use a named expression that is formed using the token
-**`->`**.
+The values can be specified on a function parameter. If a parameter
+has a value, the value is used by default, so it is optional to
+specify the value when calling the function for that particular
+parameter. If you still want to specify a value, you will need to use
+a named expression that is formed using the **`->`** token.
 
 ```ymir 
 import std::io
@@ -95,10 +94,11 @@ def main () {
 }
 ```
 
-The named expression can equally be used for parameters that does not
-have default value. A named expression will allow you to specify the
-parameter in the order you want. The algorithm, to determine which
-parameter an argument is refering to, is illustrated by the example : 
+The named expression can also be used for parameters that do not have
+a default value. A named expression will allow you to specify the
+parameter in any order you want. The algorithm, which determines which
+parameter an argument refers to, is presented bellow and we will
+illustrate it by the following example :
 
 ```ymir
 def foo (x : i32, y : i32 = 9, z : i32) {
@@ -131,27 +131,56 @@ for each p in params :
 ```
 
 In this example, the result of each step will be : 
+
 ```
 1, x : [x-> 2]
 2, y : [x-> 2, y-> 1]
 3, z : [x-> 2, y-> 1, 8]
 ```
 
+You can use a complex expression for the default expression of a
+parameter, such as the creation of a class, a function call, and even
+a code block. However, you cannot refer to the other parameters of the
+function. In the next section, we will talk about function bodies, but
+the explanations presented there are valid for any type of expression.
+
+```ymir
+import std::io
+
+def foo (x : i32) -> i32 
+	x + 1
+	
+def bar (x : i32) -> i32
+	x + 2
+	
+def test (a : i32, b : i32 = {bar (1) + foo (2)}) {
+	//                             ^
+	//                       Try to replace by a
+	println (a);
+	println (b);
+}
+
+def main () {
+	test (12);
+}
+```
+
 ## Function body
 
 The body of a function is an expression. Everything in ymir is an
-expression, but every expression does not always have a value, and can
-be of type `void`.
+expression, but each expression does not always have a value, and can
+be `empty`. An empty expression has the type `void`.
 
-A simple `add` function can be writter as follows : 
+A simple `add` function can be written as follows: 
+
 ```ymir
 def add (x : i32, y : i32)-> i32 
 	x + y
 ```
 
-Or using a more complex expression, as block, which is an expression
-containing a set of statements. A block is surronded by the tokens `{}`,
-and the last expression in a block is its value. 
+Or by using a more complex expression, such as block, which is an
+expression containing a set of statements. A block is surrounded by
+the `{}` tokens, and the last expression in a block is its value.
 
 ```ymir
 def main () {
@@ -162,10 +191,10 @@ def main () {
 }
 ```
 
-The token `;`, is a way of specifying that an expression ends in a
-block, and that the value of the block is the expression that
-follows. If no expression follows the value of the block, it is evaluated
-to nothing and its type is **`void`**. For example, if we write the
+The `;` token is a way of specifying that an expression ends, and that
+the value of the block is the expression that follows. If no
+expression follows the expression, the block value is evaluated to
+nothing and its type is **`void`**. For example, if we write the
 following code :
 
 ```ymir
@@ -181,6 +210,7 @@ def main () {
 ```
 
 You should get the following error from the compiler : 
+
 ```
 Error : cannot declare var of type void
  --> main.yr:(6,9)
@@ -195,9 +225,9 @@ compilation terminated.
 ## Function return type
 
 Sometimes a function can return a value, the type of the value must be
-defined at the end of the function definition before the value, by
-using the token **`->`**. The type of the value of the function must
-be the same as the type defined in the prototype.
+defined at the end of the function definition before the value, using
+the token **`->`**. The type of the value of the function must be the
+same as the one defined in the prototype.
 
 ```ymir
 def foo (x : i32)-> i32 
@@ -220,10 +250,10 @@ def isDivisable (x : i32, z : i32) -> bool {
 }
 ```
 
-If the value of function's body is not equivalent to the type
-of the function, and if there is a possibility that the function never
-encounter a return statement, an error is returned by the compiler. For
-example with the following code :
+If the type of the value of the function body is not equivalent to the
+type of the function, and if it is possible that the function may
+never encounter a return declaration, an error is returned by the
+compiler. For example, with the following code :
 
 ```ymir
 import std::io
@@ -279,9 +309,10 @@ The compiler won't return any error.
 
 ## Block declaration
 
-You can declare functions, structs, etc. in a function. This is used
-to create symbol that are useful only for the current function. Sub
-function don't enclose the scope of the parent function.
+You can declare functions, structures, and so on in a function. This
+makes it possible to create symbols that are only useful for the
+current function. Subfunctions do not cover the scope of the parent
+function.
 
 ```ymir
 def foo () {
@@ -305,5 +336,5 @@ def main () {
 }
 ```
 
-There is no way to retreive the symbol `bar` from outside the function
-`foo`. The function is not a module Cf. [Modules]()
+There is no way to retrieve the `bar` symbol outside the `foo`
+function. The function is not a module Cf. [Modules]()

@@ -25,6 +25,10 @@
                 
             
                 
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-spoiler/spoiler.css">
+                
+            
+                
                 <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
                 
             
@@ -525,7 +529,20 @@
             
         </li>
     
-        <li class="chapter " data-level="1.13" >
+        <li class="chapter " data-level="1.13" data-path="../version/README.md">
+            
+                <span>
+            
+                    
+                    Version
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" >
             
                 <span>
             
@@ -584,7 +601,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="functions">Functions</h1>
-<p>Function is a widely accepted concept for dividing a program into
+<p>Functions are a widely accepted concept for dividing a program into
 small parts. A ymir program starts with the <code>main</code> function that you
 have already seen in previous chapters.</p>
 <p>All functions are declared using the keyword <strong><code>def</code></strong>. And are called
@@ -609,7 +626,7 @@ using parameters separated by commas in parentheses.</p>
 order is not important for the compiler, so even if <code>foo</code> is declared
 after the <code>main</code> function, it can be called without any problem.</p>
 <p>You can also call a function using dotcall syntax, by placing the
-first parameter of the function on the left. This is a syntax used to
+first parameter of the function on the left. This syntax is used to
 perform continuous data processing and to make the source code easier
 to read.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>io
@@ -646,12 +663,11 @@ syntax is similar to the declaration of a variable, but the keyword
     <span class="token function">bar</span> <span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>Values can be specified on a function parameter. If a parameter has a
-value, it is the value that is used by default, and it is therefore
-optionnal to specify value when calling the function for that
-particular parameter. If you still want to specify a value, you will
-have to use a named expression that is formed using the token
-<strong><code>-&gt;</code></strong>.</p>
+<p>The values can be specified on a function parameter. If a parameter
+has a value, the value is used by default, so it is optional to
+specify the value when calling the function for that particular
+parameter. If you still want to specify a value, you will need to use
+a named expression that is formed using the <strong><code>-&gt;</code></strong> token.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>io
 
 <span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> i32 <span class="token operator">=</span> <span class="token number">8</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -663,10 +679,11 @@ have to use a named expression that is formed using the token
     <span class="token function">foo</span> <span class="token punctuation">(</span>x<span class="token punctuation">-&gt;</span> <span class="token number">7</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>The named expression can equally be used for parameters that does not
-have default value. A named expression will allow you to specify the
-parameter in the order you want. The algorithm, to determine which
-parameter an argument is refering to, is illustrated by the example : </p>
+<p>The named expression can also be used for parameters that do not have
+a default value. A named expression will allow you to specify the
+parameter in any order you want. The algorithm, which determines which
+parameter an argument refers to, is presented bellow and we will
+illustrate it by the following example :</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> i32<span class="token punctuation">,</span> y <span class="token punctuation">:</span> i32 <span class="token operator">=</span> <span class="token number">9</span><span class="token punctuation">,</span> z <span class="token punctuation">:</span> i32<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token function">println</span> <span class="token punctuation">(</span>x<span class="token punctuation">,</span> <span class="token string">&quot; &quot;</span><span class="token punctuation">,</span> y<span class="token punctuation">,</span> <span class="token string">&quot; &quot;</span><span class="token punctuation">,</span> z<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
@@ -696,17 +713,41 @@ Let final_args <span class="token operator">=</span> <span class="token punctuat
 <pre class="language-"><code>1, x : [x-&gt; 2]
 2, y : [x-&gt; 2, y-&gt; 1]
 3, z : [x-&gt; 2, y-&gt; 1, 8]
-</code></pre><h2 id="function-body">Function body</h2>
+</code></pre><p>You can use a complex expression for the default expression of a
+parameter, such as the creation of a class, a function call, and even
+a code block. However, you cannot refer to the other parameters of the
+function. In the next section, we will talk about function bodies, but
+the explanations presented there are valid for any type of expression.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>io
+
+<span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> i32<span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> i32 
+    x <span class="token operator">+</span> <span class="token number">1</span>
+
+<span class="token keyword">def</span> <span class="token function">bar</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> i32<span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> i32
+    x <span class="token operator">+</span> <span class="token number">2</span>
+
+<span class="token keyword">def</span> <span class="token function">test</span> <span class="token punctuation">(</span>a <span class="token punctuation">:</span> i32<span class="token punctuation">,</span> b <span class="token punctuation">:</span> i32 <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token function">bar</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">//                             ^</span>
+    <span class="token comment">//                       Try to replace by a</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">test</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="function-body">Function body</h2>
 <p>The body of a function is an expression. Everything in ymir is an
-expression, but every expression does not always have a value, and can
-be of type <code>void</code>.</p>
-<p>A simple <code>add</code> function can be writter as follows : </p>
+expression, but each expression does not always have a value, and can
+be <code>empty</code>. An empty expression has the type <code>void</code>.</p>
+<p>A simple <code>add</code> function can be written as follows: </p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">add</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> i32<span class="token punctuation">,</span> y <span class="token punctuation">:</span> i32<span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> i32 
     x <span class="token operator">+</span> y
 </code></pre>
-<p>Or using a more complex expression, as block, which is an expression
-containing a set of statements. A block is surronded by the tokens <code>{}</code>,
-and the last expression in a block is its value. </p>
+<p>Or by using a more complex expression, such as block, which is an
+expression containing a set of statements. A block is surrounded by
+the <code>{}</code> tokens, and the last expression in a block is its value.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token punctuation">{</span>
         <span class="token keyword">let</span> y <span class="token operator">=</span> <span class="token number">9</span><span class="token punctuation">;</span>
@@ -714,10 +755,10 @@ and the last expression in a block is its value. </p>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>The token <code>;</code>, is a way of specifying that an expression ends in a
-block, and that the value of the block is the expression that
-follows. If no expression follows the value of the block, it is evaluated
-to nothing and its type is <strong><code>void</code></strong>. For example, if we write the
+<p>The <code>;</code> token is a way of specifying that an expression ends, and that
+the value of the block is the expression that follows. If no
+expression follows the expression, the block value is evaluated to
+nothing and its type is <strong><code>void</code></strong>. For example, if we write the
 following code :</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> i32 
     <span class="token number">9</span>
@@ -740,9 +781,9 @@ ymir1: fatal error:
 compilation terminated.
 </code></pre><h2 id="function-return-type">Function return type</h2>
 <p>Sometimes a function can return a value, the type of the value must be
-defined at the end of the function definition before the value, by
-using the token <strong><code>-&gt;</code></strong>. The type of the value of the function must
-be the same as the type defined in the prototype.</p>
+defined at the end of the function definition before the value, using
+the token <strong><code>-&gt;</code></strong>. The type of the value of the function must be the
+same as the one defined in the prototype.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> i32<span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> i32 
     x <span class="token operator">+</span> <span class="token number">1</span>
 
@@ -759,10 +800,10 @@ be the same as the type defined in the prototype.</p>
     <span class="token punctuation">(</span>x <span class="token operator">%</span> z<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>If the value of function&apos;s body is not equivalent to the type
-of the function, and if there is a possibility that the function never
-encounter a return statement, an error is returned by the compiler. For
-example with the following code :</p>
+<p>If the type of the value of the function body is not equivalent to the
+type of the function, and if it is possible that the function may
+never encounter a return declaration, an error is returned by the
+compiler. For example, with the following code :</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>io
 
 <span class="token keyword">def</span> <span class="token function">add_one</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> i32<span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> i32 <span class="token punctuation">{</span>
@@ -806,9 +847,10 @@ compilation terminated.
 </code></pre>
 <p>The compiler won&apos;t return any error.</p>
 <h2 id="block-declaration">Block declaration</h2>
-<p>You can declare functions, structs, etc. in a function. This is used
-to create symbol that are useful only for the current function. Sub
-function don&apos;t enclose the scope of the parent function.</p>
+<p>You can declare functions, structures, and so on in a function. This
+makes it possible to create symbols that are only useful for the
+current function. Subfunctions do not cover the scope of the parent
+function.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>io<span class="token punctuation">;</span>    
     <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">12</span><span class="token punctuation">;</span>
@@ -829,8 +871,8 @@ function don&apos;t enclose the scope of the parent function.</p>
     <span class="token comment">// println (&quot;In the main function !&quot;);</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>There is no way to retreive the symbol <code>bar</code> from outside the function
-<code>foo</code>. The function is not a module Cf. <a href="">Modules</a></p>
+<p>There is no way to retrieve the <code>bar</code> symbol outside the <code>foo</code>
+function. The function is not a module Cf. <a href="">Modules</a></p>
 
                                 
                                 </section>
@@ -874,7 +916,7 @@ function don&apos;t enclose the scope of the parent function.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Functions","level":"1.3.3","depth":2,"next":{"title":"Control flows","level":"1.3.4","depth":2,"path":"primitives/control.md","ref":"primitives/control.md","articles":[]},"previous":{"title":"Data types","level":"1.3.2","depth":2,"path":"primitives/types.md","ref":"primitives/types.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"primitives/functions.md","mtime":"2020-02-24T19:08:03.576Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-24T21:37:19.367Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Functions","level":"1.3.3","depth":2,"next":{"title":"Control flows","level":"1.3.4","depth":2,"path":"primitives/control.md","ref":"primitives/control.md","articles":[]},"previous":{"title":"Data types","level":"1.3.2","depth":2,"path":"primitives/types.md","ref":"primitives/types.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename","spoiler"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"spoiler":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"primitives/functions.md","mtime":"2020-02-28T09:07:32.317Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-01T14:08:22.072Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
@@ -893,6 +935,10 @@ function don&apos;t enclose the scope of the parent function.</p>
     
         
         <script src="../gitbook/gitbook-plugin-mathjax/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-spoiler/spoiler.js"></script>
         
     
         

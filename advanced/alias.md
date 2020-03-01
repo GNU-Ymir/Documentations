@@ -1,15 +1,13 @@
 # Alias
 
-All the types that contains pointer to data located in the heap, are
-aliasable type. An aliasable type cannot be copied implicitly, and
-also cannot be refered implicitly, for respectively performance and
-safety considerations. There is principaly to types that are
-aliasable, the arrays (or slices there is no difference in Ymir) and
-Objects. The structs, and tuple that contains aliasable types are also
-aliasable.
+All types that contain a pointer to data in the heap are aliasable
+type. An aliasable type cannot be implicitly copied, nor can it be
+implicitly referenced, for performance and security reasons
+respectively. There are mainly two aliasable types, arrays (or slices,
+there is no difference in Ymir) and objects. Structures and tuples
+that contain aliasable types are also aliasable.
 
-
-You must use the keyword `alias`, to tell to the compiler that you
+You must use the keyword `alias`, to tell the compiler that you
 understand that a new variable will borrow values.
 
 ```ymir
@@ -28,12 +26,10 @@ This source code can be represented in memory by the following figure.
 
 <img src="https://gnu-ymir.github.io/Documentations/advanced/memory_x_alias_main.png" alt="drawing" width="700"/>
 
-
-The alias keyword is mandatory only when the variable that will borrow
-the data is mutable, and can have an impact on the value. You
-evidently can't borrow immutable data in a variable that is
-mutable. For example the compiler should return an error on the
-following code.
+The alias keyword is only mandatory when the variable that will borrow
+the data is mutable and may impact the value. It is obvious that one
+cannot borrow immutable data from a variable that is mutable. For
+example, the compiler must return an error on the following code.
 
 ```ymir
 import std::io
@@ -53,11 +49,12 @@ Error : discard the constant qualifier is prohibited, left operand mutability le
     | 
  5  |     let mut y : [mut i32] = alias x;
     |             ^
-Note : 
- --> main.yr:(5,29)
-    | 
- 5  |     let mut y : [mut i32] = alias x;
-    |                             ^
+    | Note : 
+    |  --> main.yr:(5,29)
+    |     | 
+    |  5  |     let mut y : [mut i32] = alias x;
+    |     |                             ^^^^^
+    |------------------------------ 
 
 Error : undefined symbol y
  --> main.yr:(8,14)
@@ -70,8 +67,8 @@ compilation terminated.
 ```
 
 However, if the variable that will borrow the data is not mutable,
-there is no need to add the `alias` keyword, and the compiler will
-make an implicit alias, that will have no consequence.
+there is no need to add the keyword `alias`, and the compiler will
+create an implicit alias, which will have no consequences.
 
 ```ymir
 import std::io
@@ -102,18 +99,38 @@ def main () {
 }
 ```
 
-You may have noticed, that even if the literal is actually the element
-that create the data, we do not consider that it is the owner of the
-data, and therefore the keyword `alias` is implicit when dealing with
-literal. We consider that the data have an owner only once it has been
-affected to a variable.
+You may have noticed that even though the literal is actually the
+element that creates the data, we do not consider it to be the owner
+of the data, so the keyword `alias` is implied when it is literal. We
+consider the data to have an owner only once it has been assigned to a
+variable.
+
+There are other kinds of `alias` that are implicitly allowed, such
+as code blocks or function returns. Those are implicit because
+the alias is already made within the value of these elements.
+
+```ymir
+import std::io
+
+def foo () -> dmut [i32] {
+	let dmut x = [1, 2, 3];
+	alias x // alias is done here and mandatory
+}
+
+def main () {
+	let x = foo (); // no need to alias
+	println (x); // [1, 2, 3];
+}
+```
 
 ## Alias a function parameter
 
-As you have noticed, the keyword "alias", unlike the keyword "ref",
-does not characterize a variable. The type of a variable will tell
-whether the type must be passed through alias or not, and therefore
-there is no change in the definition of the function.
+As you have noticed, the keyword `alias`, unlike the keyword `ref`,
+does not characterize a variable. The type of a variable will indicate
+whether the type should be passed by alias or not, so there is no
+change in the definition of the function. When the type of a parameter
+is an aliasable type, this parameter can be mutable without being a
+reference.
 
 ```ymir 
 import std::io
@@ -130,9 +147,8 @@ def main () {
 }
 ```
 
-Like for the variable, if the parameter of the function cannot have
-effect on the values that are borrowed, the alias keyword is not
-mandatory.
+As with the variable, if the function parameter cannot affect the
+values that are borrowed, the alias keyword is not required.
 
 ```ymir 
 import std::io
@@ -149,11 +165,12 @@ def main () {
 
 ## Special case of struct and tuple
 
-In the chapter [Structure]() you will learn how to create structure
-containing multiple field of different type. You already learn how to
-make tuple. Those type are sometime aliasable, depending on the inner
-type they possess. If a tuple, or a struct has a field, whose type is
-aliasable, then the tuple or the struct is also aliasable.
+In the chapter [Structure]() you will learn how to create a structure
+containing several fields of different types. You have already learned
+how to make tuples. These types are sometimes aliasable, depending on
+the internal type they have. If a tuple, or a structure, has a field
+whose type is aliasable, then the tuple or structure is also
+aliasable.
 
 The table bellow present some example of aliasable tuple : 
 

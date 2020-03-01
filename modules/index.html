@@ -25,6 +25,10 @@
                 
             
                 
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-spoiler/spoiler.css">
+                
+            
+                
                 <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
                 
             
@@ -525,7 +529,20 @@
             
         </li>
     
-        <li class="chapter " data-level="1.13" >
+        <li class="chapter " data-level="1.13" data-path="../version/README.md">
+            
+                <span>
+            
+                    
+                    Version
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" >
             
                 <span>
             
@@ -607,7 +624,7 @@ relative path of the compilation, i.e. if the file is located in
 <code>$(pwd)/relative/path/to/file</code>, its module name must be
 <code>relative::path::to::file</code>.</p>
 <p>The name of a module is defined by the first line of the source code,
-by the line keyword <code>mod</code>. If this line is not given by the user, the
+by keyword <code>mod</code>. If this line is not given by the user, the
 path of the module will only be the file name, so you will not always
 be able to import the module, depending on its relative path.</p>
 <p>For example, in the file <code>foo.yr</code>, the first line must look like : </p>
@@ -620,7 +637,7 @@ be able to import the module, depending on its relative path.</p>
 <h2 id="privacy">Privacy</h2>
 <p>All symbols defined in a module are private by default. Only modules
 that have declared the symbol have access to it. With the keyword
-<code>pub</code> you can export the symbol for a external modules, which will then
+<code>pub</code> you can export the symbol for an external modules, which will then
 have access to the symbol.</p>
 <p>For example, with file <code>foo.yr</code> filled as follows : </p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">mod</span> <span class="token macro-rules function">sub_modules:</span><span class="token punctuation">:</span>foo<span class="token punctuation">;</span>
@@ -651,7 +668,7 @@ pub <span class="token punctuation">{</span>
 </code></pre>
 <h2 id="sub-modules">Sub modules</h2>
 <p>It is possible to declare sub-module that are part of a global module,
-with the keyword &quot;mod&quot;. Unlike global modules, you have to name them
+with the keyword <code>mod</code>. Unlike global modules, you have to name them
 when you want to access the symbols declared inside them. For example :</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">mod</span> main
 <span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>io
@@ -835,7 +852,7 @@ suite, so the way to create libraries, object files, etc. is the same.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Modules","level":"1.6","depth":1,"next":{"title":"Objects","level":"1.7","depth":1,"path":"objects/README.md","ref":"objects/README.md","articles":[{"title":"Class","level":"1.7.1","depth":2,"path":"objects/class.md","ref":"objects/class.md","articles":[]},{"title":"Inheritance","level":"1.7.2","depth":2,"path":"objects/inheritance.md","ref":"objects/inheritance.md","articles":[]},{"title":"Traits","level":"1.7.3","depth":2,"path":"objects/traits.md","ref":"objects/traits.md","articles":[]},{"title":"Example program","level":"1.7.4","depth":2,"path":"objects/example.md","ref":"objects/example.md","articles":[]}]},"previous":{"title":"Enum","level":"1.5.2","depth":2,"path":"types/enum.md","ref":"types/enum.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"modules/README.md","mtime":"2020-02-24T19:08:03.568Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-24T21:37:19.367Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Modules","level":"1.6","depth":1,"next":{"title":"Objects","level":"1.7","depth":1,"path":"objects/README.md","ref":"objects/README.md","articles":[{"title":"Class","level":"1.7.1","depth":2,"path":"objects/class.md","ref":"objects/class.md","articles":[]},{"title":"Inheritance","level":"1.7.2","depth":2,"path":"objects/inheritance.md","ref":"objects/inheritance.md","articles":[]},{"title":"Traits","level":"1.7.3","depth":2,"path":"objects/traits.md","ref":"objects/traits.md","articles":[]},{"title":"Example program","level":"1.7.4","depth":2,"path":"objects/example.md","ref":"objects/example.md","articles":[]}]},"previous":{"title":"Enum","level":"1.5.2","depth":2,"path":"types/enum.md","ref":"types/enum.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename","spoiler"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"spoiler":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"modules/README.md","mtime":"2020-02-29T13:24:02.438Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-01T14:08:22.072Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
@@ -854,6 +871,10 @@ suite, so the way to create libraries, object files, etc. is the same.</p>
     
         
         <script src="../gitbook/gitbook-plugin-mathjax/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-spoiler/spoiler.js"></script>
         
     
         

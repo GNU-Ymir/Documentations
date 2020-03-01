@@ -1,7 +1,7 @@
 # Structure
 
-Structure is a common pattern used in many languages to define
-users' custom types, which contains multiple values of different
+Structure is a common design used in many languages to define users'
+custom types, which contains multiple values of different
 types. Structures are similar to tuples, in terms of memory management
 (always located in the stack). Unlike tuples, structures have a name,
 and all their internal fields also have a name.
@@ -24,12 +24,12 @@ As you can see structure are printable.
 
 ## Structure mutability
 
-The mutability of the field of a structure is defined within the
-structure declaration. As for any variable declaration, by default the
-fields of a structure are immutable. You can of course add the keyword
-`mut` before the field declaration, to make it mutable. Its mutability
-is therefore dependent on the mutability of the variable that borrows
-the data from the structure.
+The mutability of a field of a structure is defined in the structure
+declaration. As with any variable declaration, the fields of a
+structure are by default immutable. You can of course add the keyword
+`mut` before the declaration of the field, to make it mutable. Its
+mutability therefore depends on the mutability of the variable that
+borrows the data from the structure.
 
 ```ymir 
 import std::io
@@ -54,8 +54,8 @@ def main () {
 
 ## Memory borrowing of structure
 
-As explained in the [Alias]() chapter, structures are only aliasable
-if they contain a field whose type is aliasable. All fields in a
+As explained in the chapter [Alias](), structures are only aliasable
+if they contain a field whose type is aliasable. All the fields of a
 structure are copied each time an assignment is made.
 
 ```ymir
@@ -82,13 +82,13 @@ main::Point(1, 2) main::Point(1, 12)
 
 ## Default value 
 
-You can add a default value for a field in a structure, like a
+You can add a default value for a field in a structure, such as a
 function call, it can be changed when creating a new structure, using
-a named expression, which is constructed with the `->' token.
+a named expression, which is constructed with the `->` token.
 
-The algorithm for determining to which field an argument is associated
-is the same as the one used for the function call, and is presented in
-[Function]().
+The algorithm for determining which field an argument is associated
+with is the same as that used for the function call, and is presented
+in [Function]().
 
 **Exercise :** Try to guess the output of the following program : 
 
@@ -108,18 +108,25 @@ def main () {
 	println (point2);
 }
 ```
+<div class="spoiler_head"> <strong>Correction</strong> (spoiler) : </div>
+{%s%}
+<pre class="language-" style="position: relative;" class="spoiler"><code>main::Point(98, 12)
+main::Point(0, 1)
+</code></pre>
+{%ends%}
+
 
 ## Packed and Union
 
-This part only concern advanced programming paradigms, and are close
-to the machine level. I don't think you'll ever need them unless you
+This part only concerns advanced programming paradigms, and is close
+to the machine level. I don't think you'll ever need it, unless you
 try to optimize your code at a binary level.
 
 The size of a structure is calculated by the compiler, which decides
 the alignment of the different fields. This is why the size of a
-structure containing an `i64` and a `c8` is `16` bytes and not `9`. To
-force the compiler to remove the optimized alignment, you can use the
-`packed` modifier.
+structure containing an `i64' and a `c8'` is `16` bytes, not `9`
+bytes. To force the compiler to remove the optimized alignment, you
+can use the `packed` modifier.
 
 ```ymir
 import std::io
@@ -169,6 +176,6 @@ def main () {
 ```
 
 As you can see, the construction of the Union requires only one
-argument. You cannot give multiple arguments when building an union,
-as they would be contradictory. The argument must also be passed as a
+argument. You cannot give several arguments when building a union, as
+they would be contradictory. The argument must also be passed as a
 named expression (using the `->` token).

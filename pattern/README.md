@@ -177,7 +177,7 @@ def main () {
 		Point (1) => {
 			println ("Point where x is equal to 1");
 		}
-		Point () {
+		Point () => {
 			println ("Any point");
 		}
     }
@@ -221,7 +221,7 @@ class Point {
 	pub let x : i32 = 1;
 	let y : i32 = 2;
 	
-	self () {}
+	pub self () {}
 }
 
 def main () {

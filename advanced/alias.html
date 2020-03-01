@@ -25,6 +25,10 @@
                 
             
                 
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-spoiler/spoiler.css">
+                
+            
+                
                 <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
                 
             
@@ -525,7 +529,20 @@
             
         </li>
     
-        <li class="chapter " data-level="1.13" >
+        <li class="chapter " data-level="1.13" data-path="../version/README.md">
+            
+                <span>
+            
+                    
+                    Version
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" >
             
                 <span>
             
@@ -584,14 +601,13 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="alias">Alias</h1>
-<p>All the types that contains pointer to data located in the heap, are
-aliasable type. An aliasable type cannot be copied implicitly, and
-also cannot be refered implicitly, for respectively performance and
-safety considerations. There is principaly to types that are
-aliasable, the arrays (or slices there is no difference in Ymir) and
-Objects. The structs, and tuple that contains aliasable types are also
-aliasable.</p>
-<p>You must use the keyword <code>alias</code>, to tell to the compiler that you
+<p>All types that contain a pointer to data in the heap are aliasable
+type. An aliasable type cannot be implicitly copied, nor can it be
+implicitly referenced, for performance and security reasons
+respectively. There are mainly two aliasable types, arrays (or slices,
+there is no difference in Ymir) and objects. Structures and tuples
+that contain aliasable types are also aliasable.</p>
+<p>You must use the keyword <code>alias</code>, to tell the compiler that you
 understand that a new variable will borrow values.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>io
 
@@ -605,11 +621,10 @@ understand that a new variable will borrow values.</p>
 </code></pre>
 <p>This source code can be represented in memory by the following figure.</p>
 <p><img src="https://gnu-ymir.github.io/Documentations/advanced/memory_x_alias_main.png" alt="drawing" width="700"></p>
-<p>The alias keyword is mandatory only when the variable that will borrow
-the data is mutable, and can have an impact on the value. You
-evidently can&apos;t borrow immutable data in a variable that is
-mutable. For example the compiler should return an error on the
-following code.</p>
+<p>The alias keyword is only mandatory when the variable that will borrow
+the data is mutable and may impact the value. It is obvious that one
+cannot borrow immutable data from a variable that is mutable. For
+example, the compiler must return an error on the following code.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>io
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -625,11 +640,12 @@ following code.</p>
     | 
  5  |     let mut y : [mut i32] = alias x;
     |             ^
-Note : 
- --&gt; main.yr:(5,29)
-    | 
- 5  |     let mut y : [mut i32] = alias x;
-    |                             ^
+    | Note : 
+    |  --&gt; main.yr:(5,29)
+    |     | 
+    |  5  |     let mut y : [mut i32] = alias x;
+    |     |                             ^^^^^
+    |------------------------------ 
 
 Error : undefined symbol y
  --&gt; main.yr:(8,14)
@@ -640,8 +656,8 @@ Error : undefined symbol y
 ymir1: fatal error: 
 compilation terminated.
 </code></pre><p>However, if the variable that will borrow the data is not mutable,
-there is no need to add the <code>alias</code> keyword, and the compiler will
-make an implicit alias, that will have no consequence.</p>
+there is no need to add the keyword <code>alias</code>, and the compiler will
+create an implicit alias, which will have no consequences.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>io
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -666,16 +682,33 @@ values of <code>x</code> will not be changed, no matter what you do with <code>y
     <span class="token function">println</span> <span class="token punctuation">(</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>You may have noticed, that even if the literal is actually the element
-that create the data, we do not consider that it is the owner of the
-data, and therefore the keyword <code>alias</code> is implicit when dealing with
-literal. We consider that the data have an owner only once it has been
-affected to a variable.</p>
+<p>You may have noticed that even though the literal is actually the
+element that creates the data, we do not consider it to be the owner
+of the data, so the keyword <code>alias</code> is implied when it is literal. We
+consider the data to have an owner only once it has been assigned to a
+variable.</p>
+<p>There are other kinds of <code>alias</code> that are implicitly allowed, such
+as code blocks or function returns. Those are implicit because
+the alias is already made within the value of these elements.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>io
+
+<span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> dmut <span class="token punctuation">[</span>i32<span class="token punctuation">]</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> dmut x <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    alias x <span class="token comment">// alias is done here and mandatory</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// no need to alias</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// [1, 2, 3];</span>
+<span class="token punctuation">}</span>
+</code></pre>
 <h2 id="alias-a-function-parameter">Alias a function parameter</h2>
-<p>As you have noticed, the keyword &quot;alias&quot;, unlike the keyword &quot;ref&quot;,
-does not characterize a variable. The type of a variable will tell
-whether the type must be passed through alias or not, and therefore
-there is no change in the definition of the function.</p>
+<p>As you have noticed, the keyword <code>alias</code>, unlike the keyword <code>ref</code>,
+does not characterize a variable. The type of a variable will indicate
+whether the type should be passed by alias or not, so there is no
+change in the definition of the function. When the type of a parameter
+is an aliasable type, this parameter can be mutable without being a
+reference.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>io
 
 <span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token keyword">mut</span> x <span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token keyword">mut</span> i32<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -689,9 +722,8 @@ there is no change in the definition of the function.</p>
     <span class="token comment">// Try to remove the alias</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>Like for the variable, if the parameter of the function cannot have
-effect on the values that are borrowed, the alias keyword is not
-mandatory.</p>
+<p>As with the variable, if the function parameter cannot affect the
+values that are borrowed, the alias keyword is not required.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>io
 
 <span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> <span class="token punctuation">[</span>i32<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -704,11 +736,12 @@ mandatory.</p>
 <span class="token punctuation">}</span>
 </code></pre>
 <h2 id="special-case-of-struct-and-tuple">Special case of struct and tuple</h2>
-<p>In the chapter <a href="">Structure</a> you will learn how to create structure
-containing multiple field of different type. You already learn how to
-make tuple. Those type are sometime aliasable, depending on the inner
-type they possess. If a tuple, or a struct has a field, whose type is
-aliasable, then the tuple or the struct is also aliasable.</p>
+<p>In the chapter <a href="">Structure</a> you will learn how to create a structure
+containing several fields of different types. You have already learned
+how to make tuples. These types are sometimes aliasable, depending on
+the internal type they have. If a tuple, or a structure, has a field
+whose type is aliasable, then the tuple or structure is also
+aliasable.</p>
 <p>The table bellow present some example of aliasable tuple : </p>
 <table>
 <thead>
@@ -779,7 +812,7 @@ aliasable, then the tuple or the struct is also aliasable.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Aliases","level":"1.4.2","depth":2,"next":{"title":"Copy and Deep copy","level":"1.4.3","depth":2,"path":"advanced/copies.md","ref":"advanced/copies.md","articles":[]},"previous":{"title":"References","level":"1.4.1","depth":2,"path":"advanced/references.md","ref":"advanced/references.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"advanced/alias.md","mtime":"2020-02-24T19:08:03.548Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-24T21:37:19.367Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Aliases","level":"1.4.2","depth":2,"next":{"title":"Copy and Deep copy","level":"1.4.3","depth":2,"path":"advanced/copies.md","ref":"advanced/copies.md","articles":[]},"previous":{"title":"References","level":"1.4.1","depth":2,"path":"advanced/references.md","ref":"advanced/references.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename","spoiler"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"spoiler":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"advanced/alias.md","mtime":"2020-02-29T13:07:48.196Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-01T14:08:22.072Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
@@ -798,6 +831,10 @@ aliasable, then the tuple or the struct is also aliasable.</p>
     
         
         <script src="../gitbook/gitbook-plugin-mathjax/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-spoiler/spoiler.js"></script>
         
     
         

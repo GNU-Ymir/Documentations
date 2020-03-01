@@ -25,6 +25,10 @@
                 
             
                 
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-spoiler/spoiler.css">
+                
+            
+                
                 <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
                 
             
@@ -525,7 +529,20 @@
             
         </li>
     
-        <li class="chapter " data-level="1.13" >
+        <li class="chapter " data-level="1.13" data-path="../version/README.md">
+            
+                <span>
+            
+                    
+                    Version
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" >
             
                 <span>
             
@@ -584,9 +601,9 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="reference">Reference</h1>
-<p>The keyword<strong><code>ref</code></strong>is a keyword that is placed before the declaration
-of a variable. It is used to refer to a value, which is usually
-borrowed from another variable.</p>
+<p>The keyword<strong><code>ref</code></strong> is a keyword that is placed before the
+declaration of a variable. It is used to refer to a value, which is
+usually borrowed from another variable.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
     <span class="token keyword">let</span> <span class="token keyword">ref</span> y <span class="token operator">=</span> <span class="token keyword">ref</span> x<span class="token punctuation">;</span>
@@ -594,13 +611,13 @@ borrowed from another variable.</p>
     <span class="token comment">// Try to remove the keyword ref.</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>The above program, can be represented in memory as illustrated in the
-following figure. </p>
+<p>The above program can be represented in memory as shown in the
+following figure.</p>
 <p><img src="https://gnu-ymir.github.io/Documentations/advanced/memory_x__ref_y_foo.png" alt="Image"></p>
-<p><strong><code>y</code></strong>, is a pointer to x, that can be used as it was directly
-<strong><code>x</code></strong>. Which means, that <strong><code>y</code></strong> must have the same mutability
-properties as <strong><code>x</code></strong>. And that, if <code>x</code> is mutable, modify <code>y</code> would
-also modify <code>x</code>.</p>
+<p><strong><code>y</code></strong>, is a pointer to x, which can be used as if it were directly
+<strong><code>x</code></strong>. This means that <strong><code>y</code></strong> must have the same mutability
+properties (or lower) as <strong><code>x</code></strong>. And that if <code>x</code> is mutable, changing <code>y</code>
+would also change <code>x</code>.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>io
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -633,14 +650,16 @@ accept the side effects it may have on your values.</p>
     <span class="token function">println</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span> 
 <span class="token punctuation">}</span>
 </code></pre>
-<p>The following figure shows the memory status of the previous code: </p>
+<p>The following figure shows the memory status of the previous code:</p>
 <p><img src="https://gnu-ymir.github.io/Documentations/advanced/memory_x_main_ref_x_foo.png" alt="drawing" width="450"></p>
 <p>The keyword <code>ref</code> is not always associated with a mutable variable, it
 can be used to pass a complex type to a function more efficiently,
 when you don&apos;t want to make a complete copy, which would be much less
-efficient. In this case, you still need to specify that you pass the
-variable by reference, to distinguish it from the function which
-passes the variable directly by value.</p>
+efficient. In this case, you should always specify that you pass the
+variable by reference, to distinguish it from the function that passes
+the variable directly by value. In practice, due to the existence of
+aliasable types, which will be discussed in the next chapter, you will
+never gain anything by doing this.</p>
 <p><strong>Exercise :</strong> Try to guess the output of the following program : </p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>io
 
@@ -660,9 +679,15 @@ passes the variable directly by value.</p>
     <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token keyword">ref</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
+<p><div class="spoiler_head"> <strong>Correction</strong> (spoiler) : </div>
+<div class="spoiler">
+<pre class="language-" style="position: relative;"><code>By value : 89
+By reference : 89
+</code></pre>
+</div></p>
 <p>If you have done the exercise, and added the keyword <code>mut</code> in the
-signature of the first function <code>foo</code>, you should have got the
-following error:</p>
+signature of the first function <code>foo</code>, you should get the following
+error: </p>
 <pre class="language-"><code>Error : a parameter cannot be mutable, if it is not a reference
  --&gt; main.yr:(4,14)
     | 
@@ -673,12 +698,12 @@ ymir1: fatal error:
 compilation terminated.
 </code></pre><p>This error means that the type of x is not aliasable, so if it is not
 a reference, marking it as mutable will have no effect on the program,
-and therefore the compiler does not allow it.</p>
+so the compiler does not allow it.</p>
 <h2 id="reference-as-a-value">Reference as a value</h2>
-<p>A reference is not a type, it is only a type of variable, you can&apos;t
-store references in sub types (for example, you can&apos;t make an array of
-reference, or a tuple containing a reference to a value). It means
-that with the following code, you should get an error.</p>
+<p>A reference is not a type, it is only a kind of variable, you cannot
+store references in subtypes (for example, you cannot make a reference
+array, or a tuple containing a reference to a value). This means that
+with the following code, you should get an error.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">12</span><span class="token punctuation">;</span>
     <span class="token keyword">let</span> y <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token keyword">ref</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -692,32 +717,35 @@ that with the following code, you should get an error.</p>
 
 ymir1: fatal error: 
 compilation terminated.
-</code></pre><h2 id="reference-as-function-return">Reference as function return</h2>
-<p>This part is a bit tricky, and I recommend you never do this unless
-you really know what you&apos;re doing. A function can return a reference
-to a variable, but <strong>Ymir</strong> does not provide any verification to
-ensure that the variable will still exist when the function ends, and
-therefore the reference will still point to a valid value. This is a
-major defect in the static verification of <strong>Ymir</strong>, which is
-currently under development.</p>
+</code></pre><p>This warning means that you have used the keyword <code>ref</code> but the
+compiler will ignore it because it will not create a reference to <code>x</code>
+in the value of <code>y</code>.</p>
+<h2 id="reference-as-function-return">Reference as function return</h2>
+<p>You may be skeptical about the interest of returning a reference to a
+variable, and we agree with you. That is why, it is impossible to
+return a reference to a variable as a function return value. </p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>io
 
-<span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token keyword">ref</span> x <span class="token punctuation">:</span> i32<span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token keyword">ref</span> i32 <span class="token punctuation">{</span>
+<span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token keyword">ref</span> i32 <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">12</span><span class="token punctuation">;</span>
     <span class="token keyword">ref</span> x
 <span class="token punctuation">}</span>
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">12</span><span class="token punctuation">;</span>
-    <span class="token keyword">let</span> <span class="token keyword">ref</span> y <span class="token operator">=</span> <span class="token keyword">ref</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token keyword">ref</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">println</span> <span class="token punctuation">(</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+    <span class="token keyword">let</span> <span class="token keyword">ref</span> y <span class="token operator">=</span> <span class="token keyword">ref</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// x would no longer exists</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// and a seg fault would be raised, when using the reference</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>You may be skeptical about the interest of returning a reference to a
-variable that is a parameter, and I agree with you, but the ability to
-return a reference can be useful sometimes, especially when it comes
-to objects, which are described in the chapter
-<a href="class/README.md">Class</a>.</p>
+<p>With the above source code, you should get the following error : </p>
+<pre class="language-"><code>Error : cannot return a reference type
+ --&gt; main.yr:(3,19)
+    | 
+ 3  | def foo () -&gt; ref i32 {
+    |                   ^^^
 
+ymir1: fatal error: 
+compilation terminated.
+</code></pre>
                                 
                                 </section>
                             
@@ -760,7 +788,7 @@ to objects, which are described in the chapter
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"References","level":"1.4.1","depth":2,"next":{"title":"Aliases","level":"1.4.2","depth":2,"path":"advanced/alias.md","ref":"advanced/alias.md","articles":[]},"previous":{"title":"Alias and References","level":"1.4","depth":1,"path":"advanced/README.md","ref":"advanced/README.md","articles":[{"title":"References","level":"1.4.1","depth":2,"path":"advanced/references.md","ref":"advanced/references.md","articles":[]},{"title":"Aliases","level":"1.4.2","depth":2,"path":"advanced/alias.md","ref":"advanced/alias.md","articles":[]},{"title":"Copy and Deep copy","level":"1.4.3","depth":2,"path":"advanced/copies.md","ref":"advanced/copies.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"advanced/references.md","mtime":"2020-02-24T19:08:03.552Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-24T21:37:19.367Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"References","level":"1.4.1","depth":2,"next":{"title":"Aliases","level":"1.4.2","depth":2,"path":"advanced/alias.md","ref":"advanced/alias.md","articles":[]},"previous":{"title":"Alias and References","level":"1.4","depth":1,"path":"advanced/README.md","ref":"advanced/README.md","articles":[{"title":"References","level":"1.4.1","depth":2,"path":"advanced/references.md","ref":"advanced/references.md","articles":[]},{"title":"Aliases","level":"1.4.2","depth":2,"path":"advanced/alias.md","ref":"advanced/alias.md","articles":[]},{"title":"Copy and Deep copy","level":"1.4.3","depth":2,"path":"advanced/copies.md","ref":"advanced/copies.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename","spoiler"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"spoiler":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"advanced/references.md","mtime":"2020-02-29T13:12:44.633Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-01T14:08:22.072Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
@@ -779,6 +807,10 @@ to objects, which are described in the chapter
     
         
         <script src="../gitbook/gitbook-plugin-mathjax/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-spoiler/spoiler.js"></script>
         
     
         

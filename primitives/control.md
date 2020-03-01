@@ -1,23 +1,21 @@
 # Control flows
 
-
 When writing a program, the ability to decide to execute part of the
-code conditionally, or to repeat part of the code, is a basic schema
+code conditionally, or to repeat part of the code, is a basic scheme
 that can be really useful.
 
-In **Ymir** unlike many *C-like* language, there is no such things as
-a statement, everything is an expression and can be evaluated. So, you
-can initialize variable with a `if`, a `while` or even a `for`
-expression.
+In **Ymir**, unlike many *C* languages, there is no statement,
+everything is an expression and can be evaluated. Thus, you can
+initialize a variable with an expression `if`, `while` or even `for`.
 
 # If expression
 
-An *if expression* allows you to branch in your code by making
-decisions based on conditions. A if expression is composed by a `if`
-keyword, followed by an expression that has to be typed as a `bool`,
-followed by a expression. You can add an `else` after an *if
-expression*, to execute code, if the condition of the *if expression*
-is not respected.
+An *if* expression allows you to branch into your code by making
+decisions based on conditions. An *if* expression consists of a keyword
+`if`, followed by an expression that must be typed as a `bool`,
+followed by an expression. You can add an `else` after an *if*
+expression, to execute the code, if the condition of the *if*
+expression is not met.
 
 ```ymir
 def main () {
@@ -44,10 +42,10 @@ def main () {
 }
 ```
 
-As said above, since everything is an expression, you can use *if
-expressions* as values. Every branch of the *if expression* must have
-the same type, otherwise an error while be returned by the
-compiler. The value of an if, can of course be of type **`void`**.
+As mentioned above, since everything is an expression, you can use *if
+expressions* as values. Each branch of the *if* expression must have
+the same type, otherwise an error will be returned by the
+compiler. The value of an *if*, can of course be of type **`void`**.
 
 ```ymir
 def main () {
@@ -60,8 +58,8 @@ def main () {
 }
 ```
 
-If no `else` follows an *if expression*, a default `else` that does
-nothing and have a value of type `void` is added. For example with the
+If no `else` follows an *if* expression, a default `else` that does
+nothing and has an *empty* value is added. For example, with the
 following code :
 
 
@@ -78,15 +76,16 @@ You should get the following error:
 
 ```
 Error : incompatible types void and i32
- --> main.yr:(3,13)
+ --> main.yr:(3,10)
     | 
- 3  |     let x = if condition {
-    |             ^
-Note : 
- --> main.yr:(4,2)
-    | 
- 4  | 	5
-    | 	^
+ 3  | 	let x = if condition {
+    | 	        ^^
+    | Note : 
+    |  --> main.yr:(4,3)
+    |     | 
+    |  4  | 		5 
+    |     | 		^
+    |------------------------------ 
 
 ymir1: fatal error: 
 compilation terminated.
@@ -98,8 +97,8 @@ In **Ymir**, there is three kind of loops: `loop`, `while` and `for`.
 
 ### Infinite repetitions with `loop`
 
-The `loop` keyword tells to the compiler, that a block of code has to
-be repeated forever.
+The keyword `loop` is used to specify that a block of code must be
+repeated endlessly.
 
 ```ymir
 def main () {
@@ -108,9 +107,10 @@ def main () {
 	}
 }
 ```
-A loop can be used to repeat an action until it succeed, such as wait
-the end of a thread, or wait incoming network connections, etc.  The
-keyword `break` allows you to stop a loop, and give a value to it.
+
+A loop can be used to repeat an action until it succeeds, e.g. waiting
+for the end of a thread, or waiting for incoming network connections,
+etc.  The keyword `break` is used to stop a loop and gives it a value.
 
 ```ymir 
 import std::io
@@ -128,7 +128,7 @@ def main () {
 }
 ```
 
-Will give the following result once executed : 
+The above source code will produce the following result:
 
 ```
 Result : 11
@@ -136,11 +136,11 @@ Result : 11
 
 ### Loop while condition is met
 
-The `while` keyword allows you to create a loop, that continue until a
-condition is unmet. As for the `loop`, it can be breaked with the
-keyword `break`. The value of a while is given by the value of its
+The keyword `while` creates a loop, which continues until a condition
+is no longer satisfied. As for the `loop`, it can be broken with the
+keyword `break`. The value of a *while* is given by the value of its
 content expression, at the last iteration, or by the value given by a
-`break` if has been breaked.
+`break` if it has been broken.
 
 ```ymir
 import std::io
@@ -155,7 +155,7 @@ def main () {
 }
 ```
 
-While produced the following results : 
+The above source code will produce the following result:
 
 ```
 X is : 10
@@ -163,17 +163,17 @@ X is : 10
 
 ### For loops to iterate over a value
 
-The last type of loop is the "for" loop. It is applicable on an
-iterable type. The value of a "for" loop works exactly like the value
-evaluation of a "while" loop. Ranges, Slice and Tuple are iterable
-types.  For example, for range :
+The last type of loop is the `for` loop. It is applicable on an
+iterable type. The value of a `for` loop works exactly like the
+evaluation of the value of a `while` loop. Ranges, Slice and Tuple are
+iterable types.  For example, for range :
 
 ```ymir
 import std::io
     
 def main () {
     for i in (0 .. 8).step_by (2) {
-		println (i, "!");
+		println (i);
     }	
 	
 	for i in 10 .. 0 {
@@ -182,27 +182,37 @@ def main () {
 }
 ```
 
-You can iterate one slice per value, by defining only one iterator on
-the for loop. This variable, will make a copy of each element of the
+You can iterate a slice by value, by defining a single iterator on the
+for loop. This variable, will make a copy of each element of the
 slice, at each iteration. Of course, you can choose to iterate by
 reference, and even make it mutable. Or get the index at the same
-time. Or get the index finger at the same time. When using an index,
-its type is a **`usize`**.
+time. When using an index, its type is a **`usize`**.
+
+- Iteration by value :
 
 ```ymir
 for i in [1, 2, 3]
 ```
+
+- Iteration by reference : 
+
 ```ymir
 let mut x : [mut i32] = [1, 2, 3];
 for ref mut i in x {
 	i = 8;
 }
+println (x);
 ```
+
+- Iteration by value and index, (the value can of course be a reference) : 
+
 ```ymir
 for index, value in [1, 2, 3]
 ```
 
-If the slice on which you are iterating is mutable, you can have a mutable ref access to its values.
+If the slice you are iterating on is mutable, you can have mutable
+access to its values.
+
 ```ymir
 import std::io
 
@@ -216,6 +226,11 @@ def main () {
 	println (x);
 }
 ```
+
+The mutability of the tables and the reference system are advanced
+knowledge of the language, and will not be discussed in this
+chapter. For more information, please read the chapter on
+[Aliases and references]().
 
 You can also iterate over tuple, but it will be a static iteration,
 and is equivalent to a static rewrite.

@@ -144,3 +144,45 @@ def main () {
 ```
 
 
+## Final class
+
+Final classes declared with the custom attributes `@final` defines
+classes that cannot have heirs. The custom attributes `@final` can
+also be used on method to avoid overload from heir class.
+
+```ymir
+import std::io;
+
+class @abstract Shape {	
+    pub self () {}
+    
+    pub def area (self) -> i32;	
+}
+
+class Rectangle over Shape {
+
+    let _length : i32;
+    let _width : i32;
+    
+    pub self (l : i32, w : i32) with _length = l, _width = w {}
+    
+    pub over @final area (self) -> i32 {
+		self._length * self._width
+    }
+    
+}
+
+class @final Square over Rectangle {	
+    pub self (l : i32) with super (l, l) {}
+
+    // Try to add this method
+    // pub over area (self) -> i32 {
+    //     self._length * self._width
+    // }
+}
+
+def main () {
+    let s : Shape = Square::new (9);
+    println (s.area ());
+}
+```

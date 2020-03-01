@@ -25,6 +25,10 @@
                 
             
                 
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-spoiler/spoiler.css">
+                
+            
+                
                 <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
                 
             
@@ -525,7 +529,20 @@
             
         </li>
     
-        <li class="chapter " data-level="1.13" >
+        <li class="chapter " data-level="1.13" data-path="../version/README.md">
+            
+                <span>
+            
+                    
+                    Version
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" >
             
                 <span>
             
@@ -584,8 +601,8 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="structure">Structure</h1>
-<p>Structure is a common pattern used in many languages to define
-users&apos; custom types, which contains multiple values of different
+<p>Structure is a common design used in many languages to define users&apos;
+custom types, which contains multiple values of different
 types. Structures are similar to tuples, in terms of memory management
 (always located in the stack). Unlike tuples, structures have a name,
 and all their internal fields also have a name.</p>
@@ -603,12 +620,12 @@ and all their internal fields also have a name.</p>
 </code></pre>
 <p>As you can see structure are printable.</p>
 <h2 id="structure-mutability">Structure mutability</h2>
-<p>The mutability of the field of a structure is defined within the
-structure declaration. As for any variable declaration, by default the
-fields of a structure are immutable. You can of course add the keyword
-<code>mut</code> before the field declaration, to make it mutable. Its mutability
-is therefore dependent on the mutability of the variable that borrows
-the data from the structure.</p>
+<p>The mutability of a field of a structure is defined in the structure
+declaration. As with any variable declaration, the fields of a
+structure are by default immutable. You can of course add the keyword
+<code>mut</code> before the declaration of the field, to make it mutable. Its
+mutability therefore depends on the mutability of the variable that
+borrows the data from the structure.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>io
 
 <span class="token keyword">struct</span> 
@@ -629,8 +646,8 @@ the data from the structure.</p>
 <span class="token punctuation">}</span>
 </code></pre>
 <h2 id="memory-borrowing-of-structure">Memory borrowing of structure</h2>
-<p>As explained in the <a href="">Alias</a> chapter, structures are only aliasable
-if they contain a field whose type is aliasable. All fields in a
+<p>As explained in the chapter <a href="">Alias</a>, structures are only aliasable
+if they contain a field whose type is aliasable. All the fields of a
 structure are copied each time an assignment is made.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>io
 
@@ -649,12 +666,12 @@ structure are copied each time an assignment is made.</p>
 <p>The above program should compile and display the following output : </p>
 <pre class="language-"><code>main::Point(1, 2) main::Point(1, 12)
 </code></pre><h2 id="default-value">Default value</h2>
-<p>You can add a default value for a field in a structure, like a
+<p>You can add a default value for a field in a structure, such as a
 function call, it can be changed when creating a new structure, using
-a named expression, which is constructed with the `-&gt;&apos; token.</p>
-<p>The algorithm for determining to which field an argument is associated
-is the same as the one used for the function call, and is presented in
-<a href="">Function</a>.</p>
+a named expression, which is constructed with the <code>-&gt;</code> token.</p>
+<p>The algorithm for determining which field an argument is associated
+with is the same as that used for the function call, and is presented
+in <a href="">Function</a>.</p>
 <p><strong>Exercise :</strong> Try to guess the output of the following program : </p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>io
 
@@ -671,15 +688,20 @@ is the same as the one used for the function call, and is presented in
     <span class="token function">println</span> <span class="token punctuation">(</span>point2<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
+<p><div class="spoiler_head"> <strong>Correction</strong> (spoiler) : </div>
+<div class="spoiler">
+<pre class="language-" style="position: relative;"><code>main::Point(98, 12)
+main::Point(0, 1)
+</code></pre>
+</div></p>
 <h2 id="packed-and-union">Packed and Union</h2>
-<p>This part only concern advanced programming paradigms, and are close
-to the machine level. I don&apos;t think you&apos;ll ever need them unless you
+<p>This part only concerns advanced programming paradigms, and is close
+to the machine level. I don&apos;t think you&apos;ll ever need it, unless you
 try to optimize your code at a binary level.</p>
 <p>The size of a structure is calculated by the compiler, which decides
 the alignment of the different fields. This is why the size of a
-structure containing an <code>i64</code> and a <code>c8</code> is <code>16</code> bytes and not <code>9</code>. To
-force the compiler to remove the optimized alignment, you can use the
-<code>packed</code> modifier.</p>
+structure containing an <code>i64&apos; and a</code>c8&apos;<code>is</code>16<code>bytes, not</code>9<code>bytes. To force the compiler to remove the optimized alignment, you
+can use the</code>packed` modifier.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>io
 
 <span class="token keyword">struct</span> <span class="token operator">@</span>packed
@@ -717,8 +739,8 @@ of the structure will then be the size of its largest field.</p>
 </code></pre>
 <pre class="language-"><code>1094713344
 </code></pre><p>As you can see, the construction of the Union requires only one
-argument. You cannot give multiple arguments when building an union,
-as they would be contradictory. The argument must also be passed as a
+argument. You cannot give several arguments when building a union, as
+they would be contradictory. The argument must also be passed as a
 named expression (using the <code>-&gt;</code> token).</p>
 
                                 
@@ -763,7 +785,7 @@ named expression (using the <code>-&gt;</code> token).</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Structure","level":"1.5.1","depth":2,"next":{"title":"Enum","level":"1.5.2","depth":2,"path":"types/enum.md","ref":"types/enum.md","articles":[]},"previous":{"title":"User define types","level":"1.5","depth":1,"path":"types/README.md","ref":"types/README.md","articles":[{"title":"Structure","level":"1.5.1","depth":2,"path":"types/struct.md","ref":"types/struct.md","articles":[]},{"title":"Enum","level":"1.5.2","depth":2,"path":"types/enum.md","ref":"types/enum.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"types/struct.md","mtime":"2020-02-24T19:08:03.584Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-24T21:37:19.367Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Structure","level":"1.5.1","depth":2,"next":{"title":"Enum","level":"1.5.2","depth":2,"path":"types/enum.md","ref":"types/enum.md","articles":[]},"previous":{"title":"User define types","level":"1.5","depth":1,"path":"types/README.md","ref":"types/README.md","articles":[{"title":"Structure","level":"1.5.1","depth":2,"path":"types/struct.md","ref":"types/struct.md","articles":[]},{"title":"Enum","level":"1.5.2","depth":2,"path":"types/enum.md","ref":"types/enum.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename","spoiler"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"spoiler":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"types/struct.md","mtime":"2020-02-29T13:15:23.446Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-01T14:08:22.072Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
@@ -782,6 +804,10 @@ named expression (using the <code>-&gt;</code> token).</p>
     
         
         <script src="../gitbook/gitbook-plugin-mathjax/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-spoiler/spoiler.js"></script>
         
     
         

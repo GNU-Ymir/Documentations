@@ -1,5 +1,5 @@
 # User define types
 
-There is three different types, that can be created by the user,
-structures, enumeration and objects. This chapter covers the structure
-and enumeration.
+There are three different types, which can be created by the user,
+namely structures, enumeration and objects. This chapter discusses
+structure and enumeration.

@@ -1,7 +1,8 @@
 # Reference
-The keyword**`ref`**is a keyword that is placed before the declaration
-of a variable. It is used to refer to a value, which is usually
-borrowed from another variable.
+
+The keyword**`ref`** is a keyword that is placed before the
+declaration of a variable. It is used to refer to a value, which is
+usually borrowed from another variable.
  
 ```ymir
 def foo () {
@@ -11,15 +12,16 @@ def foo () {
 	// Try to remove the keyword ref.
 }
 ```
-The above program, can be represented in memory as illustrated in the
-following figure. 
+
+The above program can be represented in memory as shown in the
+following figure.
 
 ![Image](https://gnu-ymir.github.io/Documentations/advanced/memory_x__ref_y_foo.png)
 
-**`y`**, is a pointer to x, that can be used as it was directly
-**`x`**. Which means, that **`y`** must have the same mutability
-properties as **`x`**. And that, if `x` is mutable, modify `y` would
-also modify `x`.
+**`y`**, is a pointer to x, which can be used as if it were directly
+**`x`**. This means that **`y`** must have the same mutability
+properties (or lower) as **`x`**. And that if `x` is mutable, changing `y`
+would also change `x`.
 
 ```ymir
 import std::io
@@ -64,16 +66,18 @@ def main () {
 }
 ```
 
-The following figure shows the memory status of the previous code: 
+The following figure shows the memory status of the previous code:
 
 <img src="https://gnu-ymir.github.io/Documentations/advanced/memory_x_main_ref_x_foo.png" alt="drawing" width="450"/>
 
 The keyword `ref` is not always associated with a mutable variable, it
 can be used to pass a complex type to a function more efficiently,
 when you don't want to make a complete copy, which would be much less
-efficient. In this case, you still need to specify that you pass the
-variable by reference, to distinguish it from the function which
-passes the variable directly by value.
+efficient. In this case, you should always specify that you pass the
+variable by reference, to distinguish it from the function that passes
+the variable directly by value. In practice, due to the existence of
+aliasable types, which will be discussed in the next chapter, you will
+never gain anything by doing this.
 
 **Exercise :** Try to guess the output of the following program : 
 
@@ -97,9 +101,16 @@ def main () {
 }
 ```
 
+<div class="spoiler_head"> <strong>Correction</strong> (spoiler) : </div>
+{%s%}
+<pre class="language-" style="position: relative;" class="spoiler"><code>By value : 89
+By reference : 89
+</code></pre>
+{%ends%}
+
 If you have done the exercise, and added the keyword `mut` in the
-signature of the first function `foo`, you should have got the
-following error:
+signature of the first function `foo`, you should get the following
+error: 
 
 ```
 Error : a parameter cannot be mutable, if it is not a reference
@@ -114,15 +125,14 @@ compilation terminated.
 
 This error means that the type of x is not aliasable, so if it is not
 a reference, marking it as mutable will have no effect on the program,
-and therefore the compiler does not allow it.
-
+so the compiler does not allow it.
 
 ## Reference as a value 
 
-A reference is not a type, it is only a type of variable, you can't
-store references in sub types (for example, you can't make an array of
-reference, or a tuple containing a reference to a value). It means
-that with the following code, you should get an error.
+A reference is not a type, it is only a kind of variable, you cannot
+store references in subtypes (for example, you cannot make a reference
+array, or a tuple containing a reference to a value). This means that
+with the following code, you should get an error.
 
 ```ymir 
 def main () {
@@ -142,32 +152,39 @@ ymir1: fatal error:
 compilation terminated.
 ```
 
+This warning means that you have used the keyword `ref` but the
+compiler will ignore it because it will not create a reference to `x`
+in the value of `y`.
+
 ## Reference as function return
 
-This part is a bit tricky, and I recommend you never do this unless
-you really know what you're doing. A function can return a reference
-to a variable, but **Ymir** does not provide any verification to
-ensure that the variable will still exist when the function ends, and
-therefore the reference will still point to a valid value. This is a
-major defect in the static verification of **Ymir**, which is
-currently under development.
+You may be skeptical about the interest of returning a reference to a
+variable, and we agree with you. That is why, it is impossible to
+return a reference to a variable as a function return value. 
 
 ```ymir
 import std::io
 
-def foo (ref x : i32) -> ref i32 {
+def foo () -> ref i32 {
+	let x = 12;
 	ref x
 }
 
 def main () {
-	let x = 12;
-	let ref y = ref foo (ref x);
-	println (y); 
+	let ref y = ref foo (); // x would no longer exists
+	println (y); // and a seg fault would be raised, when using the reference
 }
 ```
 
-You may be skeptical about the interest of returning a reference to a
-variable that is a parameter, and I agree with you, but the ability to
-return a reference can be useful sometimes, especially when it comes
-to objects, which are described in the chapter
-[Class](class/README.md).
+With the above source code, you should get the following error : 
+
+```
+Error : cannot return a reference type
+ --> main.yr:(3,19)
+    | 
+ 3  | def foo () -> ref i32 {
+    |                   ^^^
+
+ymir1: fatal error: 
+compilation terminated.
+```

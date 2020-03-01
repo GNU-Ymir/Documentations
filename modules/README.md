@@ -31,7 +31,7 @@ relative path of the compilation, i.e. if the file is located in
 `relative::path::to::file`.
 
 The name of a module is defined by the first line of the source code,
-by the line keyword `mod`. If this line is not given by the user, the
+by keyword `mod`. If this line is not given by the user, the
 path of the module will only be the file name, so you will not always
 be able to import the module, depending on its relative path.
 
@@ -53,7 +53,7 @@ import sub_modules::foo
 
 All symbols defined in a module are private by default. Only modules
 that have declared the symbol have access to it. With the keyword
-`pub` you can export the symbol for a external modules, which will then
+`pub` you can export the symbol for an external modules, which will then
 have access to the symbol.
 
 For example, with file `foo.yr` filled as follows : 
@@ -95,7 +95,7 @@ pub {
 ## Sub modules
 
 It is possible to declare sub-module that are part of a global module,
-with the keyword "mod". Unlike global modules, you have to name them
+with the keyword `mod`. Unlike global modules, you have to name them
 when you want to access the symbols declared inside them. For example :
 
 ```ymir

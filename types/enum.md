@@ -1,9 +1,9 @@
 # Enumeration
 
 Enumerations are user-defined types that have a set of values. The
-keyword `enum` is used to define an enumerated type, from which the
-field type is deduced at compile time. It is mandatory that each field
-shares the same type.
+keyword `enum` is used to define an enumeration type. The type of the
+fields is inferred at compile time, thanks to the value associated with
+them. It is mandatory that each field shares the same type.
 
 ```ymir
 import std::io
@@ -28,8 +28,8 @@ def main () {
 }
 ```
 
-Enum can be cast to the type of its value, but the reverse is not
-possible.
+The enumeration can be casted according to the type of its value, but
+the reverse is not possible.
 
 ```ymir
 import std::io

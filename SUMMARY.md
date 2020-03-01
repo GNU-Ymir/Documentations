@@ -30,5 +30,6 @@
 * [Operator overloading](templates/operators.md)
 * [Error handling](errors/main.md)
   * [Scope guards](errors/scope.md)
+* [Version](version/README.md)
 * [Documentation]()
  

@@ -1,5 +1,5 @@
 {
-    "plugins": ["prism", "-highlight", "copy-code-button", "mathjax", "codeblock-filename"],
+    "plugins": ["prism", "-highlight", "copy-code-button", "mathjax", "codeblock-filename", "spoiler"],
     "pluginsConfig": {
 	"prism": {
 	    "css": [

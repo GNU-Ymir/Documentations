@@ -25,6 +25,10 @@
                 
             
                 
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-spoiler/spoiler.css">
+                
+            
+                
                 <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
                 
             
@@ -525,7 +529,20 @@
             
         </li>
     
-        <li class="chapter " data-level="1.13" >
+        <li class="chapter " data-level="1.13" data-path="../version/README.md">
+            
+                <span>
+            
+                    
+                    Version
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" >
             
                 <span>
             
@@ -707,6 +724,45 @@ class Circle <span class="token keyword">over</span> Shape <span class="token pu
     <span class="token comment">// Try to replace by shape</span>
 <span class="token punctuation">}</span>
 </code></pre>
+<h2 id="final-class">Final class</h2>
+<p>Final classes declared with the custom attributes <code>@final</code> defines
+classes that cannot have heirs. The custom attributes <code>@final</code> can
+also be used on method to avoid overload from heir class.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token macro-rules function">std:</span><span class="token punctuation">:</span>io<span class="token punctuation">;</span>
+
+class <span class="token operator">@</span>abstract Shape <span class="token punctuation">{</span>    
+    pub <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+    pub <span class="token keyword">def</span> <span class="token function">area</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> i32<span class="token punctuation">;</span>    
+<span class="token punctuation">}</span>
+
+class Rectangle <span class="token keyword">over</span> Shape <span class="token punctuation">{</span>
+
+    <span class="token keyword">let</span> _length <span class="token punctuation">:</span> i32<span class="token punctuation">;</span>
+    <span class="token keyword">let</span> _width <span class="token punctuation">:</span> i32<span class="token punctuation">;</span>
+
+    pub <span class="token keyword">self</span> <span class="token punctuation">(</span>l <span class="token punctuation">:</span> i32<span class="token punctuation">,</span> w <span class="token punctuation">:</span> i32<span class="token punctuation">)</span> with _length <span class="token operator">=</span> l<span class="token punctuation">,</span> _width <span class="token operator">=</span> w <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+    pub <span class="token keyword">over</span> <span class="token operator">@</span><span class="token keyword">final</span> <span class="token function">area</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> i32 <span class="token punctuation">{</span>
+        <span class="token keyword">self</span><span class="token punctuation">.</span>_length <span class="token operator">*</span> <span class="token keyword">self</span><span class="token punctuation">.</span>_width
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+
+class <span class="token operator">@</span><span class="token keyword">final</span> Square <span class="token keyword">over</span> Rectangle <span class="token punctuation">{</span>    
+    pub <span class="token keyword">self</span> <span class="token punctuation">(</span>l <span class="token punctuation">:</span> i32<span class="token punctuation">)</span> with <span class="token keyword">super</span> <span class="token punctuation">(</span>l<span class="token punctuation">,</span> l<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+    <span class="token comment">// Try to add this method</span>
+    <span class="token comment">// pub over area (self) -&gt; i32 {</span>
+    <span class="token comment">//     self._length * self._width</span>
+    <span class="token comment">// }</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> s <span class="token punctuation">:</span> Shape <span class="token operator">=</span> <span class="token macro-rules function">Square:</span><span class="token punctuation">:</span><span class="token function">new</span> <span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span>s<span class="token punctuation">.</span><span class="token function">area</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
 
                                 
                                 </section>
@@ -750,7 +806,7 @@ class Circle <span class="token keyword">over</span> Shape <span class="token pu
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Inheritance","level":"1.7.2","depth":2,"next":{"title":"Traits","level":"1.7.3","depth":2,"path":"objects/traits.md","ref":"objects/traits.md","articles":[]},"previous":{"title":"Class","level":"1.7.1","depth":2,"path":"objects/class.md","ref":"objects/class.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"objects/inheritance.md","mtime":"2020-02-24T19:08:03.572Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-24T21:37:19.367Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Inheritance","level":"1.7.2","depth":2,"next":{"title":"Traits","level":"1.7.3","depth":2,"path":"objects/traits.md","ref":"objects/traits.md","articles":[]},"previous":{"title":"Class","level":"1.7.1","depth":2,"path":"objects/class.md","ref":"objects/class.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename","spoiler"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"spoiler":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"objects/inheritance.md","mtime":"2020-02-29T13:38:52.616Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-01T14:08:22.072Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
@@ -769,6 +825,10 @@ class Circle <span class="token keyword">over</span> Shape <span class="token pu
     
         
         <script src="../gitbook/gitbook-plugin-mathjax/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-spoiler/spoiler.js"></script>
         
     
         
