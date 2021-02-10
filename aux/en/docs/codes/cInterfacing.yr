@@ -1,5 +1,0 @@
-extern (C) pow (base : double, exponent : double) -> double;
-
-def main() {
-    println ("7 ^ 3 = ", pow (7.0, 3.0));
-}

@@ -1,5 +1,0 @@
-mod myLibrary.myModule;
-
-def myFunction (myVar : myStructType) -> void {
-    // example
-}
