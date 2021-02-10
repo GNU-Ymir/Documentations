@@ -1,0 +1,17 @@
+.code-filename {
+    line-height: inherit;
+    color: #657b83; /* base00 */
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+
+    background-color: #cbc8b9;
+    
+    border-bottom: 1px solid transparent;
+    border-bottom-color: transparent;
+    border-top-right-radius: 20px;
+    height : 25px;
+    margin-top : 20px;
+}
+
+.code-filename p {
+    padding-left : 10px;
+}

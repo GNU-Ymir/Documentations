@@ -1,9 +1,9 @@
 {
-    "plugins": ["prism", "-highlight", "copy-code-button", "mathjax", "codeblock-filename", "spoiler"],
+    "plugins": ["prism", "-highlight", "copy-code-button", "mathjax", "codeblock-filename", "spoiler", "folding-menu", "language-picker", "anchor-nav-x"],
     "pluginsConfig": {
 	"prism": {
 	    "css": [
-		"prismjs/themes/prism-atelier.css"
+		"themes/code.css"
 	    ]
 	}
     }

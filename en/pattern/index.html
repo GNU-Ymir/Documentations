@@ -1,0 +1,996 @@
+
+<!DOCTYPE HTML>
+<html lang="en" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Pattern matching · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-prism/code.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-codeblock-filename/block.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-spoiler/spoiler.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-language-picker/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-anchor-nav-x/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../templates/" />
+    
+    
+    <link rel="prev" href="../functions/" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../hello-world/">
+            
+                <a href="../hello-world/">
+            
+                    
+                    Hello World
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../hello-world/commentaires.html">
+            
+                <a href="../hello-world/commentaires.html">
+            
+                    
+                    Comments
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../primitives/">
+            
+                <a href="../primitives/">
+            
+                    
+                    Basic programming concepts
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../primitives/variables.html">
+            
+                <a href="../primitives/variables.html">
+            
+                    
+                    Variable and Mutability
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../primitives/types.html">
+            
+                <a href="../primitives/types.html">
+            
+                    
+                    Data types
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../primitives/functions.html">
+            
+                <a href="../primitives/functions.html">
+            
+                    
+                    Functions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../primitives/control.html">
+            
+                <a href="../primitives/control.html">
+            
+                    
+                    Control flows
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../advanced/">
+            
+                <a href="../advanced/">
+            
+                    
+                    Alias and References
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../advanced/references.html">
+            
+                <a href="../advanced/references.html">
+            
+                    
+                    References
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../advanced/alias.html">
+            
+                <a href="../advanced/alias.html">
+            
+                    
+                    Aliases
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../advanced/copies.html">
+            
+                <a href="../advanced/copies.html">
+            
+                    
+                    Copy and Deep copy
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../types/">
+            
+                <a href="../types/">
+            
+                    
+                    User define types
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../types/struct.html">
+            
+                <a href="../types/struct.html">
+            
+                    
+                    Structure
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../types/enum.html">
+            
+                <a href="../types/enum.html">
+            
+                    
+                    Enum
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../modules/">
+            
+                <a href="../modules/">
+            
+                    
+                    Modules
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../objects/">
+            
+                <a href="../objects/">
+            
+                    
+                    Objects
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../objects/class.html">
+            
+                <a href="../objects/class.html">
+            
+                    
+                    Class
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../objects/inheritance.html">
+            
+                <a href="../objects/inheritance.html">
+            
+                    
+                    Inheritance
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="../objects/traits.html">
+            
+                <a href="../objects/traits.html">
+            
+                    
+                    Traits
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.4" data-path="../objects/example.html">
+            
+                <a href="../objects/example.html">
+            
+                    
+                    Example program
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../functions/">
+            
+                <a href="../functions/">
+            
+                    
+                    Function advanced
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.9" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Pattern matching
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../templates/">
+            
+                <a href="../templates/">
+            
+                    
+                    Templates
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="../templates/special.html">
+            
+                <a href="../templates/special.html">
+            
+                    
+                    Specialization
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.2" data-path="../templates/cte.html">
+            
+                <a href="../templates/cte.html">
+            
+                    
+                    Compile time execution
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.3" data-path="../templates/values.html">
+            
+                <a href="../templates/values.html">
+            
+                    
+                    Template as values
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="../templates/operators.html">
+            
+                <a href="../templates/operators.html">
+            
+                    
+                    Operator overloading
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="../errors/main.html">
+            
+                <a href="../errors/main.html">
+            
+                    
+                    Error handling
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.12.1" data-path="../errors/scope.html">
+            
+                <a href="../errors/scope.html">
+            
+                    
+                    Scope guards
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="../version/README.md">
+            
+                <span>
+            
+                    
+                    Version
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" >
+            
+                <span>
+            
+                    
+                    Documentation
+            
+                </span>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Pattern matching</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#pattern-matching"><b>1. </b>Pattern matching</a></li><ul><li><span class="title-icon "></span><a href="#matching-multiple-values"><b>1.1. </b>Matching multiple values</a></li><li><span class="title-icon "></span><a href="#variable-pattern"><b>1.2. </b>Variable pattern</a></li><li><span class="title-icon "></span><a href="#destructuring-patterns"><b>1.3. </b>Destructuring patterns</a></li><ul><li><span class="title-icon "></span><a href="#destructuring-structure"><b>1.3.1. </b>Destructuring structure</a></li><li><span class="title-icon "></span><a href="#destructuring-class"><b>1.3.2. </b>Destructuring class</a></li></ul></ul></ul></div><a href="#pattern-matching" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="pattern-matching"><a name="pattern-matching" class="anchor-navigation-ex-anchor" href="#pattern-matching"><i class="fa fa-link" aria-hidden="true"></i></a>1. Pattern matching</h1>
+<p>The pattern matching is an important part of the <strong>Ymir</strong> language. It
+allows to make test over values and moreover on types, especially when
+it comes to objects. The pattern matching syntax always start with the
+keyword <code>match</code> followed by an expression, and then patterns enclosed
+between <code>{}</code>.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">match</span> <span class="token punctuation">(</span><span class="token number">42</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token number">1</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;The answer is one&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token number">2</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;The answer is two&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        _ <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;I don&apos;t know, but neither one nor two...&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Match like every other element of the <strong>Ymir</strong> language are
+expression. You can use a match to get a value, but all branch of the
+match must have the same type. If the case that the compiler is not
+sure that a branch will be entered and will return a value in every
+case, you will get an error saying that the pattern matching does not
+have a default value.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token keyword">match</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token number">1</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token number">8</span>
+        <span class="token number">2</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token number">7</span>
+        <span class="token number">3</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token number">6</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<pre class="language-"><code>Error : match of type i32 has no default match case
+ --&gt; main.yr:(2,13)
+    | 
+ 2  |     let x = match (12) {
+    |             ^
+
+ymir1: fatal error: 
+compilation terminated.
+</code></pre><h2 id="matching-multiple-values"><a name="matching-multiple-values" class="anchor-navigation-ex-anchor" href="#matching-multiple-values"><i class="fa fa-link" aria-hidden="true"></i></a>1.1. Matching multiple values</h2>
+<p>You can check multiple values in one pattern with the token <code>|</code>, which
+semantic is the same as a or. You can also check interval using the
+keyword <code>..</code> and <code>...</code>.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">match</span> <span class="token number">42</span> <span class="token punctuation">{</span>
+        <span class="token number">1</span> <span class="token punctuation">..</span> <span class="token number">10</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+            <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;The answer is between 1 and 10 not included&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token number">10</span> <span class="token punctuation">...</span> <span class="token number">40</span> <span class="token punctuation">{</span>
+            <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;The answer is between 10 and 40 included&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token number">41</span> <span class="token operator">|</span> <span class="token number">42</span> <span class="token operator">|</span> <span class="token number">43</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+            <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;The answer is either 41, 42 or 43&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>The pattern are tested in the order they are written, and the matching
+never enter two different pattern even if two of them return a valid
+match.</p>
+<h2 id="variable-pattern"><a name="variable-pattern" class="anchor-navigation-ex-anchor" href="#variable-pattern"><i class="fa fa-link" aria-hidden="true"></i></a>1.2. Variable pattern</h2>
+<p>You can use a variable that will take the value of the element that is
+matched. The variable is declared like a standard variable declaration
+but with token <code>let</code> ommitted. You don&apos;t have to specify the name or
+the type of the variable, but there must be the token <code>:</code> somewhere,
+so if you don&apos;t wan&apos;t to specify the type, you can just use the token
+<code>_</code>.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">match</span> <span class="token number">13</span> <span class="token punctuation">{</span>
+        _ <span class="token punctuation">:</span> <span class="token basic-types">i32</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+            <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;It is a i32, but I don&apos;t care about the value&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        _ <span class="token punctuation">:</span> <span class="token basic-types">i32</span> <span class="token operator">=</span> <span class="token number">13</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+            <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;It is a i32, whose value is 13&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        _ <span class="token punctuation">:</span> <span class="token type">_</span> <span class="token operator">=</span> <span class="token number">13</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+            <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;It is a i32, whose value is 13, but I didn&apos;t checked the type&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>        
+        x <span class="token punctuation">:</span> <span class="token basic-types">i32</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+            <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;It is a i32, and the value is : &quot;</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>In the above example, every test will pass, but only the first pattern
+will be evaluated, and the output of this program will only be : <code>It
+is a i32, but I don&apos;t care about the value</code> </p>
+<p>You can pass a value by reference in a pattern matching to modify it
+inside a valid pattern.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> <span class="token other-keyword">mut</span> z <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">match</span> <span class="token other-keyword">ref</span> z <span class="token punctuation">{</span>
+        <span class="token comment">// ^^^</span>
+        <span class="token comment">// Try to remove the ref</span>
+        <span class="token other-keyword">ref</span> <span class="token other-keyword">mut</span> x <span class="token punctuation">:</span> <span class="token type">_</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+            x <span class="token operator">=</span> <span class="token number">42</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token function">println</span> <span class="token punctuation">(</span>z<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="destructuring-patterns"><a name="destructuring-patterns" class="anchor-navigation-ex-anchor" href="#destructuring-patterns"><i class="fa fa-link" aria-hidden="true"></i></a>1.3. Destructuring patterns</h2>
+<p>There are two types of destructuring patters, for tuple by using
+pattern inside parenthese, or for structure and classes by using a
+Call syntax. When you want to destructure a tuple, you will just have
+to use parentheses that will surround any patterns, that are presented
+in this section.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> tuple <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">&apos;x&apos;</span><span class="token punctuation">,</span> <span class="token number">3.14</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">match</span> tuple <span class="token punctuation">{</span>
+        <span class="token punctuation">(</span>_ <span class="token punctuation">:</span> <span class="token basic-types">i32</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> _<span class="token punctuation">,</span> _<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+            <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;This tuple has an arity of three and its first element is an i32, whose value is 1&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> 
+        <span class="token punctuation">(</span>x <span class="token punctuation">:</span> <span class="token type">_</span><span class="token punctuation">,</span> y <span class="token punctuation">:</span> <span class="token type">_</span><span class="token punctuation">,</span> z <span class="token punctuation">:</span> <span class="token type">_</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+            <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;This tuple has an arity of three, and its values are : (&quot;</span><span class="token punctuation">,</span> x<span class="token punctuation">,</span> <span class="token string">&quot;, &quot;</span><span class="token punctuation">,</span> y<span class="token punctuation">,</span> <span class="token string">&quot;, &quot;</span><span class="token punctuation">,</span> z<span class="token punctuation">,</span> <span class="token string">&quot;)&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>        
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="destructuring-structure"><a name="destructuring-structure" class="anchor-navigation-ex-anchor" href="#destructuring-structure"><i class="fa fa-link" aria-hidden="true"></i></a>1.3.1. Destructuring structure</h3>
+<p>The destructurating of a structure is made like a call of the
+structure. But you don&apos;t have to secify all the fields, but only those
+you want to check.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
+
+<span class="token keyword">struct</span>
+<span class="token operator">|</span> x <span class="token punctuation">:</span> <span class="token basic-types">i32</span>
+<span class="token operator">|</span> y <span class="token punctuation">:</span> <span class="token basic-types">i32</span>
+ <span class="token punctuation">-&gt;</span> Point<span class="token punctuation">;</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> p <span class="token operator">=</span> <span class="token function">Point</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">match</span> p <span class="token punctuation">{</span>
+        <span class="token function">Point</span> <span class="token punctuation">(</span>y<span class="token punctuation">-&gt;</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+            <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Point where y is equal to 1&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token function">Point</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+            <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Point where x is equal to 1&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token function">Point</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+            <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Any point&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>You can of course with a variable pattern refer to the values later in
+the pattern, for both the structure or even its fields. Reference
+variable works the same as well.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
+
+<span class="token keyword">struct</span>
+<span class="token operator">|</span> x <span class="token punctuation">:</span> <span class="token basic-types">i32</span>
+<span class="token operator">|</span> y <span class="token punctuation">:</span> <span class="token basic-types">i32</span>
+ <span class="token punctuation">-&gt;</span> Point<span class="token punctuation">;</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> point <span class="token operator">=</span> <span class="token function">Point</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">match</span> point <span class="token punctuation">{</span>
+        p <span class="token punctuation">:</span> <span class="token type">_</span> <span class="token operator">=</span> <span class="token function">Point</span> <span class="token punctuation">(</span>y<span class="token punctuation">-&gt;</span> y <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+            <span class="token function">println</span> <span class="token punctuation">(</span>p<span class="token punctuation">,</span> <span class="token string">&quot; is a point, whose y field is equal to &quot;</span><span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="destructuring-class"><a name="destructuring-class" class="anchor-navigation-ex-anchor" href="#destructuring-class"><i class="fa fa-link" aria-hidden="true"></i></a>1.3.2. Destructuring class</h3>
+<p>The syntax for destructuring object is the same as the syntax for
+destructuring structure. However, the parameters inside the
+parentheses will referes to object attributes that must be public in
+the context of the pattern matching.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
+
+<span class="token keyword">class</span> Point <span class="token punctuation">{</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">let</span> x <span class="token punctuation">:</span> <span class="token basic-types">i32</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> y <span class="token punctuation">:</span> <span class="token basic-types">i32</span> <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> p <span class="token operator">=</span> <span class="token path">Point</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">match</span> p <span class="token punctuation">{</span>
+        <span class="token function">Point</span> <span class="token punctuation">(</span>x<span class="token punctuation">-&gt;</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+        <span class="token comment">//     ^</span>
+        <span class="token comment">// Try to replace with y</span>
+            <span class="token function">println</span> <span class="token punctuation">(</span>p<span class="token punctuation">.</span>x<span class="token punctuation">,</span> <span class="token string">&quot; is a equal to 1&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Unlike structure destructuring, the type of the object is also
+checked. It can be useful when dealing with inheritance. </p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
+
+<span class="token keyword">class</span> <span class="token operator">@</span>abstract Shape <span class="token punctuation">{</span>
+    <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> Rectangle over Shape <span class="token punctuation">{</span>
+    <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> Circle over Shape <span class="token punctuation">{</span>
+    <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> Shape <span class="token punctuation">{</span>
+    <span class="token path">Circle</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> s <span class="token operator">=</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">match</span> s <span class="token punctuation">{</span>
+        <span class="token function">Circle</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+            <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Foo returned a circle&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token function">Rectangle</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+            <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Foo returned a rectangle&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>It is the only way to check a inheritance in <strong>Ymir</strong>, and this way is
+safe. In many language like Java, D or C++, you will have the right to
+use the casting system, that will have a undefined behavior in C++,
+and make a program crash in Java, and will return the value <code>null</code> in
+D. Those three behavior are not acceptable since they are not
+safe. The pattern matching will allow you to specify the behavior when
+the cast has failed, for example, if you want to get the center of
+circle :</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
+
+<span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
+
+<span class="token keyword">class</span> <span class="token operator">@</span>abstract Shape <span class="token punctuation">{</span>
+    <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> Rectangle over Shape <span class="token punctuation">{</span>
+    <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> Circle over Shape <span class="token punctuation">{</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">let</span> center <span class="token punctuation">:</span> <span class="token basic-types">i32</span> <span class="token punctuation">;</span>
+
+    <span class="token keyword">self</span> <span class="token punctuation">(</span>center <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token keyword">with</span> center <span class="token operator">=</span> center <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/**
+ * Don&apos;t worry I will return you a circle
+*/</span>
+<span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> Shape <span class="token punctuation">{</span>
+    <span class="token path">Rectangle</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> circle <span class="token operator">=</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> center <span class="token operator">=</span> <span class="token keyword">match</span> circle <span class="token punctuation">{</span>
+        <span class="token function">Circle</span> <span class="token punctuation">(</span>center<span class="token punctuation">-&gt;</span> center <span class="token punctuation">:</span> <span class="token type">_</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> center
+        _ <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+            <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;That&apos;s not a circle, foo lied!&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token number">0</span> <span class="token comment">// No need to have confidence in foo </span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;The center of the circle is : &quot;</span><span class="token punctuation">,</span> center<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../functions/" class="navigation navigation-prev " aria-label="Previous page: Function advanced">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../templates/" class="navigation navigation-next " aria-label="Next page: Templates">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Pattern matching","level":"1.9","depth":1,"next":{"title":"Templates","level":"1.10","depth":1,"path":"templates/README.md","ref":"templates/README.md","articles":[{"title":"Specialization","level":"1.10.1","depth":2,"path":"templates/special.md","ref":"templates/special.md","articles":[]},{"title":"Compile time execution","level":"1.10.2","depth":2,"path":"templates/cte.md","ref":"templates/cte.md","articles":[]},{"title":"Template as values","level":"1.10.3","depth":2,"path":"templates/values.md","ref":"templates/values.md","articles":[]}]},"previous":{"title":"Function advanced","level":"1.8","depth":1,"path":"functions/README.md","ref":"functions/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"pattern/README.md","mtime":"2021-01-27T16:45:53.017Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-02-10T14:40:44.832Z"},"basePath":"..","book":{"language":"en"}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="https://cdn.mathjax.org/mathjax/2.6-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-mathjax/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-spoiler/spoiler.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-folding-menu/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-language-picker/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-anchor-nav-x/lib/handler.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

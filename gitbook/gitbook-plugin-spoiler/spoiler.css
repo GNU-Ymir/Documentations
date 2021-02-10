@@ -1,10 +1,8 @@
 .spoiler {
-    background-color: #2D3143;
-    color: #2D3143;
-    display: none;
+	background-color: #2D3143;
+	color: #2D3143;
 }
 
 .spoiler.hover {
-    background-color: white;
-    display: block;
+	background-color: white;
 }
