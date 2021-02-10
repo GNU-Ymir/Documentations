@@ -1,0 +1,51 @@
+\tikzstyle{every picture}+=[remember picture]
+\tikzstyle{mProjectPP}=[circle,fill=yellow!70, minimum size=20pt,inner sep=0pt]
+\tikzstyle{label}=[rectangle, fill=white, minimum size=40pt, inner sep=0pt]
+\tikzstyle{Box}=[rectangle, fill=white, minimum size=40pt, inner sep=0pt]
+\tikzstyle{Box2}=[rectangle, fill=white, minimum size=20pt, inner sep=0pt]
+\definecolor{applegreen}{rgb}{0.55, 0.71, 0.0}
+\definecolor{antiquebrass}{rgb}{0.8, 0.58, 0.46}
+
+\begin{tikzpicture}
+  % ================ Axis ========================
+  \draw (0, 0) -- coordinate (LEFT) (0, 0);
+  \draw[->](0, 10) -- coordinate (YAx) (0, 0);
+  \draw[->](7.2, 10) -- coordinate (YAx) (7.2, 0);
+  \draw[Box] ($(LEFT.east)+(3.5, 10.7)$) -- ($(LEFT.east)+(3.5, 10.7)$) node[anchor=center]{\textbf{STACK}};
+
+  \filldraw (0, 7.5) circle (1pt) node[align=center, left] {+0};
+  \filldraw (0, 6.5) circle (1pt) node[align=center, left] {+8};
+  \filldraw (0, 5) circle (1pt) node[align=center, left] {+0};
+
+  % ================ Foo ========================
+  \fill[black!10] ($(LEFT.east)+(0.2, 10)$) rectangle ($(LEFT.east)+(7, 9)$);
+  \draw[Box] ($(LEFT.east)+(3.5, 8.6)$) -- ($(LEFT.east)+(3.5, 8.6)$) node[anchor=center]{\textbf{.}};
+  \draw[Box] ($(LEFT.east)+(3.5, 8.4)$) -- ($(LEFT.east)+(3.5, 8.4)$) node[anchor=center]{\textbf{.}};
+  \draw[Box] ($(LEFT.east)+(3.5, 8.2)$) -- ($(LEFT.east)+(3.5, 8.2)$) node[anchor=center]{\textbf{.}};
+
+  \draw[line width=1pt] ($(LEFT.east)+(0.18, 7.9)$) rectangle ($(LEFT.east)+(7.02, 6.5)$);
+  \fill[blue!10] ($(LEFT.east)+(0.2, 7.5)$) rectangle ($(LEFT.east)+(7, 6.55)$);
+  \draw[Box] ($(LEFT.east)+(3.5, 7.7)$) -- ($(LEFT.east)+(3.5, 7.7)$) node[anchor=center]{\emph{main}};
+
+  \draw[Box] ($(LEFT.east)+(0.5, 7)$) -- ($(LEFT.east)+(0.5, 7)$) node[anchor=center]{\textbf{\textit{x}}};
+  \draw[Box] ($(LEFT.east)+(3.5, 7)$) -- ($(LEFT.east)+(3.5, 7)$) node[anchor=center]{$12$};
+  \draw[line width=1pt] ($(LEFT.east)+(0.3, 7.4)$) rectangle ($(LEFT.east)+(6.8, 6.6)$);
+
+  \draw[Box] ($(LEFT.east)+(3.5, 6.2)$) -- ($(LEFT.east)+(3.5, 6.2)$) node[anchor=center]{\textbf{.}};
+  \draw[Box] ($(LEFT.east)+(3.5, 6.0)$) -- ($(LEFT.east)+(3.5, 6.0)$) node[anchor=center]{\textbf{.}};
+  \draw[Box] ($(LEFT.east)+(3.5, 5.8)$) -- ($(LEFT.east)+(3.5, 5.8)$) node[anchor=center]{\textbf{.}};
+
+  \draw[line width=1pt] ($(LEFT.east)+(0.18, 5.4)$) rectangle ($(LEFT.east)+(7.02, 4)$);
+  \fill[blue!10] ($(LEFT.east)+(0.2, 5)$) rectangle ($(LEFT.east)+(7, 4.05)$);
+  \draw[Box] ($(LEFT.east)+(3.5, 5.19)$) -- ($(LEFT.east)+(3.5, 5.19)$) node[anchor=center]{\emph{foo}};
+
+  \draw[Box] ($(LEFT.east)+(0.5, 4.5)$) -- ($(LEFT.east)+(0.5, 4.5)$) node[anchor=center]{\textbf{\textit{x}}};
+  \draw[Box] ($(LEFT.east)+(3.5, 4.5)$) -- ($(LEFT.east)+(3.5, 4.5)$) node[anchor=center]{$\&(main+0)$};
+  \draw[line width=1pt] ($(LEFT.east)+(0.3, 4.9)$) rectangle ($(LEFT.east)+(6.8, 4.1)$);
+  
+
+  \draw[thick,->,shorten >=1pt] ($(LEFT.east)+(-0.5, 4.5)$) to [out=180,in=180] node[below left, yshift=3mm] {} ($(LEFT.east)+(-0.8, 7.5)$);
+  
+\end{tikzpicture}
+
+% \end{figure}

@@ -1,0 +1,875 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Methods · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-prism/prism-atelier.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-codeblock-filename/block.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="inher.html" />
+    
+    
+    <link rel="prev" href="constrs.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../hello-world/">
+            
+                <a href="../../hello-world/">
+            
+                    
+                    Hello World
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../../hello-world/commentaires.html">
+            
+                <a href="../../hello-world/commentaires.html">
+            
+                    
+                    Comments
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../types-primitifs.html">
+            
+                <a href="../../types-primitifs.html">
+            
+                    
+                    Primitive types
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../expressions/">
+            
+                <a href="../../expressions/">
+            
+                    
+                    Expressions
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../expressions/literaux.html">
+            
+                <a href="../../expressions/literaux.html">
+            
+                    
+                    Literals
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../../expressions/variables.html">
+            
+                <a href="../../expressions/variables.html">
+            
+                    
+                    Variables
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../../expressions/operateurs.html">
+            
+                <a href="../../expressions/operateurs.html">
+            
+                    
+                    Operators
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../../expressions/arrays.html">
+            
+                <a href="../../expressions/arrays.html">
+            
+                    
+                    Arrays and slices
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../../expressions/ranges.html">
+            
+                <a href="../../expressions/ranges.html">
+            
+                    
+                    Ranges
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../../expressions/tuples.html">
+            
+                <a href="../../expressions/tuples.html">
+            
+                    
+                    Tuples
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="../../expressions/structures-de-controle.html">
+            
+                <a href="../../expressions/structures-de-controle.html">
+            
+                    
+                    Control structures
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8" data-path="../../expressions/pattern_matching.html">
+            
+                <a href="../../expressions/pattern_matching.html">
+            
+                    
+                    Pattern maching
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../../fonctions/main.html">
+            
+                <a href="../../fonctions/main.html">
+            
+                    
+                    Fonctions
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../../fonctions/attributs.html">
+            
+                <a href="../../fonctions/attributs.html">
+            
+                    
+                    Attributs
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../../fonctions/lambdas.html">
+            
+                <a href="../../fonctions/lambdas.html">
+            
+                    
+                    Lambdas
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../main.html">
+            
+                <a href="../main.html">
+            
+                    
+                    Custom types
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../structures.html">
+            
+                <a href="../structures.html">
+            
+                    
+                    Structures
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../unions.html">
+            
+                <a href="../unions.html">
+            
+                    
+                    Unions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../enums.html">
+            
+                <a href="../enums.html">
+            
+                    
+                    Enums
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../objects.html">
+            
+                <a href="../objects.html">
+            
+                    
+                    Objects
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.4.1" data-path="attrs.html">
+            
+                <a href="attrs.html">
+            
+                    
+                    Attributes
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4.2" data-path="constrs.html">
+            
+                <a href="constrs.html">
+            
+                    
+                    Construction and deconstruction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.6.4.3" data-path="methods.html">
+            
+                <a href="methods.html">
+            
+                    
+                    Methods
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4.4" data-path="inher.html">
+            
+                <a href="inher.html">
+            
+                    
+                    Inheritance
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.5" data-path="../traits.html">
+            
+                <a href="../traits.html">
+            
+                    
+                    Traits
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../../modules/main.html">
+            
+                <a href="../../modules/main.html">
+            
+                    
+                    Modules
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../../modules/creation.html">
+            
+                <a href="../../modules/creation.html">
+            
+                    
+                    Declaration and filesystems
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../../modules/access.html">
+            
+                <a href="../../modules/access.html">
+            
+                    
+                    Access specifiers and visibility
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../../templates/main.html">
+            
+                <a href="../../templates/main.html">
+            
+                    
+                    Templates
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../../templates/types.html">
+            
+                <a href="../../templates/types.html">
+            
+                    
+                    Types constraints
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../../templates/value.html">
+            
+                <a href="../../templates/value.html">
+            
+                    
+                    Compile time value
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../../templates/operators.html">
+            
+                <a href="../../templates/operators.html">
+            
+                    
+                    Operator overloading
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../../errors/main.html">
+            
+                <a href="../../errors/main.html">
+            
+                    
+                    Error handling
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../../errors/scope_guards.html">
+            
+                <a href="../../errors/scope_guards.html">
+            
+                    
+                    Scope guards
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" >
+            
+                <span>
+            
+                    
+                    Macros
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="../../interoperabilite/">
+            
+                <a href="../../interoperabilite/">
+            
+                    
+                    Interoperability
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.11.1" data-path="../../interoperabilite/avec-c.html">
+            
+                <a href="../../interoperabilite/avec-c.html">
+            
+                    
+                    With C
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.2" >
+            
+                <span>
+            
+                    
+                    With C++
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.3" >
+            
+                <span>
+            
+                    
+                    With D
+            
+                </span>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >Methods</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="methods">Methods</h1>
+<p>Methods are special functions that apply to instances of objects. They make it possible to apply a particular treatment to a type and facilitate the structuring of the code.</p>
+<h2 id="pure-methods">Pure methods</h2>
+<p>As for functions, methods are separated into two categories, pure methods and impure methods (see <a href="functions/main.md">Functions</a>).</p>
+<p>Pure methods are defined in a class using the keyword <code class="language-">def</code>. The first parameter of a method is always <code class="language-">self</code>, its type is a reference of an object, and is always inferred.</p>
+<pre class="language-"><code class="lang-ymir">
+type MyType <span class="token function">impl</span> <span class="token punctuation">(</span>i32<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">self</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> i32<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">self</span><span class="token punctuation">.</span><span class="token number">0</span> <span class="token operator">=</span> x<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+    <span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">,</span> z <span class="token punctuation">:</span> i32<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Replace &quot;</span><span class="token punctuation">,</span> <span class="token keyword">self</span><span class="token punctuation">.</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token string">&quot; by &quot;</span><span class="token punctuation">,</span> z<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">self</span><span class="token punctuation">.</span><span class="token number">0</span> <span class="token operator">=</span> z<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+
+<span class="token comment">// ...</span>
+
+<span class="token keyword">let</span> myvar <span class="token operator">=</span> <span class="token macro-rules function">MyType:</span><span class="token punctuation">:</span><span class="token function">init</span> <span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+myvar<span class="token punctuation">.</span><span class="token function">foo</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// This prints : &apos;Replace 10 by 12&apos;</span>
+</code></pre>
+<p>It is possible to define several methods with the same name, as for functions. The method that is closest to type specialization during a call, or reference, will be used.</p>
+<p>We will see later that it is also possible to override a method with inheritance.
+Only pure methods can be overrided by inheritance, because they alone are virtual.</p>
+<h2 id="impure-methods">Impure methods</h2>
+<p>As for the declaration of pure methods, the keyword <code class="language-">def</code> allows to declare an impure method. The difference between a pure method and an impure method is the same as the difference between pure and impure functions, so you can refer to the section <a href="functions/main.md">Function</a>, for more details.</p>
+<pre class="language-"><code class="lang-ymir">
+type MyType <span class="token function">impl</span> <span class="token punctuation">(</span>i32<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token comment">// ...</span>
+
+    <span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// Foo is an impure method</span>
+        <span class="token comment">// ...</span>
+    <span class="token punctuation">}</span>    
+<span class="token punctuation">}</span>
+</code></pre>
+<p>As specified above, impure methods are not virtual and therefore cannot be overloaded by inheritance.</p>
+<h2 id="static-methods">Static methods</h2>
+<p>The name &quot;static method&quot; is an abuse of language to define functions defined within a class and which can be used without an object instance.</p>
+<p>A static method is accessible through the operator <code class="language-">::</code>.</p>
+<p>Unlike methods, these functions do not take the `self&apos; parameter as the first argument.</p>
+<pre class="language-"><code class="lang-ymir">type MyType <span class="token function">impl</span> <span class="token punctuation">(</span>i32<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token comment">// ...</span>
+
+    <span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> i32<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// This method is static</span>
+        <span class="token comment">// ...</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+
+<span class="token comment">// The type can be directly used to call static methods</span>
+<span class="token macro-rules function">MyType:</span><span class="token punctuation">:</span><span class="token function">foo</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Ok</span>
+
+
+<span class="token keyword">let</span> myvar <span class="token operator">=</span> <span class="token macro-rules function">MyType:</span><span class="token punctuation">:</span><span class="token function">init</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// We can also use a variable of this type </span>
+<span class="token macro-rules function">myvar:</span><span class="token punctuation">:</span><span class="token function">foo</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Ok</span>
+
+<span class="token comment">// The static method cannot be accessed using the dot operator</span>
+myvar<span class="token punctuation">.</span><span class="token function">foo</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Error, type MyType does not have any method named foo</span>
+</code></pre>
+<p>As with any function declaration, static methods can be pure or impure, and also template as we will see in the section dedicated to <a href="../.../templates/fonctions.md">Templates</a>.</p>
+<h4 id="limitations">Limitations</h4>
+<p>Since the constructor of an object is called in the same way as a static method, it is impossible to define a static method called <code class="language-">init</code>.</p>
+<h2 id="operator-overloading">Operator overloading</h2>
+<p>Operator overloading can be defined within a class. Nevertheless, the operation of these overloads is fully similar to that defined outside a class. Therefore, the details of these overloads are defined in the following section <a href="templates/operators.md">Operator overloading</a>.</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="constrs.html" class="navigation navigation-prev " aria-label="Previous page: Construction and deconstruction">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="inher.html" class="navigation navigation-next " aria-label="Next page: Inheritance">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Methods","level":"1.6.4.3","depth":3,"next":{"title":"Inheritance","level":"1.6.4.4","depth":3,"path":"types-personnalises/objects/inher.md","ref":"types-personnalises/objects/inher.md","articles":[]},"previous":{"title":"Construction and deconstruction","level":"1.6.4.2","depth":3,"path":"types-personnalises/objects/constrs.md","ref":"types-personnalises/objects/constrs.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["prism","-highlight","copy-code-button","mathjax","codeblock-filename"],"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-atelier.css"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"codeblock-filename":{},"mathjax":{"forceSVG":false,"version":"2.6-latest"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"types-personnalises/objects/methods.md","mtime":"2018-12-01T18:27:05.175Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-12-01T18:39:00.470Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="https://cdn.mathjax.org/mathjax/2.6-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-mathjax/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
