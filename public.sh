@@ -1,3 +1,5 @@
+cp -r themes node_modules/themes
+
 # install the plugins and build the static site
 gitbook install && gitbook build
 

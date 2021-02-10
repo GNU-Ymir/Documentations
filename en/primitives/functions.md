@@ -27,30 +27,9 @@ def bar () {
 ```
 
 The declaration of a function can be done anywhere in the program, the
-order is not important for the compiler, so even if `foo` is declared
+order is not important for the compiler, thus even if `foo` is declared
 after the `main` function, it can be called without any problem.
 
-You can also call a function using dotcall syntax, by placing the
-first parameter of the function on the left. This syntax is used to
-perform continuous data processing and to make the source code easier
-to read.
-
-```ymir
-import std::io
-
-def plusOne (i : i32) -> i32 
-	i + 1
-
-def plusTwo (i : i32) -> i32
-	i + 2
-	
-def main () {
-	let x = 12;
-	x.plusOne ()
-	 .plusTwo ()
-	 .println ();
-}	
-```
 
 ## Parameters 
 
@@ -338,3 +317,27 @@ def main () {
 
 There is no way to retrieve the `bar` symbol outside the `foo`
 function. The function is not a module Cf. [Modules]()
+
+## Uniform call syntax
+
+You can also call a function using uniform call syntax, by placing the
+first parameter of the function on the left. This syntax is used to
+perform continuous data processing and to make the source code easier
+to read.
+
+```ymir
+import std::io
+
+def plusOne (i : i32) -> i32 
+	i + 1
+
+def plusTwo (i : i32) -> i32
+	i + 2
+	
+def main () {
+	let x = 12;
+	x.plusOne ()
+	 .plusTwo ()
+	 .println ();
+}	
+```

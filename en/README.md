@@ -1,34 +1,29 @@
 # Introduction
 
-**Ymir** is a high level programming language, with static typing,
-  aiming to help developpers to gain time by proposing type safety,
-  and strong and safe semantic. The semantic of this language is
-  oriented on safety, concurrency and execution speed. Those
-  objectives are achieved thanks to its high expressivity and its
-  direct compilation to a efficient native machine language.
+**Ymir** is a high-level, statically typed programming language
+  designed to help developers save time by providing type safety with
+  strong and secure semantics. The semantics of this language is
+  oriented towards security, concurrency and speed of execution. These
+  objectives are achieved thanks to its high expressiveness and its
+  direct compilation into an efficient native machine language.
 
-
-This documentation explores the main concept of **Ymir**, by proposing
-a collection of examples that demonstrates the assets of this new
-language. This travel, will presents some part of the standard library
-as well.
+This documentation explores the main concepts of **Ymir**, providing a
+set of examples that demonstrate the strengths of this new
+language. It will also present an introduction to the standard
+library.
 
 # Important
 
-Before we start explanations of the language, please keep in mind that
-it is still being developed and that sometimes things may not work as
-planned. If you come across errors that you cannot understand or that
-you think are wrong, please contact us at <gnu.ymir@mail.com>. We look
-forward to receiving mail from you!
+Before starting to discuss the language, please keep in mind that it
+is still under development and that sometimes things may not work as
+expected. If you encounter errors that you do not understand or think
+are incorrect, please contact us at: <gnu.ymir@mail.com>. We look
+forward to receiving your mails!
 
 ## Installation
 
 The reference compiler of **Ymir** is based on the compiler **GCC**,
 which offer strong static optimization, as well as a vast set of
-supported target architectures.
-
-The **Ymir** reference compiler is based on the **GCC** compiler,
-which offers strong static optimization, as well as a large set of
 supported target architectures.
 
 There are two ways to install the **gyc** (Gnu Ymir Compiler), natively or by using a docker container.
@@ -111,15 +106,15 @@ This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.```
 
 To make it easier to use, you can add an alias in the `~/.local/bin` directory.
-First open the file `~/.local/bin/gyc-8` and paste the following line :
+First open the file `~/.local/bin/gyc` and paste the following line :
 ```bash
 docker run -t -v $(pwd):/tmp -w /tmp gnuymir/8.2.0 $*
 ```
 Then open a new shell, and run the following commands :
 
 ```bash
-$ chmod +x ~/.local/bin/gyc-8
-$ gyc-8 --version
+$ chmod +x ~/.local/bin/gyc
+$ gyc --version
 
 gyc-8 (GCC) 8.2.0
 Copyright (C) 2018 Free Software Foundation, Inc.
