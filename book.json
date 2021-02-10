@@ -1,10 +1,13 @@
 {
-    "plugins": ["prism", "-highlight", "copy-code-button", "mathjax", "codeblock-filename", "spoiler", "folding-menu", "language-picker", "anchor-nav-x"],
+    "plugins": ["prism", "-highlight", "copy-code-button", "katex", "codeblock-filename", "spoiler", "folding-menu", "language-picker", "anchor-nav-x"],
     "pluginsConfig": {
 	"prism": {
 	    "css": [
 		"themes/code.css"
 	    ]
+	},
+	"anchor-navigation-ex" : {	    
+	    "isRewritePageTitle" : false	    
 	}
     }
 }
