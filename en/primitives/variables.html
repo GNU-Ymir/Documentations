@@ -612,15 +612,19 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#variables-and-mutability"><b>1. </b>Variables and Mutability</a></li><ul><li><span class="title-icon "></span><a href="#global-variables"><b>1.1. </b>Global variables</a></li><li><span class="title-icon "></span><a href="#shadowing-and-scope"><b>1.2. </b>Shadowing and scope</a></li></ul></ul></div><a href="#variables-and-mutability" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="variables-and-mutability"><a name="variables-and-mutability" class="anchor-navigation-ex-anchor" href="#variables-and-mutability"><i class="fa fa-link" aria-hidden="true"></i></a>1. Variables and Mutability</h1>
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#variables-and-mutability"><b>1. </b>Variables and Mutability</a></li><ul><li><span class="title-icon "></span><a href="#global-variables"><b>1.1. </b>Global variables</a></li><li><span class="title-icon "></span><a href="#shadowing-and-scope"><b>1.2. </b>Shadowing and scope</a></li><ul><li><span class="title-icon "></span><a href="#shadowing"><b>1.2.1. </b>Shadowing</a></li><li><span class="title-icon "></span><a href="#lifetime"><b>1.2.2. </b>Lifetime</a></li></ul></ul></ul></div><a href="#variables-and-mutability" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="variables-and-mutability"><a name="variables-and-mutability" class="anchor-navigation-ex-anchor" href="#variables-and-mutability"><i class="fa fa-link" aria-hidden="true"></i></a>1. Variables and Mutability</h1>
 <p>Variables are declared with the keyword <strong><code>let</code></strong>, the type of the
-variable is deduced from the value associated with it. The type can be
-forced with the <code>:</code> token, but it must be compatible with the value.</p>
+variable is deduced from the value associated with it. The type of the
+variable can be forced with the <strong><code>:</code></strong> token, but it must be
+compatible with the value.</p>
 <p>If a variable is declared immutable, once a value is bound to it, it
 can no longer change. In addition, a variable must have an initial
-value and cannot be declared without it.</p>
-<p>To illustrate the declaration of variables, you can try to execute the
-following code.</p>
+value and cannot be declared without it, in order to garanty that a
+variable is always initialized. You will see in the <a href="https://gnu-ymir.github.io/Documentations/en/primitives/control.html" target="_blank">Control
+flow</a>
+section, that a variable can still be intialized conditionnaly.</p>
+<p>The following source code present a declaration of a variable <strong><code>x</code></strong>,
+of type <strong><code>i32</code></strong>.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -631,18 +635,20 @@ following code.</p>
     <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;X is equal to : &quot;</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>You should get the following compiler error: </p>
+<p>The compiler should return the following error: </p>
 <pre class="language-"><code>Error : left operand of type i32 is immutable
- --&gt; main.yr:(7,5)
-    | 
- 7  |     x = 3;
-    |     ^
+ --&gt; main.yr:(7,2)
+    &#x2503; 
+ 7  &#x2503;     x = 3; 
+    &#x2503;     ^
+
 
 ymir1: fatal error: 
 compilation terminated.
-</code></pre><p>In Ymir, variable mutability and, in addition, type mutability ensure,
-through static checks, that when one declares that the value of a
-variable will not change, it will not really change. Although this can
+</code></pre><p><br>
+In Ymir, variable mutability and, type mutability ensure, through
+static checks, that when one declares that the value of a variable
+will not change, it will really never change. Although this can
 sometimes be a little frustrating for the user.</p>
 <p>A variable is immutable by default, but it can sometimes be useful to
 make it mutable. To do this, you can use the keywords <strong><code>mut</code></strong> and
@@ -651,9 +657,10 @@ difference between these two keywords is that <strong><code>dmut</code></strong>
 the type of the variable is deeply mutable. The immutability of a type
 is transitive, but this transitivity and what it implies will be
 explained in detail in another chapter, since it is an advanced
-knowledge of the language <strong>Ymir</strong>.</p>
+knowledge of the language <strong>Ymir</strong> (cf. <a href="https://gnu-ymir.github.io/Documentations/en/advanced/" target="_blank">Alias and
+References</a>).</p>
 <p>If we take the same example as above, except that we add the keyword
-<code>mut</code> to the variable <code>x</code>.</p>
+<strong><code>mut</code></strong> to the declaration of the variable <strong><code>x</code></strong>.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -664,14 +671,18 @@ knowledge of the language <strong>Ymir</strong>.</p>
     <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;X is equal to : &quot;</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>This time you won&apos;t get any errors, and the next output should appear
-when you run the program.</p>
+<p><br>
+This time the compiler will not return any errors, and the next output should appear
+when running the program.</p>
 <pre class="language-"><code>X is equal to : 2
 X is equal to : 3
-</code></pre><p>Variable mutability can be very useful, but sometimes a little
-difficult to address when dealing with complex types. <strong>Ymir</strong>
-introduces the <strong>aliasable</strong> types, which are explained in detail in the
-chapter <a href="https://gnu-ymir.github.io/Documentations/advanced/" target="_blank">Aliases and references</a>.</p>
+</code></pre><p><br></p>
+<p>Variable mutability can be very useful, but sometimes a little
+difficult to address when dealing with complex types. The <strong>Ymir</strong>
+language has <strong>aliasable</strong> types, that borrows data from different
+segment of memory, with strong mutability semantics. Those types are
+explained in detail in the chapter <a href="https://gnu-ymir.github.io/Documentations/advanced/" target="_blank">Aliases and
+references</a>.</p>
 <h2 id="global-variables"><a name="global-variables" class="anchor-navigation-ex-anchor" href="#global-variables"><i class="fa fa-link" aria-hidden="true"></i></a>1.1. Global variables</h2>
 <p>Global variables are variables that are declared outside of a
 function, they can be used for multiple reasons. These types of
@@ -687,14 +698,17 @@ immutable by default.</p>
 <span class="token punctuation">}</span>
 </code></pre>
 <h2 id="shadowing-and-scope"><a name="shadowing-and-scope" class="anchor-navigation-ex-anchor" href="#shadowing-and-scope"><i class="fa fa-link" aria-hidden="true"></i></a>1.2. Shadowing and scope</h2>
+<h3 id="shadowing"><a name="shadowing" class="anchor-navigation-ex-anchor" href="#shadowing"><i class="fa fa-link" aria-hidden="true"></i></a>1.2.1. Shadowing</h3>
 <p>All variables that are not global, have a life time that is defined by
 their scope. A scope is a code segment, which has a beginning and an
 end, in which statements are made. Further information on scope will
-be provided in the chapter on function bodies in <a href="https://gnu-ymir.github.io/Documentations/primitives/functions.html" target="_blank">Functions</a>.</p>
+be provided in the chapter on function bodies in
+<a href="https://gnu-ymir.github.io/Documentations/primitives/functions.html" target="_blank">Functions</a>.</p>
 <p>Two variables with the same name cannot be declared in colliding
 scopes, i.e. if a variable is declared with the name of a currently
 living variable in the current scope, a shadowing error will occur.</p>
-<p>To illustrate this, copy and execute the following program. </p>
+<p>The following source code illustrates this point, where two variable
+are declared in the same scope with the same name <strong><code>x</code></strong>.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -703,22 +717,64 @@ living variable in the current scope, a shadowing error will occur.</p>
     <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">12</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>You should get the following error when compiling.</p>
+<p><br>
+With this source code the compiler will return the following error.</p>
 <pre class="language-"><code>Error : declaration of x shadows another declaration
- --&gt; main.yr:(6,9)
-    | 
- 6  |     let x = 12;
-    |         ^
-    | Note : 
-    |  --&gt; main.yr:(4,9)
-    |     | 
-    |  4  |     let x = 9;
-    |     |         ^
-    |------------------------------ 
+ --&gt; main.yr:(6,6)
+    &#x2503; 
+ 6  &#x2503;     let x = 12;
+    &#x2503;         ^
+    &#x2503; Note : 
+    &#x2503;  --&gt; main.yr:(4,6)
+    &#x2503;     &#x2503; 
+    &#x2503;  4  &#x2503;     let x = 9;
+    &#x2503;     &#x2503;         ^
+    &#x2517;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501; 
+
 
 ymir1: fatal error: 
 compilation terminated.
+</code></pre><p><br></p>
+<p>Unlike some other programming languages, the shadowing of a variable
+is also not permitted in sub scopes, thus the following source code
+should also return an error.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">9</span><span class="token punctuation">;</span>
+    <span class="token punctuation">{</span> <span class="token comment">// entering a scope</span>
+    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">12</span><span class="token punctuation">;</span> 
+    <span class="token punctuation">}</span>   
+<span class="token punctuation">}</span>
 </code></pre>
+<h3 id="lifetime"><a name="lifetime" class="anchor-navigation-ex-anchor" href="#lifetime"><i class="fa fa-link" aria-hidden="true"></i></a>1.2.2. Lifetime</h3>
+<p>As explained earlier the lifetime of a variable is the lifetime of the
+scope in which a variable was declared. For example, compiling the
+following source code will return an error, as the variable <strong><code>x</code></strong> no
+longer exists when trying to print it.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">12</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token comment">// x does not exists past this scope end</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br></p>
+<p>If a variable is declared inside a scope and is never used during its
+lifetime the compiler will return an error. To avoid this error, the
+variable can be named <strong><code>_</code></strong>. This seems useless to declare a
+variable that is not used, but it can be useful sometimes (for example
+when declaring function parameters in a overriden function, cf. <a href="https://gnu-ymir.github.io/Documentations/en/objects/inheritance.html" target="_blank">Class
+inheritence</a>).</p>
+<p>A variable, whose name is <strong><code>_</code></strong> is anonymus, then there is no way to
+retreive the value of this variable.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> _ <span class="token operator">=</span> <span class="token number">12</span><span class="token punctuation">;</span> <span class="token comment">// declare a anonymus variable</span>
+<span class="token punctuation">}</span>
+</code></pre>
+
                                 
                                 </section>
                             
@@ -761,7 +817,7 @@ compilation terminated.
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Variable and Mutability","level":"1.3.1","depth":2,"next":{"title":"Data types","level":"1.3.2","depth":2,"path":"primitives/types.md","ref":"primitives/types.md","articles":[]},"previous":{"title":"Basic programming concepts","level":"1.3","depth":1,"path":"primitives/README.md","ref":"primitives/README.md","articles":[{"title":"Variable and Mutability","level":"1.3.1","depth":2,"path":"primitives/variables.md","ref":"primitives/variables.md","articles":[]},{"title":"Data types","level":"1.3.2","depth":2,"path":"primitives/types.md","ref":"primitives/types.md","articles":[]},{"title":"Functions","level":"1.3.3","depth":2,"path":"primitives/functions.md","ref":"primitives/functions.md","articles":[]},{"title":"Control flows","level":"1.3.4","depth":2,"path":"primitives/control.md","ref":"primitives/control.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","copy-code-button","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"primitives/variables.md","mtime":"2021-02-10T18:00:26.757Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-02-10T18:02:42.146Z"},"basePath":"..","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Variable and Mutability","level":"1.3.1","depth":2,"next":{"title":"Data types","level":"1.3.2","depth":2,"path":"primitives/types.md","ref":"primitives/types.md","articles":[]},"previous":{"title":"Basic programming concepts","level":"1.3","depth":1,"path":"primitives/README.md","ref":"primitives/README.md","articles":[{"title":"Variable and Mutability","level":"1.3.1","depth":2,"path":"primitives/variables.md","ref":"primitives/variables.md","articles":[]},{"title":"Data types","level":"1.3.2","depth":2,"path":"primitives/types.md","ref":"primitives/types.md","articles":[]},{"title":"Functions","level":"1.3.3","depth":2,"path":"primitives/functions.md","ref":"primitives/functions.md","articles":[]},{"title":"Control flows","level":"1.3.4","depth":2,"path":"primitives/control.md","ref":"primitives/control.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","copy-code-button","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"primitives/variables.md","mtime":"2021-02-13T12:54:29.624Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-02-13T13:52:36.860Z"},"basePath":"..","book":{"language":"en"}});
         });
     </script>
 </div>
