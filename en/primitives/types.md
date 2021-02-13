@@ -272,7 +272,7 @@ Handling](https://gnu-ymir.github.io/Documentations/en/errors/main.html).
 
 <br>
 
-The following table lists the attributes specific to char types.
+The following table lists the attributes specific to pointer types.
 
 | Name | Meaning | 
 | --- | --- |
