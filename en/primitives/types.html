@@ -630,7 +630,7 @@ following code.</p>
 <p><br></p>
 <p>To understand the difference between the type of <strong><code>x</code></strong> and the type
 of <strong><code>y</code></strong>, we invite you to read the chapter
-<a href="">Aliases and References</a>.</p>
+<a href="https://gnu-ymir.github.io/Documentations/en/advanced/" target="_blank">Aliases and References</a>.</p>
 <p>Each type has type attributes, which can be accessed by using the <strong><code>::</code></strong>
 operator on a type.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token basic-types">i32</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">init</span><span class="token punctuation">;</span>  <span class="token comment">// i32 (0)</span>
@@ -1142,11 +1142,8 @@ array.</p>
 the main function in the above example throws the OutOfArray
 exception. The exception system is detailed in the <a href="https://gnu-ymir.github.io/Documentations/en/errors/main.html" target="_blank">Error Handling</a>
 chapter.</p>
-<p>The &quot;~&quot; operator is used to concatenate two arrays of the same
-type. We did not use the <code>+</code> operator as in many languages, because it
-creates ambiguities. For example, the following line <code>`&quot;string: 1 +
-2&quot;</code>, is unclear, maybe the user wanted to add <code>1</code> and <code>2</code> and then
-make the concatenation , but the result will be <code>&quot;string : 12&quot;</code>.</p>
+<p>The <strong><code>~</code></strong> operator is used to concatenate two arrays of the same
+type.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
 <span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token punctuation">[</span><span class="token basic-types">i32</span><span class="token punctuation">]</span> <span class="token punctuation">{</span>
@@ -1157,9 +1154,9 @@ make the concatenation , but the result will be <code>&quot;string : 12&quot;</c
     <span class="token function">println</span> <span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span> ~ <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>You can also create a new table using the allocation syntax. This will
-allow you to allocate a new array in the heap, with an initial value
-for each index in the slice. The size may be unknown at compile time.</p>
+<p>You can also create a new array using the allocation syntax. This will
+allow you to allocate a new array on the heap, with an initial value
+for each index in the slice. The size can be unknown at compile time.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -1168,10 +1165,10 @@ for each index in the slice. The size may be unknown at compile time.</p>
 <span class="token punctuation">}</span>
 </code></pre>
 <h3 id="static-arrays"><a name="static-arrays" class="anchor-navigation-ex-anchor" href="#static-arrays"><i class="fa fa-link" aria-hidden="true"></i></a>1.2.4. Static Arrays</h3>
-<p>Unlike the slice, static arrays are stored on the stack rather than in
+<p>Unlike the slice, static arrays are stored in the stack rather than on
 the heap, and their size is known at compile time. They are
 instantiated with a syntax close to the slice allocation syntax, but
-omitting the <code>new</code> keywork.</p>
+omitting the <strong><code>new</code></strong> keywork.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
 <span class="token comment">/**
@@ -1182,7 +1179,7 @@ omitting the <code>new</code> keywork.</p>
 <span class="token punctuation">}</span>
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token keyword">throws</span> OutOfArray
+    <span class="token keyword">throws</span> <span class="token operator">&amp;</span><span class="token type">OutOfArray</span>
 <span class="token punctuation">{</span>
     <span class="token keyword">let</span> <span class="token other-keyword">mut</span> a <span class="token punctuation">:</span> <span class="token type">[</span><span class="token other-keyword">mut</span> <span class="token basic-types">i32</span> <span class="token punctuation">;</span> <span class="token number">12</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">0</span> <span class="token punctuation">;</span> <span class="token number">12</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 
@@ -1196,7 +1193,7 @@ omitting the <code>new</code> keywork.</p>
 <span class="token punctuation">}</span>
 </code></pre>
 <p>You can transform a static array into a slice using the <code>alias</code>,
-<code>copy</code> and <code>dcopy</code> keywords. The chapter <a href="">Aliases and references</a>
+<code>copy</code> and <code>dcopy</code> keywords. The chapter <a href="https://gnu-ymir.github.io/Documentations/en/advanced/" target="_blank">Aliases and references</a>
 explains the difference between these keywords.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
@@ -1265,7 +1262,7 @@ chapter.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Data types","level":"1.3.2","depth":2,"next":{"title":"Functions","level":"1.3.3","depth":2,"path":"primitives/functions.md","ref":"primitives/functions.md","articles":[]},"previous":{"title":"Variable and Mutability","level":"1.3.1","depth":2,"path":"primitives/variables.md","ref":"primitives/variables.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","copy-code-button","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"primitives/types.md","mtime":"2021-02-13T13:55:10.530Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-02-13T13:55:41.770Z"},"basePath":"..","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Data types","level":"1.3.2","depth":2,"next":{"title":"Functions","level":"1.3.3","depth":2,"path":"primitives/functions.md","ref":"primitives/functions.md","articles":[]},"previous":{"title":"Variable and Mutability","level":"1.3.1","depth":2,"path":"primitives/variables.md","ref":"primitives/variables.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","copy-code-button","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"primitives/types.md","mtime":"2021-02-13T15:01:43.098Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-02-13T15:06:14.687Z"},"basePath":"..","book":{"language":"en"}});
         });
     </script>
 </div>
