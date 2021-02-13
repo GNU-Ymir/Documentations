@@ -563,7 +563,7 @@ import std::io;
 
 def main () {
     let i : i32? = (12)?;
-    let j : i32? = (i32)?::err;     
+    let j : i32? = (i32?)::err;     
 }
 ```
 
