@@ -23,10 +23,23 @@ $ gyc hello.yr
 
 This command produce a binary `a.out` that can be executed 
 
-```
+```bash
 $ ./a.out
 Hello World !!
 ```
 
-The command line options of gyc are the same as those of all
-[gcc suite compilers](https://gcc.gnu.org/onlinedocs/gcc/Overall-Options.html#Overall-Options).
+The command line options of gyc are the same as those of all [gcc
+suite
+compilers](https://gcc.gnu.org/onlinedocs/gcc/Overall-Options.html#Overall-Options),
+with few exceptions that will be clarified in this documentation.
+
+The option **`-o`** can be used to define the name of the output executable.
+
+```bash
+$ gyc main.yr -o main
+$ ls
+main  main.yr
+$ ./main
+Hello World !!
+```
+

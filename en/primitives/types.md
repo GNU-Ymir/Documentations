@@ -18,16 +18,20 @@ let mut x : [mut i32] = [1, 2];
 let mut y = [1, 2];
 ```
 
+<br>
+
 To understand the difference between the type of **`x`** and the type
 of **`y`**, we invite you to read the chapter
 [Aliases and References]().
 
-Each type has type attributes, which can be accessed by using the `::`
+Each type has type attributes, which can be accessed by using the **`::`**
 operator on a type.
 
 ```ymir
 let a = i32::init;  // i32 (0)
 ```
+
+<br>
 
 All primitive types have common attributes that are listed in the
 table below:
@@ -40,8 +44,9 @@ table below:
 ## Scalar types
 
 Scalar types represent all types containing a single value. **Ymir**
-has four primitive scalar types: integers, floating point, characters,
-and booleans. They can have different sizes for different purposes.
+has five primitive scalar types: integers, floating point, characters,
+booleans, and pointers. They can have different sizes for different
+purposes.
 
 ### Integer types
 
@@ -99,20 +104,22 @@ def main () {
 You should get the following error : 
 
 ```
-Error : overflow capacity for type i8 = 934
- --> main.yr:(2,18)
-    | 
- 2  |     let x : i8 = 934i8;
-    |                  ^
+Error : overflow capacity for type i8 = 943
+ --> main.yr:(12,18)
+    ┃ 
+12  ┃     let x : i8 = 943i8;
+    ┃                  ^^^
 
 ymir1: fatal error: 
 compilation terminated.
 ```
 
-However, if the value cannot be known at compile time, the overflow is
-not checked and can lead to strange behavior. For example, if you try
-to add 1 to a variable of type **`i16`** that contains the value
-`32767`, the result will be `-32768`.
+<br>
+
+**WARNING** However, if the value cannot be known at compile time, the
+overflow is not checked and can lead to strange behavior. For example,
+if you try to add 1 to a variable of type **`i16`** that contains the
+value `32767`, the result will be `-32768`.
 
 ### Floating-point types
 
@@ -160,6 +167,14 @@ def main () {
 }
 ```
 
+<br>
+
+The following table lists the attributes specific to boolean type.
+
+| Name | Meaning | 
+| --- | --- |
+| `init` | The initial value - `false` | 
+
 ### Character type 
 
 The **`c8`** and **`c32`** are the types used to encode the
@@ -171,7 +186,7 @@ character type will be **`c32`**.
 The **`c32`** character has a size of four bytes and can store any
 unicode value.  Literal characters can have two forms, and are always
 surrounded by the **`'`** token. The first form is the character
-itself **`r`**, and the second is the unicode value in the integer
+itself, and the second is the unicode value in the integer
 form `\u{12}` or `\u{0xB}`.
 
 ```ymir
@@ -205,6 +220,65 @@ ymir1: fatal error:
 compilation terminated.
 ```
 
+<br>
+
+The following table lists the attributes specific to char types.
+
+| Name | Meaning | 
+| --- | --- |
+| `init` | The initial value - `\u{0}` | 
+
+### Pointers
+
+Pointer are values that stores an address of memory. They can be used
+to store the location of a data in memory. In **`Ymir`**, pointers are
+considered low level programming and are mainly used in the std, and
+runtime to interface with machine level semantics. You can perfectly
+write any program without needing pointers.
+
+Pointers are defined using the `&` keyword on types, or on
+values. They are aliasable types, as they borrow memory (cf [Aliasable
+and
+References](https://gnu-ymir.github.io/Documentations/en/advanced/)).
+
+```ymir
+import std::io;
+
+def main ()
+    throws &SegFault, &AssertError
+{
+    let mut i = 12;
+    let p : &i32 = &i; // creation of a pointer on i
+    i = 42;
+    assert (*p == 42); // dereference the pointer and access the value
+}
+```
+
+<br>
+
+Pointers are unsafe, and dereference a pointer can result in undefined
+behavior depending on where it points. It can also sometimes raise a
+segmentation fault. In **`Ymir`**, segmentation fault are recovered,
+and an exception is thrown. Error handling is presented in chaper
+[Error
+Handling](https://gnu-ymir.github.io/Documentations/en/errors/main.html).
+
+**WARNING**, Note that the segmentation fault may not occur even if
+  the pointer is not properly set. The easiest way to avoid undefined
+  behavior is to not use pointers and use `std` verified functions, or
+  other semantically verified elements (cf [Aliasable and
+  References](https://gnu-ymir.github.io/Documentations/en/advanced/)).
+
+
+<br>
+
+The following table lists the attributes specific to char types.
+
+| Name | Meaning | 
+| --- | --- |
+| `inner` | The type of the inner value - for example : `i32` for `&i32` | 
+
+
 ## Compound types 
 
 Unlike scalar types, the compound contains multiple values.  There are
@@ -224,6 +298,8 @@ def main () {
 }
 ```
 
+<br>
+
 The tuple `t`, is a single element, and can be passed as a function
 parameter or as a return value of a function. It can also be
 destructured, in order to retrieve the values of its component
@@ -242,6 +318,8 @@ def main () {
 }
 ```
 
+<br>
+
 The other method is to use the tuple destructuring syntax, which will
 create new variables and therefore starts with the keyword **`let`**.
 
@@ -254,6 +332,8 @@ def main () {
 	println (f, " ", e.0);
 }
 ```
+
+<br>
 
 In the last example, we can see that the tuple destructuring syntax
 allows to extract only a part of the tuple values. The value of
@@ -282,13 +362,27 @@ def main () {
 }
 ```
 
+<br>
+
+We will see in the [Control flows](https://gnu-ymir.github.io/Documentations/en/primitives/control.html) section, a fourth and a fifth
+method to extract values from tuple.
+
+The following table lists the attributes specific to tuple types.
+
+| Name | Meaning | 
+| --- | --- |
+| `arity` | The number of elements contained in the tuple |
+| `init` | a tuple, where each element values are set to `init`  | 
+
 ### Ranges
 
 Ranges are types that contain two values defining a range, and are
 named **`r!(T)`**, where **`T`** is the type of the range limits. They
-are created by the token **`..`** or **`...`**. A range consists
-of four values, which are stored in the fields shown in the following
-table.
+are created by the token **`..`** or **`...`**. A range consists of
+four values, which are stored in the fields shown in the following
+table. These fields can be accessed using the **`.`** token, as unlike
+type specific attributes, they are not knwon at compile time, and must
+be accessed dynamically.
 
 | name | type | value | 
 | --- | --- | --- |
@@ -313,22 +407,27 @@ def main () {
 } 
 ```
 
-The [Flow Control]() section shows a use of these types.. 
+The [Control flows](https://gnu-ymir.github.io/Documentations/en/primitives/control.html) section shows a use of these types.
+
+The range types have no specific attributes accessible with the
+**`::`** token.
 
 ### Arrays 
 
 An array is a collection of values of the same type, stored in
 contiguous memory.  Unlike tuples, the size of an array is unknown at
-compile time, and in **Ymir**, they are similar to slices.
+compile time, and in **Ymir**, they are similar to slices, and will be
+refered as such.
  
 A slice is a two-word object, the first word is the length of the
-slice, and the second is a pointer to the data stored in the
-slice. A slice is an aliasable type, its mutability is a bit more
-complicated than the mutability of scalar types, because it borrows
-memory which is not automatically copied when an assignment is
-made. This section will not discuss the mutability of internal types
-or aliasable types, so we recommend you read the
-[Aliases and References]() chapter.
+slice, and the second is a pointer to the data stored in the slice. A
+slice is an aliasable type, its mutability is a bit more complicated
+than the mutability of scalar types, because it borrows memory which
+is not automatically copied when an assignment is made. This section
+will not discuss the mutability of internal types or aliasable types,
+so we recommend you read the [Aliases and
+References](https://gnu-ymir.github.io/Documentations/en/advanced/)
+chapter.
  
 The field **`len`** records the length of the slice and can be
 retrieved by the point operator **`.`**.  The length of the slice is
@@ -371,7 +470,7 @@ def main ()
 
 Access to a slice is not secure, and may fail at runtime. This is why
 the main function in the above example throws the OutOfArray
-exception. The exception system is detailed in the [Error Handling]()
+exception. The exception system is detailed in the [Error Handling](https://gnu-ymir.github.io/Documentations/en/errors/main.html)
 chapter.
 
 The "~" operator is used to concatenate two arrays of the same
@@ -455,4 +554,20 @@ def main () {
 }
 ```
 
+### Option
+
+The option typed values are values that may be set or not. They are
+defined using the token **`?`** on types or values. Further
+information on option type are given in [Error
+handling](https://gnu-ymir.github.io/Documentations/en/errors/main.html)
+chapter.
+
+```ymir
+import std::io;
+
+def main () {
+    let i : i32? = (12)?;
+    let j : i32? = (i32)?::err;     
+}
+```
 
