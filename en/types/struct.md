@@ -4,7 +4,8 @@ Structure is a common design used in many languages to define users'
 custom types, which contains multiple values of different
 types. Structures are similar to tuples, in terms of memory management
 (always located in the stack). Unlike tuples, structures have a name,
-and all their internal fields also have a name.
+and all their internal fields also have a name. As you can see
+structure are printable.
 
 ```ymir
 import std::io
@@ -19,8 +20,6 @@ def main () {
 	println (point);
 } 
 ```
-
-As you can see structure are printable.
 
 ## Structure mutability
 
@@ -54,9 +53,11 @@ def main () {
 
 ## Memory borrowing of structure
 
-As explained in the chapter [Alias](), structures are only aliasable
-if they contain a field whose type is aliasable. All the fields of a
-structure are copied each time an assignment is made.
+As explained in the chapter [Alias and
+References](https://gnu-ymir.github.io/Documentations/en/advanced/),
+structures are only aliasable if they contain a field whose type is
+aliasable. All the fields of a structure are copied each time an
+assignment is made.
 
 ```ymir
 import std::io
@@ -68,7 +69,7 @@ struct
 
 def main () {
 	let p = Point (1, 2);
-	let mut p2 = x;
+	let mut p2 = p;
 	p2.y = 12; 
 	println (p, " ", p2);
 }
@@ -88,9 +89,7 @@ a named expression, which is constructed with the `->` token.
 
 The algorithm for determining which field an argument is associated
 with is the same as that used for the function call, and is presented
-in [Function]().
-
-**Exercise :** Try to guess the output of the following program : 
+in [Function](https://gnu-ymir.github.io/Documentations/en/primitives/functions.html).
 
 ```ymir
 import std::io
@@ -108,12 +107,13 @@ def main () {
 	println (point2);
 }
 ```
-<div class="spoiler_head"> <strong>Correction</strong> (spoiler) : </div>
-{%s%}
-<pre class="language-" style="position: relative;" class="spoiler"><code>main::Point(98, 12)
+
+<br>
+
+```
+main::Point(98, 12)
 main::Point(0, 1)
-</code></pre>
-{%ends%}
+```
 
 
 ## Packed and Union

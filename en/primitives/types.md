@@ -22,7 +22,7 @@ let mut y = [1, 2];
 
 To understand the difference between the type of **`x`** and the type
 of **`y`**, we invite you to read the chapter
-[Aliases and References]().
+[Aliases and References](https://gnu-ymir.github.io/Documentations/en/advanced/).
 
 Each type has type attributes, which can be accessed by using the **`::`**
 operator on a type.
@@ -473,12 +473,8 @@ the main function in the above example throws the OutOfArray
 exception. The exception system is detailed in the [Error Handling](https://gnu-ymir.github.io/Documentations/en/errors/main.html)
 chapter.
 
-The "~" operator is used to concatenate two arrays of the same
-type. We did not use the `+` operator as in many languages, because it
-creates ambiguities. For example, the following line ``"string: 1 +
-2"`, is unclear, maybe the user wanted to add `1` and `2` and then
-make the concatenation , but the result will be `"string : 12"`.
-
+The **`~`** operator is used to concatenate two arrays of the same
+type.
 
 ```ymir
 import std::io
@@ -492,9 +488,9 @@ def main ()  {
 }
 ```
 
-You can also create a new table using the allocation syntax. This will
-allow you to allocate a new array in the heap, with an initial value
-for each index in the slice. The size may be unknown at compile time.
+You can also create a new array using the allocation syntax. This will
+allow you to allocate a new array on the heap, with an initial value
+for each index in the slice. The size can be unknown at compile time.
 
 ```ymir
 import std::io
@@ -507,10 +503,10 @@ def main () {
 
 ### Static Arrays
 
-Unlike the slice, static arrays are stored on the stack rather than in
+Unlike the slice, static arrays are stored in the stack rather than on
 the heap, and their size is known at compile time. They are
 instantiated with a syntax close to the slice allocation syntax, but
-omitting the `new` keywork.
+omitting the **`new`** keywork.
 
 ```ymir
 import std::io
@@ -523,7 +519,7 @@ def foo (a : [i32 ; 12]) {
 }
 
 def main ()
-    throws OutOfArray
+    throws &OutOfArray
 {
     let mut a : [mut i32 ; 12] = [0 ; 12];
 
@@ -538,7 +534,7 @@ def main ()
 ```
 
 You can transform a static array into a slice using the `alias`,
-`copy` and `dcopy` keywords. The chapter [Aliases and references]()
+`copy` and `dcopy` keywords. The chapter [Aliases and references](https://gnu-ymir.github.io/Documentations/en/advanced/)
 explains the difference between these keywords.
 
 ```ymir
