@@ -22,14 +22,17 @@ def main () {
 }
 ```
 
+<br>
+
 This source code can be represented in memory by the following figure.
 
-<img src="https://gnu-ymir.github.io/Documentations/advanced/memory_x_alias_main.png" alt="drawing" width="700"/>
+<img src="https://gnu-ymir.github.io/Documentations/en/advanced/memory_x_alias_main.png" alt="drawing" width="700"/>
 
 The alias keyword is only mandatory when the variable that will borrow
 the data is mutable and may impact the value. It is obvious that one
 cannot borrow immutable data from a variable that is mutable. For
 example, the compiler must return an error on the following code.
+
 
 ```ymir
 import std::io
@@ -43,7 +46,9 @@ def main () {
 }
 ```
 
-```
+<br>
+
+```error
 Error : discard the constant qualifier is prohibited, left operand mutability level is 2 but must be at most 1
  --> main.yr:(5,13)
     | 
@@ -66,6 +71,8 @@ ymir1: fatal error:
 compilation terminated.
 ```
 
+<br>
+
 However, if the variable that will borrow the data is not mutable,
 there is no need to add the keyword `alias`, and the compiler will
 create an implicit alias, which will have no consequences.
@@ -79,6 +86,8 @@ def main () {
 	println (y);
 }
 ```
+
+<br>
 
 In the last example, **`y`** can be mutable, as long as its internal
 value is immutable, i.e. its type is `mut [i32]`, you can change the
@@ -98,6 +107,8 @@ def main () {
 	println (y);
 }
 ```
+
+<br>
 
 You may have noticed that even though the literal is actually the
 element that creates the data, we do not consider it to be the owner
@@ -123,6 +134,8 @@ def main () {
 }
 ```
 
+<br>
+
 ## Alias a function parameter
 
 As you have noticed, the keyword `alias`, unlike the keyword `ref`,
@@ -147,6 +160,8 @@ def main () {
 }
 ```
 
+<br>
+
 As with the variable, if the function parameter cannot affect the
 values that are borrowed, the alias keyword is not required.
 
@@ -162,6 +177,8 @@ def main () {
 	foo (x);
 }
 ```
+
+<br>
 
 ## Special case of struct and tuple
 

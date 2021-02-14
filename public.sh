@@ -1,7 +1,10 @@
 cp -r themes node_modules/themes
 
+
 # install the plugins and build the static site
 gitbook install && gitbook build
+
+cp -r gitbook-plugin-spoiler node_modules/
 
 # checkout to the gh-pages branch
 if git checkout gh-pages ; then 
@@ -10,7 +13,7 @@ if git checkout gh-pages ; then
     if git pull origin gh-pages --rebase ; then 
 
 	# copy the static site files into the current directory.
-	cp -R _book/* .
+	cp -R _book/* .	
 
 	# remove 'node_modules' and '_book' directory
 	git clean -fx node_modules

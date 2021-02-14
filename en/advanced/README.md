@@ -41,7 +41,9 @@ def foo () {
 }
 ```
 
-![Image](https://gnu-ymir.github.io/Documentations/advanced/memory_x_foo.png)
+<br>
+
+<img src="https://gnu-ymir.github.io/Documentations/en/advanced/memory_x_foo.png" alt="drawing" width="700">
 
 ## Mutability level 
 
@@ -73,12 +75,14 @@ def main () {
 }
 ```
 
+<br>
+
 The type of `x` in the previous example is `mut [i32]`, we didn't
 specify mutability for the internal part of the array, so the compiler
 assumed you didn't want it to be mutable, for security reasons. If you
 did the previous exercise, you should get the following error:
 
-```
+```error
 Error : left operand of type i32 is immutable
  --> main.yr:(7,7)
     | 
@@ -88,6 +92,8 @@ Error : left operand of type i32 is immutable
 ymir1: fatal error: 
 compilation terminated.
 ```
+
+<br>
 
 This means that the data borrowed by **`x`** (and in this case are
 located in the heap) are not mutable.
@@ -126,9 +132,11 @@ def main () {
 }
 ```
 
+<br>
+
 You should get the following error : 
 
-```
+```error
 Error : discard the constant qualifier is prohibited, left operand mutability level is 2 but must be at most 1
  --> main.yr:(4,14)
     | 
@@ -144,6 +152,8 @@ Error : discard the constant qualifier is prohibited, left operand mutability le
 ymir1: fatal error: 
 compilation terminated.
 ```
+
+<br>
 
 ## Memory borrowing
 

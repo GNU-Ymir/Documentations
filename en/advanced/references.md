@@ -16,7 +16,7 @@ def foo () {
 The above program can be represented in memory as shown in the
 following figure.
 
-![Image](https://gnu-ymir.github.io/Documentations/advanced/memory_x__ref_y_foo.png)
+![Image](https://gnu-ymir.github.io/Documentations/en/advanced/memory_x__ref_y_foo.png)
 
 **`y`**, is a pointer to x, which can be used as if it were directly
 **`x`**. This means that **`y`** must have the same mutability
@@ -66,9 +66,11 @@ def main () {
 }
 ```
 
+<br>
+
 The following figure shows the memory status of the previous code:
 
-<img src="https://gnu-ymir.github.io/Documentations/advanced/memory_x_main_ref_x_foo.png" alt="drawing" width="450"/>
+<img src="https://gnu-ymir.github.io/Documentations/en/advanced/memory_x_main_ref_x_foo.png" alt="drawing" width="450"/>
 
 The keyword `ref` is not always associated with a mutable variable, it
 can be used to pass a complex type to a function more efficiently,
@@ -78,8 +80,6 @@ variable by reference, to distinguish it from the function that passes
 the variable directly by value. In practice, due to the existence of
 aliasable types, which will be discussed in the next chapter, you will
 never gain anything by doing this.
-
-**Exercise :** Try to guess the output of the following program : 
 
 ```ymir
 import std::io
@@ -101,18 +101,20 @@ def main () {
 }
 ```
 
-<div class="spoiler_head"> <strong>Correction</strong> (spoiler) : </div>
-{%s%}
-<pre class="language-" style="position: relative;" class="spoiler"><code>By value : 89
+<br>
+
+```
+By value : 89
 By reference : 89
-</code></pre>
-{%ends%}
+```
+
+<br>
 
 If you have done the exercise, and added the keyword `mut` in the
 signature of the first function `foo`, you should get the following
 error: 
 
-```
+```error
 Error : a parameter cannot be mutable, if it is not a reference
  --> main.yr:(4,14)
     | 
@@ -122,6 +124,8 @@ Error : a parameter cannot be mutable, if it is not a reference
 ymir1: fatal error: 
 compilation terminated.
 ```
+
+<br>
 
 This error means that the type of x is not aliasable, so if it is not
 a reference, marking it as mutable will have no effect on the program,
@@ -141,7 +145,9 @@ def main () {
 }
 ```
 
-```
+<br>
+
+```error
 Warning : the creation of ref has no effect on left operand
  --> main.yr:(3,19)
     | 
@@ -151,6 +157,8 @@ Warning : the creation of ref has no effect on left operand
 ymir1: fatal error: 
 compilation terminated.
 ```
+
+<br>
 
 This warning means that you have used the keyword `ref` but the
 compiler will ignore it because it will not create a reference to `x`
@@ -176,9 +184,11 @@ def main () {
 }
 ```
 
+<br>
+
 With the above source code, you should get the following error : 
 
-```
+```error
 Error : cannot return a reference type
  --> main.yr:(3,19)
     | 

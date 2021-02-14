@@ -87,6 +87,7 @@ pre[class*="language-"] {
     /* color: #c32caa; */
 }
 
+.token.warning,
 .token.selector,
 .token.attr-name,
 .token.string,
@@ -148,6 +149,7 @@ pre[class*="language-"] {
     color: #1fad83;
 }
 
+.token.note,
 .token.placeholder,
 .token.variable {
     color: #6684f1;
@@ -166,11 +168,13 @@ pre[class*="language-"] {
     font-style: italic;
 }
 
+.token.error,
 .token.important,
 .token.bold {
     font-weight: bold;
 }
 
+.token.error,
 .token.important {
     color: #d73737;
 }
@@ -182,4 +186,12 @@ pre[class*="language-"] {
 pre > code.highlight {
     outline: .4em solid #d73737;
     outline-offset: .4em;
+}
+
+.spoiler.over {
+    display: block;
+}
+
+.spoiler {
+    display: none;
 }

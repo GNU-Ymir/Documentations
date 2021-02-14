@@ -29,7 +29,7 @@ def main () {
 
 The compiler should return the following error: 
 
-```
+```error
 Error : left operand of type i32 is immutable
  --> main.yr:(7,2)
     ┃ 
@@ -141,7 +141,7 @@ def main () {
 <br>
 With this source code the compiler will return the following error.
 
-```
+```error
 Error : declaration of x shadows another declaration
  --> main.yr:(6,6)
     ┃ 

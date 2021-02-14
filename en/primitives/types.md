@@ -103,7 +103,7 @@ def main () {
 ```
 You should get the following error : 
 
-```
+```error
 Error : overflow capacity for type i8 = 943
  --> main.yr:(12,18)
     ┃ 
@@ -209,7 +209,7 @@ The error should be as follows, and this means that you will need at
 least 3 **`c8`** to store the value, so it doesn't fit into one
 **`c8`** :
 
-```
+```error
 Error : malformed literal, number of c8 is 3
  --> main.yr:(2,10)
     | 

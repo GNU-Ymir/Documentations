@@ -29,7 +29,9 @@ def main () {
 }
 ```
 
-<img src="https://gnu-ymir.github.io/Documentations/advanced/memory_x_copy_main.png" alt="drawing" width="700"/>
+<br>
+
+<img src="https://gnu-ymir.github.io/Documentations/en/advanced/memory_x_copy_main.png" alt="drawing" width="700"/>
 
 **Exercise :** Modify `x` that is initialised with an imutable string literal : 
 
@@ -37,7 +39,7 @@ def main () {
 import std::io
 
 def main () 
-	throws OutOfArray 
+	throws &OutOfArray 
 {
 	let x = "hello !";
 	x [0] = 'H'; // Make this line work
