@@ -615,41 +615,37 @@
                                 <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#control-flows"><b>1. </b>Control flows</a></li><li><span class="title-icon "></span><a href="#if-expression"><b>2. </b>If expression</a></li><ul><li><span class="title-icon "></span><a href="#loops"><b>2.1. </b>Loops</a></li><ul><li><span class="title-icon "></span><a href="#infinite-repetitions-with-loop"><b>2.1.1. </b>Infinite repetitions with loop</a></li><li><span class="title-icon "></span><a href="#loop-while-condition-is-met"><b>2.1.2. </b>Loop while condition is met</a></li><li><span class="title-icon "></span><a href="#for-loops-to-iterate-over-a-value"><b>2.1.3. </b>For loops to iterate over a value</a></li></ul></ul></ul></div><a href="#control-flows" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="control-flows"><a name="control-flows" class="anchor-navigation-ex-anchor" href="#control-flows"><i class="fa fa-link" aria-hidden="true"></i></a>1. Control flows</h1>
 <p>When writing a program, the ability to decide to execute part of the
 code conditionally, or to repeat part of the code, is a basic scheme
-that can be really useful.</p>
-<p>In <strong>Ymir</strong>, unlike many <em>C</em> languages, there is no statement,
-everything is an expression and can be evaluated. Thus, you can
-initialize a variable with an expression <code>if</code>, <code>while</code> or even <code>for</code>.</p>
+that can be really useful. In <strong>Ymir</strong>, unlike many <em>C</em> languages,
+there is no statement, everything is an expression and can be
+evaluated. Thus, <strong><code>if</code></strong>, <strong><code>while</code></strong>, and any other control flow
+expressions have a value.</p>
 <h1 id="if-expression"><a name="if-expression" class="anchor-navigation-ex-anchor" href="#if-expression"><i class="fa fa-link" aria-hidden="true"></i></a>2. If expression</h1>
-<p>An <em>if</em> expression allows you to branch into your code by making
-decisions based on conditions. An <em>if</em> expression consists of a keyword
-<code>if</code>, followed by an expression that must be typed as a <code>bool</code>,
-followed by an expression. You can add an <code>else</code> after an <em>if</em>
+<p>An <strong><code>if</code></strong> expression allows you to branch into your code by making
+decisions based on conditions. You can add an <code>else</code> after an <em>if</em>
 expression, to execute the code, if the condition of the <em>if</em>
-expression is not met.</p>
+expression is not met. The syntax of the <strong><code>if</code></strong> expression is the
+following:</p>
+<pre class="language-"><code>if_expression := &apos;if&apos; expression expression (&apos;else&apos; expression)?
+</code></pre><p>The following source code present a basic utilization of the <strong><code>if</code></strong>
+expression. In this example, the expression has no value, and is then
+evaluated as a <strong><code>void</code></strong> expression.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
 
     <span class="token keyword">if</span> x <span class="token operator">&lt;</span> <span class="token number">5</span> <span class="token punctuation">{</span>
-        <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;X is lower than 5&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;X is lower than 5&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>x <span class="token operator">==</span> <span class="token number">5</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// parentheses are optional</span>
+      <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;X is exactly 5&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
-        <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;X is higher or equal to 5&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;X is higher than 5&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>You can add an every expression you want after an <code>else</code>, for example another <code>if</code>.</p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> x <span class="token operator">&lt;</span> <span class="token number">5</span> <span class="token punctuation">{</span>
-        <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;X is lower than 5&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> x <span class="token operator">==</span> <span class="token number">5</span> <span class="token punctuation">{</span>
-        <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;X is equal to 5&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</code></pre>
-<p>As mentioned above, since everything is an expression, you can use <em>if
-expressions</em> as values. Each branch of the <em>if</em> expression must have
-the same type, otherwise an error will be returned by the
-compiler. The value of an <em>if</em>, can of course be of type <strong><code>void</code></strong>.</p>
+<p>As mentioned above, since everything is an expression, you can use
+<strong><code>if</code></strong> expressions as values. Each branch of the <strong><code>if</code></strong> expression
+must have the same type, otherwise an error will be returned by the
+compiler. The value of an <strong><code>if</code></strong>, can of course be of type
+<strong><code>void</code></strong>.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">let</span> condition <span class="token operator">=</span> <span class="token other-keyword">true</span><span class="token punctuation">;</span>
     <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token keyword">if</span> condition <span class="token punctuation">{</span>
@@ -659,85 +655,103 @@ compiler. The value of an <em>if</em>, can of course be of type <strong><code>vo
     <span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>If no <code>else</code> follows an <em>if</em> expression, a default <code>else</code> that does
-nothing and has an <em>empty</em> value is added. For example, with the
-following code :</p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> condition <span class="token operator">=</span> <span class="token other-keyword">true</span><span class="token punctuation">;</span>
-    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token keyword">if</span> condition <span class="token punctuation">{</span>
+<p>If there is a possibility that no branch of an expression <strong><code>if</code></strong> is
+visited, then the value of the whole <strong><code>if</code></strong> expression is
+<strong><code>void</code></strong>. Then, with the following source code, the compiler will
+return an error, because there is a possibility for the variable
+<code>condition</code> to be evaluated to <code>false</code>.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token basic-types">bool</span> <span class="token punctuation">{</span> <span class="token comment">// ... } // return a bool value</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> condition <span class="token operator">=</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token keyword">if</span> condition <span class="token punctuation">{</span> <span class="token comment">// the condition can be false</span>
         <span class="token number">5</span> 
-    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span> <span class="token comment">// and then the expression has no value, that is not possible</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>You should get the following error: </p>
-<pre class="language-"><code>Error : incompatible types void and i32
- --&gt; main.yr:(3,10)
+<p><br></p>
+<pre class="language-"><code class="lang-error"><span class="token path">Error</span> : incompatible types void and i32
+ <span class="token comment">--&gt; main.yr:(3,10)</span>
     | 
  3  |     let x = if condition {
     |             ^^
-    | Note : 
-    |  --&gt; main.yr:(4,3)
+    | <span class="token keyword">Note</span> : 
+    |  <span class="token comment">--&gt; main.yr:(4,3)</span>
     |     | 
     |  4  |         5 
     |     |         ^
     |------------------------------ 
 
-ymir1: fatal error: 
+ymir1: <span class="token path">fatal error</span>: 
 compilation terminated.
-</code></pre><h2 id="loops"><a name="loops" class="anchor-navigation-ex-anchor" href="#loops"><i class="fa fa-link" aria-hidden="true"></i></a>2.1. Loops</h2>
+</code></pre>
+<h2 id="loops"><a name="loops" class="anchor-navigation-ex-anchor" href="#loops"><i class="fa fa-link" aria-hidden="true"></i></a>2.1. Loops</h2>
 <p>In <strong>Ymir</strong>, there is three kind of loops: <code>loop</code>, <code>while</code> and <code>for</code>.</p>
 <h3 id="infinite-repetitions-with-loop"><a name="infinite-repetitions-with-loop" class="anchor-navigation-ex-anchor" href="#infinite-repetitions-with-loop"><i class="fa fa-link" aria-hidden="true"></i></a>2.1.1. Infinite repetitions with loop</h3>
-<p>The keyword <code>loop</code> is used to specify that a block of code must be
-repeated endlessly.</p>
+<p>The keyword <strong><code>loop</code></strong> is used to specify that a block of code must be
+repeated endlessly. The syntax of the <strong><code>loop</code></strong> expression is the
+following:</p>
+<pre class="language-"><code>loop_expression := &apos;loop&apos; expression
+</code></pre><p><br></p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    loop <span class="token punctuation">{</span>
-        <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;I will be printed an infinite number of times&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    loop <span class="token punctuation">{</span> <span class="token comment">// the loop will never exit</span>
+         <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;I will be printed an infinite number of times&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre>
 <p>A loop can be used to repeat an action until it succeeds, e.g. waiting
 for the end of a thread, or waiting for incoming network connections,
-etc.  The keyword <code>break</code> is used to stop a loop and gives it a value.</p>
+etc.  The keyword <strong><code>break</code></strong> is used to stop a loop and to give a
+value to it.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">let</span> <span class="token other-keyword">mut</span> counter <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
 
-    <span class="token keyword">let</span> result <span class="token operator">=</span> loop <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> result <span class="token operator">=</span> loop <span class="token punctuation">{</span> 
         counter <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span>
         <span class="token keyword">if</span> counter <span class="token operator">==</span> <span class="token number">10</span> <span class="token punctuation">{</span>
-            <span class="token keyword">break</span> counter <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span> counter <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment">// stop the loop and set its value to &apos;counter + 1&apos;</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span><span class="token punctuation">;</span>
     <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Result : &quot;</span><span class="token punctuation">,</span> result<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
+<p><br></p>
 <p>The above source code will produce the following result:</p>
 <pre class="language-"><code>Result : 11
 </code></pre><h3 id="loop-while-condition-is-met"><a name="loop-while-condition-is-met" class="anchor-navigation-ex-anchor" href="#loop-while-condition-is-met"><i class="fa fa-link" aria-hidden="true"></i></a>2.1.2. Loop while condition is met</h3>
-<p>The keyword <code>while</code> creates a loop, which continues until a condition
-is no longer satisfied. As for the <code>loop</code>, it can be broken with the
-keyword <code>break</code>. The value of a <em>while</em> is given by the value of its
-content expression, at the last iteration, or by the value given by a
-<code>break</code> if it has been broken.</p>
+<p>The keyword <strong><code>while</code></strong> creates a loop, which continues until a
+condition is no longer satisfied. As for the <strong><code>loop</code></strong>, it can be
+broken with the keyword <strong><code>break</code></strong>. The value of a <strong><code>while</code></strong> is
+given by the value of its content expression, at the last iteration,
+or by the value given by a <strong><code>break</code></strong> if it has been broken.</p>
+<p>The syntax of the <strong><code>while</code></strong> expression is the following:</p>
+<pre class="language-"><code>while_expression := &apos;while&apos; expression expression
+</code></pre><p><br></p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">let</span> <span class="token other-keyword">mut</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
     <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token keyword">while</span> i <span class="token operator">&lt;</span> <span class="token number">10</span> <span class="token punctuation">{</span>
-        i <span class="token operator">+=</span> <span class="token number">1</span>        
+        i <span class="token operator">+=</span> <span class="token number">1</span>    <span class="token comment">// the value of the while loop will be equal to &apos;i&apos; at the last iteration    </span>
     <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
     <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;X is : &quot;</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
+<p><br></p>
 <p>The above source code will produce the following result:</p>
 <pre class="language-"><code>X is : 10
 </code></pre><h3 id="for-loops-to-iterate-over-a-value"><a name="for-loops-to-iterate-over-a-value" class="anchor-navigation-ex-anchor" href="#for-loops-to-iterate-over-a-value"><i class="fa fa-link" aria-hidden="true"></i></a>2.1.3. For loops to iterate over a value</h3>
-<p>The last type of loop is the <code>for</code> loop. It is applicable on an
-iterable type. The value of a <code>for</code> loop works exactly like the
-evaluation of the value of a <code>while</code> loop. Ranges, Slice and Tuple are
-iterable types.  For example, for range :</p>
+<p>The last type of loop is the <strong><code>for</code></strong> loop. It is applicable on an
+iterable type. The value of a <strong><code>for</code></strong> loop works exactly like the
+evaluation of the value of a <strong><code>while</code></strong> loop. Ranges, Slice and Tuple
+are iterable types. For example, for range :</p>
+<p>The syntax of the <strong><code>while</code></strong> expression is the following:</p>
+<pre class="language-"><code>for_expression := &apos;for&apos; (&apos;(&apos; var_decls &apos;)&apos; | var_decls) &apos;in&apos; expression expression
+var_decls := var_decl (&apos;,&apos; var_decl)
+</code></pre><p><br></p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -750,6 +764,7 @@ iterable types.  For example, for range :</p>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre>
+<p><br></p>
 <p>You can iterate a slice by value, by defining a single iterator on the
 for loop. This variable, will make a copy of each element of the
 slice, at each iteration. Of course, you can choose to iterate by
@@ -760,6 +775,7 @@ time. When using an index, its type is a <strong><code>usize</code></strong>.</p
 </ul>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span>
 </code></pre>
+<p><br></p>
 <ul>
 <li>Iteration by reference : </li>
 </ul>
@@ -769,11 +785,13 @@ time. When using an index, its type is a <strong><code>usize</code></strong>.</p
 <span class="token punctuation">}</span>
 <span class="token function">println</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
+<p><br></p>
 <ul>
 <li>Iteration by value and index, (the value can of course be a reference) : </li>
 </ul>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">for</span> index<span class="token punctuation">,</span> value <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span>
 </code></pre>
+<p><br></p>
 <p>If the slice you are iterating on is mutable, you can have mutable
 access to its values.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
@@ -788,10 +806,11 @@ access to its values.</p>
     <span class="token function">println</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
+<p><br></p>
 <p>The mutability of the tables and the reference system are advanced
 knowledge of the language, and will not be discussed in this
 chapter. For more information, please read the chapter on
-<a href="">Aliases and references</a>.</p>
+<a href="https://gnu-ymir.github.io/Documentations/en/advanced/" target="_blank">Aliases and references</a>.</p>
 <p>You can also iterate over tuple, but it will be a static iteration,
 and is equivalent to a static rewrite.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span> 
@@ -850,7 +869,7 @@ and is equivalent to a static rewrite.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Control flows","level":"1.3.4","depth":2,"next":{"title":"Alias and References","level":"1.4","depth":1,"path":"advanced/README.md","ref":"advanced/README.md","articles":[{"title":"References","level":"1.4.1","depth":2,"path":"advanced/references.md","ref":"advanced/references.md","articles":[]},{"title":"Aliases","level":"1.4.2","depth":2,"path":"advanced/alias.md","ref":"advanced/alias.md","articles":[]},{"title":"Copy and Deep copy","level":"1.4.3","depth":2,"path":"advanced/copies.md","ref":"advanced/copies.md","articles":[]}]},"previous":{"title":"Functions","level":"1.3.3","depth":2,"path":"primitives/functions.md","ref":"primitives/functions.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","copy-code-button","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"primitives/control.md","mtime":"2021-02-13T15:06:24.378Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-02-13T17:56:31.001Z"},"basePath":"..","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Control flows","level":"1.3.4","depth":2,"next":{"title":"Alias and References","level":"1.4","depth":1,"path":"advanced/README.md","ref":"advanced/README.md","articles":[{"title":"References","level":"1.4.1","depth":2,"path":"advanced/references.md","ref":"advanced/references.md","articles":[]},{"title":"Aliases","level":"1.4.2","depth":2,"path":"advanced/alias.md","ref":"advanced/alias.md","articles":[]},{"title":"Copy and Deep copy","level":"1.4.3","depth":2,"path":"advanced/copies.md","ref":"advanced/copies.md","articles":[]}]},"previous":{"title":"Functions","level":"1.3.3","depth":2,"path":"primitives/functions.md","ref":"primitives/functions.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","copy-code-button","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"primitives/control.md","mtime":"2021-02-14T20:32:19.754Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-02-14T21:09:26.084Z"},"basePath":"..","book":{"language":"en"}});
         });
     </script>
 </div>

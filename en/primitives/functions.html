@@ -614,78 +614,128 @@
                                 
                                 <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#functions"><b>1. </b>Functions</a></li><ul><li><span class="title-icon "></span><a href="#parameters"><b>1.1. </b>Parameters</a></li><li><span class="title-icon "></span><a href="#function-body"><b>1.2. </b>Function body</a></li><li><span class="title-icon "></span><a href="#function-return-type"><b>1.3. </b>Function return type</a></li><li><span class="title-icon "></span><a href="#block-declaration"><b>1.4. </b>Block declaration</a></li><li><span class="title-icon "></span><a href="#uniform-call-syntax"><b>1.5. </b>Uniform call syntax</a></li></ul></ul></div><a href="#functions" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="functions"><a name="functions" class="anchor-navigation-ex-anchor" href="#functions"><i class="fa fa-link" aria-hidden="true"></i></a>1. Functions</h1>
 <p>Functions are a widely accepted concept for dividing a program into
-small parts. A ymir program starts with the <code>main</code> function that you
-have already seen in previous chapters.</p>
-<p>All functions are declared using the keyword <strong><code>def</code></strong>. And are called
-using parameters separated by commas in parentheses.</p>
+small parts. A <strong><code>Ymir</code></strong> program starts with the <code>main</code> function that
+you have already seen in previous chapters. All functions are declared
+using the keyword <strong><code>def</code></strong> followed by a identifier, and a list of
+parameters. A function is called by using its identifier and a list of
+parameters separated by commas between parentheses. </p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span> 
 
+<span class="token comment">/**
+ * The main function is the entry point of the program
+ * It can have no parameters, and return an i32, or void
+ */</span>
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
+<span class="token comment">/**
+ * Declaration of a function named &apos;foo&apos; with no parameters 
+ */</span>
 <span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Foo&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    <span class="token function">bar</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">bar</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
 <span class="token punctuation">}</span>
 
-<span class="token keyword">def</span> <span class="token function">bar</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Bar&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">/**
+ * Declaration of a function named &apos;bar&apos; with one parameter &apos;x&apos; of type &apos;i32&apos;
+ */</span>
+<span class="token keyword">def</span> <span class="token function">bar</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Bar &quot;</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>The declaration of a function can be done anywhere in the program, the
-order is not important for the compiler, thus even if <code>foo</code> is declared
-after the <code>main</code> function, it can be called without any problem.</p>
+<p><br></p>
+<p>The identifier of a function must follow the same rule as variable
+name identifier, that it to say respect the following gramatical rule
+: <code>[_]*[a-Z][a-Z0-9_]*</code></p>
+<p>The order of declaration of the symbol has no impact on the
+compilation. The symbols are defined by the compiler before being
+validated, thus contrary to C-like languages, even if the <code>foo</code>
+function is defined after the <code>main</code> function, it&apos;s symbol is
+accessible, and hence callable by the <code>main</code> function. Further
+information about symbol declarations, and accesses are presented in
+chapter
+<a href="https://gnu-ymir.github.io/Documentations/en/modules/" target="_blank">Modules</a>.</p>
 <h2 id="parameters"><a name="parameters" class="anchor-navigation-ex-anchor" href="#parameters"><i class="fa fa-link" aria-hidden="true"></i></a>1.1. Parameters</h2>
-<p>The parameters of a function are declared after its name, and the
-syntax is similar to the declaration of a variable, but the keyword
-<strong><code>let</code></strong> is omitted because it is obvious.</p>
+<p>The parameters of a function are declared after its identifier between
+parentheses. The syntax of declaration of a parameter is similar to
+the syntax of declaration of a variable, except that the keyword
+<strong><code>let</code></strong> is omitted. However, unlike variable declaration, a
+parameter must have a type, and its value is optional.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span> 
 
+<span class="token comment">/**
+ * Declaration of a function &apos;foo&apos; with one parameter &apos;x&apos; of type &apos;i32&apos;
+ */</span>
 <span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;The value of x is : &quot;</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
+<span class="token comment">/**
+ * Declaration of a function &apos;bar&apos; with two parameters &apos;x&apos; and &apos;y&apos; whose respective types are &apos;i32&apos; and &apos;i32&apos;
+ */</span>
 <span class="token keyword">def</span> <span class="token function">bar</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">,</span> y <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;The value of x + y : &quot;</span><span class="token punctuation">,</span> x <span class="token operator">+</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">bar</span> <span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Call the function &apos;foo&apos; with &apos;x&apos; set to &apos;5&apos;</span>
+    <span class="token function">bar</span> <span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Call the function &apos;bar&apos; with &apos;x&apos; set to &apos;3&apos; and &apos;y&apos; set to &apos;4&apos;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>The values can be specified on a function parameter. If a parameter
-has a value, the value is used by default, so it is optional to
-specify the value when calling the function for that particular
-parameter. If you still want to specify a value, you will need to use
-a named expression that is formed using the <strong><code>-&gt;</code></strong> token.</p>
+<p><br></p>
+<p>A function parameter can have a value, that is used by default when
+calling the function. On can therefore note that it is optional to
+specify the value of a function parameter that have a default value,
+when calling the function. To change the value of a parameter with a
+default value, the token <strong><code>-&gt;</code></strong> is used. This syntax is called a
+<em>named expression</em>, and follows the gramatical rule :</p>
+<pre class="language-"><code>named_expression: Identifier &apos;-&gt;&apos; expression
+</code></pre><p><br></p>
+<p>The following source code presents an example of function with a
+parameter with a default value, and the usage of a <em>named expression</em> to
+call this function.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
+<span class="token comment">/**
+ * Function &apos;foo&apos; can be called without specifying a value for parameter &apos;x&apos;
+ * &apos;8&apos; will be used as a default value for &apos;x&apos;
+ */</span>
 <span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> <span class="token basic-types">i32</span> <span class="token operator">=</span> <span class="token number">8</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;The value of x is : &quot;</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">foo</span> <span class="token punctuation">(</span>x<span class="token punctuation">-&gt;</span> <span class="token number">7</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// call &apos;foo&apos; with &apos;x&apos; set to &apos;8&apos;</span>
+    <span class="token function">foo</span> <span class="token punctuation">(</span>x<span class="token punctuation">-&gt;</span> <span class="token number">7</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// call &apos;foo&apos; with &apos;x&apos; set to &apos;7&apos;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>The named expression can also be used for parameters that do not have
-a default value. A named expression will allow you to specify the
-parameter in any order you want. The algorithm, which determines which
-parameter an argument refers to, is presented bellow and we will
-illustrate it by the following example :</p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">,</span> y <span class="token punctuation">:</span> <span class="token basic-types">i32</span> <span class="token operator">=</span> <span class="token number">9</span><span class="token punctuation">,</span> z <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<p><br></p>
+<p>The <em>named expression</em> can also be used for parameters without any
+default value. Thanks to the <em>named expression</em>, it is allowed to
+specify the parameter in any order. The algorithm, which
+determines which parameter an argument refers to, is presented bellow
+and we will illustrate it by the following example :</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
+
+<span class="token comment">/**
+ * Parameters with default values, does not need to be last parameters
+ * This function can be called with only two parameters (x, z), or using named expression syntax
+ */</span>
+<span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">,</span> y <span class="token punctuation">:</span> <span class="token basic-types">i32</span> <span class="token operator">=</span> <span class="token number">9</span><span class="token punctuation">,</span> z <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token function">println</span> <span class="token punctuation">(</span>x<span class="token punctuation">,</span> <span class="token string">&quot; &quot;</span><span class="token punctuation">,</span> y<span class="token punctuation">,</span> <span class="token string">&quot; &quot;</span><span class="token punctuation">,</span> z<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Call the &apos;foo&apos; function with &apos;x&apos; = 2, &apos;y&apos; = 1 and &apos;z&apos; = 8 </span>
     <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">,</span> y<span class="token punctuation">-&gt;</span> <span class="token number">1</span><span class="token punctuation">,</span> x<span class="token punctuation">-&gt;</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// call the function &apos;foo&apos; with &apos;x&apos; = 1 and y = &apos;9&apos; and z = &apos;8&apos;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>The algorithm is the following : </p>
+<p><br></p>
+<p>The pseudo code of the algorithm that assigns the values to the
+function parameters is presented below.</p>
 <pre class="language-"><code class="lang-ymir">Let args be the list of <span class="token function">arguments</span> <span class="token punctuation">(</span><span class="token punctuation">[</span>y<span class="token punctuation">-&gt;</span> <span class="token number">1</span><span class="token punctuation">,</span> x<span class="token punctuation">-&gt;</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
 Let params be the list of <span class="token function">parameters</span> <span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token operator">=</span><span class="token number">9</span><span class="token punctuation">,</span> z<span class="token punctuation">)</span>
 Let final_args <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> be the list of final arguments
@@ -702,15 +752,19 @@ Let final_args <span class="token operator">=</span> <span class="token punctuat
         remove p <span class="token keyword">in</span> params
         remove <span class="token function">firstUnamedArg</span> <span class="token punctuation">(</span>args<span class="token punctuation">)</span> <span class="token keyword">in</span> args
 </code></pre>
-<p>In this example, the result of each step will be : </p>
+<p><br> If we use the example function foo <code>def foo (x: i32, y : i32 = 9, z : i32)</code>,
+and the call expression <code>foo (8, x-&gt; 2, y-&gt; 1)</code>
+then the result of the assignement algorithm at each step will be the
+following.</p>
 <pre class="language-"><code>1, x : [x-&gt; 2]
 2, y : [x-&gt; 2, y-&gt; 1]
 3, z : [x-&gt; 2, y-&gt; 1, 8]
-</code></pre><p>You can use a complex expression for the default expression of a
-parameter, such as the creation of a class, a function call, and even
-a code block. However, you cannot refer to the other parameters of the
-function. In the next section, we will talk about function bodies, but
-the explanations presented there are valid for any type of expression.</p>
+</code></pre><p><br></p>
+<p>You can use any complex expression for the default value of a function
+parameter, for example the creation of a class, a function call, and
+even a code block, etc. The only limitation is that, you cannot refer
+to the other parameters of the function, as they are not considered
+declared in the scope of the default value.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
 <span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span> 
@@ -719,7 +773,10 @@ the explanations presented there are valid for any type of expression.</p>
 <span class="token keyword">def</span> <span class="token function">bar</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span>
     x <span class="token operator">+</span> <span class="token number">2</span>
 
-<span class="token keyword">def</span> <span class="token function">test</span> <span class="token punctuation">(</span>a <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">,</span> b <span class="token punctuation">:</span> <span class="token basic-types">i32</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token function">bar</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token comment">/**
+ * Declaration of a &apos;baz&apos; function, where &apos;b&apos; = bar(1) + foo(2), as a default value
+ */</span>
+<span class="token keyword">def</span> <span class="token function">baz</span> <span class="token punctuation">(</span>a <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">,</span> b <span class="token punctuation">:</span> <span class="token basic-types">i32</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token function">bar</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment">//                             ^</span>
     <span class="token comment">//                       Try to replace by a</span>
     <span class="token function">println</span> <span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -727,52 +784,74 @@ the explanations presented there are valid for any type of expression.</p>
 <span class="token punctuation">}</span>
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token function">test</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">test</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+    <span class="token function">test</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">,</span> b<span class="token punctuation">-&gt;</span> <span class="token number">23</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
+<p><br></p>
+<p>The symbols used in the default value of a parameters must be
+accessible in the context of the function declaration. In the last
+example, that means that the function <code>baz</code> must know the function
+<code>bar</code> and the function <code>foo</code>, however, there is no need for the
+function that calls it (here the function <code>main</code>) to know these
+symbols. Further explanation on symbol declarations and accesses are
+presented in chapter
+<a href="https://gnu-ymir.github.io/Documentations/en/modules/" target="_blank">Modules</a>.</p>
 <h2 id="function-body"><a name="function-body" class="anchor-navigation-ex-anchor" href="#function-body"><i class="fa fa-link" aria-hidden="true"></i></a>1.2. Function body</h2>
-<p>The body of a function is an expression. Everything in ymir is an
-expression, but each expression does not always have a value, and can
-be <code>empty</code>. An empty expression has the type <code>void</code>.</p>
-<p>A simple <code>add</code> function can be written as follows: </p>
+<p>The body of a function is an expression. Everything in <strong><code>ymir</code></strong> is
+an expression, and every expression are typed. That does not mean that
+every expression have a value, as they can be typed as <code>void</code>
+expression. A simple <strong><code>add</code></strong> function can be written as follows: </p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">add</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">,</span> y <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span> 
     x <span class="token operator">+</span> y
 </code></pre>
+<p><br></p>
 <p>Or by using a more complex expression, such as block, which is an
 expression containing a set of statements. A block is surrounded by
 the <code>{}</code> tokens, and the last expression in a block is its value.</p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<pre class="language-"><code class="lang-ymir">
+<span class="token keyword">def</span> <span class="token function">add</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">,</span> y <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span> <span class="token punctuation">{</span> <span class="token comment">// start of a block</span>
+    x <span class="token operator">+</span> y <span class="token comment">// last expression of the block is the value of the block</span>
+<span class="token punctuation">}</span> <span class="token comment">// end of a block</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token punctuation">{</span>
-        <span class="token keyword">let</span> y <span class="token operator">=</span> <span class="token number">9</span><span class="token punctuation">;</span>
-        y <span class="token operator">+</span> <span class="token number">1</span>
-    <span class="token punctuation">}</span>
+        <span class="token keyword">let</span> y <span class="token operator">=</span> <span class="token function">add</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        y <span class="token operator">+</span> <span class="token number">8</span> 
+    <span class="token punctuation">}</span>   
 <span class="token punctuation">}</span>
 </code></pre>
+<p><br></p>
 <p>The <code>;</code> token is a way of specifying that an expression ends, and that
 the value of the block is the expression that follows. If no
 expression follows the expression, the block value is evaluated to
-nothing and its type is <strong><code>void</code></strong>. For example, if we write the
-following code :</p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span> 
+nothing and its type is <strong><code>void</code></strong>. For example, if for the following
+source code :</p>
+<pre class="language-"><code class="lang-ymir"><span class="token comment">/**
+ * The value of foo is &apos;9&apos;
+ */</span>
+<span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span> 
     <span class="token number">9</span>
 
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token punctuation">{</span>
-        <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+        <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Call foo, but does not store the return value</span>
+    <span class="token punctuation">}</span> <span class="token comment">// The value of the block is &apos;void&apos;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>You should get the following error from the compiler : </p>
-<pre class="language-"><code>Error : cannot declare var of type void
- --&gt; main.yr:(6,9)
+<p><br></p>
+<p>The compiler will return the following error : </p>
+<pre class="language-"><code class="lang-error"><span class="token path">Error</span> : cannot declare var of type void
+ <span class="token comment">--&gt; main.yr:(6,9)</span>
     | 
  6  |     let x = {
     |         ^
 
-ymir1: fatal error: 
+ymir1: <span class="token path">fatal error</span>: 
 compilation terminated.
-</code></pre><h2 id="function-return-type"><a name="function-return-type" class="anchor-navigation-ex-anchor" href="#function-return-type"><i class="fa fa-link" aria-hidden="true"></i></a>1.3. Function return type</h2>
+</code></pre>
+<h2 id="function-return-type"><a name="function-return-type" class="anchor-navigation-ex-anchor" href="#function-return-type"><i class="fa fa-link" aria-hidden="true"></i></a>1.3. Function return type</h2>
 <p>Sometimes a function can return a value, the type of the value must be
 defined at the end of the function definition before the value, using
 the token <strong><code>-&gt;</code></strong>. The type of the value of the function must be the
@@ -786,50 +865,58 @@ same as the one defined in the prototype.</p>
     <span class="token function">foo</span> <span class="token punctuation">(</span>z<span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>The keyword <code>return</code> is used to end a function prematurely.</p>
+<p><br></p>
+<p>The keyword <strong><code>return</code></strong> is used to end a function prematurely. </p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">isDivisable</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">,</span> z <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token basic-types">bool</span> <span class="token punctuation">{</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>z <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token other-keyword">false</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>z <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token other-keyword">false</span><span class="token punctuation">;</span> 
 
     <span class="token punctuation">(</span>x <span class="token operator">%</span> z<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span>
 <span class="token punctuation">}</span>
 </code></pre>
 <p>If the type of the value of the function body is not equivalent to the
 type of the function, and if it is possible that the function may
-never encounter a return declaration, an error is returned by the
+never encounter a <strong><code>return</code></strong> declaration, an error is returned by the
 compiler. For example, with the following code :</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
 <span class="token keyword">def</span> <span class="token function">add_one</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span> <span class="token punctuation">{</span>
-    x <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    x <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment">// the value of the block is void, due to the &apos;;&apos;</span>
 <span class="token punctuation">}</span>
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token function">add_one</span> <span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token function">add_one</span> <span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
     <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;The value of x : &quot;</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
+<p><br></p>
 <p>You should get the following error : </p>
-<pre class="language-"><code>Error : incompatible types i32 and void
- --&gt; main.yr:(3,29)
-    | 
- 3  | def add_one (x : i32)-&gt; i32 {
-    |                             ^
-Note : 
- --&gt; main.yr:(5,1)
-    | 
- 5  | }
-    | ^
+<pre class="language-"><code class="lang-error"><span class="token path">Error</span> : incompatible types i32 and void
+ <span class="token comment">--&gt; main.yr:(3,29)</span>
+    &#x2503; 
+ 3  &#x2503; def add_one (x : i32)-&gt; i32 {
+    &#x2503;                             ^
+    &#x2503; <span class="token keyword">Note</span> : 
+    &#x2503;  <span class="token comment">--&gt; main.yr:(5,1)</span>
+    &#x2503;     &#x2503; 
+    &#x2503;  5  &#x2503; }
+    &#x2503;     &#x2503; ^
+    &#x2517;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501; 
 
-ymir1: fatal error: 
+
+ymir1: <span class="token path">fatal error</span>: 
 compilation terminated.
-</code></pre><p>But if you change the last expression by a return statement, for example : </p>
+</code></pre>
+<p><br></p>
+<p>But if you change the last expression by a <strong><code>return</code></strong> statement, the
+compiler won&apos;t return any error, for example in the following source
+code.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
 <span class="token keyword">def</span> <span class="token function">add_one</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span> <span class="token punctuation">{</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>x <span class="token operator">==</span> <span class="token number">12</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">return</span> x <span class="token operator">+</span> <span class="token number">1</span>
+    <span class="token keyword">if</span> x <span class="token operator">==</span> <span class="token number">12</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> x <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
-        <span class="token keyword">return</span> x <span class="token operator">+</span> <span class="token number">2</span>
+        <span class="token keyword">return</span> x <span class="token operator">+</span> <span class="token number">2</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 
@@ -838,7 +925,7 @@ compilation terminated.
     <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;The value of x : &quot;</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>The compiler won&apos;t return any error.</p>
+<p><br></p>
 <h2 id="block-declaration"><a name="block-declaration" class="anchor-navigation-ex-anchor" href="#block-declaration"><i class="fa fa-link" aria-hidden="true"></i></a>1.4. Block declaration</h2>
 <p>You can declare functions, structures, and so on in a function. This
 makes it possible to create symbols that are only useful for the
@@ -865,12 +952,16 @@ function.</p>
 <span class="token punctuation">}</span>
 </code></pre>
 <p>There is no way to retrieve the <code>bar</code> symbol outside the <code>foo</code>
-function. The function is not a module Cf. <a href="">Modules</a></p>
+function. A function is not a module, and thus the declaration made
+inside a function are available only for the function. The chapter
+<a href="https://gnu-ymir.github.io/Documentations/en/modules/" target="_blank">Modules</a>
+presents another ways to define symbols available for functions.</p>
 <h2 id="uniform-call-syntax"><a name="uniform-call-syntax" class="anchor-navigation-ex-anchor" href="#uniform-call-syntax"><i class="fa fa-link" aria-hidden="true"></i></a>1.5. Uniform call syntax</h2>
-<p>You can also call a function using uniform call syntax, by placing the
-first parameter of the function on the left. This syntax is used to
-perform continuous data processing and to make the source code easier
-to read.</p>
+<p>The <em>uniform call syntax</em> is a syntax that allows to call a function
+with another syntax, than the one presented earlier. The <em>uniform call
+syntax</em> place the first parameter of the function on the left using
+the <em><code>.</code></em> operator. This syntax is used to perform continuous data
+processing and to make the source code easier to read.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
 <span class="token keyword">def</span> <span class="token function">plusOne</span> <span class="token punctuation">(</span>i <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span> 
@@ -886,6 +977,10 @@ to read.</p>
      <span class="token punctuation">.</span><span class="token function">println</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
+<p><br></p>
+<p>This syntax is named <em>uniform call syntax</em> because it is similar to
+ the the syntax used to call methods on class objects
+ (cf. <a href="https://gnu-ymir.github.io/Documentations/en/objects/" target="_blank">Objects</a>);</p>
 
                                 
                                 </section>
@@ -929,7 +1024,7 @@ to read.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Functions","level":"1.3.3","depth":2,"next":{"title":"Control flows","level":"1.3.4","depth":2,"path":"primitives/control.md","ref":"primitives/control.md","articles":[]},"previous":{"title":"Data types","level":"1.3.2","depth":2,"path":"primitives/types.md","ref":"primitives/types.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","copy-code-button","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"primitives/functions.md","mtime":"2021-02-13T15:06:24.378Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-02-13T17:56:31.001Z"},"basePath":"..","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Functions","level":"1.3.3","depth":2,"next":{"title":"Control flows","level":"1.3.4","depth":2,"path":"primitives/control.md","ref":"primitives/control.md","articles":[]},"previous":{"title":"Data types","level":"1.3.2","depth":2,"path":"primitives/types.md","ref":"primitives/types.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","copy-code-button","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"primitives/functions.md","mtime":"2021-02-14T20:06:07.255Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-02-14T21:09:26.084Z"},"basePath":"..","book":{"language":"en"}});
         });
     </script>
 </div>

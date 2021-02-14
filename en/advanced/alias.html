@@ -631,8 +631,9 @@ understand that a new variable will borrow values.</p>
     <span class="token function">println</span> <span class="token punctuation">(</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
+<p><br></p>
 <p>This source code can be represented in memory by the following figure.</p>
-<p><img src="https://gnu-ymir.github.io/Documentations/advanced/memory_x_alias_main.png" alt="drawing" width="700"></p>
+<p><img src="https://gnu-ymir.github.io/Documentations/en/advanced/memory_x_alias_main.png" alt="drawing" width="700"></p>
 <p>The alias keyword is only mandatory when the variable that will borrow
 the data is mutable and may impact the value. It is obvious that one
 cannot borrow immutable data from a variable that is mutable. For
@@ -647,27 +648,30 @@ example, the compiler must return an error on the following code.</p>
     <span class="token function">println</span> <span class="token punctuation">(</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<pre class="language-"><code>Error : discard the constant qualifier is prohibited, left operand mutability level is 2 but must be at most 1
- --&gt; main.yr:(5,13)
+<p><br></p>
+<pre class="language-"><code class="lang-error"><span class="token path">Error</span> : discard the constant qualifier is prohibited, left operand mutability level is 2 but must be at most 1
+ <span class="token comment">--&gt; main.yr:(5,13)</span>
     | 
  5  |     let mut y : [mut i32] = alias x;
     |             ^
-    | Note : 
-    |  --&gt; main.yr:(5,29)
+    | <span class="token keyword">Note</span> : 
+    |  <span class="token comment">--&gt; main.yr:(5,29)</span>
     |     | 
     |  5  |     let mut y : [mut i32] = alias x;
     |     |                             ^^^^^
     |------------------------------ 
 
-Error : undefined symbol y
- --&gt; main.yr:(8,14)
+<span class="token path">Error</span> : undefined symbol y
+ <span class="token comment">--&gt; main.yr:(8,14)</span>
     | 
  8  |     println (y);
     |              ^
 
-ymir1: fatal error: 
+ymir1: <span class="token path">fatal error</span>: 
 compilation terminated.
-</code></pre><p>However, if the variable that will borrow the data is not mutable,
+</code></pre>
+<p><br></p>
+<p>However, if the variable that will borrow the data is not mutable,
 there is no need to add the keyword <code>alias</code>, and the compiler will
 create an implicit alias, which will have no consequences.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
@@ -678,6 +682,7 @@ create an implicit alias, which will have no consequences.</p>
     <span class="token function">println</span> <span class="token punctuation">(</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
+<p><br></p>
 <p>In the last example, <strong><code>y</code></strong> can be mutable, as long as its internal
 value is immutable, i.e. its type is <code>mut [i32]</code>, you can change the
 value of <code>y</code>, but not the value it borrows. There is no problem, the
@@ -694,6 +699,7 @@ values of <code>x</code> will not be changed, no matter what you do with <code>y
     <span class="token function">println</span> <span class="token punctuation">(</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
+<p><br></p>
 <p>You may have noticed that even though the literal is actually the
 element that creates the data, we do not consider it to be the owner
 of the data, so the keyword <code>alias</code> is implied when it is literal. We
@@ -714,6 +720,7 @@ the alias is already made within the value of these elements.</p>
     <span class="token function">println</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// [1, 2, 3];</span>
 <span class="token punctuation">}</span>
 </code></pre>
+<p><br></p>
 <h2 id="alias-a-function-parameter"><a name="alias-a-function-parameter" class="anchor-navigation-ex-anchor" href="#alias-a-function-parameter"><i class="fa fa-link" aria-hidden="true"></i></a>1.1. Alias a function parameter</h2>
 <p>As you have noticed, the keyword <code>alias</code>, unlike the keyword <code>ref</code>,
 does not characterize a variable. The type of a variable will indicate
@@ -734,6 +741,7 @@ reference.</p>
     <span class="token comment">// Try to remove the alias</span>
 <span class="token punctuation">}</span>
 </code></pre>
+<p><br></p>
 <p>As with the variable, if the function parameter cannot affect the
 values that are borrowed, the alias keyword is not required.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
@@ -747,6 +755,7 @@ values that are borrowed, the alias keyword is not required.</p>
     <span class="token function">foo</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
+<p><br></p>
 <h2 id="special-case-of-struct-and-tuple"><a name="special-case-of-struct-and-tuple" class="anchor-navigation-ex-anchor" href="#special-case-of-struct-and-tuple"><i class="fa fa-link" aria-hidden="true"></i></a>1.2. Special case of struct and tuple</h2>
 <p>In the chapter <a href="">Structure</a> you will learn how to create a structure
 containing several fields of different types. You have already learned
@@ -824,7 +833,7 @@ aliasable.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Aliases","level":"1.4.2","depth":2,"next":{"title":"Copy and Deep copy","level":"1.4.3","depth":2,"path":"advanced/copies.md","ref":"advanced/copies.md","articles":[]},"previous":{"title":"References","level":"1.4.1","depth":2,"path":"advanced/references.md","ref":"advanced/references.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","copy-code-button","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"advanced/alias.md","mtime":"2021-02-13T15:06:24.366Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-02-13T17:56:31.001Z"},"basePath":"..","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Aliases","level":"1.4.2","depth":2,"next":{"title":"Copy and Deep copy","level":"1.4.3","depth":2,"path":"advanced/copies.md","ref":"advanced/copies.md","articles":[]},"previous":{"title":"References","level":"1.4.1","depth":2,"path":"advanced/references.md","ref":"advanced/references.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","copy-code-button","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"advanced/alias.md","mtime":"2021-02-14T20:39:34.595Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-02-14T21:09:26.084Z"},"basePath":"..","book":{"language":"en"}});
         });
     </script>
 </div>

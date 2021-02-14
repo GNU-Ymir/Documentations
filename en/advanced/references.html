@@ -625,7 +625,7 @@ usually borrowed from another variable.</p>
 </code></pre>
 <p>The above program can be represented in memory as shown in the
 following figure.</p>
-<p><img src="https://gnu-ymir.github.io/Documentations/advanced/memory_x__ref_y_foo.png" alt="Image"></p>
+<p><img src="https://gnu-ymir.github.io/Documentations/en/advanced/memory_x__ref_y_foo.png" alt="Image"></p>
 <p><strong><code>y</code></strong>, is a pointer to x, which can be used as if it were directly
 <strong><code>x</code></strong>. This means that <strong><code>y</code></strong> must have the same mutability
 properties (or lower) as <strong><code>x</code></strong>. And that if <code>x</code> is mutable, changing <code>y</code>
@@ -662,8 +662,9 @@ accept the side effects it may have on your values.</p>
     <span class="token function">println</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span> 
 <span class="token punctuation">}</span>
 </code></pre>
+<p><br></p>
 <p>The following figure shows the memory status of the previous code:</p>
-<p><img src="https://gnu-ymir.github.io/Documentations/advanced/memory_x_main_ref_x_foo.png" alt="drawing" width="450"></p>
+<p><img src="https://gnu-ymir.github.io/Documentations/en/advanced/memory_x_main_ref_x_foo.png" alt="drawing" width="450"></p>
 <p>The keyword <code>ref</code> is not always associated with a mutable variable, it
 can be used to pass a complex type to a function more efficiently,
 when you don&apos;t want to make a complete copy, which would be much less
@@ -672,7 +673,6 @@ variable by reference, to distinguish it from the function that passes
 the variable directly by value. In practice, due to the existence of
 aliasable types, which will be discussed in the next chapter, you will
 never gain anything by doing this.</p>
-<p><strong>Exercise :</strong> Try to guess the output of the following program : </p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
 <span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span> x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -691,24 +691,24 @@ never gain anything by doing this.</p>
     <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token other-keyword">ref</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p><div class="spoiler_head"> <strong>Correction</strong> (spoiler) : </div>
-<span class="spoiler">
-<pre class="language-" style="position: relative;"><code>By value : 89
+<p><br></p>
+<pre class="language-"><code>By value : 89
 By reference : 89
-</code></pre>
-</span></p>
+</code></pre><p><br></p>
 <p>If you have done the exercise, and added the keyword <code>mut</code> in the
 signature of the first function <code>foo</code>, you should get the following
 error: </p>
-<pre class="language-"><code>Error : a parameter cannot be mutable, if it is not a reference
- --&gt; main.yr:(4,14)
+<pre class="language-"><code class="lang-error"><span class="token path">Error</span> : a parameter cannot be mutable, if it is not a reference
+ <span class="token comment">--&gt; main.yr:(4,14)</span>
     | 
  4  | def foo (mut x : i32) {
     |              ^
 
-ymir1: fatal error: 
+ymir1: <span class="token path">fatal error</span>: 
 compilation terminated.
-</code></pre><p>This error means that the type of x is not aliasable, so if it is not
+</code></pre>
+<p><br></p>
+<p>This error means that the type of x is not aliasable, so if it is not
 a reference, marking it as mutable will have no effect on the program,
 so the compiler does not allow it.</p>
 <h2 id="reference-as-a-value"><a name="reference-as-a-value" class="anchor-navigation-ex-anchor" href="#reference-as-a-value"><i class="fa fa-link" aria-hidden="true"></i></a>1.2. Reference as a value</h2>
@@ -721,15 +721,18 @@ with the following code, you should get an error.</p>
     <span class="token keyword">let</span> y <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token other-keyword">ref</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<pre class="language-"><code>Warning : the creation of ref has no effect on left operand
- --&gt; main.yr:(3,19)
+<p><br></p>
+<pre class="language-"><code class="lang-error"><span class="token function">Warning</span> : the creation of ref has no effect on left operand
+ <span class="token comment">--&gt; main.yr:(3,19)</span>
     | 
  3  |     let y = (10, ref x);
     |                      ^
 
-ymir1: fatal error: 
+ymir1: <span class="token path">fatal error</span>: 
 compilation terminated.
-</code></pre><p>This warning means that you have used the keyword <code>ref</code> but the
+</code></pre>
+<p><br></p>
+<p>This warning means that you have used the keyword <code>ref</code> but the
 compiler will ignore it because it will not create a reference to <code>x</code>
 in the value of <code>y</code>.</p>
 <h2 id="reference-as-function-return"><a name="reference-as-function-return" class="anchor-navigation-ex-anchor" href="#reference-as-function-return"><i class="fa fa-link" aria-hidden="true"></i></a>1.3. Reference as function return</h2>
@@ -748,16 +751,18 @@ return a reference to a variable as a function return value. </p>
     <span class="token function">println</span> <span class="token punctuation">(</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// and a seg fault would be raised, when using the reference</span>
 <span class="token punctuation">}</span>
 </code></pre>
+<p><br></p>
 <p>With the above source code, you should get the following error : </p>
-<pre class="language-"><code>Error : cannot return a reference type
- --&gt; main.yr:(3,19)
+<pre class="language-"><code class="lang-error"><span class="token path">Error</span> : cannot return a reference type
+ <span class="token comment">--&gt; main.yr:(3,19)</span>
     | 
  3  | def foo () -&gt; ref i32 {
     |                   ^^^
 
-ymir1: fatal error: 
+ymir1: <span class="token path">fatal error</span>: 
 compilation terminated.
 </code></pre>
+
                                 
                                 </section>
                             
@@ -800,7 +805,7 @@ compilation terminated.
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"References","level":"1.4.1","depth":2,"next":{"title":"Aliases","level":"1.4.2","depth":2,"path":"advanced/alias.md","ref":"advanced/alias.md","articles":[]},"previous":{"title":"Alias and References","level":"1.4","depth":1,"path":"advanced/README.md","ref":"advanced/README.md","articles":[{"title":"References","level":"1.4.1","depth":2,"path":"advanced/references.md","ref":"advanced/references.md","articles":[]},{"title":"Aliases","level":"1.4.2","depth":2,"path":"advanced/alias.md","ref":"advanced/alias.md","articles":[]},{"title":"Copy and Deep copy","level":"1.4.3","depth":2,"path":"advanced/copies.md","ref":"advanced/copies.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","copy-code-button","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"advanced/references.md","mtime":"2021-02-13T15:06:24.366Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-02-13T17:56:31.001Z"},"basePath":"..","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"References","level":"1.4.1","depth":2,"next":{"title":"Aliases","level":"1.4.2","depth":2,"path":"advanced/alias.md","ref":"advanced/alias.md","articles":[]},"previous":{"title":"Alias and References","level":"1.4","depth":1,"path":"advanced/README.md","ref":"advanced/README.md","articles":[{"title":"References","level":"1.4.1","depth":2,"path":"advanced/references.md","ref":"advanced/references.md","articles":[]},{"title":"Aliases","level":"1.4.2","depth":2,"path":"advanced/alias.md","ref":"advanced/alias.md","articles":[]},{"title":"Copy and Deep copy","level":"1.4.3","depth":2,"path":"advanced/copies.md","ref":"advanced/copies.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","copy-code-button","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"advanced/references.md","mtime":"2021-02-14T20:38:12.624Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-02-14T21:09:26.084Z"},"basePath":"..","book":{"language":"en"}});
         });
     </script>
 </div>
