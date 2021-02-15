@@ -3,9 +3,9 @@
 Structure is a common design used in many languages to define users'
 custom types, which contains multiple values of different
 types. Structures are similar to tuples, in terms of memory management
-(always located in the stack). Unlike tuples, structures have a name,
-and all their internal fields also have a name. As you can see
-structure are printable.
+(can be located in the stack). Unlike tuples, structures have a name,
+and all their internal fields also have a name. It can be said that
+tuple are simply anonymus structures. 
 
 ```ymir
 import std::io
@@ -16,9 +16,71 @@ struct
  -> Point;
  
 def main () {
-	let point = Point (1, 2);
-	println (point);
+    let point = Point (1, 2); // initialize the value of the structure
+    println (point); // structures are printable
 } 
+```
+
+## Structure construction
+
+The construction of a structure is made using the same syntax as a
+function call, that is to say using its identifier and a list of
+parameters inside parentheses and separated by comas. Like function
+calls, structure can have default values assigneted to fields. The
+value of these field can be then changed using the *named expression*
+syntax, which is constructed with the `->` token.
+
+The algorithm for determining which value will be associated to each
+field is the same as that used for the function call, and is presented
+in
+[Function](https://gnu-ymir.github.io/Documentations/en/primitives/functions.html).
+
+```ymir
+import std::io
+
+struct 
+| x : i32 = 0
+| y : i32 
+ -> Point;
+  
+def main () {
+    let point = Point (y-> 12, x-> 98);
+    println (point);
+
+    let point2 = Point (1);
+    println (point2);
+}
+```
+
+<br>
+
+```
+main::Point(98, 12)
+main::Point(0, 1)
+```
+
+<br>
+
+## Field access
+
+The field of a structure are always public, and accessible using the
+operator **`.`** where the left operand is a value whose type is a
+structure, and the right operand is the identifier of the field.
+
+```ymir
+import std::io
+
+struct 
+| x : i32
+| y : i32 
+ -> Point;
+ 
+def main ()
+    throws &AssertError
+{
+    let point = Point (1, 2); 
+    assert (point.x == 1 && point.y == 2);
+}
 ```
 
 ## Structure mutability
@@ -67,54 +129,17 @@ struct
 | mut y : i32
  -> Point;
 
-def main () {
-	let p = Point (1, 2);
-	let mut p2 = p;
-	p2.y = 12; 
-	println (p, " ", p2);
+def main ()
+    throws &AssertError
+{
+    let p = Point (1, 2);
+    let mut p2 = p; // make a copy of the structure
+    p2.y = 12;
+
+    assert (p.y == 2);
+    assert (p2.y == 12);
 }
 ```
-
-The above program should compile and display the following output : 
-
-```
-main::Point(1, 2) main::Point(1, 12)
-```
-
-## Default value 
-
-You can add a default value for a field in a structure, such as a
-function call, it can be changed when creating a new structure, using
-a named expression, which is constructed with the `->` token.
-
-The algorithm for determining which field an argument is associated
-with is the same as that used for the function call, and is presented
-in [Function](https://gnu-ymir.github.io/Documentations/en/primitives/functions.html).
-
-```ymir
-import std::io
-
-struct 
-| x : i32 = 0
-| y : i32 
- -> Point;
-  
-def main () {
-	let point = Point (y-> 12, x-> 98);
-	println (point);
-	
-	let point2 = Point (1);
-	println (point2);
-}
-```
-
-<br>
-
-```
-main::Point(98, 12)
-main::Point(0, 1)
-```
-
 
 ## Packed and Union
 
@@ -125,8 +150,9 @@ try to optimize your code at a binary level.
 The size of a structure is calculated by the compiler, which decides
 the alignment of the different fields. This is why the size of a
 structure containing an `i64' and a `c8'` is `16` bytes, not `9`
-bytes. To force the compiler to remove the optimized alignment, you
-can use the `packed` modifier.
+bytes. There is no guarantee about the size or the order of the fields
+in the generated program. To force the compiler to remove the
+optimized alignment, you can use the `packed` modifier.
 
 ```ymir
 import std::io
@@ -143,8 +169,8 @@ struct
 
 
 def main () {
-	println ("Size of packed : ", sizeof Packed);
-	println ("Size of unpacked : ", sizeof Unpacked);
+    println ("Size of packed : ", sizeof Packed);
+    println ("Size of unpacked : ", sizeof Unpacked);
 }
 ```
 
@@ -165,17 +191,109 @@ struct @union
 | y : f32
  -> Dummy;
 
-def main () {
+def main ()
+    throws &AssertError
+{
     let x = Dummy (y-> 12.0f);
-    println (x.x);
+    assert (x.x == 1094713344);
 }
-```
-
-```
-1094713344
 ```
 
 As you can see, the construction of the Union requires only one
 argument. You cannot give several arguments when building a union, as
 they would be contradictory. The argument must also be passed as a
-named expression (using the `->` token).
+*named expression* (using the `->` token).
+
+## Structure specific attributes
+
+### Attributes of a type
+
+Structure have type specific attributes, as any types, accessible with
+the token **`::`**. The table below presents these specific
+attributes. These attributes are accessible using a type of struct,
+and not a value. A example, under the table presents usage of struct
+specific attributes.
+
+| Name | Meaning |
+| --- | --- |
+| `init` | The initial value of the type |
+| `typeid` |  The name of the type stored in a value of type **`[c32]`** |
+| `typeinfo` | A structure of type TypeInfo, containing information about the type |
+
+All the information about TypeInfo are presented in chapter [Dynamic types]().
+
+```ymir
+mod main;
+
+import std::io;
+
+struct
+| x : i32
+| y : i32 = 9
+ -> Point; 
+ 
+def main ()
+    throws &AssertError
+{
+    let x = Point::init;
+    
+    // the structure is declared in the main module, thus its name is main::Point	
+    assert (Point::typeid == "main::Point");
+    
+    assert (x.x == i32::init && x.y == 9);
+}
+```
+
+### Attributes of a value
+
+Value of type struct have also specific attributes accessible using
+the token **`::`**. This token is used because it will generate
+another values of a different types at compile time, and these values
+are not contained inside the structure. The table below lists the
+specific attributes accessible using a value of type struct.
+
+| Name | Meaning |
+| --- | --- |
+| `tupleof` | Create a immutable tuple value from the struct value  |
+| `fields_address` | Used for low level operation. Create a tuple where each field is the address of the field if the struct |
+
+An simple example of `tupleof` and `fields_address` is presented in
+the following source code. The mutability of the pointers in the tuple
+created by `fields_address` is the same mutability as those of the
+fields of the creator struct. This attributes is used in the `std` for
+low level operations, and as for pointer we do not recommand to use
+this attribute unless, you know exactly what you are doing. In a
+previous section, we presented that there is no guarantee on the
+alignment and order of the fields in the structure in the compiled
+program. The interest of `fields_address` attribute is to bypass this
+limitation, when writing code that need access to the fields without
+knowing the name of the fields (basically some `std` function uses
+that capacity).
+
+```ymir
+struct
+| x : i32
+| mut y : i32
+ -> Point;
+
+def main ()
+    throws &AssertError, &SegFault
+{
+    let mut point = Point (1, 2);
+    let (x, y) = point::tupleof;
+
+    assert (x == 1 && y == 2);
+
+    let mut addrs : (&i32, dmut &i32) = alias (point::fields_address);
+    //                                  ^^^^^
+    // The alias is mandatory, we try to borrow data using a pointer, which is an aliasable type
+    // The first element of addrs can't be mutable, because x is not mutable in the structure
+    
+    *(addrs._1) = 9; // modifying 'y' value of point
+
+    assert (point.y == 9);
+
+    let imut_addrs = point::fields_address; // here not need for alias
+    assert (*(imut_addrs._1) == 9);
+}
+```

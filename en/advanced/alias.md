@@ -213,5 +213,10 @@ The table below presents some examples of aliasable tuples :
 | (([i32], i32), f64) | true | [i32] is a slice, and hence aliasable |
 
 
-
-
+In the introduction of this chapter we presented the notion of
+[Mutability
+level](https://gnu-ymir.github.io/Documentations/en/advanced/#mutability-level). One
+can note that mutability level is not suitable for tuple, as aliasable
+tuple are trees of type and not simply a list. However, this does not
+change much, the compiler just check the mutability level of the inner
+types of the tuple, recursively.

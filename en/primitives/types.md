@@ -38,8 +38,11 @@ table below:
 
 | Name | Meaning |
 | --- | --- |
-| `init` | The initial value of the type |
+| `init` | The initial value of the struct, where each field are set to init if they don't have default value |
 | `typeid` |  The name of the type stored in a value of type **`[c32]`** |
+| `typeinfo` | A structure of type TypeInfo, containing information about the type |
+
+All the information about TypeInfo are presented in chapter [Dynamic types]().
 
 ## Scalar types
 
