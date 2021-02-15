@@ -616,7 +616,7 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#enumeration"><b>1. </b>Enumeration</a></li></ul></div><a href="#enumeration" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="enumeration"><a name="enumeration" class="anchor-navigation-ex-anchor" href="#enumeration"><i class="fa fa-link" aria-hidden="true"></i></a>1. Enumeration</h1>
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#enumeration"><b>1. </b>Enumeration</a></li><ul><li><span class="title-icon "></span><a href="#value-access"><b>1.1. </b>Value access</a></li><li><span class="title-icon "></span><a href="#enumeration-specific-attributes"><b>1.2. </b>Enumeration specific attributes</a></li></ul></ul></div><a href="#enumeration" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="enumeration"><a name="enumeration" class="anchor-navigation-ex-anchor" href="#enumeration"><i class="fa fa-link" aria-hidden="true"></i></a>1. Enumeration</h1>
 <p>Enumerations are user-defined types that have a set of values. The
 keyword <code>enum</code> is used to define an enumeration type. The type of the
 fields is inferred at compile time, thanks to the value associated with
@@ -642,11 +642,16 @@ them. It is mandatory that each field shares the same type.</p>
     <span class="token function">foo</span> <span class="token punctuation">(</span>d<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>The enumeration can be casted according to the type of its value, but
-the reverse is not possible.</p>
+<h2 id="value-access"><a name="value-access" class="anchor-navigation-ex-anchor" href="#value-access"><i class="fa fa-link" aria-hidden="true"></i></a>1.1. Value access</h2>
+<p>The values of an enumeration are accessible using the token
+<strong><code>::</code></strong>. In practice, access a value of the enumeration will past the
+content value of the field in the source code. The result of the
+expression have the type of the enumeration, and can be implicitely
+casted into the type of its content. An example of enumeration access
+is presented in the following source code.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
-<span class="token keyword">enum</span>
+<span class="token keyword">enum</span> <span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token basic-types">c32</span><span class="token punctuation">]</span>
 <span class="token operator">|</span> MONDAY <span class="token operator">=</span> <span class="token string">&quot;Mon&quot;</span>
 <span class="token operator">|</span> TUESDAY <span class="token operator">=</span> <span class="token string">&quot;Tue&quot;</span>
 <span class="token operator">|</span> WEDNESDAY <span class="token operator">=</span> <span class="token string">&quot;Wed&quot;</span>
@@ -665,12 +670,39 @@ the reverse is not possible.</p>
 <span class="token punctuation">}</span>
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// the internal type Day is of type [c32], so it can be implicitely casted into [c32]</span>
     <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token path">Day</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">MONDAY</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
     <span class="token function">bar</span> <span class="token punctuation">(</span><span class="token path">Day</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">MONDAY</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token comment">// Try to add the line </span>
-    <span class="token comment">// bar (&quot;Mon&quot;)</span>
+
+    <span class="token comment">// However, it is impossible to transform a [c32] into a Day implicitely</span>
+    <span class="token function">bar</span> <span class="token punctuation">(</span><span class="token string">&quot;Mon&quot;</span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
 </code></pre>
+<p><br></p>
+<p>With the above source code, because we try to cast a <strong><code>[c32]</code></strong> into
+a <code>Day</code>, the compiler will return an error. The error is presented in
+the code block below.</p>
+<pre class="language-"><code class="lang-error"><span class="token path">Error</span> : the call operator is not defined for type main::bar and {mut [c32]}
+ <span class="token comment">--&gt; main.yr:(28,6)</span>
+    &#x2503; 
+28  &#x2503;     bar (&quot;Mon&quot;)
+    &#x2503;         ^     ^
+    &#x2503; <span class="token other-keyword">Note</span> : candidate bar <span class="token comment">--&gt; main.yr:(17,5) : main::bar (day : [c32])-&gt; void</span>
+    &#x2503; <span class="token path">Error</span> : incompatible types main::Day and mut [c32]
+    &#x2503;  <span class="token comment">--&gt; main.yr:(28,7)</span>
+    &#x2503;     &#x2503; 
+    &#x2503; 28  &#x2503;     bar (&quot;Mon&quot;)
+    &#x2503;     &#x2503;          ^
+    &#x2503; 
+    &#x2503; <span class="token other-keyword">Note</span> : parameter day <span class="token comment">--&gt; main.yr:(17,10) : main::bar (day : [c32])-&gt; void</span>
+    &#x2517;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501; 
+
+
+ymir1: <span class="token path">fatal error</span>: 
+compilation terminated.
+</code></pre>
+<h2 id="enumeration-specific-attributes"><a name="enumeration-specific-attributes" class="anchor-navigation-ex-anchor" href="#enumeration-specific-attributes"><i class="fa fa-link" aria-hidden="true"></i></a>1.2. Enumeration specific attributes</h2>
 
                                 
                                 </section>
@@ -714,7 +746,7 @@ the reverse is not possible.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Enum","level":"1.5.2","depth":2,"next":{"title":"Modules","level":"1.6","depth":1,"path":"modules/README.md","ref":"modules/README.md","articles":[]},"previous":{"title":"Structure","level":"1.5.1","depth":2,"path":"types/struct.md","ref":"types/struct.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"types/enum.md","mtime":"2021-02-15T09:48:44.784Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-02-15T15:12:02.000Z"},"basePath":"..","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Enum","level":"1.5.2","depth":2,"next":{"title":"Modules","level":"1.6","depth":1,"path":"modules/README.md","ref":"modules/README.md","articles":[]},"previous":{"title":"Structure","level":"1.5.1","depth":2,"path":"types/struct.md","ref":"types/struct.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"types/enum.md","mtime":"2021-02-15T17:07:06.959Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-02-15T19:42:51.511Z"},"basePath":"..","book":{"language":"en"}});
         });
     </script>
 </div>
