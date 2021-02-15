@@ -41,6 +41,10 @@
                 
             
                 
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-code/plugin.css">
+                
+            
+                
                 <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
                 
             
@@ -615,7 +619,14 @@
                                 <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#reference"><b>1. </b>Reference</a></li><ul><li><span class="title-icon "></span><a href="#reference-as-function-parameter"><b>1.1. </b>Reference as function parameter</a></li><li><span class="title-icon "></span><a href="#reference-as-a-value"><b>1.2. </b>Reference as a value</a></li><li><span class="title-icon "></span><a href="#reference-as-function-return"><b>1.3. </b>Reference as function return</a></li></ul></ul></div><a href="#reference" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="reference"><a name="reference" class="anchor-navigation-ex-anchor" href="#reference"><i class="fa fa-link" aria-hidden="true"></i></a>1. Reference</h1>
 <p>The keyword<strong><code>ref</code></strong> is a keyword that is placed before the
 declaration of a variable. It is used to refer to a value, which is
-usually borrowed from another variable.</p>
+usually borrowed from another variable. They are performing similar
+operation as
+<a href="https://gnu-ymir.github.io/Documentations/en/primitives/types.html#pointers" target="_blank">Pointers</a>,
+with the difference that they does not need to be dereferenced (this
+is done automatically), and pointer arithmetics is not possible with
+references. In <strong>Ymir</strong> references are always set, and are always set
+from another variable, hence they are way safer than pointers, and
+must be prefered to them when possible.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
     <span class="token keyword">let</span> <span class="token other-keyword">ref</span> y <span class="token operator">=</span> <span class="token other-keyword">ref</span> x<span class="token punctuation">;</span>
@@ -623,25 +634,48 @@ usually borrowed from another variable.</p>
     <span class="token comment">// Try to remove the keyword ref.</span>
 <span class="token punctuation">}</span>
 </code></pre>
+<p><br></p>
 <p>The above program can be represented in memory as shown in the
 following figure.</p>
 <p><img src="https://gnu-ymir.github.io/Documentations/en/advanced/memory_x__ref_y_foo.png" alt="Image"></p>
-<p><strong><code>y</code></strong>, is a pointer to x, which can be used as if it were directly
-<strong><code>x</code></strong>. This means that <strong><code>y</code></strong> must have the same mutability
-properties (or lower) as <strong><code>x</code></strong>. And that if <code>x</code> is mutable, changing <code>y</code>
-would also change <code>x</code>.</p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
-
-<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> <span class="token other-keyword">mut</span> x <span class="token punctuation">:</span> <span class="token type">[</span><span class="token other-keyword">mut</span> <span class="token basic-types">i32</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token keyword">let</span> <span class="token other-keyword">ref</span> <span class="token other-keyword">mut</span> y <span class="token punctuation">:</span> <span class="token type">[</span><span class="token other-keyword">mut</span> <span class="token basic-types">i32</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token other-keyword">ref</span> x<span class="token punctuation">;</span>
-    y <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token function">println</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<p>In this figure, one can note that <strong><code>y</code></strong>, is a pointer to x, which
+can be used as if it was directly <strong><code>x</code></strong>. This means that <strong><code>y</code></strong>
+must have the same mutability properties (or lower) as <strong><code>x</code></strong>. And
+that if <strong><code>x</code></strong> is mutable, changing the value of <strong><code>y</code></strong> would also
+change <strong><code>x</code></strong>.</p>
+<p>A first example of reference is presented in the following source
+code. In this example, a mutable variable <strong><code>x</code></strong> contains a value of
+type <strong><code>i32</code></strong>. This value is placed on the stack, as it is not a
+aliasable type. Then a variable <strong><code>y</code></strong> is constructed as a reference
+of the variable <strong><code>x</code></strong>. Modifying <strong><code>y</code></strong> in the following example, also
+modifies <strong><code>x</code></strong>.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">throws</span> <span class="token operator">&amp;</span><span class="token type">AssertError</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">let</span> <span class="token other-keyword">mut</span> x <span class="token operator">=</span> <span class="token number">12</span><span class="token punctuation">;</span> <span class="token comment">// place a value of type i32 and value 12 on the stack</span>
+    <span class="token keyword">let</span> <span class="token other-keyword">ref</span> <span class="token other-keyword">mut</span> y <span class="token operator">=</span> <span class="token other-keyword">ref</span> x<span class="token punctuation">;</span> <span class="token comment">// create a reference of x</span>
+    y <span class="token operator">=</span> <span class="token number">42</span><span class="token punctuation">;</span> <span class="token comment">// modify the value pointed by the reference</span>
+    <span class="token keyword">assert</span> <span class="token punctuation">(</span>x <span class="token operator">==</span> <span class="token number">42</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>The above program should display the following output once launched:</p>
-<pre class="language-"><code>[7, 8, 9]
-</code></pre><h2 id="reference-as-function-parameter"><a name="reference-as-function-parameter" class="anchor-navigation-ex-anchor" href="#reference-as-function-parameter"><i class="fa fa-link" aria-hidden="true"></i></a>1.1. Reference as function parameter</h2>
+<p><br></p>
+<p>A more complexe example is presented in the following source code. In
+this example, a deeply mutable array <strong><code>x</code></strong> is created. This array is
+a reference on borrowed data in the heap. A deeply mutable reference
+<strong><code>y</code></strong> is the, made on that variable <strong><code>x</code></strong>, which is allowed
+because <strong><code>x</code></strong> is also deeply mutable and the mutability level of
+<strong><code>x</code></strong> and <strong><code>y</code></strong> are the same. When changing the value of <strong><code>y</code></strong>
+(here the reference of the slice), it does not only change the
+reference of <strong><code>y</code></strong> but also the reference of <strong><code>x</code></strong>.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> <span class="token other-keyword">mut</span> x <span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token other-keyword">mut</span> <span class="token basic-types">i32</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> <span class="token other-keyword">ref</span> <span class="token other-keyword">mut</span> y <span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token other-keyword">mut</span> <span class="token basic-types">i32</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token other-keyword">ref</span> x<span class="token punctuation">;</span>
+    y <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">// modify the value pointed by the reference (in the stack)</span>
+    y <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">89</span><span class="token punctuation">;</span> <span class="token comment">// modify the value on the heap</span>
+    <span class="token keyword">assert</span> <span class="token punctuation">(</span>x <span class="token operator">==</span> <span class="token punctuation">[</span><span class="token number">89</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="reference-as-function-parameter"><a name="reference-as-function-parameter" class="anchor-navigation-ex-anchor" href="#reference-as-function-parameter"><i class="fa fa-link" aria-hidden="true"></i></a>1.1. Reference as function parameter</h2>
 <p>A parameter of a function can be a reference. As with the local
 variable, when a value is passed to it, you must tell the compiler
 that you understand that you are passing the value by reference, and
@@ -695,8 +729,8 @@ never gain anything by doing this.</p>
 <pre class="language-"><code>By value : 89
 By reference : 89
 </code></pre><p><br></p>
-<p>If you have done the exercise, and added the keyword <code>mut</code> in the
-signature of the first function <code>foo</code>, you should get the following
+<p>If you have done the exercise, and added the keyword <strong><code>mut</code></strong> in the
+signature of the first function <strong><code>foo</code></strong>, you should get the following
 error: </p>
 <pre class="language-"><code class="lang-error"><span class="token path">Error</span> : a parameter cannot be mutable, if it is not a reference
  <span class="token comment">--&gt; main.yr:(4,14)</span>
@@ -708,20 +742,23 @@ ymir1: <span class="token path">fatal error</span>:
 compilation terminated.
 </code></pre>
 <p><br></p>
-<p>This error means that the type of x is not aliasable, so if it is not
+<p>This error means that the type of <strong><code>x</code></strong> is not aliasable, so if it is not
 a reference, marking it as mutable will have no effect on the program,
 so the compiler does not allow it.</p>
 <h2 id="reference-as-a-value"><a name="reference-as-a-value" class="anchor-navigation-ex-anchor" href="#reference-as-a-value"><i class="fa fa-link" aria-hidden="true"></i></a>1.2. Reference as a value</h2>
 <p>A reference is not a type, it is only a kind of variable, you cannot
-store references in subtypes (for example, you cannot make a reference
-array, or a tuple containing a reference to a value). This means that
-with the following code, you should get an error.</p>
+store references in subtypes (for example, you cannot make an array of
+references, or a tuple containing a reference to a value). This means
+that with the following code, you should will get an error.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">12</span><span class="token punctuation">;</span>
     <span class="token keyword">let</span> y <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token other-keyword">ref</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p><br></p>
+<p><br> The following error means that the source code intended to create
+a reference on a variable, but the compiler will not make it, as it
+has no interest and will be immediately dereferenced to be stored in
+the tuple value.</p>
 <pre class="language-"><code class="lang-error"><span class="token function">Warning</span> : the creation of ref has no effect on left operand
  <span class="token comment">--&gt; main.yr:(3,19)</span>
     | 
@@ -731,10 +768,6 @@ with the following code, you should get an error.</p>
 ymir1: <span class="token path">fatal error</span>: 
 compilation terminated.
 </code></pre>
-<p><br></p>
-<p>This warning means that you have used the keyword <code>ref</code> but the
-compiler will ignore it because it will not create a reference to <code>x</code>
-in the value of <code>y</code>.</p>
 <h2 id="reference-as-function-return"><a name="reference-as-function-return" class="anchor-navigation-ex-anchor" href="#reference-as-function-return"><i class="fa fa-link" aria-hidden="true"></i></a>1.3. Reference as function return</h2>
 <p>You may be skeptical about the interest of returning a reference to a
 variable, and we agree with you. That is why, it is impossible to
@@ -752,7 +785,7 @@ return a reference to a variable as a function return value. </p>
 <span class="token punctuation">}</span>
 </code></pre>
 <p><br></p>
-<p>With the above source code, you should get the following error : </p>
+<p>With the above source code, the compiler return this fairly straightforward error.</p>
 <pre class="language-"><code class="lang-error"><span class="token path">Error</span> : cannot return a reference type
  <span class="token comment">--&gt; main.yr:(3,19)</span>
     | 
@@ -805,7 +838,7 @@ compilation terminated.
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"References","level":"1.4.1","depth":2,"next":{"title":"Aliases","level":"1.4.2","depth":2,"path":"advanced/alias.md","ref":"advanced/alias.md","articles":[]},"previous":{"title":"Alias and References","level":"1.4","depth":1,"path":"advanced/README.md","ref":"advanced/README.md","articles":[{"title":"References","level":"1.4.1","depth":2,"path":"advanced/references.md","ref":"advanced/references.md","articles":[]},{"title":"Aliases","level":"1.4.2","depth":2,"path":"advanced/alias.md","ref":"advanced/alias.md","articles":[]},{"title":"Copy and Deep copy","level":"1.4.3","depth":2,"path":"advanced/copies.md","ref":"advanced/copies.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","copy-code-button","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"advanced/references.md","mtime":"2021-02-14T20:38:12.624Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-02-14T21:09:26.084Z"},"basePath":"..","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"References","level":"1.4.1","depth":2,"next":{"title":"Aliases","level":"1.4.2","depth":2,"path":"advanced/alias.md","ref":"advanced/alias.md","articles":[]},"previous":{"title":"Alias and References","level":"1.4","depth":1,"path":"advanced/README.md","ref":"advanced/README.md","articles":[{"title":"References","level":"1.4.1","depth":2,"path":"advanced/references.md","ref":"advanced/references.md","articles":[]},{"title":"Aliases","level":"1.4.2","depth":2,"path":"advanced/alias.md","ref":"advanced/alias.md","articles":[]},{"title":"Copy and Deep copy","level":"1.4.3","depth":2,"path":"advanced/copies.md","ref":"advanced/copies.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"advanced/references.md","mtime":"2021-02-15T09:24:29.833Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-02-15T09:48:34.754Z"},"basePath":"..","book":{"language":"en"}});
         });
     </script>
 </div>
@@ -813,10 +846,6 @@ compilation terminated.
         
     <script src="../../gitbook/gitbook.js"></script>
     <script src="../../gitbook/theme.js"></script>
-    
-        
-        <script src="../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
-        
     
         
         <script src="../../gitbook/gitbook-plugin-spoiler/spoiler.js"></script>
@@ -832,6 +861,10 @@ compilation terminated.
     
         
         <script src="../../gitbook/gitbook-plugin-anchor-nav-x/lib/handler.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-code/plugin.js"></script>
         
     
         

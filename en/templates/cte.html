@@ -41,6 +41,10 @@
                 
             
                 
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-code/plugin.css">
+                
+            
+                
                 <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
                 
             
@@ -706,7 +710,7 @@ to decide wether or not the symbol must be declared. </p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">traits</span><span class="token punctuation">;</span>
 
-<span class="token keyword">def</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>isIntegral<span class="token operator">!</span>T<span class="token punctuation">)</span> <span class="token function">foo</span> <span class="token punctuation">(</span>T<span class="token punctuation">)</span> <span class="token punctuation">(</span>a <span class="token punctuation">:</span> <span class="token type">T</span><span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> T
+<span class="token keyword">def</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>isIntegral<span class="token operator">!</span>T<span class="token punctuation">)</span> <span class="token function">foo</span> <span class="token punctuation">(</span>T<span class="token punctuation">)</span> <span class="token punctuation">(</span>a <span class="token punctuation">:</span> T<span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> T
     a <span class="token operator">+</span> cast<span class="token operator">!</span><span class="token function">T</span><span class="token punctuation">(</span><span class="token number">30</span><span class="token punctuation">)</span>
 
 
@@ -726,7 +730,7 @@ the condition that is satisfied will be compiled.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">traits</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
 
-<span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>T<span class="token punctuation">)</span> <span class="token punctuation">(</span>a <span class="token punctuation">:</span> <span class="token type">T</span><span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> T <span class="token punctuation">{</span>
+<span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>T<span class="token punctuation">)</span> <span class="token punctuation">(</span>a <span class="token punctuation">:</span> T<span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> T <span class="token punctuation">{</span>
     cte <span class="token keyword">if</span> <span class="token punctuation">(</span>isIntegral<span class="token operator">!</span>T<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         a <span class="token operator">+</span> <span class="token number">30</span>
     <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
@@ -749,11 +753,11 @@ time condition.</p>
 
 <span class="token keyword">class</span> <span class="token function">Container</span> <span class="token punctuation">(</span>T<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     cte <span class="token keyword">if</span> <span class="token operator">!</span><span class="token punctuation">(</span><span class="token function">is!</span><span class="token punctuation">(</span>T<span class="token punctuation">)</span><span class="token punctuation">(</span>X of void<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token other-keyword">pub</span> <span class="token keyword">let</span> value <span class="token punctuation">:</span> <span class="token type">T</span><span class="token punctuation">;</span>
+        <span class="token other-keyword">pub</span> <span class="token keyword">let</span> value <span class="token punctuation">:</span> T<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 
     cte <span class="token keyword">if</span> <span class="token operator">!</span><span class="token punctuation">(</span><span class="token function">is!</span><span class="token punctuation">(</span>T<span class="token punctuation">)</span><span class="token punctuation">(</span>X of void<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> <span class="token type">T</span><span class="token punctuation">)</span> <span class="token keyword">with</span> value <span class="token operator">=</span> x <span class="token punctuation">{</span><span class="token punctuation">}</span>
+        <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> T<span class="token punctuation">)</span> <span class="token keyword">with</span> value <span class="token operator">=</span> x <span class="token punctuation">{</span><span class="token punctuation">}</span>
     <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
         <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
@@ -820,7 +824,7 @@ time condition.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Compile time execution","level":"1.10.2","depth":2,"next":{"title":"Template as values","level":"1.10.3","depth":2,"path":"templates/values.md","ref":"templates/values.md","articles":[]},"previous":{"title":"Specialization","level":"1.10.1","depth":2,"path":"templates/special.md","ref":"templates/special.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","copy-code-button","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"templates/cte.md","mtime":"2021-02-13T17:56:41.113Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-02-14T21:09:26.084Z"},"basePath":"..","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Compile time execution","level":"1.10.2","depth":2,"next":{"title":"Template as values","level":"1.10.3","depth":2,"path":"templates/values.md","ref":"templates/values.md","articles":[]},"previous":{"title":"Specialization","level":"1.10.1","depth":2,"path":"templates/special.md","ref":"templates/special.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"templates/cte.md","mtime":"2021-02-14T21:09:35.397Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-02-15T09:48:34.754Z"},"basePath":"..","book":{"language":"en"}});
         });
     </script>
 </div>
@@ -828,10 +832,6 @@ time condition.</p>
         
     <script src="../../gitbook/gitbook.js"></script>
     <script src="../../gitbook/theme.js"></script>
-    
-        
-        <script src="../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
-        
     
         
         <script src="../../gitbook/gitbook-plugin-spoiler/spoiler.js"></script>
@@ -847,6 +847,10 @@ time condition.</p>
     
         
         <script src="../../gitbook/gitbook-plugin-anchor-nav-x/lib/handler.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-code/plugin.js"></script>
         
     
         

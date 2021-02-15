@@ -41,6 +41,10 @@
                 
             
                 
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-code/plugin.css">
+                
+            
+                
                 <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
                 
             
@@ -613,19 +617,21 @@
                                 <section class="normal markdown-section">
                                 
                                 <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#alias"><b>1. </b>Alias</a></li><ul><li><span class="title-icon "></span><a href="#alias-a-function-parameter"><b>1.1. </b>Alias a function parameter</a></li><li><span class="title-icon "></span><a href="#special-case-of-struct-and-tuple"><b>1.2. </b>Special case of struct and tuple</a></li></ul></ul></div><a href="#alias" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="alias"><a name="alias" class="anchor-navigation-ex-anchor" href="#alias"><i class="fa fa-link" aria-hidden="true"></i></a>1. Alias</h1>
-<p>All types that contain a pointer to data in the heap are aliasable
-type. An aliasable type cannot be implicitly copied, nor can it be
-implicitly referenced, for performance and security reasons
-respectively. There are mainly two aliasable types, arrays (or slices,
-there is no difference in Ymir) and objects. Structures and tuples
-that contain aliasable types are also aliasable.</p>
-<p>You must use the keyword <code>alias</code>, to tell the compiler that you
-understand that a new variable will borrow values.</p>
+<p>All types that containing a pointer to data in the heap (or the stack)
+are aliasable types. An aliasable type cannot be implicitly copied,
+nor can it be implicitly referenced, for performance and security
+reasons respectively. There are mainly three aliasable types, arrays
+(or slices, there is no difference in <strong>Ymir</strong>), pointers, and
+objects. Structures and tuples containing aliasable types are also
+aliasable.</p>
+<p>The keyword <strong><code>alias</code></strong> is used to inform the compiler that the used
+understand that the data borrowed by a variable (or a value) will
+borrowed by another values.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> <span class="token other-keyword">mut</span> x <span class="token punctuation">:</span> <span class="token type">[</span><span class="token other-keyword">mut</span> <span class="token basic-types">i32</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token keyword">let</span> <span class="token other-keyword">mut</span> y <span class="token punctuation">:</span> <span class="token type">[</span><span class="token other-keyword">mut</span> <span class="token basic-types">i32</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token other-keyword">alias</span> x<span class="token punctuation">;</span>
+    <span class="token keyword">let</span> <span class="token other-keyword">mut</span> x <span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token other-keyword">mut</span> <span class="token basic-types">i32</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> <span class="token other-keyword">mut</span> y <span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token other-keyword">mut</span> <span class="token basic-types">i32</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token other-keyword">alias</span> x<span class="token punctuation">;</span> <span class="token comment">// allow y to borrow the value of x</span>
     <span class="token comment">//                      ^^^^^</span>
     <span class="token comment">// Try to remove the alias</span>
     <span class="token function">println</span> <span class="token punctuation">(</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -642,7 +648,7 @@ example, the compiler must return an error on the following code.</p>
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token keyword">let</span> <span class="token other-keyword">mut</span> y <span class="token punctuation">:</span> <span class="token type">[</span><span class="token other-keyword">mut</span> <span class="token basic-types">i32</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token other-keyword">alias</span> x<span class="token punctuation">;</span>
+    <span class="token keyword">let</span> <span class="token other-keyword">mut</span> y <span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token other-keyword">mut</span> <span class="token basic-types">i32</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token other-keyword">alias</span> x<span class="token punctuation">;</span> <span class="token comment">// try to borrow immutable data in deeply mutable variable y  </span>
     <span class="token comment">//                      ^^^^^</span>
     <span class="token comment">// Try to remove the alias</span>
     <span class="token function">println</span> <span class="token punctuation">(</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -654,7 +660,7 @@ example, the compiler must return an error on the following code.</p>
     | 
  5  |     let mut y : [mut i32] = alias x;
     |             ^
-    | <span class="token keyword">Note</span> : 
+    | <span class="token other-keyword">Note</span> : 
     |  <span class="token comment">--&gt; main.yr:(5,29)</span>
     |     | 
     |  5  |     let mut y : [mut i32] = alias x;
@@ -672,21 +678,22 @@ compilation terminated.
 </code></pre>
 <p><br></p>
 <p>However, if the variable that will borrow the data is not mutable,
-there is no need to add the keyword <code>alias</code>, and the compiler will
+there is no need to add the keyword <strong><code>alias</code></strong>, and the compiler will
 create an implicit alias, which will have no consequences.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token keyword">let</span> y <span class="token operator">=</span> x<span class="token punctuation">;</span> 
+    <span class="token keyword">let</span> y <span class="token operator">=</span> x<span class="token punctuation">;</span> <span class="token comment">// implicit alias is allowed, &apos;y&apos; is immutable</span>
     <span class="token function">println</span> <span class="token punctuation">(</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
 <p><br></p>
 <p>In the last example, <strong><code>y</code></strong> can be mutable, as long as its internal
-value is immutable, i.e. its type is <code>mut [i32]</code>, you can change the
-value of <code>y</code>, but not the value it borrows. There is no problem, the
-values of <code>x</code> will not be changed, no matter what you do with <code>y</code>.</p>
+values are immutable, i.e. its type is <code>mut [i32]</code>, you can change the
+value of <strong><code>y</code></strong>, but not the values it borrows. There is no problem,
+the values of <strong><code>x</code></strong> will not be changed, no matter what is done with
+<strong><code>y</code></strong>.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -702,11 +709,11 @@ values of <code>x</code> will not be changed, no matter what you do with <code>y
 <p><br></p>
 <p>You may have noticed that even though the literal is actually the
 element that creates the data, we do not consider it to be the owner
-of the data, so the keyword <code>alias</code> is implied when it is literal. We
+of the data, so the keyword <strong><code>alias</code></strong> is implied when it is literal. We
 consider the data to have an owner only once it has been assigned to a
 variable.</p>
 <p>There are other kinds of <code>alias</code> that are implicitly allowed, such
-as code blocks or function returns. Those are implicit because
+as code blocks or function calls. Those are implicit because
 the alias is already made within the value of these elements.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
@@ -715,14 +722,16 @@ the alias is already made within the value of these elements.</p>
     <span class="token other-keyword">alias</span> x <span class="token comment">// alias is done here and mandatory</span>
 <span class="token punctuation">}</span>
 
-<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// no need to alias</span>
-    <span class="token function">println</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// [1, 2, 3];</span>
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">throws</span> <span class="token operator">&amp;</span><span class="token type">AssertError</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// no need to alias, it must have been done in the function</span>
+    <span class="token keyword">assert</span> <span class="token punctuation">(</span>x <span class="token operator">==</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
 <p><br></p>
 <h2 id="alias-a-function-parameter"><a name="alias-a-function-parameter" class="anchor-navigation-ex-anchor" href="#alias-a-function-parameter"><i class="fa fa-link" aria-hidden="true"></i></a>1.1. Alias a function parameter</h2>
-<p>As you have noticed, the keyword <code>alias</code>, unlike the keyword <code>ref</code>,
+<p>As you have noticed, the keyword <strong><code>alias</code></strong>, unlike the keyword <code>ref</code>,
 does not characterize a variable. The type of a variable will indicate
 whether the type should be passed by alias or not, so there is no
 change in the definition of the function. When the type of a parameter
@@ -730,15 +739,23 @@ is an aliasable type, this parameter can be mutable without being a
 reference.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
-<span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token other-keyword">mut</span> x <span class="token punctuation">:</span> <span class="token type">[</span><span class="token other-keyword">mut</span> <span class="token basic-types">i32</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    x <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> x <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token comment">// The function foo will be allowed to modify the internal values of y</span>
+<span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token other-keyword">mut</span> y <span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token other-keyword">mut</span> <span class="token basic-types">i32</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="token keyword">throws</span> <span class="token operator">&amp;</span><span class="token type">OutOfArray</span>
+<span class="token punctuation">{</span>
+    y <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> y <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    y <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">// has no impact on the x of main,</span>
+    <span class="token comment">// y is a reference to the data borrowed not to the variable x itself</span>
 <span class="token punctuation">}</span>
 
-<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">throws</span> <span class="token operator">&amp;</span><span class="token type">OutOfArray</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span><span class="token type">AssertError</span>
+<span class="token punctuation">{</span>
     <span class="token keyword">let</span> <span class="token other-keyword">dmut</span> x <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
     <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token other-keyword">alias</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment">//   ^^^^^</span>
     <span class="token comment">// Try to remove the alias</span>
+    <span class="token keyword">assert</span> <span class="token punctuation">(</span>x <span class="token operator">==</span> <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
 <p><br></p>
@@ -746,47 +763,53 @@ reference.</p>
 values that are borrowed, the alias keyword is not required.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
-<span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> <span class="token type">[</span><span class="token basic-types">i32</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token function">println</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token basic-types">i32</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// just read the borrowed data, and don&apos;t modify them</span>
 <span class="token punctuation">}</span>
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> <span class="token other-keyword">dmut</span> x <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token function">foo</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> <span class="token other-keyword">dmut</span> x <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>    
+    <span class="token function">foo</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// no need to alias</span>
 <span class="token punctuation">}</span>
 </code></pre>
 <p><br></p>
 <h2 id="special-case-of-struct-and-tuple"><a name="special-case-of-struct-and-tuple" class="anchor-navigation-ex-anchor" href="#special-case-of-struct-and-tuple"><i class="fa fa-link" aria-hidden="true"></i></a>1.2. Special case of struct and tuple</h2>
-<p>In the chapter <a href="">Structure</a> you will learn how to create a structure
-containing several fields of different types. You have already learned
-how to make tuples. These types are sometimes aliasable, depending on
-the internal type they have. If a tuple, or a structure, has a field
-whose type is aliasable, then the tuple or structure is also
-aliasable.</p>
-<p>The table bellow present some example of aliasable tuple : </p>
+<p>In the chapter
+<a href="https://gnu-ymir.github.io/Documentations/en/types/struct.html" target="_blank">Structure</a>
+you will learn how to create a structure containing several fields of
+different types. You have already learned how to make tuples. These
+types are sometimes aliasable, depending on the internal type they
+contain. If a tuple, or a structure, has a field whose type is aliasable,
+then the tuple or structure is also aliasable.</p>
+<p>The table below presents some examples of aliasable tuples : </p>
 <table>
 <thead>
 <tr>
 <th>Type</th>
 <th>Aliasable</th>
+<th>Reason</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>(i32, i32)</td>
 <td>false</td>
+<td>i32 is not aliasable</td>
 </tr>
 <tr>
 <td>([i32],)</td>
 <td>true</td>
+<td>[i32] is a slice, and hence aliasable</td>
 </tr>
 <tr>
 <td>([i32], f64)</td>
 <td>true</td>
+<td>[i32] is a slice, and hence aliasable</td>
 </tr>
 <tr>
 <td>(([i32], i32), f64)</td>
 <td>true</td>
+<td>[i32] is a slice, and hence aliasable</td>
 </tr>
 </tbody>
 </table>
@@ -833,7 +856,7 @@ aliasable.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Aliases","level":"1.4.2","depth":2,"next":{"title":"Copy and Deep copy","level":"1.4.3","depth":2,"path":"advanced/copies.md","ref":"advanced/copies.md","articles":[]},"previous":{"title":"References","level":"1.4.1","depth":2,"path":"advanced/references.md","ref":"advanced/references.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","copy-code-button","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"advanced/alias.md","mtime":"2021-02-14T20:39:34.595Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-02-14T21:09:26.084Z"},"basePath":"..","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Aliases","level":"1.4.2","depth":2,"next":{"title":"Copy and Deep copy","level":"1.4.3","depth":2,"path":"advanced/copies.md","ref":"advanced/copies.md","articles":[]},"previous":{"title":"References","level":"1.4.1","depth":2,"path":"advanced/references.md","ref":"advanced/references.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"advanced/alias.md","mtime":"2021-02-15T09:38:16.438Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-02-15T09:48:34.754Z"},"basePath":"..","book":{"language":"en"}});
         });
     </script>
 </div>
@@ -841,10 +864,6 @@ aliasable.</p>
         
     <script src="../../gitbook/gitbook.js"></script>
     <script src="../../gitbook/theme.js"></script>
-    
-        
-        <script src="../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
-        
     
         
         <script src="../../gitbook/gitbook-plugin-spoiler/spoiler.js"></script>
@@ -860,6 +879,10 @@ aliasable.</p>
     
         
         <script src="../../gitbook/gitbook-plugin-anchor-nav-x/lib/handler.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-code/plugin.js"></script>
         
     
         
