@@ -1,21 +1,23 @@
 # Alias
 
-All types that contain a pointer to data in the heap are aliasable
-type. An aliasable type cannot be implicitly copied, nor can it be
-implicitly referenced, for performance and security reasons
-respectively. There are mainly two aliasable types, arrays (or slices,
-there is no difference in Ymir) and objects. Structures and tuples
-that contain aliasable types are also aliasable.
+All types that containing a pointer to data in the heap (or the stack)
+are aliasable types. An aliasable type cannot be implicitly copied,
+nor can it be implicitly referenced, for performance and security
+reasons respectively. There are mainly three aliasable types, arrays
+(or slices, there is no difference in **Ymir**), pointers, and
+objects. Structures and tuples containing aliasable types are also
+aliasable.
 
-You must use the keyword `alias`, to tell the compiler that you
-understand that a new variable will borrow values.
+The keyword **`alias`** is used to inform the compiler that the used
+understand that the data borrowed by a variable (or a value) will
+borrowed by another values.
 
 ```ymir
 import std::io
 
 def main () {
 	let mut x : [mut i32] = [1, 2, 3];
-	let mut y : [mut i32] = alias x;
+	let mut y : [mut i32] = alias x; // allow y to borrow the value of x
 	//                      ^^^^^
 	// Try to remove the alias
 	println (y);
@@ -39,7 +41,7 @@ import std::io
 
 def main () {
 	let x = [1, 2, 3];
-	let mut y : [mut i32] = alias x;
+	let mut y : [mut i32] = alias x; // try to borrow immutable data in deeply mutable variable y  
 	//                      ^^^^^
 	// Try to remove the alias
 	println (y);
@@ -74,7 +76,7 @@ compilation terminated.
 <br>
 
 However, if the variable that will borrow the data is not mutable,
-there is no need to add the keyword `alias`, and the compiler will
+there is no need to add the keyword **`alias`**, and the compiler will
 create an implicit alias, which will have no consequences.
 
 ```ymir
@@ -82,7 +84,7 @@ import std::io
 
 def main () {
 	let x = [1, 2, 3];
-	let y = x; 
+	let y = x; // implicit alias is allowed, 'y' is immutable
 	println (y);
 }
 ```
@@ -90,9 +92,10 @@ def main () {
 <br>
 
 In the last example, **`y`** can be mutable, as long as its internal
-value is immutable, i.e. its type is `mut [i32]`, you can change the
-value of `y`, but not the value it borrows. There is no problem, the
-values of `x` will not be changed, no matter what you do with `y`.
+values are immutable, i.e. its type is `mut [i32]`, you can change the
+value of **`y`**, but not the values it borrows. There is no problem,
+the values of **`x`** will not be changed, no matter what is done with
+**`y`**.
 
 ```ymir
 import std::io
@@ -112,12 +115,12 @@ def main () {
 
 You may have noticed that even though the literal is actually the
 element that creates the data, we do not consider it to be the owner
-of the data, so the keyword `alias` is implied when it is literal. We
+of the data, so the keyword **`alias`** is implied when it is literal. We
 consider the data to have an owner only once it has been assigned to a
 variable.
 
 There are other kinds of `alias` that are implicitly allowed, such
-as code blocks or function returns. Those are implicit because
+as code blocks or function calls. Those are implicit because
 the alias is already made within the value of these elements.
 
 ```ymir
@@ -128,9 +131,11 @@ def foo () -> dmut [i32] {
 	alias x // alias is done here and mandatory
 }
 
-def main () {
-	let x = foo (); // no need to alias
-	println (x); // [1, 2, 3];
+def main ()
+    throws &AssertError
+{
+	let x = foo (); // no need to alias, it must have been done in the function
+	assert (x == [1, 2, 3]);
 }
 ```
 
@@ -138,25 +143,33 @@ def main () {
 
 ## Alias a function parameter
 
-As you have noticed, the keyword `alias`, unlike the keyword `ref`,
+As you have noticed, the keyword **`alias`**, unlike the keyword `ref`,
 does not characterize a variable. The type of a variable will indicate
 whether the type should be passed by alias or not, so there is no
 change in the definition of the function. When the type of a parameter
 is an aliasable type, this parameter can be mutable without being a
 reference.
 
-```ymir 
+```ymir
 import std::io
 
-def foo (mut x : [mut i32]) {
-	x [0] = x [1];
+// The function foo will be allowed to modify the internal values of y
+def foo (mut y : [mut i32])
+    throws &OutOfArray
+{
+    y [0] = y [1];
+    y = [8, 3, 4]; // has no impact on the x of main,
+    // y is a reference to the data borrowed not to the variable x itself
 }
 
-def main () {
-	let dmut x = [1, 2, 3];
-	foo (alias x);
-	//   ^^^^^
-	// Try to remove the alias
+def main ()
+    throws &OutOfArray, &AssertError
+{
+    let dmut x = [1, 2, 3];
+    foo (alias x);
+    //   ^^^^^
+    // Try to remove the alias
+    assert (x == [2, 2, 3]);
 }
 ```
 
@@ -169,12 +182,12 @@ values that are borrowed, the alias keyword is not required.
 import std::io
 
 def foo (x : [i32]) {
-	println (x);
+    println (x); // just read the borrowed data, and don't modify them
 }
 
 def main () {
-	let dmut x = [1, 2, 3];
-	foo (x);
+	let dmut x = [1, 2, 3];	
+	foo (x); // no need to alias
 }
 ```
 
@@ -182,21 +195,22 @@ def main () {
 
 ## Special case of struct and tuple
 
-In the chapter [Structure]() you will learn how to create a structure
-containing several fields of different types. You have already learned
-how to make tuples. These types are sometimes aliasable, depending on
-the internal type they have. If a tuple, or a structure, has a field
-whose type is aliasable, then the tuple or structure is also
-aliasable.
+In the chapter
+[Structure](https://gnu-ymir.github.io/Documentations/en/types/struct.html)
+you will learn how to create a structure containing several fields of
+different types. You have already learned how to make tuples. These
+types are sometimes aliasable, depending on the internal type they
+contain. If a tuple, or a structure, has a field whose type is aliasable,
+then the tuple or structure is also aliasable.
 
-The table bellow present some example of aliasable tuple : 
+The table below presents some examples of aliasable tuples : 
 
-| Type | Aliasable |
+| Type | Aliasable | Reason |
 | --- | --- |
-| (i32, i32) | false |
-| ([i32],) | true |
-| ([i32], f64) | true |
-| (([i32], i32), f64) | true |
+| (i32, i32) | false | i32 is not aliasable |
+| ([i32],) | true | [i32] is a slice, and hence aliasable |
+| ([i32], f64) | true | [i32] is a slice, and hence aliasable |
+| (([i32], i32), f64) | true | [i32] is a slice, and hence aliasable |
 
 
 

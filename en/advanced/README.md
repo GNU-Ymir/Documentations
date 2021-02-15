@@ -28,9 +28,9 @@ the difference between heap and stack. The stack is a space allocated
 by the program when a function is entered, which is released when the
 function is exited. On the other hand, the heap is a space that is
 allocated when certain instructions in the program require it, such as
-creating a new table, creating a new object instance, and so on.
+allocating a new array, allocating  a new object instance, and so on.
 
-When an array is created, all its data is stored in the heap, and the
+When an array is allocated, all its data is stored in the heap, and the
 address of this data is stored in the stack, where the variables are
 located. The following figure shows the data representation for this
 program:
@@ -59,8 +59,8 @@ following table:
 | dmut [[[i32]]] | 4 |
 
 This is mainly used to ensure that the borrowed data is not changed by
-another variable in a foreign part of the program. The user has full
-control over the data he or she has created. The example below shows
+another variable in a foreign part of the program. The users have full
+control over the data they have created. The example below shows
 how the mutability level is used to ensure that the content of a
 table is never changed.
 
@@ -103,8 +103,8 @@ located in the heap) are not mutable.
 Earlier we introduced the keyword `dmut`, this keyword is used to
 avoid a very verbose type statement, and to say that every subtype
 from this point on will be mutable. This keyword is applicable to all
-types, but will only have a different effect from `mut` on arrays and
-tuples. The following table gives an example of an array type, using
+types, but will only have a different effect from `mut` on aliasable
+types. The following table gives an example of an array type, using
 the keyword `dmut` :
 
 | Type | Verbose equivalent |
@@ -116,13 +116,24 @@ If we modify the example given above, and change the `mut` keyword to
 a `dmut` keyword, the type of `x` becomes `mut [mut i32]`, so `x[0] = 8`
 becomes a valid statement.
 
+```ymir
+import std::io
+
+def main () {
+	let mut x = [1, 2, 3];
+	x = [2, 3, 4];
+	// Try to add the following line : 
+	// x [0] = 8;
+}
+```
+
 ### String literal 
 
-Literal strings, unlike literal arrays, are found in the text
-(read-only part of a program). This means that the type of a literal
-string is `[c32]` (or `[c8]` if the suffix `s8` is specified), while
-the type of a literal array (of `i32` for example) is `mut
-[mut i32]`. So, if you write the following code:
+Literal strings, unlike literal arrays, are in the text segment of the
+program (read-only part of a program). This means that the type of a
+literal string is `[c32]` (or `[c8]` if the suffix `s8` is specified),
+while the type of a literal array (of `i32` for example) is `mut [mut
+i32]`. So, if you write the following code:
 
 ```ymir
 import std::io
@@ -134,7 +145,14 @@ def main () {
 
 <br>
 
-You should get the following error : 
+The compiler will return an error. This error means that the
+mutability level of the right operand is 1, here `mut [c32]`, (the
+reference of the array is mutable but not its content), and the code
+try to put the reference inside a variable of mutability level 2, that
+is to say of type `mut [mut c32]`. If this was allowed the variable
+`x` would have the possibility to change data that has been marked as
+immutable at some point of the program, so the compiler does not allow
+it, and return the following error.
 
 ```error
 Error : discard the constant qualifier is prohibited, left operand mutability level is 2 but must be at most 1

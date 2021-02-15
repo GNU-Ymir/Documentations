@@ -1,6 +1,9 @@
 {
-    "plugins": ["prism", "-highlight", "copy-code-button", "katex", "codeblock-filename", "spoiler", "folding-menu", "language-picker", "anchor-nav-x"],
+    "plugins": ["prism", "-highlight", "katex", "codeblock-filename", "spoiler", "folding-menu", "language-picker", "anchor-nav-x", "code"],
     "pluginsConfig": {
+	"code": {
+	    "copyButtons": true
+	},
 	"prism": {
 	    "css": [
 		"themes/code.css"

@@ -18,14 +18,23 @@ type. The following table shows some examples of copy types:
 
 An example of what you can achieve with `copy` is shown in the
 following code. The representation of the memory is also shown in the
-following figure.
+figure underneath. In this example, the variable **`x`** is copied in
+the variable **`y`**, and thus the two variable borrows different
+data, but have an exact same value.
 
 ```ymir
 import std::io
     
-def main () {
+def main ()
+    throws &AssertError, &OutOfArray
+{
     let x = [1, 2, 3];
-	let dmut y = copy x;
+    let dmut y = copy x; // create a copy of x
+    assert (x == y); // y and x have the same value, but at different location
+
+    y [0] = 9; 
+    assert (x == [1, 2, 3]); // modifying y does not affect x
+    assert (y == [9, 2, 3]); // but still affects y
 }
 ```
 
@@ -43,7 +52,7 @@ def main ()
 {
 	let x = "hello !";
 	x [0] = 'H'; // Make this line work
-	println (x);
+	assert (x == "Hello !");
 }
 ```
 
@@ -52,11 +61,11 @@ def main ()
 <pre class="language-" style="position: relative;" class="spoiler"><code class="lang-ymir">import std::io
 
 def main () 
-	throws OutOfArray 
+    throws &OutOfArray, &AssertError
 {
 	let dmut x = copy "hello !";
 	x [0] = 'H'; // Well done
-	println (x);
+	assert (x == "Hello !");
 }
 </code></pre>
 {%ends%}

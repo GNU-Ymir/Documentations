@@ -2,7 +2,14 @@
 
 The keyword**`ref`** is a keyword that is placed before the
 declaration of a variable. It is used to refer to a value, which is
-usually borrowed from another variable.
+usually borrowed from another variable. They are performing similar
+operation as
+[Pointers](https://gnu-ymir.github.io/Documentations/en/primitives/types.html#pointers),
+with the difference that they does not need to be dereferenced (this
+is done automatically), and pointer arithmetics is not possible with
+references. In **Ymir** references are always set, and are always set
+from another variable, hence they are way safer than pointers, and
+must be prefered to them when possible.
  
 ```ymir
 def foo () {
@@ -13,32 +20,58 @@ def foo () {
 }
 ```
 
+<br>
+
 The above program can be represented in memory as shown in the
 following figure.
 
 ![Image](https://gnu-ymir.github.io/Documentations/en/advanced/memory_x__ref_y_foo.png)
 
-**`y`**, is a pointer to x, which can be used as if it were directly
-**`x`**. This means that **`y`** must have the same mutability
-properties (or lower) as **`x`**. And that if `x` is mutable, changing `y`
-would also change `x`.
+In this figure, one can note that **`y`**, is a pointer to x, which
+can be used as if it was directly **`x`**. This means that **`y`**
+must have the same mutability properties (or lower) as **`x`**. And
+that if **`x`** is mutable, changing the value of **`y`** would also
+change **`x`**.
+
+A first example of reference is presented in the following source
+code. In this example, a mutable variable **`x`** contains a value of
+type **`i32`**. This value is placed on the stack, as it is not a
+aliasable type. Then a variable **`y`** is constructed as a reference
+of the variable **`x`**. Modifying **`y`** in the following example, also
+modifies **`x`**.
 
 ```ymir
-import std::io
-
-def main () {
-	let mut x : [mut i32] = [1, 2, 3];
-	let ref mut y : [mut i32] = ref x;
-	y = [7, 8, 9];
-	println (x); 
+def main ()
+    throws &AssertError
+{
+    let mut x = 12; // place a value of type i32 and value 12 on the stack
+    let ref mut y = ref x; // create a reference of x
+    y = 42; // modify the value pointed by the reference
+    assert (x == 42);
 }
 ```
 
-The above program should display the following output once launched:
+<br>
 
+A more complexe example is presented in the following source code. In
+this example, a deeply mutable array **`x`** is created. This array is
+a reference on borrowed data in the heap. A deeply mutable reference
+**`y`** is the, made on that variable **`x`**, which is allowed
+because **`x`** is also deeply mutable and the mutability level of
+**`x`** and **`y`** are the same. When changing the value of **`y`**
+(here the reference of the slice), it does not only change the
+reference of **`y`** but also the reference of **`x`**.
+
+```ymir
+def main () {
+	let mut x : [mut i32] = [1, 2, 3];
+	let ref mut y : [mut i32] = ref x;
+	y = [7, 8, 9]; // modify the value pointed by the reference (in the stack)
+	y [0] = 89; // modify the value on the heap
+	assert (x == [89, 8, 9]); 
+}
 ```
-[7, 8, 9]
-```
+
 
 ## Reference as function parameter
 
@@ -110,8 +143,8 @@ By reference : 89
 
 <br>
 
-If you have done the exercise, and added the keyword `mut` in the
-signature of the first function `foo`, you should get the following
+If you have done the exercise, and added the keyword **`mut`** in the
+signature of the first function **`foo`**, you should get the following
 error: 
 
 ```error
@@ -127,16 +160,16 @@ compilation terminated.
 
 <br>
 
-This error means that the type of x is not aliasable, so if it is not
+This error means that the type of **`x`** is not aliasable, so if it is not
 a reference, marking it as mutable will have no effect on the program,
 so the compiler does not allow it.
 
 ## Reference as a value 
 
 A reference is not a type, it is only a kind of variable, you cannot
-store references in subtypes (for example, you cannot make a reference
-array, or a tuple containing a reference to a value). This means that
-with the following code, you should get an error.
+store references in subtypes (for example, you cannot make an array of
+references, or a tuple containing a reference to a value). This means
+that with the following code, you should will get an error.
 
 ```ymir 
 def main () {
@@ -145,7 +178,10 @@ def main () {
 }
 ```
 
-<br>
+<br> The following error means that the source code intended to create
+a reference on a variable, but the compiler will not make it, as it
+has no interest and will be immediately dereferenced to be stored in
+the tuple value.
 
 ```error
 Warning : the creation of ref has no effect on left operand
@@ -157,12 +193,6 @@ Warning : the creation of ref has no effect on left operand
 ymir1: fatal error: 
 compilation terminated.
 ```
-
-<br>
-
-This warning means that you have used the keyword `ref` but the
-compiler will ignore it because it will not create a reference to `x`
-in the value of `y`.
 
 ## Reference as function return
 
@@ -186,7 +216,7 @@ def main () {
 
 <br>
 
-With the above source code, you should get the following error : 
+With the above source code, the compiler return this fairly straightforward error.
 
 ```error
 Error : cannot return a reference type
