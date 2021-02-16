@@ -629,7 +629,7 @@ decisions based on conditions. You can add an <code>else</code> after an <em>if<
 expression, to execute the code, if the condition of the <em>if</em>
 expression is not met. The syntax of the <strong><code>if</code></strong> expression is the
 following:</p>
-<pre class="language-"><code class="lang-grammar">if_expression := &apos;if&apos; expression expression (&apos;else&apos; expression)?
+<pre class="language-"><code class="lang-grammar"><span class="token path">if_expression</span> <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token string">&apos;if&apos;</span> expression expression <span class="token punctuation">(</span><span class="token string">&apos;else&apos;</span> expression<span class="token punctuation">)</span>?
 </code></pre>
 <p><br></p>
 <p>The following source code present a basic utilization of the <strong><code>if</code></strong>
@@ -678,19 +678,19 @@ return an error, because there is a possibility for the variable
 <span class="token punctuation">}</span>
 </code></pre>
 <p><br></p>
-<pre class="language-"><code class="lang-error">Error : incompatible types void and i32
- --&gt; main.yr:(3,10)
+<pre class="language-"><code class="lang-error"><span class="token path">Error</span> : incompatible types void and i32
+ <span class="token comment">--&gt; main.yr:(3,10)</span>
     | 
  3  |     let x = if condition {
     |             ^^
-    | Note : 
-    |  --&gt; main.yr:(4,3)
+    | <span class="token other-keyword">Note</span> : 
+    |  <span class="token comment">--&gt; main.yr:(4,3)</span>
     |     | 
     |  4  |         5 
     |     |         ^
     |------------------------------ 
 
-ymir1: fatal error: 
+ymir1: <span class="token path">fatal error</span>: 
 compilation terminated.
 </code></pre>
 <p><br></p>
@@ -700,7 +700,7 @@ compilation terminated.
 <p>The keyword <strong><code>loop</code></strong> is used to specify that a block of code must be
 repeated endlessly. The syntax of the <strong><code>loop</code></strong> expression is the
 following:</p>
-<pre class="language-"><code class="lang-grammar">loop_expression := &apos;loop&apos; expression
+<pre class="language-"><code class="lang-grammar"><span class="token path">loop_expression</span> <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token string">&apos;loop&apos;</span> expression
 </code></pre>
 <p><br></p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -739,7 +739,7 @@ broken with the keyword <strong><code>break</code></strong>. The value of a <str
 given by the value of its content expression, at the last iteration,
 or by the value given by a <strong><code>break</code></strong> if it has been broken.</p>
 <p>The syntax of the <strong><code>while</code></strong> expression is the following:</p>
-<pre class="language-"><code class="lang-grammar">while_expression := &apos;while&apos; expression expression
+<pre class="language-"><code class="lang-grammar"><span class="token path">while_expression</span> <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token string">&apos;while&apos;</span> expression expression
 </code></pre>
 <p><br></p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
@@ -763,12 +763,12 @@ iterable type. The value of a <strong><code>for</code></strong> loop works exact
 evaluation of the value of a <strong><code>while</code></strong> loop. Ranges, Slice and Tuple
 are iterable types. For example, for range :</p>
 <p>The syntax of the <strong><code>while</code></strong> expression is the following:</p>
-<pre class="language-"><code class="lang-grammar">for_expression := &apos;for&apos; (&apos;(&apos; var_decls &apos;)&apos; | var_decls) &apos;in&apos; expression expression
+<pre class="language-"><code class="lang-grammar"><span class="token path">for_expression</span> <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token string">&apos;for&apos;</span> <span class="token punctuation">(</span><span class="token string">&apos;(&apos;</span> var_decls <span class="token string">&apos;)&apos;</span> <span class="token operator">|</span> var_decls<span class="token punctuation">)</span> <span class="token string">&apos;in&apos;</span> expression expression
 
-var_decls := var_decl (&apos;,&apos; var_decl)
-var_decl := (decorator)* identifier (&apos;:&apos; type)?
+<span class="token path">var_decls</span> <span class="token punctuation">:</span><span class="token operator">=</span> var_decl <span class="token punctuation">(</span><span class="token string">&apos;,&apos;</span> var_decl<span class="token punctuation">)</span>
+<span class="token path">var_decl</span> <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token punctuation">(</span>decorator<span class="token punctuation">)</span><span class="token operator">*</span> identifier <span class="token punctuation">(</span><span class="token string">&apos;:&apos;</span> type<span class="token punctuation">)</span>?
 
-decorator := &apos;ref&apos; | &apos;mut&apos; | &apos;dmut&apos;
+<span class="token path">decorator</span> <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token string">&apos;ref&apos;</span> <span class="token operator">|</span> <span class="token string">&apos;mut&apos;</span> <span class="token operator">|</span> <span class="token string">&apos;dmut&apos;</span>
 </code></pre>
 <p><br></p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
@@ -888,7 +888,7 @@ and is equivalent to a static rewrite.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Control flows","level":"1.3.4","depth":2,"next":{"title":"Alias and References","level":"1.4","depth":1,"path":"advanced/README.md","ref":"advanced/README.md","articles":[{"title":"References","level":"1.4.1","depth":2,"path":"advanced/references.md","ref":"advanced/references.md","articles":[]},{"title":"Aliases","level":"1.4.2","depth":2,"path":"advanced/alias.md","ref":"advanced/alias.md","articles":[]},{"title":"Copy and Deep copy","level":"1.4.3","depth":2,"path":"advanced/copies.md","ref":"advanced/copies.md","articles":[]}]},"previous":{"title":"Functions","level":"1.3.3","depth":2,"path":"primitives/functions.md","ref":"primitives/functions.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"primitives/control.md","mtime":"2021-02-16T11:17:50.922Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-02-16T11:18:59.712Z"},"basePath":"..","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Control flows","level":"1.3.4","depth":2,"next":{"title":"Alias and References","level":"1.4","depth":1,"path":"advanced/README.md","ref":"advanced/README.md","articles":[{"title":"References","level":"1.4.1","depth":2,"path":"advanced/references.md","ref":"advanced/references.md","articles":[]},{"title":"Aliases","level":"1.4.2","depth":2,"path":"advanced/alias.md","ref":"advanced/alias.md","articles":[]},{"title":"Copy and Deep copy","level":"1.4.3","depth":2,"path":"advanced/copies.md","ref":"advanced/copies.md","articles":[]}]},"previous":{"title":"Functions","level":"1.3.3","depth":2,"path":"primitives/functions.md","ref":"primitives/functions.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"primitives/control.md","mtime":"2021-02-16T11:19:09.601Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-02-16T11:20:59.479Z"},"basePath":"..","book":{"language":"en"}});
         });
     </script>
 </div>

@@ -628,9 +628,9 @@ source block. As for struct declaration, templates can be used, but
 this functionnality will only be discussed in the
 <a href="https://gnu-ymir.github.io/Documentations/en/templates/" target="_blank">Templates</a>
 chapter.</p>
-<pre class="language-"><code class="lang-grammar">enum_type := &apos;enum&apos; (&apos;:&apos; type)? (inner_value)+ &apos;-&gt;&apos; identifier (templates)?;
-inner_value := &apos;|&apos; identifier &apos;=&apos; expression
-identifier := (&apos;_&apos;)* [A-z] ([A-z0-9_])*
+<pre class="language-"><code class="lang-grammar"><span class="token path">enum_type</span> <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token string">&apos;enum&apos;</span> <span class="token punctuation">(</span><span class="token string">&apos;:&apos;</span> type<span class="token punctuation">)</span>? <span class="token punctuation">(</span>inner_value<span class="token punctuation">)</span><span class="token operator">+</span> <span class="token string">&apos;-&gt;&apos;</span> identifier <span class="token punctuation">(</span>templates<span class="token punctuation">)</span>?<span class="token punctuation">;</span>
+<span class="token path">inner_value</span> <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token string">&apos;|&apos;</span> identifier <span class="token string">&apos;=&apos;</span> expression
+<span class="token path">identifier</span> <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token punctuation">(</span><span class="token string">&apos;_&apos;</span><span class="token punctuation">)</span><span class="token operator">*</span> <span class="token punctuation">[</span>A<span class="token operator">-</span>z<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token punctuation">[</span>A<span class="token operator">-</span>z0<span class="token operator">-</span>9_<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">*</span>
 </code></pre>
 <p><br></p>
 <p>A simple example of utilization of an enum type is presented in the
@@ -700,23 +700,23 @@ source code.</p>
 <p>With the above source code, because we try to cast a <strong><code>[c32]</code></strong> into
 a <strong><code>Day</code></strong>, the compiler will return an error. The error is presented in
 the code block below.</p>
-<pre class="language-"><code class="lang-error">Error : the call operator is not defined for type main::bar and {mut [c32]}
- --&gt; main.yr:(28,6)
+<pre class="language-"><code class="lang-error"><span class="token path">Error</span> : the call operator is not defined for type main::bar and {mut [c32]}
+ <span class="token comment">--&gt; main.yr:(28,6)</span>
     &#x2503; 
 28  &#x2503;     bar (&quot;Mon&quot;)
     &#x2503;         ^     ^
-    &#x2503; Note : candidate bar --&gt; main.yr:(17,5) : main::bar (day : [c32])-&gt; void
-    &#x2503; Error : incompatible types main::Day and mut [c32]
-    &#x2503;  --&gt; main.yr:(28,7)
+    &#x2503; <span class="token other-keyword">Note</span> : candidate bar <span class="token comment">--&gt; main.yr:(17,5) : main::bar (day : [c32])-&gt; void</span>
+    &#x2503; <span class="token path">Error</span> : incompatible types main::Day and mut [c32]
+    &#x2503;  <span class="token comment">--&gt; main.yr:(28,7)</span>
     &#x2503;     &#x2503; 
     &#x2503; 28  &#x2503;     bar (&quot;Mon&quot;)
     &#x2503;     &#x2503;          ^
     &#x2503; 
-    &#x2503; Note : parameter day --&gt; main.yr:(17,10) : main::bar (day : [c32])-&gt; void
+    &#x2503; <span class="token other-keyword">Note</span> : parameter day <span class="token comment">--&gt; main.yr:(17,10) : main::bar (day : [c32])-&gt; void</span>
     &#x2517;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501; 
 
 
-ymir1: fatal error: 
+ymir1: <span class="token path">fatal error</span>: 
 compilation terminated.
 </code></pre>
 <p><br></p>
@@ -870,7 +870,7 @@ really usefull here.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Enum","level":"1.5.2","depth":2,"next":{"title":"Modules","level":"1.6","depth":1,"path":"modules/README.md","ref":"modules/README.md","articles":[]},"previous":{"title":"Structure","level":"1.5.1","depth":2,"path":"types/struct.md","ref":"types/struct.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"types/enum.md","mtime":"2021-02-16T11:17:50.930Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-02-16T11:18:59.712Z"},"basePath":"..","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Enum","level":"1.5.2","depth":2,"next":{"title":"Modules","level":"1.6","depth":1,"path":"modules/README.md","ref":"modules/README.md","articles":[]},"previous":{"title":"Structure","level":"1.5.1","depth":2,"path":"types/struct.md","ref":"types/struct.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"types/enum.md","mtime":"2021-02-16T11:19:09.605Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-02-16T11:20:59.479Z"},"basePath":"..","book":{"language":"en"}});
         });
     </script>
 </div>
