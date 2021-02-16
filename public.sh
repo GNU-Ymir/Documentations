@@ -1,10 +1,13 @@
+# install the plugins and build the static site
+gitbook install
+
+# install local modifications
+cp -r gitbook-plugin-spoiler node_modules/
+cp -r prismjs node_modules/
 cp -r themes node_modules/themes
 
-
-# install the plugins and build the static site
-gitbook install && gitbook build
-
-cp -r gitbook-plugin-spoiler node_modules/
+# build the static site
+gitbook build
 
 # checkout to the gh-pages branch
 if git checkout gh-pages ; then 
