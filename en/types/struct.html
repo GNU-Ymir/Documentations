@@ -292,7 +292,7 @@
                 <a href="./">
             
                     
-                    User define types
+                    User defined types
             
                 </a>
             
@@ -622,7 +622,25 @@ custom types, which contains multiple values of different
 types. Structures are similar to tuples, in terms of memory management
 (can be located in the stack). Unlike tuples, structures have a name,
 and all their internal fields also have a name. It can be said that
-tuple are simply anonymus structures. </p>
+tuple are simply anonymus structures.</p>
+<p>The complete grammar of structure definition is presented in the
+following code block. One can note the possibility to add templates to
+the definition of the structure. These templates will only be
+discussed in the
+<a href="https://gnu-ymir.github.io/Documentations/en/templates/" target="_blank">Templates</a>
+chapter.</p>
+<pre class="language-"><code class="lang-grammar"><span class="token path">struct_type</span> <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token string">&apos;struct&apos;</span> <span class="token punctuation">(</span><span class="token string">&apos;|&apos;</span> var_decl<span class="token punctuation">)</span><span class="token operator">*</span> <span class="token string">&apos;-&gt;&apos;</span> identifier <span class="token punctuation">(</span>templates<span class="token punctuation">)</span>?
+<span class="token path">var_decl</span> <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token punctuation">(</span><span class="token string">&apos;mut&apos;</span>?<span class="token punctuation">)</span> identifier <span class="token string">&apos;:&apos;</span> type <span class="token punctuation">(</span><span class="token string">&apos;=&apos;</span> expression<span class="token punctuation">)</span>?
+<span class="token path">identifier</span> <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token punctuation">(</span><span class="token string">&apos;_&apos;</span><span class="token punctuation">)</span><span class="token operator">*</span> <span class="token punctuation">[</span>A<span class="token operator">-</span>z<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token punctuation">[</span>A<span class="token operator">-</span>z0<span class="token operator">-</span>9_<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">*</span>
+</code></pre>
+<p><br></p>
+<p>One can note from this definition that a structure may contain no
+fields, and be empty. The variable declaration of the fields uses the
+same syntax as declaration of function parameters, that is to say the
+same syntax as variable declaration but with the keyword <strong><code>let</code></strong>
+omitted. The following source code presents a definition of a
+structure <strong><code>Point</code></strong> with two fields <strong><code>x</code></strong> and <strong><code>y</code></strong> of type
+<strong><code>i32</code></strong>.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
 <span class="token keyword">struct</span> 
@@ -922,7 +940,7 @@ that capacity).</p>
 
             
                 
-                <a href="./" class="navigation navigation-prev " aria-label="Previous page: User define types">
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: User defined types">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
@@ -938,7 +956,7 @@ that capacity).</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Structure","level":"1.5.1","depth":2,"next":{"title":"Enum","level":"1.5.2","depth":2,"path":"types/enum.md","ref":"types/enum.md","articles":[]},"previous":{"title":"User define types","level":"1.5","depth":1,"path":"types/README.md","ref":"types/README.md","articles":[{"title":"Structure","level":"1.5.1","depth":2,"path":"types/struct.md","ref":"types/struct.md","articles":[]},{"title":"Enum","level":"1.5.2","depth":2,"path":"types/enum.md","ref":"types/enum.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"types/struct.md","mtime":"2021-02-15T15:12:12.352Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-02-15T19:42:51.511Z"},"basePath":"..","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Structure","level":"1.5.1","depth":2,"next":{"title":"Enum","level":"1.5.2","depth":2,"path":"types/enum.md","ref":"types/enum.md","articles":[]},"previous":{"title":"User defined types","level":"1.5","depth":1,"path":"types/README.md","ref":"types/README.md","articles":[{"title":"Structure","level":"1.5.1","depth":2,"path":"types/struct.md","ref":"types/struct.md","articles":[]},{"title":"Enum","level":"1.5.2","depth":2,"path":"types/enum.md","ref":"types/enum.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"livereload":{},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"types/struct.md","mtime":"2021-02-16T09:44:18.491Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-02-16T10:31:54.469Z"},"basePath":"..","book":{"language":"en"}});
         });
     </script>
 </div>
@@ -965,6 +983,10 @@ that capacity).</p>
     
         
         <script src="../../gitbook/gitbook-plugin-code/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-livereload/plugin.js"></script>
         
     
         

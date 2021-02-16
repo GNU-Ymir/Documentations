@@ -292,7 +292,7 @@
                 <a href="./">
             
                     
-                    User define types
+                    User defined types
             
                 </a>
             
@@ -617,10 +617,25 @@
                                 <section class="normal markdown-section">
                                 
                                 <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#enumeration"><b>1. </b>Enumeration</a></li><ul><li><span class="title-icon "></span><a href="#value-access"><b>1.1. </b>Value access</a></li><li><span class="title-icon "></span><a href="#enumeration-specific-attributes"><b>1.2. </b>Enumeration specific attributes</a></li></ul></ul></div><a href="#enumeration" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="enumeration"><a name="enumeration" class="anchor-navigation-ex-anchor" href="#enumeration"><i class="fa fa-link" aria-hidden="true"></i></a>1. Enumeration</h1>
-<p>Enumerations are user-defined types that have a set of values. The
-keyword <code>enum</code> is used to define an enumeration type. The type of the
-fields is inferred at compile time, thanks to the value associated with
-them. It is mandatory that each field shares the same type.</p>
+<p>Enumerations are user-defined types that enumerates a list of
+values. The keyword <code>enum</code> is used to define an enumeration type. The
+type of the fields can be inferred at compile time, thanks to the
+value associated with them, but can also be forced using the keyword
+<strong><code>:</code></strong> after the keyword <strong><code>enum</code></strong>. It is mandatory that each field
+shares the same type.</p>
+<p>The complete grammar of an enumeration is presented in the following
+source block. As for struct declaration, templates can be used, but
+this functionnality will only be discussed in the
+<a href="https://gnu-ymir.github.io/Documentations/en/templates/" target="_blank">Templates</a>
+chapter.</p>
+<pre class="language-"><code class="lang-grammar"><span class="token path">enum_type</span> <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token string">&apos;enum&apos;</span> <span class="token punctuation">(</span><span class="token string">&apos;:&apos;</span> type<span class="token punctuation">)</span>? <span class="token punctuation">(</span>inner_value<span class="token punctuation">)</span><span class="token operator">+</span> <span class="token string">&apos;-&gt;&apos;</span> identifier <span class="token punctuation">(</span>templates<span class="token punctuation">)</span>?<span class="token punctuation">;</span>
+<span class="token path">inner_value</span> <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token string">&apos;|&apos;</span> identifier <span class="token string">&apos;=&apos;</span> expression
+<span class="token path">identifier</span> <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token punctuation">(</span><span class="token string">&apos;_&apos;</span><span class="token punctuation">)</span><span class="token operator">*</span> <span class="token punctuation">[</span>A<span class="token operator">-</span>z<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token punctuation">[</span>A<span class="token operator">-</span>z0<span class="token operator">-</span>9_<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">*</span>
+</code></pre>
+<p><br></p>
+<p>A simple example of utilization of an enum type is presented in the
+source code below, where an enum type <code>Day</code> of type <code>[c32]</code> is
+defined.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
 <span class="token keyword">enum</span>
@@ -645,10 +660,12 @@ them. It is mandatory that each field shares the same type.</p>
 <h2 id="value-access"><a name="value-access" class="anchor-navigation-ex-anchor" href="#value-access"><i class="fa fa-link" aria-hidden="true"></i></a>1.1. Value access</h2>
 <p>The values of an enumeration are accessible using the token
 <strong><code>::</code></strong>. In practice, access a value of the enumeration will past the
-content value of the field in the source code. The result of the
-expression have the type of the enumeration, and can be implicitely
-casted into the type of its content. An example of enumeration access
-is presented in the following source code.</p>
+content value of the field at the caller location. The result of the
+expression have the type of the enumeration (for example the type
+<strong><code>Day</code></strong> in the example below), and can be implicitely casted
+into the type of its content (for example <strong><code>[c32]</code></strong> in the example
+below). An example of enumeration access is presented in the following
+source code.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
 <span class="token keyword">enum</span> <span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token basic-types">c32</span><span class="token punctuation">]</span>
@@ -681,7 +698,7 @@ is presented in the following source code.</p>
 </code></pre>
 <p><br></p>
 <p>With the above source code, because we try to cast a <strong><code>[c32]</code></strong> into
-a <code>Day</code>, the compiler will return an error. The error is presented in
+a <strong><code>Day</code></strong>, the compiler will return an error. The error is presented in
 the code block below.</p>
 <pre class="language-"><code class="lang-error"><span class="token path">Error</span> : the call operator is not defined for type main::bar and {mut [c32]}
  <span class="token comment">--&gt; main.yr:(28,6)</span>
@@ -702,7 +719,114 @@ the code block below.</p>
 ymir1: <span class="token path">fatal error</span>: 
 compilation terminated.
 </code></pre>
+<p><br></p>
+<p>Enumeration values can be more complex than literals, and can for
+example call functions, create structures, etc. An example of
+enumeration creating structure from function call is presented in the
+source code below. </p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">struct</span>
+<span class="token operator">|</span> a <span class="token punctuation">:</span> <span class="token basic-types">i32</span>
+<span class="token operator">|</span> b <span class="token punctuation">:</span> <span class="token basic-types">i32</span>
+<span class="token operator">|</span> c <span class="token punctuation">:</span> <span class="token basic-types">i32</span>
+<span class="token operator">|</span> d <span class="token punctuation">:</span> <span class="token basic-types">i32</span>
+ <span class="token punctuation">-&gt;</span> Ipv4Addr<span class="token punctuation">;</span>
+
+<span class="token keyword">enum</span>
+<span class="token operator">|</span> LOCALHOST <span class="token operator">=</span> <span class="token function">localhost</span> <span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token operator">|</span> BROADCAST <span class="token operator">=</span> <span class="token function">broadcast</span> <span class="token punctuation">(</span><span class="token punctuation">)</span>
+ <span class="token punctuation">-&gt;</span> KnownAddr<span class="token punctuation">;</span>
+
+<span class="token keyword">def</span> <span class="token function">localhost</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> Ipv4Addr <span class="token punctuation">{</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Call localhost&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">Ipv4Addr</span> <span class="token punctuation">(</span><span class="token number">127</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">broadcast</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> Ipv4Addr <span class="token punctuation">{</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Call broadcast&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    
+    <span class="token function">Ipv4Addr</span> <span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">,</span> <span class="token number">255</span><span class="token punctuation">,</span> <span class="token number">255</span><span class="token punctuation">,</span> <span class="token number">255</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">throws</span> <span class="token operator">&amp;</span><span class="token type">AssertError</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">let</span> addr <span class="token operator">=</span> <span class="token path">KnownAddr</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">LOCALHOST</span><span class="token punctuation">;</span> <span class="token comment">// will call localhost here</span>
+
+    <span class="token keyword">assert</span> <span class="token punctuation">(</span><span class="token path">KnownAddr</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">LOCALHOST</span><span class="token punctuation">.</span>a <span class="token operator">==</span> <span class="token number">127</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// a second time here</span>
+    <span class="token keyword">assert</span> <span class="token punctuation">(</span><span class="token path">KnownAddr</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">BROADCAST</span><span class="token punctuation">.</span>d <span class="token operator">==</span> <span class="token number">255</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// call broadcast here</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br></p>
+<p>The enumeration value of a field is constructed at each access, this
+means for example that when enumeration values are constructed using
+function call, the function is called each time the enumeration field
+is accessed. Thus the result of the execution of the compiled source
+code above will be the following:</p>
+<pre class="language-"><code>Call localhost
+Call localhost
+Call broadcast
+</code></pre><p><br></p>
 <h2 id="enumeration-specific-attributes"><a name="enumeration-specific-attributes" class="anchor-navigation-ex-anchor" href="#enumeration-specific-attributes"><i class="fa fa-link" aria-hidden="true"></i></a>1.2. Enumeration specific attributes</h2>
+<p>As for any type, enumeration have specific type attributes. The table
+below lists the enumeration type specific attributes.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>members</code></td>
+<td>A slice containing all the values of the enumeration</td>
+</tr>
+<tr>
+<td><code>member_names</code></td>
+<td>A slice of [c32], containing all the names of the fields of the enumeration (same order than <code>members</code>)</td>
+</tr>
+<tr>
+<td><code>typeid</code></td>
+<td>The type identifier of the enumeration type in a <code>[c32]</code> typed value</td>
+</tr>
+<tr>
+<td><code>typeinfo</code></td>
+<td>The typeinfo of the inner type of the enumeration (cf. <a href="">Dynamic types</a>)</td>
+</tr>
+<tr>
+<td><code>inner</code></td>
+<td>The inner type of the enumeration</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p>One may note that the operator to access specific attributes and field
+is the same, and therefore that if an enumeration have a field named
+as a specific attributes there will be a conflict. To avoid conflict,
+the priority is given to the fields of the enumeration, and specific
+attributes can be accessed using their identifier surrounded by
+<strong><code>_</code></strong> tokens. For example, accessing the <code>members</code> specific
+attributes can be made using the identifier <code>__members__</code>. An example
+of the principle is presented in the following source code. The
+specific attribute surrounding is applicable to all types, but can be
+really usefull here.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">mod</span> main<span class="token punctuation">;</span>
+
+<span class="token keyword">enum</span>
+<span class="token operator">|</span> typeid       <span class="token operator">=</span> <span class="token number">1</span>
+<span class="token operator">|</span> typeinfo     <span class="token operator">=</span> <span class="token number">2</span>
+<span class="token operator">|</span> members      <span class="token operator">=</span> <span class="token number">3</span>
+<span class="token operator">|</span> member_names <span class="token operator">=</span> <span class="token number">4</span>
+<span class="token operator">|</span> inner        <span class="token operator">=</span> <span class="token number">5</span>
+ <span class="token punctuation">-&gt;</span> AnnoyingEnum<span class="token punctuation">;</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">throws</span> <span class="token operator">&amp;</span><span class="token type">AssertError</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">assert</span> <span class="token punctuation">(</span><span class="token path">AnnoyingEnum</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">typeid</span> <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">assert</span> <span class="token punctuation">(</span><span class="token path">AnnoyingEnum</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">__typeid</span> <span class="token operator">==</span> <span class="token path">AnnoyingEnum</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">__typeid__</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">assert</span> <span class="token punctuation">(</span><span class="token path">AnnoyingEnum</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">__typeid</span> <span class="token operator">==</span> <span class="token string">&quot;main::AnnoyingEnum&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    
+<span class="token punctuation">}</span>
+</code></pre>
 
                                 
                                 </section>
@@ -746,7 +870,7 @@ compilation terminated.
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Enum","level":"1.5.2","depth":2,"next":{"title":"Modules","level":"1.6","depth":1,"path":"modules/README.md","ref":"modules/README.md","articles":[]},"previous":{"title":"Structure","level":"1.5.1","depth":2,"path":"types/struct.md","ref":"types/struct.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"types/enum.md","mtime":"2021-02-15T17:07:06.959Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-02-15T19:42:51.511Z"},"basePath":"..","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Enum","level":"1.5.2","depth":2,"next":{"title":"Modules","level":"1.6","depth":1,"path":"modules/README.md","ref":"modules/README.md","articles":[]},"previous":{"title":"Structure","level":"1.5.1","depth":2,"path":"types/struct.md","ref":"types/struct.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"livereload":{},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"types/enum.md","mtime":"2021-02-16T10:21:51.110Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-02-16T10:31:54.469Z"},"basePath":"..","book":{"language":"en"}});
         });
     </script>
 </div>
@@ -773,6 +897,10 @@ compilation terminated.
     
         
         <script src="../../gitbook/gitbook-plugin-code/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-livereload/plugin.js"></script>
         
     
         
