@@ -5,7 +5,30 @@ custom types, which contains multiple values of different
 types. Structures are similar to tuples, in terms of memory management
 (can be located in the stack). Unlike tuples, structures have a name,
 and all their internal fields also have a name. It can be said that
-tuple are simply anonymus structures. 
+tuple are simply anonymus structures.
+
+The complete grammar of structure definition is presented in the
+following code block. One can note the possibility to add templates to
+the definition of the structure. These templates will only be
+discussed in the
+[Templates](https://gnu-ymir.github.io/Documentations/en/templates/)
+chapter.
+
+```grammar
+struct_type := 'struct' ('|' var_decl)* '->' identifier (templates)?
+var_decl := ('mut'?) identifier ':' type ('=' expression)?
+identifier := ('_')* [A-z] ([A-z0-9_])*	 
+```
+
+<br>
+
+One can note from this definition that a structure may contain no
+fields, and be empty. The variable declaration of the fields uses the
+same syntax as declaration of function parameters, that is to say the
+same syntax as variable declaration but with the keyword **`let`**
+omitted. The following source code presents a definition of a
+structure **`Point`** with two fields **`x`** and **`y`** of type
+**`i32`**.
 
 ```ymir
 import std::io

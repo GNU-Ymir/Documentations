@@ -15,9 +15,11 @@ expression, to execute the code, if the condition of the *if*
 expression is not met. The syntax of the **`if`** expression is the
 following:
 
-```
+```grammar
 if_expression := 'if' expression expression ('else' expression)?
 ```
+
+<br>
 
 The following source code present a basic utilization of the **`if`**
 expression. In this example, the expression has no value, and is then
@@ -37,6 +39,8 @@ def main () {
 }
 ```
 
+<br>
+
 As mentioned above, since everything is an expression, you can use
 **`if`** expressions as values. Each branch of the **`if`** expression
 must have the same type, otherwise an error will be returned by the
@@ -53,6 +57,8 @@ def main () {
 	};
 }
 ```
+
+<br>
 
 If there is a possibility that no branch of an expression **`if`** is
 visited, then the value of the whole **`if`** expression is
@@ -90,6 +96,8 @@ ymir1: fatal error:
 compilation terminated.
 ```
 
+<br>
+
 ## Loops 
 
 In **Ymir**, there is three kind of loops: `loop`, `while` and `for`.
@@ -100,7 +108,7 @@ The keyword **`loop`** is used to specify that a block of code must be
 repeated endlessly. The syntax of the **`loop`** expression is the
 following:
 
-```
+```grammar
 loop_expression := 'loop' expression
 ```
 
@@ -114,6 +122,8 @@ def main () {
     }
 }
 ```
+
+<br>
 
 A loop can be used to repeat an action until it succeeds, e.g. waiting
 for the end of a thread, or waiting for incoming network connections,
@@ -144,6 +154,8 @@ The above source code will produce the following result:
 Result : 11
 ```
 
+<br>
+
 ### Loop while condition is met
 
 The keyword **`while`** creates a loop, which continues until a
@@ -154,7 +166,7 @@ or by the value given by a **`break`** if it has been broken.
 
 The syntax of the **`while`** expression is the following:
 
-```
+```grammar
 while_expression := 'while' expression expression
 ```
 
@@ -181,6 +193,8 @@ The above source code will produce the following result:
 X is : 10
 ```
 
+<br>
+
 ### For loops to iterate over a value
 
 The last type of loop is the **`for`** loop. It is applicable on an
@@ -190,9 +204,13 @@ are iterable types. For example, for range :
 
 The syntax of the **`while`** expression is the following:
 
-```
+```grammar
 for_expression := 'for' ('(' var_decls ')' | var_decls) 'in' expression expression
+
 var_decls := var_decl (',' var_decl)
+var_decl := (decorator)* identifier (':' type)?
+
+decorator := 'ref' | 'mut' | 'dmut'
 ```
 
 <br>

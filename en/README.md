@@ -20,6 +20,11 @@ expected. If you encounter errors that you do not understand or think
 are incorrect, please contact us at: <gnu.ymir@mail.com>. We look
 forward to receiving your mails!
 
+Even more, all contributions are very welcome, whether to improve the
+documentation, to propose improvements to the language or std, to the
+runtime, or even to the automatic release generation procedure. All
+code repositories are available on [github](https://github.com/GNU-Ymir).
+
 ## Installation
 
 The reference compiler of **Ymir** is based on the compiler **GCC**,

@@ -10,26 +10,25 @@ parameters separated by commas between parentheses.
 ```ymir 
 import std::io 
 
-/**
- * The main function is the entry point of the program
- * It can have no parameters, and return an i32, or void
- */
+// The main function is the entry point of the program
+// It can have no parameters, and return an i32, or void
+//
 def main () {
     foo ();
 }
 
-/**
- * Declaration of a function named 'foo' with no parameters 
- */
+
+// Declaration of a function named 'foo' with no parameters 
+//
 def foo () {
     println ("Foo");
     	
     bar (); 
 }
 
-/**
- * Declaration of a function named 'bar' with one parameter 'x' of type 'i32'
- */
+
+// Declaration of a function named 'bar' with one parameter 'x' of type 'i32'
+//
 def bar (x : i32) {
     println ("Bar ", x);
 }
@@ -37,9 +36,20 @@ def bar (x : i32) {
 
 <br>
 
-The identifier of a function must follow the same rule as variable
-name identifier, that it to say respect the following gramatical rule
-: `[_]*[a-Z][a-Z0-9_]*`
+The grammar of a function is defined in the following code block.
+
+```grammar
+function := template_function | simple_function
+simple_function := 'def' identifier parameters ('->' type)? expression
+template_function := 'def' ('if' expression) identifier templates ('->' type)? expression
+
+parameters := '(' (var_decl (',' var_decl)*)? ')'
+var_decl := identifier ':' type ('=' expression)?
+
+identifier := ('_')* [A-z] ([A-z0-9_])*
+```
+
+<br>
 
 The order of declaration of the symbol has no impact on the
 compilation. The symbols are defined by the compiler before being
@@ -61,16 +71,14 @@ parameter must have a type, and its value is optional.
 ```ymir 
 import std::io 
 
-/**
- * Declaration of a function 'foo' with one parameter 'x' of type 'i32'
- */
+// Declaration of a function 'foo' with one parameter 'x' of type 'i32'
+//
 def foo (x : i32) {
 	println ("The value of x is : ", x);
 }
 
-/**
- * Declaration of a function 'bar' with two parameters 'x' and 'y' whose respective types are 'i32' and 'i32'
- */
+// Declaration of a function 'bar' with two parameters 'x' and 'y' whose respective types are 'i32' and 'i32'
+//
 def bar (x : i32, y : i32) {
 	println ("The value of x + y : ", x + y);
 }
@@ -103,10 +111,10 @@ call this function.
 ```ymir 
 import std::io
 
-/**
- * Function 'foo' can be called without specifying a value for parameter 'x'
- * '8' will be used as a default value for 'x'
- */
+
+// Function 'foo' can be called without specifying a value for parameter 'x'
+// '8' will be used as a default value for 'x'
+//
 def foo (x : i32 = 8) {
     println ("The value of x is : ", x);
 }
@@ -128,10 +136,10 @@ and we will illustrate it by the following example :
 ```ymir
 import std::io
 
-/**
- * Parameters with default values, does not need to be last parameters
- * This function can be called with only two parameters (x, z), or using named expression syntax
- */
+
+// Parameters with default values, does not need to be last parameters
+// This function can be called with only two parameters (x, z), or using named expression syntax
+//
 def foo (x : i32, y : i32 = 9, z : i32) {
     println (x, " ", y, " ", z);
 }
@@ -194,9 +202,8 @@ def foo (x : i32) -> i32
 def bar (x : i32) -> i32
 	x + 2
 
-/**
- * Declaration of a 'baz' function, where 'b' = bar(1) + foo(2), as a default value
- */
+// Declaration of a 'baz' function, where 'b' = bar(1) + foo(2), as a default value
+//
 def baz (a : i32, b : i32 = {bar (1) + foo (2)}) {
 	//                             ^
 	//                       Try to replace by a
@@ -262,16 +269,16 @@ nothing and its type is **`void`**. For example, if for the following
 source code :
 
 ```ymir
-/**
- * The value of foo is '9'
- */
+
+// The value of foo is '9'
+//
 def foo () -> i32 
     9
 
 
 def main () {
     let x = {
-        foo (); // Call foo, but does not store the return value
+         foo (); // Call foo, but does not store the return value
     } // The value of the block is 'void'
 }
 ```

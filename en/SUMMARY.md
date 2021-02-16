@@ -12,7 +12,7 @@
   * [References](advanced/references.md)
   * [Aliases](advanced/alias.md)
   * [Copy and Deep copy](advanced/copies.md)
-* [User define types](types/README.md)
+* [User defined types](types/README.md)
   * [Structure](types/struct.md)
   * [Enum](types/enum.md)
 * [Modules](modules/README.md) 

@@ -3,12 +3,33 @@
 Variables are declared with the keyword **`let`**, the type of the
 variable is deduced from the value associated with it. The type of the
 variable can be forced with the **`:`** token, but it must be
-compatible with the value.
+compatible with the value. The following code block presents the
+grammar of the declaration of a variable.
+
+```grammar
+var_declaration := 'let' inner_var_decl (',' inner_var_decl)*
+inner_var_decl  := (decorator)* identifier (':' type)? '=' expression
+decorator := 'mut' | 'dmut' | 'ref'
+identifier := ('_')* [A-z] ([A-z0-9_])*
+```
+
+<br>
+
+The decorators are used to determine the behavior to adopt with the
+variable. The keyword **`ref`** and **`dmut`** will be discuss in
+another chapter (cf. [Aliases and
+References](https://gnu-ymir.github.io/Documentations/en/advanced/)). The
+keyword **`mut`** on the other hand is used to determine that the
+value of a variable can be changed. A variable is therefore declared
+immutable by default (if the decorator **`mut`** is not specified).
 
 If a variable is declared immutable, once a value is bound to it, it
-can no longer change. In addition, a variable must have an initial
-value and cannot be declared without it, in order to garanty that a
-variable is always initialized. You will see in the [Control
+can no longer change. The idea behind default immutability is to avoid
+errors, by forcing the developpers to determine which variables can be
+changed, and by making all the other ones immutable. In addition, a
+variable must have an initial value and cannot be declared without it,
+in order to garanty that a variable is always initialized. You will
+see in the [Control
 flow](https://gnu-ymir.github.io/Documentations/en/primitives/control.html)
 section, that a variable can still be intialized conditionnaly.
 
@@ -95,11 +116,19 @@ references](https://gnu-ymir.github.io/Documentations/advanced/).
 ## Global variables
 
 Global variables are variables that are declared outside of a
-function, they can be used for multiple reasons. These types of
-variables are declared using the keyword `static`.
+function, they can be used for multiple reasons, even if they have a
+rather bad reputation for many justified reasons. We choose to let the
+possibility to define global variables, as they still allows some
+programmation paradigms that would be undoable otherwise.
 
-As with all variables, these may or may not be mutable, but are
-immutable by default.
+Global variable are defined as any variable, except that the keyword
+**`let`** is replaced by the keyword **`static`**. As with all
+variables, these may or may not be mutable, but are immutable by
+default. The following source code present an utilization of a
+immutable global variable. This utilization is just a showcase, as a
+enumeration
+(cf. [Enum](https://gnu-ymir.github.io/Documentations/en/types/enum.html))
+would be far better in this specific case.
 
 ```ymir
 import std::io
@@ -126,7 +155,9 @@ scopes, i.e. if a variable is declared with the name of a currently
 living variable in the current scope, a shadowing error will occur.
 
 The following source code illustrates this point, where two variable
-are declared in the same scope with the same name **`x`**.
+are declared in the same scope with the same name **`x`**. With this
+source code the compiler will return an error that is presented in the
+code block underneath.
 
 ```ymir
 import std::io
@@ -139,7 +170,6 @@ def main () {
 ```
 
 <br>
-With this source code the compiler will return the following error.
 
 ```error
 Error : declaration of x shadows another declaration
@@ -158,18 +188,49 @@ Error : declaration of x shadows another declaration
 ymir1: fatal error: 
 compilation terminated.
 ```
+
 <br>
 
 Unlike some other programming languages, the shadowing of a variable
-is also not permitted in sub scopes, thus the following source code
-should also return an error.
+is also not permitted in sub scopes, to avoid strange behaviors and
+losing many minds. Thus the following source code will also return
+an error.
 
 ```ymir
 def main () {
     let x = 9;
     { // entering a scope
-	let x = 12; 
+	    let x = 12; 
     }   
+}
+```
+
+<br>
+
+Global variables do not create variable shadowing problem. A global
+variable is a global symbol, and is accessible the same way as any
+global symbols. This is not the case for local variables that are only
+accessible inside the function that declared them. Further information
+about global symbols is presented in chapter
+[Modules](https://gnu-ymir.github.io/Documentations/en/modules/).
+
+```ymir
+mod main;
+
+import std::io;
+
+static pi = 3.14159265359
+
+def main ()
+    throws &AssertError
+{
+    {
+		let pi = 3;
+		assert (pi == 3); // using local pi
+    }
+    // Well thats ugly, but global pi can also be accessed using main::pi
+    assert (pi == 3.14159265359);
+    assert (main::pi == 3.14159265359);
 }
 ```
 
@@ -185,7 +246,7 @@ import std::io;
 
 def main () {
     {
-	let x = 12;
+		let x = 12;
     } // x does not exists past this scope end
     println (x);
 }
@@ -200,7 +261,7 @@ variable that is not used, but it can be useful sometimes (for example
 when declaring function parameters in a overriden function, cf. [Class
 inheritence](https://gnu-ymir.github.io/Documentations/en/objects/inheritance.html)).
 
-A variable, whose name is **`_`** is anonymus, then there is no way to
+A variable whose name is **`_`**, is anonymus, then there is no way to
 retreive the value of this variable.
 
 ```ymir
