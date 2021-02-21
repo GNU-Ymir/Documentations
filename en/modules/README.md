@@ -12,7 +12,7 @@ Let have a look at the following file hierarchy :
 ```
 .
 ├── main.yr
-└── sub_modules
+└── extern_modules
     ├── bar.yr
     └── foo.yr
 
@@ -21,9 +21,9 @@ Let have a look at the following file hierarchy :
 
 In this hierarchy we have three files, which contain modules, the
 first module in the file `main.yr` will be named `main`. The second
-one in the `sub_modules/bar.yr` file will be named `sub_modules::bar`,
-and the third one in the `sub_modules/foo.yr` file will be named
-`sub_modules::foo`.
+one in the `extern_modules/bar.yr` file will be named `extern_modules::bar`,
+and the third one in the `extern_modules/foo.yr` file will be named
+`extern_modules::foo`.
 
 To be properly importable, the module must be defined from the
 relative path of the compilation, i.e. if the file is located in
@@ -38,16 +38,26 @@ be able to import the module, depending on its relative path.
 For example, in the file `foo.yr`, the first line must look like : 
 
 ```ymir
-mod sub_modules::foo
+mod extern_modules::foo
 ```
+
+<br>
 
 And, it will therefore be importable everywhere, for example in the
 `main` module, when writing the import declaration :
 
 ```ymir
-import sub_modules::foo
+import extern_modules::foo
 ```
 
+<br> 
+
+The syntax of the import statement is the following :
+
+```grammar
+import_statement := 'import' path (',' path)* (';')?
+path := Identifier ('::' Identifier)*
+```
 
 ## Privacy
 
@@ -59,92 +69,149 @@ have access to the symbol.
 For example, with file `foo.yr` filled as follows : 
 
 ```ymir
-mod sub_modules::foo;
+mod extern_modules::foo;
 
+// foo is public, it can be accessed from external modules
 pub def foo () {}
 
+// The bar function is private by default
+// Thus only usable in this module
 def bar () {}
 ```
 
-And the file `main.yr` as follows : 
+<br>
+
+And the file `main.yr` as follows. The `main` module, will only have
+access to the `foo` function, which is declared in the
+`extern_modules::foo` module.
 
 ```ymir
-import sub_modules::foo
+// This importation will give access to all the symbols in the module
+// 'extern_modules::foo' that have been declared 'public'
+import extern_modules::foo
 
 def main () {
-	foo ();
+    foo (); // foo is public we can call it
 //  ^^^
-// Try to replace foo by bar
+// Try to replace foo by bar, it is not public
 }
 ```
 
-The `main` module, will only have access to the `foo` function, which
-is declared in the `sub_modules::foo` module. The keyword `pub` can be
-used as a block to cover multiple declarations :
+<br>
+
+The keyword `pub` can be used as a block to cover multiple
+declarations. The syntax of the pub qualifier is described in the
+following code block, and an example of utilization is presented in
+the block underneath.
+
+```grammar
+pub_statement := 'pub' ('{' declaration* '}')
+                       | (declaration)
+```
+
+<br>
 
 ```ymir
-mod sub_modules::foo
+mod extern_modules::foo
 
 pub {
 	def foo () {}
 	
 	def bar () {}
 }
+
+pub def baz () {}
 ```
 
 ## Sub modules
 
 It is possible to declare sub-module that are part of a global module,
 with the keyword `mod`. Unlike global modules, you have to name them
-when you want to access the symbols declared inside them. For example :
+when you want to access the symbols declared inside them. An example
+of inner module is presented in the following code block.
 
 ```ymir
 mod main
 import std::io
 
+// Declaration of a module named InnerModule
+// This module is private, thus only accessible for the module main
 mod InnerModule {
+
+    	// Declaration of a function foo inside the module
+	// It is public, so the module main can access it
 	pub def foo () {
 		println ("Foo");
 		bar ();
 	}
-	
+
+	// Declaration of a private function bar
+	// only symbols declared in the module InnerModule have access to it
 	def bar () {
 		println ("Bar");
 	}
 }
 
 def main () {
+    	 // There is no problem to access the function foo that is public
 	InnerModule::foo ();
-	//           ^^^
-	// Try to replace by bar
+
+	// However the function bar is private
+	InnerModule::bar ();
 }
 ```
 
-The confidentiality system is the same as for the global module. A
-module is a symbol, so its privacy is the same as the privacy of
-functions, structure, class, etc. Only the main module will have
-access to the sub-module `InnerModule` in the example above.
+<br>
+
+The above source code won't compile as 'main' function declared in
+'main' module try to have access to the function 'bar' declared
+private in the module 'InnerModule'. The compiler will return the
+following error.
+
+```error
+Error : undefined sub symbol bar for element main::InnerModule
+ --> main.yr:(27,16)
+    ┃ 
+27  ┃     InnerModule::bar ();
+    ┃                ^^^^^
+    ┃ Note : bar --> main.yr:(17,9) : bar is private within this context
+    ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 
+
+
+ymir1: fatal error: 
+compilation terminated.
+```
+
+<br>
+
+The privacy system is the same as for the global module. A module is a
+symbol, so its privacy is the same as the privacy of functions,
+structure, class, etc. Only the main module will have access to the
+sub-module `InnerModule` in the example above. Meaning that importing
+the module `main` won't give access to `main::InnerModule`. This can
+be changed by adding the qualifier `pub` to the module `InnerModule`.
 
 ## Symbol conflict resolution
 
-When two external global modules declare two symbols with the same name,
-it may be impossible to know which symbol you want to use. In this
-case, you can use the full name of the symbol to resolve the
-ambiguity. For example, with the `bar.yr` file:
+When two external global modules declare two symbols with the same
+name, it may be impossible to know which symbol you want to use. In
+this case, you can use the full name of the symbol to resolve the
+ambiguity. To give an example of symbol conflict, let's say that we
+have two module `extern_modules::foo` and `extern_modules::bar`
+declaring a function with the same signature `foo`.
 
 ```ymir
-mod sub_modules::bar
+mod extern_modules::bar
 import std::io
 
 pub def foo () {
 	println ("Bar");
 }
 ```
-
-And the file `foo.yr` : 
+<br>
 
 ```ymir
-mod sub_modules::foo
+mod extern_modules::foo
 import std::io
 
 pub def foo () {
@@ -152,57 +219,82 @@ pub def foo () {
 }
 ```
 
-When using the symbol foo in the `main` module : 
+In the `main` module, we import both modules `extern_modules::bar` and
+`extern_modules::foo`, and try to call the function `foo`. In that
+case, there is no way to tell which function will be used,
+`extern_modules::foo::foo` or `extern_modules::bar::foo`. And the
+compiler will return an error. One can note that this errors occurs
+only because the signature of the two function `foo` is the same, if
+there was a difference, for example the function in the
+`extern_modules::bar` module took a `i32` as parameters, the conflict
+would be resolved by itself, as the call expression will be different.
 
 ```ymir 
-import sub_modules::bar, sub_modules::foo
+import extern_modules::bar, extern_modules::foo
 
 def main () {
 	foo ();
 }
 ```
 
-You should get the following error : 
+<br>
 
-```
-Error : foo called with {} work with both
+```error
+Error : Multiple Symbols : {extern_modules::bar::foo ()-> void} x 2 called with {} work with both
  --> main.yr:(4,9)
-    | 
- 4  |     foo ();
-    |         ^
-Note : candidate  --> main.yr:(4,9) : sub_modules::bar::foo ()-> void
-Note : candidate  --> main.yr:(4,9) : sub_modules::foo::foo ()-> void
+    ┃ 
+ 4  ┃     foo ();
+    ┃         ^
+    ┃ Note : candidate foo --> extern_modules/bar.yr:(4,9) : extern_modules::bar::foo ()-> void
+    ┃ Note : candidate foo --> extern_modules/foo.yr:(4,9) : extern_modules::foo::foo ()-> void
+    ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 
+
 
 ymir1: fatal error: 
 compilation terminated.
 ```
 
-You can solve this problem, by replacing the call `foo()`, by `sub_modules::foo::foo ()`.
+<br>
+
+The conflict problem can be resolved by changing the calling
+expression, and writting the full name of the function that we wan't
+to call.
+
+```ymir
+import extern_modules::bar, extern_modules::foo
+
+def main () {
+    extern_modules::bar::foo (); // Bar
+    extern_modules::foo::foo (); // Foo	
+}
+```
+
+<br>
 
 ## Public importation
 
 As for all declaration, importation are private. It means that the
 importation is not recursive. For example, if the module
-`sub_modules::foo` imports the module `sub_modules::bar`, and the
-module `main` import the module `sub_modules::foo`, all the public
-symbols declared in `sub_modules::bar` will not be accessible in the
+`extern_modules::foo` imports the module `extern_modules::bar`, and the
+module `main` import the module `extern_modules::foo`, all the public
+symbols declared in `extern_modules::bar` will not be accessible in the
 module `main`.
 
 You can of course, make a `pub` importation, to make the symbols of
-the module `sub_modules::bar` visible for the module `main`.
+the module `extern_modules::bar` visible for the module `main`.
 
-- sub_modules/foo.yr
+- extern_modules/foo.yr
 
 ```ymir
-mod sub_modules::foo
+mod extern_modules::foo
 
-pub import sub_modules::bar
+pub import extern_modules::bar
 ```
 
-- sub_modules/bar.yr
+- extern_modules/bar.yr
 
 ```ymir
-mod sub_modules::bar
+mod extern_modules::bar
 import std::io
 
 pub def bar () {
@@ -214,7 +306,7 @@ pub def bar () {
 
 ```ymir
 mod main
-import sub_modules::foo;
+import extern_modules::foo;
 
 def main () {
 	bar ();
@@ -247,34 +339,36 @@ module, you will get an error.
 
 ```ymir
 mod main
-import sub_modules::foo;
+import extern_modules::foo;
 
 def main () {
 	foo ();
 }
 ```
 
-- sub_modules/foo.yr
+- extern_modules/foo.yr
 
 ```ymir
-mod sub_modules::foo
+mod extern_modules::foo
 
 pub def foo () {}
 ```
 
+<br>
+
 ```
 $ gyc main.yr
 /tmp/ccCOeXDq.o: In function `_Y4mainFZv':
-main.yr:(.text+0x3e): undefined reference to `_Y11sub_modules3foo3fooFZv'
+main.yr:(.text+0x3e): undefined reference to `_Y14extern_modules3foo3fooFZv'
 collect2: error: ld returned 1 exit status
 ```
 
-This means that the symbol `foo` declared in the module `sub_modules::foo` cannot be
+This means that the symbol `foo` declared in the module `extern_modules::foo` cannot be
 found. So you have to write the command line.
 
 
 ```
-$ gyc main.yr sub_modules/foo.yr
+$ gyc main.yr extern_modules/foo.yr
 ```
 
 The way `gyc` works is similar to all the compilers in the `GCC`
