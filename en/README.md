@@ -1,4 +1,4 @@
-https://gitea.emile-cadorel.fr/Emile/Ymir-Docker.git/info/lfs/objects/69a94eea846456dd9d7007f6f804d3383789aea1c950091c00c46b3aa5aef913/bGliZ21pZGdhcmRfOS4zLjBfYW1kNjQuZGVi# Introduction
+# Introduction
 
 **Ymir** is a high-level, statically typed programming language
   designed to help developers save time by providing type safety with
