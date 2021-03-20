@@ -614,7 +614,7 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#important"><b>1. </b>Important</a></li><ul><li><span class="title-icon "></span><a href="#installation"><b>1.1. </b>Installation</a></li><ul><li><span class="title-icon "></span><a href="#native-installation"><b>1.1.1. </b>Native installation</a></li><li><span class="title-icon "></span><a href="#uninstallation-of-the-native-version"><b>1.1.2. </b>Uninstallation of the native version</a></li></ul><li><span class="title-icon "></span><a href="#docker-installation"><b>1.2. </b>Docker installation</a></li></ul></ul></div><a href="#important" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><p><a href="https://gitea.emile-cadorel.fr/Emile/Ymir-Docker.git/info/lfs/objects/69a94eea846456dd9d7007f6f804d3383789aea1c950091c00c46b3aa5aef913/bGliZ21pZGdhcmRfOS4zLjBfYW1kNjQuZGVi#" target="_blank">https://gitea.emile-cadorel.fr/Emile/Ymir-Docker.git/info/lfs/objects/69a94eea846456dd9d7007f6f804d3383789aea1c950091c00c46b3aa5aef913/bGliZ21pZGdhcmRfOS4zLjBfYW1kNjQuZGVi#</a> Introduction</p>
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#introduction"><b>1. </b>Introduction</a></li><li><span class="title-icon "></span><a href="#important"><b>2. </b>Important</a></li><ul><li><span class="title-icon "></span><a href="#installation"><b>2.1. </b>Installation</a></li><ul><li><span class="title-icon "></span><a href="#native-installation"><b>2.1.1. </b>Native installation</a></li><li><span class="title-icon "></span><a href="#uninstallation-of-the-native-version"><b>2.1.2. </b>Uninstallation of the native version</a></li></ul><li><span class="title-icon "></span><a href="#docker-installation"><b>2.2. </b>Docker installation</a></li></ul></ul></div><a href="#introduction" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="introduction"><a name="introduction" class="anchor-navigation-ex-anchor" href="#introduction"><i class="fa fa-link" aria-hidden="true"></i></a>1. Introduction</h1>
 <p><strong>Ymir</strong> is a high-level, statically typed programming language
   designed to help developers save time by providing type safety with
   strong and secure semantics. The semantics of this language is
@@ -625,7 +625,7 @@
 set of examples that demonstrate the strengths of this new
 language. It will also present an introduction to the standard
 library.</p>
-<h1 id="important"><a name="important" class="anchor-navigation-ex-anchor" href="#important"><i class="fa fa-link" aria-hidden="true"></i></a>1. Important</h1>
+<h1 id="important"><a name="important" class="anchor-navigation-ex-anchor" href="#important"><i class="fa fa-link" aria-hidden="true"></i></a>2. Important</h1>
 <p>Before starting to discuss the language, please keep in mind that it
 is still under development and that sometimes things may not work as
 expected. If you encounter errors that you do not understand or think
@@ -635,12 +635,12 @@ forward to receiving your mails!</p>
 documentation, to propose improvements to the language or std, to the
 runtime, or even to the automatic release generation procedure. All
 code repositories are available on <a href="https://github.com/GNU-Ymir" target="_blank">github</a>.</p>
-<h2 id="installation"><a name="installation" class="anchor-navigation-ex-anchor" href="#installation"><i class="fa fa-link" aria-hidden="true"></i></a>1.1. Installation</h2>
+<h2 id="installation"><a name="installation" class="anchor-navigation-ex-anchor" href="#installation"><i class="fa fa-link" aria-hidden="true"></i></a>2.1. Installation</h2>
 <p>The reference compiler of <strong>Ymir</strong> is based on the compiler <strong>GCC</strong>,
 which offer strong static optimization, as well as a vast set of
 supported target architectures.</p>
 <p>There are two ways to install the <strong>gyc</strong> (Gnu Ymir Compiler), natively or by using a docker container.</p>
-<h3 id="native-installation"><a name="native-installation" class="anchor-navigation-ex-anchor" href="#native-installation"><i class="fa fa-link" aria-hidden="true"></i></a>1.1.1. Native installation</h3>
+<h3 id="native-installation"><a name="native-installation" class="anchor-navigation-ex-anchor" href="#native-installation"><i class="fa fa-link" aria-hidden="true"></i></a>2.1.1. Native installation</h3>
 <p>This compiler can be installed on linux debian system, by following those simple steps: </p>
 <ul>
 <li><p>First, you need to downloads the packages : </p>
@@ -681,7 +681,7 @@ Copyright <span class="token punctuation">(</span>C<span class="token punctuatio
 This is <span class="token function">free</span> software<span class="token punctuation">;</span> see the <span class="token builtin class-name">source</span> <span class="token keyword">for</span> copying conditions.  There is NO
 warranty<span class="token punctuation">;</span> not even <span class="token keyword">for</span> MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 </code></pre>
-<h3 id="uninstallation-of-the-native-version"><a name="uninstallation-of-the-native-version" class="anchor-navigation-ex-anchor" href="#uninstallation-of-the-native-version"><i class="fa fa-link" aria-hidden="true"></i></a>1.1.2. Uninstallation of the native version</h3>
+<h3 id="uninstallation-of-the-native-version"><a name="uninstallation-of-the-native-version" class="anchor-navigation-ex-anchor" href="#uninstallation-of-the-native-version"><i class="fa fa-link" aria-hidden="true"></i></a>2.1.2. Uninstallation of the native version</h3>
 <p>As for any debian package, the uninstall is done as follows : </p>
 <pre class="language-"><code class="lang-bash">$ dpkg -r gyc-9
 $ dpkg -r libgmidgard-9-dev
@@ -690,7 +690,7 @@ $ dpkg -r libgmidgard-9-dev
 But you can still reinstall it easily if there is any problem, by typing : </p>
 <pre class="language-"><code class="lang-ymir">sudo apt install <span class="token operator">-</span><span class="token operator">-</span>reinstall gcc<span class="token number">-9</span>
 </code></pre>
-<h2 id="docker-installation"><a name="docker-installation" class="anchor-navigation-ex-anchor" href="#docker-installation"><i class="fa fa-link" aria-hidden="true"></i></a>1.2. Docker installation</h2>
+<h2 id="docker-installation"><a name="docker-installation" class="anchor-navigation-ex-anchor" href="#docker-installation"><i class="fa fa-link" aria-hidden="true"></i></a>2.2. Docker installation</h2>
 <p>To start you have to install docker.</p>
 <pre class="language-"><code class="lang-bash">$ <span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> docker.io
 </code></pre>
@@ -756,7 +756,7 @@ warranty<span class="token punctuation">;</span> not even <span class="token key
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Hello World","level":"1.2","depth":1,"path":"hello-world/README.md","ref":"hello-world/README.md","articles":[{"title":"Comments","level":"1.2.1","depth":2,"path":"hello-world/commentaires.md","ref":"hello-world/commentaires.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"README.md","mtime":"2021-03-20T14:53:39.517Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-03-20T14:54:14.239Z"},"basePath":".","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Hello World","level":"1.2","depth":1,"path":"hello-world/README.md","ref":"hello-world/README.md","articles":[{"title":"Comments","level":"1.2.1","depth":2,"path":"hello-world/commentaires.md","ref":"hello-world/commentaires.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"README.md","mtime":"2021-03-20T15:18:37.593Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-03-20T15:19:01.871Z"},"basePath":".","book":{"language":"en"}});
         });
     </script>
 </div>
