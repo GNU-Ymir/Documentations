@@ -1,4 +1,4 @@
-# Introduction
+https://gitea.emile-cadorel.fr/Emile/Ymir-Docker.git/info/lfs/objects/69a94eea846456dd9d7007f6f804d3383789aea1c950091c00c46b3aa5aef913/bGliZ21pZGdhcmRfOS4zLjBfYW1kNjQuZGVi# Introduction
 
 **Ymir** is a high-level, statically typed programming language
   designed to help developers save time by providing type safety with
@@ -37,8 +37,8 @@ There are two ways to install the **gyc** (Gnu Ymir Compiler), natively or by us
 
 This compiler can be installed on linux debian system, by following those simple steps: 
 - First, you need to downloads the packages : 
-  - [libmidgard-9-dev](https://github.com/GNU-Ymir/Ymir-Docker/raw/master/builder_image/9/amd64/bin/libgmidgard_9.3.0_amd64.deb)
-  - [GYC](https://github.com/GNU-Ymir/Ymir-Docker/raw/master/builder_image/9/amd64/bin/gyc-9_9.3.0_amd64.deb)
+  - [libmidgard-9-dev](https://gitea.emile-cadorel.fr/Emile/Ymir-Docker/src/branch/master/builder_image/9/amd64/bin/libgmidgard_9.3.0_amd64.deb)
+  - [GYC](https://gitea.emile-cadorel.fr/Emile/Ymir-Docker/src/branch/master/builder_image/9/amd64/bin/gyc-9_9.3.0_amd64.deb)
 	
 - And then, you need to install them using dpkg : 
 
