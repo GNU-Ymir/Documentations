@@ -616,15 +616,14 @@
                                 
                                 <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#introduction"><b>1. </b>Introduction</a></li><li><span class="title-icon "></span><a href="#important"><b>2. </b>Important</a></li><ul><li><span class="title-icon "></span><a href="#installation"><b>2.1. </b>Installation</a></li><ul><li><span class="title-icon "></span><a href="#native-installation"><b>2.1.1. </b>Native installation</a></li><li><span class="title-icon "></span><a href="#uninstallation-of-the-native-version"><b>2.1.2. </b>Uninstallation of the native version</a></li></ul><li><span class="title-icon "></span><a href="#docker-installation"><b>2.2. </b>Docker installation</a></li></ul></ul></div><a href="#introduction" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="introduction"><a name="introduction" class="anchor-navigation-ex-anchor" href="#introduction"><i class="fa fa-link" aria-hidden="true"></i></a>1. Introduction</h1>
 <p><strong>Ymir</strong> is a high-level, statically typed programming language
-  designed to help developers save time by providing type safety with
-  strong and secure semantics. The semantics of this language is
-  oriented towards security, concurrency and speed of execution. These
-  objectives are achieved thanks to its high expressiveness and its
-  direct compilation into an efficient native machine language.</p>
+  designed to help developers to save time by providing strong and
+  safe semantic. The semantic of this language is oriented towards
+  safety, concurrency and speed of execution. These objectives are
+  achieved thanks to its high expressiveness and its direct
+  compilation into an efficient native machine language.</p>
 <p>This documentation explores the main concepts of <strong>Ymir</strong>, providing a
 set of examples that demonstrate the strengths of this new
-language. It will also present an introduction to the standard
-library.</p>
+language. It also presents an introduction to the standard library.</p>
 <h1 id="important"><a name="important" class="anchor-navigation-ex-anchor" href="#important"><i class="fa fa-link" aria-hidden="true"></i></a>2. Important</h1>
 <p>Before starting to discuss the language, please keep in mind that it
 is still under development and that sometimes things may not work as
@@ -634,7 +633,10 @@ forward to receiving your mails!</p>
 <p>Even more, all contributions are very welcome, whether to improve the
 documentation, to propose improvements to the language or std, to the
 runtime, or even to the automatic release generation procedure. All
-code repositories are available on <a href="https://github.com/GNU-Ymir" target="_blank">github</a>.</p>
+code repositories are available on
+<a href="https://github.com/GNU-Ymir" target="_blank">github</a>. In this documentation, known
+limitations of the language are sometimes highlighted, and calls for
+contribution.</p>
 <h2 id="installation"><a name="installation" class="anchor-navigation-ex-anchor" href="#installation"><i class="fa fa-link" aria-hidden="true"></i></a>2.1. Installation</h2>
 <p>The reference compiler of <strong>Ymir</strong> is based on the compiler <strong>GCC</strong>,
 which offer strong static optimization, as well as a vast set of
@@ -645,8 +647,8 @@ supported target architectures.</p>
 <ul>
 <li><p>First, you need to downloads the packages : </p>
 <ul>
-<li><a href="https://gitea.emile-cadorel.fr/Emile/Ymir-Docker.git/info/lfs/objects/69a94eea846456dd9d7007f6f804d3383789aea1c950091c00c46b3aa5aef913/bGliZ21pZGdhcmRfOS4zLjBfYW1kNjQuZGVi" target="_blank">libmidgard-9-dev</a></li>
-<li><a href="https://gitea.emile-cadorel.fr/Emile/Ymir-Docker.git/info/lfs/objects/aee58538c545e7c533fee9aee2bf6a25801e2de076a6995ca9221c3443209c6a/Z3ljLTlfOS4zLjBfYW1kNjQuZGVi" target="_blank">GYC</a></li>
+<li><a href="https://gitea.emile-cadorel.fr/Emile/Ymir-Docker/src/branch/master/builder_image/9/amd64/bin/libgmidgard_9.3.0_amd64.deb" target="_blank">libmidgard-9-dev</a></li>
+<li><a href="https://gitea.emile-cadorel.fr/Emile/Ymir-Docker/src/branch/master/builder_image/9/amd64/bin/gyc-9_9.3.0_amd64.deb" target="_blank">GYC</a></li>
 </ul>
 </li>
 <li><p>And then, you need to install them using dpkg : </p>
@@ -655,6 +657,7 @@ supported target architectures.</p>
 <pre class="language-"><code class="lang-bash">$ <span class="token function">sudo</span> dpkg -i libgmidgard_9.3.0_amd64.deb
 $ <span class="token function">sudo</span> dpkg -i gyc-9_9.3.0_amd64.deb
 </code></pre>
+<p><br></p>
 <p>These packages depend on : </p>
 <ul>
 <li>g++-9</li>
@@ -672,6 +675,7 @@ $ <span class="token function">sudo</span> dpkg -i gyc-9_9.3.0_amd64.deb
 <p>If one of them is not installed, you will get an error, that can be resolved by running the following command : </p>
 <pre class="language-"><code class="lang-bash"><span class="token function">sudo</span> <span class="token function">apt</span> --fix-broken <span class="token function">install</span>
 </code></pre>
+<p><br></p>
 <p>And then reinstall the package that has previously failed (dpkg).
 The compiler is now installed and is named <code>gyc</code></p>
 <pre class="language-"><code class="lang-bash">$ gyc --version
@@ -681,11 +685,13 @@ Copyright <span class="token punctuation">(</span>C<span class="token punctuatio
 This is <span class="token function">free</span> software<span class="token punctuation">;</span> see the <span class="token builtin class-name">source</span> <span class="token keyword">for</span> copying conditions.  There is NO
 warranty<span class="token punctuation">;</span> not even <span class="token keyword">for</span> MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 </code></pre>
+<p><br></p>
 <h3 id="uninstallation-of-the-native-version"><a name="uninstallation-of-the-native-version" class="anchor-navigation-ex-anchor" href="#uninstallation-of-the-native-version"><i class="fa fa-link" aria-hidden="true"></i></a>2.1.2. Uninstallation of the native version</h3>
 <p>As for any debian package, the uninstall is done as follows : </p>
 <pre class="language-"><code class="lang-bash">$ dpkg -r gyc-9
 $ dpkg -r libgmidgard-9-dev
 </code></pre>
+<p><br></p>
 <p><strong>Caution</strong> The uninstallation can remove your gcc installation.
 But you can still reinstall it easily if there is any problem, by typing : </p>
 <pre class="language-"><code class="lang-ymir">sudo apt install <span class="token operator">-</span><span class="token operator">-</span>reinstall gcc<span class="token number">-9</span>
@@ -694,6 +700,7 @@ But you can still reinstall it easily if there is any problem, by typing : </p>
 <p>To start you have to install docker.</p>
 <pre class="language-"><code class="lang-bash">$ <span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> docker.io
 </code></pre>
+<p><br></p>
 <p>Then retrieve the docker image from the repository :</p>
 <pre class="language-"><code class="lang-bash">$ docker pull gnuymir/9.3.0-amd64
 </code></pre>
@@ -704,11 +711,14 @@ Copyright <span class="token punctuation">(</span>C<span class="token punctuatio
 This is <span class="token function">free</span> software<span class="token punctuation">;</span> see the <span class="token builtin class-name">source</span> <span class="token keyword">for</span> copying conditions.  There is NO
 warranty<span class="token punctuation">;</span> not even <span class="token keyword">for</span> MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 </code></pre>
+<p><br></p>
 <p>To make it easier to use, you can add an alias in the <code>~/.local/bin</code> directory.
 First open the file <code>~/.local/bin/gyc</code> and paste the following line :</p>
 <pre class="language-"><code class="lang-bash">docker run -t -v <span class="token variable"><span class="token variable">$(</span><span class="token builtin class-name">pwd</span><span class="token variable">)</span></span>:/tmp -w /tmp gnuymir/9.3.0-amd64 <span class="token variable">$*</span>
 </code></pre>
-<p>Then open a new shell, and run the following commands :</p>
+<p><br></p>
+<p>Make sure, that your <code>PATH</code> contains the <code>~/.local/bin</code>directory, and
+then open a new shell, and run the following commands :</p>
 <pre class="language-"><code class="lang-bash">$ <span class="token function">chmod</span> +x ~/.local/bin/gyc
 $ gyc --version
 
@@ -756,7 +766,7 @@ warranty<span class="token punctuation">;</span> not even <span class="token key
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Hello World","level":"1.2","depth":1,"path":"hello-world/README.md","ref":"hello-world/README.md","articles":[{"title":"Comments","level":"1.2.1","depth":2,"path":"hello-world/commentaires.md","ref":"hello-world/commentaires.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"README.md","mtime":"2021-03-20T15:19:12.681Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-03-20T15:20:35.314Z"},"basePath":".","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Hello World","level":"1.2","depth":1,"path":"hello-world/README.md","ref":"hello-world/README.md","articles":[{"title":"Comments","level":"1.2.1","depth":2,"path":"hello-world/commentaires.md","ref":"hello-world/commentaires.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"README.md","mtime":"2021-04-20T11:21:52.215Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-04-20T16:50:17.136Z"},"basePath":".","book":{"language":"en"}});
         });
     </script>
 </div>
