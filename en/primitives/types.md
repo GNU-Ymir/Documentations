@@ -4,10 +4,10 @@ In **Ymir** language, each value has a certain type of data, which
 indicates how the program must behave and how it should operate with
 the value. **Ymir** is a statically typed language, which means that
 all types of all values must be known at compile time. Usually, the
-compiler is able to deduce the data types from the values, and it is
+compiler is able to infer the data types from the values, and it is
 not necessary to specify them when declaring a variable. But
 sometimes, when it comes to the mutability of a variable or the
-inheritance of a class, for example, the inference can be wrong and
+inheritance of a class for example, the inference can be wrong and
 the behavior not adapted to what you might want to do.
 
 Therefore, the type may be added when declaring a variable, as in the
@@ -24,8 +24,8 @@ To understand the difference between the type of **`x`** and the type
 of **`y`**, we invite you to read the chapter
 [Aliases and References](https://gnu-ymir.github.io/Documentations/en/advanced/).
 
-Each type has type attributes, which can be accessed by using the **`::`**
-operator on a type.
+Each type has type attributes. Theses attributes are accessed using
+the double colon operator **`::`** on a type expression.
 
 ```ymir
 let a = i32::init;  // i32 (0)
@@ -34,7 +34,11 @@ let a = i32::init;  // i32 (0)
 <br>
 
 All primitive types have common attributes that are listed in the
-table below:
+table below. Attributes can be surrounded by `_`, to avoid some
+ambiguity for some types (*cf.*
+[Enumeration](https://gnu-ymir.github.io/Documentations/en/types/enum.html)). For
+example, the attribute `typeid` is equivalent to `__typeid__`, or
+`_typeid`.
 
 | Name | Meaning |
 | --- | --- |
@@ -42,7 +46,35 @@ table below:
 | `typeid` |  The name of the type stored in a value of type **`[c32]`** |
 | `typeinfo` | A structure of type TypeInfo, containing information about the type |
 
-All the information about TypeInfo are presented in chapter [Dynamic types]().
+All the information about TypeInfo are presented in chapter [Dynamic
+types](https://gnu-ymir.github.io/Documentations/en/types_advanced/).
+
+The keyword **`typeof`** retreive the type of a value at compilation
+time. This type can be used in any context, to retreive type
+information. For example, in a variable declaration. 
+
+```ymir
+import std::io;
+
+def bar () -> i32 {
+	42 
+}
+
+def foo () -> typeof (bar ()) {
+	bar ()
+}
+
+def main () {
+	let x : typeof (foo ()) = foo ();
+	
+	println (typeof (x)::typeid, " (", x, ")");
+}
+```
+
+Results: 
+```
+i32 (42)
+```
 
 ## Scalar types
 
@@ -70,7 +102,7 @@ size.
 | arch | isize | usize |
 
 The `usize` and `isize` types are architecture dependent, and have the
-size of a pointer.
+size of a pointer, depending on the architecture targeted.
 
 Each type of signed integer can store values ranging from *-(2
 <sup>n - 1</sup>)* to *2 <sup>n - 1</sup> - 1*, where *n* is the size
@@ -82,10 +114,11 @@ store values from *0* to *255*.
 You can write an integer in two forms, decimal `9_234` and hexadecimal
 `0x897A`. The `_` token, is simply ignored in a literal integer.
 
-To make sure the literal has the type you want, you will need to add
-the type as a prefix to the literal. For example, to get a **`i8`**
-with the value *7*, you would write `7i8`. By default, if no prefix is
-added at the end of the literal, its type is considered a **`i32`**.
+To make sure a literal value has the right type, a prefix can be added
+at the end of it. For example, to get a **`i8`** with the value *7*,
+the right literal is written `7i8`. By default, if no prefix is added
+at the end of the literal, the language defines its type as a
+**`i32`**.
 
 As indicated above, each type has attributes, the following table
 lists the integer-specific attributes:
@@ -95,16 +128,20 @@ lists the integer-specific attributes:
 | `max` | The maximal value |
 | `min` | The minimal value |
 
-An overflow check is performed on literals, and an error is returned
-by the compiler if the type of integer you chose is not large enough
-to contain the value. For example:
+An overflow check is performed on literals at compilation time, and an
+error is returned by the compiler if the type of integer choosed to
+encode the literal is not large enough to contain the value. For
+example:
 
 ```ymir
 def main () {
 	let x : i8 = 934i8;
 }
 ```
-You should get the following error : 
+
+Because a i8 can only store value ranging from `-127` to `128`, the
+value `934` would not fit. For that reason the compiler returns the
+following error.
 
 ```error
 Error : overflow capacity for type i8 = 943
@@ -122,11 +159,13 @@ compilation terminated.
 **WARNING** However, if the value cannot be known at compile time, the
 overflow is not checked and can lead to strange behavior. For example,
 if you try to add 1 to a variable of type **`i16`** that contains the
-value `32767`, the result will be `-32768`.
+value `32767`, the result will be `-32768`. *Contribution:* Provide a
+dynamic way to verify the overflow of arithmetic operation (at least
+in debug mode).
 
 ### Floating-point types
 
-Floating-point types, refer to the number having a decimal
+Floating-point types, refer to numbers with a decimal
 part. **Ymir** provides two types of floating point numbers, **`f32`**
 and **`f64`**, which have a size of 32 bits and 64 bits respectively.
 
@@ -188,7 +227,7 @@ character type will be **`c32`**.
 
 The **`c32`** character has a size of four bytes and can store any
 unicode value.  Literal characters can have two forms, and are always
-surrounded by the **`'`** token. The first form is the character
+surrounded by the token **`'`**. The first form is the character
 itself, and the second is the unicode value in the integer
 form `\u{12}` or `\u{0xB}`.
 
@@ -208,8 +247,8 @@ def main () {
 }
 ```
 
-The error should be as follows, and this means that you will need at
-least 3 **`c8`** to store the value, so it doesn't fit into one
+The error will be the following. This error means that you will need
+at least 3 **`c8`** to store the value, so it doesn't fit into one
 **`c8`** :
 
 ```error
@@ -225,7 +264,7 @@ compilation terminated.
 
 <br>
 
-The following table lists the attributes specific to char types.
+The following table lists the attributes specific to character types.
 
 | Name | Meaning | 
 | --- | --- |
@@ -237,7 +276,8 @@ Pointer are values that stores an address of memory. They can be used
 to store the location of a data in memory. In **`Ymir`**, pointers are
 considered low level programming and are mainly used in the std, and
 runtime to interface with machine level semantics. You can perfectly
-write any program without needing pointers.
+write any program without needing pointers, and for that reason we
+recomand to not use them.
 
 Pointers are defined using the `&` keyword on types, or on
 values. They are aliasable types, as they borrow memory (cf [Aliasable
@@ -259,7 +299,7 @@ def main ()
 
 <br>
 
-Pointers are unsafe, and dereference a pointer can result in undefined
+Pointers are unsafe, and dereferencing a pointer can result in undefined
 behavior depending on where it points. It can also sometimes raise a
 segmentation fault. In **`Ymir`**, segmentation fault are recovered,
 and an exception is thrown. Error handling is presented in chaper
@@ -271,7 +311,6 @@ Handling](https://gnu-ymir.github.io/Documentations/en/errors/main.html).
   behavior is to not use pointers and use `std` verified functions, or
   other semantically verified elements (cf [Aliasable and
   References](https://gnu-ymir.github.io/Documentations/en/advanced/)).
-
 
 <br>
 
@@ -290,25 +329,35 @@ three types of compounds: the tuple, the range and the arrays.
 ### Tuple 
 
 A tuple is a set of values of different types. Tuples have a fixed
-arity, once it has been defined at compile time, it cannot be
-modified. Each element of a tuple has a type, and its order cannot be
-changed either. Tuples are built between parentheses, by a
-comma-separated list of values.
+arity. The arity of a tuple is defined at compilation time, and
+represent the number of values contained inside the tuple. Each
+element of a tuple has a type, and a given order. Tuples are built
+between parentheses, by a comma-separated list of values. A tuple of
+one value can be defined, by putting a coma after the first
+value. This way the compiler can understand the desire of creating a
+tuple, and do not confuse it with a normal expression between
+parentheses.
 
 ```ymir
 def main () {
-	let t : (i32, c32, f64) = (1, 'r', 3.14); 
+	let t : (i32, c32, f64) = (1, 'r', 3.14);  // three value tuple
+	let t2 : (i32,) = (1,); // single value tuple
+	let t3 : i32 = (1); // single value of type i32
 }
 ```
 
 <br>
 
-The tuple `t`, is a single element, and can be passed as a function
+The tuple `t`, is a single element, and can be used as a function
 parameter or as a return value of a function. It can also be
-destructured, in order to retrieve the values of its component
-elements. There are three ways to do this, the first one is to use the
-dot operator **`.`**, and an integer whose value is known at
-compilation time.
+destructured, to retrieve the values of its component elements. There
+are three ways of tuple destructuring.
+
+1) the dot operator **`.`**, followed by an integer value, whose value
+is known at compilation time. This value can be computed by a complex
+expression, as long as the compiler is able to retreive the value at
+compilation time (*cf.* [Compilation time
+execution](https://gnu-ymir.github.io/Documentations/en/templates/cte.html)).
 
 ```ymir
 import std::io;
@@ -323,8 +372,13 @@ def main () {
 
 <br>
 
-The other method is to use the tuple destructuring syntax, which will
-create new variables and therefore starts with the keyword **`let`**.
+2) the tuple destructuring syntax. This syntax, close to variable
+declaration, creates new variables that contains parts of the tuple
+that is destructured. In the following example, one can note that the
+tuple destructuring syntax allows to extract only some of the tuple
+values. The type of the variable **`e`** is the tuple **`(c32,
+f64)`**, and its values are **`('r', 3.14)`**, when the variable
+**`f`** contains the value **`1`** of type **`i32`**.
 
 ```ymir
 def main () {
@@ -338,13 +392,12 @@ def main () {
 
 <br>
 
-In the last example, we can see that the tuple destructuring syntax
-allows to extract only a part of the tuple values. The value of
-**`e`** in this example will be **`('r', 3.14)`**.
-
-The last method to extract values from the tuple is with the keyword
-**`expand`**, this keyword is a compile-time rewrite and the following
-example shows how you can use it.
+3) the keyword **`expand`**. this keyword is a compile-time rewrite,
+that expands the values of a tuple into a list of values. This list is
+then used to create other tuples, call functions, etc. The following
+example shows the use of the keyword **`expand`** to call a function
+taking two parameters, with the value of a tuple containing two
+values. 
 
 ```ymir
 import std::io
@@ -367,32 +420,29 @@ def main () {
 
 <br>
 
-We will see in the [Control flows](https://gnu-ymir.github.io/Documentations/en/primitives/control.html) section, a fourth and a fifth
-method to extract values from tuple.
-
-The following table lists the attributes specific to tuple types.
+There is two other ways to destructurate a tuple. These ways are
+presented in forthcoming chapters. The following table lists the
+attributes specific to tuple types.
 
 | Name | Meaning | 
 | --- | --- |
-| `arity` | The number of elements contained in the tuple |
+| `arity` | The number of elements contained in the tuple (in a **`u32`**) |
 | `init` | a tuple, where each element values are set to `init`  | 
 
 ### Ranges
 
-Ranges are types that contain two values defining a range, and are
-named **`r!(T)`**, where **`T`** is the type of the range limits. They
-are created by the token **`..`** or **`...`**. A range consists of
+Ranges are types that contain two values defining a range. A range is
+named **`r!T`**, where **`T`** is the type of the range limits. They
+are created by the token **`..`** and **`...`**. A range consists of
 four values, which are stored in the fields shown in the following
-table. These fields can be accessed using the **`.`** token, as unlike
-type specific attributes, they are not knwon at compile time, and must
-be accessed dynamically.
+table. These fields can be accessed using the dot operator **`.`**. 
 
 | name | type | value | 
 | --- | --- | --- |
 | fst | T | the first bound |
 | scd | T | the second bound |
 | step | mut T | the step of the interval |
-| contain | bool | Is the scd bound contained in the interval |
+| contain | bool | Is the scd bound contained in the interval ? |
 
 ```ymir
 def main () {
@@ -410,30 +460,54 @@ def main () {
 } 
 ```
 
-The [Control flows](https://gnu-ymir.github.io/Documentations/en/primitives/control.html) section shows a use of these types.
-
-The range types have no specific attributes accessible with the
-**`::`** token.
+The [Control
+flows](https://gnu-ymir.github.io/Documentations/en/primitives/control.html)
+section shows a use of these types.
 
 ### Arrays 
 
 An array is a collection of values of the same type, stored in
 contiguous memory.  Unlike tuples, the size of an array is unknown at
 compile time, and in **Ymir**, they are similar to slices, and will be
-refered as such.
+refered as such. Slices are defined with a syntax close to the one of
+tuple, but with brackets instead of parentheses, for example **`[1, 2, 3]`**. 
+The type of a slice is also defined using the brackets, for example **`[i32]`**, meaning a slice containing **`i32`** values.
+
+String literals, enclosed between double quotes are a special case of
+slice literals. There is no string type in Ymir, but only slices
+type. Because of this, string values are typed **`[c32]`** or
+**`[c8]`** depending on the type of values contained in the
+slice. String literals can be prefixed with the keyword **`s8`** or
+**`s32`** to define the encoding system used. By default, when no
+prefix is specified a string literal have a type **`[c32]`**. 
+
+```ymir
+import std::io;
+
+def main () { 
+	let x = [1, 2, 3]; // a [i32] slice
+	let y = "Hello World !!"; // a [c32] slice
+	let z = "Hello World !!"s8; // a [c8] slice
+}
+```
+<br>
+
+**Warning**: The length of a [c8] literals can seem incorrect
+due to the encoding system. For example, the slice `"☺"s8` will have a
+length of **`3`**. To summarize, **`[c8]`** slices are utf-8 encoded
+string literals, when **`[c32]`** are encoded in utf-32.
  
 A slice is a two-word object, the first word is the length of the
 slice, and the second is a pointer to the data stored in the slice. A
 slice is an aliasable type, its mutability is a bit more complicated
 than the mutability of scalar types, because it borrows memory which
 is not automatically copied when an assignment is made. This section
-will not discuss the mutability of internal types or aliasable types,
-so we recommend you read the [Aliases and
-References](https://gnu-ymir.github.io/Documentations/en/advanced/)
-chapter.
+will not discuss the mutability of internal types or aliasable
+types. This is discussed in the chapter [Aliases and
+References](https://gnu-ymir.github.io/Documentations/en/advanced/).
  
 The field **`len`** records the length of the slice and can be
-retrieved by the point operator **`.`**.  The length of the slice is
+retrieved with the dot operator **`.`**.  The length of the slice is
 stored in a **`usize`** field.
  
 ```ymir
@@ -450,34 +524,49 @@ Similarly, the **`ptr`** field, gives access to the pointer of the
 slice and its types depend on the inner type of the slice, and is
 never mutable. Pointer type are absolutely not important for a
 **Ymir** program, and we suspect that you will never have use of
-them. But they are defined just in case.
+them. They are defined to allow low level programming paradigms, and
+are used in the std and runtime. 
 
 To access the elements of an array, the **`[]`** operator is used. It
-will take either an integer value or a range value. If a range value
-is given, a second slice that borrows a section of the first is
-created. For now, the range step does not affect the borrowing of the
-array.
+takes either an integer value or a range value as parameter. If a
+range value is given, a second slice that borrows a section of the
+first is created. For now, the step of the range does not affect the
+borrowing of the array. A contribution can be made here. On the other
+hand if an integer value **`i`** is given as parameter, the value at
+the index **`i`** is returned.
  
 ```ymir
-import std::io
+import std::io;
+
 def main () 
-	throws OutOfArray 
+	throws &OutOfArray 
 {
 	let x = [1, 2, 3];
-	let y = x [0..2];
+	let y = x [0 .. 2];
 	let z = x [0];
 	
 	println (x, " ", y, " ", z); 
 }
 ```
 
-Access to a slice is not secure, and may fail at runtime. This is why
-the main function in the above example throws the OutOfArray
-exception. The exception system is detailed in the [Error Handling](https://gnu-ymir.github.io/Documentations/en/errors/main.html)
-chapter.
+<br>
 
-The **`~`** operator is used to concatenate two arrays of the same
-type.
+The length of a slice is unknown at compilation time, and access can
+be made with dynamic integers whose values are also unknown at
+compilation time. For that reason, it may happen that the parameters
+used go beyond the slice length. With this in mind, slice access is
+considered unsafe, and can throw an exception of type
+**`&OutOfArray`**. The exception system, and error handling is
+detailed in the chapter [Error
+Handling](https://gnu-ymir.github.io/Documentations/en/errors/main.html).
+
+Slices can be concatenated, to form another slice. The concatenation
+is made using the operator tilde on two operands. To work properly and
+be accepted by the language, the two slice used as operands must share
+the same type (but not necessarily mutability level, the mutability of
+the operand with the lowest mutability level is choosed for the result
+of the operation *cf.* [Aliases and
+References](https://gnu-ymir.github.io/Documentations/en/advanced/)).
 
 ```ymir
 import std::io
@@ -491,25 +580,47 @@ def main ()  {
 }
 ```
 
-You can also create a new array using the allocation syntax. This will
-allow you to allocate a new array on the heap, with an initial value
-for each index in the slice. The size can be unknown at compile time.
+The tilde token was chosen to avoid some ambiguity. In some languages
+such as Java, the concatenation is made using the token **`+`** that
+sometimes creates some ambiguity when concatenating strings, and other
+elements such as integers. For example, the expression `"foo" + 1 + 2`, is ambiguous. 
+One can note however, that since concatenation only works on slices of
+the same type, the following expression `"foo" ~ 2`, is invalid as
+"foo" is of type **`[c32]`**, and **`2`** of type **`i32`**.
+
+Another syntax can be used to create slices. This syntax called *slice
+allocation*, allocates a slice on the heap and set the same value to
+every element of the slice.
 
 ```ymir
 import std::io
+import std::random;
 
 def main () {
-	let a = [0 ; new 100u64]; 
-	println (a);
+	let a : [i32] = [0 ; new 100u64]; // this avoids the write of 100 zeros
+	                                  // but the result is the same
+							  
+	let b = [12 ; new uniform (10, 100)]; 
+	//                ^^^^^^^ generates a random value between 10 and 100
+	println (a, " ", b);
 }
 ```
+
+<br>
+
+The following table lists the attributes specific to slice types.
+
+| Name | Meaning | 
+| --- | --- |
+| `inner` | the inner type |
+| `init` | an empty slice (with `len == 0us`) |
 
 ### Static Arrays
 
 Unlike the slice, static arrays are stored in the stack rather than on
-the heap, and their size is known at compile time. They are
-instantiated with a syntax close to the slice allocation syntax, but
-omitting the **`new`** keywork.
+the heap. To be possible, their size must be known at compilation
+time. The syntax used to create a static array is close to the syntax
+of a *slice allocation*, but the keyword **`new`** omitted.
 
 ```ymir
 import std::io
@@ -536,8 +647,9 @@ def main ()
 }
 ```
 
-You can transform a static array into a slice using the `alias`,
-`copy` and `dcopy` keywords. The chapter [Aliases and references](https://gnu-ymir.github.io/Documentations/en/advanced/)
+A static array can be transformed into a slice using the `alias`,
+`copy` and `dcopy` keywords. The chapter [Aliases and
+references](https://gnu-ymir.github.io/Documentations/en/advanced/)
 explains the difference between these keywords.
 
 ```ymir
@@ -553,20 +665,74 @@ def main () {
 }
 ```
 
+One can argue that slice literals should be of static array type. We
+made the choice to create slices from array literals rather than
+static arrays to avoid verbosity, as we claim that slices are way more
+commonly used than arrays with a static size. We are for the moment
+considering the possibility to prefix slice literals, to define static
+array literals, but the question is not yet decided.
+
+<br>
+
+The following table lists the attributes specific to array types.
+
+| Name | Meaning | 
+| --- | --- |
+| `inner` | the inner type |
+| `len` | the len of the array (`usize` value) |
+| `init` | an array where each element is set to the `init` value of the inner type | 
+
 ### Option
 
 The option typed values are values that may be set or not. They are
 defined using the token **`?`** on types or values. Further
-information on option type are given in [Error
-handling](https://gnu-ymir.github.io/Documentations/en/errors/main.html)
-chapter.
+information on option type are given in the chapter [Error
+handling](https://gnu-ymir.github.io/Documentations/en/errors/main.html),
+as they are completely related to error management system. 
 
 ```ymir
 import std::io;
 
 def main () {
-    let i : i32? = (12)?;
-    let j : i32? = (i32?)::err;     
+    let i : i32? = (12)?; // an option type containing the value 12
+    let j : i32? = (i32?)::err; // an option value containing no value
 }
 ```
 
+The value of an option type can be retreived using functions in the
+std, or pattern matching. In this chapter, we only focus on the
+**`unwrap`** function, pattern matching being left for a future
+chapter (*cf.* [Pattern
+matchin](https://gnu-ymir.github.io/Documentations/en/pattern)).  The
+function **`unwrap`** from the module **`std::conv`**, get the value
+contained inside an option type. If no value is contained inside the
+option, the function throws an error of type **`CastFailure`**.
+
+```ymir
+import std::io;
+import std::conv;
+
+def foo (b : bool)-> (i32)? {
+	if b { 
+		19? // return the value 19, wrapped into an option
+	} else {
+		(i32?)::__err__ // return an empty value
+	}
+}
+
+
+def main () 
+	throws &CastFailure 
+{
+	let x = foo (true);
+	println (x.unwrap () + 23);
+}
+```
+
+<br>
+
+The following table lists the attributes specific to option types.
+
+| Name | Meaning | 
+| --- | --- |
+| `err` | An empty option value | 

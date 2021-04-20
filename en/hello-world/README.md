@@ -3,12 +3,13 @@
 The following source code is the **Ymir** version of the famous program "Hello world !"
 
 ```ymir
-import std::io
+import std::io // importation of the module containing io functions
 
 // This is a comment 
 
-// This is a function declaration 
-// The main function, is the first one to be called
+/** This is a function declaration
+  * The main function, is the first one to be called
+  */
 def main () {
     // Print 'Hello World !!' to the console
     println ("Hello World !!");
@@ -21,7 +22,7 @@ A binary can be generated using **GYC**.
 $ gyc hello.yr
 ``` 
 
-This command produce a binary `a.out` that can be executed 
+This command produces a binary `a.out` that can be executed.
 
 ```bash
 $ ./a.out

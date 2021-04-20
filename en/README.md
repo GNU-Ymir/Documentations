@@ -1,16 +1,15 @@
 # Introduction
 
 **Ymir** is a high-level, statically typed programming language
-  designed to help developers save time by providing type safety with
-  strong and secure semantics. The semantics of this language is
-  oriented towards security, concurrency and speed of execution. These
-  objectives are achieved thanks to its high expressiveness and its
-  direct compilation into an efficient native machine language.
+  designed to help developers to save time by providing strong and
+  safe semantic. The semantic of this language is oriented towards
+  safety, concurrency and speed of execution. These objectives are
+  achieved thanks to its high expressiveness and its direct
+  compilation into an efficient native machine language.
 
 This documentation explores the main concepts of **Ymir**, providing a
 set of examples that demonstrate the strengths of this new
-language. It will also present an introduction to the standard
-library.
+language. It also presents an introduction to the standard library.
 
 # Important
 
@@ -23,7 +22,10 @@ forward to receiving your mails!
 Even more, all contributions are very welcome, whether to improve the
 documentation, to propose improvements to the language or std, to the
 runtime, or even to the automatic release generation procedure. All
-code repositories are available on [github](https://github.com/GNU-Ymir).
+code repositories are available on
+[github](https://github.com/GNU-Ymir). In this documentation, known
+limitations of the language are sometimes highlighted, and calls for
+contribution.
 
 ## Installation
 
@@ -37,14 +39,16 @@ There are two ways to install the **gyc** (Gnu Ymir Compiler), natively or by us
 
 This compiler can be installed on linux debian system, by following those simple steps: 
 - First, you need to downloads the packages : 
-  - [libmidgard-9-dev](https://gitea.emile-cadorel.fr/Emile/Ymir-Docker.git/info/lfs/objects/69a94eea846456dd9d7007f6f804d3383789aea1c950091c00c46b3aa5aef913/bGliZ21pZGdhcmRfOS4zLjBfYW1kNjQuZGVi)
-  - [GYC](https://gitea.emile-cadorel.fr/Emile/Ymir-Docker.git/info/lfs/objects/aee58538c545e7c533fee9aee2bf6a25801e2de076a6995ca9221c3443209c6a/Z3ljLTlfOS4zLjBfYW1kNjQuZGVi)
-	
+  - [libmidgard-9-dev](https://gitea.emile-cadorel.fr/Emile/Ymir-Docker/src/branch/master/builder_image/9/amd64/bin/libgmidgard_9.3.0_amd64.deb)
+  - [GYC](https://gitea.emile-cadorel.fr/Emile/Ymir-Docker/src/branch/master/builder_image/9/amd64/bin/gyc-9_9.3.0_amd64.deb)
+
 - And then, you need to install them using dpkg : 
 
 ```bash
 $ sudo dpkg -i libgmidgard_9.3.0_amd64.deb
-$ sudo dpkg -i gyc-9_9.3.0_amd64.deb```
+$ sudo dpkg -i gyc-9_9.3.0_amd64.deb
+```
+<br>
 
 These packages depend on : 
 - g++-9
@@ -60,9 +64,11 @@ These packages depend on :
 - libgc-dev >= 1:7.4.2
 
 If one of them is not installed, you will get an error, that can be resolved by running the following command : 
+
 ```bash
 sudo apt --fix-broken install
 ```
+<br>
 
 And then reinstall the package that has previously failed (dpkg).
 The compiler is now installed and is named `gyc`
@@ -73,7 +79,9 @@ $ gyc --version
 gyc-9 (GCC) 9.3.0
 Copyright (C) 2018 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
-warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.```
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+```
+<br>
 
 ### Uninstallation of the native version
 
@@ -83,6 +91,8 @@ As for any debian package, the uninstall is done as follows :
 $ dpkg -r gyc-9
 $ dpkg -r libgmidgard-9-dev
 ```
+<br>
+
 **Caution** The uninstallation can remove your gcc installation.
 But you can still reinstall it easily if there is any problem, by typing : 
 ```ymir
@@ -95,6 +105,7 @@ To start you have to install docker.
 ```bash
 $ sudo apt install docker.io
 ```
+<br>
 
 Then retrieve the docker image from the repository :
 ```bash
@@ -107,14 +118,20 @@ $ docker run -t -v $(pwd):/tmp -w /tmp gnuymir/9.3.0-amd64 --version
 gyc-9 (GCC) 9.3.0
 Copyright (C) 2018 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
-warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.```
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+```
+<br>
 
 To make it easier to use, you can add an alias in the `~/.local/bin` directory.
 First open the file `~/.local/bin/gyc` and paste the following line :
+
 ```bash
 docker run -t -v $(pwd):/tmp -w /tmp gnuymir/9.3.0-amd64 $*
 ```
-Then open a new shell, and run the following commands :
+<br>
+
+Make sure, that your `PATH` contains the `~/.local/bin`directory, and
+then open a new shell, and run the following commands :
 
 ```bash
 $ chmod +x ~/.local/bin/gyc

@@ -7,7 +7,7 @@
 
 ```ymir
 def main () 
-	throws &AssertError
+	throws &AssertError // the main function contains uncaught exceptions
 {
     // This is an example of comment
 
@@ -20,7 +20,7 @@ def main ()
 	And this is the proof
     */
 
-    // None of the line will influence the compilation
+    // None of the comment lines have an influence on the compilation
 
     let x = 1 + /* 2 + */  3;
     assert (x == 4); 
@@ -30,9 +30,10 @@ def main ()
 In the above pogram, calling **`assert`** will throw an exception if
 the test is false. Errors are presented in the [Error
 Handling](https://gnu-ymir.github.io/Documentations/en/errors/main.html)
-chapter.
+chapter. For the moment, we can consider that the exception simply
+stops the program when the test fails.
 
-Comments can be used to generate documentation of the code. The
-documentation is explained in the
+
+We will see in the
 [Documentation](https://gnu-ymir.github.io/Documentations/en/documentation/main.html)
-chapter.
+chapter, that comments are very usefull, to generate documentations.

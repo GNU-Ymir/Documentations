@@ -13,20 +13,20 @@ Prism.languages.coffeescript = Prism.languages.extend('javascript', {
 
 		// Strings are multiline
 		{
-			pattern: /'(?:\\?[^\\])*?'/,
-			greedy: true,
+			pattern: /'(?:\\[\s\S]|[^\\'])*'/,
+			greedy: true
 		},
 
 		{
 			// Strings are multiline
-			pattern: /"(?:\\?[^\\])*?"/,
+			pattern: /"(?:\\[\s\S]|[^\\"])*"/,
 			greedy: true,
 			inside: {
 				'interpolation': interpolation
 			}
 		}
 	],
-	'keyword': /\b(and|break|by|catch|class|continue|debugger|delete|do|each|else|extend|extends|false|finally|for|if|in|instanceof|is|isnt|let|loop|namespace|new|no|not|null|of|off|on|or|own|return|super|switch|then|this|throw|true|try|typeof|undefined|unless|until|when|while|window|with|yes|yield)\b/,
+	'keyword': /\b(?:and|break|by|catch|class|continue|debugger|delete|do|each|else|extend|extends|false|finally|for|if|in|instanceof|is|isnt|let|loop|namespace|new|no|not|null|of|off|on|or|own|return|super|switch|then|this|throw|true|try|typeof|undefined|unless|until|when|while|window|with|yes|yield)\b/,
 	'class-member': {
 		pattern: /@(?!\d)\w+/,
 		alias: 'variable'
@@ -52,13 +52,17 @@ Prism.languages.insertBefore('coffeescript', 'comment', {
 
 Prism.languages.insertBefore('coffeescript', 'string', {
 	'inline-javascript': {
-		pattern: /`(?:\\?[\s\S])*?`/,
+		pattern: /`(?:\\[\s\S]|[^\\`])*`/,
 		inside: {
 			'delimiter': {
 				pattern: /^`|`$/,
 				alias: 'punctuation'
 			},
-			rest: Prism.languages.javascript
+			'script': {
+				pattern: /[\s\S]+/,
+				alias: 'language-javascript',
+				inside: Prism.languages.javascript
+			}
 		}
 	},
 
@@ -88,4 +92,5 @@ Prism.languages.insertBefore('coffeescript', 'keyword', {
 
 delete Prism.languages.coffeescript['template-string'];
 
+Prism.languages.coffee = Prism.languages.coffeescript;
 }(Prism));
