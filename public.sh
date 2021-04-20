@@ -5,6 +5,7 @@ gitbook install
 cp -r gitbook-plugin-spoiler node_modules/
 cp -r prismjs node_modules/
 cp -r themes node_modules/themes
+cp -r gitbook-plugin-code node_modules/
 
 # build the static site
 gitbook build
