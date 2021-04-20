@@ -152,7 +152,7 @@ import std::io;
 def main () {
 	let mut x = 12;
 	println (typeof (x)::typeid);
-	println (const typeof (x))::typeid);
+	println ((const typeof (x))::typeid);
 }
 ```
 Results:
