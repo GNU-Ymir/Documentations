@@ -763,11 +763,13 @@ compilation terminated.
 <p><br></p>
 <h2 id="symbol-conflict-resolution"><a name="symbol-conflict-resolution" class="anchor-navigation-ex-anchor" href="#symbol-conflict-resolution"><i class="fa fa-link" aria-hidden="true"></i></a>1.4. Symbol conflict resolution</h2>
 <p>When two external global modules declare two symbols with the same
-name, it may be impossible to know which symbol you want to use. In
-this case, you can use the full name of the symbol to resolve the
+name, it may be impossible to know which symbol the user is refereing
+to. In this case, the double colon operator <strong><code>::</code></strong> can be used with
+the name of the module declaring the symbol to resolve the
 ambiguity. To give an example of symbol conflict, let&apos;s say that we
 have two module <code>extern_modules::foo</code> and <code>extern_modules::bar</code>
 declaring a function with the same signature <code>foo</code>.</p>
+<p>1) Module <em><code>extern_modules/bar.yr</code></em></p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">mod</span> <span class="token path">extern_modules</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">bar</span>
 <span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
@@ -776,6 +778,7 @@ declaring a function with the same signature <code>foo</code>.</p>
 <span class="token punctuation">}</span>
 </code></pre>
 <p><br></p>
+<p>2) Module <em><code>extern_modules/foo.yr</code></em></p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">mod</span> <span class="token path">extern_modules</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">foo</span>
 <span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
@@ -783,47 +786,65 @@ declaring a function with the same signature <code>foo</code>.</p>
     <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Foo&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>In the <code>main</code> module, we import both modules <code>extern_modules::bar</code> and
-<code>extern_modules::foo</code>, and try to call the function <code>foo</code>. In that
-case, there is no way to tell which function will be used,
-<code>extern_modules::foo::foo</code> or <code>extern_modules::bar::foo</code>. And the
-compiler will return an error. One can note that this errors occurs
-only because the signature of the two function <code>foo</code> is the same, if
-there was a difference, for example the function in the
-<code>extern_modules::bar</code> module took a <code>i32</code> as parameters, the conflict
-would be resolved by itself, as the call expression will be different.</p>
+<p>In the <code>main</code> module, both modules <code>extern_modules::bar</code> and
+<code>extern_modules::foo</code>, are imported. The main function presented below
+refers to the symbol <strong><code>foo</code></strong>. In that case, there is no way to tell
+which function will be used, <code>extern_modules::foo::foo</code> or
+<code>extern_modules::bar::foo</code>. The compiler returns an error. One can
+note that this errors occurs only because the signature of the two
+function <code>foo</code> are the same (taking no parameters), and they are both
+public. If there was a difference in their prototypes, for example if
+the function in the module <code>extern_modules::bar</code> would take a value of
+type <code>i32</code> as parameter, the conflict would be resolved by itself, as
+the call expression will be different.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">extern_modules</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">bar</span><span class="token punctuation">,</span> <span class="token path">extern_modules</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">foo</span>
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p><br></p>
-<pre class="language-"><code class="lang-error"><span class="token path">Error</span> : Multiple Symbols : {extern_modules::bar::foo ()-&gt; void} x 2 called with {} work with both
- <span class="token comment">--&gt; main.yr:(4,9)</span>
-    &#x2503; 
+<p>Errors:</p>
+<pre class="language-"><code class="lang-error"><span class="token path">Error</span> : {extern_modules::bar::foo ()-&gt; void, extern_modules::foo::foo ()-&gt; void, mod extern_modules::foo} x 3 called with {} work with both
+ <span class="token comment">--&gt; main.yr:(4,6)</span>
  4  &#x2503;     foo ();
-    &#x2503;         ^
+    &#x254B;         ^
     &#x2503; <span class="token other-keyword">Note</span> : candidate foo <span class="token comment">--&gt; extern_modules/bar.yr:(4,9) : extern_modules::bar::foo ()-&gt; void</span>
     &#x2503; <span class="token other-keyword">Note</span> : candidate foo <span class="token comment">--&gt; extern_modules/foo.yr:(4,9) : extern_modules::foo::foo ()-&gt; void</span>
-    &#x2517;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501; 
+    &#x2517;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501; 
 
 
 ymir1: <span class="token path">fatal error</span>: 
 compilation terminated.
 </code></pre>
 <p><br></p>
+<p>In the above error, we can see that three modules are presented. The
+two functions (in <strong><code>extern_modules::bar</code></strong>, and
+<strong><code>extern_modules::foo</code></strong>) and the <strong>foo</strong> module itself. Obviously,
+it is not possible to use the call operator <strong><code>()</code></strong> on a module, that
+is why it is not presented as a possible canditate in the notes of the
+error.</p>
 <p>The conflict problem can be resolved by changing the calling
-expression, and writting the full name of the function that we wan&apos;t
-to call.</p>
+expression, and using the double colon operator <strong><code>::</code></strong>. In the
+following example, the full name of the module is used. This is not
+always necessary, as <strong><code>bar::foo</code></strong> is sufficient to refer to
+<strong><code>extern_modules::bar::foo</code></strong>, and <strong><code>foo::foo</code></strong> for function
+<strong><code>foo</code></strong> in <strong><code>extern_modules::foo</code></strong>.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">extern_modules</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">bar</span><span class="token punctuation">,</span> <span class="token path">extern_modules</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">foo</span>
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token path">extern_modules</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">bar</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Bar</span>
-    <span class="token path">extern_modules</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">foo</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Foo    </span>
+    <span class="token path">extern_modules</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">bar</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+    <span class="token path">extern_modules</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">foo</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+
+    <span class="token path">foo</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+    <span class="token path">bar</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p><br></p>
+<p>Results:</p>
+<pre class="language-"><code>Bar
+Foo
+Foo
+Bar
+</code></pre><p><br></p>
 <h2 id="public-importation"><a name="public-importation" class="anchor-navigation-ex-anchor" href="#public-importation"><i class="fa fa-link" aria-hidden="true"></i></a>1.5. Public importation</h2>
 <p>As for all declaration, importation are private. It means that the
 importation is not recursive. For example, if the module
@@ -944,7 +965,7 @@ suite, so the way to create libraries, object files, etc. is the same.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Modules","level":"1.5","depth":1,"next":{"title":"User defined types","level":"1.6","depth":1,"path":"types/README.md","ref":"types/README.md","articles":[{"title":"Structure","level":"1.6.1","depth":2,"path":"types/struct.md","ref":"types/struct.md","articles":[]},{"title":"Enum","level":"1.6.2","depth":2,"path":"types/enum.md","ref":"types/enum.md","articles":[]}]},"previous":{"title":"Best practice","level":"1.4.4","depth":2,"path":"advanced/best.md","ref":"advanced/best.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"modules/README.md","mtime":"2021-04-21T11:57:04.631Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-04-21T13:01:07.160Z"},"basePath":"..","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Modules","level":"1.5","depth":1,"next":{"title":"User defined types","level":"1.6","depth":1,"path":"types/README.md","ref":"types/README.md","articles":[{"title":"Structure","level":"1.6.1","depth":2,"path":"types/struct.md","ref":"types/struct.md","articles":[]},{"title":"Enum","level":"1.6.2","depth":2,"path":"types/enum.md","ref":"types/enum.md","articles":[]}]},"previous":{"title":"Best practice","level":"1.4.4","depth":2,"path":"advanced/best.md","ref":"advanced/best.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"modules/README.md","mtime":"2021-04-21T13:11:11.725Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-04-21T13:16:58.747Z"},"basePath":"..","book":{"language":"en"}});
         });
     </script>
 </div>
