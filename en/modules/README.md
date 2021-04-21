@@ -113,7 +113,7 @@ nor *A::Y::baz*. The symbol *A::X::bar*, has access to every symbols
 
 <br>
 
-<img src="https://gnu-ymir.github.io/Documentations/en/modules/tree.png" alt="drawing" width="700">
+<img src="https://gnu-ymir.github.io/Documentations/en/modules/tree.png" alt="drawing" height="300" style="display: block; margin-left: auto;  margin-right: auto;">
 
 <br>
 
@@ -133,26 +133,32 @@ pub :=   'pub' '{' symbol* '}'
 
 ### Example
 
-Let the file **`extern_modules/foo.yr`** be filled as follows:
+1) Module *`extern_modules/foo.yr`*
 
 ```ymir
 mod extern_modules::foo;
 
-// foo is public, it can be accessed from foreign modules
+/**
+ * foo is public, it can be accessed from foreign modules
+ */
 pub def foo () {}
 
-// The bar function is private by default
-// Thus only usable in this module
+/**
+ * The bar function is private by default
+ * Thus only usable in this module
+ */
 def bar () {}
 ```
 
 <br>
 
-And the file **`main.yr`** as follows:
+2) Module *`main.yr`*
 
 ```ymir
-// This importation will give access to all the symbols in the module
-// 'extern_modules::foo' that have been declared 'public'
+/**
+ * This importation will give access to all the symbols in the module
+ * 'extern_modules::foo' that have been declared 'public'
+ */
 import extern_modules::foo
 
 def main () {
@@ -207,6 +213,8 @@ pub def foo () {
 }
 ```
 
+<br>
+
 In the `main` module, both modules `extern_modules::bar` and
 `extern_modules::foo`, are imported. The main function presented below
 refers to the symbol **`foo`**. In that case, there is no way to tell
@@ -218,6 +226,8 @@ public. If there was a difference in their prototypes, for example if
 the function in the module `extern_modules::bar` would take a value of
 type `i32` as parameter, the conflict would be resolved by itself, as
 the call expression will be different.
+
+3) Module *`main.yr`*
 
 ```ymir 
 import extern_modules::bar, extern_modules::foo
@@ -243,12 +253,16 @@ compilation terminated.
 
 <br>
 
+
+.page-inner {
+  width: 95%;
+}
 In the above error, we can see that three modules are presented. The
-two functions (in **`extern_modules::bar`**, and
-**`extern_modules::foo`**) and the **foo** module itself. Obviously,
-it is not possible to use the call operator **`()`** on a module, that
-is why it is not presented as a possible canditate in the notes of the
-error.
+two functions **`foo`** — in **`extern_modules::bar`**, and
+**`extern_modules::foo`** — and the **`extern_modules::foo`** module
+itself. Obviously, it is not possible to use the call operator
+**`()`** on a module, that is why it is not presented as a possible
+canditate in the notes of the error.
 
 The conflict problem can be resolved by changing the calling
 expression, and using the double colon operator **`::`**. In the

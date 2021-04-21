@@ -25,7 +25,12 @@ def foo () {
 The above program can be represented in memory as shown in the
 following figure.
 
-![Image](https://gnu-ymir.github.io/Documentations/en/advanced/memory_x__ref_y_foo.png)
+<br>
+
+<img src="https://gnu-ymir.github.io/Documentations/en/advanced/memory_x__ref_y_foo.png" alt="drawing" height="500", style="display: block; margin-left: auto;  margin-right: auto;">
+
+<br>
+
 
 In this figure, one can note that **`y`**, is a pointer to x, which
 can be used as if it was directly **`x`**. This means that **`y`**
@@ -103,7 +108,7 @@ def main () {
 
 The following figure shows the memory status of the previous code:
 
-<img src="https://gnu-ymir.github.io/Documentations/en/advanced/memory_x_main_ref_x_foo.png" alt="drawing" width="450"/>
+<img src="https://gnu-ymir.github.io/Documentations/en/advanced/memory_x_main_ref_x_foo.png" alt="drawing" width="500" style="display: block; margin-left: auto;  margin-right: auto;">
 
 The keyword `ref` is not always associated with a mutable variable, it
 can be used to pass a complex type to a function more efficiently,

@@ -10,7 +10,8 @@
 	    ]
 	},
 	"anchor-navigation-ex" : {	    
-	    "isRewritePageTitle" : false	    
+	    "isRewritePageTitle" : false,
+	    "toolTipMode" : "click"
 	}
     }
 }
