@@ -179,12 +179,14 @@ compilation terminated.
 ## Symbol conflict resolution
 
 When two external global modules declare two symbols with the same
-name, it may be impossible to know which symbol you want to use. In
-this case, you can use the full name of the symbol to resolve the
+name, it may be impossible to know which symbol the user is refereing
+to. In this case, the double colon operator **`::`** can be used with
+the name of the module declaring the symbol to resolve the
 ambiguity. To give an example of symbol conflict, let's say that we
 have two module `extern_modules::foo` and `extern_modules::bar`
 declaring a function with the same signature `foo`.
 
+1) Module *`extern_modules/bar.yr`*
 ```ymir
 mod extern_modules::bar
 import std::io
@@ -195,6 +197,7 @@ pub def foo () {
 ```
 <br>
 
+2) Module *`extern_modules/foo.yr`*
 ```ymir
 mod extern_modules::foo
 import std::io
@@ -204,15 +207,17 @@ pub def foo () {
 }
 ```
 
-In the `main` module, we import both modules `extern_modules::bar` and
-`extern_modules::foo`, and try to call the function `foo`. In that
-case, there is no way to tell which function will be used,
-`extern_modules::foo::foo` or `extern_modules::bar::foo`. And the
-compiler will return an error. One can note that this errors occurs
-only because the signature of the two function `foo` is the same, if
-there was a difference, for example the function in the
-`extern_modules::bar` module took a `i32` as parameters, the conflict
-would be resolved by itself, as the call expression will be different.
+In the `main` module, both modules `extern_modules::bar` and
+`extern_modules::foo`, are imported. The main function presented below
+refers to the symbol **`foo`**. In that case, there is no way to tell
+which function will be used, `extern_modules::foo::foo` or
+`extern_modules::bar::foo`. The compiler returns an error. One can
+note that this errors occurs only because the signature of the two
+function `foo` are the same (taking no parameters), and they are both
+public. If there was a difference in their prototypes, for example if
+the function in the module `extern_modules::bar` would take a value of
+type `i32` as parameter, the conflict would be resolved by itself, as
+the call expression will be different.
 
 ```ymir 
 import extern_modules::bar, extern_modules::foo
@@ -221,18 +226,15 @@ def main () {
 	foo ();
 }
 ```
-
-<br>
-
+Errors:
 ```error
-Error : Multiple Symbols : {extern_modules::bar::foo ()-> void} x 2 called with {} work with both
- --> main.yr:(4,9)
-    ┃ 
- 4  ┃     foo ();
-    ┃         ^
+Error : {extern_modules::bar::foo ()-> void, extern_modules::foo::foo ()-> void, mod extern_modules::foo} x 3 called with {} work with both
+ --> main.yr:(4,6)
+ 4  ┃ 	foo ();
+    ╋ 	    ^
     ┃ Note : candidate foo --> extern_modules/bar.yr:(4,9) : extern_modules::bar::foo ()-> void
     ┃ Note : candidate foo --> extern_modules/foo.yr:(4,9) : extern_modules::foo::foo ()-> void
-    ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 
+    ┗━━━━━━ 
 
 
 ymir1: fatal error: 
@@ -241,17 +243,37 @@ compilation terminated.
 
 <br>
 
+In the above error, we can see that three modules are presented. The
+two functions (in **`extern_modules::bar`**, and
+**`extern_modules::foo`**) and the **foo** module itself. Obviously,
+it is not possible to use the call operator **`()`** on a module, that
+is why it is not presented as a possible canditate in the notes of the
+error.
+
 The conflict problem can be resolved by changing the calling
-expression, and writting the full name of the function that we wan't
-to call.
+expression, and using the double colon operator **`::`**. In the
+following example, the full name of the module is used. This is not
+always necessary, as **`bar::foo`** is sufficient to refer to
+**`extern_modules::bar::foo`**, and **`foo::foo`** for function
+**`foo`** in **`extern_modules::foo`**.
 
 ```ymir
 import extern_modules::bar, extern_modules::foo
 
 def main () {
-    extern_modules::bar::foo (); // Bar
-    extern_modules::foo::foo (); // Foo	
+    extern_modules::bar::foo (); 
+    extern_modules::foo::foo (); 
+	
+	foo::foo (); 
+	bar::foo ();
 }
+```
+Results:
+```
+Bar
+Foo
+Foo
+Bar
 ```
 
 <br>
