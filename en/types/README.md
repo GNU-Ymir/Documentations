@@ -1,5 +1,8 @@
 # User defined types
 
-There are three different types, which can be created by the user,
-namely structures, enumeration and objects. This chapter discusses
-structure and enumeration.
+There are three different custom types: 
+- Structure
+- Enumeration
+- Class
+
+The following chapters present the structure and enumeration.

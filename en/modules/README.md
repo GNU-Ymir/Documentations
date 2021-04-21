@@ -19,7 +19,8 @@ Let have a look at the following file hierarchy :
 1 directory, 3 files
 ```
 
-In this hierarchy we have three files, which contain modules, the
+<br>
+In this file hierarchy there are three files, which contain modules, the
 first module in the file `main.yr` will be named `main`. The second
 one in the `extern_modules/bar.yr` file will be named `extern_modules::bar`,
 and the third one in the `extern_modules/foo.yr` file will be named
@@ -31,9 +32,10 @@ relative path of the compilation, i.e. if the file is located in
 `relative::path::to::file`.
 
 The name of a module is defined by the first line of the source code,
-by keyword `mod`. If this line is not given by the user, the
-path of the module will only be the file name, so you will not always
-be able to import the module, depending on its relative path.
+by keyword `mod`. If this line is not given by the user, the path of
+the module will only be the file name, so you will not always be able
+to import the module, depending on its relative path. You can consider
+this line mandatory for the moment. 
 
 For example, in the file `foo.yr`, the first line must look like : 
 
@@ -56,22 +58,87 @@ The syntax of the import statement is the following :
 
 ```grammar
 import_statement := 'import' path (',' path)* (';')?
-path := Identifier ('::' Identifier)*
+path := Identifier ('::' Identifier)* ('::' '_')?
 ```
+
+## Sub modules
+
+Sub modules are local modules, declared inside a global modules, are
+inside another sub module. Unlike global module, the access to the
+symbols defined inside them is not implicit. For that reason they have
+to be explicitely mentionned when trying to access to their
+symbols. This mention is done with the double colon binary operator
+**`::`**, where the first operand is the name of the module, and the
+second the name of the symbol to access.
+
+```ymir
+mod main
+import std::io;
+
+mod InnerModule {
+
+	pub def foo () {
+		println ("Foo");
+	}
+
+}
+
+def main () {
+	InnerModule::foo (); // access of the function declared in InnerModule
+}
+```
+
+The access operator **`::`**, can also be used to access to symbols
+declared inside global modules. This will be discussed after talking
+about privacy of symbols.
 
 ## Privacy
 
-All symbols defined in a module are private by default. Only modules
-that have declared the symbol have access to it. With the keyword
-`pub` you can export the symbol for an external modules, which will then
-have access to the symbol.
+All symbols defined in a module are private by default. The privacy of
+a given symbol *s* refer to the possibility for foreign modules, and
+symbols to access to this given symbol *s*. When a symbol *s* is
+declared private in a module *s*, then only the other symbols of the
+module *m* have access to it. Module privacy can be seen as a tree,
+where a global module is a root, and module symbols are the branches
+and leaves of the tree. In such a tree, symbols have access to their
+parent, siblings, and the siblings of their parents. 
 
-For example, with file `foo.yr` filled as follows : 
+In the following figure an example of a module tree is presented,
+where a global module named *A*, has three symbols, 2 sub modules
+*A::X* and *A::Y*, and a function *A::foo*. In this tree, we assume
+that every symbols are declared private. For that reason, the function
+*A::foo* has access to *A*, *A::X*, *A::Y*, but not to *A::X::bar*,
+nor *A::Y::baz*. The symbol *A::X::bar*, has access to every symbols
+(*A*, *A::X*, *A::Y*, *A::foo*), except *A::Y::baz*.
+
+<br>
+
+<img src="https://gnu-ymir.github.io/Documentations/en/modules/tree.png" alt="drawing" width="700">
+
+<br>
+
+Global modules are always tree roots, for that reason they don't have
+parents. For example, the module **`extern_modules::foo`**, does not
+have access to the symbols declared inside the module
+**`extern_modules`**, (if they are privates).
+
+The keyword **`pub`** flag a symbol as *public*, and accessible by
+foreign modules. This keyword can be used as a block, or for only one
+symbol. Its syntax grammar is presented in the following code block.
+
+```grammar
+pub :=   'pub' '{' symbol* '}' 
+       | 'pub' symbol	
+```
+
+### Example
+
+Let the file **`extern_modules/foo.yr`** be filled as follows:
 
 ```ymir
 mod extern_modules::foo;
 
-// foo is public, it can be accessed from external modules
+// foo is public, it can be accessed from foreign modules
 pub def foo () {}
 
 // The bar function is private by default
@@ -81,9 +148,7 @@ def bar () {}
 
 <br>
 
-And the file `main.yr` as follows. The `main` module, will only have
-access to the `foo` function, which is declared in the
-`extern_modules::foo` module.
+And the file **`main.yr`** as follows:
 
 ```ymir
 // This importation will give access to all the symbols in the module
@@ -92,90 +157,17 @@ import extern_modules::foo
 
 def main () {
     foo (); // foo is public we can call it
-//  ^^^
-// Try to replace foo by bar, it is not public
+	bar (); // however, bar is private thus not accessible
 }
 ```
-
-<br>
-
-The keyword `pub` can be used as a block to cover multiple
-declarations. The syntax of the pub qualifier is described in the
-following code block, and an example of utilization is presented in
-the block underneath.
-
-```grammar
-pub_statement := 'pub' ('{' declaration* '}')
-                       | (declaration)
-```
-
-<br>
-
-```ymir
-mod extern_modules::foo
-
-pub {
-	def foo () {}
-	
-	def bar () {}
-}
-
-pub def baz () {}
-```
-
-## Sub modules
-
-It is possible to declare sub-module that are part of a global module,
-with the keyword `mod`. Unlike global modules, you have to name them
-when you want to access the symbols declared inside them. An example
-of inner module is presented in the following code block.
-
-```ymir
-mod main
-import std::io
-
-// Declaration of a module named InnerModule
-// This module is private, thus only accessible for the module main
-mod InnerModule {
-
-    	// Declaration of a function foo inside the module
-	// It is public, so the module main can access it
-	pub def foo () {
-		println ("Foo");
-		bar ();
-	}
-
-	// Declaration of a private function bar
-	// only symbols declared in the module InnerModule have access to it
-	def bar () {
-		println ("Bar");
-	}
-}
-
-def main () {
-    	 // There is no problem to access the function foo that is public
-	InnerModule::foo ();
-
-	// However the function bar is private
-	InnerModule::bar ();
-}
-```
-
-<br>
-
-The above source code won't compile as 'main' function declared in
-'main' module try to have access to the function 'bar' declared
-private in the module 'InnerModule'. The compiler will return the
-following error.
-
+Errors:
 ```error
-Error : undefined sub symbol bar for element main::InnerModule
- --> main.yr:(27,16)
-    ┃ 
-27  ┃     InnerModule::bar ();
-    ┃                ^^^^^
-    ┃ Note : bar --> main.yr:(17,9) : bar is private within this context
-    ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 
+Error : undefined symbol bar
+ --> main.yr:(7,5)
+ 7  ┃     bar (); // however, bar is private thus not accessible
+    ╋     ^^^
+    ┃ Note : bar --> extern_modules/foo.yr:(8,5) : extern_modules::foo::bar is private within this context
+    ┗━━━━━━ 
 
 
 ymir1: fatal error: 
@@ -183,13 +175,6 @@ compilation terminated.
 ```
 
 <br>
-
-The privacy system is the same as for the global module. A module is a
-symbol, so its privacy is the same as the privacy of functions,
-structure, class, etc. Only the main module will have access to the
-sub-module `InnerModule` in the example above. Meaning that importing
-the module `main` won't give access to `main::InnerModule`. This can
-be changed by adding the qualifier `pub` to the module `InnerModule`.
 
 ## Symbol conflict resolution
 

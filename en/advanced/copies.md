@@ -1,14 +1,16 @@
 # Copy data to make them mutable
 
-Sometimes you may not want to allow certain data to be borrowed. Or
-some data is immutable, but you still want to change it and return a
-modified value. To solve this problem, **Ymir** provides two keywords,
-`copy` and `dcopy`. 
+Sometimes it is not possible to allow data to be borrowed by foreign
+functions or variables. This can be due to the facts that data are
+immutable for example. To solve this problem, **Ymir** provides two
+keywords, **`copy`** and `dcopy`.
 
 ## Copy
 
-The copy keyword will make a copy of the first level of an aliasable
-type. The following table shows some examples of copy types:
+The **`copy`** keyword makes a copy of the first level of a value,
+whose type is aliasable. This copy transform an immutable type into a
+mutable one, by increasing its mutability level by one. The following
+table shows some examples of the types of copied values :
 
 | Type | Type of copied value |
 | --- | --- |
@@ -16,11 +18,12 @@ type. The following table shows some examples of copy types:
 | mut [i32] | mut [mut i32] |
 | mut [[i32]] | mut [mut [i32]] |
 
-An example of what you can achieve with `copy` is shown in the
-following code. The representation of the memory is also shown in the
-figure underneath. In this example, the variable **`x`** is copied in
-the variable **`y`**, and thus the two variable borrows different
-data, but have an exact same value.
+An example of what can be achieved by **`copy`** keyword is shown in
+the following code. The representation of the memory is also shown in
+the figure underneath. In this example, the variable **`x`** is copied
+and the result value is placed in the variable **`y`**. In this
+example, each variable are borrowing different data placed on the
+heap, whose values are equivalent.
 
 ```ymir
 import std::io
@@ -39,6 +42,13 @@ def main ()
 ```
 
 <br>
+
+We can see from the figure below, that the variable **`y`** points to
+data at a different location, from the data pointed by **`x`**. This
+implies a new memory allocation, and a memory copy, that cost some cpu
+time, and memory place. For that reason, copies are never hidden by
+the language, and are made only when the keyword **`copy`** is placed
+in the source code.
 
 <img src="https://gnu-ymir.github.io/Documentations/en/advanced/memory_x_copy_main.png" alt="drawing" width="700"/>
 

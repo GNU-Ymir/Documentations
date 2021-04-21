@@ -133,9 +133,7 @@ def main () {
 	foo (ref x);
 }
 ```
-
-<br>
-
+Results:
 ```
 By value : 89
 By reference : 89
@@ -143,7 +141,7 @@ By reference : 89
 
 <br>
 
-If you have done the exercise, and added the keyword **`mut`** in the
+If you have done the exercise, and added the keyword **`mut`** to the
 signature of the first function **`foo`**, you should get the following
 error: 
 

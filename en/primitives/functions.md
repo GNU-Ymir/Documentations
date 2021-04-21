@@ -508,10 +508,10 @@ available for other functions, and foreign modules (*cf.*
 ## Uniform call syntax
 
 The *uniform call syntax* is a syntax that allows to call a function
-with the dot operator **`.`**. The *uniform call syntax* place the
-first parameter of the function as the left operand of the dot
-operation, and the rest of the parameters of the function after the
-right operand as a list of expression separated by comas enclosed
+with the dot operator **`.`**. The *uniform call syntax* places the
+first parameter of the function at the left of the dot
+operation, and the rest of the arguments of the function after the
+right operand as a list of expressions separated by comas enclosed
 inside parentheses. 
 
 ```grammar
@@ -539,6 +539,10 @@ def main () {
 	 .plusTwo ()
 	 .println ();	 	 
 }	
+```
+Results:
+```
+15
 ```
 
 <br>

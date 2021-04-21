@@ -182,7 +182,7 @@ values that are borrowed, the alias keyword is not required.
 import std::io
 
 def foo (x : [i32]) {
-    println (x); // just read the borrowed data, and don't modify them
+    println (x); // just reads the borrowed data, but doesn't modify them
 }
 
 def main () {
@@ -192,6 +192,34 @@ def main () {
 ```
 
 <br>
+
+### Alias in *uniform call syntax*
+
+We have seen in the function chapter, the *uniform call syntax*. This
+syntax is used to call a function using the dot operator **`.`**, by
+putting the first parameter of the function on the left of the
+operation. When the first parameter is of an aliasable type, the first
+argument must be aliased explicitely, leading to a strange and verbose
+syntax.
+
+```ymir
+let dmut a = [1, 2, 3];
+(alias a).foo (12); // same a foo (alias a, 12);
+```
+
+<br>
+To avoid verbosity, we added the operator **`:.`**, to use the
+*uniform call syntax* with an aliasable first parameter. 
+
+```ymir
+let dmut a = [1, 2, 3];
+a:.foo (12); // same as foo (alias a, 12);
+```
+<br>
+
+This operator is very usefull when dealing with classes, where the
+*uniform call syntax* is mandatory, as we will see in chapter
+[Class](https://gnu-ymir.github.io/Documentations/en/objects/class.html).
 
 ## Special case of struct and tuple
 
