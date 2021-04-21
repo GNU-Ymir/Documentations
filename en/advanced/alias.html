@@ -282,12 +282,38 @@
             
         </li>
     
+        <li class="chapter " data-level="1.4.4" data-path="best.html">
+            
+                <a href="best.html">
+            
+                    
+                    Best practice
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
         </li>
     
-        <li class="chapter " data-level="1.5" data-path="../types/">
+        <li class="chapter " data-level="1.5" data-path="../modules/">
+            
+                <a href="../modules/">
+            
+                    
+                    Modules
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../types/">
             
                 <a href="../types/">
             
@@ -301,7 +327,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.5.1" data-path="../types/struct.html">
+        <li class="chapter " data-level="1.6.1" data-path="../types/struct.html">
             
                 <a href="../types/struct.html">
             
@@ -314,7 +340,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.5.2" data-path="../types/enum.html">
+        <li class="chapter " data-level="1.6.2" data-path="../types/enum.html">
             
                 <a href="../types/enum.html">
             
@@ -329,19 +355,6 @@
     
 
             </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6" data-path="../modules/">
-            
-                <a href="../modules/">
-            
-                    
-                    Modules
-            
-                </a>
-            
-
             
         </li>
     
@@ -616,7 +629,7 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#alias"><b>1. </b>Alias</a></li><ul><li><span class="title-icon "></span><a href="#alias-a-function-parameter"><b>1.1. </b>Alias a function parameter</a></li><li><span class="title-icon "></span><a href="#special-case-of-struct-and-tuple"><b>1.2. </b>Special case of struct and tuple</a></li></ul></ul></div><a href="#alias" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="alias"><a name="alias" class="anchor-navigation-ex-anchor" href="#alias"><i class="fa fa-link" aria-hidden="true"></i></a>1. Alias</h1>
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#alias"><b>1. </b>Alias</a></li><ul><li><span class="title-icon "></span><a href="#alias-a-function-parameter"><b>1.1. </b>Alias a function parameter</a></li><ul><li><span class="title-icon "></span><a href="#alias-in-uniform-call-syntax"><b>1.1.1. </b>Alias in uniform call syntax</a></li></ul><li><span class="title-icon "></span><a href="#special-case-of-struct-and-tuple"><b>1.2. </b>Special case of struct and tuple</a></li></ul></ul></div><a href="#alias" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="alias"><a name="alias" class="anchor-navigation-ex-anchor" href="#alias"><i class="fa fa-link" aria-hidden="true"></i></a>1. Alias</h1>
 <p>All types that containing a pointer to data in the heap (or the stack)
 are aliasable types. An aliasable type cannot be implicitly copied,
 nor can it be implicitly referenced, for performance and security
@@ -764,7 +777,7 @@ values that are borrowed, the alias keyword is not required.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
 <span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token basic-types">i32</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token function">println</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// just read the borrowed data, and don&apos;t modify them</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// just reads the borrowed data, but doesn&apos;t modify them</span>
 <span class="token punctuation">}</span>
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -773,6 +786,26 @@ values that are borrowed, the alias keyword is not required.</p>
 <span class="token punctuation">}</span>
 </code></pre>
 <p><br></p>
+<h3 id="alias-in-uniform-call-syntax"><a name="alias-in-uniform-call-syntax" class="anchor-navigation-ex-anchor" href="#alias-in-uniform-call-syntax"><i class="fa fa-link" aria-hidden="true"></i></a>1.1.1. Alias in uniform call syntax</h3>
+<p>We have seen in the function chapter, the <em>uniform call syntax</em>. This
+syntax is used to call a function using the dot operator <strong><code>.</code></strong>, by
+putting the first parameter of the function on the left of the
+operation. When the first parameter is of an aliasable type, the first
+argument must be aliased explicitely, leading to a strange and verbose
+syntax.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">let</span> <span class="token other-keyword">dmut</span> a <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">(</span><span class="token other-keyword">alias</span> a<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">foo</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// same a foo (alias a, 12);</span>
+</code></pre>
+<p><br>
+To avoid verbosity, we added the operator <strong><code>:.</code></strong>, to use the
+<em>uniform call syntax</em> with an aliasable first parameter. </p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">let</span> <span class="token other-keyword">dmut</span> a <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+a<span class="token punctuation">:</span><span class="token punctuation">.</span><span class="token function">foo</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// same as foo (alias a, 12);</span>
+</code></pre>
+<p><br></p>
+<p>This operator is very usefull when dealing with classes, where the
+<em>uniform call syntax</em> is mandatory, as we will see in chapter
+<a href="https://gnu-ymir.github.io/Documentations/en/objects/class.html" target="_blank">Class</a>.</p>
 <h2 id="special-case-of-struct-and-tuple"><a name="special-case-of-struct-and-tuple" class="anchor-navigation-ex-anchor" href="#special-case-of-struct-and-tuple"><i class="fa fa-link" aria-hidden="true"></i></a>1.2. Special case of struct and tuple</h2>
 <p>In the chapter
 <a href="https://gnu-ymir.github.io/Documentations/en/types/struct.html" target="_blank">Structure</a>
@@ -863,7 +896,7 @@ types of the tuple, recursively.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Aliases","level":"1.4.2","depth":2,"next":{"title":"Copy and Deep copy","level":"1.4.3","depth":2,"path":"advanced/copies.md","ref":"advanced/copies.md","articles":[]},"previous":{"title":"References","level":"1.4.1","depth":2,"path":"advanced/references.md","ref":"advanced/references.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"advanced/alias.md","mtime":"2021-04-20T16:53:13.910Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-04-20T17:01:20.459Z"},"basePath":"..","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Aliases","level":"1.4.2","depth":2,"next":{"title":"Copy and Deep copy","level":"1.4.3","depth":2,"path":"advanced/copies.md","ref":"advanced/copies.md","articles":[]},"previous":{"title":"References","level":"1.4.1","depth":2,"path":"advanced/references.md","ref":"advanced/references.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"advanced/alias.md","mtime":"2021-04-21T11:06:30.997Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-04-21T13:01:07.160Z"},"basePath":"..","book":{"language":"en"}});
         });
     </script>
 </div>

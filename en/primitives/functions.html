@@ -282,12 +282,38 @@
             
         </li>
     
+        <li class="chapter " data-level="1.4.4" data-path="../advanced/best.html">
+            
+                <a href="../advanced/best.html">
+            
+                    
+                    Best practice
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
         </li>
     
-        <li class="chapter " data-level="1.5" data-path="../types/">
+        <li class="chapter " data-level="1.5" data-path="../modules/">
+            
+                <a href="../modules/">
+            
+                    
+                    Modules
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../types/">
             
                 <a href="../types/">
             
@@ -301,7 +327,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.5.1" data-path="../types/struct.html">
+        <li class="chapter " data-level="1.6.1" data-path="../types/struct.html">
             
                 <a href="../types/struct.html">
             
@@ -314,7 +340,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.5.2" data-path="../types/enum.html">
+        <li class="chapter " data-level="1.6.2" data-path="../types/enum.html">
             
                 <a href="../types/enum.html">
             
@@ -329,19 +355,6 @@
     
 
             </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6" data-path="../modules/">
-            
-                <a href="../modules/">
-            
-                    
-                    Modules
-            
-                </a>
-            
-
             
         </li>
     
@@ -1031,10 +1044,10 @@ available for other functions, and foreign modules (<em>cf.</em>
 <a href="https://gnu-ymir.github.io/Documentations/en/modules/" target="_blank">Modules</a>).</p>
 <h2 id="uniform-call-syntax"><a name="uniform-call-syntax" class="anchor-navigation-ex-anchor" href="#uniform-call-syntax"><i class="fa fa-link" aria-hidden="true"></i></a>1.5. Uniform call syntax</h2>
 <p>The <em>uniform call syntax</em> is a syntax that allows to call a function
-with the dot operator <strong><code>.</code></strong>. The <em>uniform call syntax</em> place the
-first parameter of the function as the left operand of the dot
-operation, and the rest of the parameters of the function after the
-right operand as a list of expression separated by comas enclosed
+with the dot operator <strong><code>.</code></strong>. The <em>uniform call syntax</em> places the
+first parameter of the function at the left of the dot
+operation, and the rest of the arguments of the function after the
+right operand as a list of expressions separated by comas enclosed
 inside parentheses. </p>
 <pre class="language-"><code class="lang-grammar"><span class="token path">ufc</span> <span class="token punctuation">:</span><span class="token operator">=</span> expression <span class="token string">&apos;.&apos;</span> expression <span class="token string">&apos;(&apos;</span> <span class="token punctuation">(</span>expression <span class="token punctuation">(</span><span class="token string">&apos;,&apos;</span> expression<span class="token punctuation">)</span><span class="token operator">*</span><span class="token punctuation">)</span>? <span class="token string">&apos;)&apos;</span>
 </code></pre>
@@ -1058,7 +1071,9 @@ on class objects
      <span class="token punctuation">.</span><span class="token function">println</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>          
 <span class="token punctuation">}</span>
 </code></pre>
-<p><br></p>
+<p>Results:</p>
+<pre class="language-"><code>15
+</code></pre><p><br></p>
 <p>The <em>uniform call syntax</em> can also be useful to define equivalent of
 methods on structures. </p>
 
@@ -1104,7 +1119,7 @@ methods on structures. </p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Functions","level":"1.3.3","depth":2,"next":{"title":"Control flows","level":"1.3.4","depth":2,"path":"primitives/control.md","ref":"primitives/control.md","articles":[]},"previous":{"title":"Data types","level":"1.3.2","depth":2,"path":"primitives/types.md","ref":"primitives/types.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"primitives/functions.md","mtime":"2021-04-20T16:53:13.922Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-04-20T17:01:20.459Z"},"basePath":"..","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Functions","level":"1.3.3","depth":2,"next":{"title":"Control flows","level":"1.3.4","depth":2,"path":"primitives/control.md","ref":"primitives/control.md","articles":[]},"previous":{"title":"Data types","level":"1.3.2","depth":2,"path":"primitives/types.md","ref":"primitives/types.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"primitives/functions.md","mtime":"2021-04-21T10:23:54.177Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-04-21T13:01:07.160Z"},"basePath":"..","book":{"language":"en"}});
         });
     </script>
 </div>

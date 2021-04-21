@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Objects · GitBook</title>
+        <title>Best practice · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -81,10 +81,10 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="class.html" />
+    <link rel="next" href="../modules/" />
     
     
-    <link rel="prev" href="../types/enum.html" />
+    <link rel="prev" href="copies.html" />
     
 
     </head>
@@ -229,9 +229,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4" data-path="../advanced/">
+        <li class="chapter " data-level="1.4" data-path="./">
             
-                <a href="../advanced/">
+                <a href="./">
             
                     
                     Alias and References
@@ -243,9 +243,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.4.1" data-path="../advanced/references.html">
+        <li class="chapter " data-level="1.4.1" data-path="references.html">
             
-                <a href="../advanced/references.html">
+                <a href="references.html">
             
                     
                     References
@@ -256,9 +256,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.2" data-path="../advanced/alias.html">
+        <li class="chapter " data-level="1.4.2" data-path="alias.html">
             
-                <a href="../advanced/alias.html">
+                <a href="alias.html">
             
                     
                     Aliases
@@ -269,9 +269,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.3" data-path="../advanced/copies.html">
+        <li class="chapter " data-level="1.4.3" data-path="copies.html">
             
-                <a href="../advanced/copies.html">
+                <a href="copies.html">
             
                     
                     Copy and Deep copy
@@ -282,9 +282,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.4" data-path="../advanced/best.html">
+        <li class="chapter active" data-level="1.4.4" data-path="best.html">
             
-                <a href="../advanced/best.html">
+                <a href="best.html">
             
                     
                     Best practice
@@ -358,9 +358,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.7" data-path="./">
+        <li class="chapter " data-level="1.7" data-path="../objects/">
             
-                <a href="./">
+                <a href="../objects/">
             
                     
                     Objects
@@ -372,9 +372,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.7.1" data-path="class.html">
+        <li class="chapter " data-level="1.7.1" data-path="../objects/class.html">
             
-                <a href="class.html">
+                <a href="../objects/class.html">
             
                     
                     Class
@@ -385,9 +385,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7.2" data-path="inheritance.html">
+        <li class="chapter " data-level="1.7.2" data-path="../objects/inheritance.html">
             
-                <a href="inheritance.html">
+                <a href="../objects/inheritance.html">
             
                     
                     Inheritance
@@ -398,9 +398,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7.3" data-path="traits.html">
+        <li class="chapter " data-level="1.7.3" data-path="../objects/traits.html">
             
-                <a href="traits.html">
+                <a href="../objects/traits.html">
             
                     
                     Traits
@@ -411,9 +411,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7.4" data-path="example.html">
+        <li class="chapter " data-level="1.7.4" data-path="../objects/example.html">
             
-                <a href="example.html">
+                <a href="../objects/example.html">
             
                     
                     Example program
@@ -614,7 +614,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Objects</a>
+        <a href=".." >Best practice</a>
     </h1>
 </div>
 
@@ -629,13 +629,80 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#objects"><b>1. </b>Objects</a></li></ul></div><a href="#objects" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="objects"><a name="objects" class="anchor-navigation-ex-anchor" href="#objects"><i class="fa fa-link" aria-hidden="true"></i></a>1. Objects</h1>
-<p><strong>Ymir</strong> is a object oriented language. But unlike many oriented
-language, it is statically typed, and safe. Unlike <code>java</code> or <code>D</code>, the
-class does not inherit the global class <code>Object</code>, and an object
-instance can&apos;t be null. Every variable that contains object are
-assured to contain a value, and that access to that value won&apos;t
-produce any crash of the program.</p>
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#best-practice"><b>1. </b>Best practice</a></li></ul></div><a href="#best-practice" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="best-practice"><a name="best-practice" class="anchor-navigation-ex-anchor" href="#best-practice"><i class="fa fa-link" aria-hidden="true"></i></a>1. Best practice</h1>
+<p>The <em>copy</em> is never hidden in the source code that is available to the
+user. However, many codes that we are using on a daily basis, are
+provided by libraries. In libraries, only the prototypes of the
+functions are presented to the user, and therefore if a copy is made
+inside a function, the copy is hidden from the user. We cannot
+guarantee that such copy are not made (at least for the moment), so we
+propose a best practice advice to avoid hidden copies inside
+libraries.</p>
+<p>This advice is simple, never take a immutable parameter in a function,
+if you have to make a copy of it inside the function. For example, let
+say we have a function that sorts a slice. This function should
+preferably take a mutable slice as input and modify it directly.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">good</span> <span class="token punctuation">(</span><span class="token other-keyword">dmut</span> slc <span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token basic-types">i32</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> <span class="token other-keyword">dmut</span> <span class="token punctuation">[</span><span class="token basic-types">i32</span><span class="token punctuation">]</span> <span class="token punctuation">{</span>
+    <span class="token comment">// perform the sort on slc</span>
+    <span class="token other-keyword">alias</span> slc
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">bad</span> <span class="token punctuation">(</span>slc <span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token basic-types">i32</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> <span class="token other-keyword">dmut</span> <span class="token punctuation">[</span><span class="token basic-types">i32</span><span class="token punctuation">]</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> <span class="token other-keyword">dmut</span> res <span class="token operator">=</span> <span class="token keyword">copy</span> slc<span class="token punctuation">;</span>
+    <span class="token comment">// perform the sort on res</span>
+    <span class="token other-keyword">alias</span> res<span class="token punctuation">}</span>
+</code></pre>
+<p><br></p>
+<p>This way, the function calling the sort function has the choice of
+making the <em>copy</em> or not. In the following example, the user has the
+choice when calling the function <strong><code>good</code></strong>, but never when calling
+the function <strong><code>bad</code></strong>, making the copy hidden. One can note from the
+following example, that the copy is never hidden when calling
+<strong><code>good</code></strong>, and that it is also possible to make no copy at all.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> <span class="token other-keyword">dmut</span> slc <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> <span class="token other-keyword">dmut</span> aux <span class="token operator">=</span> <span class="token function">good</span> <span class="token punctuation">(</span><span class="token keyword">copy</span> slc<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// slc is unchanged, and aux is sorted</span>
+    <span class="token keyword">let</span> <span class="token other-keyword">dmut</span> slc2 <span class="token operator">=</span> <span class="token function">good</span> <span class="token punctuation">(</span><span class="token other-keyword">alias</span> slc<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// slc is sorted, and slc2 points the data of slc</span>
+
+    <span class="token function">good</span> <span class="token punctuation">(</span>slc<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// impossible, implicit alias is not allowed</span>
+
+    <span class="token function">bad</span> <span class="token punctuation">(</span>slc<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// here there is not need for alias, nor copy, </span>
+               <span class="token comment">// the data of slc won&apos;t be modified in bad</span>
+               <span class="token comment">// the copy is alway made and hidden</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br></p>
+<p>From the above example, the compiler returns an error, when trying to
+call the function <strong><code>good</code></strong> without <em>aliasing</em> nor <em>copying</em>. This
+error prevents from copying values implicitely without writting it
+down, nor making <em>aliasing</em> of the values and giving the write
+permission to foreign functions without informing the compiler of our
+agreement. All the other calls are valid, the wish of the user being
+totally explicit.</p>
+<pre class="language-"><code class="lang-error"><span class="token path">Error</span> : the call operator is not defined for main::good and {mut [mut i32]}
+ <span class="token comment">--&gt; main.yr:(17,7)</span>
+17  &#x2503;     good (slc); // impossible, implicit alias is not allowed
+    &#x254B;          ^   ^
+    &#x2503; <span class="token other-keyword">Note</span> : candidate good <span class="token comment">--&gt; main.yr:(1,5) : main::good (slc : mut [mut i32])-&gt; mut [mut i32]</span>
+    &#x2503;     &#x2503; <span class="token path">Error</span> : discard the constant qualifier is prohibited, left operand mutability level is 2 but must be at most 1
+    &#x2503;     &#x2503;  <span class="token comment">--&gt; main.yr:(17,8)</span>
+    &#x2503;     &#x2503; 17  &#x2503;     good (slc); // impossible, implicit alias is not allowed
+    &#x2503;     &#x2503;     &#x254B;           ^^^
+    &#x2503;     &#x2503;     &#x2503; <span class="token other-keyword">Note</span> : implicit alias of type mut [mut i32] is not allowed, it will implicitly discard constant qualifier
+    &#x2503;     &#x2503;     &#x2503;  <span class="token comment">--&gt; main.yr:(17,8)</span>
+    &#x2503;     &#x2503;     &#x2503; 17  &#x2503;     good (slc); // impossible, implicit alias is not allowed
+    &#x2503;     &#x2503;     &#x2503;     &#x254B;           ^^^
+    &#x2503;     &#x2503;     &#x2517;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x253B;&#x2501; 
+    &#x2503;     &#x2503; <span class="token other-keyword">Note</span> : for parameter slc <span class="token comment">--&gt; main.yr:(1,16) of main::good (slc : mut [mut i32])-&gt; mut [mut i32]</span>
+    &#x2503;     &#x2517;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501; 
+    &#x2517;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x253B;&#x2501; 
+
+
+ymir1: <span class="token path">fatal error</span>: 
+compilation terminated.
+</code></pre>
+<p><br></p>
+<p><em>Contribution</em>: Maybe it is possible to complitely avoid hidden copies ? (I don&apos;t have any clue for the moment).</p>
 
                                 
                                 </section>
@@ -663,12 +730,12 @@ produce any crash of the program.</p>
 
             
                 
-                <a href="../types/enum.html" class="navigation navigation-prev " aria-label="Previous page: Enum">
+                <a href="copies.html" class="navigation navigation-prev " aria-label="Previous page: Copy and Deep copy">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="class.html" class="navigation navigation-next " aria-label="Next page: Class">
+                <a href="../modules/" class="navigation navigation-next " aria-label="Next page: Modules">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -679,7 +746,7 @@ produce any crash of the program.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Objects","level":"1.7","depth":1,"next":{"title":"Class","level":"1.7.1","depth":2,"path":"objects/class.md","ref":"objects/class.md","articles":[]},"previous":{"title":"Enum","level":"1.6.2","depth":2,"path":"types/enum.md","ref":"types/enum.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"objects/README.md","mtime":"2021-04-20T17:01:32.697Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-04-21T13:01:07.160Z"},"basePath":"..","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Best practice","level":"1.4.4","depth":2,"next":{"title":"Modules","level":"1.5","depth":1,"path":"modules/README.md","ref":"modules/README.md","articles":[]},"previous":{"title":"Copy and Deep copy","level":"1.4.3","depth":2,"path":"advanced/copies.md","ref":"advanced/copies.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"advanced/best.md","mtime":"2021-04-21T10:58:17.410Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-04-21T13:01:07.160Z"},"basePath":"..","book":{"language":"en"}});
         });
     </script>
 </div>

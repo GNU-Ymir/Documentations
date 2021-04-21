@@ -81,10 +81,10 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../objects/" />
+    <link rel="next" href="../types/" />
     
     
-    <link rel="prev" href="../types/enum.html" />
+    <link rel="prev" href="../advanced/best.html" />
     
 
     </head>
@@ -282,12 +282,38 @@
             
         </li>
     
+        <li class="chapter " data-level="1.4.4" data-path="../advanced/best.html">
+            
+                <a href="../advanced/best.html">
+            
+                    
+                    Best practice
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
         </li>
     
-        <li class="chapter " data-level="1.5" data-path="../types/">
+        <li class="chapter active" data-level="1.5" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Modules
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../types/">
             
                 <a href="../types/">
             
@@ -301,7 +327,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.5.1" data-path="../types/struct.html">
+        <li class="chapter " data-level="1.6.1" data-path="../types/struct.html">
             
                 <a href="../types/struct.html">
             
@@ -314,7 +340,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.5.2" data-path="../types/enum.html">
+        <li class="chapter " data-level="1.6.2" data-path="../types/enum.html">
             
                 <a href="../types/enum.html">
             
@@ -329,19 +355,6 @@
     
 
             </ul>
-            
-        </li>
-    
-        <li class="chapter active" data-level="1.6" data-path="./">
-            
-                <a href="./">
-            
-                    
-                    Modules
-            
-                </a>
-            
-
             
         </li>
     
@@ -616,7 +629,7 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#modules"><b>1. </b>Modules</a></li><ul><li><span class="title-icon "></span><a href="#file-hierarchy"><b>1.1. </b>File hierarchy</a></li><li><span class="title-icon "></span><a href="#privacy"><b>1.2. </b>Privacy</a></li><li><span class="title-icon "></span><a href="#sub-modules"><b>1.3. </b>Sub modules</a></li><li><span class="title-icon "></span><a href="#symbol-conflict-resolution"><b>1.4. </b>Symbol conflict resolution</a></li><li><span class="title-icon "></span><a href="#public-importation"><b>1.5. </b>Public importation</a></li><li><span class="title-icon "></span><a href="#include-directory"><b>1.6. </b>Include directory</a></li><li><span class="title-icon "></span><a href="#compilation-of-modules"><b>1.7. </b>Compilation of modules</a></li></ul></ul></div><a href="#modules" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="modules"><a name="modules" class="anchor-navigation-ex-anchor" href="#modules"><i class="fa fa-link" aria-hidden="true"></i></a>1. Modules</h1>
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#modules"><b>1. </b>Modules</a></li><ul><li><span class="title-icon "></span><a href="#file-hierarchy"><b>1.1. </b>File hierarchy</a></li><li><span class="title-icon "></span><a href="#sub-modules"><b>1.2. </b>Sub modules</a></li><li><span class="title-icon "></span><a href="#privacy"><b>1.3. </b>Privacy</a></li><ul><li><span class="title-icon "></span><a href="#example"><b>1.3.1. </b>Example</a></li></ul><li><span class="title-icon "></span><a href="#symbol-conflict-resolution"><b>1.4. </b>Symbol conflict resolution</a></li><li><span class="title-icon "></span><a href="#public-importation"><b>1.5. </b>Public importation</a></li><li><span class="title-icon "></span><a href="#include-directory"><b>1.6. </b>Include directory</a></li><li><span class="title-icon "></span><a href="#compilation-of-modules"><b>1.7. </b>Compilation of modules</a></li></ul></ul></div><a href="#modules" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="modules"><a name="modules" class="anchor-navigation-ex-anchor" href="#modules"><i class="fa fa-link" aria-hidden="true"></i></a>1. Modules</h1>
 <p>When creating a large project, it is very important to organize your
 code. <strong>Ymir</strong> offers a system of modules, which is used to manage
 different parts of the code that have different purposes. Each source
@@ -630,7 +643,8 @@ file in <strong>Ymir</strong> is a module.</p>
     &#x2514;&#x2500;&#x2500; foo.yr
 
 1 directory, 3 files
-</code></pre><p>In this hierarchy we have three files, which contain modules, the
+</code></pre><p><br>
+In this file hierarchy there are three files, which contain modules, the
 first module in the file <code>main.yr</code> will be named <code>main</code>. The second
 one in the <code>extern_modules/bar.yr</code> file will be named <code>extern_modules::bar</code>,
 and the third one in the <code>extern_modules/foo.yr</code> file will be named
@@ -640,9 +654,10 @@ relative path of the compilation, i.e. if the file is located in
 <code>$(pwd)/relative/path/to/file</code>, its module name must be
 <code>relative::path::to::file</code>.</p>
 <p>The name of a module is defined by the first line of the source code,
-by keyword <code>mod</code>. If this line is not given by the user, the
-path of the module will only be the file name, so you will not always
-be able to import the module, depending on its relative path.</p>
+by keyword <code>mod</code>. If this line is not given by the user, the path of
+the module will only be the file name, so you will not always be able
+to import the module, depending on its relative path. You can consider
+this line mandatory for the moment. </p>
 <p>For example, in the file <code>foo.yr</code>, the first line must look like : </p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">mod</span> <span class="token path">extern_modules</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">foo</span>
 </code></pre>
@@ -654,17 +669,68 @@ be able to import the module, depending on its relative path.</p>
 <p><br> </p>
 <p>The syntax of the import statement is the following :</p>
 <pre class="language-"><code class="lang-grammar"><span class="token path">import_statement</span> <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token string">&apos;import&apos;</span> path <span class="token punctuation">(</span><span class="token string">&apos;,&apos;</span> path<span class="token punctuation">)</span><span class="token operator">*</span> <span class="token punctuation">(</span><span class="token string">&apos;;&apos;</span><span class="token punctuation">)</span>?
-<span class="token path">path</span> <span class="token punctuation">:</span><span class="token operator">=</span> Identifier <span class="token punctuation">(</span><span class="token string">&apos;::&apos;</span> Identifier<span class="token punctuation">)</span><span class="token operator">*</span>
+<span class="token path">path</span> <span class="token punctuation">:</span><span class="token operator">=</span> Identifier <span class="token punctuation">(</span><span class="token string">&apos;::&apos;</span> Identifier<span class="token punctuation">)</span><span class="token operator">*</span> <span class="token punctuation">(</span><span class="token string">&apos;::&apos;</span> <span class="token string">&apos;_&apos;</span><span class="token punctuation">)</span>?
 </code></pre>
-<h2 id="privacy"><a name="privacy" class="anchor-navigation-ex-anchor" href="#privacy"><i class="fa fa-link" aria-hidden="true"></i></a>1.2. Privacy</h2>
-<p>All symbols defined in a module are private by default. Only modules
-that have declared the symbol have access to it. With the keyword
-<code>pub</code> you can export the symbol for an external modules, which will then
-have access to the symbol.</p>
-<p>For example, with file <code>foo.yr</code> filled as follows : </p>
+<h2 id="sub-modules"><a name="sub-modules" class="anchor-navigation-ex-anchor" href="#sub-modules"><i class="fa fa-link" aria-hidden="true"></i></a>1.2. Sub modules</h2>
+<p>Sub modules are local modules, declared inside a global modules, are
+inside another sub module. Unlike global module, the access to the
+symbols defined inside them is not implicit. For that reason they have
+to be explicitely mentionned when trying to access to their
+symbols. This mention is done with the double colon binary operator
+<strong><code>::</code></strong>, where the first operand is the name of the module, and the
+second the name of the symbol to access.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">mod</span> main
+<span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
+
+<span class="token keyword">mod</span> InnerModule <span class="token punctuation">{</span>
+
+    <span class="token other-keyword">pub</span> <span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Foo&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token path">InnerModule</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// access of the function declared in InnerModule</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>The access operator <strong><code>::</code></strong>, can also be used to access to symbols
+declared inside global modules. This will be discussed after talking
+about privacy of symbols.</p>
+<h2 id="privacy"><a name="privacy" class="anchor-navigation-ex-anchor" href="#privacy"><i class="fa fa-link" aria-hidden="true"></i></a>1.3. Privacy</h2>
+<p>All symbols defined in a module are private by default. The privacy of
+a given symbol <em>s</em> refer to the possibility for foreign modules, and
+symbols to access to this given symbol <em>s</em>. When a symbol <em>s</em> is
+declared private in a module <em>s</em>, then only the other symbols of the
+module <em>m</em> have access to it. Module privacy can be seen as a tree,
+where a global module is a root, and module symbols are the branches
+and leaves of the tree. In such a tree, symbols have access to their
+parent, siblings, and the siblings of their parents. </p>
+<p>In the following figure an example of a module tree is presented,
+where a global module named <em>A</em>, has three symbols, 2 sub modules
+<em>A::X</em> and <em>A::Y</em>, and a function <em>A::foo</em>. In this tree, we assume
+that every symbols are declared private. For that reason, the function
+<em>A::foo</em> has access to <em>A</em>, <em>A::X</em>, <em>A::Y</em>, but not to <em>A::X::bar</em>,
+nor <em>A::Y::baz</em>. The symbol <em>A::X::bar</em>, has access to every symbols
+(<em>A</em>, <em>A::X</em>, <em>A::Y</em>, <em>A::foo</em>), except <em>A::Y::baz</em>.</p>
+<p><br></p>
+<p><img src="https://gnu-ymir.github.io/Documentations/en/modules/tree.png" alt="drawing" width="700"></p>
+<p><br></p>
+<p>Global modules are always tree roots, for that reason they don&apos;t have
+parents. For example, the module <strong><code>extern_modules::foo</code></strong>, does not
+have access to the symbols declared inside the module
+<strong><code>extern_modules</code></strong>, (if they are privates).</p>
+<p>The keyword <strong><code>pub</code></strong> flag a symbol as <em>public</em>, and accessible by
+foreign modules. This keyword can be used as a block, or for only one
+symbol. Its syntax grammar is presented in the following code block.</p>
+<pre class="language-"><code class="lang-grammar"><span class="token other-keyword">pub</span> <span class="token punctuation">:</span><span class="token operator">=</span>   <span class="token string">&apos;pub&apos;</span> <span class="token string">&apos;{&apos;</span> symbol<span class="token operator">*</span> <span class="token string">&apos;}&apos;</span> 
+       <span class="token operator">|</span> <span class="token string">&apos;pub&apos;</span> symbol
+</code></pre>
+<h3 id="example"><a name="example" class="anchor-navigation-ex-anchor" href="#example"><i class="fa fa-link" aria-hidden="true"></i></a>1.3.1. Example</h3>
+<p>Let the file <strong><code>extern_modules/foo.yr</code></strong> be filled as follows:</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">mod</span> <span class="token path">extern_modules</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">foo</span><span class="token punctuation">;</span>
 
-<span class="token comment">// foo is public, it can be accessed from external modules</span>
+<span class="token comment">// foo is public, it can be accessed from foreign modules</span>
 <span class="token other-keyword">pub</span> <span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
 
 <span class="token comment">// The bar function is private by default</span>
@@ -672,96 +738,29 @@ have access to the symbol.</p>
 <span class="token keyword">def</span> <span class="token function">bar</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
 </code></pre>
 <p><br></p>
-<p>And the file <code>main.yr</code> as follows. The <code>main</code> module, will only have
-access to the <code>foo</code> function, which is declared in the
-<code>extern_modules::foo</code> module.</p>
+<p>And the file <strong><code>main.yr</code></strong> as follows:</p>
 <pre class="language-"><code class="lang-ymir"><span class="token comment">// This importation will give access to all the symbols in the module</span>
 <span class="token comment">// &apos;extern_modules::foo&apos; that have been declared &apos;public&apos;</span>
 <span class="token keyword">import</span> <span class="token path">extern_modules</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">foo</span>
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// foo is public we can call it</span>
-<span class="token comment">//  ^^^</span>
-<span class="token comment">// Try to replace foo by bar, it is not public</span>
+    <span class="token function">bar</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// however, bar is private thus not accessible</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p><br></p>
-<p>The keyword <code>pub</code> can be used as a block to cover multiple
-declarations. The syntax of the pub qualifier is described in the
-following code block, and an example of utilization is presented in
-the block underneath.</p>
-<pre class="language-"><code class="lang-grammar"><span class="token path">pub_statement</span> <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token string">&apos;pub&apos;</span> <span class="token punctuation">(</span><span class="token string">&apos;{&apos;</span> declaration<span class="token operator">*</span> <span class="token string">&apos;}&apos;</span><span class="token punctuation">)</span>
-                       <span class="token operator">|</span> <span class="token punctuation">(</span>declaration<span class="token punctuation">)</span>
-</code></pre>
-<p><br></p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">mod</span> <span class="token path">extern_modules</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">foo</span>
-
-<span class="token other-keyword">pub</span> <span class="token punctuation">{</span>
-    <span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
-
-    <span class="token keyword">def</span> <span class="token function">bar</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-
-<span class="token other-keyword">pub</span> <span class="token keyword">def</span> <span class="token function">baz</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
-</code></pre>
-<h2 id="sub-modules"><a name="sub-modules" class="anchor-navigation-ex-anchor" href="#sub-modules"><i class="fa fa-link" aria-hidden="true"></i></a>1.3. Sub modules</h2>
-<p>It is possible to declare sub-module that are part of a global module,
-with the keyword <code>mod</code>. Unlike global modules, you have to name them
-when you want to access the symbols declared inside them. An example
-of inner module is presented in the following code block.</p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">mod</span> main
-<span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
-
-<span class="token comment">// Declaration of a module named InnerModule</span>
-<span class="token comment">// This module is private, thus only accessible for the module main</span>
-<span class="token keyword">mod</span> InnerModule <span class="token punctuation">{</span>
-
-        <span class="token comment">// Declaration of a function foo inside the module</span>
-    <span class="token comment">// It is public, so the module main can access it</span>
-    <span class="token other-keyword">pub</span> <span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Foo&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token function">bar</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token comment">// Declaration of a private function bar</span>
-    <span class="token comment">// only symbols declared in the module InnerModule have access to it</span>
-    <span class="token keyword">def</span> <span class="token function">bar</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Bar&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-         <span class="token comment">// There is no problem to access the function foo that is public</span>
-    <span class="token path">InnerModule</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-    <span class="token comment">// However the function bar is private</span>
-    <span class="token path">InnerModule</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">bar</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-</code></pre>
-<p><br></p>
-<p>The above source code won&apos;t compile as &apos;main&apos; function declared in
-&apos;main&apos; module try to have access to the function &apos;bar&apos; declared
-private in the module &apos;InnerModule&apos;. The compiler will return the
-following error.</p>
-<pre class="language-"><code class="lang-error"><span class="token path">Error</span> : undefined sub symbol bar for element main::InnerModule
- <span class="token comment">--&gt; main.yr:(27,16)</span>
-    &#x2503; 
-27  &#x2503;     InnerModule::bar ();
-    &#x2503;                ^^^^^
-    &#x2503; <span class="token other-keyword">Note</span> : bar <span class="token comment">--&gt; main.yr:(17,9) : bar is private within this context</span>
-    &#x2517;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501; 
+<p>Errors:</p>
+<pre class="language-"><code class="lang-error"><span class="token path">Error</span> : undefined symbol bar
+ <span class="token comment">--&gt; main.yr:(7,5)</span>
+ 7  &#x2503;     bar (); // however, bar is private thus not accessible
+    &#x254B;     ^^^
+    &#x2503; <span class="token other-keyword">Note</span> : bar <span class="token comment">--&gt; extern_modules/foo.yr:(8,5) : extern_modules::foo::bar is private within this context</span>
+    &#x2517;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501; 
 
 
 ymir1: <span class="token path">fatal error</span>: 
 compilation terminated.
 </code></pre>
 <p><br></p>
-<p>The privacy system is the same as for the global module. A module is a
-symbol, so its privacy is the same as the privacy of functions,
-structure, class, etc. Only the main module will have access to the
-sub-module <code>InnerModule</code> in the example above. Meaning that importing
-the module <code>main</code> won&apos;t give access to <code>main::InnerModule</code>. This can
-be changed by adding the qualifier <code>pub</code> to the module <code>InnerModule</code>.</p>
 <h2 id="symbol-conflict-resolution"><a name="symbol-conflict-resolution" class="anchor-navigation-ex-anchor" href="#symbol-conflict-resolution"><i class="fa fa-link" aria-hidden="true"></i></a>1.4. Symbol conflict resolution</h2>
 <p>When two external global modules declare two symbols with the same
 name, it may be impossible to know which symbol you want to use. In
@@ -929,12 +928,12 @@ suite, so the way to create libraries, object files, etc. is the same.</p>
 
             
                 
-                <a href="../types/enum.html" class="navigation navigation-prev " aria-label="Previous page: Enum">
+                <a href="../advanced/best.html" class="navigation navigation-prev " aria-label="Previous page: Best practice">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="../objects/" class="navigation navigation-next " aria-label="Next page: Objects">
+                <a href="../types/" class="navigation navigation-next " aria-label="Next page: User defined types">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -945,7 +944,7 @@ suite, so the way to create libraries, object files, etc. is the same.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Modules","level":"1.6","depth":1,"next":{"title":"Objects","level":"1.7","depth":1,"path":"objects/README.md","ref":"objects/README.md","articles":[{"title":"Class","level":"1.7.1","depth":2,"path":"objects/class.md","ref":"objects/class.md","articles":[]},{"title":"Inheritance","level":"1.7.2","depth":2,"path":"objects/inheritance.md","ref":"objects/inheritance.md","articles":[]},{"title":"Traits","level":"1.7.3","depth":2,"path":"objects/traits.md","ref":"objects/traits.md","articles":[]},{"title":"Example program","level":"1.7.4","depth":2,"path":"objects/example.md","ref":"objects/example.md","articles":[]}]},"previous":{"title":"Enum","level":"1.5.2","depth":2,"path":"types/enum.md","ref":"types/enum.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"modules/README.md","mtime":"2021-04-20T16:53:13.922Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-04-20T17:01:20.459Z"},"basePath":"..","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Modules","level":"1.5","depth":1,"next":{"title":"User defined types","level":"1.6","depth":1,"path":"types/README.md","ref":"types/README.md","articles":[{"title":"Structure","level":"1.6.1","depth":2,"path":"types/struct.md","ref":"types/struct.md","articles":[]},{"title":"Enum","level":"1.6.2","depth":2,"path":"types/enum.md","ref":"types/enum.md","articles":[]}]},"previous":{"title":"Best practice","level":"1.4.4","depth":2,"path":"advanced/best.md","ref":"advanced/best.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"modules/README.md","mtime":"2021-04-21T11:57:04.631Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-04-21T13:01:07.160Z"},"basePath":"..","book":{"language":"en"}});
         });
     </script>
 </div>
