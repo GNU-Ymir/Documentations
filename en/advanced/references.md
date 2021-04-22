@@ -108,7 +108,7 @@ def main () {
 
 The following figure shows the memory status of the previous code:
 
-<img src="https://gnu-ymir.github.io/Documentations/en/advanced/memory_x_main_ref_x_foo.png" alt="drawing" width="500" style="display: block; margin-left: auto;  margin-right: auto;">
+<img src="https://gnu-ymir.github.io/Documentations/en/advanced/memory_x_main_ref_x_foo.png" alt="drawing" width="450" style="display: block; margin-left: auto;  margin-right: auto;">
 
 The keyword `ref` is not always associated with a mutable variable, it
 can be used to pass a complex type to a function more efficiently,

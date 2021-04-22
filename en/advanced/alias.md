@@ -28,7 +28,7 @@ def main () {
 
 This source code can be represented in memory by the following figure.
 
-<img src="https://gnu-ymir.github.io/Documentations/en/advanced/memory_x_alias_main.png" alt="drawing" height="400"  style="display: block; margin-left: auto;  margin-right: auto;">
+<img src="https://gnu-ymir.github.io/Documentations/en/advanced/memory_x_alias_main.png" alt="drawing" height="500"  style="display: block; margin-left: auto;  margin-right: auto;">
 
 The alias keyword is only mandatory when the variable that will borrow
 the data is mutable and may impact the value. It is obvious that one

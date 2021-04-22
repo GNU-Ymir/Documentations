@@ -50,7 +50,8 @@ time, and memory place. For that reason, copies are never hidden by
 the language, and are made only when the keyword **`copy`** is placed
 in the source code.
 
-<img src="https://gnu-ymir.github.io/Documentations/en/advanced/memory_x_copy_main.png" alt="drawing" width="700"/>
+
+<img src="https://gnu-ymir.github.io/Documentations/en/advanced/memory_x_copy_main.png" alt="drawing" height="500" style="display: block; margin-left: auto;  margin-right: auto;">
 
 **Exercise :** Modify `x` that is initialised with an imutable string literal : 
 

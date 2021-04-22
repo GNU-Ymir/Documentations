@@ -52,12 +52,12 @@ def main () {
 <br>
 
 From the above example, the compiler returns an error, when trying to
-call the function **`good`** without *aliasing* nor *copying*. This
-error prevents from copying values implicitely without writting it
-down, nor making *aliasing* of the values and giving the write
-permission to foreign functions without informing the compiler of our
-agreement. All the other calls are valid, the wish of the user being
-totally explicit.
+call the function **`good`** without *aliasing* nor *copying* at line
+**6**. This error prevents from copying values implicitely without
+writting it down, nor making *aliasing* of the values and giving the
+write permission to foreign functions without informing the compiler
+of our agreement. All the other calls are valid, the wish of the user
+being totally explicit.
 
 ```error
 Error : the call operator is not defined for main::good and {mut [mut i32]}

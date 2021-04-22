@@ -49,9 +49,12 @@ example, the attribute `typeid` is equivalent to `__typeid__`, or
 All the information about TypeInfo are presented in chapter [Dynamic
 types](https://gnu-ymir.github.io/Documentations/en/types_advanced/).
 
-The keyword **`typeof`** retreive the type of a value at compilation
-time. This type can be used in any context, to retreive type
-information. For example, in a variable declaration. 
+## Typeof and Sizeof
+
+1) The keyword **`typeof`** retreives the type of a value at
+compilation time. This type can be used in any context, to retreive
+type information. For example, in a variable declaration, a function
+parameter, or return type, structure fields, etc..
 
 ```ymir
 import std::io;
@@ -70,10 +73,30 @@ def main () {
 	println (typeof (x)::typeid, " (", x, ")");
 }
 ```
-
 Results: 
 ```
 i32 (42)
+```
+
+<br>
+
+2) The keyword **`sizeof`** retreive the size of a type in bytes at
+compilation time. It is applicable only on types, not on value, but
+the type of a value can be retreive using the **`typeof`**
+keyword. This size is given in a value of type **`usize`** (this
+scalar type is presented below).
+
+```ymir
+import std::io;
+
+def main () {
+	let x : usize = sizeof (i32);
+	println (x, " ", sizeof (typeof (x)));
+}
+```
+Results: (on a x86-64 arch)
+```
+4 8
 ```
 
 ## Scalar types

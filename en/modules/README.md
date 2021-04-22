@@ -7,7 +7,7 @@ file in **Ymir** is a module.
 
 ## File hierarchy 
 
-Let have a look at the following file hierarchy : 
+Lets have a look at the following file hierarchy : 
 
 ```
 .

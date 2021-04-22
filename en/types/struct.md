@@ -3,7 +3,7 @@
 Structure is a common design used in many languages to define users'
 custom types, which contains multiple values of different
 types. Structures are similar to tuples, in terms of memory management
-(can be located in the stack). Unlike tuples, structures have a name,
+(located in the stack). Unlike tuples, structures have a name,
 and all their internal fields also have a name. It can be said that
 tuple are simply anonymus structures.
 
@@ -22,13 +22,12 @@ identifier := ('_')* [A-z] ([A-z0-9_])*
 
 <br>
 
-One can note from this definition that a structure may contain no
-fields, and be empty. The variable declaration of the fields uses the
-same syntax as declaration of function parameters, that is to say the
-same syntax as variable declaration but with the keyword **`let`**
-omitted. The following source code presents a definition of a
-structure **`Point`** with two fields **`x`** and **`y`** of type
-**`i32`**.
+The variable declaration of the fields uses the same syntax as
+declaration of function parameters, that is to say the same syntax as
+variable declaration but with the keyword **`let`** omitted. The
+following source code presents a definition of a structure **`Point`**
+with two fields **`x`** and **`y`** of type **`i32`**. The two fields
+of this structure are immutable, and have no default values.
 
 ```ymir
 import std::io
@@ -43,6 +42,32 @@ def main () {
     println (point); // structures are printable
 } 
 ```
+Results:
+```
+main::Point(1, 2)
+```
+
+<br>
+
+It is totally possible to declare a structure with no fields. Note,
+however, that such structure has a size of 1 byte in
+memory. *Contribution* this is a limitation observed in gcc, maybe
+this can be corrected ?
+
+```ymir
+import std::io;
+
+struct -> Unit;
+
+def main () {
+	let x = Unit ();
+	println (x, " of size ", sizeof (x));
+}
+```
+Results:
+```
+main::Unit() of size 1
+```
 
 ## Structure construction
 
@@ -50,13 +75,11 @@ The construction of a structure is made using the same syntax as a
 function call, that is to say using its identifier and a list of
 parameters inside parentheses and separated by comas. Like function
 calls, structure can have default values assigneted to fields. The
-value of these field can be then changed using the *named expression*
-syntax, which is constructed with the `->` token.
-
-The algorithm for determining which value will be associated to each
-field is the same as that used for the function call, and is presented
-in
-[Function](https://gnu-ymir.github.io/Documentations/en/primitives/functions.html).
+value of these fields can be changed using the *named expression*
+syntax, which is constructed with the arrow operator `->`. Field
+without default value can also be constructed using the *named
+expression* syntax. In that case, the order of field construction is
+not important.
 
 ```ymir
 import std::io
@@ -74,9 +97,7 @@ def main () {
     println (point2);
 }
 ```
-
-<br>
-
+Results:
 ```
 main::Point(98, 12)
 main::Point(0, 1)
@@ -86,9 +107,10 @@ main::Point(0, 1)
 
 ## Field access
 
-The field of a structure are always public, and accessible using the
-operator **`.`** where the left operand is a value whose type is a
-structure, and the right operand is the identifier of the field.
+The fields of a structure are always public, and accessible using the
+dot binary operator **`.`**, where the left operand is a value whose
+type is a structure, and the right operand is the identifier of the
+field.
 
 ```ymir
 import std::io
@@ -110,10 +132,12 @@ def main ()
 
 The mutability of a field of a structure is defined in the structure
 declaration. As with any variable declaration, the fields of a
-structure are by default immutable. You can of course add the keyword
-`mut` before the declaration of the field, to make it mutable. Its
-mutability therefore depends on the mutability of the variable that
-borrows the data from the structure.
+structure are by default immutable. By adding the keyword **`mut`**
+before the identifier of a field, the field becomes mutable. However,
+the mutability is transitive in *Ymir*, meaning that a immutable value
+of a struct type, cannot be modified even if its field are marked
+mutable. Consequently, for a field to be really mutable, it must be
+marked as such, and be a field of a mutable value.
 
 ```ymir 
 import std::io
@@ -124,25 +148,40 @@ struct
  -> Point;
  
 def main () {
-	let mut point = Point (1, 2);
-	//  ^^^
-	// Try to remove the mut here
-	point.y = 98;
+	let mut p1 = Point (1, 2);
+	p1.y = 98; // y is mutable
+	              // and p1 is mutable no problem
 	
-	// Try to add the following line 
-	// point.x = 34;
+	p1.x = 34; // x is not mutable, this won't compile
 	
-	println (point);
+	let p2 = Point (1, 2);
+	p2.y = 98; // p2 is not mutable, this won't compile	
 }
+```
+Errors:
+```error
+Error : left operand of type i32 is immutable
+ --> main.yr:(13,4)
+13  ┃ 	p1.x = 34; // x is not mutable, this won't compile
+    ╋ 	  ^
+
+Error : left operand of type i32 is immutable
+ --> main.yr:(16,4)
+16  ┃ 	p2.y = 98; // p2 is not mutable, this won't compile	
+    ╋ 	  ^
+
+
+ymir1: fatal error: 
+compilation terminated.
 ```
 
 ## Memory borrowing of structure
 
-As explained in the chapter [Alias and
-References](https://gnu-ymir.github.io/Documentations/en/advanced/),
-structures are only aliasable if they contain a field whose type is
-aliasable. All the fields of a structure are copied each time an
-assignment is made.
+By default structure data are located in the value that contains them,
+i.e. in the stack inside a variable, on the heap inside a slice,
+etc. They are copied by value, at assignement or function call. This
+copy is static, and does not require allocation, so it is allowed
+implicitely. 
 
 ```ymir
 import std::io
@@ -163,6 +202,27 @@ def main ()
     assert (p2.y == 12);
 }
 ```
+
+<br>
+
+Structure may contain aliasable values, such as slice. In that case,
+the copy is no longer allowed implicitely (if the structure is
+mutable, and the field containing the *aliasable* value is also
+mutable, and the element that will borrow the data is also
+mutable). To resolve the problem, the keywords `dcopy`, and `alias`
+presented in [Aliases and
+References](https://gnu-ymir.github.io/Documentations/en/advanced/)
+can be used.
+
+```ymir
+```
+
+It is impossible to make a simple copy of a structure
+with the keyword **`copy`**, the mutability level being statically set
+in the structure definition. For example, if a structure *S* contains
+a field whose type is **`mut [mut [i32]]`**, every value of type *S*
+have a field of type **`mut [mut [i32]]`**. For that reason, by making
+a first level *copy*, the mutability level would not be respected.
 
 ## Packed and Union
 
@@ -229,13 +289,11 @@ they would be contradictory. The argument must also be passed as a
 
 ## Structure specific attributes
 
-### Attributes of a type
-
 Structure have type specific attributes, as any types, accessible with
-the token **`::`**. The table below presents these specific
-attributes. These attributes are accessible using a type of struct,
-and not a value. A example, under the table presents usage of struct
-specific attributes.
+the double colon binary operator **`::`**. The table below presents
+these specific attributes. These attributes are accessible using a
+type of struct, and not a value. A example, under the table presents
+usage of struct specific attributes.
 
 | Name | Meaning |
 | --- | --- |
@@ -264,59 +322,5 @@ def main ()
     assert (Point::typeid == "main::Point");
     
     assert (x.x == i32::init && x.y == 9);
-}
-```
-
-### Attributes of a value
-
-Value of type struct have also specific attributes accessible using
-the token **`::`**. This token is used because it will generate
-another values of a different types at compile time, and these values
-are not contained inside the structure. The table below lists the
-specific attributes accessible using a value of type struct.
-
-| Name | Meaning |
-| --- | --- |
-| `tupleof` | Create a immutable tuple value from the struct value  |
-| `fields_address` | Used for low level operation. Create a tuple where each field is the address of the field if the struct |
-
-An simple example of `tupleof` and `fields_address` is presented in
-the following source code. The mutability of the pointers in the tuple
-created by `fields_address` is the same mutability as those of the
-fields of the creator struct. This attributes is used in the `std` for
-low level operations, and as for pointer we do not recommand to use
-this attribute unless, you know exactly what you are doing. In a
-previous section, we presented that there is no guarantee on the
-alignment and order of the fields in the structure in the compiled
-program. The interest of `fields_address` attribute is to bypass this
-limitation, when writing code that need access to the fields without
-knowing the name of the fields (basically some `std` function uses
-that capacity).
-
-```ymir
-struct
-| x : i32
-| mut y : i32
- -> Point;
-
-def main ()
-    throws &AssertError, &SegFault
-{
-    let mut point = Point (1, 2);
-    let (x, y) = point::tupleof;
-
-    assert (x == 1 && y == 2);
-
-    let mut addrs : (&i32, dmut &i32) = alias (point::fields_address);
-    //                                  ^^^^^
-    // The alias is mandatory, we try to borrow data using a pointer, which is an aliasable type
-    // The first element of addrs can't be mutable, because x is not mutable in the structure
-    
-    *(addrs._1) = 9; // modifying 'y' value of point
-
-    assert (point.y == 9);
-
-    let imut_addrs = point::fields_address; // here not need for alias
-    assert (*(imut_addrs._1) == 9);
 }
 ```
