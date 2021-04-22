@@ -2796,9 +2796,10 @@ table {
 }
 .page-inner {
  position:relative;
- max-width:90%;
+ max-width:65%;
  margin:0 auto;
- padding:20px 15px 40px 15px
+ padding:10px 15px 40px 15px;
+ margin-left: 7%;
 }
 .page-inner .btn-group .btn {
  border-radius:0;

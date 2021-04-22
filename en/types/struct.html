@@ -629,11 +629,11 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#structure"><b>1. </b>Structure</a></li><ul><li><span class="title-icon "></span><a href="#structure-construction"><b>1.1. </b>Structure construction</a></li><li><span class="title-icon "></span><a href="#field-access"><b>1.2. </b>Field access</a></li><li><span class="title-icon "></span><a href="#structure-mutability"><b>1.3. </b>Structure mutability</a></li><li><span class="title-icon "></span><a href="#memory-borrowing-of-structure"><b>1.4. </b>Memory borrowing of structure</a></li><li><span class="title-icon "></span><a href="#packed-and-union"><b>1.5. </b>Packed and Union</a></li><li><span class="title-icon "></span><a href="#structure-specific-attributes"><b>1.6. </b>Structure specific attributes</a></li><ul><li><span class="title-icon "></span><a href="#attributes-of-a-type"><b>1.6.1. </b>Attributes of a type</a></li><li><span class="title-icon "></span><a href="#attributes-of-a-value"><b>1.6.2. </b>Attributes of a value</a></li></ul></ul></ul></div><a href="#structure" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="structure"><a name="structure" class="anchor-navigation-ex-anchor" href="#structure"><i class="fa fa-link" aria-hidden="true"></i></a>1. Structure</h1>
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#structure"><b>1. </b>Structure</a></li><ul><li><span class="title-icon "></span><a href="#structure-construction"><b>1.1. </b>Structure construction</a></li><li><span class="title-icon "></span><a href="#field-access"><b>1.2. </b>Field access</a></li><li><span class="title-icon "></span><a href="#structure-mutability"><b>1.3. </b>Structure mutability</a></li><li><span class="title-icon "></span><a href="#memory-borrowing-of-structure"><b>1.4. </b>Memory borrowing of structure</a></li><li><span class="title-icon "></span><a href="#structure-specific-attributes"><b>1.5. </b>Structure specific attributes</a></li></ul></ul></div><a href="#structure" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="structure"><a name="structure" class="anchor-navigation-ex-anchor" href="#structure"><i class="fa fa-link" aria-hidden="true"></i></a>1. Structure</h1>
 <p>Structure is a common design used in many languages to define users&apos;
 custom types, which contains multiple values of different
 types. Structures are similar to tuples, in terms of memory management
-(can be located in the stack). Unlike tuples, structures have a name,
+(located in the stack). Unlike tuples, structures have a name,
 and all their internal fields also have a name. It can be said that
 tuple are simply anonymus structures.</p>
 <p>The complete grammar of structure definition is presented in the
@@ -647,13 +647,12 @@ chapter.</p>
 <span class="token path">identifier</span> <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token punctuation">(</span><span class="token string">&apos;_&apos;</span><span class="token punctuation">)</span><span class="token operator">*</span> <span class="token punctuation">[</span>A<span class="token operator">-</span>z<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token punctuation">[</span>A<span class="token operator">-</span>z0<span class="token operator">-</span>9_<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">*</span>
 </code></pre>
 <p><br></p>
-<p>One can note from this definition that a structure may contain no
-fields, and be empty. The variable declaration of the fields uses the
-same syntax as declaration of function parameters, that is to say the
-same syntax as variable declaration but with the keyword <strong><code>let</code></strong>
-omitted. The following source code presents a definition of a
-structure <strong><code>Point</code></strong> with two fields <strong><code>x</code></strong> and <strong><code>y</code></strong> of type
-<strong><code>i32</code></strong>.</p>
+<p>The variable declaration of the fields uses the same syntax as
+declaration of function parameters, that is to say the same syntax as
+variable declaration but with the keyword <strong><code>let</code></strong> omitted. The
+following source code presents a definition of a structure <strong><code>Point</code></strong>
+with two fields <strong><code>x</code></strong> and <strong><code>y</code></strong> of type <strong><code>i32</code></strong>. The two fields
+of this structure are immutable, and have no default values.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
 <span class="token keyword">struct</span> 
@@ -666,17 +665,34 @@ structure <strong><code>Point</code></strong> with two fields <strong><code>x</c
     <span class="token function">println</span> <span class="token punctuation">(</span>point<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// structures are printable</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<h2 id="structure-construction"><a name="structure-construction" class="anchor-navigation-ex-anchor" href="#structure-construction"><i class="fa fa-link" aria-hidden="true"></i></a>1.1. Structure construction</h2>
+<p>Results:</p>
+<pre class="language-"><code>main::Point(1, 2)
+</code></pre><p><br></p>
+<p>It is totally possible to declare a structure with no fields. Note,
+however, that such structure has a size of 1 byte in
+memory. <em>Contribution</em> this is a limitation observed in gcc, maybe
+this can be corrected ?</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span> <span class="token punctuation">-&gt;</span> Unit<span class="token punctuation">;</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token function">Unit</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span>x<span class="token punctuation">,</span> <span class="token string">&quot; of size &quot;</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Results:</p>
+<pre class="language-"><code>main::Unit() of size 1
+</code></pre><h2 id="structure-construction"><a name="structure-construction" class="anchor-navigation-ex-anchor" href="#structure-construction"><i class="fa fa-link" aria-hidden="true"></i></a>1.1. Structure construction</h2>
 <p>The construction of a structure is made using the same syntax as a
 function call, that is to say using its identifier and a list of
 parameters inside parentheses and separated by comas. Like function
 calls, structure can have default values assigneted to fields. The
-value of these field can be then changed using the <em>named expression</em>
-syntax, which is constructed with the <code>-&gt;</code> token.</p>
-<p>The algorithm for determining which value will be associated to each
-field is the same as that used for the function call, and is presented
-in
-<a href="https://gnu-ymir.github.io/Documentations/en/primitives/functions.html" target="_blank">Function</a>.</p>
+value of these fields can be changed using the <em>named expression</em>
+syntax, which is constructed with the arrow operator <code>-&gt;</code>. Field
+without default value can also be constructed using the <em>named
+expression</em> syntax. In that case, the order of field construction is
+not important.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
 <span class="token keyword">struct</span> 
@@ -692,14 +708,15 @@ in
     <span class="token function">println</span> <span class="token punctuation">(</span>point2<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p><br></p>
+<p>Results:</p>
 <pre class="language-"><code>main::Point(98, 12)
 main::Point(0, 1)
 </code></pre><p><br></p>
 <h2 id="field-access"><a name="field-access" class="anchor-navigation-ex-anchor" href="#field-access"><i class="fa fa-link" aria-hidden="true"></i></a>1.2. Field access</h2>
-<p>The field of a structure are always public, and accessible using the
-operator <strong><code>.</code></strong> where the left operand is a value whose type is a
-structure, and the right operand is the identifier of the field.</p>
+<p>The fields of a structure are always public, and accessible using the
+dot binary operator <strong><code>.</code></strong>, where the left operand is a value whose
+type is a structure, and the right operand is the identifier of the
+field.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
 <span class="token keyword">struct</span> 
@@ -717,10 +734,12 @@ structure, and the right operand is the identifier of the field.</p>
 <h2 id="structure-mutability"><a name="structure-mutability" class="anchor-navigation-ex-anchor" href="#structure-mutability"><i class="fa fa-link" aria-hidden="true"></i></a>1.3. Structure mutability</h2>
 <p>The mutability of a field of a structure is defined in the structure
 declaration. As with any variable declaration, the fields of a
-structure are by default immutable. You can of course add the keyword
-<code>mut</code> before the declaration of the field, to make it mutable. Its
-mutability therefore depends on the mutability of the variable that
-borrows the data from the structure.</p>
+structure are by default immutable. By adding the keyword <strong><code>mut</code></strong>
+before the identifier of a field, the field becomes mutable. However,
+the mutability is transitive in <em>Ymir</em>, meaning that a immutable value
+of a struct type, cannot be modified even if its field are marked
+mutable. Consequently, for a field to be really mutable, it must be
+marked as such, and be a field of a mutable value.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
 <span class="token keyword">struct</span> 
@@ -729,23 +748,37 @@ borrows the data from the structure.</p>
  <span class="token punctuation">-&gt;</span> Point<span class="token punctuation">;</span>
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> <span class="token other-keyword">mut</span> point <span class="token operator">=</span> <span class="token function">Point</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token comment">//  ^^^</span>
-    <span class="token comment">// Try to remove the mut here</span>
-    point<span class="token punctuation">.</span>y <span class="token operator">=</span> <span class="token number">98</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> <span class="token other-keyword">mut</span> p1 <span class="token operator">=</span> <span class="token function">Point</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    p1<span class="token punctuation">.</span>y <span class="token operator">=</span> <span class="token number">98</span><span class="token punctuation">;</span> <span class="token comment">// y is mutable</span>
+                  <span class="token comment">// and p1 is mutable no problem</span>
 
-    <span class="token comment">// Try to add the following line </span>
-    <span class="token comment">// point.x = 34;</span>
+    p1<span class="token punctuation">.</span>x <span class="token operator">=</span> <span class="token number">34</span><span class="token punctuation">;</span> <span class="token comment">// x is not mutable, this won&apos;t compile</span>
 
-    <span class="token function">println</span> <span class="token punctuation">(</span>point<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> p2 <span class="token operator">=</span> <span class="token function">Point</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    p2<span class="token punctuation">.</span>y <span class="token operator">=</span> <span class="token number">98</span><span class="token punctuation">;</span> <span class="token comment">// p2 is not mutable, this won&apos;t compile    </span>
 <span class="token punctuation">}</span>
 </code></pre>
+<p>Errors:</p>
+<pre class="language-"><code class="lang-error"><span class="token path">Error</span> : left operand of type i32 is immutable
+ <span class="token comment">--&gt; main.yr:(13,4)</span>
+13  &#x2503;     p1.x = 34; // x is not mutable, this won&apos;t compile
+    &#x254B;       ^
+
+<span class="token path">Error</span> : left operand of type i32 is immutable
+ <span class="token comment">--&gt; main.yr:(16,4)</span>
+16  &#x2503;     p2.y = 98; // p2 is not mutable, this won&apos;t compile    
+    &#x254B;       ^
+
+
+ymir1: <span class="token path">fatal error</span>: 
+compilation terminated.
+</code></pre>
 <h2 id="memory-borrowing-of-structure"><a name="memory-borrowing-of-structure" class="anchor-navigation-ex-anchor" href="#memory-borrowing-of-structure"><i class="fa fa-link" aria-hidden="true"></i></a>1.4. Memory borrowing of structure</h2>
-<p>As explained in the chapter <a href="https://gnu-ymir.github.io/Documentations/en/advanced/" target="_blank">Alias and
-References</a>,
-structures are only aliasable if they contain a field whose type is
-aliasable. All the fields of a structure are copied each time an
-assignment is made.</p>
+<p>By default structure data are located in the value that contains them,
+i.e. in the stack inside a variable, on the heap inside a slice,
+etc. They are copied by value, at assignement or function call. This
+copy is static, and does not require allocation, so it is allowed
+implicitely. </p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
 <span class="token keyword">struct</span> 
@@ -764,16 +797,39 @@ assignment is made.</p>
     <span class="token keyword">assert</span> <span class="token punctuation">(</span>p2<span class="token punctuation">.</span>y <span class="token operator">==</span> <span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<h2 id="packed-and-union"><a name="packed-and-union" class="anchor-navigation-ex-anchor" href="#packed-and-union"><i class="fa fa-link" aria-hidden="true"></i></a>1.5. Packed and Union</h2>
-<p>This part only concerns advanced programming paradigms, and is close
-to the machine level. I don&apos;t think you&apos;ll ever need it, unless you
-try to optimize your code at a binary level.</p>
-<p>The size of a structure is calculated by the compiler, which decides
-the alignment of the different fields. This is why the size of a
-structure containing an <code>i64&apos; and a</code>c8&apos;<code>is</code>16<code>bytes, not</code>9<code>bytes. There is no guarantee about the size or the order of the fields
-in the generated program. To force the compiler to remove the
-optimized alignment, you can use the</code>packed` modifier.</p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
+<p><br></p>
+<p>Structure may contain aliasable values, such as slice. In that case,
+the copy is no longer allowed implicitely (if the structure is
+mutable, and the field containing the <em>aliasable</em> value is also
+mutable, and the element that will borrow the data is also
+mutable). To resolve the problem, the keywords <code>dcopy</code>, and <code>alias</code>
+presented in <a href="https://gnu-ymir.github.io/Documentations/en/advanced/" target="_blank">Aliases and
+References</a>
+can be used.</p>
+<pre class="language-"><code class="lang-ymir">```
+
+It is impossible to make a simple <span class="token keyword">copy</span> of a structure
+<span class="token keyword">with</span> the keyword <span class="token operator">*</span><span class="token operator">*</span>`<span class="token keyword">copy</span>`<span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">,</span> the mutability level being statically set
+<span class="token keyword">in</span> the structure definition<span class="token punctuation">.</span> For example<span class="token punctuation">,</span> <span class="token keyword">if</span> a structure <span class="token operator">*</span>S<span class="token operator">*</span> contains
+a field whose type is <span class="token operator">*</span><span class="token operator">*</span>`<span class="token other-keyword">mut</span> <span class="token punctuation">[</span><span class="token other-keyword">mut</span> <span class="token punctuation">[</span><span class="token basic-types">i32</span><span class="token punctuation">]</span><span class="token punctuation">]</span>`<span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">,</span> every value of type <span class="token operator">*</span>S<span class="token operator">*</span>
+have a field of type <span class="token operator">*</span><span class="token operator">*</span>`<span class="token other-keyword">mut</span> <span class="token punctuation">[</span><span class="token other-keyword">mut</span> <span class="token punctuation">[</span><span class="token basic-types">i32</span><span class="token punctuation">]</span><span class="token punctuation">]</span>`<span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">.</span> For that reason<span class="token punctuation">,</span> by making
+a first level <span class="token operator">*</span><span class="token keyword">copy</span><span class="token operator">*</span><span class="token punctuation">,</span> the mutability level would not be respected<span class="token punctuation">.</span>
+
+## Packed and Union
+
+This part only concerns advanced programming paradigms<span class="token punctuation">,</span> and is close
+to the machine level<span class="token punctuation">.</span> I don<span class="token string">&apos;t think you&apos;</span>ll ever need it<span class="token punctuation">,</span> unless you
+try to optimize your code at a binary level<span class="token punctuation">.</span>
+
+The size of a structure is calculated by the compiler<span class="token punctuation">,</span> which decides
+the alignment of the different fields<span class="token punctuation">.</span> This is why the size of a
+structure containing an `<span class="token basic-types">i64</span><span class="token string">&apos; and a `c8&apos;</span>` is `<span class="token number">16</span>` bytes<span class="token punctuation">,</span> not `<span class="token number">9</span>`
+bytes<span class="token punctuation">.</span> There is no guarantee about the size or the order of the fields
+<span class="token keyword">in</span> the generated program<span class="token punctuation">.</span> To force the compiler to remove the
+optimized alignment<span class="token punctuation">,</span> you can use the `packed` modifier<span class="token punctuation">.</span>
+
+```ymir
+<span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
 <span class="token keyword">struct</span> <span class="token operator">@</span>packed
 <span class="token operator">|</span> x <span class="token punctuation">:</span> <span class="token basic-types">i64</span>
@@ -814,13 +870,12 @@ of the structure will then be the size of its largest field.</p>
 argument. You cannot give several arguments when building a union, as
 they would be contradictory. The argument must also be passed as a
 <em>named expression</em> (using the <code>-&gt;</code> token).</p>
-<h2 id="structure-specific-attributes"><a name="structure-specific-attributes" class="anchor-navigation-ex-anchor" href="#structure-specific-attributes"><i class="fa fa-link" aria-hidden="true"></i></a>1.6. Structure specific attributes</h2>
-<h3 id="attributes-of-a-type"><a name="attributes-of-a-type" class="anchor-navigation-ex-anchor" href="#attributes-of-a-type"><i class="fa fa-link" aria-hidden="true"></i></a>1.6.1. Attributes of a type</h3>
+<h2 id="structure-specific-attributes"><a name="structure-specific-attributes" class="anchor-navigation-ex-anchor" href="#structure-specific-attributes"><i class="fa fa-link" aria-hidden="true"></i></a>1.5. Structure specific attributes</h2>
 <p>Structure have type specific attributes, as any types, accessible with
-the token <strong><code>::</code></strong>. The table below presents these specific
-attributes. These attributes are accessible using a type of struct,
-and not a value. A example, under the table presents usage of struct
-specific attributes.</p>
+the double colon binary operator <strong><code>::</code></strong>. The table below presents
+these specific attributes. These attributes are accessible using a
+type of struct, and not a value. A example, under the table presents
+usage of struct specific attributes.</p>
 <table>
 <thead>
 <tr>
@@ -862,68 +917,6 @@ specific attributes.</p>
     <span class="token keyword">assert</span> <span class="token punctuation">(</span><span class="token path">Point</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">typeid</span> <span class="token operator">==</span> <span class="token string">&quot;main::Point&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     <span class="token keyword">assert</span> <span class="token punctuation">(</span>x<span class="token punctuation">.</span>x <span class="token operator">==</span> <span class="token basic-types">i32</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">init</span> <span class="token operator">&amp;&amp;</span> x<span class="token punctuation">.</span>y <span class="token operator">==</span> <span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-</code></pre>
-<h3 id="attributes-of-a-value"><a name="attributes-of-a-value" class="anchor-navigation-ex-anchor" href="#attributes-of-a-value"><i class="fa fa-link" aria-hidden="true"></i></a>1.6.2. Attributes of a value</h3>
-<p>Value of type struct have also specific attributes accessible using
-the token <strong><code>::</code></strong>. This token is used because it will generate
-another values of a different types at compile time, and these values
-are not contained inside the structure. The table below lists the
-specific attributes accessible using a value of type struct.</p>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>tupleof</code></td>
-<td>Create a immutable tuple value from the struct value</td>
-</tr>
-<tr>
-<td><code>fields_address</code></td>
-<td>Used for low level operation. Create a tuple where each field is the address of the field if the struct</td>
-</tr>
-</tbody>
-</table>
-<p>An simple example of <code>tupleof</code> and <code>fields_address</code> is presented in
-the following source code. The mutability of the pointers in the tuple
-created by <code>fields_address</code> is the same mutability as those of the
-fields of the creator struct. This attributes is used in the <code>std</code> for
-low level operations, and as for pointer we do not recommand to use
-this attribute unless, you know exactly what you are doing. In a
-previous section, we presented that there is no guarantee on the
-alignment and order of the fields in the structure in the compiled
-program. The interest of <code>fields_address</code> attribute is to bypass this
-limitation, when writing code that need access to the fields without
-knowing the name of the fields (basically some <code>std</code> function uses
-that capacity).</p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">struct</span>
-<span class="token operator">|</span> x <span class="token punctuation">:</span> <span class="token basic-types">i32</span>
-<span class="token operator">|</span> <span class="token other-keyword">mut</span> y <span class="token punctuation">:</span> <span class="token basic-types">i32</span>
- <span class="token punctuation">-&gt;</span> Point<span class="token punctuation">;</span>
-
-<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token keyword">throws</span> <span class="token operator">&amp;</span><span class="token type">AssertError</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span><span class="token type">SegFault</span>
-<span class="token punctuation">{</span>
-    <span class="token keyword">let</span> <span class="token other-keyword">mut</span> point <span class="token operator">=</span> <span class="token function">Point</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">let</span> <span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token path">point</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">tupleof</span><span class="token punctuation">;</span>
-
-    <span class="token keyword">assert</span> <span class="token punctuation">(</span>x <span class="token operator">==</span> <span class="token number">1</span> <span class="token operator">&amp;&amp;</span> y <span class="token operator">==</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-    <span class="token keyword">let</span> <span class="token other-keyword">mut</span> addrs <span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token basic-types">i32</span><span class="token punctuation">,</span> <span class="token other-keyword">dmut</span> <span class="token operator">&amp;</span><span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token other-keyword">alias</span> <span class="token punctuation">(</span><span class="token path">point</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">fields_address</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token comment">//                                  ^^^^^</span>
-    <span class="token comment">// The alias is mandatory, we try to borrow data using a pointer, which is an aliasable type</span>
-    <span class="token comment">// The first element of addrs can&apos;t be mutable, because x is not mutable in the structure</span>
-
-    <span class="token operator">*</span><span class="token punctuation">(</span>addrs<span class="token punctuation">.</span>_1<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">9</span><span class="token punctuation">;</span> <span class="token comment">// modifying &apos;y&apos; value of point</span>
-
-    <span class="token keyword">assert</span> <span class="token punctuation">(</span>point<span class="token punctuation">.</span>y <span class="token operator">==</span> <span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-    <span class="token keyword">let</span> imut_addrs <span class="token operator">=</span> <span class="token path">point</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">fields_address</span><span class="token punctuation">;</span> <span class="token comment">// here not need for alias</span>
-    <span class="token keyword">assert</span> <span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">(</span>imut_addrs<span class="token punctuation">.</span>_1<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
 
@@ -969,7 +962,7 @@ that capacity).</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Structure","level":"1.6.1","depth":2,"next":{"title":"Enum","level":"1.6.2","depth":2,"path":"types/enum.md","ref":"types/enum.md","articles":[]},"previous":{"title":"User defined types","level":"1.6","depth":1,"path":"types/README.md","ref":"types/README.md","articles":[{"title":"Structure","level":"1.6.1","depth":2,"path":"types/struct.md","ref":"types/struct.md","articles":[]},{"title":"Enum","level":"1.6.2","depth":2,"path":"types/enum.md","ref":"types/enum.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"types/struct.md","mtime":"2021-04-21T13:17:11.041Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-04-21T13:58:17.356Z"},"basePath":"..","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Structure","level":"1.6.1","depth":2,"next":{"title":"Enum","level":"1.6.2","depth":2,"path":"types/enum.md","ref":"types/enum.md","articles":[]},"previous":{"title":"User defined types","level":"1.6","depth":1,"path":"types/README.md","ref":"types/README.md","articles":[{"title":"Structure","level":"1.6.1","depth":2,"path":"types/struct.md","ref":"types/struct.md","articles":[]},{"title":"Enum","level":"1.6.2","depth":2,"path":"types/enum.md","ref":"types/enum.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"types/struct.md","mtime":"2021-04-22T08:21:33.019Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-04-22T09:32:39.998Z"},"basePath":"..","book":{"language":"en"}});
         });
     </script>
 </div>
