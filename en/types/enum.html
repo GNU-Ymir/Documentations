@@ -81,7 +81,7 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../objects/" />
+    <link rel="next" href="aka.html" />
     
     
     <link rel="prev" href="struct.html" />
@@ -346,6 +346,19 @@
             
                     
                     Enum
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="aka.html">
+            
+                <a href="aka.html">
+            
+                    
+                    Aka
             
                 </a>
             
@@ -629,13 +642,13 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#enumeration"><b>1. </b>Enumeration</a></li><ul><li><span class="title-icon "></span><a href="#value-access"><b>1.1. </b>Value access</a></li><li><span class="title-icon "></span><a href="#enumeration-specific-attributes"><b>1.2. </b>Enumeration specific attributes</a></li></ul></ul></div><a href="#enumeration" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="enumeration"><a name="enumeration" class="anchor-navigation-ex-anchor" href="#enumeration"><i class="fa fa-link" aria-hidden="true"></i></a>1. Enumeration</h1>
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#enumeration"><b>1. </b>Enumeration</a></li><ul><li><span class="title-icon "></span><a href="#value-access"><b>1.1. </b>Value access</a></li><ul><li><span class="title-icon "></span><a href="#value-types"><b>1.1.1. </b>Value types</a></li><li><span class="title-icon "></span><a href="#value-constructions"><b>1.1.2. </b>Value constructions</a></li><li><span class="title-icon "></span><a href="#value-context"><b>1.1.3. </b>Value context</a></li></ul><li><span class="title-icon "></span><a href="#enumeration-specific-attributes"><b>1.2. </b>Enumeration specific attributes</a></li></ul></ul></div><a href="#enumeration" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="enumeration"><a name="enumeration" class="anchor-navigation-ex-anchor" href="#enumeration"><i class="fa fa-link" aria-hidden="true"></i></a>1. Enumeration</h1>
 <p>Enumerations are user-defined types that enumerates a list of
 values. The keyword <code>enum</code> is used to define an enumeration type. The
-type of the fields can be inferred at compile time, thanks to the
-value associated with them, but can also be forced using the keyword
-<strong><code>:</code></strong> after the keyword <strong><code>enum</code></strong>. It is mandatory that each field
-shares the same type.</p>
+type of the fields can be inferred from the value associated to the
+fields. This type can be forced using the type operator <strong><code>:</code></strong>, after
+the keyword <strong><code>enum</code></strong>. All the fields of an enumeration shares the
+same type.</p>
 <p>The complete grammar of an enumeration is presented in the following
 source block. As for struct declaration, templates can be used, but
 this functionnality will only be discussed in the
@@ -646,9 +659,9 @@ chapter.</p>
 <span class="token path">identifier</span> <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token punctuation">(</span><span class="token string">&apos;_&apos;</span><span class="token punctuation">)</span><span class="token operator">*</span> <span class="token punctuation">[</span>A<span class="token operator">-</span>z<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token punctuation">[</span>A<span class="token operator">-</span>z0<span class="token operator">-</span>9_<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">*</span>
 </code></pre>
 <p><br></p>
-<p>A simple example of utilization of an enum type is presented in the
-source code below, where an enum type <code>Day</code> of type <code>[c32]</code> is
-defined.</p>
+<p>In the following source code, an example of an enumeration of type
+<strong><code>[c32]</code></strong> is presented. This enumeration lists the names of the
+days.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
 <span class="token keyword">enum</span>
@@ -671,17 +684,19 @@ defined.</p>
 <span class="token punctuation">}</span>
 </code></pre>
 <h2 id="value-access"><a name="value-access" class="anchor-navigation-ex-anchor" href="#value-access"><i class="fa fa-link" aria-hidden="true"></i></a>1.1. Value access</h2>
-<p>The values of an enumeration are accessible using the token
-<strong><code>::</code></strong>. In practice, access a value of the enumeration will past the
-content value of the field at the caller location. The result of the
-expression have the type of the enumeration (for example the type
-<strong><code>Day</code></strong> in the example below), and can be implicitely casted
-into the type of its content (for example <strong><code>[c32]</code></strong> in the example
-below). An example of enumeration access is presented in the following
-source code.</p>
+<p>The values of an enumeration are accessible using the double colon
+binary operator <strong><code>::</code></strong>. In practice, access a value of the
+enumeration will past the content value of the field at the caller
+location. The value - result of the expression - is of the type of the
+enumeration (for example the type <strong><code>Day</code></strong> in the example below).</p>
+<h3 id="value-types"><a name="value-types" class="anchor-navigation-ex-anchor" href="#value-types"><i class="fa fa-link" aria-hidden="true"></i></a>1.1.1. Value types</h3>
+<p>An example of enumeration access is presented in the following source
+code. In this example, implicit casting is perform from a <strong><code>Day</code></strong> to
+a <strong><code>[c32]</code></strong>, when calling the function <strong><code>foo</code></strong>, at line
+<strong>23</strong>. This implicit cast is allowed.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
-<span class="token keyword">enum</span> <span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token basic-types">c32</span><span class="token punctuation">]</span>
+<span class="token keyword">enum</span> <span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token basic-types">c32</span><span class="token punctuation">]</span> <span class="token comment">// the type is optional</span>
 <span class="token operator">|</span> MONDAY <span class="token operator">=</span> <span class="token string">&quot;Mon&quot;</span>
 <span class="token operator">|</span> TUESDAY <span class="token operator">=</span> <span class="token string">&quot;Tue&quot;</span>
 <span class="token operator">|</span> WEDNESDAY <span class="token operator">=</span> <span class="token string">&quot;Wed&quot;</span>
@@ -710,34 +725,41 @@ source code.</p>
 <span class="token punctuation">}</span>
 </code></pre>
 <p><br></p>
-<p>With the above source code, because we try to cast a <strong><code>[c32]</code></strong> into
-a <strong><code>Day</code></strong>, the compiler will return an error. The error is presented in
-the code block below.</p>
-<pre class="language-"><code class="lang-error"><span class="token path">Error</span> : the call operator is not defined for type main::bar and {mut [c32]}
- <span class="token comment">--&gt; main.yr:(28,6)</span>
-    &#x2503; 
+<p>However, the contrary is not allowed, because the source code tries to
+cast a <strong><code>[c32]</code></strong> into a <strong><code>Day</code></strong> at line <strong>28</strong>, the compiler
+returns an error. The error is presented in the code block below. Such
+cast is forbidden, to avoid enumeration value to contain a value that
+is actually not defined in the list of the field of the
+enumeration. For example, if this was accepted, the string
+<strong><code>&quot;NotADay&quot;</code></strong> would be castable into a <strong><code>Day</code></strong> (<em>note:</em> the value
+of the string being possibly unknown at compilation time).</p>
+<pre class="language-"><code class="lang-error"><span class="token path">Error</span> : the call operator is not defined for main::bar and {mut [c32]}
+ <span class="token comment">--&gt; main.yr:(28,9)</span>
 28  &#x2503;     bar (&quot;Mon&quot;)
-    &#x2503;         ^     ^
-    &#x2503; <span class="token other-keyword">Note</span> : candidate bar <span class="token comment">--&gt; main.yr:(17,5) : main::bar (day : [c32])-&gt; void</span>
-    &#x2503; <span class="token path">Error</span> : incompatible types main::Day and mut [c32]
-    &#x2503;  <span class="token comment">--&gt; main.yr:(28,7)</span>
-    &#x2503;     &#x2503; 
-    &#x2503; 28  &#x2503;     bar (&quot;Mon&quot;)
-    &#x2503;     &#x2503;          ^
-    &#x2503; 
-    &#x2503; <span class="token other-keyword">Note</span> : parameter day <span class="token comment">--&gt; main.yr:(17,10) : main::bar (day : [c32])-&gt; void</span>
-    &#x2517;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501; 
+    &#x254B;         ^     ^
+    &#x2503; <span class="token other-keyword">Note</span> : candidate bar <span class="token comment">--&gt; main.yr:(17,5) : main::bar (day : main::Day([c32]))-&gt; void</span>
+    &#x2503;     &#x2503; <span class="token path">Error</span> : incompatible types main::Day and mut [c32]
+    &#x2503;     &#x2503;  <span class="token comment">--&gt; main.yr:(28,10)</span>
+    &#x2503;     &#x2503; 28  &#x2503;     bar (&quot;Mon&quot;)
+    &#x2503;     &#x2503;     &#x254B;          ^
+    &#x2503;     &#x2503; <span class="token other-keyword">Note</span> : for parameter day <span class="token comment">--&gt; main.yr:(17,10) of main::bar (day : main::Day([c32]))-&gt; void</span>
+    &#x2503;     &#x2517;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501; 
+    &#x2517;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x253B;&#x2501; 
 
 
 ymir1: <span class="token path">fatal error</span>: 
 compilation terminated.
 </code></pre>
 <p><br></p>
-<p>Enumeration values can be more complex than literals, and can for
-example call functions, create structures, etc. An example of
-enumeration creating structure from function call is presented in the
-source code below. </p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">struct</span>
+<h3 id="value-constructions"><a name="value-constructions" class="anchor-navigation-ex-anchor" href="#value-constructions"><i class="fa fa-link" aria-hidden="true"></i></a>1.1.2. Value constructions</h3>
+<p>Enumeration values can be more complex than literals. Any kind of
+value can be used, for example call functions, condition block, scope
+guards, etc. In the following example, an enumeration creating
+structure from function call is presented. The type of the enumeration
+is <strong><code>Ipv4Addr</code></strong>.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
+
+<span class="token keyword">struct</span>
 <span class="token operator">|</span> a <span class="token punctuation">:</span> <span class="token basic-types">i32</span>
 <span class="token operator">|</span> b <span class="token punctuation">:</span> <span class="token basic-types">i32</span>
 <span class="token operator">|</span> c <span class="token punctuation">:</span> <span class="token basic-types">i32</span>
@@ -766,6 +788,7 @@ source code below. </p>
 
     <span class="token keyword">assert</span> <span class="token punctuation">(</span><span class="token path">KnownAddr</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">LOCALHOST</span><span class="token punctuation">.</span>a <span class="token operator">==</span> <span class="token number">127</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// a second time here</span>
     <span class="token keyword">assert</span> <span class="token punctuation">(</span><span class="token path">KnownAddr</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">BROADCAST</span><span class="token punctuation">.</span>d <span class="token operator">==</span> <span class="token number">255</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// call broadcast here</span>
+    <span class="token keyword">assert</span> <span class="token punctuation">(</span>addr<span class="token punctuation">.</span>a <span class="token operator">==</span> <span class="token number">127</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
 <p><br></p>
@@ -773,11 +796,69 @@ source code below. </p>
 means for example that when enumeration values are constructed using
 function call, the function is called each time the enumeration field
 is accessed. Thus the result of the execution of the compiled source
-code above will be the following:</p>
+code above is the following:</p>
 <pre class="language-"><code>Call localhost
 Call localhost
 Call broadcast
 </code></pre><p><br></p>
+<h3 id="value-context"><a name="value-context" class="anchor-navigation-ex-anchor" href="#value-context"><i class="fa fa-link" aria-hidden="true"></i></a>1.1.3. Value context</h3>
+<p>If the value of the enumeration seems to be passed at the caller
+location, they don&apos;t share the context of the caller. In other words,
+the fields of an enumeration have access to the symbol accessible from
+the enumeration context, and not from the caller context. An example,
+of enumeration trying to access symbols is presented in the source
+code bellow.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
+
+<span class="token keyword">static</span> __GLOB__ <span class="token operator">=</span> <span class="token other-keyword">true</span><span class="token punctuation">;</span>
+
+<span class="token keyword">enum</span> 
+<span class="token operator">|</span> FOO <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">if</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token number">42</span> <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span> <span class="token number">11</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token operator">|</span> BAR <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">if</span> <span class="token punctuation">(</span>__GLOB__<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token number">42</span> <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span> <span class="token number">11</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+ <span class="token punctuation">-&gt;</span> ErrorEnum<span class="token punctuation">;</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token other-keyword">false</span><span class="token punctuation">;</span>
+
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token path">ErrorEnum</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">FOO</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br> </p>
+<p>From the above example, the compiler returns an error. In this error,
+the compiler informs that the variable <strong><code>x</code></strong> is not defined from the
+context of the enumeration. Even if the variable is declared inside
+the <strong><code>main</code></strong> function, it is not accessible from the enumeration
+context. The global variable <strong><code>__GLOB__</code></strong> is accessible from the
+enumeration context, and thus accessing it is not an issue.</p>
+<pre class="language-"><code class="lang-error"><span class="token other-keyword">Note</span> : 
+ <span class="token comment">--&gt; main.yr:(6,3)</span>
+ 6  &#x2503; | FOO = (if (x) { 42 } else { 11 })
+    &#x254B;   ^^^
+    &#x2503; <span class="token path">Error</span> : undefined symbol x
+    &#x2503;  <span class="token comment">--&gt; main.yr:(6,14)</span>
+    &#x2503;  6  &#x2503; | FOO = (if (x) { 42 } else { 11 })
+    &#x2503;     &#x254B;              ^
+    &#x2517;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x253B;&#x2501; 
+
+<span class="token other-keyword">Note</span> : 
+ <span class="token comment">--&gt; main.yr:(13,11)</span>
+13  &#x2503;     println (ErrorEnum::FOO); 
+    &#x254B;              ^^^^^^^^^
+    &#x2503; <span class="token path">Error</span> : the type main::ErrorEnum is not complete due to previous errors
+    &#x2503;  <span class="token comment">--&gt; main.yr:(8,5)</span>
+    &#x2503;  8  &#x2503;  -&gt; ErrorEnum;
+    &#x2503;     &#x254B;     ^^^^^^^^^
+    &#x2503;     &#x2503; <span class="token other-keyword">Note</span> : 
+    &#x2503;     &#x2503;  <span class="token comment">--&gt; main.yr:(13,11)</span>
+    &#x2503;     &#x2503; 13  &#x2503;     println (ErrorEnum::FOO); 
+    &#x2503;     &#x2503;     &#x254B;              ^^^^^^^^^
+    &#x2503;     &#x2517;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x253B;&#x2501; 
+    &#x2517;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x253B;&#x2501; 
+
+
+ymir1: <span class="token path">fatal error</span>: 
+compilation terminated.
+</code></pre>
 <h2 id="enumeration-specific-attributes"><a name="enumeration-specific-attributes" class="anchor-navigation-ex-anchor" href="#enumeration-specific-attributes"><i class="fa fa-link" aria-hidden="true"></i></a>1.2. Enumeration specific attributes</h2>
 <p>As for any type, enumeration have specific type attributes. The table
 below lists the enumeration type specific attributes.</p>
@@ -813,15 +894,15 @@ below lists the enumeration type specific attributes.</p>
 </table>
 <p><br></p>
 <p>One may note that the operator to access specific attributes and field
-is the same, and therefore that if an enumeration have a field named
-as a specific attributes there will be a conflict. To avoid conflict,
-the priority is given to the fields of the enumeration, and specific
-attributes can be accessed using their identifier surrounded by
-<strong><code>_</code></strong> tokens. For example, accessing the <code>members</code> specific
-attributes can be made using the identifier <code>__members__</code>. An example
-of the principle is presented in the following source code. The
-specific attribute surrounding is applicable to all types, but can be
-really usefull here.</p>
+is the same (double colon binary operator <strong><code>::</code></strong>), and therefore
+that if an enumeration have a field named as a specific attributes
+there is a conflict. To avoid conflict, the priority is given to the
+fields of the enumeration, and specific attributes can be accessed
+using their identifier surrounded by <strong><code>_</code></strong> tokens. For example,
+accessing the <code>members</code> specific attributes can be made using the
+identifier <code>__members__</code>. An example of the principle is presented in
+the following source code. The specific attribute surrounding is
+applicable to all types, but can be really usefull here.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">mod</span> main<span class="token punctuation">;</span>
 
 <span class="token keyword">enum</span>
@@ -872,7 +953,7 @@ really usefull here.</p>
                 </a>
                 
                 
-                <a href="../objects/" class="navigation navigation-next " aria-label="Next page: Objects">
+                <a href="aka.html" class="navigation navigation-next " aria-label="Next page: Aka">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -883,7 +964,7 @@ really usefull here.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Enum","level":"1.6.2","depth":2,"next":{"title":"Objects","level":"1.7","depth":1,"path":"objects/README.md","ref":"objects/README.md","articles":[{"title":"Class","level":"1.7.1","depth":2,"path":"objects/class.md","ref":"objects/class.md","articles":[]},{"title":"Inheritance","level":"1.7.2","depth":2,"path":"objects/inheritance.md","ref":"objects/inheritance.md","articles":[]},{"title":"Traits","level":"1.7.3","depth":2,"path":"objects/traits.md","ref":"objects/traits.md","articles":[]},{"title":"Example program","level":"1.7.4","depth":2,"path":"objects/example.md","ref":"objects/example.md","articles":[]}]},"previous":{"title":"Structure","level":"1.6.1","depth":2,"path":"types/struct.md","ref":"types/struct.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"types/enum.md","mtime":"2021-04-21T13:58:33.044Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-04-22T09:32:39.998Z"},"basePath":"..","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Enum","level":"1.6.2","depth":2,"next":{"title":"Aka","level":"1.6.3","depth":2,"path":"types/aka.md","ref":"types/aka.md","articles":[]},"previous":{"title":"Structure","level":"1.6.1","depth":2,"path":"types/struct.md","ref":"types/struct.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"types/enum.md","mtime":"2021-04-23T11:41:20.141Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-04-23T13:07:04.882Z"},"basePath":"..","book":{"language":"en"}});
         });
     </script>
 </div>

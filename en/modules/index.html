@@ -353,6 +353,19 @@
             
         </li>
     
+        <li class="chapter " data-level="1.6.3" data-path="../types/aka.html">
+            
+                <a href="../types/aka.html">
+            
+                    
+                    Aka
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -629,7 +642,7 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#modules"><b>1. </b>Modules</a></li><ul><li><span class="title-icon "></span><a href="#file-hierarchy"><b>1.1. </b>File hierarchy</a></li><li><span class="title-icon "></span><a href="#sub-modules"><b>1.2. </b>Sub modules</a></li><li><span class="title-icon "></span><a href="#privacy"><b>1.3. </b>Privacy</a></li><ul><li><span class="title-icon "></span><a href="#example"><b>1.3.1. </b>Example</a></li></ul><li><span class="title-icon "></span><a href="#symbol-conflict-resolution"><b>1.4. </b>Symbol conflict resolution</a></li><li><span class="title-icon "></span><a href="#public-importation"><b>1.5. </b>Public importation</a></li><li><span class="title-icon "></span><a href="#include-directory"><b>1.6. </b>Include directory</a></li><li><span class="title-icon "></span><a href="#compilation-of-modules"><b>1.7. </b>Compilation of modules</a></li></ul></ul></div><a href="#modules" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="modules"><a name="modules" class="anchor-navigation-ex-anchor" href="#modules"><i class="fa fa-link" aria-hidden="true"></i></a>1. Modules</h1>
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#modules"><b>1. </b>Modules</a></li><ul><li><span class="title-icon "></span><a href="#file-hierarchy"><b>1.1. </b>File hierarchy</a></li><li><span class="title-icon "></span><a href="#sub-modules"><b>1.2. </b>Sub modules</a></li><li><span class="title-icon "></span><a href="#privacy"><b>1.3. </b>Privacy</a></li><ul><li><span class="title-icon "></span><a href="#example"><b>1.3.1. </b>Example</a></li></ul><li><span class="title-icon "></span><a href="#symbol-conflict-resolution"><b>1.4. </b>Symbol conflict resolution</a></li><li><span class="title-icon "></span><a href="#public-importation"><b>1.5. </b>Public importation</a></li><ul><li><span class="title-icon "></span><a href="#best-practice"><b>1.5.1. </b>Best practice</a></li></ul><li><span class="title-icon "></span><a href="#include-directory"><b>1.6. </b>Include directory</a></li><li><span class="title-icon "></span><a href="#compilation-of-modules"><b>1.7. </b>Compilation of modules</a></li></ul></ul></div><a href="#modules" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="modules"><a name="modules" class="anchor-navigation-ex-anchor" href="#modules"><i class="fa fa-link" aria-hidden="true"></i></a>1. Modules</h1>
 <p>When creating a large project, it is very important to organize your
 code. <strong>Ymir</strong> offers a system of modules, which is used to manage
 different parts of the code that have different purposes. Each source
@@ -865,16 +878,7 @@ symbols declared in <code>extern_modules::bar</code> will not be accessible in t
 module <code>main</code>.</p>
 <p>You can of course, make a <code>pub</code> importation, to make the symbols of
 the module <code>extern_modules::bar</code> visible for the module <code>main</code>.</p>
-<ul>
-<li>extern_modules/foo.yr</li>
-</ul>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">mod</span> <span class="token path">extern_modules</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">foo</span>
-
-<span class="token other-keyword">pub</span> <span class="token keyword">import</span> <span class="token path">extern_modules</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">bar</span>
-</code></pre>
-<ul>
-<li>extern_modules/bar.yr</li>
-</ul>
+<p>1) Module <em><code>extern_modules/bar.yr</code></em></p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">mod</span> <span class="token path">extern_modules</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">bar</span>
 <span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
@@ -882,9 +886,14 @@ the module <code>extern_modules::bar</code> visible for the module <code>main</c
     <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Bar&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<ul>
-<li>main.yr</li>
-</ul>
+<p><br></p>
+<p>2) Module <em><code>extern_modules/foo.yr</code></em></p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">mod</span> <span class="token path">extern_modules</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">foo</span>
+
+<span class="token other-keyword">pub</span> <span class="token keyword">import</span> <span class="token path">extern_modules</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">bar</span>
+</code></pre>
+<p><br></p>
+<p>3) Module <em><code>main.yr</code></em></p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">mod</span> main
 <span class="token keyword">import</span> <span class="token path">extern_modules</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">foo</span><span class="token punctuation">;</span>
 
@@ -892,6 +901,31 @@ the module <code>extern_modules::bar</code> visible for the module <code>main</c
     <span class="token function">bar</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
+<p><br></p>
+<p>In the example above, the function <strong><code>bar</code></strong> defined in the module
+<strong><code>extern_modules::bar</code></strong>, is imported (because the function is public
+is public) by the module <strong><code>extern_modules::foo</code></strong>. This importation
+is public, thus when the module <strong><code>main</code></strong> imports the module
+<strong><code>extern_modules::foo</code></strong>, it also imports the module
+<strong><code>extern_modules::bar</code></strong>, and has access to the function <strong><code>bar</code></strong>. </p>
+<h3 id="best-practice"><a name="best-practice" class="anchor-navigation-ex-anchor" href="#best-practice"><i class="fa fa-link" aria-hidden="true"></i></a>1.5.1. Best practice</h3>
+<p>Public importation must be used with caution, to avoid polluting other
+modules. A good practice, is to define some modules only to make
+public importations. These modules should be named <strong><code>_</code></strong>. For
+example, with our previous file hierarchy, a file
+<strong><code>extern_modules/_.yr</code></strong> would be added, and no public imports made
+in the modules <strong><code>extern_modules::foo</code></strong>, nor in the module
+<strong><code>extern_modules::bar</code></strong>.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">mod</span> <span class="token path">extern_modules</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">_</span><span class="token punctuation">;</span>
+
+<span class="token other-keyword">pub</span> <span class="token keyword">import</span> <span class="token path">extern_modules</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">foo</span><span class="token punctuation">;</span>
+<span class="token other-keyword">pub</span> <span class="token keyword">import</span> <span class="token path">extern_modules</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">bar</span><span class="token punctuation">;</span>
+</code></pre>
+<p><br></p>
+<p>These modules are not automatically generated by <em>Ymir</em> &#x2014; even if it
+seems trivial &#x2014;, to allow importing only a subset of the modules
+contained in a sub directory. These importation modules are optional
+and left to the choice of the user.</p>
 <h2 id="include-directory"><a name="include-directory" class="anchor-navigation-ex-anchor" href="#include-directory"><i class="fa fa-link" aria-hidden="true"></i></a>1.6. Include directory</h2>
 <p>You can use the <code>-I</code> option, to add a path to the include
 directory. This path will be used as if it was the current <code>$(pwd)</code>. In
@@ -903,12 +937,12 @@ must be <code>relative::to::my::file</code>.</p>
 <p>This is how the standard library is included in the build, and how you
 can access modules in <code>std::</code> that are not located in <code>$(pwd)/std/</code>.</p>
 <h2 id="compilation-of-modules"><a name="compilation-of-modules" class="anchor-navigation-ex-anchor" href="#compilation-of-modules"><i class="fa fa-link" aria-hidden="true"></i></a>1.7. Compilation of modules</h2>
-<p>All modules must be compiled, the <code>import</code> declaration will not
-compile external modules.  For example, if you compile only the <code>main</code>
-module, you will get an error.</p>
-<ul>
-<li>main.yr </li>
-</ul>
+<p>All modules must be compiled, the <code>import</code> declaration is just a
+directive of for symbols access, but does not compile the imported
+symbols. For example, in the following example, there are two modules,
+one declaring a function <strong><code>foo</code></strong>, and the other importing it and
+calling it. </p>
+<p>1) Module <em><code>main.yr</code></em></p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">mod</span> main
 <span class="token keyword">import</span> <span class="token path">extern_modules</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">foo</span><span class="token punctuation">;</span>
 
@@ -916,24 +950,29 @@ module, you will get an error.</p>
     <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<ul>
-<li>extern_modules/foo.yr</li>
-</ul>
+<p><br></p>
+<p>2) Module <em><code>extern_modules/foo.yr</code></em></p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">mod</span> <span class="token path">extern_modules</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">foo</span>
 
 <span class="token other-keyword">pub</span> <span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
 </code></pre>
 <p><br></p>
+<p>By compiling only the <strong><code>main</code></strong> function, the compiler returns a link
+error. This error means that the symbol <code>foo</code> declared in the module
+<code>extern_modules::foo</code> was not found during the symbol linkage. </p>
 <pre class="language-"><code>$ gyc main.yr
 /tmp/ccCOeXDq.o: In function `_Y4mainFZv&apos;:
 main.yr:(.text+0x3e): undefined reference to `_Y14extern_modules3foo3fooFZv&apos;
 collect2: error: ld returned 1 exit status
-</code></pre><p>This means that the symbol <code>foo</code> declared in the module <code>extern_modules::foo</code> cannot be
-found. So you have to write the command line.</p>
+</code></pre><p><br></p>
+<p>To avoid this error, and create a valid executable, where all symbols
+can be found, the module <strong><code>extern_modules::foo</code></strong> has to be compiled
+as well. <em>GYC</em> is able to manage object files (containing pre compiled
+symbols), and compiled libraries. The way <em>GYC</em> manage these kind of
+objects is similar to all compiler of the <em>GCC suite</em>, and is not
+presented in this documentation (<em>cf.</em> <a href="https://gcc.gnu.org/onlinedocs/gcc-9.3.0/gcc/Link-Options.html#Link-Options" target="_blank">GCC options for linking</a>).</p>
 <pre class="language-"><code>$ gyc main.yr extern_modules/foo.yr
-</code></pre><p>The way <code>gyc</code> works is similar to all the compilers in the <code>GCC</code>
-suite, so the way to create libraries, object files, etc. is the same.</p>
-
+</code></pre>
                                 
                                 </section>
                             
@@ -976,7 +1015,7 @@ suite, so the way to create libraries, object files, etc. is the same.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Modules","level":"1.5","depth":1,"next":{"title":"User defined types","level":"1.6","depth":1,"path":"types/README.md","ref":"types/README.md","articles":[{"title":"Structure","level":"1.6.1","depth":2,"path":"types/struct.md","ref":"types/struct.md","articles":[]},{"title":"Enum","level":"1.6.2","depth":2,"path":"types/enum.md","ref":"types/enum.md","articles":[]}]},"previous":{"title":"Best practice","level":"1.4.4","depth":2,"path":"advanced/best.md","ref":"advanced/best.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"modules/README.md","mtime":"2021-04-22T09:32:10.051Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-04-22T09:32:39.998Z"},"basePath":"..","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Modules","level":"1.5","depth":1,"next":{"title":"User defined types","level":"1.6","depth":1,"path":"types/README.md","ref":"types/README.md","articles":[{"title":"Structure","level":"1.6.1","depth":2,"path":"types/struct.md","ref":"types/struct.md","articles":[]},{"title":"Enum","level":"1.6.2","depth":2,"path":"types/enum.md","ref":"types/enum.md","articles":[]},{"title":"Aka","level":"1.6.3","depth":2,"path":"types/aka.md","ref":"types/aka.md","articles":[]}]},"previous":{"title":"Best practice","level":"1.4.4","depth":2,"path":"advanced/best.md","ref":"advanced/best.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"modules/README.md","mtime":"2021-04-22T09:57:36.999Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-04-23T13:07:04.882Z"},"basePath":"..","book":{"language":"en"}});
         });
     </script>
 </div>
