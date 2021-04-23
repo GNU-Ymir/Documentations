@@ -44,7 +44,7 @@ The grammar of a function is defined in the following code block.
 ```grammar
 function := template_function | simple_function
 simple_function := 'def' identifier parameters ('->' type)? expression
-template_function := 'def' ('if' expression) identifier templates ('->' type)? expression
+template_function := 'def' ('if' expression) identifier templates parameters ('->' type)? expression
 
 parameters := '(' (var_decl (',' var_decl)*)? ')'
 var_decl := identifier ':' type ('=' expression)?

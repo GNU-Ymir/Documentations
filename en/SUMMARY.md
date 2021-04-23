@@ -17,6 +17,7 @@
 * [User defined types](types/README.md)
   * [Structure](types/struct.md)
   * [Enum](types/enum.md)
+  * [Aka](types/aka.md)
 * [Objects](objects/README.md)
   * [Class](objects/class.md)
   * [Inheritance](objects/inheritance.md)

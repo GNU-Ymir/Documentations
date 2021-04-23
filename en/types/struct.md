@@ -1,18 +1,18 @@
 # Structure
 
 Structure is a common design used in many languages to define users'
-custom types, which contains multiple values of different
-types. Structures are similar to tuples, in terms of memory management
-(located in the stack). Unlike tuples, structures have a name,
-and all their internal fields also have a name. It can be said that
-tuple are simply anonymus structures.
+custom types. They contains multiple values of different types,
+accessible by identifiers. Structures are similar to tuples, in terms
+of memory management (located in the stack). Unlike tuples, structures
+are named, and all their internal fields are named as well. 
 
 The complete grammar of structure definition is presented in the
 following code block. One can note the possibility to add templates to
 the definition of the structure. These templates will only be
-discussed in the
-[Templates](https://gnu-ymir.github.io/Documentations/en/templates/)
-chapter.
+discussed in the chapter
+[Templates](https://gnu-ymir.github.io/Documentations/en/templates/),
+and are not of interest to us at the moment.
+
 
 ```grammar
 struct_type := 'struct' ('|' var_decl)* '->' identifier (templates)?
@@ -22,12 +22,12 @@ identifier := ('_')* [A-z] ([A-z0-9_])*
 
 <br>
 
-The variable declaration of the fields uses the same syntax as
-declaration of function parameters, that is to say the same syntax as
-variable declaration but with the keyword **`let`** omitted. The
-following source code presents a definition of a structure **`Point`**
-with two fields **`x`** and **`y`** of type **`i32`**. The two fields
-of this structure are immutable, and have no default values.
+The fields of the structure are defined using the same syntax as the
+declaration of function parameters, i.e. the same syntax as variable
+declaration but with the keyword **`let`** omitted. The following
+source code presents a definition of a structure **`Point`** with two
+fields **`x`** and **`y`** of type **`i32`**. The two fields of this
+structure are immutable, and have no default values.
 
 ```ymir
 import std::io
@@ -42,6 +42,9 @@ def main () {
     println (point); // structures are printable
 } 
 ```
+
+<br>
+
 Results:
 ```
 main::Point(1, 2)
@@ -49,10 +52,11 @@ main::Point(1, 2)
 
 <br>
 
-It is totally possible to declare a structure with no fields. Note,
-however, that such structure has a size of 1 byte in
-memory. *Contribution* this is a limitation observed in gcc, maybe
-this can be corrected ?
+It is possible to declare a structure with no fields. Note, however,
+that such structure has a size of 1 byte in memory.
+
+<span style="color:grey">*Contribution* this is a limitation observed in gcc, maybe
+this can be corrected ?</span>
 
 ```ymir
 import std::io;
@@ -215,27 +219,60 @@ References](https://gnu-ymir.github.io/Documentations/en/advanced/)
 can be used.
 
 ```ymir
+import std::io
+
+struct 
+| mut y : [mut [mut i32]]
+ -> Point;
+
+def main ()
+    throws &OutOfArray
+{
+    let mut a = Point ([[1, 23, 3], [4, 5, 6]]);
+    let mut b = dcopy a;
+    let mut c = alias a;
+    
+    b.y [0][0] = 9; // only change the value of 'b'
+    c.y [0][1] = 2; // change the value of 'a' and 'c'
+    
+    println (a);
+    println (b);
+    println (c);
+}
 ```
 
-It is impossible to make a simple copy of a structure
-with the keyword **`copy`**, the mutability level being statically set
-in the structure definition. For example, if a structure *S* contains
-a field whose type is **`mut [mut [i32]]`**, every value of type *S*
-have a field of type **`mut [mut [i32]]`**. For that reason, by making
-a first level *copy*, the mutability level would not be respected.
+<br>
+Results:
+```
+main::Point([[1, 2, 3], [4, 5, 6]])
+main::Point([[9, 23, 3], [4, 5, 6]])
+main::Point([[1, 2, 3], [4, 5, 6]])
+```
+
+<br>
+
+It is impossible to make a simple copy of a structure with the keyword
+**`copy`**, the mutability level being set once and for all in the
+structure definition. For example, if a structure *S* contains a field
+whose type is **`mut [mut [i32]]`**, every value of type *S* have a
+field of type **`mut [mut [i32]]`**. For that reason, by making a
+first level *copy*, the mutability level would not be respected.
 
 ## Packed and Union
 
 This part only concerns advanced programming paradigms, and is close
-to the machine level. I don't think you'll ever need it, unless you
-try to optimize your code at a binary level.
+to the machine level. It is unlikely that you will ever need it,
+unless you try to optimize your code at a binary level.
+
+### Packed 
 
 The size of a structure is calculated by the compiler, which decides
 the alignment of the different fields. This is why the size of a
-structure containing an `i64' and a `c8'` is `16` bytes, not `9`
+structure containing an `i64` and a `c8` is **16** bytes, not **9**
 bytes. There is no guarantee about the size or the order of the fields
 in the generated program. To force the compiler to remove the
-optimized alignment, you can use the `packed` modifier.
+optimized alignment, the *special modifier* **`packed`** can be
+used. 
 
 ```ymir
 import std::io
@@ -257,14 +294,37 @@ def main () {
 }
 ```
 
+Results: 
+
 ```
 Size of packed : 9
 Size of unpacked : 16
 ```
 
-The `union` modifier, on the other hand, tells the compiler that all
-fields in the structure must share the same memory location. The size
-of the structure will then be the size of its largest field.
+### Union
+
+The **`union`** *special modifier* , on the other hand, informs the
+compiler that all fields in the structure must share the same memory
+location. In the following example, the **`union`** *modifier* is used
+on a structure containing two fields. The largest field of the
+structure is the field **`y`** of type **`f64`**. The size of this
+field is **8** bytes, thus the structure has a size of **8** bytes as
+well. All the fields are aligned at the beginning of the strucures,
+meaning that the field **`x`**, and **`y`** shares the same address in
+memory.
+
+```ymir
+struct @union 
+| x : i32
+| y : f64
+ -> Dummy;
+```
+
+<br>
+
+The construction of a structure with **`union`** *modifier* requires
+only one argument. This argument must be passed as a *named
+expression* with the arrow operator `->`.
 
 ```ymir
 import std::io
@@ -278,18 +338,21 @@ def main ()
     throws &AssertError
 {
     let x = Dummy (y-> 12.0f);
+
+    // Comparison of pointer is only possible on pointer of the same type
+    // Any pointer can be casted into a pointer of &void (the contrary is not possible)
+	// is operator, checks if two pointer are equals
+    assert (cast!(&void) (&(x.x)) is cast!(&void) (&(x.y)));
+
+    // The value of x depends on the value of y
     assert (x.x == 1094713344);
+    assert (x.y == 12.0f);
 }
 ```
 
-As you can see, the construction of the Union requires only one
-argument. You cannot give several arguments when building a union, as
-they would be contradictory. The argument must also be passed as a
-*named expression* (using the `->` token).
-
 ## Structure specific attributes
 
-Structure have type specific attributes, as any types, accessible with
+Structures have type specific attributes, as any types, accessible with
 the double colon binary operator **`::`**. The table below presents
 these specific attributes. These attributes are accessible using a
 type of struct, and not a value. A example, under the table presents
