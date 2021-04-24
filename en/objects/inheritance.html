@@ -668,169 +668,467 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#inheritance"><b>1. </b>Inheritance</a></li><ul><li><span class="title-icon "></span><a href="#attributes"><b>1.1. </b>Attributes</a></li><li><span class="title-icon "></span><a href="#constructor_function%20Object()%20%7B%20[native%20code]%20%7D"><b>1.2. </b>Constructor</a></li><li><span class="title-icon "></span><a href="#method-overriding"><b>1.3. </b>Method overriding</a></li><li><span class="title-icon "></span><a href="#abstract-class"><b>1.4. </b>Abstract class</a></li><li><span class="title-icon "></span><a href="#final-class"><b>1.5. </b>Final class</a></li></ul></ul></div><a href="#inheritance" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="inheritance"><a name="inheritance" class="anchor-navigation-ex-anchor" href="#inheritance"><i class="fa fa-link" aria-hidden="true"></i></a>1. Inheritance</h1>
-<p>A class can be derived from a base class. You can use the keyword
-<code>over</code> to perform inheritance between two classes. A class can have
-only one ancestor.</p>
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#inheritance"><b>1. </b>Inheritance</a></li><ul><li><span class="title-icon "></span><a href="#fields"><b>1.1. </b>Fields</a></li><li><span class="title-icon "></span><a href="#parent-class-construction"><b>1.2. </b>Parent class construction</a></li><li><span class="title-icon "></span><a href="#parent-class-destruction"><b>1.3. </b>Parent class destruction</a></li><li><span class="title-icon "></span><a href="#method-overriding"><b>1.4. </b>Method overriding</a></li><ul><li><span class="title-icon "></span><a href="#override-mutable-method"><b>1.4.1. </b>Override mutable method</a></li><li><span class="title-icon "></span><a href="#final-methods"><b>1.4.2. </b>Final methods</a></li></ul><li><span class="title-icon "></span><a href="#abstract-class"><b>1.5. </b>Abstract class</a></li><ul><li><span class="title-icon "></span><a href="#method-with-no-body"><b>1.5.1. </b>Method with no body</a></li></ul><li><span class="title-icon "></span><a href="#final-class"><b>1.6. </b>Final class</a></li></ul></ul></div><a href="#inheritance" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="inheritance"><a name="inheritance" class="anchor-navigation-ex-anchor" href="#inheritance"><i class="fa fa-link" aria-hidden="true"></i></a>1. Inheritance</h1>
+<p>One of the most important point of the object oriented programming
+paradigm is the possibility for a class to be derived from a base
+class. This capability enables type polymorphism. In <em>Ymir</em> the
+keyword <code>over</code> is used for class derivation, and overriding. A class
+can have only one ancestor. We will see in the chapter about traits,
+that multiple inheritance can be in some way achieved in another way.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">class</span> Shape <span class="token punctuation">{</span>
 <span class="token punctuation">}</span>
 
+<span class="token comment">/**</span>
+<span class="token comment"> * A circle is a shape</span>
+<span class="token comment"> */</span>
 <span class="token keyword">class</span> Circle <span class="token keyword">over</span> Shape <span class="token punctuation">{</span>
     <span class="token keyword">let</span> _center <span class="token punctuation">:</span> <span class="token basic-types">i32</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
     <span class="token keyword">let</span> _radius <span class="token punctuation">:</span> <span class="token basic-types">i32</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<h2 id="attributes"><a name="attributes" class="anchor-navigation-ex-anchor" href="#attributes"><i class="fa fa-link" aria-hidden="true"></i></a>1.1. Attributes</h2>
-<p>The attributes of an ancestor cannot be redeclared by an heir
-class. All attributes are protected by default, so the heir can access
-the attribute of an ancestor. You can use the <code>prv</code> keyword to make
-them private and then inaccessible to the heirs.</p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">class</span> Shape <span class="token punctuation">{</span>
-        <span class="token keyword">let</span> _x <span class="token punctuation">:</span> <span class="token basic-types">i32</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token comment">//  ^^^</span>
-<span class="token comment">// Try to add prv</span>
+<h2 id="fields"><a name="fields" class="anchor-navigation-ex-anchor" href="#fields"><i class="fa fa-link" aria-hidden="true"></i></a>1.1. Fields</h2>
+<p>The fields of an ancestor cannot be redeclared by an heir class. Even
+if they are hidden to the heir class (private fields). This choice was
+made to avoid miscomprehension, as two different variables would be
+named the same way.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> Shape <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> _x <span class="token punctuation">:</span> <span class="token basic-types">i32</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
 
     <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 
 <span class="token keyword">class</span> Circle <span class="token keyword">over</span> Shape <span class="token punctuation">{</span>
-    <span class="token comment">// Try to add the following line </span>
-    <span class="token comment">// let _x : i32;</span>
+    <span class="token keyword">let</span> _x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">;</span>
 
     <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
         <span class="token function">println</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">.</span>_x<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>    
 <span class="token punctuation">}</span>
 </code></pre>
-<h2 id="constructor_function Object() { [native code] }"><a name="constructor_function Object() { [native code] }" class="anchor-navigation-ex-anchor" href="#constructor_function%20Object()%20%7B%20[native%20code]%20%7D"><i class="fa fa-link" aria-hidden="true"></i></a>1.2. Constructor</h2>
-<p>The constructor of the parent class must be called, when constructing
-a heir class. The <code>with</code> syntax is used to perform that.</p>
+<p><br></p>
+<p>Error:</p>
+<pre class="language-"><code class="lang-error"><span class="token path">Error</span> : when validating main::Circle
+ <span class="token comment">--&gt; main.yr:(9,7)</span>
+ 9  &#x2503; class Circle over Shape {
+    &#x254B;       ^^^^^^
+    &#x2503; <span class="token path">Error</span> : declaration of _x shadows another declaration
+    &#x2503;  <span class="token comment">--&gt; main.yr:(4,13)</span>
+    &#x2503;  4  &#x2503;     prv let _x : i32 = 0;
+    &#x2503;     &#x254B;             ^^
+    &#x2503;     &#x2503; <span class="token other-keyword">Note</span> : 
+    &#x2503;     &#x2503;  <span class="token comment">--&gt; main.yr:(10,9)</span>
+    &#x2503;     &#x2503; 10  &#x2503;     let _x : i32;
+    &#x2503;     &#x2503;     &#x254B;         ^^
+    &#x2503;     &#x2517;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x253B;&#x2501; 
+    &#x2517;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x253B;&#x2501; 
+
+
+ymir1: <span class="token path">fatal error</span>: 
+compilation terminated.
+</code></pre>
+<h2 id="parent-class-construction"><a name="parent-class-construction" class="anchor-navigation-ex-anchor" href="#parent-class-construction"><i class="fa fa-link" aria-hidden="true"></i></a>1.2. Parent class construction</h2>
+<p>All object instances must be constructed. This means that when a class
+override a base class, the constructor of the base class must be
+called inside the constructor of the heir class. This call can be made
+implicitly if the constructor of the parent class takes no
+arguments. However, if no constructor in the parent class takes no
+arguments, then the call must be made explicitly. This explicit call
+is made inside the with statement.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">class</span> Shape <span class="token punctuation">{</span>    
+    <span class="token keyword">let</span> _x <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
     <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
 
-    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token function">println</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token keyword">with</span> _x <span class="token operator">=</span> x <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> Circle <span class="token keyword">over</span> Shape <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> _radius <span class="token punctuation">:</span> <span class="token type">f32</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// Same as : with super ()</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">with</span> _radius <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">.</span>0f <span class="token punctuation">{</span><span class="token punctuation">}</span> 
+
+    <span class="token comment">// call the second parent constructor, at line 5</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token keyword">with</span> <span class="token keyword">super</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">,</span> _radius <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">.</span>0f <span class="token punctuation">{</span><span class="token punctuation">}</span> 
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br></p>
+<p>The call of the parent constructor is the first thing performed inside
+a constructor. Meaning, that the construction of the fields of the
+heir class are made afterward. To illustrate this point, the following
+example presents a base class <strong><code>Foo</code></strong> with a constructor printing
+<strong><code>foo</code></strong>, and a heir class <strong><code>Bar</code></strong>, calling the function <strong><code>bar</code>*</strong>
+(printing the value <strong><code>bar</code></strong>) to initialize its field <strong><code>_x</code></strong>.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
+
+<span class="token keyword">def</span> <span class="token function">bar</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span> <span class="token punctuation">{</span>
+    <span class="token function">println</span><span class="token punctuation">(</span> <span class="token string">&quot;Bar&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token number">42</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> Foo <span class="token punctuation">{</span>    
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Foo&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 
-<span class="token keyword">class</span> Circle <span class="token keyword">over</span> Shape <span class="token punctuation">{</span>
-    <span class="token comment">// ... attributes </span>
+<span class="token keyword">class</span> Bar <span class="token keyword">over</span> Foo <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> _x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">;</span>
 
-    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token comment">// Same as : with super ()</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">with</span> _x <span class="token operator">=</span> <span class="token function">bar</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
-    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token keyword">with</span> <span class="token keyword">super</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> _ <span class="token operator">=</span> <span class="token path">Bar</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<h2 id="method-overriding"><a name="method-overriding" class="anchor-navigation-ex-anchor" href="#method-overriding"><i class="fa fa-link" aria-hidden="true"></i></a>1.3. Method overriding</h2>
-<p>The keyword <code>over</code> is used to override a method. You cannot implicitly
-override a method by omitting the <code>over</code> keyword and using the <code>def</code>
-keyword. The signature of the method must be strictly identical to
-that of the ancestor&apos;s method, including privacy. Of course,
-you cannot override private methods, but you can override protected
-and public methods.</p>
+<p><br>
+Results: </p>
+<pre class="language-"><code>Foo
+Bar
+</code></pre><p><br> </p>
+<p>However, because constructor redirection does not call parent
+constructor, and let that work to the called constructor, to which
+they are redirected, the following program has a different
+behavior. The arguments of the redirection are computed first, then
+the call to the parent constructor, and finally the construction of
+the fields of the heir class.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
+
+<span class="token keyword">def</span> <span class="token function">bar</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span> <span class="token punctuation">{</span>
+    <span class="token function">println</span><span class="token punctuation">(</span> <span class="token string">&quot;Bar&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token number">29</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">baz</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span> <span class="token punctuation">{</span>
+    <span class="token function">println</span><span class="token punctuation">(</span> <span class="token string">&quot;Baz&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token number">13</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> Foo <span class="token punctuation">{</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Foo&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> Bar <span class="token keyword">over</span> Foo <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> _x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">;</span>
+
+    <span class="token comment">/**</span>
+<span class="token comment">     * Call parent constructor at line 14, and then bar</span>
+<span class="token comment">     */</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token keyword">with</span> _x <span class="token operator">=</span> <span class="token function">bar</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> x <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+    <span class="token comment">/**</span>
+<span class="token comment">     * Call baz first, then self at line 25</span>
+<span class="token comment">     */</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">with</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token function">baz</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> 
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> _ <span class="token operator">=</span> <span class="token path">Bar</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br>
+Results:</p>
+<pre class="language-"><code class="lang-ymir">Baz
+Foo
+Bar
+</code></pre>
+<p><br> The construction order is perfectly predictible, but should not
+have an impact on the program behavior. So it is probably not a good
+idea to rely on it.</p>
+<h2 id="parent-class-destruction"><a name="parent-class-destruction" class="anchor-navigation-ex-anchor" href="#parent-class-destruction"><i class="fa fa-link" aria-hidden="true"></i></a>1.3. Parent class destruction</h2>
+<p>In contrast to construction, the parent destructor is the last
+operation of the destruction of a heir class. The parent destructor is
+always called, there is no way to avoid it (aside exiting the
+program). </p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> Foo <span class="token punctuation">{</span>    
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token function">__dtor</span> <span class="token punctuation">(</span><span class="token other-keyword">mut</span> <span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Destroying Foo&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;====&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> Bar <span class="token keyword">over</span> Foo <span class="token punctuation">{</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+    <span class="token function">__dtor</span> <span class="token punctuation">(</span><span class="token other-keyword">mut</span> <span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;====&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Destroying Bar&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token comment">// desperately trying to avoid parent destruction</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> _ <span class="token operator">=</span> <span class="token path">Bar</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    loop <span class="token punctuation">{</span>
+        <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br>
+Results:</p>
+<pre class="language-"><code>====
+Destroying Bar
+Destroying Foo
+====
+====
+Destroying Bar
+Destroying Foo
+====
+====
+Destroying Bar
+Destroying Foo
+====
+...
+</code></pre><h2 id="method-overriding"><a name="method-overriding" class="anchor-navigation-ex-anchor" href="#method-overriding"><i class="fa fa-link" aria-hidden="true"></i></a>1.4. Method overriding</h2>
+<p>The keyword <code>over</code> is used to override a method. Methods <strong>cannot</strong> be
+ implicitly overriden by omitting the <code>over</code> keyword and using the
+ <code>def</code> keyword. The signature of the method must be strictly identical
+ to the one of the ancestor method, including privacy, and argument
+ mutability. Of course, private methods cannot be overriden, because
+ hidden to heir classes, but protected and public methods can be
+ overriden. In the following example, a class <strong><code>Shape</code></strong> define the
+ method <strong><code>area</code></strong>. This method is public, and then can be overriden
+ by heir classes. The class <strong><code>Circle</code></strong> and <strong><code>Rectangle</code></strong> overrides
+ the methods.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
 <span class="token keyword">class</span> Shape <span class="token punctuation">{</span>
-    <span class="token comment">// ... attributes and constructors</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
 
-    <span class="token other-keyword">pub</span> <span class="token keyword">def</span> <span class="token function">area</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span> 
-        <span class="token number">0</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">def</span> <span class="token function">area</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> f64 
+    <span class="token number">0.0</span>
 <span class="token punctuation">}</span>
 
 <span class="token keyword">class</span> Circle <span class="token keyword">over</span> Shape <span class="token punctuation">{</span>
-    <span class="token comment">// ... attributes and constructors</span>
+    <span class="token keyword">let</span> _radius <span class="token punctuation">:</span> <span class="token type">f64</span><span class="token punctuation">;</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span>radius <span class="token punctuation">:</span> <span class="token type">f64</span><span class="token punctuation">)</span> <span class="token keyword">with</span> _radius <span class="token operator">=</span> radius <span class="token punctuation">{</span><span class="token punctuation">}</span>
 
-    <span class="token other-keyword">pub</span> <span class="token keyword">over</span> <span class="token function">area</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span> <span class="token punctuation">{</span>
-        <span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">math</span><span class="token punctuation">;</span>
-        <span class="token path">Math</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">PI</span> <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">.</span>_radius <span class="token operator">*</span> <span class="token keyword">self</span><span class="token punctuation">.</span>_radius<span class="token punctuation">)</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">over</span> <span class="token function">area</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> f64 <span class="token punctuation">{</span>
+    <span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">math</span><span class="token punctuation">;</span>
+    <span class="token path">math</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">PI</span> <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">.</span>_radius <span class="token operator">*</span> <span class="token keyword">self</span><span class="token punctuation">.</span>_radius<span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 
 <span class="token keyword">class</span> Square <span class="token keyword">over</span> Shape <span class="token punctuation">{</span>
-    <span class="token comment">// ... attributes and constructors</span>
+    <span class="token keyword">let</span> _side <span class="token punctuation">:</span> <span class="token type">f64</span><span class="token punctuation">;</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span>side <span class="token punctuation">:</span> <span class="token type">f64</span><span class="token punctuation">)</span> <span class="token keyword">with</span> _side <span class="token operator">=</span> side <span class="token punctuation">{</span><span class="token punctuation">}</span>
 
-    <span class="token other-keyword">pub</span> <span class="token keyword">over</span> <span class="token function">area</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span> <span class="token punctuation">{</span>
-        <span class="token keyword">self</span><span class="token punctuation">.</span>_side <span class="token operator">*</span> <span class="token keyword">self</span><span class="token punctuation">.</span>_side
+    <span class="token other-keyword">pub</span> <span class="token keyword">over</span> <span class="token function">area</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> f64 <span class="token punctuation">{</span>
+    <span class="token keyword">self</span><span class="token punctuation">.</span>_side <span class="token operator">*</span> <span class="token keyword">self</span><span class="token punctuation">.</span>_side
     <span class="token punctuation">}</span>
 
 <span class="token punctuation">}</span>
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> <span class="token other-keyword">mut</span> s <span class="token punctuation">:</span> <span class="token type">Shape</span> <span class="token operator">=</span> <span class="token path">Circle</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> <span class="token other-keyword">mut</span> s <span class="token punctuation">:</span> <span class="token type">&amp;Shape</span> <span class="token operator">=</span> <span class="token path">Circle</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token number">12.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">println</span> <span class="token punctuation">(</span>s<span class="token punctuation">.</span><span class="token function">area</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    s <span class="token operator">=</span> <span class="token path">Square</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    s <span class="token operator">=</span> <span class="token path">Square</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token number">3.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">println</span> <span class="token punctuation">(</span>s<span class="token punctuation">.</span><span class="token function">area</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    
 <span class="token punctuation">}</span>
 </code></pre>
-<h2 id="abstract-class"><a name="abstract-class" class="anchor-navigation-ex-anchor" href="#abstract-class"><i class="fa fa-link" aria-hidden="true"></i></a>1.4. Abstract class</h2>
-<p>A class can be abstract, this means that the class cannot be
-instantiated even if it has a constructor. An abstract class can declare
-methods without body, these methods must be overriden by heir
-classes. In the above example, there is no reason why we can
-instantiate a <code>Shape</code>, so just mark the class as abstract.</p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">class</span> <span class="token operator">@</span>abstract Shape <span class="token punctuation">{</span>
-    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token comment">// need a constructor to be heritable</span>
+<p><br>
+Results:</p>
+<pre class="language-"><code>452.389342
+9.000000
+</code></pre><h3 id="override-mutable-method"><a name="override-mutable-method" class="anchor-navigation-ex-anchor" href="#override-mutable-method"><i class="fa fa-link" aria-hidden="true"></i></a>1.4.1. Override mutable method</h3>
+<p>The mutability of the method must be respected in the heir class. This
+means that mutable method must be mutable in the heir, and immutable
+methods must be immutable in the heir.</p>
+<h3 id="final-methods"><a name="final-methods" class="anchor-navigation-ex-anchor" href="#final-methods"><i class="fa fa-link" aria-hidden="true"></i></a>1.4.2. Final methods</h3>
+<p>A base class can flags its method to avoid overriding. This flag is
+placed as a <em>custom modifier</em> before the name of the method.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">class</span> Foo <span class="token punctuation">{</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
 
-    <span class="token other-keyword">pub</span> <span class="token keyword">def</span> <span class="token function">area</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span><span class="token punctuation">;</span> <span class="token comment">// Method has no body</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">def</span> <span class="token operator">@</span>final <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> Bar <span class="token keyword">over</span> Foo <span class="token punctuation">{</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+    <span class="token other-keyword">pub</span> <span class="token keyword">over</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Error:</p>
+<pre class="language-"><code class="lang-error"><span class="token path">Error</span> : when validating main::Bar
+ <span class="token comment">--&gt; main.yr:(7,7)</span>
+ 7  &#x2503; class Bar over Foo {
+    &#x254B;       ^^^
+    &#x2503; <span class="token path">Error</span> : cannot override final method (const self) =&gt; main::Foo::foo ()-&gt; void
+    &#x2503;  <span class="token comment">--&gt; main.yr:(10,14)</span>
+    &#x2503; 10  &#x2503;     pub over foo (self) {}
+    &#x2503;     &#x254B;              ^^^
+    &#x2503;     &#x2503; <span class="token other-keyword">Note</span> : 
+    &#x2503;     &#x2503;  <span class="token comment">--&gt; main.yr:(4,20)</span>
+    &#x2503;     &#x2503;  4  &#x2503;     pub def @final foo (self) {}
+    &#x2503;     &#x2503;     &#x254B;                    ^^^
+    &#x2503;     &#x2517;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x253B;&#x2501; 
+    &#x2517;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x253B;&#x2501; 
+
+
+ymir1: <span class="token path">fatal error</span>: 
+compilation terminated.
+</code></pre>
+<p><br> </p>
+<p>Such flag can also be used on an overriden method inside a heir
+class to avoid further overriding. </p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">class</span> Foo <span class="token punctuation">{</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+    <span class="token other-keyword">pub</span> <span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> Bar <span class="token keyword">over</span> Foo <span class="token punctuation">{</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+    <span class="token other-keyword">pub</span> <span class="token keyword">over</span> <span class="token operator">@</span>final <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> Baz <span class="token keyword">over</span> Bar <span class="token punctuation">{</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+    <span class="token other-keyword">pub</span> <span class="token keyword">over</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br>
+Error:</p>
+<pre class="language-"><code class="lang-error"><span class="token path">Error</span> : when validating main::Baz
+ <span class="token comment">--&gt; main.yr:(13,7)</span>
+13  &#x2503; class Baz over Bar {
+    &#x254B;       ^^^
+    &#x2503; <span class="token path">Error</span> : cannot override final method (const self) =&gt; main::Bar::foo ()-&gt; void
+    &#x2503;  <span class="token comment">--&gt; main.yr:(16,14)</span>
+    &#x2503; 16  &#x2503;     pub over foo (self) {}
+    &#x2503;     &#x254B;              ^^^
+    &#x2503;     &#x2503; <span class="token other-keyword">Note</span> : 
+    &#x2503;     &#x2503;  <span class="token comment">--&gt; main.yr:(10,21)</span>
+    &#x2503;     &#x2503; 10  &#x2503;     pub over @final foo (self) {}
+    &#x2503;     &#x2503;     &#x254B;                     ^^^
+    &#x2503;     &#x2517;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x253B;&#x2501; 
+    &#x2517;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x253B;&#x2501; 
+
+
+ymir1: <span class="token path">fatal error</span>: 
+compilation terminated.
+</code></pre>
+<h2 id="abstract-class"><a name="abstract-class" class="anchor-navigation-ex-anchor" href="#abstract-class"><i class="fa fa-link" aria-hidden="true"></i></a>1.5. Abstract class</h2>
+<p>A class can be abstract, this means that the class cannot be
+instantiated even if it has a constructor. An abstract class can
+declare methods without body, these methods must be overriden by heir
+classes. An abstract must have a constructor to be heritable, this
+constructor being called by the heir classes. Not that an abstract
+class can have no public constructors, but that a class that have no
+public constructors is not necessarily abstract.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">class</span> <span class="token operator">@</span>abstract Shape <span class="token punctuation">{</span>
+    <span class="token other-keyword">prot</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token comment">// need a constructor to be inheritable</span>
+
+    <span class="token other-keyword">pub</span> <span class="token keyword">def</span> <span class="token function">area</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> f64<span class="token punctuation">;</span> <span class="token comment">// Method does not need a body</span>
 <span class="token punctuation">}</span>
 
 <span class="token keyword">class</span> Circle <span class="token keyword">over</span> Shape <span class="token punctuation">{</span>
-    <span class="token comment">// ... attributes and constructors</span>
+    <span class="token keyword">let</span> _radius <span class="token punctuation">:</span> <span class="token type">f64</span><span class="token punctuation">;</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span>radius <span class="token punctuation">:</span> <span class="token type">f64</span><span class="token punctuation">)</span> <span class="token keyword">with</span> _radius <span class="token operator">=</span> radius <span class="token punctuation">{</span><span class="token punctuation">}</span>
 
-    <span class="token comment">// Try to remove this method definition</span>
-    <span class="token other-keyword">pub</span> <span class="token keyword">over</span> <span class="token function">area</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span> <span class="token punctuation">{</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">over</span> <span class="token function">area</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> f64 <span class="token punctuation">{</span>
         <span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">math</span><span class="token punctuation">;</span>
-        <span class="token path">Math</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">PI</span> <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">.</span>_radius <span class="token operator">*</span> <span class="token keyword">self</span><span class="token punctuation">.</span>_radius<span class="token punctuation">)</span>
+        <span class="token path">math</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">PI</span> <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">.</span>_radius <span class="token operator">*</span> <span class="token keyword">self</span><span class="token punctuation">.</span>_radius<span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">let</span> s <span class="token punctuation">:</span> <span class="token type">Shape</span> <span class="token operator">=</span> <span class="token path">Circle</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token comment">//              ^^^^^^</span>
-    <span class="token comment">// Try to replace by shape</span>
-<span class="token punctuation">}</span>
-</code></pre>
-<h2 id="final-class"><a name="final-class" class="anchor-navigation-ex-anchor" href="#final-class"><i class="fa fa-link" aria-hidden="true"></i></a>1.5. Final class</h2>
-<p>Final classes declared with the custom attributes <code>@final</code> defines
-classes that cannot have heirs. The custom attributes <code>@final</code> can
-also be used on method to avoid overload from heir class.</p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
-
-<span class="token keyword">class</span> <span class="token operator">@</span>abstract Shape <span class="token punctuation">{</span>    
-    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
-
-    <span class="token other-keyword">pub</span> <span class="token keyword">def</span> <span class="token function">area</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span><span class="token punctuation">;</span>    
-<span class="token punctuation">}</span>
-
-<span class="token keyword">class</span> Rectangle <span class="token keyword">over</span> Shape <span class="token punctuation">{</span>
-
-    <span class="token keyword">let</span> _length <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">;</span>
-    <span class="token keyword">let</span> _width <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">;</span>
-
-    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span>l <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">,</span> w <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token keyword">with</span> _length <span class="token operator">=</span> l<span class="token punctuation">,</span> _width <span class="token operator">=</span> w <span class="token punctuation">{</span><span class="token punctuation">}</span>
-
-    <span class="token other-keyword">pub</span> <span class="token keyword">over</span> <span class="token operator">@</span>final <span class="token function">area</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span> <span class="token punctuation">{</span>
-        <span class="token keyword">self</span><span class="token punctuation">.</span>_length <span class="token operator">*</span> <span class="token keyword">self</span><span class="token punctuation">.</span>_width
-    <span class="token punctuation">}</span>
-
-<span class="token punctuation">}</span>
-
-<span class="token keyword">class</span> <span class="token operator">@</span>final Square <span class="token keyword">over</span> Rectangle <span class="token punctuation">{</span>    
-    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span>l <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token keyword">with</span> <span class="token keyword">super</span> <span class="token punctuation">(</span>l<span class="token punctuation">,</span> l<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
-
-    <span class="token comment">// Try to add this method</span>
-    <span class="token comment">// pub over area (self) -&gt; i32 {</span>
-    <span class="token comment">//     self._length * self._width</span>
-    <span class="token comment">// }</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> s <span class="token punctuation">:</span> <span class="token type">Shape</span> <span class="token operator">=</span> <span class="token path">Square</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">println</span> <span class="token punctuation">(</span>s<span class="token punctuation">.</span><span class="token function">area</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
+<h3 id="method-with-no-body"><a name="method-with-no-body" class="anchor-navigation-ex-anchor" href="#method-with-no-body"><i class="fa fa-link" aria-hidden="true"></i></a>1.5.1. Method with no body</h3>
+<p>A method of an abstract class can have a body, and thus behave as any
+method of any class. It can also have no body, but in that case heir
+class must override this method. Otherwise the class is
+incomplete. Abstract class can be heir class, in that case they don&apos;t
+need to override the methods without body.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">class</span> <span class="token operator">@</span>abstract Foo <span class="token punctuation">{</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+    <span class="token other-keyword">pub</span> <span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token operator">@</span>abstract Bar <span class="token keyword">over</span> Foo <span class="token punctuation">{</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> Baz <span class="token keyword">over</span> Bar <span class="token punctuation">{</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br>
+Error:</p>
+<pre class="language-"><code class="lang-error"><span class="token path">Error</span> : when validating main::Baz
+ <span class="token comment">--&gt; main.yr:(11,7)</span>
+11  &#x2503; class Baz over Bar {
+    &#x254B;       ^^^
+    &#x2503; <span class="token path">Error</span> : the class main::Baz is not abstract, but does not override the empty parent method (const self) =&gt; main::Foo::foo ()-&gt; void
+    &#x2503;  <span class="token comment">--&gt; main.yr:(11,7)</span>
+    &#x2503; 11  &#x2503; class Baz over Bar {
+    &#x2503;     &#x254B;       ^^^
+    &#x2503;     &#x2503; <span class="token other-keyword">Note</span> : 
+    &#x2503;     &#x2503;  <span class="token comment">--&gt; main.yr:(4,13)</span>
+    &#x2503;     &#x2503;  4  &#x2503;     pub def foo (self);
+    &#x2503;     &#x2503;     &#x254B;             ^^^
+    &#x2503;     &#x2517;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x253B;&#x2501; 
+    &#x2517;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x253B;&#x2501; 
+
+
+ymir1: <span class="token path">fatal error</span>: 
+compilation terminated.
+</code></pre>
+<h2 id="final-class"><a name="final-class" class="anchor-navigation-ex-anchor" href="#final-class"><i class="fa fa-link" aria-hidden="true"></i></a>1.6. Final class</h2>
+<p>Final classes declared with the custom attributes <code>@final</code> defines
+classes that cannot have heirs. A final class, can be an heir class,
+or a base class. If the class is a base class, strong optimization can
+be made by the compiler, (no vtable required, and call of the methods
+are direct and way faster). For that reason, it is a good practice to
+flag classes for which we are certain they cannot be inheritable. This
+optimization is also done on final methods (if they are not overriden,
+i.e. final when define for the first time), thus this is a good
+practice to flag methods for which we are certain they won&apos;t be
+overriden. This optimization cannot be done if the class is not a base
+class.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">class</span> <span class="token operator">@</span>final Foo <span class="token punctuation">{</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+    <span class="token other-keyword">pub</span> <span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> Bar <span class="token keyword">over</span> Foo <span class="token punctuation">{</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br>
+Error:</p>
+<pre class="language-"><code class="lang-error"><span class="token path">Error</span> : the base class main::Foo is marked as final
+ <span class="token comment">--&gt; main.yr:(7,16)</span>
+ 7  &#x2503; class Bar over Foo {
+    &#x254B;                ^^^
+
+
+ymir1: <span class="token path">fatal error</span>: 
+compilation terminated.
+</code></pre>
+<p><br></p>
+<p><em>Contribution</em>: It is possible to have an abstract and final class. I
+didn&apos;t find any use case for that, maybe that is completely useless,
+and must be prohibited.</p>
 
                                 
                                 </section>
@@ -874,7 +1172,7 @@ also be used on method to avoid overload from heir class.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Inheritance","level":"1.7.4","depth":2,"next":{"title":"Traits","level":"1.7.5","depth":2,"path":"objects/traits.md","ref":"objects/traits.md","articles":[]},"previous":{"title":"Methods","level":"1.7.3","depth":2,"path":"objects/methods.md","ref":"objects/methods.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"objects/inheritance.md","mtime":"2021-04-24T14:20:15.787Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-04-24T14:22:04.606Z"},"basePath":"..","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Inheritance","level":"1.7.4","depth":2,"next":{"title":"Traits","level":"1.7.5","depth":2,"path":"objects/traits.md","ref":"objects/traits.md","articles":[]},"previous":{"title":"Methods","level":"1.7.3","depth":2,"path":"objects/methods.md","ref":"objects/methods.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"objects/inheritance.md","mtime":"2021-04-24T18:21:35.647Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-04-24T18:27:12.989Z"},"basePath":"..","book":{"language":"en"}});
         });
     </script>
 </div>

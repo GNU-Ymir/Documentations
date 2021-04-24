@@ -787,13 +787,9 @@ By reference : 89
 signature of the first function <strong><code>foo</code></strong>, you should get the following
 error: </p>
 <pre class="language-"><code class="lang-error"><span class="token path">Error</span> : a parameter cannot be mutable, if it is not a reference
- <span class="token comment">--&gt; main.yr:(4,14)</span>
-    | 
- 4  | def foo (mut x : i32) {
-    |              ^
-
-ymir1: <span class="token path">fatal error</span>: 
-compilation terminated.
+ <span class="token comment">--&gt; main.yr:(3,15)</span>
+ 3  &#x2503; def foo (mut  x : i32) {
+    &#x254B;               ^
 </code></pre>
 <p><br></p>
 <p>This error means that the type of <strong><code>x</code></strong> is not aliasable, so if it is not
@@ -813,11 +809,11 @@ that with the following code, you should will get an error.</p>
 a reference on a variable, but the compiler will not make it, as it
 has no interest and will be immediately dereferenced to be stored in
 the tuple value.</p>
-<pre class="language-"><code class="lang-error"><span class="token function">Warning</span> : the creation of ref has no effect on left operand
- <span class="token comment">--&gt; main.yr:(3,19)</span>
-    | 
- 3  |     let y = (10, ref x);
-    |                      ^
+<pre class="language-"><code class="lang-error"><span class="token function">Warning</span> : the creation of ref has no effect on the left operand
+ <span class="token comment">--&gt; main.yr:(3,22)</span>
+ 3  &#x2503;     let y = (10, ref x);
+    &#x254B;                      ^
+
 
 ymir1: <span class="token path">fatal error</span>: 
 compilation terminated.
@@ -842,12 +838,8 @@ return a reference to a variable as a function return value. </p>
 <p>With the above source code, the compiler return this fairly straightforward error.</p>
 <pre class="language-"><code class="lang-error"><span class="token path">Error</span> : cannot return a reference type
  <span class="token comment">--&gt; main.yr:(3,19)</span>
-    | 
- 3  | def foo () -&gt; ref i32 {
-    |                   ^^^
-
-ymir1: <span class="token path">fatal error</span>: 
-compilation terminated.
+ 3  &#x2503; def foo () -&gt; ref i32 {
+    &#x254B;                   ^^^
 </code></pre>
 
                                 
@@ -892,7 +884,7 @@ compilation terminated.
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"References","level":"1.4.1","depth":2,"next":{"title":"Aliases","level":"1.4.2","depth":2,"path":"advanced/alias.md","ref":"advanced/alias.md","articles":[]},"previous":{"title":"Alias and References","level":"1.4","depth":1,"path":"advanced/README.md","ref":"advanced/README.md","articles":[{"title":"References","level":"1.4.1","depth":2,"path":"advanced/references.md","ref":"advanced/references.md","articles":[]},{"title":"Aliases","level":"1.4.2","depth":2,"path":"advanced/alias.md","ref":"advanced/alias.md","articles":[]},{"title":"Copy and Deep copy","level":"1.4.3","depth":2,"path":"advanced/copies.md","ref":"advanced/copies.md","articles":[]},{"title":"Best practice","level":"1.4.4","depth":2,"path":"advanced/best.md","ref":"advanced/best.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"advanced/references.md","mtime":"2021-04-24T14:20:15.779Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-04-24T14:22:04.606Z"},"basePath":"..","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"References","level":"1.4.1","depth":2,"next":{"title":"Aliases","level":"1.4.2","depth":2,"path":"advanced/alias.md","ref":"advanced/alias.md","articles":[]},"previous":{"title":"Alias and References","level":"1.4","depth":1,"path":"advanced/README.md","ref":"advanced/README.md","articles":[{"title":"References","level":"1.4.1","depth":2,"path":"advanced/references.md","ref":"advanced/references.md","articles":[]},{"title":"Aliases","level":"1.4.2","depth":2,"path":"advanced/alias.md","ref":"advanced/alias.md","articles":[]},{"title":"Copy and Deep copy","level":"1.4.3","depth":2,"path":"advanced/copies.md","ref":"advanced/copies.md","articles":[]},{"title":"Best practice","level":"1.4.4","depth":2,"path":"advanced/best.md","ref":"advanced/best.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"advanced/references.md","mtime":"2021-04-24T18:23:25.270Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-04-24T18:27:12.989Z"},"basePath":"..","book":{"language":"en"}});
         });
     </script>
 </div>
