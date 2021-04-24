@@ -152,13 +152,10 @@ error:
 
 ```error
 Error : a parameter cannot be mutable, if it is not a reference
- --> main.yr:(4,14)
-    | 
- 4  | def foo (mut x : i32) {
-    |              ^
+ --> main.yr:(3,15)
+ 3  ┃ def foo (mut  x : i32) {
+    ╋               ^
 
-ymir1: fatal error: 
-compilation terminated.
 ```
 
 <br>
@@ -187,11 +184,11 @@ has no interest and will be immediately dereferenced to be stored in
 the tuple value.
 
 ```error
-Warning : the creation of ref has no effect on left operand
- --> main.yr:(3,19)
-    | 
- 3  | 	let y = (10, ref x);
-    | 	                 ^
+Warning : the creation of ref has no effect on the left operand
+ --> main.yr:(3,22)
+ 3  ┃     let y = (10, ref x);
+    ╋                      ^
+
 
 ymir1: fatal error: 
 compilation terminated.
@@ -224,10 +221,7 @@ With the above source code, the compiler return this fairly straightforward erro
 ```error
 Error : cannot return a reference type
  --> main.yr:(3,19)
-    | 
- 3  | def foo () -> ref i32 {
-    |                   ^^^
+ 3  ┃ def foo () -> ref i32 {
+    ╋                   ^^^
 
-ymir1: fatal error: 
-compilation terminated.
 ```

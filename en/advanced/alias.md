@@ -49,25 +49,24 @@ def main () {
 ```
 
 <br>
+Errors:
 
 ```error
 Error : discard the constant qualifier is prohibited, left operand mutability level is 2 but must be at most 1
  --> main.yr:(5,13)
-    | 
- 5  |     let mut y : [mut i32] = alias x;
-    |             ^
-    | Note : 
-    |  --> main.yr:(5,29)
-    |     | 
-    |  5  |     let mut y : [mut i32] = alias x;
-    |     |                             ^^^^^
-    |------------------------------ 
+ 5  ┃     let mut y : [mut i32] = alias x; // try to borrow immutable data in deeply mutable variable y  
+    ╋             ^
+    ┃ Note : 
+    ┃  --> main.yr:(5,29)
+    ┃  5  ┃     let mut y : [mut i32] = alias x; // try to borrow immutable data in deeply mutable variable y  
+    ┃     ╋                             ^^^^^
+    ┗━━━━━┻━ 
 
 Error : undefined symbol y
  --> main.yr:(8,14)
-    | 
- 8  |     println (y);
-    |              ^
+ 8  ┃     println (y);
+    ╋              ^
+
 
 ymir1: fatal error: 
 compilation terminated.
