@@ -81,7 +81,7 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="inheritance.html" />
+    <link rel="next" href="mutability.html" />
     
     
     <link rel="prev" href="./" />
@@ -398,7 +398,33 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7.2" data-path="inheritance.html">
+        <li class="chapter " data-level="1.7.2" data-path="mutability.html">
+            
+                <a href="mutability.html">
+            
+                    
+                    Mutability
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="methods.html">
+            
+                <a href="methods.html">
+            
+                    
+                    Methods
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.4" data-path="inheritance.html">
             
                 <a href="inheritance.html">
             
@@ -411,7 +437,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7.3" data-path="traits.html">
+        <li class="chapter " data-level="1.7.5" data-path="traits.html">
             
                 <a href="traits.html">
             
@@ -424,7 +450,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7.4" data-path="example.html">
+        <li class="chapter " data-level="1.7.6" data-path="example.html">
             
                 <a href="example.html">
             
@@ -642,121 +668,294 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#class"><b>1. </b>Class</a></li><ul><li><span class="title-icon "></span><a href="#attributes"><b>1.1. </b>Attributes</a></li><li><span class="title-icon "></span><a href="#constructor_function%20Object()%20%7B%20[native%20code]%20%7D"><b>1.2. </b>Constructor</a></li><li><span class="title-icon "></span><a href="#methods"><b>1.3. </b>Methods</a></li><li><span class="title-icon "></span><a href="#destructors"><b>1.4. </b>Destructors</a></li></ul></ul></div><a href="#class" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="class"><a name="class" class="anchor-navigation-ex-anchor" href="#class"><i class="fa fa-link" aria-hidden="true"></i></a>1. Class</h1>
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#class"><b>1. </b>Class</a></li><ul><li><span class="title-icon "></span><a href="#fields"><b>1.1. </b>Fields</a></li><ul><li><span class="title-icon "></span><a href="#field-privacy"><b>1.1.1. </b>Field privacy</a></li></ul><li><span class="title-icon "></span><a href="#constructor_function%20Object()%20%7B%20[native%20code]%20%7D"><b>1.2. </b>Constructor</a></li><ul><li><span class="title-icon "></span><a href="#field-construction"><b>1.2.1. </b>Field construction</a></li><li><span class="title-icon "></span><a href="#create-an-object-instance"><b>1.2.2. </b>Create an object instance</a></li><li><span class="title-icon "></span><a href="#named-constructor"><b>1.2.3. </b>Named constructor</a></li><li><span class="title-icon "></span><a href="#construction-redirection"><b>1.2.4. </b>Construction redirection</a></li><li><span class="title-icon "></span><a href="#constructor-privacy"><b>1.2.5. </b>Constructor privacy</a></li></ul><li><span class="title-icon "></span><a href="#destructors"><b>1.3. </b>Destructors</a></li></ul></ul></div><a href="#class" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="class"><a name="class" class="anchor-navigation-ex-anchor" href="#class"><i class="fa fa-link" aria-hidden="true"></i></a>1. Class</h1>
 <p>An object is an instance of a class. A class is declared using the
-keyword <code>class</code>. </p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">class</span> Foo <span class="token punctuation">{</span>
-<span class="token punctuation">}</span>
+keyword <strong><code>class</code></strong>, followed by the identifier of the class.  The
+complete grammar of a class definition is presented in the following
+code block.</p>
+<pre class="language-"><code class="lang-grammar"><span class="token path">class_decl</span> <span class="token punctuation">:</span><span class="token operator">=</span> simple_class_decl <span class="token operator">|</span> template_class_decl
+
+<span class="token path">simple_class_decl</span> <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token string">&apos;class&apos;</span> <span class="token punctuation">(</span>modifiers<span class="token punctuation">)</span>? Identifier <span class="token punctuation">(</span><span class="token string">&apos;over&apos;</span> type<span class="token punctuation">)</span>? <span class="token string">&apos;{&apos;</span> class_content <span class="token string">&apos;}&apos;</span>
+<span class="token path">template_class_decl</span> <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token string">&apos;class&apos;</span> <span class="token punctuation">(</span><span class="token string">&apos;if&apos;</span> expression<span class="token punctuation">)</span>? <span class="token punctuation">(</span>modifiers<span class="token punctuation">)</span>? Identifier templates <span class="token punctuation">(</span><span class="token string">&apos;over&apos;</span> type<span class="token punctuation">)</span>? <span class="token string">&apos;{&apos;</span> class_content <span class="token string">&apos;}&apos;</span>
+<span class="token path">class_content</span> <span class="token punctuation">:</span><span class="token operator">=</span>   field
+                 <span class="token operator">|</span> method
+                 <span class="token operator">|</span> constructor
+                 <span class="token operator">|</span> impl
+                 <span class="token operator">|</span> destructor
+<span class="token path">modifiers</span> <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token string">&apos;@&apos;</span> <span class="token punctuation">(</span><span class="token string">&apos;{&apos;</span> modifier <span class="token punctuation">(</span><span class="token string">&apos;,&apos;</span> modifier<span class="token punctuation">)</span><span class="token operator">*</span> <span class="token string">&apos;}&apos;</span><span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token punctuation">(</span>modifier<span class="token punctuation">)</span>
+<span class="token path">modifier</span> <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token string">&apos;final&apos;</span> <span class="token operator">|</span> <span class="token string">&apos;abstract&apos;</span>
 </code></pre>
-<h2 id="attributes"><a name="attributes" class="anchor-navigation-ex-anchor" href="#attributes"><i class="fa fa-link" aria-hidden="true"></i></a>1.1. Attributes</h2>
-<p>A class can contain attributes, which are equivalent to fields for a
-structure.  An attribute is declared as a variable, using the keyword
-<code>let</code>. You must give at least the type to the declaration, but the
-value is not mandatory.</p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">class</span> Point <span class="token punctuation">{</span>
+<p><br></p>
+<p>As many symbols, the class can be a template symbols. Templates are
+not presented in this chapter, and are left for a future chapter
+(<em>cf.</em>
+<a href="https://gnu-ymir.github.io/Documentations/en/templates/" target="_blank">Templates</a>).</p>
+<h2 id="fields"><a name="fields" class="anchor-navigation-ex-anchor" href="#fields"><i class="fa fa-link" aria-hidden="true"></i></a>1.1. Fields</h2>
+<p>A class can contain fields. A field is declared as a variable, using
+the keyword <code>let</code>. A field can have a default value, in that case the
+type is optional, however if the value is not set, the field must have
+a type. Multiple fields can be declared within the same <strong><code>let</code></strong>,
+with coma separating them.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">class</span> Point4D <span class="token punctuation">{</span>
     <span class="token keyword">let</span> _x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">;</span>
     <span class="token keyword">let</span> _y <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> _z <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">,</span> _w <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>All attributes are protected by default, i.e. only this class and its
-heirs will have access to them. You can use the <code>pub</code> keyword to make
-them public and usable everywhere.</p>
+<h3 id="field-privacy"><a name="field-privacy" class="anchor-navigation-ex-anchor" href="#field-privacy"><i class="fa fa-link" aria-hidden="true"></i></a>1.1.1. Field privacy</h3>
+<p>All fields are protected by default, i.e. only the class defining them
+and its heirs have access to them. The keyword <strong><code>pub</code></strong> can be used
+to make the fields public, and accessible from outside the class
+definition. The keyword <strong><code>prv</code></strong>, on the other hand, can be use to
+make the field totally hidden from outside the class. Unlike
+<strong><code>prot</code></strong>, <strong><code>prv</code></strong> fields are not accessible by the heirs of a
+class.</p>
+<p>A good practice is to enclose the privacy of the fields in their name
+definition. For example, a public field is named <strong><code>x</code></strong>, without any
+<strong><code>_</code></strong> token. A protected fields always starts with a single
+underscore, <strong><code>_y</code></strong>, and private fields are surrounded by two
+underscores before and after the identifier. This is just a convention,
+the name has no impact on the privacy.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">class</span> A <span class="token punctuation">{</span>
+    <span class="token other-keyword">pub</span>  <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">12</span><span class="token punctuation">;</span>
+    <span class="token other-keyword">prot</span> <span class="token keyword">let</span> _y <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">;</span>
+    <span class="token other-keyword">prv</span>  <span class="token keyword">let</span> __z__ <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
 <h2 id="constructor_function Object() { [native code] }"><a name="constructor_function Object() { [native code] }" class="anchor-navigation-ex-anchor" href="#constructor_function%20Object()%20%7B%20[native%20code]%20%7D"><i class="fa fa-link" aria-hidden="true"></i></a>1.2. Constructor</h2>
 <p>To be instancible, a class must declare at least one constructor. The
 constructor is always named <code>self</code>, and takes parameters to build the
-object. The constructor must give a value to all the attributes of the
-class, the attributes are initialized using the <code>with</code> keyword.</p>
+object. The object is accessible within the constructor body through
+the variable <strong><code>self</code></strong>.</p>
+<h3 id="field-construction"><a name="field-construction" class="anchor-navigation-ex-anchor" href="#field-construction"><i class="fa fa-link" aria-hidden="true"></i></a>1.2.1. Field construction</h3>
+<p>The constructor must set the value to all the fields of the
+class, with the keyword <strong><code>with</code></strong>. Fields with default values are not
+necessarily set by this <strong><code>with</code></strong> statement, but can be
+redefined. The with statement has the effect of the initial value of
+the fields, meaning that the value of immutable fields is set by them.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">class</span> Point <span class="token punctuation">{</span>
     <span class="token keyword">let</span> _x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">;</span>
     <span class="token keyword">let</span> _y <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
 
-    <span class="token comment">// _y is already initialized</span>
-    <span class="token comment">// it is not mandatory to add it in the with initialization</span>
-    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">with</span> _x <span class="token operator">=</span> <span class="token number">12</span> <span class="token punctuation">{</span>
-        <span class="token comment">// Try to print the attribute _x </span>
-        <span class="token comment">// You will need to use self </span>
-    <span class="token punctuation">}</span>
+    <span class="token comment">/**</span>
+<span class="token comment">     * _y is already initialized</span>
+<span class="token comment">     * it is not mandatory to add it in the with initialization</span>
+<span class="token comment">     */</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">with</span> _x <span class="token operator">=</span> <span class="token number">12</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
 
-    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">,</span> y <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token keyword">with</span> _x <span class="token operator">=</span> x<span class="token punctuation">,</span> _y <span class="token operator">=</span> y <span class="token punctuation">{</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</code></pre>
-<p>Once the class has constructors, you can call them using the following
-syntax :</p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">let</span> p <span class="token punctuation">:</span> <span class="token type">Point</span> <span class="token operator">=</span> <span class="token path">Point</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
-<span class="token keyword">let</span> p2 <span class="token punctuation">:</span> <span class="token type">Point</span> <span class="token operator">=</span> <span class="token path">Point</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment">// Try to add the following line : </span>
-<span class="token comment">// let p3 : Point = null;</span>
-</code></pre>
-<p>Constructors, like methods are protected by default, you can use the
-keyword <code>pub</code> to make them public and <code>prv</code> to make them private.</p>
-<p>A class is not a pointer, you can&apos;t make it <code>null</code>, that has no sense
-in <strong>Ymir</strong>.</p>
-<p>You can call another constructor with the syntax <code>with</code>. When you call
-another constructor, all fields are already initialized, so you cannot
-initialize them again.</p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">class</span> Point <span class="token punctuation">{</span>
-    <span class="token comment">// ... attributes</span>
-
-    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">with</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
-
+    <span class="token comment">/**</span>
+<span class="token comment">     * But it can be redefined</span>
+<span class="token comment">     */</span>
     <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">,</span> y <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token keyword">with</span> _x <span class="token operator">=</span> x<span class="token punctuation">,</span> _y <span class="token operator">=</span> y <span class="token punctuation">{</span><span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<h2 id="methods"><a name="methods" class="anchor-navigation-ex-anchor" href="#methods"><i class="fa fa-link" aria-hidden="true"></i></a>1.3. Methods</h2>
-<p>Methods of a class are functions that are applicable to an object
-instance. The methods are declared like function, but take the <code>self</code>
-as first parameter. The type of <code>self</code> is not specified because it is
-obvious.</p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">class</span> Point <span class="token punctuation">{</span>
-    <span class="token comment">// ... the same declaration as above</span>
+<p><br> </p>
+<p>Field value is set only once. For example, if a class has a field
+<strong><code>_x</code></strong> with a default value, calling a function <strong><code>foo</code></strong>. And the
+constructor use the <strong><code>with</code></strong> statement to set the value of the field
+from the return value of the <strong><code>bar</code></strong> function, the function
+<strong><code>foo</code></strong> is never called.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span> <span class="token punctuation">{</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Foo&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token number">42</span>
+<span class="token punctuation">}</span>
 
-    <span class="token other-keyword">pub</span> <span class="token keyword">def</span> <span class="token function">vector</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">,</span> other <span class="token punctuation">:</span> <span class="token type">Point</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> Point <span class="token punctuation">{</span>
-        <span class="token path">Point</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span>other<span class="token punctuation">.</span>_x <span class="token operator">-</span> <span class="token keyword">self</span><span class="token punctuation">.</span>_x<span class="token punctuation">,</span> other<span class="token punctuation">.</span>_y <span class="token operator">-</span> <span class="token keyword">self</span><span class="token punctuation">.</span>_y<span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">bar</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span> <span class="token punctuation">{</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;bar&quot;</span><span class="token punctuation">)</span>
+    <span class="token number">33</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> A <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> _x <span class="token operator">=</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">with</span> _x <span class="token operator">=</span> <span class="token function">bar</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token comment">// foo is not called, bar is call instead</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br></p>
+<p>The point behind <strong><code>with</code></strong> field construction, is to ensure that all
+fields have a value, when entering the constructor body. This way,
+when instruction are made inside the constructor body, such as
+printing the value of the fields, their value is already set, and the
+object instance is already valid.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">class</span> A <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> _x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">;</span>
+
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">with</span> _x <span class="token operator">=</span> <span class="token number">42</span> <span class="token punctuation">{</span>
+        <span class="token function">println</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">.</span>_x<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// access the field _x, of the current object instance</span>
+    <span class="token punctuation">}</span> 
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="create-an-object-instance"><a name="create-an-object-instance" class="anchor-navigation-ex-anchor" href="#create-an-object-instance"><i class="fa fa-link" aria-hidden="true"></i></a>1.2.2. Create an object instance</h3>
+<p>Class are used to create object instance, by calling a
+constructor. This call is made using the double colon binary operator
+<strong><code>::</code></strong>, with the left operand being the name of the class to
+instantiate, and the right operand the keyword <strong><code>new</code></strong>. After the
+keyword <strong><code>new</code></strong> a list of argument is presented, this list is the
+list of argument to pass to the constructor. The constructor with the
+best affinity is choosed and called on a allocated instance of the
+class. Constructor affinity is computed as function affinity (based on
+type mutability, and type compatibility &#x2013; <em>cf.</em> <a href="https://gnu-ymir.github.io/Documentations/en/advanced/" target="_blank">Aliases and
+References</a>).</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
+
+<span class="token keyword">class</span> A <span class="token punctuation">{</span>
+
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Int : &quot;</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> <span class="token type">f32</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Float : &quot;</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 
 <span class="token punctuation">}</span>
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> p1 <span class="token operator">=</span> <span class="token path">Point</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span> p2 <span class="token operator">=</span> <span class="token path">Point</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">let</span> v <span class="token operator">=</span> p1<span class="token punctuation">.</span><span class="token function">vector</span> <span class="token punctuation">(</span>p2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> _ <span class="token operator">=</span> <span class="token path">A</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> _ <span class="token operator">=</span> <span class="token path">A</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">.</span>f<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>The <code>self</code> instance is an <code>alias</code> of the object (Cf. <a href="">Alias</a>), which
-is imutable by default. You can make it mutable by using the <code>mut</code>
-keyword. As for structures, the mutability of the attributes is
-defined when they are declared. If an attribute is mutable, its
-mutability depends on the mutability of the instance of the object
-that contains it.</p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">class</span> Point <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> <span class="token other-keyword">mut</span> _x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">,</span> <span class="token other-keyword">mut</span> _y <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<p><br>
+Results</p>
+<pre class="language-"><code>Int : 12
+Float : 12.000000
+</code></pre><h3 id="named-constructor"><a name="named-constructor" class="anchor-navigation-ex-anchor" href="#named-constructor"><i class="fa fa-link" aria-hidden="true"></i></a>1.2.3. Named constructor</h3>
+<p>A name can be added to the constructor. This name is an Identifier,
+and follows the keyword <strong><code>self</code></strong>. A named constructor can be called
+by its name when constructing a class. This way two constructor can
+share the same prototype, and be called from their name. A named
+constructor is <strong>not</strong> ignored when constructing a class with the
+<strong><code>new</code></strong> keyword, its named is just not considered.</p>
+<p>In the following example, a class <strong><code>A</code></strong> contains two constructors,
+<strong><code>foo</code></strong> and <strong><code>bar</code></strong>, these constructors have one parameter of type
+<strong><code>i32</code></strong>. </p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
-    <span class="token comment">// ... the same constructors as above</span>
+<span class="token keyword">class</span> A <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> _x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">;</span>
 
-    <span class="token other-keyword">pub</span> <span class="token keyword">def</span> <span class="token function">addOne</span> <span class="token punctuation">(</span><span class="token other-keyword">mut</span> <span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment">//          ^^^</span>
-    <span class="token comment">// Try to remove the mut </span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token function">foo</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token keyword">with</span> _x <span class="token operator">=</span> x <span class="token punctuation">{</span>
+        <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Foo &quot;</span><span class="token punctuation">,</span> <span class="token keyword">self</span><span class="token punctuation">.</span>_x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-        <span class="token keyword">self</span><span class="token punctuation">.</span>_x <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-        <span class="token keyword">self</span><span class="token punctuation">.</span>_y <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token function">bar</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token keyword">with</span> _x <span class="token operator">=</span> x <span class="token punctuation">{</span>
+        <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Bar &quot;</span><span class="token punctuation">,</span> <span class="token keyword">self</span><span class="token punctuation">.</span>_x<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> <span class="token other-keyword">mut</span> p <span class="token operator">=</span> <span class="token path">Point</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token comment">//  ^^^</span>
-    <span class="token comment">// Try to remove the mut</span>
-    <span class="token punctuation">(</span><span class="token other-keyword">alias</span> p<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">addOne</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment">//     ^^^^^</span>
-<span class="token comment">// Try to remove the alias</span>
+    <span class="token keyword">let</span> _ <span class="token operator">=</span> <span class="token path">A</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">foo</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> _ <span class="token operator">=</span> <span class="token path">A</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">bar</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+
+    <span class="token keyword">let</span> _ <span class="token operator">=</span> <span class="token path">A</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>As you have guessed an object borrow data that are stored in the Heap,
-and is therefore a aliasable type. Everything that is applicable to
-aliasable type <a href="">Aliases</a> is applicable to objects.</p>
-<h2 id="destructors"><a name="destructors" class="anchor-navigation-ex-anchor" href="#destructors"><i class="fa fa-link" aria-hidden="true"></i></a>1.4. Destructors</h2>
-<p>There is no destructor in <strong>Ymir</strong>, the object instances are destroyed
-by the garbage collector. </p>
+<p><br></p>
+<p>The last object construction at line <strong>19</strong> is not possible, the call
+working with both <strong><code>foo</code></strong> and <strong><code>bar</code></strong>. The other constructions
+work fine, that is why the compiler returns only the following error.</p>
+<pre class="language-"><code class="lang-error"><span class="token path">Error</span> : {self foo (x : i32)-&gt; mut &amp;(mut main::A), self bar (x : i32)-&gt; mut &amp;(mut main::A)} x 2 called with {i32} work with both
+ <span class="token comment">--&gt; main.yr:(19,17)</span>
+19  &#x2503;     let _ = A::new (12);
+    &#x254B;                    ^
+    &#x2503; <span class="token other-keyword">Note</span> : candidate self <span class="token comment">--&gt; main.yr:(6,6) : self foo (x : i32)-&gt; mut &amp;(mut main::A)</span>
+    &#x2503; <span class="token other-keyword">Note</span> : candidate self <span class="token comment">--&gt; main.yr:(10,6) : self bar (x : i32)-&gt; mut &amp;(mut main::A)</span>
+    &#x2517;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501; 
+
+
+ymir1: <span class="token path">fatal error</span>: 
+compilation terminated.
+</code></pre>
+<h3 id="construction-redirection"><a name="construction-redirection" class="anchor-navigation-ex-anchor" href="#construction-redirection"><i class="fa fa-link" aria-hidden="true"></i></a>1.2.4. Construction redirection</h3>
+<p>To avoid redondent code, a constructor can call another constructor in
+the <strong><code>with</code></strong> statement. This call redirection is performed by using
+the <strong><code>self</code></strong> keyword. In that case, because the fields are already
+constructed by the called constructor, they must not be reconstructed.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> A <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> _x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">;</span>
+
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">with</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Scd &quot;</span><span class="token punctuation">,</span> <span class="token keyword">self</span><span class="token punctuation">.</span>_x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token keyword">with</span> _x <span class="token operator">=</span> x <span class="token punctuation">{</span>
+        <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Fst &quot;</span><span class="token punctuation">,</span> <span class="token keyword">self</span><span class="token punctuation">.</span>_x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> _ <span class="token operator">=</span> <span class="token path">A</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// construct an instance of the class A</span>
+                       <span class="token comment">// from the constructor at line 6</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br>
+Results:</p>
+<pre class="language-"><code>Fst 12
+Scd 12
+</code></pre><p><br></p>
+<p><em>Contribution:</em> Redirection to named constructor does not work for the moment. This is not complicated, but has to be done.</p>
+<h3 id="constructor-privacy"><a name="constructor-privacy" class="anchor-navigation-ex-anchor" href="#constructor-privacy"><i class="fa fa-link" aria-hidden="true"></i></a>1.2.5. Constructor privacy</h3>
+<p>As fields, the privacy of the constructor is protected by default. The
+keyword <strong><code>prv</code></strong> and <strong><code>pub</code></strong> can be used to change it.</p>
+<h2 id="destructors"><a name="destructors" class="anchor-navigation-ex-anchor" href="#destructors"><i class="fa fa-link" aria-hidden="true"></i></a>1.3. Destructors</h2>
+<p>Object instances are destroyed by the garbage collector. Meaning that
+there is no way to determine when or even if an object instance will
+be destroyed. But lets say that such operation effectively happen
+(which is quite probable, let&apos;s no lie either), then a last function
+can be called just before the object instance is destroyed and
+irrecoverable. The destructor is called <strong><code>__dtor</code></strong>, and takes the
+parameter <strong><code>mut self</code></strong>. There is only one destructor per class, this
+destructor is optional and always public.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
+
+<span class="token keyword">static</span> <span class="token other-keyword">mut</span> I <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> A <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> _x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">;</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">with</span> _x <span class="token operator">=</span> I <span class="token punctuation">{</span>
+        I <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token function">__dtor</span> <span class="token punctuation">(</span><span class="token other-keyword">mut</span> <span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Destroying me ! &quot;</span><span class="token punctuation">,</span> <span class="token keyword">self</span><span class="token punctuation">.</span>_x<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> _ <span class="token operator">=</span> <span class="token path">A</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token punctuation">}</span> <span class="token comment">// the object instance is irrecoverable at the end of the function</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    loop <span class="token punctuation">{</span>
+        <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br></p>
+<p>Results:</p>
+<pre class="language-"><code>Destroying me ! 765
+Destroying me ! 1022
+Destroying me ! 764
+Destroying me ! 1023
+Destroying me ! 763
+Destroying me ! 1024
+Destroying me ! 762
+Destroying me ! 1025
+Destroying me ! 761
+Destroying me ! 1026
+...
+</code></pre><p><br></p>
+<p>One can note from the result, that the order of destruction is totally
+unpredictible. Rely on class destructor is not the best practice. We
+will see in a future chapter disposable objects, that are destroyed in
+a more certain way. Destructors are a last resort to free unmanaged
+memory, if this was forgotten (for example, file handles, network
+socket, etc. if not manually disposed).</p>
 
                                 
                                 </section>
@@ -789,7 +988,7 @@ by the garbage collector. </p>
                 </a>
                 
                 
-                <a href="inheritance.html" class="navigation navigation-next " aria-label="Next page: Inheritance">
+                <a href="mutability.html" class="navigation navigation-next " aria-label="Next page: Mutability">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -800,7 +999,7 @@ by the garbage collector. </p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Class","level":"1.7.1","depth":2,"next":{"title":"Inheritance","level":"1.7.2","depth":2,"path":"objects/inheritance.md","ref":"objects/inheritance.md","articles":[]},"previous":{"title":"Objects","level":"1.7","depth":1,"path":"objects/README.md","ref":"objects/README.md","articles":[{"title":"Class","level":"1.7.1","depth":2,"path":"objects/class.md","ref":"objects/class.md","articles":[]},{"title":"Inheritance","level":"1.7.2","depth":2,"path":"objects/inheritance.md","ref":"objects/inheritance.md","articles":[]},{"title":"Traits","level":"1.7.3","depth":2,"path":"objects/traits.md","ref":"objects/traits.md","articles":[]},{"title":"Example program","level":"1.7.4","depth":2,"path":"objects/example.md","ref":"objects/example.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"objects/class.md","mtime":"2021-04-22T09:32:51.971Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-04-23T13:07:04.882Z"},"basePath":"..","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Class","level":"1.7.1","depth":2,"next":{"title":"Mutability","level":"1.7.2","depth":2,"path":"objects/mutability.md","ref":"objects/mutability.md","articles":[]},"previous":{"title":"Objects","level":"1.7","depth":1,"path":"objects/README.md","ref":"objects/README.md","articles":[{"title":"Class","level":"1.7.1","depth":2,"path":"objects/class.md","ref":"objects/class.md","articles":[]},{"title":"Mutability","level":"1.7.2","depth":2,"path":"objects/mutability.md","ref":"objects/mutability.md","articles":[]},{"title":"Methods","level":"1.7.3","depth":2,"path":"objects/methods.md","ref":"objects/methods.md","articles":[]},{"title":"Inheritance","level":"1.7.4","depth":2,"path":"objects/inheritance.md","ref":"objects/inheritance.md","articles":[]},{"title":"Traits","level":"1.7.5","depth":2,"path":"objects/traits.md","ref":"objects/traits.md","articles":[]},{"title":"Example program","level":"1.7.6","depth":2,"path":"objects/example.md","ref":"objects/example.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"objects/class.md","mtime":"2021-04-24T13:47:27.405Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-04-24T14:20:03.773Z"},"basePath":"..","book":{"language":"en"}});
         });
     </script>
 </div>

@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Example program · GitBook</title>
+        <title>Mutability · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -81,10 +81,10 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../functions/" />
+    <link rel="next" href="methods.html" />
     
     
-    <link rel="prev" href="traits.html" />
+    <link rel="prev" href="class.html" />
     
 
     </head>
@@ -398,7 +398,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7.2" data-path="mutability.html">
+        <li class="chapter active" data-level="1.7.2" data-path="mutability.html">
             
                 <a href="mutability.html">
             
@@ -450,7 +450,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.7.6" data-path="example.html">
+        <li class="chapter " data-level="1.7.6" data-path="example.html">
             
                 <a href="example.html">
             
@@ -653,7 +653,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Example program</a>
+        <a href=".." >Mutability</a>
     </h1>
 </div>
 
@@ -668,80 +668,108 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#example-program"><b>1. </b>Example program</a></li></ul></div><a href="#example-program" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="example-program"><a name="example-program" class="anchor-navigation-ex-anchor" href="#example-program"><i class="fa fa-link" aria-hidden="true"></i></a>1. Example program</h1>
-<p>This chapter presents an example of a program that implements a linked
-list using the class system. You will see that even if you can&apos;t set
-an object instance to <code>null</code>, you can still implement the behavior,
-without risk of the program crashing.</p>
-<p>First of all, we have to define an element of the list, this element
-can have a value, or be the end of the list.</p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">class</span> <span class="token operator">@</span>abstract Node <span class="token punctuation">{</span>
-    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#mutability"><b>1. </b>Mutability</a></li><ul><li><span class="title-icon "></span><a href="#object-mutability"><b>1.1. </b>Object mutability</a></li><li><span class="title-icon "></span><a href="#field-mutability"><b>1.2. </b>Field mutability</a></li></ul></ul></div><a href="#mutability" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="mutability"><a name="mutability" class="anchor-navigation-ex-anchor" href="#mutability"><i class="fa fa-link" aria-hidden="true"></i></a>1. Mutability</h1>
+<p>Objects are aliasable types. The data being allocated on the heap, and
+not copied - for efficiency reasons - on affectations (<em>cf.</em> <a href="https://gnu-ymir.github.io/Documentations/en/advanced/" target="_blank">Aliases
+and
+References</a>).</p>
+<h2 id="object-mutability"><a name="object-mutability" class="anchor-navigation-ex-anchor" href="#object-mutability"><i class="fa fa-link" aria-hidden="true"></i></a>1.1. Object mutability</h2>
+<p>The type of an object instance is a reference to a class type. This
+reference can mutable, and the data pointed data as well. In the
+following example, a variable <strong><code>a</code></strong> containing an object instance of
+the class <strong><code>A</code></strong> is created. This variable contains a mutable
+reference, but the data borrowed by the reference are not mutable.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">class</span> A <span class="token punctuation">{</span>
 
-    <span class="token other-keyword">pub</span> <span class="token keyword">def</span> <span class="token function">append</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">,</span> i <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> Node<span class="token punctuation">;</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">let</span> <span class="token other-keyword">mut</span> x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">;</span>
 
-    impl Printable<span class="token punctuation">;</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token keyword">with</span> x <span class="token operator">=</span> x <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> <span class="token other-keyword">mut</span> a <span class="token punctuation">:</span> <span class="token operator">&amp;</span><span class="token punctuation">(</span>A<span class="token punctuation">)</span><span class="token operator">=</span> <span class="token path">A</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    a <span class="token operator">=</span> <span class="token path">A</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token number">42</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// ok the reference if mutable</span>
+
+    a<span class="token punctuation">.</span>x <span class="token operator">=</span> <span class="token number">33</span><span class="token punctuation">;</span> <span class="token comment">// the borrowed data are not mutable</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>This class is the ancestor of all things that can be found in a linked
-list.  The append method, while creating a copy of the list, returns a
-new list with element i appended at the end of the list. There are two
-types of nodes, a value or the end of the list. Let&apos;s start with the
-simplest, the end of the list :</p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">class</span> None <span class="token keyword">over</span> Node <span class="token punctuation">{</span>
-    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<p><br> </p>
+<p>Because the data borrowed by <strong><code>a</code></strong> are not mutable, the
+compiler returns an error.</p>
+<pre class="language-"><code class="lang-error"><span class="token path">Error</span> : left operand of type i32 is immutable
+ <span class="token comment">--&gt; main.yr:(15,3)</span>
+15  &#x2503;     a.x = 33; // the borrowed data are not mutable
+    &#x254B;      ^
 
-    <span class="token other-keyword">pub</span> <span class="token keyword">over</span> <span class="token function">append</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">,</span> i <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> Node <span class="token punctuation">{</span>
-        <span class="token comment">// We are at the end of the list</span>
-        <span class="token comment">// we just have to return a node that contains the value</span>
 
-        <span class="token path">Some</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span>i<span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token other-keyword">pub</span> <span class="token keyword">over</span> <span class="token function">print</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token function">print</span> <span class="token punctuation">(</span><span class="token string">&quot;END&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>    
-<span class="token punctuation">}</span>
+ymir1: <span class="token path">fatal error</span>: 
+compilation terminated.
 </code></pre>
-<p>And the class Some, which contains a value: </p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">class</span> Some <span class="token keyword">over</span> Node <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> _value <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">;</span>
-    <span class="token keyword">let</span> _next <span class="token punctuation">:</span> <span class="token type">Node</span><span class="token punctuation">;</span>
-
-    <span class="token other-keyword">pub</span> <span class="token punctuation">{</span>
-        <span class="token comment">/**</span>
-<span class="token comment">         * This constructor is used when this node is the last value of the list</span>
-<span class="token comment">         * It is followed by a None value</span>
-<span class="token comment">         */</span>
-         <span class="token keyword">self</span> <span class="token punctuation">(</span>v <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token keyword">with</span> _value <span class="token operator">=</span> v<span class="token punctuation">,</span> _next <span class="token operator">=</span> <span class="token path">None</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
-
-         <span class="token keyword">self</span> <span class="token punctuation">(</span>v <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">,</span> x <span class="token punctuation">:</span> <span class="token type">Node</span><span class="token punctuation">)</span> <span class="token keyword">with</span> _value <span class="token operator">=</span> v<span class="token punctuation">,</span> _next <span class="token operator">=</span> x <span class="token punctuation">{</span><span class="token punctuation">}</span>
-
-
-         <span class="token keyword">over</span> <span class="token function">append</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">,</span> i <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> Node <span class="token punctuation">{</span>
-             <span class="token path">Some</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">.</span>_value<span class="token punctuation">,</span> <span class="token keyword">self</span><span class="token punctuation">.</span>_next<span class="token punctuation">.</span><span class="token function">append</span> <span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span>
-         <span class="token punctuation">}</span>        
-
-        <span class="token keyword">over</span> <span class="token function">print</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token function">print</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">.</span>_value<span class="token punctuation">,</span> <span class="token string">&quot;::&quot;</span><span class="token punctuation">,</span> <span class="token keyword">self</span><span class="token punctuation">.</span>_next<span class="token punctuation">)</span><span class="token punctuation">;</span>        
-        <span class="token punctuation">}</span>    
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</code></pre>
-<p>There we are, the list is now usable:</p>
+<p><br></p>
+<p>This error can be avoided, by making the borrowed data mutable as
+well. Either by using the <strong><code>dmut</code></strong> modifier, or by writing <strong><code>mut
+&amp;(mut A)</code></strong>.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> x <span class="token punctuation">:</span> <span class="token type">Node</span> <span class="token operator">=</span> <span class="token path">None</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">let</span> y <span class="token operator">=</span> x<span class="token punctuation">.</span><span class="token function">append</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span> <span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span> <span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span> <span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">println</span> <span class="token punctuation">(</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> <span class="token other-keyword">dmut</span> a <span class="token operator">=</span> <span class="token path">A</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    a<span class="token punctuation">.</span>x <span class="token operator">=</span> <span class="token number">42</span><span class="token punctuation">;</span> <span class="token comment">// no problem a is mutable, and its borrowed data as well.</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span>a<span class="token punctuation">.</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span> 
 <span class="token punctuation">}</span>
 </code></pre>
-<p>You should get the following output.</p>
-<pre class="language-"><code>12::8::3::9::END
-</code></pre><p><strong>Exercise:</strong> Without changing the main function, generate the
-  following result. In other words, change the append function, to
-  make sorted insertions.</p>
-<pre class="language-"><code>3::8::9::12::END
+<p>Because classes are aliasable types, the keyword <strong><code>alias</code></strong> has to be
+used when trying to make a mutable affectation. Information about
+aliasable types is presented in chapter
+<a href="https://gnu-ymir.github.io/Documentations/en/advanced/alias.html" target="_blank">Aliases</a>,
+and is not rediscussed here.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> 
+    <span class="token keyword">throws</span> <span class="token operator">&amp;</span><span class="token type">AssertError</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">let</span> <span class="token other-keyword">dmut</span> a <span class="token operator">=</span> <span class="token path">A</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> <span class="token other-keyword">dmut</span> b <span class="token operator">=</span> <span class="token other-keyword">alias</span> a<span class="token punctuation">;</span>
+    b<span class="token punctuation">.</span>x <span class="token operator">=</span> <span class="token number">42</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">assert</span> <span class="token punctuation">(</span>a<span class="token punctuation">.</span>x <span class="token operator">==</span> <span class="token number">42</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 </code></pre>
+<h2 id="field-mutability"><a name="field-mutability" class="anchor-navigation-ex-anchor" href="#field-mutability"><i class="fa fa-link" aria-hidden="true"></i></a>1.2. Field mutability</h2>
+<p>Field mutability is set once and for all, in the definition of the
+class. The information about field mutability presented in the chapter
+about structure is applicable to classes. </p>
+<p>However, unlike structures, classes are not copiable by default, but
+have to implement a specific traits. Trait and implementation is
+presented in a future chapter, and copy is discussed in there
+chapter. (<em>cf.</em>
+<a href="https://gnu-ymir.github.io/Documentations/en/objects/traits.html" target="_blank">Traits</a>).</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">class</span> A <span class="token punctuation">{</span>
+
+    <span class="token other-keyword">pub</span> <span class="token keyword">let</span> <span class="token other-keyword">mut</span> x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">;</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">let</span> y <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">;</span>
+
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">,</span> y <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token keyword">with</span> x <span class="token operator">=</span> x<span class="token punctuation">,</span> y <span class="token operator">=</span> y <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> <span class="token other-keyword">dmut</span> a <span class="token operator">=</span> <span class="token path">A</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    a<span class="token punctuation">.</span>x <span class="token operator">=</span> <span class="token number">43</span><span class="token punctuation">;</span>
+    a<span class="token punctuation">.</span>y <span class="token operator">=</span> <span class="token number">89</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br>
+Errors: </p>
+<pre class="language-"><code class="lang-error"><span class="token path">Error</span> : left operand of type i32 is immutable
+ <span class="token comment">--&gt; main.yr:(14,3)</span>
+14  &#x2503;     a.y = 89;
+    &#x254B;      ^
+
+
+ymir1: <span class="token path">fatal error</span>: 
+compilation terminated.
+</code></pre>
+
                                 
                                 </section>
                             
@@ -768,12 +796,12 @@ simplest, the end of the list :</p>
 
             
                 
-                <a href="traits.html" class="navigation navigation-prev " aria-label="Previous page: Traits">
+                <a href="class.html" class="navigation navigation-prev " aria-label="Previous page: Class">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="../functions/" class="navigation navigation-next " aria-label="Next page: Function advanced">
+                <a href="methods.html" class="navigation navigation-next " aria-label="Next page: Methods">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -784,7 +812,7 @@ simplest, the end of the list :</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Example program","level":"1.7.6","depth":2,"next":{"title":"Function advanced","level":"1.8","depth":1,"path":"functions/README.md","ref":"functions/README.md","articles":[]},"previous":{"title":"Traits","level":"1.7.5","depth":2,"path":"objects/traits.md","ref":"objects/traits.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"objects/example.md","mtime":"2021-04-23T13:07:17.112Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-04-24T14:20:03.773Z"},"basePath":"..","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Mutability","level":"1.7.2","depth":2,"next":{"title":"Methods","level":"1.7.3","depth":2,"path":"objects/methods.md","ref":"objects/methods.md","articles":[]},"previous":{"title":"Class","level":"1.7.1","depth":2,"path":"objects/class.md","ref":"objects/class.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"objects/mutability.md","mtime":"2021-04-24T13:27:02.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-04-24T14:20:03.773Z"},"basePath":"..","book":{"language":"en"}});
         });
     </script>
 </div>

@@ -398,7 +398,33 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7.2" data-path="inheritance.html">
+        <li class="chapter " data-level="1.7.2" data-path="mutability.html">
+            
+                <a href="mutability.html">
+            
+                    
+                    Mutability
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="methods.html">
+            
+                <a href="methods.html">
+            
+                    
+                    Methods
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.4" data-path="inheritance.html">
             
                 <a href="inheritance.html">
             
@@ -411,7 +437,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7.3" data-path="traits.html">
+        <li class="chapter " data-level="1.7.5" data-path="traits.html">
             
                 <a href="traits.html">
             
@@ -424,7 +450,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7.4" data-path="example.html">
+        <li class="chapter " data-level="1.7.6" data-path="example.html">
             
                 <a href="example.html">
             
@@ -656,7 +682,9 @@ definition of a class <strong><code>A</code></strong>, and an heir class <strong
 <strong><code>A</code></strong> contains a field <strong><code>x</code></strong>, of type <strong><code>i32</code></strong>, thus of size
 <strong>4</strong> bytes. The class <strong><code>B</code></strong>, contains another field <strong><code>y</code></strong> of size
 <strong>4</strong>, leading to a class <strong><code>B</code></strong> of size <strong>8</strong>.</p>
-<p><img src="https://gnu-ymir.github.io/Documentations/en/objects/UML.png" alt="drawing" height="500" style="display: block; margin-left: auto;  margin-right: auto;"></p>
+<p><br>
+<img src="https://gnu-ymir.github.io/Documentations/en/objects/UML.png" alt="drawing" height="400" style="display: block; margin-left: auto;  margin-right: auto;">
+<br></p>
 <p>Because we want to following source code to be accepted (basic
 principle of polymorphism), the size of <strong>A</strong>, cannot be statically
 set to <strong>4</strong> bytes, (nor to <strong>8</strong>, the class <strong><code>B</code></strong> can come from a
@@ -670,6 +698,7 @@ huge loss of memory if only <strong><code>A</code></strong> values are used).</p
     <span class="token function">foo</span> <span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// calling foo with a B, heir of A</span>
 <span class="token punctuation">}</span>
 </code></pre>
+<p><br></p>
 <p>For that reason, object instances are aliasable types, and only
 contains a pointer to the values of the class. You may have notice the
 syntax <strong><code>&amp;(A)</code></strong>, in the above example. If this syntax is similar to
@@ -734,7 +763,7 @@ Events</a>).</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Objects","level":"1.7","depth":1,"next":{"title":"Class","level":"1.7.1","depth":2,"path":"objects/class.md","ref":"objects/class.md","articles":[]},"previous":{"title":"Aka","level":"1.6.3","depth":2,"path":"types/aka.md","ref":"types/aka.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"objects/README.md","mtime":"2021-04-23T12:55:04.513Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-04-23T13:07:04.882Z"},"basePath":"..","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Objects","level":"1.7","depth":1,"next":{"title":"Class","level":"1.7.1","depth":2,"path":"objects/class.md","ref":"objects/class.md","articles":[]},"previous":{"title":"Aka","level":"1.6.3","depth":2,"path":"types/aka.md","ref":"types/aka.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"objects/README.md","mtime":"2021-04-23T13:09:31.722Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-04-24T14:20:03.773Z"},"basePath":"..","book":{"language":"en"}});
         });
     </script>
 </div>
