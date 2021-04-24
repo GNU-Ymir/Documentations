@@ -148,5 +148,5 @@ My println : 12
 
 *Contribution* : enable aka on import, with the syntax : `import path
 aka name`. This is already possible, as we can see in the previous
-example, but needs two line.
+example, but needs two lines.
 

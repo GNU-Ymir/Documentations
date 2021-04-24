@@ -20,6 +20,8 @@
   * [Aka](types/aka.md)
 * [Objects](objects/README.md)
   * [Class](objects/class.md)
+  * [Mutability](objects/mutability.md)
+  * [Methods](objects/methods.md)
   * [Inheritance](objects/inheritance.md)
   * [Traits](objects/traits.md)
   * [Example program](objects/example.md)

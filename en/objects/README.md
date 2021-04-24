@@ -15,8 +15,9 @@ definition of a class **`A`**, and an heir class **`B`**. The class
 **4** bytes. The class **`B`**, contains another field **`y`** of size
 **4**, leading to a class **`B`** of size **8**.
 
-<img src="https://gnu-ymir.github.io/Documentations/en/objects/UML.png" alt="drawing" height="500" style="display: block; margin-left: auto;  margin-right: auto;">
-
+<br>
+<img src="https://gnu-ymir.github.io/Documentations/en/objects/UML.png" alt="drawing" height="400" style="display: block; margin-left: auto;  margin-right: auto;">
+<br>
 
 Because we want to following source code to be accepted (basic
 principle of polymorphism), the size of **A**, cannot be statically
@@ -33,6 +34,8 @@ def main () {
 	foo (b); // calling foo with a B, heir of A
 }
 ```
+
+<br>
 
 For that reason, object instances are aliasable types, and only
 contains a pointer to the values of the class. You may have notice the
