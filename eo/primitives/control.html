@@ -1,0 +1,621 @@
+
+<!DOCTYPE HTML>
+<html lang="eo" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Regaj fluoj · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-prism/code.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-katex/katex.min.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-codeblock-filename/block.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-spoiler/spoiler.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-language-picker/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-anchor-nav-x/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-code/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="functions.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Enkonduko
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../hello-world/">
+            
+                <a href="../hello-world/">
+            
+                    
+                    Saluton, mondo!
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../hello-world/commentaires.html">
+            
+                <a href="../hello-world/commentaires.html">
+            
+                    
+                    Komentoj
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Bazaj konceptoj
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="variables.html">
+            
+                <a href="variables.html">
+            
+                    
+                    Variabloj kaj Ŝanĝebleco
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="types.md">
+            
+                <span>
+            
+                    
+                    Datumaj tipoj
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="functions.html">
+            
+                <a href="functions.html">
+            
+                    
+                    Funkcioj
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3.4" data-path="control.html">
+            
+                <a href="control.html">
+            
+                    
+                    Regaj fluoj
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Regaj fluoj</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#regaj-fluoj"><b>1. </b>Regaj fluoj</a></li><ul><li><span class="title-icon "></span><a href="#if-esprimo"><b>1.1. </b>&apos;If&apos; esprimo</a></li><li><span class="title-icon "></span><a href="#bukloj"><b>1.2. </b>Bukloj</a></li><ul><li><span class="title-icon "></span><a href="#senfinaj-ripetoj"><b>1.2.1. </b>Senfinaj ripetoj</a></li><li><span class="title-icon "></span><a href="#bulki&#x11D;i-dum-kondi&#x109;o-estas-plenumita"><b>1.2.2. </b>Bulki&#x11D;i dum kondi&#x109;o estas plenumita</a></li><li><span class="title-icon "></span><a href="#iteracii-trans-valoro"><b>1.2.3. </b>Iteracii trans valoro</a></li></ul></ul></ul></div><a href="#regaj-fluoj" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="regaj-fluoj"><a name="regaj-fluoj" class="anchor-navigation-ex-anchor" href="#regaj-fluoj"><i class="fa fa-link" aria-hidden="true"></i></a>1. Regaj fluoj</h1>
+<p>Kiam oni skribas programkodon, la kapablo de decidi &#x109;u parto de kodo
+ruli&#x11D;os, a&#x16D; de ripeti parton de la kodo, estas baza skemo, kiu estas
+necesa.</p>
+<h2 id="if-esprimo"><a name="if-esprimo" class="anchor-navigation-ex-anchor" href="#if-esprimo"><i class="fa fa-link" aria-hidden="true"></i></a>1.1. &apos;If&apos; esprimo</h2>
+<p>La <strong><code>if</code></strong> vorto (<em>&apos;se&apos; esperante</em>), difinas esprimon kiu ebligas
+disbran&#x109;igi la programon per fari decidojn, bazitaj sur kondi&#x109;oj. La
+<strong><code>else</code></strong> vorto (<em>&apos;alie&apos; esperante</em>) povas esti lokita malanta&#x16D; <em>if</em>
+esprimo, por ruli parton de kodo, se la kondi&#x109;o de la <em>if</em> esprimo ne
+estas vera.</p>
+<p>La sintakso de la <em>if</em> esprimo estas prezentata malsupre.</p>
+<pre class="language-"><code class="lang-grammar"><span class="token path">if_esprimo</span> <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token string">&apos;if&apos;</span> esprimo esprimo <span class="token punctuation">(</span><span class="token string">&apos;else&apos;</span> esprimo<span class="token punctuation">)</span>?
+</code></pre>
+<p><br></p>
+<p>La sekva programkodo prezentas bazan uzon de la <em>if</em> esprimo. En &#x109;i
+tiu ekzemplo, la valoro de la variablo <strong><code>x</code></strong> estas testita. Se &#x11D;ia
+valoro estas malpli granda ol <code>5</code>, tiam la kodo je la linio <code>5</code> estos
+rulita, alikaze se &#x11D;ia valoro estas egala al <code>5</code> la kodo je la linio
+<code>7</code> estos plenumita. Se amba&#x16D; tiuj testoj malsukcesas, la linio <code>9</code>
+estos rulita. En &#x109;i tiu ekzemplo, <strong><code>x</code></strong> egalas <code>5</code>, do la rezulto
+estos <code>X estas ekzakte 5</code>.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> x <span class="token operator">&lt;</span> <span class="token number">5</span> <span class="token punctuation">{</span>
+       <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;X estas malpli granda ol 5&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>x <span class="token operator">==</span> <span class="token number">5</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// la krampoj ne estas devigaj</span>
+      <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;X estas ekzakte 5&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;X estas pli granda ol 5&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br></p>
+<p>La valoro de <em>if</em> esprimo estas komputita kiel la valoro de la bloko
+da kodo kiu estas rulita, kiam la programo elektas bran&#x109;on je
+kondi&#x109;o. &#x108;iuj bran&#x109;oj de la <em>if</em> esprimo devas havi valorojn, kies
+tipoj estas similaj. Alie la kompililo &#x135;etas eraron, pro ke la tipo de
+la <em>if</em> esprimo ne povas esti induktita. La tipo de <em>if</em> esprimo
+evidente povas esti <strong><code>void</code></strong>, kiu estas la tipo uzita kiam ne estas
+valoro.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> condition <span class="token operator">=</span> <span class="token other-keyword">true</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token keyword">if</span> condition <span class="token punctuation">{</span>
+        <span class="token number">5</span> 
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token number">7</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br></p>
+<p>Se eblas ke neniu el la bran&#x109;oj de <em>if</em> esprimo estas rulita, tiam la
+tipo de la esprimo devas esti <strong><code>void</code></strong>. Ekzemple, en la sekva
+programkodo, la variablo <strong><code>kondicxo</code></strong> povas enhavi amba&#x16D; la valorojn
+<strong><code>true</code></strong> a&#x16D; <strong><code>false</code></strong>. Se &#x11D;ia valoro estas <strong><code>false</code></strong>, tiam la
+kondi&#x109;o de la <em>if</em> esprimo estas malvera, kaj en la solan bran&#x109;on de
+la esprimo oni ne eniras, kaj la valoro de la variablo <strong><code>x</code></strong> ne
+estas difinita, kio estas malpermisata per la programlingvo.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token basic-types">bool</span> <span class="token punctuation">{</span> <span class="token comment">// ... } // redonas bool&apos;n valoron</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> kondicxo <span class="token operator">=</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token keyword">if</span> kondicxo <span class="token punctuation">{</span> <span class="token comment">// la kondi&#x109;o povas esti malvera</span>
+        <span class="token number">5</span> 
+    <span class="token punctuation">}</span><span class="token punctuation">;</span> <span class="token comment">// do la esprimo havas neniun valoron</span>
+       <span class="token comment">// sed la variablo &apos;x&apos; ne povas esti tipigita kiel &apos;void&apos;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br></p>
+<p>Eraroj: </p>
+<pre class="language-"><code class="lang-error"><span class="token path">Error</span> : incompatible types void and i32
+ <span class="token comment">--&gt; main.yr:(5,10)</span>
+ 5  &#x2503;     let x = if kondicxo { // la kondi&#x109;o povas esti malvera
+    &#x254B;             ^^
+    &#x2503; <span class="token other-keyword">Note</span> : 
+    &#x2503;  <span class="token comment">--&gt; main.yr:(6,3)</span>
+    &#x2503;  6  &#x2503;         5 
+    &#x2503;     &#x254B;         ^
+    &#x2517;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x253B;&#x2501; 
+
+
+ymir1: <span class="token path">fatal error</span>: 
+compilation terminated.
+</code></pre>
+<p><br></p>
+<h2 id="bukloj"><a name="bukloj" class="anchor-navigation-ex-anchor" href="#bukloj"><i class="fa fa-link" aria-hidden="true"></i></a>1.2. Bukloj</h2>
+<h3 id="senfinaj-ripetoj"><a name="senfinaj-ripetoj" class="anchor-navigation-ex-anchor" href="#senfinaj-ripetoj"><i class="fa fa-link" aria-hidden="true"></i></a>1.2.1. Senfinaj ripetoj</h3>
+<p>La <strong><code>loop</code></strong> vorto (<em>&apos;buklo&apos; esperante</em>) estas uzita por deklari ke
+bloko da kodo devas esti ripetata senfine. La sintakso de la
+<strong><code>loop</code></strong> esprimo estas prezentata en la sekva blokkodo.</p>
+<pre class="language-"><code class="lang-grammar"><span class="token path">loop_esprimo</span> <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token string">&apos;loop&apos;</span> esprimo
+</code></pre>
+<p><br></p>
+<p>En la sekva ekzemplo, la programo neniam finos, kaj presos, senfina
+nombro da fojoj, la &#x109;enon <code>&quot;Mi estos presita senfine&quot;</code>.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    loop <span class="token punctuation">{</span> 
+        <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Mi estos presita senfine&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br></p>
+<p><em>loop</em> esprimo povas esti uzita por ripeti agon, &#x11D;is &#x11D;i sukcesas,
+ekz. atendi la finon de fadeno (<em>de plenumado</em>), atendi retan konekton,
+ktp. La vorto <strong><code>break</code></strong> (<em>rompu esperante</em>) haltigas buklon. &#x11C;i &#x109;iam
+estas asociata al valoro, kiu estas donita &#x135;us malanta&#x16D; la <strong><code>break</code></strong>
+vorto. Tiu valoro estos la valoro de la buklo, se la programo rulas
+la <em>break</em> deklaron. &#x108;iuj <em>break</em> deklaroj de sama buklo devas havi
+valorojn, kies tipoj estas similaj, por garantii la koherecon de
+tipoj.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> <span class="token other-keyword">mut</span> kalkulanto <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">let</span> rezulto <span class="token operator">=</span> loop <span class="token punctuation">{</span> 
+        kalkulanto <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> kalkulanto <span class="token operator">==</span> <span class="token number">10</span> <span class="token punctuation">{</span>
+            <span class="token keyword">break</span> kalkulanto <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment">// Haltigas la buklon, kaj donas la valoron &apos;kalkulanto + 1&apos;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Rezutlo : &quot;</span><span class="token punctuation">,</span> rezulto<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br></p>
+<p>Rezulto: </p>
+<pre class="language-"><code>Rezulto: 11
+</code></pre><p><br></p>
+<h3 id="bulki&#x11D;i-dum-kondi&#x109;o-estas-plenumita"><a name="bulki&#x11D;i-dum-kondi&#x109;o-estas-plenumita" class="anchor-navigation-ex-anchor" href="#bulki&#x11D;i-dum-kondi&#x109;o-estas-plenumita"><i class="fa fa-link" aria-hidden="true"></i></a>1.2.2. Bulki&#x11D;i dum kondi&#x109;o estas plenumita</h3>
+<p>La vorto <strong><code>while</code></strong> (<em>&apos;dum&apos; esperante</em>) kreas buklon, kiu ripeti&#x11D;as
+&#x11D;is kondi&#x109;o ne plu etas plenumita. Kiel por la <em>loop</em> esprimo, <em>break</em>
+deklaroj povas esti uzitaj por haltigi &#x11D;in. Krome, malkiel <em>loop</em>
+esprimoj, <em>while</em> esprimoj &#x109;iam estas de la tipo <strong><code>void</code></strong>, pro ke
+eblas ke oni neniam eniris tiajn buklojn. La <em>break</em> deklaroj en tiaj
+buklojn devas sekvi tiun regulon, do la valoroj asociataj al <em>break</em>
+deklaroj en <em>while</em> esprimoj, &#x109;iam estas <strong><code>void</code></strong> valoroj.
+<em>Kontribuo:</em> Ni planas aldoni <strong><code>else</code></strong> blokon al <em>while</em> bukloj, por
+doni valoro al tiaj bukloj, kiam &#x11D;i ne estas eniritaj.</p>
+<p>La sintakso de <em>while</em> buklo estas prezentata en la sekva bloko da kodo.</p>
+<pre class="language-"><code class="lang-grammar"><span class="token path">while_esprimo</span> <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token string">&apos;while&apos;</span> esprimo esprimo
+</code></pre>
+<p><br></p>
+<p>La sekva ekzemplo, presentas uzon de <em>while</em> buklon, kie la buklon
+iteracias 10 fojoj, dum la valoro de <strong><code>i</code></strong> estas malpli granda ol
+<strong>10</strong>.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> <span class="token other-keyword">mut</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> i <span class="token operator">&lt;</span> <span class="token number">10</span> <span class="token punctuation">{</span>
+        i <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span>    
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;I estas : &quot;</span><span class="token punctuation">,</span> i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br>
+Rezulto:</p>
+<pre class="language-"><code>I estas : 10
+</code></pre><h3 id="iteracii-trans-valoro"><a name="iteracii-trans-valoro" class="anchor-navigation-ex-anchor" href="#iteracii-trans-valoro"><i class="fa fa-link" aria-hidden="true"></i></a>1.2.3. Iteracii trans valoro</h3>
+<p>La lasta speco de buklo estas la <em>for</em> buklo (<em>&apos;por&apos; esperante</em>),
+deklarita per la vorto <strong><code>for</code></strong>. Kiel por <em>while</em> bukloj, la valoro
+de <em>for</em> buklo &#x109;iam estas <strong><code>void</code></strong>, pro ke ne eblas garantii ke la
+buklo e&#x109; unu foje estos enirita. <em>Kontribuo:</em> ankora&#x16D; kiel por la
+<em>while</em> buklo, ni planas aldoni <em>else</em> bloko al <em>for</em> buklo por doni
+valoron al bukloj, kiuj neniam estas enirita.</p>
+<p><em>for</em> bukloj iteracias trans valoro, kies tipo estas iteraciebla. La
+bazaj tipoj, kiuj estas iteracieblaj estas, intervaloj, opoj, tran&#x109;oj
+kaj statikaj tabuloj.</p>
+<p>La sintakso de la <em>for</em> buklo estas prezentata en la sekva bloko da kodo.</p>
+<pre class="language-"><code class="lang-grammar"><span class="token path">for_esprimo</span> <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token string">&apos;for&apos;</span> <span class="token punctuation">(</span><span class="token string">&apos;(&apos;</span> var_deklj <span class="token string">&apos;)&apos;</span> <span class="token operator">|</span> var_deklj<span class="token punctuation">)</span> <span class="token string">&apos;in&apos;</span> esprimo esprimo
+
+<span class="token path">var_deklj</span> <span class="token punctuation">:</span><span class="token operator">=</span> var_dekl <span class="token punctuation">(</span><span class="token string">&apos;,&apos;</span> var_dekl<span class="token punctuation">)</span>
+<span class="token path">var_dekl</span> <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token punctuation">(</span>dekoracio<span class="token punctuation">)</span><span class="token operator">*</span> nomo <span class="token punctuation">(</span><span class="token string">&apos;:&apos;</span> tipo<span class="token punctuation">)</span>?
+
+<span class="token path">dekoracio</span> <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token string">&apos;ref&apos;</span> <span class="token operator">|</span> <span class="token string">&apos;mut&apos;</span> <span class="token operator">|</span> <span class="token string">&apos;dmut&apos;</span>
+</code></pre>
+<p><br></p>
+<p><strong>1) Iteracio trans intervalo.</strong> En la sekva ekzemplo, la <em>for</em> buklo
+estas uzita por iteracii trans du intervaloj. La unua buklo je la
+kvara linio, iteracias inter la valoroj <strong>0</strong> kaj <strong>8</strong>
+(malinkluzivita), je pa&#x15D;o de <strong>2</strong>. Kiam la dua buklo iteracias inter
+la valoroj <strong>10</strong> kaj <strong>0</strong> (malinkluzivita) per pa&#x15D;o de <strong>-1</strong>.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token punctuation">(</span><span class="token number">0</span> <span class="token punctuation">..</span> <span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">step_by</span> <span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">println</span> <span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>    
+
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token number">10</span> <span class="token punctuation">..</span> <span class="token number">0</span> <span class="token punctuation">{</span>
+        <span class="token function">println</span> <span class="token punctuation">(</span>i<span class="token punctuation">,</span> <span class="token string">&quot;!&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br></p>
+<p><strong>2) Iteracio trans tran&#x109;oj kaj statikaj tabuloj.</strong> Tran&#x109;oj estas
+iteracieblaj tipoj. Ili povas esti iteraciita uzante unu a&#x16D; du
+variabloj. Kiam oni uzas nur unu variablo, tiu variablo estas asociita
+al la valoroj enhavitaj en la tran&#x109;o. Kiam du variabloj estas uzitaj,
+la unua estas asociita al la nuna indekso de iteracio, kaj la dua
+estas asociita al la valoroj enhavitaj en la tran&#x109;o. Iteracioj
+trans statikaj tabuloj funkcias simile.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">11</span><span class="token punctuation">,</span> <span class="token number">12</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> a <span class="token punctuation">{</span>
+        <span class="token function">print</span> <span class="token punctuation">(</span>i<span class="token punctuation">,</span> <span class="token string">&quot; &quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> i<span class="token punctuation">,</span> j <span class="token keyword">in</span> a <span class="token punctuation">{</span>
+        <span class="token function">print</span> <span class="token punctuation">(</span>i<span class="token punctuation">,</span> <span class="token string">&quot;-&gt; &quot;</span><span class="token punctuation">,</span> j<span class="token punctuation">,</span> <span class="token string">&quot; &quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br></p>
+<p>Rezultoj:</p>
+<pre class="language-"><code>10 11 12 
+0-&gt; 10 1-&gt; 11 2-&gt; 12
+</code></pre><p><br></p>
+<p><em>Kontribuo:</em> Iteracii per referenco trans &#x15D;an&#x11D;eblaj tran&#x109;oj, kaj
+&#x15D;an&#x11D;eblaj statikaj tabuloj estas ankora&#x16D; ellabori&#x11D;anta.</p>
+<p><strong>3) Iteracio trans opoj.</strong> Opoj estas iteracieblaj tipoj. Sed malkiel
+tran&#x109;oj a&#x16D; intervaloj, la <em>for</em> buklo estas disvolvita dum la
+kompilado. La opoj estas iteracieblaj kun nur unu variablo, kiu estas
+asociita al la valoroj enhavitaj en la opoj.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span> 
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">&apos;r&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> x <span class="token punctuation">{</span> 
+        <span class="token function">println</span> <span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// supra buklo estas ekvivalenta al </span>
+    <span class="token function">println</span> <span class="token punctuation">(</span>x<span class="token number">.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span>x<span class="token number">.1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br></p>
+<p>Oni povas noti ke la tipo de la variablo <strong><code>i</code></strong>, en la <em>for</em> buklo de
+la supra ekzemplo, &#x15D;an&#x11D;as de unu iteracio al alia, estinte <strong><code>i32</code></strong>
+tipo, kaj sekve <strong><code>c32</code></strong> tipo je la sekva iteracio. Pro tiu kialo,
+kaj por malgra&#x16D;e esti ebla, <em>for</em> bukloj trans opoj ne estas
+malstatikaj, sed nur disvolvitaj dum kompilado. Tiu &#x15D;an&#x11D;as nenion por
+la uzantoj, sed valoras mencion, por malhelpi miskomprenon pri la
+statika sistemo de tipoj, kiu povas &#x15D;ajni malstatika tie, sed tute ne
+estas.</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="functions.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Funkcioj">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Regaj fluoj","level":"1.3.4","depth":2,"previous":{"title":"Funkcioj","level":"1.3.3","depth":2,"path":"primitives/functions.md","ref":"primitives/functions.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"eo","gitbook":"*"},"file":{"path":"primitives/control.md","mtime":"2021-05-26T08:27:27.730Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-05-31T09:56:47.888Z"},"basePath":"..","book":{"language":"eo"}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-spoiler/spoiler.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-folding-menu/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-language-picker/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-anchor-nav-x/lib/handler.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-code/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

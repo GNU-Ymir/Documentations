@@ -450,19 +450,6 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7.6" data-path="../objects/example.html">
-            
-                <a href="../objects/example.html">
-            
-                    
-                    Example program
-            
-                </a>
-            
-
-            
-        </li>
-    
 
             </ul>
             
@@ -552,7 +539,20 @@
             
         </li>
     
-        <li class="chapter " data-level="1.11" data-path="../templates/operators.html">
+        <li class="chapter " data-level="1.11" data-path="../objects/common_traits.html">
+            
+                <a href="../objects/common_traits.html">
+            
+                    
+                    Common traits
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="../templates/operators.html">
             
                 <a href="../templates/operators.html">
             
@@ -565,7 +565,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.12" data-path="../errors/main.html">
+        <li class="chapter " data-level="1.13" data-path="../errors/main.html">
             
                 <a href="../errors/main.html">
             
@@ -579,7 +579,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.12.1" data-path="../errors/scope.html">
+        <li class="chapter " data-level="1.13.1" data-path="../errors/scope.html">
             
                 <a href="../errors/scope.html">
             
@@ -597,7 +597,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.13" data-path="../version/README.md">
+        <li class="chapter " data-level="1.14" data-path="../version/README.md">
             
                 <span>
             
@@ -610,7 +610,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.14" >
+        <li class="chapter " data-level="1.15" >
             
                 <span>
             
@@ -670,7 +670,7 @@
                                 
                                 <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#functions"><b>1. </b>Functions</a></li><ul><li><span class="title-icon "></span><a href="#parameters"><b>1.1. </b>Parameters</a></li><ul><li><span class="title-icon "></span><a href="#default-value"><b>1.1.1. </b>Default value</a></li><li><span class="title-icon "></span><a href="#recursive-default-value"><b>1.1.2. </b>Recursive default value</a></li><li><span class="title-icon "></span><a href="#main-function-parameters"><b>1.1.3. </b>Main function parameters</a></li></ul><li><span class="title-icon "></span><a href="#function-body"><b>1.2. </b>Function body</a></li><li><span class="title-icon "></span><a href="#function-return-type"><b>1.3. </b>Function return type</a></li><li><span class="title-icon "></span><a href="#scope-declaration"><b>1.4. </b>Scope declaration</a></li><li><span class="title-icon "></span><a href="#uniform-call-syntax"><b>1.5. </b>Uniform call syntax</a></li></ul></ul></div><a href="#functions" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="functions"><a name="functions" class="anchor-navigation-ex-anchor" href="#functions"><i class="fa fa-link" aria-hidden="true"></i></a>1. Functions</h1>
 <p>Function is a widely accepted concept for dividing a program into
-small parts. A <strong><code>Ymir</code></strong> program starts with the <code>main</code> function that
+small parts. A <em>Ymir</em> program starts with the <strong><code>main</code></strong> function that
 you have already seen in previous chapters. All functions are declared
 using the keyword <strong><code>def</code></strong> followed by a identifier, and a list of
 parameters. A function is called by using its identifier followed by a
@@ -718,10 +718,10 @@ list of parameters separated by commas between parentheses.</p>
 <p>The order of declaration of the symbol has no impact on the
 compilation. The symbols are defined by the compiler before being
 validated, thus contrary to C-like languages, even if the <code>foo</code>
-function is defined after the <code>main</code> function, it&apos;s symbol is
-accessible, and hence callable by the <code>main</code> function. Further
-information about symbol declarations, and accesses are presented in
-chapter
+function is defined after the <code>main</code> function (in the first example of
+this chapter), it&apos;s symbol is accessible, and hence callable by the
+<code>main</code> function. Further information about symbol declarations, and
+accesses are presented in chapter
 <a href="https://gnu-ymir.github.io/Documentations/en/modules/" target="_blank">Modules</a>.</p>
 <h2 id="parameters"><a name="parameters" class="anchor-navigation-ex-anchor" href="#parameters"><i class="fa fa-link" aria-hidden="true"></i></a>1.1. Parameters</h2>
 <p>The parameters of a function are declared after its identifier between
@@ -766,9 +766,10 @@ call this function.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
 
-<span class="token comment">// Function &apos;foo&apos; can be called without specifying a value for parameter &apos;x&apos;</span>
-<span class="token comment">// &apos;8&apos; will be used as a default value for &apos;x&apos;</span>
-<span class="token comment">//</span>
+<span class="token comment">/**</span>
+<span class="token comment"> * Function &apos;foo&apos; can be called without specifying a value for parameter &apos;x&apos;</span>
+<span class="token comment"> * &apos;8&apos; will be used as the default value for &apos;x&apos;</span>
+<span class="token comment"> */</span>
 <span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> <span class="token basic-types">i32</span> <span class="token operator">=</span> <span class="token number">8</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;The value of x is : &quot;</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
@@ -787,7 +788,7 @@ specify the parameter in any order.</p>
 
 <span class="token comment">/**</span>
 <span class="token comment"> * Parameters with default values, does not need to be last parameters</span>
-<span class="token comment"> * This function can be called with only two parameters (x, z), or using named expression syntax</span>
+<span class="token comment"> * This function can be called with only two parameters (&apos;x&apos; and &apos;z&apos;), or using named expression syntax</span>
 <span class="token comment"> */</span>
 <span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">,</span> y <span class="token punctuation">:</span> <span class="token basic-types">i32</span> <span class="token operator">=</span> <span class="token number">9</span><span class="token punctuation">,</span> z <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token function">println</span> <span class="token punctuation">(</span>x<span class="token punctuation">,</span> <span class="token string">&quot; &quot;</span><span class="token punctuation">,</span> y<span class="token punctuation">,</span> <span class="token string">&quot; &quot;</span><span class="token punctuation">,</span> z<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -799,15 +800,16 @@ specify the parameter in any order.</p>
     <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// call the function &apos;foo&apos; with &apos;x&apos; = 1 and y = &apos;9&apos; and z = &apos;8&apos;</span>
 <span class="token punctuation">}</span>
 </code></pre>
+<p><br></p>
 <p>Results:</p>
 <pre class="language-"><code>2 1 8
 1 9 8
 </code></pre><p><br></p>
-<p>Any complex expression for the default value of a function parameter
-can be used. The creation of an object, a call of a function, a code
-block, etc. The only limitation is that, you cannot refer to the other
-parameters of the function. Indeed, they are not considered declared
-in the scope of the default value.</p>
+<p>Any complex expression can be used, for the default value of a
+function parameter. The creation of an object, a call of a function, a
+code block, etc. The only limitation is that, you cannot refer to the
+other parameters of the function. Indeed, they are not considered
+declared in the scope of the default value.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span> <span class="token punctuation">{</span> <span class="token punctuation">...</span> <span class="token punctuation">}</span>
 <span class="token keyword">def</span> <span class="token function">bar</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span> <span class="token punctuation">{</span> <span class="token punctuation">...</span> <span class="token punctuation">}</span>
 
@@ -889,6 +891,7 @@ the parameter <strong><code>bar_a</code></strong> when called in the default val
 
 <span class="token comment">// no need to do the same in bar, the recursivity does not exists anymore</span>
 </code></pre>
+<p><br></p>
 <p>Results:</p>
 <pre class="language-"><code>Bar 20
 Bar 31
@@ -910,10 +913,12 @@ in the command line when called. </p>
 <p>The std provides an argument parser in <strong><code>std::args</code></strong>, that will not
 be presented here, but worth mentioning.</p>
 <h2 id="function-body"><a name="function-body" class="anchor-navigation-ex-anchor" href="#function-body"><i class="fa fa-link" aria-hidden="true"></i></a>1.2. Function body</h2>
-<p>The body of a function is an expression. Every expression in Ymir are
-typed, but that does not mean that every expression have a value, as
-they can be typed as <code>void</code> expression. A simple <strong><code>add</code></strong> function
-can be written as follows:</p>
+<p>The body of a function is an expression. Every expression in <em>Ymir</em>
+are typed, but that does not mean that every expression have a value,
+as they can be typed as <code>void</code> expression. The expression (body of the
+function) is evaluated when the function is entered, and its value is
+used as the value of the function. A simple <strong><code>add</code></strong> function can be
+written as follows:</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">add</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">,</span> y <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span> 
     x <span class="token operator">+</span> y
 </code></pre>
@@ -928,22 +933,26 @@ expression of a scope, is taken as the value of the scope. </p>
     x <span class="token operator">+</span> y <span class="token comment">// last expression of the block is the value of the block</span>
 <span class="token punctuation">}</span> <span class="token comment">// end of a block</span>
 
-<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> 
+    <span class="token keyword">throws</span> <span class="token operator">&amp;</span><span class="token type">AssertError</span>
+<span class="token punctuation">{</span>
     <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token punctuation">{</span>
         <span class="token keyword">let</span> y <span class="token operator">=</span> <span class="token function">add</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         y <span class="token operator">+</span> <span class="token number">8</span> 
-    <span class="token punctuation">}</span>   
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">assert</span> <span class="token punctuation">(</span>x <span class="token operator">==</span> <span class="token number">11</span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
 </code></pre>
 <p><br></p>
-<p>The semi-colon token <code>;</code> is a way of specifying that an expression
+<p>The semi-colon token <strong><code>;</code></strong> is a way of specifying that an expression
 ends inside a scope, and that its value must be ignored. If the last
 expression of a scope is terminated by a semi-colon, an empty
 expression is added to the scope. This empty expression has no value,
 giving to the scope an empty value of type <strong><code>void</code></strong> as well.</p>
 <pre class="language-"><code class="lang-ymir">
-<span class="token comment">// The value of foo is &apos;9&apos;</span>
-<span class="token comment">//</span>
+<span class="token comment">/**</span>
+<span class="token comment"> * The value of foo is &apos;9&apos;</span>
+<span class="token comment"> */</span>
 <span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span> 
     <span class="token number">9</span>
 
@@ -1158,7 +1167,7 @@ methods on structures. </p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Functions","level":"1.3.3","depth":2,"next":{"title":"Control flows","level":"1.3.4","depth":2,"path":"primitives/control.md","ref":"primitives/control.md","articles":[]},"previous":{"title":"Data types","level":"1.3.2","depth":2,"path":"primitives/types.md","ref":"primitives/types.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"primitives/functions.md","mtime":"2021-04-24T14:22:15.149Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-04-24T18:27:12.989Z"},"basePath":"..","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Functions","level":"1.3.3","depth":2,"next":{"title":"Control flows","level":"1.3.4","depth":2,"path":"primitives/control.md","ref":"primitives/control.md","articles":[]},"previous":{"title":"Data types","level":"1.3.2","depth":2,"path":"primitives/types.md","ref":"primitives/types.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"primitives/functions.md","mtime":"2021-05-28T07:39:13.914Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-05-31T09:56:47.888Z"},"basePath":"..","book":{"language":"en"}});
         });
     </script>
 </div>

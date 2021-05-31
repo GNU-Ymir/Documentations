@@ -41,10 +41,6 @@
                 
             
                 
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-code/plugin.css">
-                
-            
-                
                 <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
                 
             
@@ -282,43 +278,17 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.4" data-path="../advanced/best.html">
-            
-                <a href="../advanced/best.html">
-            
-                    
-                    Best practice
-            
-                </a>
-            
-
-            
-        </li>
-    
 
             </ul>
             
         </li>
     
-        <li class="chapter " data-level="1.5" data-path="../modules/">
-            
-                <a href="../modules/">
-            
-                    
-                    Modules
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6" data-path="../types/">
+        <li class="chapter " data-level="1.5" data-path="../types/">
             
                 <a href="../types/">
             
                     
-                    User defined types
+                    User define types
             
                 </a>
             
@@ -327,7 +297,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.6.1" data-path="../types/struct.html">
+        <li class="chapter " data-level="1.5.1" data-path="../types/struct.html">
             
                 <a href="../types/struct.html">
             
@@ -340,7 +310,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6.2" data-path="../types/enum.html">
+        <li class="chapter " data-level="1.5.2" data-path="../types/enum.html">
             
                 <a href="../types/enum.html">
             
@@ -353,21 +323,21 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6.3" data-path="../types/aka.html">
+
+            </ul>
             
-                <a href="../types/aka.html">
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../modules/">
+            
+                <a href="../modules/">
             
                     
-                    Aka
+                    Modules
             
                 </a>
             
 
-            
-        </li>
-    
-
-            </ul>
             
         </li>
     
@@ -398,33 +368,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7.2" data-path="mutability.html">
-            
-                <a href="mutability.html">
-            
-                    
-                    Mutability
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.7.3" data-path="methods.html">
-            
-                <a href="methods.html">
-            
-                    
-                    Methods
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.7.4" data-path="inheritance.html">
+        <li class="chapter " data-level="1.7.2" data-path="inheritance.html">
             
                 <a href="inheritance.html">
             
@@ -437,7 +381,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7.5" data-path="traits.html">
+        <li class="chapter " data-level="1.7.3" data-path="traits.html">
             
                 <a href="traits.html">
             
@@ -450,7 +394,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.7.6" data-path="example.html">
+        <li class="chapter active" data-level="1.7.4" data-path="example.html">
             
                 <a href="example.html">
             
@@ -688,41 +632,41 @@ list.  The append method, while creating a copy of the list, returns a
 new list with element i appended at the end of the list. There are two
 types of nodes, a value or the end of the list. Let&apos;s start with the
 simplest, the end of the list :</p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">class</span> None <span class="token keyword">over</span> Node <span class="token punctuation">{</span>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">class</span> None over Node <span class="token punctuation">{</span>
     <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
 
-    <span class="token other-keyword">pub</span> <span class="token keyword">over</span> <span class="token function">append</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">,</span> i <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> Node <span class="token punctuation">{</span>
+    <span class="token other-keyword">pub</span> over <span class="token function">append</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">,</span> i <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> Node <span class="token punctuation">{</span>
         <span class="token comment">// We are at the end of the list</span>
         <span class="token comment">// we just have to return a node that contains the value</span>
 
         <span class="token path">Some</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span>i<span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
 
-    <span class="token other-keyword">pub</span> <span class="token keyword">over</span> <span class="token function">print</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token other-keyword">pub</span> over <span class="token function">print</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token function">print</span> <span class="token punctuation">(</span><span class="token string">&quot;END&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>    
 <span class="token punctuation">}</span>
 </code></pre>
 <p>And the class Some, which contains a value: </p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">class</span> Some <span class="token keyword">over</span> Node <span class="token punctuation">{</span>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">class</span> Some over Node <span class="token punctuation">{</span>
     <span class="token keyword">let</span> _value <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">;</span>
     <span class="token keyword">let</span> _next <span class="token punctuation">:</span> <span class="token type">Node</span><span class="token punctuation">;</span>
 
     <span class="token other-keyword">pub</span> <span class="token punctuation">{</span>
-        <span class="token comment">/**</span>
-<span class="token comment">         * This constructor is used when this node is the last value of the list</span>
-<span class="token comment">         * It is followed by a None value</span>
-<span class="token comment">         */</span>
+        <span class="token comment">/**
+         * This constructor is used when this node is the last value of the list
+         * It is followed by a None value
+         */</span>
          <span class="token keyword">self</span> <span class="token punctuation">(</span>v <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token keyword">with</span> _value <span class="token operator">=</span> v<span class="token punctuation">,</span> _next <span class="token operator">=</span> <span class="token path">None</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
 
          <span class="token keyword">self</span> <span class="token punctuation">(</span>v <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">,</span> x <span class="token punctuation">:</span> <span class="token type">Node</span><span class="token punctuation">)</span> <span class="token keyword">with</span> _value <span class="token operator">=</span> v<span class="token punctuation">,</span> _next <span class="token operator">=</span> x <span class="token punctuation">{</span><span class="token punctuation">}</span>
 
 
-         <span class="token keyword">over</span> <span class="token function">append</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">,</span> i <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> Node <span class="token punctuation">{</span>
+         over <span class="token function">append</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">,</span> i <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> Node <span class="token punctuation">{</span>
              <span class="token path">Some</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">.</span>_value<span class="token punctuation">,</span> <span class="token keyword">self</span><span class="token punctuation">.</span>_next<span class="token punctuation">.</span><span class="token function">append</span> <span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span>
          <span class="token punctuation">}</span>        
 
-        <span class="token keyword">over</span> <span class="token function">print</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        over <span class="token function">print</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token function">print</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">.</span>_value<span class="token punctuation">,</span> <span class="token string">&quot;::&quot;</span><span class="token punctuation">,</span> <span class="token keyword">self</span><span class="token punctuation">.</span>_next<span class="token punctuation">)</span><span class="token punctuation">;</span>        
         <span class="token punctuation">}</span>    
     <span class="token punctuation">}</span>
@@ -784,7 +728,7 @@ simplest, the end of the list :</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Example program","level":"1.7.6","depth":2,"next":{"title":"Function advanced","level":"1.8","depth":1,"path":"functions/README.md","ref":"functions/README.md","articles":[]},"previous":{"title":"Traits","level":"1.7.5","depth":2,"path":"objects/traits.md","ref":"objects/traits.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"objects/example.md","mtime":"2021-04-24T14:22:15.149Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-04-24T18:27:12.989Z"},"basePath":"..","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Example program","level":"1.7.4","depth":2,"next":{"title":"Function advanced","level":"1.8","depth":1,"path":"functions/README.md","ref":"functions/README.md","articles":[]},"previous":{"title":"Traits","level":"1.7.3","depth":2,"path":"objects/traits.md","ref":"objects/traits.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","copy-code-button","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"objects/example.md","mtime":"2021-02-10T15:50:32.547Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-02-10T17:57:21.102Z"},"basePath":"..","book":{"language":"en"}});
         });
     </script>
 </div>
@@ -792,6 +736,10 @@ simplest, the end of the list :</p>
         
     <script src="../../gitbook/gitbook.js"></script>
     <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
     
         
         <script src="../../gitbook/gitbook-plugin-spoiler/spoiler.js"></script>
@@ -807,10 +755,6 @@ simplest, the end of the list :</p>
     
         
         <script src="../../gitbook/gitbook-plugin-anchor-nav-x/lib/handler.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-code/plugin.js"></script>
         
     
         

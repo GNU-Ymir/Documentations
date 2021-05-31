@@ -450,19 +450,6 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7.6" data-path="../objects/example.html">
-            
-                <a href="../objects/example.html">
-            
-                    
-                    Example program
-            
-                </a>
-            
-
-            
-        </li>
-    
 
             </ul>
             
@@ -552,7 +539,20 @@
             
         </li>
     
-        <li class="chapter " data-level="1.11" data-path="../templates/operators.html">
+        <li class="chapter " data-level="1.11" data-path="../objects/common_traits.html">
+            
+                <a href="../objects/common_traits.html">
+            
+                    
+                    Common traits
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="../templates/operators.html">
             
                 <a href="../templates/operators.html">
             
@@ -565,7 +565,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.12" data-path="../errors/main.html">
+        <li class="chapter " data-level="1.13" data-path="../errors/main.html">
             
                 <a href="../errors/main.html">
             
@@ -579,7 +579,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.12.1" data-path="../errors/scope.html">
+        <li class="chapter " data-level="1.13.1" data-path="../errors/scope.html">
             
                 <a href="../errors/scope.html">
             
@@ -597,7 +597,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.13" data-path="../version/README.md">
+        <li class="chapter " data-level="1.14" data-path="../version/README.md">
             
                 <span>
             
@@ -610,7 +610,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.14" >
+        <li class="chapter " data-level="1.15" >
             
                 <span>
             
@@ -780,8 +780,7 @@ same type. A loop can evidently be of type <strong><code>void</code></strong>.</
             <span class="token keyword">break</span> counter <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment">// stop the loop and set its value to &apos;counter + 1&apos;</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span><span class="token punctuation">;</span>
-    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Result : &quot;</span><span class="token punctuation">,</span> result<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Result : &quot;</span><span class="token punctuation">,</span> result<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
 </code></pre>
 <p>Results:</p>
 <pre class="language-"><code>Result : 11
@@ -792,24 +791,30 @@ condition is no longer satisfied. As for the <em>loop</em>, it can be broken
 with the keyword <strong><code>break</code></strong>. Unlike <em>loop</em> the value of a while loop
 is always of type <strong><code>void</code></strong>, because it is impossible to ensure that
 the <em>while</em> is entered at all. The <em>break statement</em> must follow that
-rule, and break only with values of type <strong><code>void</code></strong>. </p>
+rule, and break only with values of type <strong><code>void</code></strong>. 
+<em>Contribution:</em>
+It is planned to add the possibility to write an <em>else</em> after a <em>while
+loop</em> to give a value to the <em>while loop</em> when it is not entered.</p>
+<p>The grammar of the <em>while</em> loop is presented, in the following code
+block.</p>
 <pre class="language-"><code class="lang-grammar"><span class="token path">while_expression</span> <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token string">&apos;while&apos;</span> expression expression
 </code></pre>
 <p><br></p>
-<p><em>Contribution:</em>
-It is planned to add the possibility to write an <em>else</em> after a <em>while
-loop</em> to give a value to the <em>while loop</em> when it is not entered.</p>
+<p>The following example, present an utilization of a <em>while</em> loop, where
+the loop iterates 10 times, while the value of <strong><code>i</code></strong> is lower than
+<strong>10</strong>. </p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">let</span> <span class="token other-keyword">mut</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
     <span class="token keyword">while</span> i <span class="token operator">&lt;</span> <span class="token number">10</span> <span class="token punctuation">{</span>
-        i <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span>    <span class="token comment">// the value of the while loop will be equal to &apos;i&apos; at the last iteration    </span>
+        i <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span>    
     <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
     <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;I is : &quot;</span><span class="token punctuation">,</span> i<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
+<p><br></p>
 <p>Results:</p>
 <pre class="language-"><code>I is : 10
 </code></pre><p><br></p>
@@ -942,7 +947,7 @@ static type system, there is no hidden dynamicity here.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Control flows","level":"1.3.4","depth":2,"next":{"title":"Alias and References","level":"1.4","depth":1,"path":"advanced/README.md","ref":"advanced/README.md","articles":[{"title":"References","level":"1.4.1","depth":2,"path":"advanced/references.md","ref":"advanced/references.md","articles":[]},{"title":"Aliases","level":"1.4.2","depth":2,"path":"advanced/alias.md","ref":"advanced/alias.md","articles":[]},{"title":"Copy and Deep copy","level":"1.4.3","depth":2,"path":"advanced/copies.md","ref":"advanced/copies.md","articles":[]},{"title":"Best practice","level":"1.4.4","depth":2,"path":"advanced/best.md","ref":"advanced/best.md","articles":[]}]},"previous":{"title":"Functions","level":"1.3.3","depth":2,"path":"primitives/functions.md","ref":"primitives/functions.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"primitives/control.md","mtime":"2021-04-24T14:22:15.149Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-04-24T18:27:12.989Z"},"basePath":"..","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Control flows","level":"1.3.4","depth":2,"next":{"title":"Alias and References","level":"1.4","depth":1,"path":"advanced/README.md","ref":"advanced/README.md","articles":[{"title":"References","level":"1.4.1","depth":2,"path":"advanced/references.md","ref":"advanced/references.md","articles":[]},{"title":"Aliases","level":"1.4.2","depth":2,"path":"advanced/alias.md","ref":"advanced/alias.md","articles":[]},{"title":"Copy and Deep copy","level":"1.4.3","depth":2,"path":"advanced/copies.md","ref":"advanced/copies.md","articles":[]},{"title":"Best practice","level":"1.4.4","depth":2,"path":"advanced/best.md","ref":"advanced/best.md","articles":[]}]},"previous":{"title":"Functions","level":"1.3.3","depth":2,"path":"primitives/functions.md","ref":"primitives/functions.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"primitives/control.md","mtime":"2021-05-26T08:28:41.600Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-05-31T09:56:47.888Z"},"basePath":"..","book":{"language":"en"}});
         });
     </script>
 </div>

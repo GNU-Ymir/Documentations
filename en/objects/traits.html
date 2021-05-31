@@ -81,7 +81,7 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="example.html" />
+    <link rel="next" href="../functions/" />
     
     
     <link rel="prev" href="inheritance.html" />
@@ -450,19 +450,6 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7.6" data-path="example.html">
-            
-                <a href="example.html">
-            
-                    
-                    Example program
-            
-                </a>
-            
-
-            
-        </li>
-    
 
             </ul>
             
@@ -552,7 +539,20 @@
             
         </li>
     
-        <li class="chapter " data-level="1.11" data-path="../templates/operators.html">
+        <li class="chapter " data-level="1.11" data-path="common_traits.html">
+            
+                <a href="common_traits.html">
+            
+                    
+                    Common traits
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="../templates/operators.html">
             
                 <a href="../templates/operators.html">
             
@@ -565,7 +565,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.12" data-path="../errors/main.html">
+        <li class="chapter " data-level="1.13" data-path="../errors/main.html">
             
                 <a href="../errors/main.html">
             
@@ -579,7 +579,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.12.1" data-path="../errors/scope.html">
+        <li class="chapter " data-level="1.13.1" data-path="../errors/scope.html">
             
                 <a href="../errors/scope.html">
             
@@ -597,7 +597,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.13" data-path="../version/README.md">
+        <li class="chapter " data-level="1.14" data-path="../version/README.md">
             
                 <span>
             
@@ -610,7 +610,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.14" >
+        <li class="chapter " data-level="1.15" >
             
                 <span>
             
@@ -668,23 +668,31 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#trait"><b>1. </b>Trait</a></li><ul><li><span class="title-icon "></span><a href="#inheriting-an-implementing-class"><b>1.1. </b>Inheriting an Implementing Class</a></li><li><span class="title-icon "></span><a href="#copy-trait"><b>1.2. </b>Copy trait</a></li><li><span class="title-icon "></span><a href="#printable-trait"><b>1.3. </b>Printable trait</a></li></ul></ul></div><a href="#trait" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="trait"><a name="trait" class="anchor-navigation-ex-anchor" href="#trait"><i class="fa fa-link" aria-hidden="true"></i></a>1. Trait</h1>
-<p>Traits are used to define characteristics that can be implemented by a
-class. The keyword <code>trait</code> is used to create a new Trait. A trait is
-not a type, you cannot have variable whose type is a trait. </p>
-<pre class="language-"><code class="lang-ymir">trait Printable <span class="token punctuation">{</span>
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#trait"><b>1. </b>Trait</a></li><ul><li><span class="title-icon "></span><a href="#inherit-a-class-implementing-a-trait"><b>1.1. </b>Inherit a Class implementing a Trait</a></li><ul><li><span class="title-icon "></span><a href="#simple-reimplementation"><b>1.1.1. </b>Simple reimplementation</a></li><li><span class="title-icon "></span><a href="#override-implemented-method"><b>1.1.2. </b>Override implemented method</a></li></ul><li><span class="title-icon "></span><a href="#trait-privacy"><b>1.2. </b>Trait privacy</a></li><li><span class="title-icon "></span><a href="#trait-usage"><b>1.3. </b>Trait usage</a></li></ul></ul></div><a href="#trait" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="trait"><a name="trait" class="anchor-navigation-ex-anchor" href="#trait"><i class="fa fa-link" aria-hidden="true"></i></a>1. Trait</h1>
+<p>Traits are used to define as their name suggest traits that can be
+implemented by a class. To define them, the keyword <strong><code>trait</code></strong> is
+used. A <em>trait</em> is not a type, and can only be implemented by class,
+for that reason, a variable or a value cannot be of a <em>trait</em> type.</p>
+<p>An example of a trait, is presented in the following source block. The
+idea of this trait, is to ensure that every class, implementing it,
+have a public method named <strong><code>print</code></strong> that can be called without
+parameters.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">trait</span> Printable <span class="token punctuation">{</span>
     <span class="token other-keyword">pub</span> <span class="token keyword">def</span> <span class="token function">print</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    
 <span class="token punctuation">}</span>
 </code></pre>
-<p>A class can implement a trait. All the method declared in the traits
-will be added in the definition of the class. If the class is not
-abstract all the method of the traits must have a body.</p>
+<p><br></p>
+<p>When a class implements a trait, all the method declared in the trait
+are added in the definition of the class. If the class is not abstract
+all the method of the traits must have a body. For example, if a non
+abstract class implement the trait <strong><code>Printable</code></strong>, thus it must
+override the method <strong><code>print</code></strong> to add a body to it.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
 <span class="token keyword">class</span> Point <span class="token punctuation">{</span>
     <span class="token comment">// ... Constructors and attributes</span>
 
-    impl Printable <span class="token punctuation">{</span>
+    <span class="token other-keyword">impl</span> Printable <span class="token punctuation">{</span>
         <span class="token comment">// Try to remove the following definition</span>
         <span class="token other-keyword">pub</span> <span class="token keyword">over</span> <span class="token function">print</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token function">print</span> <span class="token punctuation">(</span><span class="token string">&quot;Point {&quot;</span><span class="token punctuation">,</span> <span class="token keyword">self</span><span class="token punctuation">.</span>_x<span class="token punctuation">,</span> <span class="token string">&quot;, &quot;</span><span class="token punctuation">,</span> <span class="token keyword">self</span><span class="token punctuation">.</span>_y<span class="token punctuation">,</span> <span class="token string">&quot;}&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -692,9 +700,17 @@ abstract all the method of the traits must have a body.</p>
     <span class="token punctuation">}</span>    
 <span class="token punctuation">}</span>
 </code></pre>
-<p>A trait can provide a default behavior. The function inside a trait
-are not checked before being implemented by a class. </p>
-<pre class="language-"><code class="lang-ymir">trait Printable <span class="token punctuation">{</span>
+<p><br></p>
+<p>A trait can provide a default behavior for the method it defines. The
+body of the method is validated for each implementation. In the
+following example, the method <strong><code>print</code></strong> defined in the trait
+<strong><code>Printable</code></strong>, prints the typeid of the class that implement the
+traits. One can note, that the behavior of this function is different
+for each class that implements it, that is why it is only validated
+when a class implement the trait.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">mod</span> main<span class="token punctuation">;</span> 
+
+<span class="token keyword">trait</span> Printable <span class="token punctuation">{</span>
     <span class="token other-keyword">pub</span> <span class="token keyword">def</span> <span class="token function">print</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
         <span class="token function">print</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">typeid</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -705,77 +721,277 @@ are not checked before being implemented by a class. </p>
 <span class="token keyword">class</span> Point <span class="token punctuation">{</span>
     <span class="token comment">// ... Constructors and attributes</span>
 
-    impl Printable<span class="token punctuation">;</span> <span class="token comment">// override the print method is optional</span>
-    <span class="token comment">// The method print is verified and typed here</span>
+    <span class="token other-keyword">impl</span> Printable<span class="token punctuation">;</span>  <span class="token comment">// &apos;print&apos; method prints (&quot;main::Point&quot;)</span>
 <span class="token punctuation">}</span>
-</code></pre>
-<h2 id="inheriting-an-implementing-class"><a name="inheriting-an-implementing-class" class="anchor-navigation-ex-anchor" href="#inheriting-an-implementing-class"><i class="fa fa-link" aria-hidden="true"></i></a>1.1. Inheriting an Implementing Class</h2>
-<p>When inheriting a class implementing a trait, the methods implemented
-by the ancestor class are considered to be normal methods, so that the
-heir class can override them without any problem.</p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">class</span> <span class="token operator">@</span>abstract Shape <span class="token punctuation">{</span>
+
+<span class="token keyword">class</span> Line <span class="token punctuation">{</span>
     <span class="token comment">// ... Constructors and attributes</span>
 
-    impl Printable<span class="token punctuation">;</span>
+    <span class="token other-keyword">impl</span> Printable<span class="token punctuation">;</span>  <span class="token comment">// &apos;print&apos; method prints (&quot;main::Line&quot;)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br></p>
+<p><strong>Warning</strong>: If a trait is never implemented by any class, and have
+methods with default behavior, then it is never validated. Thus errors
+can be present in this trait, but still pass the compilation. One can
+see the trait as a kind of template, this problem being present in
+template symbol as well (<em>cf.</em>
+<a href="https://gnu-ymir.github.io/Documentations/en/templates/" target="_blank">Templates</a>).</p>
+<h2 id="inherit-a-class-implementing-a-trait"><a name="inherit-a-class-implementing-a-trait" class="anchor-navigation-ex-anchor" href="#inherit-a-class-implementing-a-trait"><i class="fa fa-link" aria-hidden="true"></i></a>1.1. Inherit a Class implementing a Trait</h2>
+<p>The methods of a trait can be overriden by heir classes. In order to
+do this, heir classes must reimplement the trait, and override the
+methods. </p>
+<h3 id="simple-reimplementation"><a name="simple-reimplementation" class="anchor-navigation-ex-anchor" href="#simple-reimplementation"><i class="fa fa-link" aria-hidden="true"></i></a>1.1.1. Simple reimplementation</h3>
+<p>In the following example, the class <strong><code>Shape</code></strong> implements
+the trait <strong><code>Printable</code></strong>, this trait has a method <strong><code>print</code></strong> with a
+default behavior. The class <strong><code>Circle</code></strong> does not reimplement the
+trait, thus when calling the method print of a <strong><code>Circle</code></strong> value, the
+value <strong><code>main::Shape</code></strong> is printed on the stdout. On the other hand,
+the class <strong><code>Rectange</code></strong> reimplement the traits, thus the value
+<strong><code>main::Rectangle</code></strong> is printed.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">mod</span> main<span class="token punctuation">;</span>
+
+<span class="token keyword">trait</span> Printable <span class="token punctuation">{</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">def</span> <span class="token function">print</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
+        <span class="token function">println</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">typeid</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token operator">@</span>abstract Shape <span class="token punctuation">{</span>
+    <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+    <span class="token other-keyword">impl</span> Printable<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
 <span class="token keyword">class</span> Circle <span class="token keyword">over</span> Shape <span class="token punctuation">{</span>
-    <span class="token comment">// ... Constructors and attributes</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> Rectangle <span class="token keyword">over</span> Shape <span class="token punctuation">{</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+    <span class="token other-keyword">impl</span> Printable<span class="token punctuation">;</span> <span class="token comment">// reimplement the method print with typeof (self) being main::Rectangle</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> c <span class="token operator">=</span> <span class="token path">Circle</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    c<span class="token punctuation">.</span><span class="token function">print</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">let</span> r <span class="token operator">=</span> <span class="token path">Rectangle</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    r<span class="token punctuation">.</span><span class="token function">print</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br>
+Results: </p>
+<pre class="language-"><code>main::Shape
+main::Rectangle
+</code></pre><h3 id="override-implemented-method"><a name="override-implemented-method" class="anchor-navigation-ex-anchor" href="#override-implemented-method"><i class="fa fa-link" aria-hidden="true"></i></a>1.1.2. Override implemented method</h3>
+<p>Implemented method cannot be overriden without reimplementing the
+trait. In the following example, a class <strong><code>Shape</code></strong> implement the
+trait <strong><code>Printable</code></strong>, and the class <strong><code>Circle</code></strong> inherits
+<strong><code>Shape</code></strong>, and tries to override the method <strong><code>print</code></strong>. </p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">mod</span> main<span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
+
+<span class="token keyword">trait</span> Printable <span class="token punctuation">{</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">def</span> <span class="token function">print</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token operator">@</span>abstract Shape <span class="token punctuation">{</span>
+    <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+    <span class="token other-keyword">impl</span> Printable <span class="token punctuation">{</span>
+        <span class="token other-keyword">pub</span> <span class="token keyword">over</span> <span class="token function">print</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;main::Shape&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> Circle <span class="token keyword">over</span> Shape <span class="token punctuation">{</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
 
     <span class="token other-keyword">pub</span> <span class="token keyword">over</span> <span class="token function">print</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<h2 id="copy-trait"><a name="copy-trait" class="anchor-navigation-ex-anchor" href="#copy-trait"><i class="fa fa-link" aria-hidden="true"></i></a>1.2. Copy trait</h2>
-<p>Class are aliasable type, but it is not trivial to determine how to
-make a copy. It is up to the user to define the copy method, by
-implementing the trait <code>core::duplication::Copiable</code>. The definition
-of this trait is the following :</p>
-<pre class="language-"><code class="lang-ymir">trait Copiable <span class="token punctuation">{</span>
-    <span class="token other-keyword">pub</span> <span class="token keyword">def</span> <span class="token function">deepCopy</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> <span class="token other-keyword">mut</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token keyword">self</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<p><br>
+Errors: </p>
+<pre class="language-"><code class="lang-error"><span class="token path">Error</span> : when validating main::Circle
+ <span class="token comment">--&gt; main.yr:(18,7)</span>
+18  &#x2503; class Circle over Shape {
+    &#x254B;       ^^^^^^
+    &#x2503; <span class="token path">Error</span> : cannot override the trait method (const self) =&gt; main::Shape::print ()-&gt; void outside the implementation of the trait
+    &#x2503;  <span class="token comment">--&gt; main.yr:(21,14)</span>
+    &#x2503; 21  &#x2503;     pub over print (self) {}
+    &#x2503;     &#x254B;              ^^^^^
+    &#x2503;     &#x2503; <span class="token other-keyword">Note</span> : 
+    &#x2503;     &#x2503;  <span class="token comment">--&gt; main.yr:(12,18)</span>
+    &#x2503;     &#x2503; 12  &#x2503;         pub over print (self) {
+    &#x2503;     &#x2503;     &#x254B;                  ^^^^^
+    &#x2503;     &#x2517;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x253B;&#x2501; 
+    &#x2517;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x253B;&#x2501; 
+
+
+ymir1: <span class="token path">fatal error</span>: 
+compilation terminated.
 </code></pre>
-<p>There is no need to import anything, since the trait is located in a
-core file, that is imported by default. The trait can be overriden as
-follows :</p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">class</span> Point <span class="token punctuation">{</span>
-     <span class="token comment">// ... Constructors and attributes</span>
+<p><br></p>
+<p>To prevent the previous error, the class <strong><code>Circle</code></strong> have to
+reimplement the trait <strong><code>Printable</code></strong>. When reimplementing a trait in
+a heir class, the parent overriding is not taken into account, and the
+method of the trait is used. In the following example, the class
+<strong><code>Shape</code></strong> implement the trait <strong><code>Printable</code></strong>, that have a method
+<strong><code>print</code></strong> with no default behavior. The class <strong><code>Circle</code></strong> tries to
+reimplement the trait, but without overriding the <strong><code>print</code></strong>
+method. This source code is rejected by the compiler, the class
+<strong><code>Circle</code></strong> is not abstract, but has a method with no body.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">mod</span> main<span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
 
-    impl Copiable <span class="token punctuation">{</span>
-        <span class="token other-keyword">pub</span> <span class="token keyword">over</span> <span class="token function">deepCopy</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token other-keyword">mut</span> Point <span class="token punctuation">{</span>
-            <span class="token path">Point</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">.</span>_x<span class="token punctuation">,</span> <span class="token keyword">self</span><span class="token punctuation">.</span>_y<span class="token punctuation">)</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
+<span class="token keyword">trait</span> Printable <span class="token punctuation">{</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">def</span> <span class="token function">print</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
-<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token path">Point</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">let</span> <span class="token other-keyword">mut</span> y <span class="token operator">=</span> <span class="token keyword">dcopy</span> x<span class="token punctuation">;</span>
-    <span class="token comment">//          ^^^^^</span>
-    <span class="token comment">// Try to remove the dcopy</span>
-<span class="token punctuation">}</span>
-</code></pre>
-<h2 id="printable-trait"><a name="printable-trait" class="anchor-navigation-ex-anchor" href="#printable-trait"><i class="fa fa-link" aria-hidden="true"></i></a>1.3. Printable trait</h2>
-<p>By default class are not printable, but the module <code>std::io</code> export
-the trait <code>Printable</code>. Once, the trait is implemented an object
-instance can be printed.</p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
+<span class="token keyword">class</span> <span class="token operator">@</span>abstract Shape <span class="token punctuation">{</span>
+    <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
 
-<span class="token keyword">class</span> Point <span class="token punctuation">{</span>
-    <span class="token comment">// ... Constructors and attributes</span>
-
-    impl Printable <span class="token punctuation">{</span>
+    <span class="token other-keyword">impl</span> Printable <span class="token punctuation">{</span>
         <span class="token other-keyword">pub</span> <span class="token keyword">over</span> <span class="token function">print</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token function">print</span> <span class="token punctuation">(</span><span class="token string">&quot;Point {&quot;</span><span class="token punctuation">,</span> <span class="token keyword">self</span><span class="token punctuation">.</span>_x<span class="token punctuation">,</span> <span class="token string">&quot;, &quot;</span><span class="token punctuation">,</span> <span class="token keyword">self</span><span class="token punctuation">.</span>_y<span class="token punctuation">,</span> <span class="token string">&quot;}&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;main::Shape&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 
-<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token path">Point</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">println</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">class</span> Circle <span class="token keyword">over</span> Shape <span class="token punctuation">{</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+    <span class="token other-keyword">impl</span> Printable<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
+<p><br>
+Errors: </p>
+<pre class="language-"><code class="lang-error"><span class="token path">Error</span> : when validating main::Circle
+ <span class="token comment">--&gt; main.yr:(18,7)</span>
+18  &#x2503; class Circle over Shape {
+    &#x254B;       ^^^^^^
+    &#x2503; <span class="token path">Error</span> : the class main::Circle is not abstract, but does not override the empty parent method (const self) =&gt; main::Printable::print ()-&gt; void
+    &#x2503;  <span class="token comment">--&gt; main.yr:(18,7)</span>
+    &#x2503; 18  &#x2503; class Circle over Shape {
+    &#x2503;     &#x254B;       ^^^^^^
+    &#x2503;     &#x2503; <span class="token other-keyword">Note</span> : 
+    &#x2503;     &#x2503;  <span class="token comment">--&gt; main.yr:(5,10)</span>
+    &#x2503;     &#x2503;  5  &#x2503;     pub def print (self);
+    &#x2503;     &#x2503;     &#x254B;             ^^^^^
+    &#x2503;     &#x2517;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x253B;&#x2501; 
+    &#x2517;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x253B;&#x2501; 
 
+
+ymir1: <span class="token path">fatal error</span>: 
+compilation terminated.
+</code></pre>
+<p><br></p>
+<p>To resolve that problem, the class <strong><code>Circle</code></strong> must add a body to the
+method <strong><code>print</code></strong>. It can happen that a trait defines multiple
+methods, and that only some have to be reimplemented by the heir
+class. In that case, there is no magical solution, <strong>maybe a
+contribution can enhance that</strong>, but every methods must be
+reimplemented. In order to mimic the behavior of the parent
+implementation, the <strong><code>super</code></strong> keyword can be used.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">class</span> Circle <span class="token keyword">over</span> Shape <span class="token punctuation">{</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>    
+
+    <span class="token other-keyword">impl</span> Printable <span class="token punctuation">{</span>
+
+        <span class="token other-keyword">pub</span> <span class="token keyword">over</span> <span class="token function">print</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> void <span class="token punctuation">{</span> 
+            <span class="token keyword">self</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">print</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// call the print method of the super class         </span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>    
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br></p>
+<h2 id="trait-privacy"><a name="trait-privacy" class="anchor-navigation-ex-anchor" href="#trait-privacy"><i class="fa fa-link" aria-hidden="true"></i></a>1.2. Trait privacy</h2>
+<p>Trait implementation is always public. For that reason, privacy
+specifier (<strong><code>pub</code></strong>, <strong><code>prot</code></strong> and <strong><code>prv</code></strong>) have no meaning on
+implementation. </p>
+<p>On the other hand, the trait methods implementation follows the same
+rule as the overriding of a parent method. That is to say, the privacy
+defined inside the trait must be the same as the privacy defined
+inside the implementation.</p>
+<h2 id="trait-usage"><a name="trait-usage" class="anchor-navigation-ex-anchor" href="#trait-usage"><i class="fa fa-link" aria-hidden="true"></i></a>1.3. Trait usage</h2>
+<p>As said in the beginning of this chapter, traits do not define
+types, thus they cannot be used to define the type of a variable. For
+example, the following source code has no meaning, <strong><code>Printable</code></strong>
+does not define a type.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">mod</span> main<span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
+
+<span class="token keyword">trait</span> Printable <span class="token punctuation">{</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">def</span> <span class="token function">print</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">foo</span>  <span class="token punctuation">(</span>a <span class="token punctuation">:</span> <span class="token type">Printable</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    a<span class="token punctuation">.</span><span class="token function">print</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br></p>
+<p>Errors: </p>
+<pre class="language-"><code class="lang-error"><span class="token path">Error</span> : expression used as a type
+ <span class="token comment">--&gt; main.yr:(8,15)</span>
+ 8  &#x2503; def foo  (a : Printable) {
+    &#x254B;               ^^^^^^^^^
+
+
+ymir1: <span class="token path">fatal error</span>: 
+compilation terminated.
+</code></pre>
+<p><br></p>
+<p>If the previous example, is not a valid <em>ymir</em> code, the behavior can
+still be implemented in the language. Traits gain interest when
+coupled with templates, and a template test can be used to check that
+a class implement a trait. More complete information, and example
+about templates, and traits specialization are presented in chapter
+<a href="https://gnu-ymir.github.io/Documentations/en/templates/" target="_blank">Templates</a>,
+but a brief example is presented in the following source code. In this
+example, two classes <strong><code>U</code></strong> and <strong><code>V</code></strong> implement the trait
+<strong><code>Printable</code></strong>. The function <strong><code>foo</code></strong> takes a parameter whose type
+is not specified but must implement the trait <strong><code>Printable</code></strong>. Thus
+the function is callable with both <strong><code>U</code></strong> or <strong><code>V</code></strong> as argument.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">mod</span> main<span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
+
+<span class="token keyword">trait</span> Printable <span class="token punctuation">{</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">def</span> <span class="token function">print</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">println</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">typeid</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> U <span class="token punctuation">{</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token other-keyword">impl</span> Printable<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> V <span class="token punctuation">{</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token other-keyword">impl</span> Printable<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/**</span>
+<span class="token comment"> * Accept every type, that implements the trait Printable </span>
+<span class="token comment"> */</span>
+<span class="token keyword">def</span> foo <span class="token punctuation">{</span>I <span class="token other-keyword">impl</span> Printable<span class="token punctuation">}</span> <span class="token punctuation">(</span>a <span class="token punctuation">:</span> I<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    a<span class="token punctuation">.</span><span class="token function">print</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token path">U</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token path">V</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br>
+Results: </p>
+<pre class="language-"><code>main::U
+main::V
+</code></pre>
                                 
                                 </section>
                             
@@ -807,7 +1023,7 @@ instance can be printed.</p>
                 </a>
                 
                 
-                <a href="example.html" class="navigation navigation-next " aria-label="Next page: Example program">
+                <a href="../functions/" class="navigation navigation-next " aria-label="Next page: Function advanced">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -818,7 +1034,7 @@ instance can be printed.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Traits","level":"1.7.5","depth":2,"next":{"title":"Example program","level":"1.7.6","depth":2,"path":"objects/example.md","ref":"objects/example.md","articles":[]},"previous":{"title":"Inheritance","level":"1.7.4","depth":2,"path":"objects/inheritance.md","ref":"objects/inheritance.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"objects/traits.md","mtime":"2021-04-24T14:22:15.149Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-04-24T18:27:12.989Z"},"basePath":"..","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Traits","level":"1.7.5","depth":2,"next":{"title":"Function advanced","level":"1.8","depth":1,"path":"functions/README.md","ref":"functions/README.md","articles":[]},"previous":{"title":"Inheritance","level":"1.7.4","depth":2,"path":"objects/inheritance.md","ref":"objects/inheritance.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"objects/traits.md","mtime":"2021-05-28T10:17:53.962Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-05-31T09:56:47.888Z"},"basePath":"..","book":{"language":"en"}});
         });
     </script>
 </div>

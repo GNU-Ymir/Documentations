@@ -14,9 +14,9 @@ Prism.languages.ymir = {
 	    /b?("|')(?:\\?.)*?\1/
     ],
     
-    'keyword': /\b(?:break|else|enum|extern|fn|for|if|in|let|match|mod|return|sizeof|static|self|struct|super|def|dg|typeof|while|with|import|assert|macro|move|copy|dcopy|class|throws|over|aka)\b/,
+    'keyword': /\b(?:break|else|enum|extern|fn|for|if|in|let|match|mod|return|sizeof|static|self|struct|super|def|dg|typeof|while|with|import|assert|macro|move|copy|dcopy|class|throws|over|aka|trait)\b/,
     
-    'other-keyword' : /\b(?:mut|dmut|false|true|pub|prv|prot|ref|with|new|alias|is)\b/,
+    'other-keyword' : /\b(?:mut|dmut|false|true|pub|prv|prot|ref|with|new|alias|is|impl)\b/,
     'basic-types' : /\b(?:i8|i16|i32|i64|u8|u16|u32|u64|bool|c8|c32)\b/,
     'path' : [
 	{

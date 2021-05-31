@@ -84,7 +84,7 @@
     <link rel="next" href="../pattern/" />
     
     
-    <link rel="prev" href="../objects/example.html" />
+    <link rel="prev" href="../objects/traits.html" />
     
 
     </head>
@@ -450,19 +450,6 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7.6" data-path="../objects/example.html">
-            
-                <a href="../objects/example.html">
-            
-                    
-                    Example program
-            
-                </a>
-            
-
-            
-        </li>
-    
 
             </ul>
             
@@ -552,7 +539,20 @@
             
         </li>
     
-        <li class="chapter " data-level="1.11" data-path="../templates/operators.html">
+        <li class="chapter " data-level="1.11" data-path="../objects/common_traits.html">
+            
+                <a href="../objects/common_traits.html">
+            
+                    
+                    Common traits
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="../templates/operators.html">
             
                 <a href="../templates/operators.html">
             
@@ -565,7 +565,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.12" data-path="../errors/main.html">
+        <li class="chapter " data-level="1.13" data-path="../errors/main.html">
             
                 <a href="../errors/main.html">
             
@@ -579,7 +579,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.12.1" data-path="../errors/scope.html">
+        <li class="chapter " data-level="1.13.1" data-path="../errors/scope.html">
             
                 <a href="../errors/scope.html">
             
@@ -597,7 +597,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.13" data-path="../version/README.md">
+        <li class="chapter " data-level="1.14" data-path="../version/README.md">
             
                 <span>
             
@@ -610,7 +610,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.14" >
+        <li class="chapter " data-level="1.15" >
             
                 <span>
             
@@ -668,15 +668,19 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#functions"><b>1. </b>Functions</a></li><ul><li><span class="title-icon "></span><a href="#function-pointer"><b>1.1. </b>Function pointer</a></li><ul><li><span class="title-icon "></span><a href="#function-pointer-using-reference"><b>1.1.1. </b>Function pointer using reference</a></li></ul><li><span class="title-icon "></span><a href="#lambda-function"><b>1.2. </b>Lambda function</a></li><li><span class="title-icon "></span><a href="#closure"><b>1.3. </b>Closure</a></li><ul><li><span class="title-icon "></span><a href="#move-closure"><b>1.3.1. </b>Move closure</a></li><li><span class="title-icon "></span><a href="#ref-closure"><b>1.3.2. </b>Ref closure</a></li></ul></ul></ul></div><a href="#functions" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="functions"><a name="functions" class="anchor-navigation-ex-anchor" href="#functions"><i class="fa fa-link" aria-hidden="true"></i></a>1. Functions</h1>
-<p>We have seen in the chapter <a href="">Basic programming concepts</a> how
-functions are written. In this chapter we will see more advanced
-function systems, named function pointer and closure.</p>
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#functions"><b>1. </b>Functions</a></li><ul><li><span class="title-icon "></span><a href="#function-pointer"><b>1.1. </b>Function pointer</a></li><ul><li><span class="title-icon "></span><a href="#function-pointer-using-reference"><b>1.1.1. </b>Function pointer using reference</a></li></ul><li><span class="title-icon "></span><a href="#lambda-function"><b>1.2. </b>Lambda function</a></li><li><span class="title-icon "></span><a href="#closure"><b>1.3. </b>Closure</a></li><ul><li><span class="title-icon "></span><a href="#copy-closure"><b>1.3.1. </b>Copy closure</a></li></ul></ul></ul></div><a href="#functions" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="functions"><a name="functions" class="anchor-navigation-ex-anchor" href="#functions"><i class="fa fa-link" aria-hidden="true"></i></a>1. Functions</h1>
+<p>We have seen in the chapter <a href="https://gnu-ymir.github.io/Documentations/en/primitives/functions.html" target="_blank">Basic programming
+concepts</a>
+how functions are written. <em>Ymir</em> can be used as a functional
+language, thus functions can also be considered as values. In this
+chapter we will see more advanced function systems, named function
+pointer and closure.</p>
 <h2 id="function-pointer"><a name="function-pointer" class="anchor-navigation-ex-anchor" href="#function-pointer"><i class="fa fa-link" aria-hidden="true"></i></a>1.1. Function pointer</h2>
 <p>A function pointer is a value that contains a function. It can be used
-to pass function as argument to other functions. The type of the
-function pointer is written using the keyword <code>fn</code>, and have the same
-syntax as a function prototype, but without a name.</p>
+for example, to pass a function, as an argument to other
+functions. The type of a function pointer is written using the keyword
+<strong><code>fn</code></strong>, and have nearly the same syntax as a function prototype, but
+without a name, and without naming the parameters.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
 <span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>f <span class="token punctuation">:</span> <span class="token keyword">fn</span> <span class="token punctuation">(</span><span class="token basic-types">i32</span><span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span> <span class="token punctuation">{</span>
@@ -692,15 +696,31 @@ syntax as a function prototype, but without a name.</p>
     <span class="token function">println</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>In the above example, we have specified that the function <code>foo</code> take
-as parameter a function pointer, that takes an <code>i32</code> and return a
-<code>i32</code>.</p>
-<h3 id="function-pointer-using-reference"><a name="function-pointer-using-reference" class="anchor-navigation-ex-anchor" href="#function-pointer-using-reference"><i class="fa fa-link" aria-hidden="true"></i></a>1.1.1. Function pointer using reference</h3>
-<p>Function pointer can take reference parameters as normal functions.</p>
+<p><br></p>
+<p>In the above example, we have specified that the function <strong><code>foo</code></strong>
+takes a function pointer as first parameter. This function pointer, is
+a function that takes an <strong><code>i32</code></strong> value and return another <strong><code>i32</code></strong> value.
+In the main function, the ampersand (<strong><code>&amp;</code></strong>) unary operator is used
+to transform the function symbol <strong><code>addOne</code></strong> into a function
+pointer. This function pointer is then passed to the function
+<strong><code>foo</code></strong>, which calls it and return its value. </p>
+<p>Results: </p>
+<pre class="language-"><code>42
+</code></pre><h3 id="function-pointer-using-reference"><a name="function-pointer-using-reference" class="anchor-navigation-ex-anchor" href="#function-pointer-using-reference"><i class="fa fa-link" aria-hidden="true"></i></a>1.1.1. Function pointer using reference</h3>
+<p>We have seen that references is not a type, in the chapter <a href="https://gnu-ymir.github.io/Documentations/en/advanced/references.html" target="_blank">Alias and
+References</a>. However,
+function prototype sometimes takes reference value as parameter. This
+must be replicated in the prototype of the function pointer. For that
+reason, the <strong><code>ref</code></strong> keyword can be used in the prototype of a
+function pointer type. </p>
+<p>In the following example, the function <strong><code>mutAddOne</code></strong> change the
+value of a reference variable <strong><code>x</code></strong>, and add one to it. The function
+<strong><code>foo</code></strong> takes a function pointer as first parameter, and calls it on
+a mutable local variable <strong><code>x</code></strong> by reference (it is important). </p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
-<span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>f <span class="token punctuation">:</span> <span class="token keyword">fn</span> <span class="token punctuation">(</span><span class="token other-keyword">ref</span> <span class="token other-keyword">mut</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> <span class="token other-keyword">ref</span> <span class="token other-keyword">mut</span> x <span class="token operator">=</span> <span class="token number">41</span><span class="token punctuation">;</span>
+<span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>f <span class="token punctuation">:</span> <span class="token keyword">fn</span> <span class="token punctuation">(</span><span class="token other-keyword">ref</span> <span class="token other-keyword">mut</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> void<span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> <span class="token other-keyword">mut</span> x <span class="token operator">=</span> <span class="token number">41</span><span class="token punctuation">;</span>
     <span class="token function">f</span> <span class="token punctuation">(</span><span class="token other-keyword">ref</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
     x
 <span class="token punctuation">}</span>
@@ -714,11 +734,86 @@ as parameter a function pointer, that takes an <code>i32</code> and return a
     <span class="token function">println</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
+<p><br></p>
+<p>Results: </p>
+<pre class="language-"><code>42
+</code></pre><p><br></p>
+<p>The prototype of the function pointer must be strictly respected, for
+obvious reasons. And as for normal functions, alias and references
+must be strictly respected as well. For example, in the follow
+example, the function <strong><code>foo</code></strong> tries to call the function pointer
+that takes a reference argument, using a simple value. And the
+<strong><code>main</code></strong> function tries to call the <strong><code>foo</code></strong> function, with a
+function pointer that does not take a reference parameter.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
+
+<span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>f <span class="token punctuation">:</span> <span class="token keyword">fn</span> <span class="token punctuation">(</span><span class="token other-keyword">ref</span> <span class="token other-keyword">mut</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> void<span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> <span class="token other-keyword">mut</span> x <span class="token operator">=</span> <span class="token number">41</span><span class="token punctuation">;</span>
+    <span class="token function">f</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    x
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">mutAddOne</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token operator">&amp;</span>mutAddOne<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br></p>
+<p>We have two errors, first the compiler does not allow an implicit
+referencing of the variable <strong><code>x</code></strong> at line <strong><code>5</code></strong>, and second the
+compiler does not allow an implicit cast of a value of type <strong><code>fn
+(i32)-&gt; void</code></strong> to <strong><code>fn (ref mut i32)-&gt; void</code></strong>.</p>
+<pre class="language-"><code class="lang-error"><span class="token path">Error</span> : the call operator is not defined for &amp;fn(ref mut i32)-&gt; void and {mut i32}
+ <span class="token comment">--&gt; main.yr:(5,7)</span>
+ 5  &#x2503;     f (x);
+    &#x254B;       ^ ^
+    &#x2503; <span class="token path">Error</span> : implicit referencing of type mut i32 is not allowed
+    &#x2503;  <span class="token comment">--&gt; main.yr:(5,8)</span>
+    &#x2503;  5  &#x2503;     f (x);
+    &#x2503;     &#x254B;        ^
+    &#x2503; <span class="token other-keyword">Note</span> : for parameter i32 <span class="token comment">--&gt; main.yr:(3,26) of f</span>
+    &#x2517;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501; 
+
+<span class="token path">Error</span> : the call operator is not defined for main::foo and {&amp;fn(i32)-&gt; void}
+ <span class="token comment">--&gt; main.yr:(14,17)</span>
+14  &#x2503;     let x = foo (&amp;mutAddOne);
+    &#x254B;                 ^          ^
+    &#x2503; <span class="token other-keyword">Note</span> : candidate foo <span class="token comment">--&gt; main.yr:(3,5) : main::foo (f : &amp;fn(ref mut i32)-&gt; void)-&gt; i32</span>
+    &#x2503;     &#x2503; <span class="token path">Error</span> : incompatible types &amp;fn(ref mut i32)-&gt; void and &amp;fn(i32)-&gt; void
+    &#x2503;     &#x2503;  <span class="token comment">--&gt; main.yr:(14,18)</span>
+    &#x2503;     &#x2503; 14  &#x2503;     let x = foo (&amp;mutAddOne);
+    &#x2503;     &#x2503;     &#x254B;                  ^
+    &#x2503;     &#x2503; <span class="token other-keyword">Note</span> : for parameter f <span class="token comment">--&gt; main.yr:(3,10) of main::foo (f : &amp;fn(ref mut i32)-&gt; void)-&gt; i32</span>
+    &#x2503;     &#x2517;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501; 
+    &#x2517;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x253B;&#x2501; 
+
+<span class="token path">Error</span> : undefined symbol x
+ <span class="token comment">--&gt; main.yr:(15,14)</span>
+15  &#x2503;     println (x);
+    &#x254B;              ^
+
+
+ymir1: <span class="token path">fatal error</span>: 
+compilation terminated.
+</code></pre>
 <h2 id="lambda-function"><a name="lambda-function" class="anchor-navigation-ex-anchor" href="#lambda-function"><i class="fa fa-link" aria-hidden="true"></i></a>1.2. Lambda function</h2>
-<p>Lambda function are anonymous function that have the same behavior as
-normal function, but don&apos;t have a name. They are declared using the
+<p>Lambda functions are anonymous functions that have the same behavior
+as normal function, but don&apos;t have a name. They are declared using the
 token <code>|</code> surrounding the parameters instead of parentheses in order
-to dinstinguish them from tuple. </p>
+to dinstinguish them from tuple. The following code block presents the
+syntax of the lambda functions.</p>
+<pre class="language-"><code class="lang-grammar"><span class="token path">lambda_func</span> <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token string">&apos;|&apos;</span> <span class="token punctuation">(</span>var_decl <span class="token punctuation">(</span><span class="token string">&apos;,&apos;</span> var_decl<span class="token punctuation">)</span><span class="token operator">*</span><span class="token punctuation">)</span>? <span class="token string">&apos;|&apos;</span> <span class="token punctuation">(</span><span class="token string">&apos;-&gt;&apos;</span> type<span class="token punctuation">)</span>? <span class="token punctuation">(</span><span class="token string">&apos;=&gt;&apos;</span><span class="token punctuation">)</span>? expression
+<span class="token path">var_decl</span> <span class="token punctuation">:</span><span class="token operator">=</span> Identifier <span class="token punctuation">(</span><span class="token string">&apos;:&apos;</span> type<span class="token punctuation">)</span>?
+</code></pre>
+<p><br></p>
+<p>The following example shows a simple usage of a lambda function. This
+function declared at line <strong><code>4</code></strong>, and stored in the variable <strong><code>x</code></strong>,
+takes two parameters <strong><code>x</code></strong> and <strong><code>y</code></strong> of type <strong><code>i32</code></strong>, and return
+their sum.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -728,11 +823,20 @@ to dinstinguish them from tuple. </p>
     <span class="token function">println</span> <span class="token punctuation">(</span><span class="token function">x</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>As you may have noticed, there is no conflict between the variable <code>x</code>
-declared in the function main, and the first parameter of the lambda
-also named <code>x</code>. In many cases the type of the parameters and return
-type can be infered, and are therefore optional. The above example can
-then be rewritten into :</p>
+<p><br></p>
+<p>As one can note, there is no conflict between the variable <strong><code>x</code></strong>
+declared in the function <strong><code>main</code></strong>, and the first parameter of the
+lambda function also named <strong><code>x</code></strong>. This is due to the fact that the
+lambda function does not enclose the context of the function that have
+created it. In other words, lambda functions behave as normal local
+function, accessible only inside the function that have declared them
+(<em>cf.</em>  <a href="https://gnu-ymir.github.io/Documentations/en/primitives/functions.html#scope-declaration" target="_blank">Scope
+declaration</a>).</p>
+<p>In many cases the type of the parameters and return type can be
+infered, and are therefore optional. The above example can then be
+rewritten into the following example. In this next example, the lambda
+function can be called with any values, as long as the binary addition
+(<strong><code>+</code></strong>) operator is defined between the two values.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -744,22 +848,25 @@ then be rewritten into :</p>
     <span class="token function">println</span> <span class="token punctuation">(</span><span class="token function">x</span> <span class="token punctuation">(</span><span class="token number">1.3</span><span class="token punctuation">,</span> <span class="token number">2.9</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    
 <span class="token punctuation">}</span>
 </code></pre>
-<p>The token <code>=&gt;</code> can be added after the prototype de make the lambda a
-bit more readable. It is just syntaxic and has no impact on the
+<p><br></p>
+<p>The token <code>=&gt;</code> can be added after the prototype of the lambda, to make
+it a bit more readable. It is just syntaxic and has no impact on the
 behavior of the lambda.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token operator">|</span>x<span class="token punctuation">,</span> y<span class="token operator">|</span> <span class="token operator">=</span><span class="token operator">&gt;</span> x <span class="token operator">+</span> y<span class="token punctuation">;</span>    
     <span class="token function">println</span> <span class="token punctuation">(</span><span class="token function">x</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-
-    <span class="token comment">// The types are not given, then you can also write </span>
-    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token function">x</span> <span class="token punctuation">(</span><span class="token number">1.3</span><span class="token punctuation">,</span> <span class="token number">2.9</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    
 <span class="token punctuation">}</span>
 </code></pre>
-<p>Lambda function can evidently be used as function argument, like
-normal functions.</p>
+<p><br></p>
+<p>Lambda functions are directly function pointers, and then can be used
+as such without needing the unary ampersand (<strong><code>&amp;</code></strong>) operator. In the
+following example, the function <strong><code>foo</code></strong> takes a function pointer as
+first parameter, and two <strong><code>i32</code></strong> values as second and third
+parameters. This function calls the function pointer twice, and add
+the result. A lambda function is used in the <strong><code>main</code></strong> function as
+the first argument for the <strong><code>foo</code></strong> function.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
 <span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>f <span class="token punctuation">:</span> <span class="token keyword">fn</span> <span class="token punctuation">(</span><span class="token basic-types">i32</span><span class="token punctuation">,</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span><span class="token punctuation">,</span> x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">,</span> y <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span> <span class="token punctuation">{</span>
@@ -768,45 +875,57 @@ normal functions.</p>
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token operator">|</span>x<span class="token punctuation">,</span> y<span class="token operator">|=</span><span class="token operator">&gt;</span> x <span class="token operator">*</span> y<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">foo</span> <span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token comment">// Dotcall syntax, you can of course write it as follows : </span>
+
+    <span class="token comment">// uniform call syntax is used, but you can of course write it as follows : </span>
     <span class="token comment">// foo (|x, y| x*y, 3, 7);</span>
     <span class="token function">println</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>Lambda function that are not typed are special element, that have no
-value. If it is not possible to infer the type of the lambda, and you
-try to use it as a value, then you will get an error. <strong>Ymir</strong> allows
-to put an untyped lambda inside an immutable var, to ease its usage,
-but the lambda still does not have any value.  With the following
-code, you should get an error.</p>
+<p>Results: </p>
+<pre class="language-"><code>42
+</code></pre><p><br></p>
+<p>Lambda function that are not typed are special element, that does not
+really have a value at runtime, and are closer to <em>compile time
+values</em> (presented in a future chapter <a href="https://gnu-ymir.github.io/Documentations/en/templates/cte.html" target="_blank">Compile time
+execution</a>).
+When the whole type of a lambda cannot be infered by the compiler
+(types of the parameters, and the type of the return type), then the
+value cannot be passed to a mutable variable. <em>Ymir</em> allows to put an
+untyped lambda inside an immutable var, to ease its usage, but the
+lambda still does not have any value. For that reason, the second line
+of the following example is possible, but not the third.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token operator">|</span>x<span class="token operator">|</span> x <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
     <span class="token keyword">let</span> <span class="token other-keyword">mut</span> y <span class="token operator">=</span> x<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<pre class="language-"><code>Error : type mut fn (any)-&gt; any is not complete
- --&gt; main.yr:(4,13)
-    | 
- 4  |     let x = |x| x + 1;
-    |             ^
-Note : 
- --&gt; main.yr:(5,13)
-    | 
- 5  |     let mut y = x;
-    |             ^
+<p><br>
+Errors: </p>
+<pre class="language-"><code>Error : the type mut fn (any)-&gt; any is not complete
+ --&gt; main.yr:(2,10)
+ 2  &#x2503;     let x = |x| x + 1;
+    &#x254B;             ^
+    &#x2503; Note : 
+    &#x2503;  --&gt; main.yr:(3,10)
+    &#x2503;  3  &#x2503;     let mut y = x;
+    &#x2503;     &#x254B;             ^
+    &#x2517;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x253B;&#x2501; 
+
 
 ymir1: fatal error: 
 compilation terminated.
-</code></pre><p>When you want to return a lambda function as a function value, you can
-have the same error.  To avoid this, you can use the keyword &quot;return&quot;,
-which will impose the type of the function return and allow an
-implicit deduction of the lambda type. For example, the following code : </p>
+</code></pre><p><br></p>
+<p>The same problem happens when an uncomplete lambda function is used as
+the value of a function. To resolve the problem, and because the
+return type of a function is always complete when the function is
+validated (or there were other previous errors), the keyword
+<strong><code>return</code></strong> can be used. Thanks to that statement, the compiler has
+additional knowledge, and can infer the type of the lambda function
+from the return type of the function.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
 <span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token keyword">fn</span> <span class="token punctuation">(</span><span class="token basic-types">i32</span><span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span> <span class="token punctuation">{</span>
-    <span class="token keyword">return</span> <span class="token operator">|</span>x<span class="token operator">|</span> <span class="token operator">=</span><span class="token operator">&gt;</span> x <span class="token operator">+</span> <span class="token number">12</span>
-<span class="token comment">//  ^^^^^^</span>
-<span class="token comment">// Try to remove the return here</span>
+    <span class="token keyword">return</span> <span class="token operator">|</span>x<span class="token operator">|</span> <span class="token operator">=</span><span class="token operator">&gt;</span> x <span class="token operator">+</span> <span class="token number">12</span> <span class="token comment">// the compiler tries to transform the lambda function into a function pointer fn (i32)-&gt; i32</span>
 <span class="token punctuation">}</span>
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -814,10 +933,16 @@ implicit deduction of the lambda type. For example, the following code : </p>
     <span class="token function">println</span> <span class="token punctuation">(</span><span class="token function">x</span> <span class="token punctuation">(</span><span class="token number">30</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
+<p><strong>Contribution</strong>: Resolve that problem when it seems obvious, for
+example in the previous example, maybe the type of the block can be
+infered directly?</p>
 <h2 id="closure"><a name="closure" class="anchor-navigation-ex-anchor" href="#closure"><i class="fa fa-link" aria-hidden="true"></i></a>1.3. Closure</h2>
-<p>Lambda function have no access on the scope of the function that
-declare them. If you try to compile the following program, you should
-get an error.</p>
+<p>As said earlier, a lambda function behave like a local private
+function, and thus has no access to the context of the function that
+have declared it. In the following example, the lambda function
+declared at line <strong><code>5</code></strong> tries to access the variable <strong><code>i</code></strong> declared
+at line <strong><code>4</code></strong>. This is impossible, the variable <strong><code>i</code></strong> exists in a
+different context that the lambda function.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -828,83 +953,150 @@ get an error.</p>
     <span class="token function">x</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>The variable <code>i</code> does not exist in the scope of the lambda function.</p>
+<p><br>
+Errors:</p>
 <pre class="language-"><code>Error : undefined symbol i
- --&gt; main.yr:(6,11)
-    | 
- 6  |     println (i);
-    |              ^
+ --&gt; main.yr:(6,12)
+ 6  &#x2503;         println (i);
+    &#x254B;                  ^
+
+Error : undefined symbol x
+ --&gt; main.yr:(8,2)
+ 8  &#x2503;     x ();
+    &#x254B;     ^
+
 
 ymir1: fatal error: 
 compilation terminated.
-</code></pre><p>Closure are a function pointer that capture the environment of the
-function that has declared them. There is two type of closure,
-reference closure and move closure.</p>
-<h3 id="move-closure"><a name="move-closure" class="anchor-navigation-ex-anchor" href="#move-closure"><i class="fa fa-link" aria-hidden="true"></i></a>1.3.1. Move closure</h3>
-<p>A move closure, declared by the keyword &quot;move&quot; followed by a lambda
-function, has access to the parent environment by value. All included
-values are immutable, and there is no way to make them mutable. A move
-closure is safe to use, and in most cases totally sufficient, and is
-preferable to the reference closure.</p>
-<p>Unlike function pointer, the closure type is created with the keyword
-<code>dg</code> for delegate. A delegate is a function pointer with an
-environment, and is the general case of a closure.</p>
+</code></pre><p><br></p>
+<p>Closure are a function pointer that capture the environment of the
+function that has declared them. In <em>Ymir</em> there is only one kind of
+accepted closure, that is called the move closure.</p>
+<h3 id="copy-closure"><a name="copy-closure" class="anchor-navigation-ex-anchor" href="#copy-closure"><i class="fa fa-link" aria-hidden="true"></i></a>1.3.1. Copy closure</h3>
+<p>A copy closure is a special kind of lambda function, that is declared
+by using the keyword <strong><code>move</code></strong> in front of a lambda literal. The
+closure as an immutable access to all the variable declared inside the
+scope of the parent function. This closure is called a <em>copy closure</em>
+because the access of the variable is made by copy (a first level copy
+<em>cf.</em> <a href="https://gnu-ymir.github.io/Documentations/en/advanced/copies.html" target="_blank">Copy and Deep
+copy</a>).
+Because closure captures a context in addition to a function pointer,
+the simple function pointer type is no more sufficient, and a new type
+is introduced. The syntax of the closure type is created with the
+keyword <strong><code>dg</code></strong> instead of <strong><code>fn</code></strong> (<em>dg</em> stands for delegate). A
+delegate is a function pointer with an environment, and is the general
+case of a closure (we will see in next section, a case of delegate
+that are not closure).</p>
+<p>In the following example, the <em>copy closure</em> declared at line <strong><code>9</code></strong>
+enclosed the scope of the function <strong><code>foo</code></strong>, and thus has access to
+the variable <strong><code>i</code></strong>. However, the enclosed variable is immutable (and
+is a copy).</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
-<span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>f <span class="token punctuation">:</span> <span class="token keyword">dg</span> <span class="token punctuation">(</span><span class="token basic-types">i32</span><span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span> <span class="token punctuation">{</span>
+<span class="token keyword">def</span> <span class="token function">bar</span> <span class="token punctuation">(</span>f <span class="token punctuation">:</span> <span class="token keyword">dg</span> <span class="token punctuation">(</span><span class="token basic-types">i32</span><span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span> <span class="token punctuation">{</span>
     <span class="token function">f</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
 
-<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">30</span><span class="token punctuation">;</span>
-    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token keyword">move</span> <span class="token operator">|</span>x<span class="token operator">|=</span><span class="token operator">&gt;</span> x <span class="token operator">+</span> i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token function">bar</span> <span class="token punctuation">(</span><span class="token keyword">move</span> <span class="token operator">|</span>x<span class="token operator">|=</span><span class="token operator">&gt;</span> x <span class="token operator">+</span> i<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">println</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-</code></pre>
-<p>Move closures can be returned safely, since the closure is done by
-value, there is no problem with the lifetime of the variables that are
-enclosed.</p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
-<span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> <span class="token keyword">dg</span> <span class="token punctuation">(</span><span class="token basic-types">i32</span><span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span> <span class="token punctuation">{</span>
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br></p>
+<p>The above source code in the context of the <strong><code>foo</code></strong> function, can be
+illustrated by the following figure.</p>
+<p><br></p>
+<p><img src="https://gnu-ymir.github.io/Documentations/en/functions/closure.png" alt="drawing" height="500" ,="" style="display: block; margin-left: auto;  margin-right: auto;"></p>
+<p><br></p>
+<p>As one can note, the variable <strong><code>i</code></strong> enclosed in the closure is not
+the same as the variable <strong><code>i</code></strong> of the <strong><code>main</code></strong> function. This has
+two impact: </p>
+<ul>
+<li>a) <em>copy closure</em> can be returned safely from functions,
+indeed even when the variable <strong><code>i</code></strong> does not exist anymore as the
+function <strong><code>foo</code></strong> is exited, a copy of it is still accessible in the
+heap (note that this is the same for aliasable types, that are in the
+heap in any case). For example: </li>
+</ul>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
+
+<span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> <span class="token keyword">dg</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">30</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token keyword">move</span> <span class="token operator">||</span> <span class="token operator">=</span><span class="token operator">&gt;</span> i <span class="token operator">+</span> <span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token function">x</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// enclosed i does not exists, but thats not a problem</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br></p>
+<p>Results:</p>
+<pre class="language-"><code>42
+</code></pre><ul>
+<li>b) the value of the enclosed <strong><code>i</code></strong> is independant
+from the value of the variable <strong><code>i</code></strong> in the <strong><code>foo</code></strong> function,
+meaning that there is no way for the <strong><code>foo</code></strong> function to change the
+value of the variable <strong><code>i</code></strong> inside the closure after its creation. For example : </li>
+</ul>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">let</span> <span class="token other-keyword">mut</span> i <span class="token operator">=</span> <span class="token number">30</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> <span class="token keyword">move</span> <span class="token operator">|</span>x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token operator">|</span> x <span class="token operator">+</span> i<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token keyword">move</span> <span class="token operator">||</span> <span class="token operator">=</span><span class="token operator">&gt;</span> i <span class="token operator">+</span> <span class="token number">12</span><span class="token punctuation">;</span>
+    i <span class="token operator">=</span> <span class="token number">11</span><span class="token punctuation">;</span> <span class="token comment">// no impact on the closure of x</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token function">x</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    
 
-<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> z <span class="token operator">=</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token function">z</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-</code></pre>
-<h3 id="ref-closure"><a name="ref-closure" class="anchor-navigation-ex-anchor" href="#ref-closure"><i class="fa fa-link" aria-hidden="true"></i></a>1.3.2. Ref closure</h3>
-<p>A ref closure is declared with the keyword ref instead of the keyword
-move. As its name implies, a ref closure has access to the parent
-environment by reference. All included values are always immutable,
-but a change in the parent environment will also have an impact on the
-enclosed environment. To clearly illustrate this behavior, the following
-source code shows the difference between a ref closure and a move
-closure.</p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
-
-<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> <span class="token other-keyword">mut</span> z <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-
-    <span class="token keyword">let</span> m <span class="token operator">=</span> <span class="token keyword">move</span> <span class="token operator">|</span>x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token operator">|</span> <span class="token operator">=</span><span class="token operator">&gt;</span> x <span class="token operator">+</span> z<span class="token punctuation">;</span>
-    <span class="token keyword">let</span> r <span class="token operator">=</span> <span class="token other-keyword">ref</span>  <span class="token operator">|</span>x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token operator">|</span> <span class="token operator">=</span><span class="token operator">&gt;</span> x <span class="token operator">+</span> z<span class="token punctuation">;</span>
-
-    z <span class="token operator">=</span> <span class="token number">30</span><span class="token punctuation">;</span>
-    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token function">m</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token function">r</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> y <span class="token operator">=</span> <span class="token keyword">move</span> <span class="token operator">||</span> <span class="token operator">=</span><span class="token operator">&gt;</span> i <span class="token operator">+</span> <span class="token number">12</span><span class="token punctuation">;</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token function">y</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<pre class="language-"><code>13
-42
-</code></pre><p>A ref closure is not safe to be returned, it enclose refence to local
-variable. For the moment <strong>gyc</strong> does not provide static verification
-to ensure that no ref closure is returned, or at least that the ref
-closure that is returned does not enclosed local variable whose
-lifetime will end with the end of the parent environment.</p>
+<p><br>
+Results: </p>
+<pre class="language-"><code>42
+23
+</code></pre><p>By using aliasable types, this limitation can be bypassed, for example
+a slice can be used to enclosed the value of i, and access it from the
+closure, without removing the guarantees of the <em>copy closure</em>, this
+is illustrated in the following example. <strong>Warning</strong>: if you might be
+tempted to use a pointer on the <strong><code>i</code></strong> variable, its highly not
+recommended. Indeed, pointing to a local variable remove the guarantee
+we introduced earlier in the point (a) - (in general using pointer -
+not function pointer - to value is a bad idea, and should be
+prohibited outside the std).</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
 
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">throws</span> <span class="token operator">&amp;</span><span class="token type">OutOfArray</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">let</span> <span class="token other-keyword">dmut</span> i <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">12</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token keyword">move</span> <span class="token operator">||</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+        i<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">12</span>
+    <span class="token punctuation">}</span> catch <span class="token punctuation">{</span>
+        _ <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+            <span class="token number">0</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+    i <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">30</span><span class="token punctuation">;</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token function">x</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>In the above example, the <em>copy closure</em> access to the first index of
+the slice <strong><code>i</code></strong>. This is a unsafe operation, the slice can be empty,
+this is why a catch is made. Information about catch is not presented
+here, and will be discussed in a future chapter <a href="https://gnu-ymir.github.io/Documentations/en/errors/main.html" target="_blank">Error
+handling</a>. Here
+because the slice is not empty when the closure is called, the access
+works.</p>
+<p>Results: </p>
+<pre class="language-"><code>42
+</code></pre>
                                 
                                 </section>
                             
@@ -931,7 +1123,7 @@ lifetime will end with the end of the parent environment.</p>
 
             
                 
-                <a href="../objects/example.html" class="navigation navigation-prev " aria-label="Previous page: Example program">
+                <a href="../objects/traits.html" class="navigation navigation-prev " aria-label="Previous page: Traits">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
@@ -947,7 +1139,7 @@ lifetime will end with the end of the parent environment.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Function advanced","level":"1.8","depth":1,"next":{"title":"Pattern matching","level":"1.9","depth":1,"path":"pattern/README.md","ref":"pattern/README.md","articles":[]},"previous":{"title":"Example program","level":"1.7.6","depth":2,"path":"objects/example.md","ref":"objects/example.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"functions/README.md","mtime":"2021-04-24T14:22:15.145Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-04-24T18:27:12.989Z"},"basePath":"..","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Function advanced","level":"1.8","depth":1,"next":{"title":"Pattern matching","level":"1.9","depth":1,"path":"pattern/README.md","ref":"pattern/README.md","articles":[]},"previous":{"title":"Traits","level":"1.7.5","depth":2,"path":"objects/traits.md","ref":"objects/traits.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"functions/README.md","mtime":"2021-05-31T09:56:03.947Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-05-31T09:56:47.888Z"},"basePath":"..","book":{"language":"en"}});
         });
     </script>
 </div>
