@@ -1,7 +1,7 @@
 # Functions
 
 Function is a widely accepted concept for dividing a program into
-small parts. A **`Ymir`** program starts with the `main` function that
+small parts. A *Ymir* program starts with the **`main`** function that
 you have already seen in previous chapters. All functions are declared
 using the keyword **`def`** followed by a identifier, and a list of
 parameters. A function is called by using its identifier followed by a
@@ -57,10 +57,10 @@ identifier := ('_')* [A-z] ([A-z0-9_])*
 The order of declaration of the symbol has no impact on the
 compilation. The symbols are defined by the compiler before being
 validated, thus contrary to C-like languages, even if the `foo`
-function is defined after the `main` function, it's symbol is
-accessible, and hence callable by the `main` function. Further
-information about symbol declarations, and accesses are presented in
-chapter
+function is defined after the `main` function (in the first example of
+this chapter), it's symbol is accessible, and hence callable by the
+`main` function. Further information about symbol declarations, and
+accesses are presented in chapter
 [Modules](https://gnu-ymir.github.io/Documentations/en/modules/).
 
 ## Parameters 
@@ -119,9 +119,10 @@ call this function.
 import std::io
 
 
-// Function 'foo' can be called without specifying a value for parameter 'x'
-// '8' will be used as a default value for 'x'
-//
+/**
+ * Function 'foo' can be called without specifying a value for parameter 'x'
+ * '8' will be used as the default value for 'x'
+ */
 def foo (x : i32 = 8) {
     println ("The value of x is : ", x);
 }
@@ -144,7 +145,7 @@ import std::io
 
 /**
  * Parameters with default values, does not need to be last parameters
- * This function can be called with only two parameters (x, z), or using named expression syntax
+ * This function can be called with only two parameters ('x' and 'z'), or using named expression syntax
  */
 def foo (x : i32, y : i32 = 9, z : i32) {
     println (x, " ", y, " ", z);
@@ -156,6 +157,7 @@ def main () {
     foo (1, 8); // call the function 'foo' with 'x' = 1 and y = '9' and z = '8'
 }
 ```
+<br>
 
 Results:
 ```
@@ -165,11 +167,11 @@ Results:
 
 <br>
 
-Any complex expression for the default value of a function parameter
-can be used. The creation of an object, a call of a function, a code
-block, etc. The only limitation is that, you cannot refer to the other
-parameters of the function. Indeed, they are not considered declared
-in the scope of the default value.
+Any complex expression can be used, for the default value of a
+function parameter. The creation of an object, a call of a function, a
+code block, etc. The only limitation is that, you cannot refer to the
+other parameters of the function. Indeed, they are not considered
+declared in the scope of the default value.
 
 ```ymir
 def foo (x : i32) -> i32 { ... }
@@ -266,6 +268,9 @@ def foo (foo_a : i32 = bar (bar_a-> 20)) -> i32 {
 
 // no need to do the same in bar, the recursivity does not exists anymore
 ```
+
+<br>
+
 Results:
 ```
 Bar 20
@@ -297,10 +302,12 @@ be presented here, but worth mentioning.
 
 ## Function body
 
-The body of a function is an expression. Every expression in Ymir are
-typed, but that does not mean that every expression have a value, as
-they can be typed as `void` expression. A simple **`add`** function
-can be written as follows:
+The body of a function is an expression. Every expression in *Ymir*
+are typed, but that does not mean that every expression have a value,
+as they can be typed as `void` expression. The expression (body of the
+function) is evaluated when the function is entered, and its value is
+used as the value of the function. A simple **`add`** function can be
+written as follows:
 
 ```ymir
 def add (x : i32, y : i32)-> i32 
@@ -321,17 +328,20 @@ def add (x : i32, y : i32) -> i32 { // start of a block
     x + y // last expression of the block is the value of the block
 } // end of a block
 
-def main () {
+def main () 
+	throws &AssertError
+{
     let x = {
     	let y = add (1, 2);
     	y + 8 
-    }   
+    };
+	assert (x == 11)
 }
 ```
 
 <br>
 
-The semi-colon token `;` is a way of specifying that an expression
+The semi-colon token **`;`** is a way of specifying that an expression
 ends inside a scope, and that its value must be ignored. If the last
 expression of a scope is terminated by a semi-colon, an empty
 expression is added to the scope. This empty expression has no value,
@@ -339,8 +349,9 @@ giving to the scope an empty value of type **`void`** as well.
 
 ```ymir
 
-// The value of foo is '9'
-//
+/**
+ * The value of foo is '9'
+ */
 def foo () -> i32 
     9
 

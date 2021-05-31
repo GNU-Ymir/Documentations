@@ -324,7 +324,7 @@ methods must be immutable in the heir.
 
 ### Final methods
 
-A base class can flags its method to avoid overriding. This flag is
+A base class can flag its method to avoid overriding. This flag is
 placed as a *custom modifier* before the name of the method.
 
 
@@ -342,7 +342,9 @@ class Bar over Foo {
 }
 ```
 
-Error:
+<br>
+
+Errors:
 ```error
 Error : when validating main::Bar
  --> main.yr:(7,7)
@@ -366,7 +368,7 @@ compilation terminated.
 
 <br> 
 
-Such flag can also be used on an overriden method inside a heir
+This flag can also be used on an overriden method inside a heir
 class to avoid further overriding. 
 
 ```ymir
@@ -390,7 +392,7 @@ class Baz over Bar {
 ```
 
 <br>
-Error:
+Errors:
 
 ```error
 Error : when validating main::Baz

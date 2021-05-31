@@ -143,8 +143,8 @@ def main () {
 			break counter + 1; // stop the loop and set its value to 'counter + 1'
 		}
 	};
-	println ("Result : ", result);
-}
+	println ("Result : ", result);}
+
 ```
 Results:
 ```
@@ -161,17 +161,23 @@ with the keyword **`break`**. Unlike *loop* the value of a while loop
 is always of type **`void`**, because it is impossible to ensure that
 the *while* is entered at all. The *break statement* must follow that
 rule, and break only with values of type **`void`**. 
+*Contribution:*
+It is planned to add the possibility to write an *else* after a *while
+loop* to give a value to the *while loop* when it is not entered.
 
+
+The grammar of the *while* loop is presented, in the following code
+block.
 
 ```grammar
 while_expression := 'while' expression expression
 ```
 <br>
 
-*Contribution:*
-It is planned to add the possibility to write an *else* after a *while
-loop* to give a value to the *while loop* when it is not entered.
 
+The following example, present an utilization of a *while* loop, where
+the loop iterates 10 times, while the value of **`i`** is lower than
+**10**. 
 
 ```ymir
 import std::io
@@ -179,12 +185,14 @@ import std::io
 def main () {
 	let mut i = 0;
 	while i < 10 {
-		i += 1;	// the value of the while loop will be equal to 'i' at the last iteration	
+		i += 1;	
 	};
 	
 	println ("I is : ", i);
 }
 ```
+<br>
+
 Results:
 ```
 I is : 10

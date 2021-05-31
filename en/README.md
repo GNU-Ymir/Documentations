@@ -95,7 +95,8 @@ $ dpkg -r libgmidgard-9-dev
 
 **Caution** The uninstallation can remove your gcc installation.
 But you can still reinstall it easily if there is any problem, by typing : 
-```ymir
+
+```bash
 sudo apt install --reinstall gcc-9
 ```
 

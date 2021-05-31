@@ -146,7 +146,7 @@ My println : 12
 
 <br>
 
-*Contribution* : enable aka on import, with the syntax : `import path
-aka name`. This is already possible, as we can see in the previous
-example, but needs two lines.
+**Contribution** : enable aka on import, with the syntax : `import
+path aka name`. This is already possible, as we can see in the
+previous example, but needs two lines.
 

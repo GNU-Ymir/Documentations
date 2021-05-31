@@ -1,16 +1,20 @@
 
 # Functions 
 
-We have seen in the chapter [Basic programming concepts]() how
-functions are written. In this chapter we will see more advanced
-function systems, named function pointer and closure.
+We have seen in the chapter [Basic programming
+concepts](https://gnu-ymir.github.io/Documentations/en/primitives/functions.html)
+how functions are written. *Ymir* can be used as a functional
+language, thus functions can also be considered as values. In this
+chapter we will see more advanced function systems, named function
+pointer and closure.
 
 ## Function pointer
 
 A function pointer is a value that contains a function. It can be used
-to pass function as argument to other functions. The type of the
-function pointer is written using the keyword `fn`, and have the same
-syntax as a function prototype, but without a name.
+for example, to pass a function, as an argument to other
+functions. The type of a function pointer is written using the keyword
+**`fn`**, and have nearly the same syntax as a function prototype, but
+without a name, and without naming the parameters.
 
 ```ymir
 import std::io
@@ -29,19 +33,41 @@ def main () {
 }
 ```
 
-In the above example, we have specified that the function `foo` take
-as parameter a function pointer, that takes an `i32` and return a
-`i32`.
+<br>
+
+In the above example, we have specified that the function **`foo`**
+takes a function pointer as first parameter. This function pointer, is
+a function that takes an **`i32`** value and return another **`i32`** value.
+In the main function, the ampersand (**`&`**) unary operator is used
+to transform the function symbol **`addOne`** into a function
+pointer. This function pointer is then passed to the function
+**`foo`**, which calls it and return its value. 
+
+Results: 
+
+```
+42
+```
 
 ### Function pointer using reference
 
-Function pointer can take reference parameters as normal functions.
+We have seen that references is not a type, in the chapter [Alias and
+References](https://gnu-ymir.github.io/Documentations/en/advanced/references.html). However,
+function prototype sometimes takes reference value as parameter. This
+must be replicated in the prototype of the function pointer. For that
+reason, the **`ref`** keyword can be used in the prototype of a
+function pointer type. 
+
+In the following example, the function **`mutAddOne`** change the
+value of a reference variable **`x`**, and add one to it. The function
+**`foo`** takes a function pointer as first parameter, and calls it on
+a mutable local variable **`x`** by reference (it is important). 
 
 ```ymir
 import std::io
 
-def foo (f : fn (ref mut i32)-> i32) -> i32 {
-	let ref mut x = 41;
+def foo (f : fn (ref mut i32)-> void) -> i32 {
+	let mut x = 41;
 	f (ref x);
 	x
 }
@@ -56,12 +82,105 @@ def main () {
 }
 ```
 
+<br>
+
+Results: 
+
+```
+42
+```
+
+<br>
+
+The prototype of the function pointer must be strictly respected, for
+obvious reasons. And as for normal functions, alias and references
+must be strictly respected as well. For example, in the follow
+example, the function **`foo`** tries to call the function pointer
+that takes a reference argument, using a simple value. And the
+**`main`** function tries to call the **`foo`** function, with a
+function pointer that does not take a reference parameter.
+
+```ymir
+import std::io
+
+def foo (f : fn (ref mut i32)-> void) -> i32 {
+    let mut x = 41;
+    f (x);
+    x
+}
+
+def mutAddOne (x : i32) {
+    println (x);
+}
+
+def main () {
+    let x = foo (&mutAddOne);
+    println (x);
+}
+```
+
+<br>
+
+We have two errors, first the compiler does not allow an implicit
+referencing of the variable **`x`** at line **`5`**, and second the
+compiler does not allow an implicit cast of a value of type **`fn
+(i32)-> void`** to **`fn (ref mut i32)-> void`**.
+
+```error
+Error : the call operator is not defined for &fn(ref mut i32)-> void and {mut i32}
+ --> main.yr:(5,7)
+ 5  ┃     f (x);
+    ╋       ^ ^
+    ┃ Error : implicit referencing of type mut i32 is not allowed
+    ┃  --> main.yr:(5,8)
+    ┃  5  ┃     f (x);
+    ┃     ╋        ^
+    ┃ Note : for parameter i32 --> main.yr:(3,26) of f
+    ┗━━━━━━ 
+
+Error : the call operator is not defined for main::foo and {&fn(i32)-> void}
+ --> main.yr:(14,17)
+14  ┃     let x = foo (&mutAddOne);
+    ╋                 ^          ^
+    ┃ Note : candidate foo --> main.yr:(3,5) : main::foo (f : &fn(ref mut i32)-> void)-> i32
+    ┃     ┃ Error : incompatible types &fn(ref mut i32)-> void and &fn(i32)-> void
+    ┃     ┃  --> main.yr:(14,18)
+    ┃     ┃ 14  ┃     let x = foo (&mutAddOne);
+    ┃     ┃     ╋                  ^
+    ┃     ┃ Note : for parameter f --> main.yr:(3,10) of main::foo (f : &fn(ref mut i32)-> void)-> i32
+    ┃     ┗━━━━━━ 
+    ┗━━━━━┻━ 
+
+Error : undefined symbol x
+ --> main.yr:(15,14)
+15  ┃     println (x);
+    ╋              ^
+
+
+ymir1: fatal error: 
+compilation terminated.
+```
+
 ## Lambda function 
 
-Lambda function are anonymous function that have the same behavior as
-normal function, but don't have a name. They are declared using the
+Lambda functions are anonymous functions that have the same behavior
+as normal function, but don't have a name. They are declared using the
 token `|` surrounding the parameters instead of parentheses in order
-to dinstinguish them from tuple. 
+to dinstinguish them from tuple. The following code block presents the
+syntax of the lambda functions.
+
+
+```grammar
+lambda_func := '|' (var_decl (',' var_decl)*)? '|' ('->' type)? ('=>')? expression
+var_decl := Identifier (':' type)?
+```
+
+<br>
+
+The following example shows a simple usage of a lambda function. This
+function declared at line **`4`**, and stored in the variable **`x`**,
+takes two parameters **`x`** and **`y`** of type **`i32`**, and return
+their sum.
 
 ```ymir
 import std::io
@@ -73,12 +192,22 @@ def main () {
 	println (x (1, 2));
 }
 ```
+<br>
 
-As you may have noticed, there is no conflict between the variable `x`
-declared in the function main, and the first parameter of the lambda
-also named `x`. In many cases the type of the parameters and return
-type can be infered, and are therefore optional. The above example can
-then be rewritten into :
+As one can note, there is no conflict between the variable **`x`**
+declared in the function **`main`**, and the first parameter of the
+lambda function also named **`x`**. This is due to the fact that the
+lambda function does not enclose the context of the function that have
+created it. In other words, lambda functions behave as normal local
+function, accessible only inside the function that have declared them
+(*cf.*  [Scope
+declaration](https://gnu-ymir.github.io/Documentations/en/primitives/functions.html#scope-declaration)).
+
+In many cases the type of the parameters and return type can be
+infered, and are therefore optional. The above example can then be
+rewritten into the following example. In this next example, the lambda
+function can be called with any values, as long as the binary addition
+(**`+`**) operator is defined between the two values.
 
 ```ymir
 import std::io
@@ -93,8 +222,10 @@ def main () {
 }
 ```
 
-The token `=>` can be added after the prototype de make the lambda a
-bit more readable. It is just syntaxic and has no impact on the
+<br>
+
+The token `=>` can be added after the prototype of the lambda, to make
+it a bit more readable. It is just syntaxic and has no impact on the
 behavior of the lambda.
 
 ```ymir
@@ -103,16 +234,18 @@ import std::io
 def main () {
 	let x = |x, y| => x + y;	
 	println (x (1, 2));
-	
-		
-	// The types are not given, then you can also write 
-	println (x (1.3, 2.9));	
 }
 ```
 
-Lambda function can evidently be used as function argument, like
-normal functions.
+<br>
 
+Lambda functions are directly function pointers, and then can be used
+as such without needing the unary ampersand (**`&`**) operator. In the
+following example, the function **`foo`** takes a function pointer as
+first parameter, and two **`i32`** values as second and third
+parameters. This function calls the function pointer twice, and add
+the result. A lambda function is used in the **`main`** function as
+the first argument for the **`foo`** function.
 
 ```ymir
 import std::io
@@ -123,18 +256,31 @@ def foo (f : fn (i32, i32)-> i32, x : i32, y : i32) -> i32 {
 
 def main () {
     let x = (|x, y|=> x * y).foo (3, 7);
-	// Dotcall syntax, you can of course write it as follows : 
+	
+	// uniform call syntax is used, but you can of course write it as follows : 
 	// foo (|x, y| x*y, 3, 7);
     println (x);
 }
 ```
 
-Lambda function that are not typed are special element, that have no
-value. If it is not possible to infer the type of the lambda, and you
-try to use it as a value, then you will get an error. **Ymir** allows
-to put an untyped lambda inside an immutable var, to ease its usage,
-but the lambda still does not have any value.  With the following
-code, you should get an error.
+Results: 
+```
+42
+```
+
+<br>
+
+Lambda function that are not typed are special element, that does not
+really have a value at runtime, and are closer to *compile time
+values* (presented in a future chapter [Compile time
+execution](https://gnu-ymir.github.io/Documentations/en/templates/cte.html)).
+When the whole type of a lambda cannot be infered by the compiler
+(types of the parameters, and the type of the return type), then the
+value cannot be passed to a mutable variable. *Ymir* allows to put an
+untyped lambda inside an immutable var, to ease its usage, but the
+lambda still does not have any value. For that reason, the second line
+of the following example is possible, but not the third.
+
 ```ymir
 def main () {
 	let x = |x| x + 1;
@@ -142,34 +288,40 @@ def main () {
 }
 ```
 
+<br>
+Errors: 
+
 ```
-Error : type mut fn (any)-> any is not complete
- --> main.yr:(4,13)
-    | 
- 4  |     let x = |x| x + 1;
-    |             ^
-Note : 
- --> main.yr:(5,13)
-    | 
- 5  |     let mut y = x;
-    |             ^
+Error : the type mut fn (any)-> any is not complete
+ --> main.yr:(2,10)
+ 2  ┃ 	let x = |x| x + 1;
+    ╋ 	        ^
+    ┃ Note : 
+    ┃  --> main.yr:(3,10)
+    ┃  3  ┃ 	let mut y = x;
+    ┃     ╋ 	        ^
+    ┗━━━━━┻━ 
+
 
 ymir1: fatal error: 
 compilation terminated.
 ```
 
-When you want to return a lambda function as a function value, you can
-have the same error.  To avoid this, you can use the keyword "return",
-which will impose the type of the function return and allow an
-implicit deduction of the lambda type. For example, the following code : 
+<br>
+
+The same problem happens when an uncomplete lambda function is used as
+the value of a function. To resolve the problem, and because the
+return type of a function is always complete when the function is
+validated (or there were other previous errors), the keyword
+**`return`** can be used. Thanks to that statement, the compiler has
+additional knowledge, and can infer the type of the lambda function
+from the return type of the function.
 
 ```ymir
 import std::io
 
 def foo () -> fn (i32)-> i32 {
-	return |x| => x + 12
-//  ^^^^^^
-// Try to remove the return here
+	return |x| => x + 12 // the compiler tries to transform the lambda function into a function pointer fn (i32)-> i32
 }
 
 def main () {
@@ -178,11 +330,18 @@ def main () {
 }
 ```
 
+**Contribution**: Resolve that problem when it seems obvious, for
+example in the previous example, maybe the type of the block can be
+infered directly?
+
 ## Closure
 
-Lambda function have no access on the scope of the function that
-declare them. If you try to compile the following program, you should
-get an error.
+As said earlier, a lambda function behave like a local private
+function, and thus has no access to the context of the function that
+have declared it. In the following example, the lambda function
+declared at line **`5`** tries to access the variable **`i`** declared
+at line **`4`**. This is impossible, the variable **`i`** exists in a
+different context that the lambda function.
 
 ```ymir
 import std::io
@@ -196,102 +355,183 @@ def main () {
 }
 ```
 
-The variable `i` does not exist in the scope of the lambda function.
+<br>
+Errors:
 
 ```
 Error : undefined symbol i
- --> main.yr:(6,11)
-    | 
- 6  | 	println (i);
-    | 	         ^
+ --> main.yr:(6,12)
+ 6  ┃ 		println (i);
+    ╋ 		         ^
+
+Error : undefined symbol x
+ --> main.yr:(8,2)
+ 8  ┃ 	x ();
+    ╋ 	^
+
 
 ymir1: fatal error: 
 compilation terminated.
 ```
 
+<br>
+
+
 Closure are a function pointer that capture the environment of the
-function that has declared them. There is two type of closure,
-reference closure and move closure.
+function that has declared them. In *Ymir* there is only one kind of
+accepted closure, that is called the move closure.
 
-### Move closure 
+### Copy closure
 
-A move closure, declared by the keyword "move" followed by a lambda
-function, has access to the parent environment by value. All included
-values are immutable, and there is no way to make them mutable. A move
-closure is safe to use, and in most cases totally sufficient, and is
-preferable to the reference closure.
+A copy closure is a special kind of lambda function, that is declared
+by using the keyword **`move`** in front of a lambda literal. The
+closure as an immutable access to all the variable declared inside the
+scope of the parent function. This closure is called a *copy closure*
+because the access of the variable is made by copy (a first level copy
+*cf.* [Copy and Deep
+copy](https://gnu-ymir.github.io/Documentations/en/advanced/copies.html)).
+Because closure captures a context in addition to a function pointer,
+the simple function pointer type is no more sufficient, and a new type
+is introduced. The syntax of the closure type is created with the
+keyword **`dg`** instead of **`fn`** (*dg* stands for delegate). A
+delegate is a function pointer with an environment, and is the general
+case of a closure (we will see in next section, a case of delegate
+that are not closure).
 
-Unlike function pointer, the closure type is created with the keyword
-`dg` for delegate. A delegate is a function pointer with an
-environment, and is the general case of a closure.
+
+In the following example, the *copy closure* declared at line **`9`**
+enclosed the scope of the function **`foo`**, and thus has access to
+the variable **`i`**. However, the enclosed variable is immutable (and
+is a copy).
 
 ```ymir
 import std::io
 
-def foo (f : dg (i32)-> i32) -> i32 {
+def bar (f : dg (i32)-> i32) -> i32 {
 	f (12)
 }
 
-def main () {
+def foo () {
 	let i = 30;
-	let x = foo (move |x|=> x + i);
+	let x = bar (move |x|=> x + i);
 	println (x);
 }
+
+def main () {
+	foo ();
+}
 ```
 
-Move closures can be returned safely, since the closure is done by
-value, there is no problem with the lifetime of the variables that are
-enclosed.
+<br>
 
+The above source code in the context of the **`foo`** function, can be
+illustrated by the following figure.
+
+<br>
+
+<img src="https://gnu-ymir.github.io/Documentations/en/functions/closure.png" alt="drawing" height="500", style="display: block; margin-left: auto;  margin-right: auto;">
+
+<br>
+
+As one can note, the variable **`i`** enclosed in the closure is not
+the same as the variable **`i`** of the **`main`** function. This has
+two impact: 
+
+- a) *copy closure* can be returned safely from functions,
+indeed even when the variable **`i`** does not exist anymore as the
+function **`foo`** is exited, a copy of it is still accessible in the
+heap (note that this is the same for aliasable types, that are in the
+heap in any case). For example: 
 
 ```ymir
-import std::io
+import std::io;
 
-def foo ()-> dg (i32)-> i32 {
-	let mut i = 30;
-	return move |x : i32| x + i;
+def foo ()-> dg ()-> i32 {
+	let i = 30;
+	return (move || => i + 12);
 }
 
 def main () {
-	let z = foo ();
-	println (z (12));
+	let x = foo ();
+	println (x ()); // enclosed i does not exists, but thats not a problem
 }
 ```
- 
+<br>
 
-### Ref closure
-
-A ref closure is declared with the keyword ref instead of the keyword
-move. As its name implies, a ref closure has access to the parent
-environment by reference. All included values are always immutable,
-but a change in the parent environment will also have an impact on the
-enclosed environment. To clearly illustrate this behavior, the following
-source code shows the difference between a ref closure and a move
-closure.
-
-```ymir
-import std::io
-
-def main () {
-	let mut z = 1;
-	
-	let m = move |x : i32| => x + z;
-	let r = ref  |x : i32| => x + z;
-	
-	z = 30;
-	println (m (12));
-	println (r (12));
-}
-```
+Results:
 
 ```
-13
 42
 ```
 
-A ref closure is not safe to be returned, it enclose refence to local
-variable. For the moment **gyc** does not provide static verification
-to ensure that no ref closure is returned, or at least that the ref
-closure that is returned does not enclosed local variable whose
-lifetime will end with the end of the parent environment.
+- b) the value of the enclosed **`i`** is independant
+from the value of the variable **`i`** in the **`foo`** function,
+meaning that there is no way for the **`foo`** function to change the
+value of the variable **`i`** inside the closure after its creation. For example : 
 
+```ymir
+import std::io;
+
+def main () {
+    let mut i = 30;
+    let x = move || => i + 12;
+    i = 11; // no impact on the closure of x
+    println (x ());    
+	
+	let y = move || => i + 12;
+	println (y ());
+}
+```
+
+<br>
+Results: 
+
+```
+42
+23
+```
+
+
+By using aliasable types, this limitation can be bypassed, for example
+a slice can be used to enclosed the value of i, and access it from the
+closure, without removing the guarantees of the *copy closure*, this
+is illustrated in the following example. **Warning**: if you might be
+tempted to use a pointer on the **`i`** variable, its highly not
+recommended. Indeed, pointing to a local variable remove the guarantee
+we introduced earlier in the point (a) - (in general using pointer -
+not function pointer - to value is a bad idea, and should be
+prohibited outside the std).
+
+```ymir
+import std::io;
+
+def main ()
+    throws &OutOfArray
+{
+    let dmut i = [12];
+    let x = move || => {
+        i[0] + 12
+    } catch {
+        _ => {
+            0
+        }
+    };
+        
+    i [0] = 30;
+    println (x ());
+}
+```
+
+In the above example, the *copy closure* access to the first index of
+the slice **`i`**. This is a unsafe operation, the slice can be empty,
+this is why a catch is made. Information about catch is not presented
+here, and will be discussed in a future chapter [Error
+handling](https://gnu-ymir.github.io/Documentations/en/errors/main.html). Here
+because the slice is not empty when the closure is called, the access
+works.
+
+Results: 
+
+```
+42
+```

@@ -55,8 +55,8 @@ main::Point(1, 2)
 It is possible to declare a structure with no fields. Note, however,
 that such structure has a size of 1 byte in memory.
 
-<span style="color:grey">*Contribution* this is a limitation observed in gcc, maybe
-this can be corrected ?</span>
+**Contribution** this is a limitation observed in gcc, maybe
+this can be corrected ?
 
 ```ymir
 import std::io;

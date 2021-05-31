@@ -37,10 +37,10 @@ with few exceptions that will be clarified in this documentation.
 The option **`-o`** can be used to define the name of the output executable.
 
 ```bash
-$ gyc main.yr -o main
+$ gyc hello.yr -o hello
 $ ls
-main  main.yr
-$ ./main
+hello  hello.yr
+$ ./hello
 Hello World !!
 ```
 

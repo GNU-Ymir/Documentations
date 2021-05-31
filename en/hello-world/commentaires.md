@@ -7,7 +7,7 @@
 
 ```ymir
 def main () 
-	throws &AssertError // the main function contains uncaught exceptions
+	throws &AssertError // Not what's important for the moment
 {
     // This is an example of comment
 
