@@ -668,7 +668,7 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#functions"><b>1. </b>Functions</a></li><ul><li><span class="title-icon "></span><a href="#function-pointer"><b>1.1. </b>Function pointer</a></li><ul><li><span class="title-icon "></span><a href="#function-pointer-using-reference"><b>1.1.1. </b>Function pointer using reference</a></li></ul><li><span class="title-icon "></span><a href="#lambda-function"><b>1.2. </b>Lambda function</a></li><li><span class="title-icon "></span><a href="#closure"><b>1.3. </b>Closure</a></li><ul><li><span class="title-icon "></span><a href="#copy-closure"><b>1.3.1. </b>Copy closure</a></li></ul></ul></ul></div><a href="#functions" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="functions"><a name="functions" class="anchor-navigation-ex-anchor" href="#functions"><i class="fa fa-link" aria-hidden="true"></i></a>1. Functions</h1>
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#functions"><b>1. </b>Functions</a></li><ul><li><span class="title-icon "></span><a href="#function-pointer"><b>1.1. </b>Function pointer</a></li><ul><li><span class="title-icon "></span><a href="#function-pointer-using-reference"><b>1.1.1. </b>Function pointer using reference</a></li></ul><li><span class="title-icon "></span><a href="#lambda-function"><b>1.2. </b>Lambda function</a></li><li><span class="title-icon "></span><a href="#closure"><b>1.3. </b>Closure</a></li><ul><li><span class="title-icon "></span><a href="#copy-closure"><b>1.3.1. </b>Copy closure</a></li><li><span class="title-icon "></span><a href="#method-delegate"><b>1.3.2. </b>Method delegate</a></li></ul></ul></ul></div><a href="#functions" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="functions"><a name="functions" class="anchor-navigation-ex-anchor" href="#functions"><i class="fa fa-link" aria-hidden="true"></i></a>1. Functions</h1>
 <p>We have seen in the chapter <a href="https://gnu-ymir.github.io/Documentations/en/primitives/functions.html" target="_blank">Basic programming
 concepts</a>
 how functions are written. <em>Ymir</em> can be used as a functional
@@ -1038,7 +1038,8 @@ heap in any case). For example: </li>
 <p><br></p>
 <p>Results:</p>
 <pre class="language-"><code>42
-</code></pre><ul>
+</code></pre><p><br></p>
+<ul>
 <li>b) the value of the enclosed <strong><code>i</code></strong> is independant
 from the value of the variable <strong><code>i</code></strong> in the <strong><code>foo</code></strong> function,
 meaning that there is no way for the <strong><code>foo</code></strong> function to change the
@@ -1060,7 +1061,8 @@ value of the variable <strong><code>i</code></strong> inside the closure after i
 Results: </p>
 <pre class="language-"><code>42
 23
-</code></pre><p>By using aliasable types, this limitation can be bypassed, for example
+</code></pre><p><br></p>
+<p>By using aliasable types, this limitation can be bypassed, for example
 a slice can be used to enclosed the value of i, and access it from the
 closure, without removing the guarantees of the <em>copy closure</em>, this
 is illustrated in the following example. <strong>Warning</strong>: if you might be
@@ -1087,6 +1089,7 @@ prohibited outside the std).</p>
     <span class="token function">println</span> <span class="token punctuation">(</span><span class="token function">x</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
+<p><br></p>
 <p>In the above example, the <em>copy closure</em> access to the first index of
 the slice <strong><code>i</code></strong>. This is a unsafe operation, the slice can be empty,
 this is why a catch is made. Information about catch is not presented
@@ -1096,6 +1099,131 @@ because the slice is not empty when the closure is called, the access
 works.</p>
 <p>Results: </p>
 <pre class="language-"><code>42
+</code></pre><h3 id="method-delegate"><a name="method-delegate" class="anchor-navigation-ex-anchor" href="#method-delegate"><i class="fa fa-link" aria-hidden="true"></i></a>1.3.2. Method delegate</h3>
+<p>A method is a function pointer associated with a object instance, then
+they can be seen as delegate. The name closure is not used here,
+because nothing is really enclosed as in <em>copy closure</em> over function
+context, so the name <em>delegate</em> being a more global term is used. A
+delegate is a function operating on an object, for which we don&apos;t know
+the exact type. </p>
+<p>A method can be transformed into a delegate using the unary ampersand
+(<strong><code>&amp;</code></strong>) operator, on a method associated to an object instance. </p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> Foo <span class="token punctuation">{</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">let</span> <span class="token other-keyword">mut</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+    <span class="token other-keyword">pub</span> <span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> void <span class="token punctuation">{</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">.</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> <span class="token other-keyword">dmut</span> a <span class="token operator">=</span> <span class="token path">Foo</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token other-keyword">dmut</span> b <span class="token operator">=</span> <span class="token path">Foo</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> x <span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token keyword">dg</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> void<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token operator">&amp;</span><span class="token type">a</span><span class="token punctuation">.</span>foo<span class="token punctuation">;</span>
+    <span class="token keyword">let</span> y <span class="token operator">=</span> <span class="token operator">&amp;</span><span class="token type">b</span><span class="token punctuation">.</span>foo<span class="token punctuation">;</span>
+
+    a<span class="token punctuation">.</span>i <span class="token operator">=</span> <span class="token number">89</span><span class="token punctuation">;</span>
+    b<span class="token punctuation">.</span>i <span class="token operator">=</span> <span class="token number">42</span><span class="token punctuation">;</span>
+
+    <span class="token function">x</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">y</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br></p>
+<p>Results: </p>
+<pre class="language-"><code>89
+42
+</code></pre><p><br></p>
+<p>Unlike <em>copy closure</em> a method can have a mutable access to the object
+associated to it. In that case, an explicit alias must be made on the
+object instance, when creating the delegate, otherwise the compiler
+throws an error. </p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> Foo <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> <span class="token other-keyword">mut</span> _i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+    <span class="token other-keyword">pub</span> <span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token other-keyword">mut</span> <span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">self</span><span class="token punctuation">.</span>_i <span class="token operator">=</span> <span class="token number">42</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token other-keyword">impl</span> Streamable<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> <span class="token other-keyword">dmut</span> a <span class="token operator">=</span> <span class="token path">Foo</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token operator">&amp;</span><span class="token punctuation">(</span>a<span class="token punctuation">.</span>foo<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">x</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">println</span> <span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br>
+Errors:</p>
+<pre class="language-"><code class="lang-error"><span class="token path">Error</span> : undefined operator &amp; for type (a).foo
+ <span class="token comment">--&gt; main.yr:(18,13)</span>
+18  &#x2503;     let x = &amp;(a.foo);
+    &#x254B;             ^
+    &#x2503; <span class="token other-keyword">Note</span> : candidate foo <span class="token comment">--&gt; main.yr:(8,13) : (mut self) =&gt; main::Foo::foo ()-&gt; void</span>
+    &#x2503;     &#x2503; <span class="token path">Error</span> : discard the constant qualifier is prohibited, left operand mutability level is 2 but must be at most 1
+    &#x2503;     &#x2503;  <span class="token comment">--&gt; main.yr:(18,13)</span>
+    &#x2503;     &#x2503; 18  &#x2503;     let x = &amp;(a.foo);
+    &#x2503;     &#x2503;     &#x254B;             ^
+    &#x2503;     &#x2503;     &#x2503; <span class="token other-keyword">Note</span> : implicit alias of type mut &amp;(mut main::Foo) is not allowed, it will implicitly discard constant qualifier
+    &#x2503;     &#x2503;     &#x2503;  <span class="token comment">--&gt; main.yr:(18,15)</span>
+    &#x2503;     &#x2503;     &#x2503; 18  &#x2503;     let x = &amp;(a.foo);
+    &#x2503;     &#x2503;     &#x2503;     &#x254B;               ^
+    &#x2503;     &#x2503;     &#x2517;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x253B;&#x2501; 
+    &#x2503;     &#x2517;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x253B;&#x2501; 
+    &#x2517;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x253B;&#x2501; 
+
+<span class="token path">Error</span> : undefined symbol x
+ <span class="token comment">--&gt; main.yr:(20,5)</span>
+20  &#x2503;     x ();
+    &#x254B;     ^
+
+
+ymir1: <span class="token path">fatal error</span>: 
+compilation terminated.
+</code></pre>
+<p><br></p>
+<p>This can be easily resolved by aliasing the variable <strong><code>a</code></strong> when
+creating the delegate. Either by using the keyword <strong><code>alias</code></strong>, or by
+using the <strong><code>:.</code></strong> binary operator.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> Foo <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> <span class="token other-keyword">mut</span> _i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+    <span class="token other-keyword">pub</span> <span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token other-keyword">mut</span> <span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">self</span><span class="token punctuation">.</span>_i <span class="token operator">=</span> <span class="token number">42</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token other-keyword">impl</span> Streamable<span class="token punctuation">;</span> <span class="token comment">// to make the type printable</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> <span class="token other-keyword">dmut</span> a <span class="token operator">=</span> <span class="token path">Foo</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token operator">&amp;</span><span class="token punctuation">(</span>a<span class="token punctuation">:</span><span class="token punctuation">.</span>foo<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// or &amp;((alias a).foo);</span>
+
+    <span class="token function">x</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">println</span> <span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br></p>
+<p>Results:</p>
+<pre class="language-"><code>main::Foo(42)
 </code></pre>
                                 
                                 </section>
@@ -1139,7 +1267,7 @@ works.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Function advanced","level":"1.8","depth":1,"next":{"title":"Pattern matching","level":"1.9","depth":1,"path":"pattern/README.md","ref":"pattern/README.md","articles":[]},"previous":{"title":"Traits","level":"1.7.5","depth":2,"path":"objects/traits.md","ref":"objects/traits.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"functions/README.md","mtime":"2021-05-31T09:56:03.947Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-05-31T09:56:47.888Z"},"basePath":"..","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Function advanced","level":"1.8","depth":1,"next":{"title":"Pattern matching","level":"1.9","depth":1,"path":"pattern/README.md","ref":"pattern/README.md","articles":[]},"previous":{"title":"Traits","level":"1.7.5","depth":2,"path":"objects/traits.md","ref":"objects/traits.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"functions/README.md","mtime":"2021-05-31T10:27:35.757Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-05-31T15:40:02.378Z"},"basePath":"..","book":{"language":"en"}});
         });
     </script>
 </div>
