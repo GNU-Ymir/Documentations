@@ -1,6 +1,6 @@
 # Hello World
 
-The following source code is the **Ymir** version of the famous program "Hello world !"
+The following source code is the *Ymir* version of the famous program "Hello world !"
 
 ```ymir
 import std::io // importation of the module containing io functions

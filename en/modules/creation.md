@@ -1,6 +1,6 @@
 # Module creation
 
-When you write a program in the **Ymir** language, you start by creating a file. This file is a module declaration, and its name is the path relative to the location of the compilation command execution.
+When you write a program in the *Ymir* language, you start by creating a file. This file is a module declaration, and its name is the path relative to the location of the compilation command execution.
 
 For example, if we have the following file tree structure:
 ```ymir

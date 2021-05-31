@@ -1,6 +1,6 @@
 # Compilation time execution
 
-In **Ymir**, templates are seen as compilation time execution
+In *Ymir*, templates are seen as compilation time execution
 parameters. They can be used to create values, symbols, are to make
 the compiler take decisions. 
 

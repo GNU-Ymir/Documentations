@@ -1,9 +1,9 @@
 # Modules
 
 When creating a large project, it is very important to organize your
-code. **Ymir** offers a system of modules, which is used to manage
+code. *Ymir* offers a system of modules, which is used to manage
 different parts of the code that have different purposes. Each source
-file in **Ymir** is a module.
+file in *Ymir* is a module.
 
 ## File hierarchy 
 

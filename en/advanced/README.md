@@ -2,13 +2,13 @@
 
 
 The alias and reference is one of the most important characteristics
-of the **Ymir** language, which allows it to give guarantees on the
+of the *Ymir* language, which allows it to give guarantees on the
 mutability of the data, and the explicit movement of the memory. It is
-important to understand how memory works in **Ymir**, in order to
+important to understand how memory works in *Ymir*, in order to
 understand the error message you might get when you try to move data
 from one variable to another.
 
-It is important to understand that **Ymir** is a high level
+It is important to understand that *Ymir* is a high level
 programming language, and that you will never have to worry about
 memory management (memory leaks), the language using a garbage
 collector. However, in terms of mutability and access rights, the
@@ -16,7 +16,7 @@ language provides an expressive system for managing memory movements.
 
 ## Standard and Aliasable types
 
-In **Ymir**, there are two types, standard types and aliasable
+In *Ymir*, there are two types, standard types and aliasable
 types. A value whose type is a standard type, can be copied without
 the need of explicitly inform the compiler. The standard types are all
 primitive scalar types. On the other hand, aliasable types are types

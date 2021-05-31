@@ -1,29 +1,45 @@
 # Pattern matching
 
-The pattern matching is an important part of the **Ymir** language. It
+The pattern matching is an important part of the *Ymir* language. It
 allows to make test over values and moreover on types, especially when
 it comes to objects. The pattern matching syntax always start with the
-keyword `match` followed by an expression, and then patterns enclosed
-between `{}`.
+keyword `match` followed by an expression, and then a list of patterns
+enclosed between `{}`.
 
-```ymir
-import std::io
+The syntax of the pattern matching is described in the following code block.
 
-def main () {
-	match (42) {
-		1 => println ("The answer is one");
-		2 => println ("The answer is two");
-		_ => println ("I don't know, but neither one nor two...")
-	}
-}
+```grammar
+match := 'match' expression '{' pattern* '}'
+pattern := pattern_expression '=>' expression (';')?
+
+pattern_expression :=   pattern_tuple 
+                      | pattern_option 
+					  | pattern_range 
+					  | pattern_var 
+					  | pattern_call
+					  | expression
+					  
+pattern_tuple := '(' (pattern_expression (',' pattern_expression)*)? ')'
+pattern_option := pattern_expression ('|' pattern_expression)*
+pattern_range := pattern_expression ('..' | '...') pattern_expression 
+pattern_var := (Identifier | '_') ':' (type | '_') ('=' pattern_expression)?
+pattern_call := (type | '_') pattern_tuple 
 ```
 
-Match like every other element of the **Ymir** language are
-expression. You can use a match to get a value, but all branch of the
-match must have the same type. If the case that the compiler is not
-sure that a branch will be entered and will return a value in every
-case, you will get an error saying that the pattern matching does not
-have a default value.
+<br>
+
+Match is a kind of control flow, relatively close to *if*
+expressions. As *if* expressions, a *match* expression can have a
+value. In that case, every branch of the *match* must share the same
+type, and there must be a guarantee that at least one test of the
+*match* succeed, and thus that a branch is entered. For example, in
+the following example, all the branch of the *match* share the same
+type **`i32`**, however it is possible (and even inevitable in that
+specific case), that no branch of the *match* were entered. So the
+compiler throws an error, as the variable **`x`** might be unset,
+which is prohibited by the language. In the following example, simple
+tests are made on the value, so the first pattern is equal to an *if*
+expression, where the test is **`12 == 1`**.
 
 ```ymir
 def main () {
@@ -35,22 +51,48 @@ def main () {
 }
 ```
 
-```
+<br>
+Errors : 
+
+```error
 Error : match of type i32 has no default match case
- --> main.yr:(2,13)
-    | 
- 2  |     let x = match (12) {
-    |             ^
+ --> main.yr:(2,10)
+ 2  ┃ 	let x = match (12) {
+    ╋ 	        ^^^^^
+
 
 ymir1: fatal error: 
 compilation terminated.
 ```
 
-## Matching multiple values
+## Matching on everything
 
-You can check multiple values in one pattern with the token `|`, which
-semantic is the same as a or. You can also check interval using the
-keyword `..` and `...`.
+The token **`_`** declares a pattern test that is always valid. It can
+be placed at different level of the pattern test, as we will see in
+the rest of this chapter.
+
+```ymir
+import std::io;
+
+def main () {
+	match 42 {
+		_ => { println ("Always true"); }
+	}
+}
+```
+
+<br>
+
+## Matching over a range of values
+
+Pattern matching aims to be more expressive than *if* expressions, and
+therefore to allow faster writting of complex test. For example, to
+check wether a value is included in an interval of values, writing the
+interval in the test of the pattern is sufficient. In the following
+example, the first pattern can be rewritten as the following *if*
+expression : **`1 <= 42 && 10 > 42`**, the second into : **`10 <= 42
+&& 40 >= 42`**, and the third one into : **`42 == 41 || 42 == 42 || 42
+== 43`**.
 
 ```ymir
 import std::io
@@ -70,18 +112,30 @@ def main () {
 }
 ```
 
-The pattern are tested in the order they are written, and the matching
-never enter two different pattern even if two of them return a valid
-match.
+<br>
+
+The pattern are tested in the order they are written in the source
+code, thus if two pattern are valid, only the first one is
+entered. For example, in the following source code, only the pattern
+at line **`5`** is entered, and the pattern at line **`6`**, even if
+it is valid, is simply ignored.
+
+```ymir
+import std::io;
+
+def main () {
+	match 42 {
+		1 .. 100 => { println ("Between 1 and 100"); }
+		10 .. 100 => { println ("Between 10 and 100"); }
+	}
+}
+```
 
 ## Variable pattern
 
-You can use a variable that will take the value of the element that is
-matched. The variable is declared like a standard variable declaration
-but with token `let` ommitted. You don't have to specify the name or
-the type of the variable, but there must be the token `:` somewhere,
-so if you don't wan't to specify the type, you can just use the token
-`_`.
+A variable declaration can be used to store a value during the pattern
+matching. The variable is declared like a standard variable
+declaration but with keyword **`let`** ommitted. 
 
 ```ymir
 import std::io
@@ -104,12 +158,53 @@ def main () {
 }
 ```
 
-In the above example, every test will pass, but only the first pattern
-will be evaluated, and the output of this program will only be : `It
-is a i32, but I don't care about the value` 
+<br>
 
-You can pass a value by reference in a pattern matching to modify it
-inside a valid pattern.
+In the above example, every pattern tests are valid, but only the first pattern
+is evaluated. 
+
+Results : 
+
+```
+It is a i32, but I don't care about the value
+```
+
+<br>
+
+One can note that the token **`:`** is important in that case, even if
+the type is not mandatory and can be omitted (by replacing it with the
+token **`_`**). This is to distinguish a variable declaration to a
+simple variable referencing. For example, in the following source
+code, a variable **`x`** is declared before the pattern matching, and
+its value is compared with the value that is tested in the *match*. A
+second pattern declares a variable **`y`**.
+
+```ymir
+import std::io;
+
+def main () {
+	let x = 42;
+	match 42 {
+		x => { println ("x == 42"); } // simple test on the variable declare 2 lines above
+		y : _ => { println (y); } // declaration of a new variable y that stores the matched value 
+	}
+	
+}
+```
+
+<br>
+Results: 
+```
+x == 42
+```
+
+
+<br>
+
+A mutable value can be updated inside a pattern, by using a reference
+variable. This works exactly like variable referencing (as presented
+in chapter
+[References](https://gnu-ymir.github.io/Documentations/en/advanced/references.html)).
 
 ```ymir
 import std::io
@@ -118,7 +213,7 @@ def main () {
 	let mut z = 1;
 	match ref z {
 		// ^^^
-		// Try to remove the ref
+		// ref is important here, otherwise the compiler throw an error
 		ref mut x : _ => {
 			x = 42;
 		}
@@ -272,7 +367,7 @@ def main () {
 }
 ```
 
-It is the only way to check a inheritance in **Ymir**, and this way is
+It is the only way to check a inheritance in *Ymir*, and this way is
 safe. In many language like Java, D or C++, you will have the right to
 use the casting system, that will have a undefined behavior in C++,
 and make a program crash in Java, and will return the value `null` in

@@ -1,7 +1,7 @@
 # Templates 
 
 The templates system provide the possibility to reuse source code,
-that is valid for multiple types. The template system of **Ymir** is
+that is valid for multiple types. The template system of *Ymir* is
 powerful, and allows you to generate code, that will be used
 many times for many purpose, by writting minimal source code. 
 
@@ -28,7 +28,7 @@ foo!foo!i32 (); // No
 
 ## Template definition syntax
 
-Multiple symbols in **Ymir** can be templates. Every template symbol
+Multiple symbols in *Ymir* can be templates. Every template symbol
 has a name, and the template parameters are following that name. For
 example, function can be templates :
 

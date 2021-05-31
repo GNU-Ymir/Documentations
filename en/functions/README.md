@@ -464,6 +464,8 @@ Results:
 42
 ```
 
+<br>
+
 - b) the value of the enclosed **`i`** is independant
 from the value of the variable **`i`** in the **`foo`** function,
 meaning that there is no way for the **`foo`** function to change the
@@ -490,7 +492,7 @@ Results:
 42
 23
 ```
-
+<br>
 
 By using aliasable types, this limitation can be bypassed, for example
 a slice can be used to enclosed the value of i, and access it from the
@@ -522,6 +524,8 @@ def main ()
 }
 ```
 
+<br>
+
 In the above example, the *copy closure* access to the first index of
 the slice **`i`**. This is a unsafe operation, the slice can be empty,
 this is why a catch is made. Information about catch is not presented
@@ -534,4 +538,155 @@ Results:
 
 ```
 42
+```
+
+### Method delegate
+
+A method is a function pointer associated with a object instance, then
+they can be seen as delegate. The name closure is not used here,
+because nothing is really enclosed as in *copy closure* over function
+context, so the name *delegate* being a more global term is used. A
+delegate is a function operating on an object, for which we don't know
+the exact type. 
+
+A method can be transformed into a delegate using the unary ampersand
+(**`&`**) operator, on a method associated to an object instance. 
+
+```ymir
+import std::io;
+
+class Foo {
+    pub let mut i = 0;
+    
+    pub self () {}
+    
+    pub def foo (self) -> void {
+	println (self.i);
+    }
+}
+
+def main () {
+    let dmut a = Foo::new (), dmut b = Foo::new ();
+    let x : (dg ()-> void) = &a.foo;
+    let y = &b.foo;
+    
+    a.i = 89;
+    b.i = 42;
+    
+    x ();
+    y ();	
+}
+```
+
+<br>
+
+Results: 
+
+```
+89
+42
+```
+
+
+<br>
+
+Unlike *copy closure* a method can have a mutable access to the object
+associated to it. In that case, an explicit alias must be made on the
+object instance, when creating the delegate, otherwise the compiler
+throws an error. 
+
+```ymir
+import std::io;
+
+class Foo {
+    let mut _i = 0;
+    
+    pub self () {}
+    
+    pub def foo (mut self) {
+        self._i = 42;
+    }
+
+    impl Streamable;
+}
+
+def main () {
+    let dmut a = Foo::new ();
+
+    let x = &(a.foo);
+
+    x ();
+
+    println (a);
+
+}
+```
+
+<br>
+Errors:
+
+```error
+Error : undefined operator & for type (a).foo
+ --> main.yr:(18,13)
+18  ┃     let x = &(a.foo);
+    ╋             ^
+    ┃ Note : candidate foo --> main.yr:(8,13) : (mut self) => main::Foo::foo ()-> void
+    ┃     ┃ Error : discard the constant qualifier is prohibited, left operand mutability level is 2 but must be at most 1
+    ┃     ┃  --> main.yr:(18,13)
+    ┃     ┃ 18  ┃     let x = &(a.foo);
+    ┃     ┃     ╋             ^
+    ┃     ┃     ┃ Note : implicit alias of type mut &(mut main::Foo) is not allowed, it will implicitly discard constant qualifier
+    ┃     ┃     ┃  --> main.yr:(18,15)
+    ┃     ┃     ┃ 18  ┃     let x = &(a.foo);
+    ┃     ┃     ┃     ╋               ^
+    ┃     ┃     ┗━━━━━┻━ 
+    ┃     ┗━━━━━┻━ 
+    ┗━━━━━┻━ 
+
+Error : undefined symbol x
+ --> main.yr:(20,5)
+20  ┃     x ();
+    ╋     ^
+
+
+ymir1: fatal error: 
+compilation terminated.
+```
+
+<br>
+
+This can be easily resolved by aliasing the variable **`a`** when
+creating the delegate. Either by using the keyword **`alias`**, or by
+using the **`:.`** binary operator.
+
+```ymir
+import std::io;
+
+class Foo {
+    let mut _i = 0;
+    
+    pub self () {}
+    
+    pub def foo (mut self) {
+        self._i = 42;
+    }
+
+    impl Streamable; // to make the type printable
+}
+
+def main () {
+    let dmut a = Foo::new ();
+    let x = &(a:.foo); // or &((alias a).foo);
+
+    x ();
+
+    println (a);
+}
+```
+
+<br>
+
+Results:
+```
+main::Foo(42)
 ```

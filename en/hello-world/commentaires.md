@@ -1,6 +1,6 @@
 # Comments
 
-**Ymir** offers different types of comments. 
+*Ymir* offers different types of comments. 
 
 * > `// A line of comment that stop at the end of the line`
 * > `/* Multi-line comment that stops at the final delimiter */`

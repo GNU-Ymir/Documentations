@@ -1,8 +1,8 @@
 # Primitives types
 
-In **Ymir** language, each value has a certain type of data, which
+In *Ymir* language, each value has a certain type of data, which
 indicates how the program must behave and how it should operate with
-the value. **Ymir** is a statically typed language, which means that
+the value. *Ymir* is a statically typed language, which means that
 all types of all values must be known at compile time. Usually, the
 compiler is able to infer the data types from the values, and it is
 not necessary to specify them when declaring a variable. But
@@ -101,7 +101,7 @@ Results: (on a x86-64 arch)
 
 ## Scalar types
 
-Scalar types represent all types containing a single value. **Ymir**
+Scalar types represent all types containing a single value. *Ymir*
 has five primitive scalar types: integers, floating point, characters,
 booleans, and pointers. They can have different sizes for different
 purposes.
@@ -109,7 +109,7 @@ purposes.
 ### Integer types
 
 An integer is a number without decimal points. There are different
-types of integers in **Ymir**, the signed one and the unsigned
+types of integers in *Ymir*, the signed one and the unsigned
 one. Signed and unsigned refers to the possibility for a number to be
 negative. Signed integer types begin with the letter **`i`**, while
 unsigned integers begin with the letter **`u`**. The following table
@@ -189,7 +189,7 @@ in debug mode).
 ### Floating-point types
 
 Floating-point types, refer to numbers with a decimal
-part. **Ymir** provides two types of floating point numbers, **`f32`**
+part. *Ymir* provides two types of floating point numbers, **`f32`**
 and **`f64`**, which have a size of 32 bits and 64 bits respectively.
 
 You can add the prefix **`f`**, at the end of a literal floating point
@@ -491,7 +491,7 @@ section shows a use of these types.
 
 An array is a collection of values of the same type, stored in
 contiguous memory.  Unlike tuples, the size of an array is unknown at
-compile time, and in **Ymir**, they are similar to slices, and will be
+compile time, and in *Ymir*, they are similar to slices, and will be
 refered as such. Slices are defined with a syntax close to the one of
 tuple, but with brackets instead of parentheses, for example **`[1, 2, 3]`**. 
 The type of a slice is also defined using the brackets, for example **`[i32]`**, meaning a slice containing **`i32`** values.
@@ -546,7 +546,7 @@ def main () {
 Similarly, the **`ptr`** field, gives access to the pointer of the
 slice and its types depend on the inner type of the slice, and is
 never mutable. Pointer type are absolutely not important for a
-**Ymir** program, and we suspect that you will never have use of
+*Ymir* program, and we suspect that you will never have use of
 them. They are defined to allow low level programming paradigms, and
 are used in the std and runtime. 
 

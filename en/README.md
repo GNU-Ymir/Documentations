@@ -1,13 +1,13 @@
 # Introduction
 
-**Ymir** is a high-level, statically typed programming language
+*Ymir* is a high-level, statically typed programming language
   designed to help developers to save time by providing strong and
   safe semantic. The semantic of this language is oriented towards
   safety, concurrency and speed of execution. These objectives are
   achieved thanks to its high expressiveness and its direct
   compilation into an efficient native machine language.
 
-This documentation explores the main concepts of **Ymir**, providing a
+This documentation explores the main concepts of *Ymir*, providing a
 set of examples that demonstrate the strengths of this new
 language. It also presents an introduction to the standard library.
 
@@ -29,7 +29,7 @@ contribution.
 
 ## Installation
 
-The reference compiler of **Ymir** is based on the compiler **GCC**,
+The reference compiler of *Ymir* is based on the compiler **GCC**,
 which offer strong static optimization, as well as a vast set of
 supported target architectures.
 

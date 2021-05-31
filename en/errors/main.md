@@ -1,6 +1,6 @@
 # Error handling
 
-This section will introduce error handling in the **Ymir**
+This section will introduce error handling in the *Ymir*
 language. As with many languages, we have opted for error handling by
 throwing exceptions. Error recovery is done in a localized way at the
 scope thanks to a system called scope guard.
@@ -147,7 +147,7 @@ def main ()
 
 ### Recovering with catch 
 
-In **Ymir** everything has a values, that is not different for a catch
+In *Ymir* everything has a values, that is not different for a catch
 block. When an error occurs, you may wan't to provide a default value,
 that will help to recover from an error. The value of a catch block is
 the value of the pattern matching it contains, and must have the same
@@ -193,7 +193,7 @@ def main () {
 }
 ```
 
-In **Ymir** you can easily transform an exception into an option type,
+In *Ymir* you can easily transform an exception into an option type,
 by returning a `None` value, when an error occured. The function
 `toOption` defined in the module `std::option` takes a function as
 template argument, and transform the result of this function into a

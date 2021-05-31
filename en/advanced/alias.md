@@ -4,7 +4,7 @@ All types that containing a pointer to data in the heap (or the stack)
 are aliasable types. An aliasable type cannot be implicitly copied,
 nor can it be implicitly referenced, for performance and security
 reasons respectively. There are mainly three aliasable types, arrays
-(or slices, there is no difference in **Ymir**), pointers, and
+(or slices, there is no difference in *Ymir*), pointers, and
 objects. Structures and tuples containing aliasable types are also
 aliasable.
 

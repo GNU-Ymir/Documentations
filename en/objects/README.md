@@ -1,6 +1,6 @@
 # Objects
 
-**Ymir** is a object oriented language, with polymorph types. In this
+*Ymir* is a object oriented language, with polymorph types. In this
 chapter, we assume that you are familiar with object oriented
 programming paradigm (if not, you will benefit from reading
 information on that paradigm first *cf.*  [object oriented

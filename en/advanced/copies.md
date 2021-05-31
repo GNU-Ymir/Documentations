@@ -2,7 +2,7 @@
 
 Sometimes it is not possible to allow data to be borrowed by foreign
 functions or variables. This can be due to the facts that data are
-immutable for example. To solve this problem, **Ymir** provides two
+immutable for example. To solve this problem, *Ymir* provides two
 keywords, **`copy`** and `dcopy`.
 
 ## Copy

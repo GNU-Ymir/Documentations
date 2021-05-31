@@ -7,7 +7,7 @@ operation as
 [Pointers](https://gnu-ymir.github.io/Documentations/en/primitives/types.html#pointers),
 with the difference that they does not need to be dereferenced (this
 is done automatically), and pointer arithmetics is not possible with
-references. In **Ymir** references are always set, and are always set
+references. In *Ymir* references are always set, and are always set
 from another variable, hence they are way safer than pointers, and
 must be prefered to them when possible.
  

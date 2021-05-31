@@ -95,7 +95,7 @@ compilation terminated.
 
 ## Loops 
 
-In **Ymir**, there are three kinds of loops: `loop`, `while` and `for`.
+In *Ymir*, there are three kinds of loops: `loop`, `while` and `for`.
 
 ### Infinite repetitions 
 
