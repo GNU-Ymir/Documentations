@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Basic programming concepts · GitBook</title>
+        <title>Exception and option type · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -81,10 +81,10 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="variables.html" />
+    <link rel="next" href="fptr_closure.html" />
     
     
-    <link rel="prev" href="../hello-world/commentaires.html" />
+    <link rel="prev" href="catching.html" />
     
 
     </head>
@@ -158,9 +158,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.3" data-path="./">
+        <li class="chapter " data-level="1.3" data-path="../primitives/">
             
-                <a href="./">
+                <a href="../primitives/">
             
                     
                     Basic programming concepts
@@ -172,9 +172,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.3.1" data-path="variables.html">
+        <li class="chapter " data-level="1.3.1" data-path="../primitives/variables.html">
             
-                <a href="variables.html">
+                <a href="../primitives/variables.html">
             
                     
                     Variable and Mutability
@@ -185,9 +185,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.2" data-path="types.html">
+        <li class="chapter " data-level="1.3.2" data-path="../primitives/types.html">
             
-                <a href="types.html">
+                <a href="../primitives/types.html">
             
                     
                     Data types
@@ -198,9 +198,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.3" data-path="functions.html">
+        <li class="chapter " data-level="1.3.3" data-path="../primitives/functions.html">
             
-                <a href="functions.html">
+                <a href="../primitives/functions.html">
             
                     
                     Functions
@@ -211,9 +211,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.4" data-path="control.html">
+        <li class="chapter " data-level="1.3.4" data-path="../primitives/control.html">
             
-                <a href="control.html">
+                <a href="../primitives/control.html">
             
                     
                     Control flows
@@ -494,9 +494,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.10" data-path="../errors/main.html">
+        <li class="chapter " data-level="1.10" data-path="main.html">
             
-                <a href="../errors/main.html">
+                <a href="main.html">
             
                     
                     Error handling
@@ -508,9 +508,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.10.1" data-path="../errors/scope_guards.html">
+        <li class="chapter " data-level="1.10.1" data-path="scope_guards.html">
             
-                <a href="../errors/scope_guards.html">
+                <a href="scope_guards.html">
             
                     
                     Scope guards
@@ -521,9 +521,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.10.2" data-path="../errors/catching.html">
+        <li class="chapter " data-level="1.10.2" data-path="catching.html">
             
-                <a href="../errors/catching.html">
+                <a href="catching.html">
             
                     
                     Catching
@@ -534,9 +534,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.10.3" data-path="../errors/option.html">
+        <li class="chapter active" data-level="1.10.3" data-path="option.html">
             
-                <a href="../errors/option.html">
+                <a href="option.html">
             
                     
                     Exception and option type
@@ -547,9 +547,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.10.4" data-path="../errors/fptr_closure.html">
+        <li class="chapter " data-level="1.10.4" data-path="fptr_closure.html">
             
-                <a href="../errors/fptr_closure.html">
+                <a href="fptr_closure.html">
             
                     
                     Unsafe function pointer
@@ -776,7 +776,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Basic programming concepts</a>
+        <a href=".." >Exception and option type</a>
     </h1>
 </div>
 
@@ -791,11 +791,114 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#basic-programming-concepts"><b>1. </b>Basic programming concepts</a></li></ul></div><a href="#basic-programming-concepts" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="basic-programming-concepts"><a name="basic-programming-concepts" class="anchor-navigation-ex-anchor" href="#basic-programming-concepts"><i class="fa fa-link" aria-hidden="true"></i></a>1. Basic programming concepts</h1>
-<p>This chapter covers the basic concepts of <em>Ymir</em> programming
-language. Specifically, you will learn about variables, mutability,
-native types, functions and control flows.</p>
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#relation-between-exception-and-option-type"><b>1. </b>Relation between exception and option type</a></li><ul><li><span class="title-icon "></span><a href="#empty-option-without-exception"><b>1.1. </b>Empty option without exception</a></li><li><span class="title-icon "></span><a href="#void-option-type"><b>1.2. </b>Void option type</a></li></ul></ul></div><a href="#relation-between-exception-and-option-type" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="relation-between-exception-and-option-type"><a name="relation-between-exception-and-option-type" class="anchor-navigation-ex-anchor" href="#relation-between-exception-and-option-type"><i class="fa fa-link" aria-hidden="true"></i></a>1. Relation between exception and option type</h1>
+<p>We have seen in the chapter <a href="https://gnu-ymir.github.io/Documentations/en/primitives/" target="_blank">Basic programming
+concept</a>,
+that the <em>Ymir</em> language have a primitive option type. This type has a
+really close relation with exceptions. Indeed, any value can be store
+inside an option type, and any failing scope can be used to create an
+empty option value. The token <strong><code>?</code></strong> is used to transform a value
+into an option type. </p>
+<p>In the following example, the <strong><code>foo</code></strong> function can throw an
+exception. The <strong><code>main</code></strong> function calls it, but use enclose the
+result inside an option type, to handle the errors. The type of the
+variable <strong><code>x</code></strong> is then <strong><code>(i32)?</code></strong>, meaning option of <strong><code>i32</code></strong>.  A
+pattern matching, is then used to check wether the <strong><code>x</code></strong> contains a
+value or not. In this example, a new pattern of the pattern matching
+is presented. This pattern is specific to the case of option type, and
+adds two keywords <strong><code>Ok</code></strong>, and error <strong><code>Err</code></strong>. They can be used with
+or without internal pattern (never named), to get the content of the
+option (in case of <strong><code>Ok</code></strong>), or the exception (in case of <strong><code>Err</code></strong>).</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
 
+<span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>i <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span> 
+    <span class="token keyword">throws</span> <span class="token operator">&amp;</span><span class="token type">AssertError</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">assert</span> <span class="token punctuation">(</span>i <span class="token operator">&lt;</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token string">&quot;i must be lower than 10&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    i <span class="token operator">+</span> <span class="token number">12</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span> ?
+    <span class="token keyword">match</span> x <span class="token punctuation">{</span>
+        <span class="token function">Ok</span> <span class="token punctuation">(</span>y <span class="token punctuation">:</span> _<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span> 
+            <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;x contains the value : &quot;</span><span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token function">Err</span> <span class="token punctuation">(</span>err <span class="token punctuation">:</span> _<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+            <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;x has no value, because : &quot;</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br></p>
+<p>Results (in release mode) : </p>
+<pre class="language-"><code>x has no value, because : core::exception::AssertError (i must be lower than 10)
+</code></pre><p><br></p>
+<p>One can note from the previous example, that the <strong><code>main</code></strong> function
+is safe. The option enclosing catches every exceptions. The exception
+can then be retreived by using a pattern matching, as presented above.
+<strong>Warning</strong> Unfortunately, the accuracy of the exception type that is
+thrown is lost at compile time, (i.e. the type contained inside an
+option type is <strong><code>Exception</code></strong>). Even, if the type can be specifically
+retreived at execution time. To remove this limitation, the different
+type of exception would have to be written in the definition of the
+option type. This would be extremely verbose. <em>Contribution</em> Maybe
+adding the possibility to write it, but optionaly, in order to store
+it if possible. I don&apos;t know if it is a good idea.</p>
+<h2 id="empty-option-without-exception"><a name="empty-option-without-exception" class="anchor-navigation-ex-anchor" href="#empty-option-without-exception"><i class="fa fa-link" aria-hidden="true"></i></a>1.1. Empty option without exception</h2>
+<p>It is possible to initialize an empty option value without throwing an
+exception. This can be done using the type specific attribute
+<strong><code>err</code></strong>. In that case, the option does not have a value, even if it
+is an <strong><code>Err</code></strong> value. </p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
+
+<span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span>? <span class="token punctuation">{</span>
+    <span class="token punctuation">(</span><span class="token basic-types">i32</span>?<span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">__err__</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">match</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">Err</span> <span class="token punctuation">(</span>err <span class="token punctuation">:</span> _<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+            <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Empty but with exception : &quot;</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token function">Err</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+            <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Totally empty, init with __err__&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br></p>
+<p>Results: </p>
+<pre class="language-"><code>Totally empty, init with __err__
+</code></pre><h2 id="void-option-type"><a name="void-option-type" class="anchor-navigation-ex-anchor" href="#void-option-type"><i class="fa fa-link" aria-hidden="true"></i></a>1.2. Void option type</h2>
+<p>Option type can store values of type <strong><code>void</code></strong>, in that case the
+<strong><code>Ok</code></strong> pattern has no value to get. This can be usefull to execute a
+function, and verify afterwards if it succeeded or not.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
+
+<span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>i <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> void 
+    <span class="token keyword">throws</span> <span class="token operator">&amp;</span><span class="token type">AssertError</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">assert</span> <span class="token punctuation">(</span>i <span class="token operator">&lt;</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token string">&quot;i must be lower than 10&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> x <span class="token punctuation">:</span> <span class="token type">void</span>? <span class="token operator">=</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span> ?
+    <span class="token keyword">match</span> x <span class="token punctuation">{</span>
+        <span class="token function">Ok</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span> 
+            <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Foo succeeded&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token function">Err</span> <span class="token punctuation">(</span>err <span class="token punctuation">:</span> _<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+            <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Foo failed, because : &quot;</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br>
+Results: </p>
+<pre class="language-"><code>Foo failed, because : core::exception::AssertError (i must be lower than 10)
+</code></pre>
                                 
                                 </section>
                             
@@ -822,12 +925,12 @@ native types, functions and control flows.</p>
 
             
                 
-                <a href="../hello-world/commentaires.html" class="navigation navigation-prev " aria-label="Previous page: Comments">
+                <a href="catching.html" class="navigation navigation-prev " aria-label="Previous page: Catching">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="variables.html" class="navigation navigation-next " aria-label="Next page: Variable and Mutability">
+                <a href="fptr_closure.html" class="navigation navigation-next " aria-label="Next page: Unsafe function pointer">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -838,7 +941,7 @@ native types, functions and control flows.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Basic programming concepts","level":"1.3","depth":1,"next":{"title":"Variable and Mutability","level":"1.3.1","depth":2,"path":"primitives/variables.md","ref":"primitives/variables.md","articles":[]},"previous":{"title":"Comments","level":"1.2.1","depth":2,"path":"hello-world/commentaires.md","ref":"hello-world/commentaires.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"primitives/README.md","mtime":"2021-05-31T15:40:16.841Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-05T04:09:09.325Z"},"basePath":"..","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Exception and option type","level":"1.10.3","depth":2,"next":{"title":"Unsafe function pointer","level":"1.10.4","depth":2,"path":"errors/fptr_closure.md","ref":"errors/fptr_closure.md","articles":[]},"previous":{"title":"Catching","level":"1.10.2","depth":2,"path":"errors/catching.md","ref":"errors/catching.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"errors/option.md","mtime":"2021-06-03T14:46:23.047Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-05T04:09:09.325Z"},"basePath":"..","book":{"language":"en"}});
         });
     </script>
 </div>

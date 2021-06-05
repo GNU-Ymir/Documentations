@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Basic programming concepts · GitBook</title>
+        <title>Streamable · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -81,10 +81,10 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="variables.html" />
+    <link rel="next" href="copiable.html" />
     
     
-    <link rel="prev" href="../hello-world/commentaires.html" />
+    <link rel="prev" href="../objects/common_traits.html" />
     
 
     </head>
@@ -158,9 +158,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.3" data-path="./">
+        <li class="chapter " data-level="1.3" data-path="../primitives/">
             
-                <a href="./">
+                <a href="../primitives/">
             
                     
                     Basic programming concepts
@@ -172,9 +172,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.3.1" data-path="variables.html">
+        <li class="chapter " data-level="1.3.1" data-path="../primitives/variables.html">
             
-                <a href="variables.html">
+                <a href="../primitives/variables.html">
             
                     
                     Variable and Mutability
@@ -185,9 +185,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.2" data-path="types.html">
+        <li class="chapter " data-level="1.3.2" data-path="../primitives/types.html">
             
-                <a href="types.html">
+                <a href="../primitives/types.html">
             
                     
                     Data types
@@ -198,9 +198,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.3" data-path="functions.html">
+        <li class="chapter " data-level="1.3.3" data-path="../primitives/functions.html">
             
-                <a href="functions.html">
+                <a href="../primitives/functions.html">
             
                     
                     Functions
@@ -211,9 +211,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.4" data-path="control.html">
+        <li class="chapter " data-level="1.3.4" data-path="../primitives/control.html">
             
-                <a href="control.html">
+                <a href="../primitives/control.html">
             
                     
                     Control flows
@@ -637,9 +637,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.12.1" data-path="../traits/streamable.html">
+        <li class="chapter active" data-level="1.12.1" data-path="streamable.html">
             
-                <a href="../traits/streamable.html">
+                <a href="streamable.html">
             
                     
                     Streamable
@@ -650,9 +650,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.12.2" data-path="../traits/copiable.html">
+        <li class="chapter " data-level="1.12.2" data-path="copiable.html">
             
-                <a href="../traits/copiable.html">
+                <a href="copiable.html">
             
                     
                     Copiable
@@ -663,9 +663,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.12.3" data-path="../traits/disposable.html">
+        <li class="chapter " data-level="1.12.3" data-path="disposable.html">
             
-                <a href="../traits/disposable.html">
+                <a href="disposable.html">
             
                     
                     With guard and Disposable
@@ -676,9 +676,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.12.4" data-path="../traits/hashable.html">
+        <li class="chapter " data-level="1.12.4" data-path="hashable.html">
             
-                <a href="../traits/hashable.html">
+                <a href="hashable.html">
             
                     
                     Hashable
@@ -689,9 +689,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.12.5" data-path="../traits/serialize.html">
+        <li class="chapter " data-level="1.12.5" data-path="serialize.html">
             
-                <a href="../traits/serialize.html">
+                <a href="serialize.html">
             
                     
                     Packable and Serializable
@@ -776,7 +776,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Basic programming concepts</a>
+        <a href=".." >Streamable</a>
     </h1>
 </div>
 
@@ -791,11 +791,103 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#basic-programming-concepts"><b>1. </b>Basic programming concepts</a></li></ul></div><a href="#basic-programming-concepts" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="basic-programming-concepts"><a name="basic-programming-concepts" class="anchor-navigation-ex-anchor" href="#basic-programming-concepts"><i class="fa fa-link" aria-hidden="true"></i></a>1. Basic programming concepts</h1>
-<p>This chapter covers the basic concepts of <em>Ymir</em> programming
-language. Specifically, you will learn about variables, mutability,
-native types, functions and control flows.</p>
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#streamable"><b>1. </b>Streamable</a></li><ul><li><span class="title-icon "></span><a href="#print-objects-to-stdout"><b>1.1. </b>Print objects to stdout</a></li><li><span class="title-icon "></span><a href="#write-objects-to-stringstream"><b>1.2. </b>Write objects to StringStream</a></li></ul></ul></div><a href="#streamable" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="streamable"><a name="streamable" class="anchor-navigation-ex-anchor" href="#streamable"><i class="fa fa-link" aria-hidden="true"></i></a>1. Streamable</h1>
+<p>Streamable objects are objects that can be put inside a
+<strong><code>StringStream</code></strong>. These objects are also printable, using the
+standard <strong><code>print</code></strong> or <strong><code>println</code></strong> functions. <em>Streamable</em> trait
+has a default behavior, that consist in writting the typeid of the
+class, followed by every fields (private and protected included) of
+the class inside the stream. </p>
+<h2 id="print-objects-to-stdout"><a name="print-objects-to-stdout" class="anchor-navigation-ex-anchor" href="#print-objects-to-stdout"><i class="fa fa-link" aria-hidden="true"></i></a>1.1. Print objects to stdout</h2>
+<p>In the following example, two classes implements the traits
+<strong><code>Streamable</code></strong>, and are printed to stdout. The first class <strong><code>Foo</code></strong>
+does not redefine the behavior of the trait, on the other hand
+<strong><code>Bar</code></strong> does.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span> <span class="token comment">// the trait is accessible from std::io, or std::stream</span>
 
+<span class="token keyword">class</span> Foo <span class="token punctuation">{</span>
+
+    <span class="token keyword">let</span> _i <span class="token operator">=</span> <span class="token number">12</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> _j <span class="token operator">=</span> <span class="token string">&quot;Foo&quot;</span><span class="token punctuation">;</span>
+
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+    <span class="token other-keyword">impl</span> Streamable<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> Bar <span class="token punctuation">{</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+    <span class="token other-keyword">impl</span> Streamable <span class="token punctuation">{</span>
+        <span class="token other-keyword">pub</span> <span class="token keyword">over</span> <span class="token function">toStream</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">,</span> <span class="token other-keyword">dmut</span> stream <span class="token punctuation">:</span> <span class="token type">&amp;StringStream</span><span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> void <span class="token punctuation">{</span>
+            stream<span class="token punctuation">:</span><span class="token punctuation">.</span><span class="token function">write</span> <span class="token punctuation">(</span><span class="token string">&quot;{I am a Bar}&quot;</span>s8<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>    
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token path">Foo</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> b <span class="token operator">=</span> <span class="token path">Bar</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">println</span> <span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br>
+Results: </p>
+<pre class="language-"><code>main::Foo(12, Foo)
+{I am a Bar}
+</code></pre><h2 id="write-objects-to-stringstream"><a name="write-objects-to-stringstream" class="anchor-navigation-ex-anchor" href="#write-objects-to-stringstream"><i class="fa fa-link" aria-hidden="true"></i></a>1.2. Write objects to StringStream</h2>
+<p>The <strong><code>Streamable</code></strong> trait is originaly used to transform an object
+into a <strong><code>[c8]</code></strong>, inside a <strong><code>&amp;StringStream</code></strong>. <strong><code>StringStream</code></strong> is
+a class provided by the module <strong><code>std::stream</code></strong> that transform types
+into a growing string, in a efficient manner, to avoid unefficient
+string concatenation.  In the following example, instead of using the
+<strong><code>print</code></strong> function, provided by <strong><code>std::io</code></strong>, the objects are added
+to a <strong><code>StringStream</code></strong>, that is then printed to stdout.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span> <span class="token comment">// io publically import std::stream</span>
+
+
+<span class="token keyword">class</span> Foo <span class="token punctuation">{</span>
+
+    <span class="token keyword">let</span> _i <span class="token operator">=</span> <span class="token number">12</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> _j <span class="token operator">=</span> <span class="token string">&quot;Foo&quot;</span><span class="token punctuation">;</span>
+
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+    <span class="token other-keyword">impl</span> Streamable<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> Bar <span class="token punctuation">{</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+    <span class="token other-keyword">impl</span> Streamable <span class="token punctuation">{</span>
+        <span class="token other-keyword">pub</span> <span class="token keyword">over</span> <span class="token function">toStream</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">,</span> <span class="token other-keyword">dmut</span> stream <span class="token punctuation">:</span> <span class="token type">&amp;StringStream</span><span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> void <span class="token punctuation">{</span>
+            stream<span class="token punctuation">:</span><span class="token punctuation">.</span><span class="token function">write</span> <span class="token punctuation">(</span><span class="token string">&quot;{I am a Bar}&quot;</span>s8<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>    
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token path">Foo</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> b <span class="token operator">=</span> <span class="token path">Bar</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">let</span> <span class="token other-keyword">dmut</span> stream <span class="token operator">=</span> <span class="token path">StringStream</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    a<span class="token punctuation">.</span><span class="token function">toStream</span> <span class="token punctuation">(</span><span class="token other-keyword">alias</span> stream<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+    stream<span class="token punctuation">:</span><span class="token punctuation">.</span><span class="token function">write</span> <span class="token punctuation">(</span><span class="token string">&quot;\n&quot;</span>s8<span class="token punctuation">)</span>     <span class="token comment">// write returns the stream</span>
+          <span class="token punctuation">:</span><span class="token punctuation">.</span><span class="token function">writeln</span> <span class="token punctuation">(</span>b<span class="token punctuation">)</span> <span class="token comment">// the method write of a stringstream call the method toStream</span>
+          <span class="token punctuation">:</span><span class="token punctuation">.</span><span class="token function">write</span> <span class="token punctuation">(</span><span class="token string">&quot;Hello : &quot;</span><span class="token punctuation">,</span> <span class="token number">42</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// everything can be added inside a stringstream</span>
+
+    <span class="token function">println</span> <span class="token punctuation">(</span>stream <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// the operator [], gets the slice [c8] contained inside the stream (without copying it).</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br>
+Results: </p>
+<pre class="language-"><code>main::Foo(12, Foo)
+{I am a Bar}
+Hello : 42
+</code></pre>
                                 
                                 </section>
                             
@@ -822,12 +914,12 @@ native types, functions and control flows.</p>
 
             
                 
-                <a href="../hello-world/commentaires.html" class="navigation navigation-prev " aria-label="Previous page: Comments">
+                <a href="../objects/common_traits.html" class="navigation navigation-prev " aria-label="Previous page: Common traits">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="variables.html" class="navigation navigation-next " aria-label="Next page: Variable and Mutability">
+                <a href="copiable.html" class="navigation navigation-next " aria-label="Next page: Copiable">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -838,7 +930,7 @@ native types, functions and control flows.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Basic programming concepts","level":"1.3","depth":1,"next":{"title":"Variable and Mutability","level":"1.3.1","depth":2,"path":"primitives/variables.md","ref":"primitives/variables.md","articles":[]},"previous":{"title":"Comments","level":"1.2.1","depth":2,"path":"hello-world/commentaires.md","ref":"hello-world/commentaires.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"primitives/README.md","mtime":"2021-05-31T15:40:16.841Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-05T04:09:09.325Z"},"basePath":"..","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Streamable","level":"1.12.1","depth":2,"next":{"title":"Copiable","level":"1.12.2","depth":2,"path":"traits/copiable.md","ref":"traits/copiable.md","articles":[]},"previous":{"title":"Common traits","level":"1.12","depth":1,"path":"objects/common_traits.md","ref":"objects/common_traits.md","articles":[{"title":"Streamable","level":"1.12.1","depth":2,"path":"traits/streamable.md","ref":"traits/streamable.md","articles":[]},{"title":"Copiable","level":"1.12.2","depth":2,"path":"traits/copiable.md","ref":"traits/copiable.md","articles":[]},{"title":"With guard and Disposable","level":"1.12.3","depth":2,"path":"traits/disposable.md","ref":"traits/disposable.md","articles":[]},{"title":"Hashable","level":"1.12.4","depth":2,"path":"traits/hashable.md","ref":"traits/hashable.md","articles":[]},{"title":"Packable and Serializable","level":"1.12.5","depth":2,"path":"traits/serialize.md","ref":"traits/serialize.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"traits/streamable.md","mtime":"2021-06-03T14:24:06.029Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-05T04:09:09.325Z"},"basePath":"..","book":{"language":"en"}});
         });
     </script>
 </div>

@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Basic programming concepts · GitBook</title>
+        <title>Hashable · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -81,10 +81,10 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="variables.html" />
+    <link rel="next" href="serialize.html" />
     
     
-    <link rel="prev" href="../hello-world/commentaires.html" />
+    <link rel="prev" href="disposable.html" />
     
 
     </head>
@@ -158,9 +158,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.3" data-path="./">
+        <li class="chapter " data-level="1.3" data-path="../primitives/">
             
-                <a href="./">
+                <a href="../primitives/">
             
                     
                     Basic programming concepts
@@ -172,9 +172,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.3.1" data-path="variables.html">
+        <li class="chapter " data-level="1.3.1" data-path="../primitives/variables.html">
             
-                <a href="variables.html">
+                <a href="../primitives/variables.html">
             
                     
                     Variable and Mutability
@@ -185,9 +185,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.2" data-path="types.html">
+        <li class="chapter " data-level="1.3.2" data-path="../primitives/types.html">
             
-                <a href="types.html">
+                <a href="../primitives/types.html">
             
                     
                     Data types
@@ -198,9 +198,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.3" data-path="functions.html">
+        <li class="chapter " data-level="1.3.3" data-path="../primitives/functions.html">
             
-                <a href="functions.html">
+                <a href="../primitives/functions.html">
             
                     
                     Functions
@@ -211,9 +211,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.4" data-path="control.html">
+        <li class="chapter " data-level="1.3.4" data-path="../primitives/control.html">
             
-                <a href="control.html">
+                <a href="../primitives/control.html">
             
                     
                     Control flows
@@ -637,9 +637,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.12.1" data-path="../traits/streamable.html">
+        <li class="chapter " data-level="1.12.1" data-path="streamable.html">
             
-                <a href="../traits/streamable.html">
+                <a href="streamable.html">
             
                     
                     Streamable
@@ -650,9 +650,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.12.2" data-path="../traits/copiable.html">
+        <li class="chapter " data-level="1.12.2" data-path="copiable.html">
             
-                <a href="../traits/copiable.html">
+                <a href="copiable.html">
             
                     
                     Copiable
@@ -663,9 +663,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.12.3" data-path="../traits/disposable.html">
+        <li class="chapter " data-level="1.12.3" data-path="disposable.html">
             
-                <a href="../traits/disposable.html">
+                <a href="disposable.html">
             
                     
                     With guard and Disposable
@@ -676,9 +676,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.12.4" data-path="../traits/hashable.html">
+        <li class="chapter active" data-level="1.12.4" data-path="hashable.html">
             
-                <a href="../traits/hashable.html">
+                <a href="hashable.html">
             
                     
                     Hashable
@@ -689,9 +689,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.12.5" data-path="../traits/serialize.html">
+        <li class="chapter " data-level="1.12.5" data-path="serialize.html">
             
-                <a href="../traits/serialize.html">
+                <a href="serialize.html">
             
                     
                     Packable and Serializable
@@ -776,7 +776,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Basic programming concepts</a>
+        <a href=".." >Hashable</a>
     </h1>
 </div>
 
@@ -791,11 +791,42 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#basic-programming-concepts"><b>1. </b>Basic programming concepts</a></li></ul></div><a href="#basic-programming-concepts" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="basic-programming-concepts"><a name="basic-programming-concepts" class="anchor-navigation-ex-anchor" href="#basic-programming-concepts"><i class="fa fa-link" aria-hidden="true"></i></a>1. Basic programming concepts</h1>
-<p>This chapter covers the basic concepts of <em>Ymir</em> programming
-language. Specifically, you will learn about variables, mutability,
-native types, functions and control flows.</p>
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#hashable"><b>1. </b>Hashable</a></li></ul></div><a href="#hashable" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="hashable"><a name="hashable" class="anchor-navigation-ex-anchor" href="#hashable"><i class="fa fa-link" aria-hidden="true"></i></a>1. Hashable</h1>
+<p><em>Hashable</em> trait (importable from <strong><code>std::hash</code></strong>) is used to
+transform an object instance into a <strong><code>u64</code></strong>. The interest is to
+easily compare objects, for example in
+<strong><code>std::collection::map::HashMap</code></strong>, or
+<strong><code>std::collection::set::HashSet</code></strong>. <em>Hashable</em> classes can be used in
+these collections as key. A default behavior is defined in this trait,
+but the method <strong><code>hash</code></strong> can be redefined, it takes a immutable
+object instance as parameter, and return a <strong><code>u64</code></strong> value.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">collection</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">map</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">hash</span><span class="token punctuation">;</span>
 
+<span class="token keyword">class</span> Foo <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> _v <span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token basic-types">c8</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span>v <span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token basic-types">c8</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token keyword">with</span> _v <span class="token operator">=</span> v <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+    <span class="token other-keyword">impl</span> Hashable<span class="token punctuation">,</span> Streamable<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> <span class="token other-keyword">dmut</span> coll <span class="token operator">=</span> HashMap<span class="token operator">!</span><span class="token punctuation">{</span><span class="token operator">&amp;</span>Foo<span class="token punctuation">,</span> <span class="token basic-types">i32</span><span class="token punctuation">}</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    coll<span class="token punctuation">:</span><span class="token punctuation">.</span><span class="token function">insert</span> <span class="token punctuation">(</span><span class="token path">Foo</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token string">&quot;X&quot;</span>s8<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    coll<span class="token punctuation">:</span><span class="token punctuation">.</span><span class="token function">insert</span> <span class="token punctuation">(</span><span class="token path">Foo</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token string">&quot;Y&quot;</span>s8<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">34</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">println</span> <span class="token punctuation">(</span>coll<span class="token punctuation">)</span><span class="token punctuation">;</span>    
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token path">Foo</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token string">&quot;X&quot;</span>s8<span class="token punctuation">)</span> <span class="token keyword">in</span> coll<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br></p>
+<p>Results: </p>
+<pre class="language-"><code>{main::Foo(X)=&gt;12, main::Foo(Y)=&gt;34}
+true
+</code></pre>
                                 
                                 </section>
                             
@@ -822,12 +853,12 @@ native types, functions and control flows.</p>
 
             
                 
-                <a href="../hello-world/commentaires.html" class="navigation navigation-prev " aria-label="Previous page: Comments">
+                <a href="disposable.html" class="navigation navigation-prev " aria-label="Previous page: With guard and Disposable">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="variables.html" class="navigation navigation-next " aria-label="Next page: Variable and Mutability">
+                <a href="serialize.html" class="navigation navigation-next " aria-label="Next page: Packable and Serializable">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -838,7 +869,7 @@ native types, functions and control flows.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Basic programming concepts","level":"1.3","depth":1,"next":{"title":"Variable and Mutability","level":"1.3.1","depth":2,"path":"primitives/variables.md","ref":"primitives/variables.md","articles":[]},"previous":{"title":"Comments","level":"1.2.1","depth":2,"path":"hello-world/commentaires.md","ref":"hello-world/commentaires.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"primitives/README.md","mtime":"2021-05-31T15:40:16.841Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-05T04:09:09.325Z"},"basePath":"..","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Hashable","level":"1.12.4","depth":2,"next":{"title":"Packable and Serializable","level":"1.12.5","depth":2,"path":"traits/serialize.md","ref":"traits/serialize.md","articles":[]},"previous":{"title":"With guard and Disposable","level":"1.12.3","depth":2,"path":"traits/disposable.md","ref":"traits/disposable.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"traits/hashable.md","mtime":"2021-06-03T14:34:47.021Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-05T04:09:09.325Z"},"basePath":"..","book":{"language":"en"}});
         });
     </script>
 </div>

@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Mutability · GitBook</title>
+        <title>Cast, and dynamic typing · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -81,10 +81,10 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="methods.html" />
+    <link rel="next" href="../functions/" />
     
     
-    <link rel="prev" href="class.html" />
+    <link rel="prev" href="traits.html" />
     
 
     </head>
@@ -398,7 +398,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.7.2" data-path="mutability.html">
+        <li class="chapter " data-level="1.7.2" data-path="mutability.html">
             
                 <a href="mutability.html">
             
@@ -450,7 +450,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7.6" data-path="cast.html">
+        <li class="chapter active" data-level="1.7.6" data-path="cast.html">
             
                 <a href="cast.html">
             
@@ -776,7 +776,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Mutability</a>
+        <a href=".." >Cast, and dynamic typing</a>
     </h1>
 </div>
 
@@ -791,107 +791,184 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#mutability"><b>1. </b>Mutability</a></li><ul><li><span class="title-icon "></span><a href="#object-mutability"><b>1.1. </b>Object mutability</a></li><li><span class="title-icon "></span><a href="#field-mutability"><b>1.2. </b>Field mutability</a></li></ul></ul></div><a href="#mutability" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="mutability"><a name="mutability" class="anchor-navigation-ex-anchor" href="#mutability"><i class="fa fa-link" aria-hidden="true"></i></a>1. Mutability</h1>
-<p>Objects are aliasable types. The data being allocated on the heap, and
-not copied - for efficiency reasons - on affectations (<em>cf.</em> <a href="https://gnu-ymir.github.io/Documentations/en/advanced/" target="_blank">Aliases
-and
-References</a>).</p>
-<h2 id="object-mutability"><a name="object-mutability" class="anchor-navigation-ex-anchor" href="#object-mutability"><i class="fa fa-link" aria-hidden="true"></i></a>1.1. Object mutability</h2>
-<p>The type of an object instance is a reference to a class type. This
-reference can mutable, and the data pointed data as well. In the
-following example, a variable <strong><code>a</code></strong> containing an object instance of
-the class <strong><code>A</code></strong> is created. This variable contains a mutable
-reference, but the data borrowed by the reference are not mutable.</p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">class</span> A <span class="token punctuation">{</span>
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#cast-and-dynamic-typing"><b>1. </b>Cast, and dynamic typing</a></li><ul><li><span class="title-icon "></span><a href="#dynamic-typeinfo"><b>1.1. </b>Dynamic typeinfo</a></li><li><span class="title-icon "></span><a href="#object"><b>1.2. </b>Object</a></li></ul></ul></div><a href="#cast-and-dynamic-typing" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="cast-and-dynamic-typing"><a name="cast-and-dynamic-typing" class="anchor-navigation-ex-anchor" href="#cast-and-dynamic-typing"><i class="fa fa-link" aria-hidden="true"></i></a>1. Cast, and dynamic typing</h1>
+<p>An object instance of a heir class can be casted to an object instance
+of an ancestor class. Unlike, casting of integer values,
+(e.g. <strong><code>i32</code></strong> to <strong><code>i64</code></strong>), because an object is an aliasable type,
+the memory size of the object is not modified. Casting must respect
+mutability of the object value. Moreover, this cast can be made
+implicitely, as it does not create any problem in memory. In the
+following example, the class <strong><code>Bar</code></strong> inherits from the class
+<strong><code>Foo</code></strong>. A variable <strong><code>x</code></strong> is created, and is of type
+<strong><code>&amp;Bar</code></strong>. At line <strong><code>1</code></strong>, an implicit cast is made of a <strong><code>&amp;Bar</code></strong>
+value to a <strong><code>&amp;Foo</code></strong> value, the same cast is made but explicitely at
+line <strong><code>1</code></strong>.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
 
-    <span class="token other-keyword">pub</span> <span class="token keyword">let</span> <span class="token other-keyword">mut</span> x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">;</span>
+<span class="token keyword">class</span> Foo <span class="token punctuation">{</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
 
-    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token keyword">with</span> x <span class="token operator">=</span> x <span class="token punctuation">{</span><span class="token punctuation">}</span>
-
+    <span class="token other-keyword">pub</span> <span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Foo&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 
+<span class="token keyword">class</span> Bar <span class="token keyword">over</span> Foo <span class="token punctuation">{</span>
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+    <span class="token other-keyword">pub</span> <span class="token keyword">over</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Bar&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">baz</span> <span class="token punctuation">(</span>f <span class="token punctuation">:</span> <span class="token type">&amp;Foo</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    f<span class="token punctuation">.</span><span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> <span class="token other-keyword">mut</span> a <span class="token punctuation">:</span> <span class="token operator">&amp;</span><span class="token punctuation">(</span>A<span class="token punctuation">)</span><span class="token operator">=</span> <span class="token path">A</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token path">Bar</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">baz</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    a <span class="token operator">=</span> <span class="token path">A</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token number">42</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// ok the reference if mutable</span>
-
-    a<span class="token punctuation">.</span>x <span class="token operator">=</span> <span class="token number">33</span><span class="token punctuation">;</span> <span class="token comment">// the borrowed data are not mutable</span>
-<span class="token punctuation">}</span>
-</code></pre>
-<p><br> </p>
-<p>Because the data borrowed by <strong><code>a</code></strong> are not mutable, the
-compiler returns an error.</p>
-<pre class="language-"><code class="lang-error"><span class="token path">Error</span> : left operand of type i32 is immutable
- <span class="token comment">--&gt; main.yr:(15,3)</span>
-15  &#x2503;     a.x = 33; // the borrowed data are not mutable
-    &#x254B;      ^
-
-
-ymir1: <span class="token path">fatal error</span>: 
-compilation terminated.
-</code></pre>
-<p><br></p>
-<p>This error can be avoided, by making the borrowed data mutable as
-well. Either by using the <strong><code>dmut</code></strong> modifier, or by writing <strong><code>mut
-&amp;(mut A)</code></strong>.</p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> <span class="token other-keyword">dmut</span> a <span class="token operator">=</span> <span class="token path">A</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    a<span class="token punctuation">.</span>x <span class="token operator">=</span> <span class="token number">42</span><span class="token punctuation">;</span> <span class="token comment">// no problem a is mutable, and its borrowed data as well.</span>
-    <span class="token function">println</span> <span class="token punctuation">(</span>a<span class="token punctuation">.</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span> 
-<span class="token punctuation">}</span>
-</code></pre>
-<p>Because classes are aliasable types, the keyword <strong><code>alias</code></strong> has to be
-used when trying to make a mutable affectation. Information about
-aliasable types is presented in chapter
-<a href="https://gnu-ymir.github.io/Documentations/en/advanced/alias.html" target="_blank">Aliases</a>,
-and is not rediscussed here.</p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> 
-    <span class="token keyword">throws</span> <span class="token operator">&amp;</span><span class="token type">AssertError</span>
-<span class="token punctuation">{</span>
-    <span class="token keyword">let</span> <span class="token other-keyword">dmut</span> a <span class="token operator">=</span> <span class="token path">A</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">let</span> <span class="token other-keyword">dmut</span> b <span class="token operator">=</span> <span class="token other-keyword">alias</span> a<span class="token punctuation">;</span>
-    b<span class="token punctuation">.</span>x <span class="token operator">=</span> <span class="token number">42</span><span class="token punctuation">;</span>
-
-    <span class="token keyword">assert</span> <span class="token punctuation">(</span>a<span class="token punctuation">.</span>x <span class="token operator">==</span> <span class="token number">42</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-</code></pre>
-<h2 id="field-mutability"><a name="field-mutability" class="anchor-navigation-ex-anchor" href="#field-mutability"><i class="fa fa-link" aria-hidden="true"></i></a>1.2. Field mutability</h2>
-<p>Field mutability is set once and for all, in the definition of the
-class. The information about field mutability presented in the chapter
-about structure is applicable to classes. </p>
-<p>However, unlike structures, classes are not copiable by default, but
-have to implement a specific traits. Trait and implementation is
-presented in a future chapter, and copy is discussed in there
-chapter. (<em>cf.</em>
-<a href="https://gnu-ymir.github.io/Documentations/en/objects/traits.html" target="_blank">Traits</a>).</p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">class</span> A <span class="token punctuation">{</span>
-
-    <span class="token other-keyword">pub</span> <span class="token keyword">let</span> <span class="token other-keyword">mut</span> x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">;</span>
-    <span class="token other-keyword">pub</span> <span class="token keyword">let</span> y <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">;</span>
-
-    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">,</span> y <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token keyword">with</span> x <span class="token operator">=</span> x<span class="token punctuation">,</span> y <span class="token operator">=</span> y <span class="token punctuation">{</span><span class="token punctuation">}</span>
-
-<span class="token punctuation">}</span>
-
-
-<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> <span class="token other-keyword">dmut</span> a <span class="token operator">=</span> <span class="token path">A</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    a<span class="token punctuation">.</span>x <span class="token operator">=</span> <span class="token number">43</span><span class="token punctuation">;</span>
-    a<span class="token punctuation">.</span>y <span class="token operator">=</span> <span class="token number">89</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> y <span class="token operator">=</span> cast<span class="token operator">!</span><span class="token punctuation">{</span><span class="token operator">&amp;</span>Foo<span class="token punctuation">}</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    y<span class="token punctuation">.</span><span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
 <p><br>
-Errors: </p>
-<pre class="language-"><code class="lang-error"><span class="token path">Error</span> : left operand of type i32 is immutable
- <span class="token comment">--&gt; main.yr:(14,3)</span>
-14  &#x2503;     a.y = 89;
-    &#x254B;      ^
-
-
-ymir1: <span class="token path">fatal error</span>: 
-compilation terminated.
+Results:</p>
+<pre class="language-"><code>Bar
+Bar
+</code></pre><h2 id="dynamic-typeinfo"><a name="dynamic-typeinfo" class="anchor-navigation-ex-anchor" href="#dynamic-typeinfo"><i class="fa fa-link" aria-hidden="true"></i></a>1.1. Dynamic typeinfo</h2>
+<p>One can note from the above example, that when a variable contains a
+value of type <strong><code>&amp;Foo</code></strong>, that does not necessarily mean that this is
+a pure <strong><code>&amp;Foo</code></strong> value, but it can be a <strong><code>&amp;Bar</code></strong>. In object
+oriented programming, this principle is denote polyphormism. In the
+chapter <a href="https://gnu-ymir.github.io/Documentations/en/primitives/" target="_blank">Basic programming
+concepts</a>,
+we have seen that every object has specific attributes. Object is no
+exception to the rule. The following table lists the default specific
+attributes of the object types.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>typeid</code></td>
+<td>The name of the type stored in a value of type [c32]</td>
+</tr>
+<tr>
+<td><code>typeinfo</code></td>
+<td>A structure of type TypeInfo, containing information about the type</td>
+</tr>
+</tbody>
+</table>
+<p>These attributes are compile time executed, and thus are static. For
+example, in the following source code, the typeid of the class
+<strong><code>Bar</code></strong> is printed to stdout, followed by a line that does exactly
+the same thing (literraly).</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token path">Bar</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">typeid</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;main::Bar&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 </code></pre>
+<p><br></p>
+<p>When it comes to dynamic typing, it can be interesting to get the
+typeinfo of the type of the value that is actually stored inside the
+variable (e.g. get the typeinfo of the <strong><code>Bar</code></strong> class, type of the
+value contained inside a <strong><code>&amp;Foo</code></strong> variable). To do that, the
+specific attribute <strong><code>typeinfo</code></strong> of object is also accessible from
+the value directly, and this time dynamically.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token path">Bar</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> y <span class="token punctuation">:</span> <span class="token type">&amp;Foo</span> <span class="token operator">=</span> x<span class="token punctuation">;</span>
+
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token path">y</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">typeinfo</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br></p>
+<p>Results: </p>
+<pre class="language-"><code>core::typeinfo::TypeInfo(13, 16, [core::typeinfo::TypeInfo(13, 16, [], main::Foo)], main::Bar)
+</code></pre><p><br> </p>
+<p>The result presented above, gives the following information : 1)
+we have a object, 2) its size is 16 bytes, 3) it has an ancestor
+(object, size 16 bytes, no ancestor, named <strong><code>main::Foo</code></strong>), 4) its
+name is <strong><code>main::Bar</code></strong>.</p>
+<p>The <strong><code>TypeInfo</code></strong> returned by the <strong><code>typeinfo</code></strong> attributes (either
+dynamically or statically), is a structure whose definition is the
+following. The <strong><code>inner</code></strong> fields depend on the value of the
+<strong><code>typeid</code></strong> field, for example, when dealing with an object it stores
+the ancestor <strong><code>TypeInfo</code></strong>, and when dealing with slice, it stores
+the <strong><code>TypeInfo</code></strong> of the type contained inside the slice.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token other-keyword">pub</span> <span class="token keyword">struct</span>
+<span class="token operator">|</span> typeid <span class="token punctuation">:</span> <span class="token type">TypeIDs</span>
+<span class="token operator">|</span> size   <span class="token punctuation">:</span> <span class="token type">usize</span>
+<span class="token operator">|</span> inner  <span class="token punctuation">:</span> <span class="token punctuation">[</span>TypeInfo<span class="token punctuation">]</span>
+<span class="token operator">|</span> name   <span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token basic-types">c32</span><span class="token punctuation">]</span> 
+ <span class="token punctuation">-&gt;</span> TypeInfo<span class="token punctuation">;</span>
+
+<span class="token other-keyword">pub</span> <span class="token keyword">enum</span> <span class="token punctuation">:</span> <span class="token basic-types">u32</span>
+<span class="token operator">|</span> ARRAY        <span class="token operator">=</span> <span class="token number">1u32</span>
+<span class="token operator">|</span> BOOL         <span class="token operator">=</span> <span class="token number">2u32</span>
+<span class="token operator">|</span> CHAR         <span class="token operator">=</span> <span class="token number">3u32</span>
+<span class="token operator">|</span> CLOSURE      <span class="token operator">=</span> <span class="token number">4u32</span>
+<span class="token operator">|</span> FLOAT        <span class="token operator">=</span> <span class="token number">5u32</span>
+<span class="token operator">|</span> FUNC_PTR     <span class="token operator">=</span> <span class="token number">6u32</span>
+<span class="token operator">|</span> SIGNED_INT   <span class="token operator">=</span> <span class="token number">7u32</span>
+<span class="token operator">|</span> UNSIGNED_INT <span class="token operator">=</span> <span class="token number">8u32</span>
+<span class="token operator">|</span> POINTER      <span class="token operator">=</span> <span class="token number">9u32</span>
+<span class="token operator">|</span> SLICE        <span class="token operator">=</span> <span class="token number">10u32</span>
+<span class="token operator">|</span> STRUCT       <span class="token operator">=</span> <span class="token number">11u32</span>
+<span class="token operator">|</span> TUPLE        <span class="token operator">=</span> <span class="token number">12u32</span>
+<span class="token operator">|</span> OBJECT       <span class="token operator">=</span> <span class="token number">13u32</span>
+<span class="token operator">|</span> VOID         <span class="token operator">=</span> <span class="token number">14u32</span>
+ <span class="token punctuation">-&gt;</span> TypeIDs<span class="token punctuation">;</span>
+</code></pre>
+<p><br></p>
+<p>The typeinfo of a class is stored in the text and is accessible from
+the vtable of the object. One can note that <strong><code>Bar</code></strong> and <strong><code>Foo</code></strong>
+have a size of 16 bytes, despite the fact that they store no
+fields. This is due to two pointers that are stored inside every
+objects, the first pointer is refering to the monitor of the object
+(<em>cf.</em> <a href="">Parallelism</a>), and the second one points the the vtable of
+the object.</p>
+<h2 id="object"><a name="object" class="anchor-navigation-ex-anchor" href="#object"><i class="fa fa-link" aria-hidden="true"></i></a>1.2. Object</h2>
+<p><em>Ymir</em> have a type named <strong><code>Object</code></strong>, that can used to cast any
+object into that type. The reverse is impossible. We have seen that
+the object are not inheriting from a global ancestor, and this is
+really not the case. This cast unlike casting to parent class objects,
+cannot be made implicitely. We can see the <strong><code>&amp;(Object)</code></strong> type as the
+<strong><code>&amp;(void)</code></strong> type, that can store any pointer, but for
+objects. Unlike <strong><code>&amp;(void)</code></strong> (in which by the way we can&apos;t cast
+objects), <strong><code>&amp;Object</code></strong> stores one valuable information, it stores a
+valid object value, with a vtable, a monitor, a typeinfo, and <strong>cannot
+be <code>null</code></strong>. </p>
+<p>In the following example, a pattern matching is used to check the type
+of the object that is returned by the <strong><code>foo</code></strong> function. This is
+discussed in chapter <a href="https://gnu-ymir.github.io/Documentations/en/pattern/" target="_blank">Pattern
+Matching</a>.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> <span class="token operator">&amp;</span><span class="token type">Object</span> <span class="token punctuation">{</span>
+    cast<span class="token operator">!</span><span class="token punctuation">{</span><span class="token operator">&amp;</span>Object<span class="token punctuation">}</span> <span class="token punctuation">(</span><span class="token path">Foo</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">match</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">Foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+            <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;I got a Foo !&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br>
+Results: </p>
+<pre class="language-"><code>I got a Foo !
+</code></pre><p><br></p>
+<p>Some function of the standard library uses the <strong><code>Object</code></strong> type to
+return values, when it is impossible statically to get more accurate
+information about the type (e.g. [Packable]
+(<a href="https://gnu-ymir.github.io/Documentations/en/traits/serialize.html" target="_blank">https://gnu-ymir.github.io/Documentations/en/traits/serialize.html</a>).)</p>
 
                                 
                                 </section>
@@ -919,12 +996,12 @@ compilation terminated.
 
             
                 
-                <a href="class.html" class="navigation navigation-prev " aria-label="Previous page: Class">
+                <a href="traits.html" class="navigation navigation-prev " aria-label="Previous page: Traits">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="methods.html" class="navigation navigation-next " aria-label="Next page: Methods">
+                <a href="../functions/" class="navigation navigation-next " aria-label="Next page: Function advanced">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -935,7 +1012,7 @@ compilation terminated.
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Mutability","level":"1.7.2","depth":2,"next":{"title":"Methods","level":"1.7.3","depth":2,"path":"objects/methods.md","ref":"objects/methods.md","articles":[]},"previous":{"title":"Class","level":"1.7.1","depth":2,"path":"objects/class.md","ref":"objects/class.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"objects/mutability.md","mtime":"2021-05-31T15:40:16.841Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-05T04:09:09.325Z"},"basePath":"..","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Cast, and dynamic typing","level":"1.7.6","depth":2,"next":{"title":"Function advanced","level":"1.8","depth":1,"path":"functions/README.md","ref":"functions/README.md","articles":[]},"previous":{"title":"Traits","level":"1.7.5","depth":2,"path":"objects/traits.md","ref":"objects/traits.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"objects/cast.md","mtime":"2021-06-04T08:39:16.639Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-05T04:09:09.325Z"},"basePath":"..","book":{"language":"en"}});
         });
     </script>
 </div>

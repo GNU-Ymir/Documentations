@@ -41,10 +41,6 @@
                 
             
                 
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-code/plugin.css">
-                
-            
-                
                 <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
                 
             
@@ -282,43 +278,17 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.4" data-path="../advanced/best.html">
-            
-                <a href="../advanced/best.html">
-            
-                    
-                    Best practice
-            
-                </a>
-            
-
-            
-        </li>
-    
 
             </ul>
             
         </li>
     
-        <li class="chapter " data-level="1.5" data-path="../modules/">
-            
-                <a href="../modules/">
-            
-                    
-                    Modules
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6" data-path="../types/">
+        <li class="chapter " data-level="1.5" data-path="../types/">
             
                 <a href="../types/">
             
                     
-                    User defined types
+                    User define types
             
                 </a>
             
@@ -327,7 +297,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.6.1" data-path="../types/struct.html">
+        <li class="chapter " data-level="1.5.1" data-path="../types/struct.html">
             
                 <a href="../types/struct.html">
             
@@ -340,7 +310,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6.2" data-path="../types/enum.html">
+        <li class="chapter " data-level="1.5.2" data-path="../types/enum.html">
             
                 <a href="../types/enum.html">
             
@@ -353,21 +323,21 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6.3" data-path="../types/aka.html">
+
+            </ul>
             
-                <a href="../types/aka.html">
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../modules/">
+            
+                <a href="../modules/">
             
                     
-                    Aka
+                    Modules
             
                 </a>
             
 
-            
-        </li>
-    
-
-            </ul>
             
         </li>
     
@@ -398,33 +368,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7.2" data-path="../objects/mutability.html">
-            
-                <a href="../objects/mutability.html">
-            
-                    
-                    Mutability
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.7.3" data-path="../objects/methods.html">
-            
-                <a href="../objects/methods.html">
-            
-                    
-                    Methods
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.7.4" data-path="../objects/inheritance.html">
+        <li class="chapter " data-level="1.7.2" data-path="../objects/inheritance.html">
             
                 <a href="../objects/inheritance.html">
             
@@ -437,12 +381,25 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7.5" data-path="../objects/traits.html">
+        <li class="chapter " data-level="1.7.3" data-path="../objects/traits.html">
             
                 <a href="../objects/traits.html">
             
                     
                     Traits
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.4" data-path="../objects/example.html">
+            
+                <a href="../objects/example.html">
+            
+                    
+                    Example program
             
                 </a>
             
@@ -539,20 +496,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.11" data-path="../objects/common_traits.html">
-            
-                <a href="../objects/common_traits.html">
-            
-                    
-                    Common traits
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.12" data-path="../templates/operators.html">
+        <li class="chapter " data-level="1.11" data-path="../templates/operators.html">
             
                 <a href="../templates/operators.html">
             
@@ -565,7 +509,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.13" data-path="main.html">
+        <li class="chapter " data-level="1.12" data-path="main.html">
             
                 <a href="main.html">
             
@@ -579,7 +523,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="1.13.1" data-path="scope.html">
+        <li class="chapter active" data-level="1.12.1" data-path="scope.html">
             
                 <a href="scope.html">
             
@@ -597,7 +541,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.14" data-path="../version/README.md">
+        <li class="chapter " data-level="1.13" data-path="../version/README.md">
             
                 <span>
             
@@ -610,7 +554,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.15" >
+        <li class="chapter " data-level="1.14" >
             
                 <span>
             
@@ -712,7 +656,7 @@ thrown. </p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
 <span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>i <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span>
-    <span class="token keyword">throws</span> AssertError
+    throws AssertError
 <span class="token punctuation">{</span>
     <span class="token keyword">assert</span> <span class="token punctuation">(</span>i <span class="token operator">&lt;</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token number">42</span>
@@ -721,7 +665,7 @@ thrown. </p>
 <span class="token punctuation">}</span>
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token keyword">throws</span> AssertError
+    throws AssertError
 <span class="token punctuation">{</span>
     <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
 <span class="token punctuation">}</span>
@@ -768,7 +712,7 @@ release tokens or handle at the end of a scope.</p>
         m<span class="token punctuation">.</span><span class="token function">lock</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token keyword">assert</span> <span class="token punctuation">(</span>i <span class="token operator">&lt;</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span> catch <span class="token punctuation">{</span>
-        x <span class="token punctuation">:</span> _ <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+        x <span class="token punctuation">:</span> <span class="token type">_</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
             <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;catch : &quot;</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span> exit <span class="token punctuation">{</span> <span class="token comment">// even if no assertion occured this will be triggered</span>
@@ -829,7 +773,7 @@ Unlock : 1
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Scope guards","level":"1.13.1","depth":2,"next":{"title":"Version","level":"1.14","depth":1,"path":"version/README.md","ref":"version/README.md","articles":[]},"previous":{"title":"Error handling","level":"1.13","depth":1,"path":"errors/main.md","ref":"errors/main.md","articles":[{"title":"Scope guards","level":"1.13.1","depth":2,"path":"errors/scope.md","ref":"errors/scope.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"errors/scope.md","mtime":"2021-05-31T09:57:03.771Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-05-31T15:40:02.378Z"},"basePath":"..","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Scope guards","level":"1.12.1","depth":2,"next":{"title":"Version","level":"1.13","depth":1,"path":"version/README.md","ref":"version/README.md","articles":[]},"previous":{"title":"Error handling","level":"1.12","depth":1,"path":"errors/main.md","ref":"errors/main.md","articles":[{"title":"Scope guards","level":"1.12.1","depth":2,"path":"errors/scope.md","ref":"errors/scope.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","copy-code-button","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"errors/scope.md","mtime":"2021-02-10T15:50:32.543Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-02-10T17:57:21.102Z"},"basePath":"..","book":{"language":"en"}});
         });
     </script>
 </div>
@@ -837,6 +781,10 @@ Unlock : 1
         
     <script src="../../gitbook/gitbook.js"></script>
     <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
     
         
         <script src="../../gitbook/gitbook-plugin-spoiler/spoiler.js"></script>
@@ -852,10 +800,6 @@ Unlock : 1
     
         
         <script src="../../gitbook/gitbook-plugin-anchor-nav-x/lib/handler.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-code/plugin.js"></script>
         
     
         
