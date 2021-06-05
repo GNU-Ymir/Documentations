@@ -285,8 +285,8 @@ class Circle over Shape {
     pub self (radius : f64) with _radius = radius {}
     
     pub over area (self) -> f64 {
-	import std::math;
-	math::PI * (self._radius * self._radius)
+		import std::math;
+		math::PI * (self._radius * self._radius)
     }
 }
 
@@ -295,7 +295,7 @@ class Square over Shape {
     pub self (side : f64) with _side = side {}
     
     pub over area (self) -> f64 {
-	self._side * self._side
+		self._side * self._side
     }
     
 }
@@ -321,6 +321,50 @@ Results:
 The mutability of the method must be respected in the heir class. This
 means that mutable method must be mutable in the heir, and immutable
 methods must be immutable in the heir.
+
+```ymir
+class Foo {
+	pub self () {}
+	
+	pub def foo (mut self)-> void {}
+	
+	pub def bar (self)-> void {}
+}
+
+class Bar over Foo {
+	pub self () {}
+	
+	pub over foo (self)-> void {}
+	
+	pub over bar (mut self)-> void {}
+}
+```
+
+<br>
+Errors:
+```error
+Error : when validating main::Bar
+ --> main.yr:(9,7)
+ 9  ┃ class Bar over Foo {
+    ╋       ^^^
+    ┃ Error : the method (const self) => main::Bar::foo ()-> void marked as override does not override anything
+    ┃  --> main.yr:(12,11)
+    ┃ 12  ┃ 	pub over foo (self)-> void {}
+    ┃     ╋ 	         ^^^
+    ┃     ┃ Note : candidate foo --> main.yr:(4,10) : (mut self) => main::Foo::foo ()-> void
+    ┃     ┗━━━━━━ 
+    ┃ Error : the method (mut self) => main::Bar::bar ()-> void marked as override does not override anything
+    ┃  --> main.yr:(14,11)
+    ┃ 14  ┃ 	pub over bar (mut self)-> void {}
+    ┃     ╋ 	         ^^^
+    ┃     ┃ Note : candidate bar --> main.yr:(6,10) : (const self) => main::Foo::bar ()-> void
+    ┃     ┗━━━━━━ 
+    ┗━━━━━┻━ 
+
+
+ymir1: fatal error: 
+compilation terminated.
+```
 
 ### Final methods
 
@@ -540,3 +584,82 @@ compilation terminated.
 *Contribution*: It is possible to have an abstract and final class. I
 didn't find any use case for that, maybe that is completely useless,
 and must be prohibited.
+
+## Casting base class objects to heir class
+
+In many languages (such as C++, D, Java, or Scala) polymorphism gives
+the possibility to cast an object of a base class into an object of an
+heir class. This is not possible in *Ymir* because this behavior is
+not safe. We will see in the chapter [Pattern
+matching](https://gnu-ymir.github.io/Documentations/en/pattern/) how
+to achieve a cast of an object into a heir class, in a safe way. 
+
+However, the *std* provides a safe shortcut that can be used to
+achieve the cast. This shortcut is by using the template function
+**`to`** of the module **`std::conv`**. This function throws a
+**`CastFailure`** exception when the cast failed, (safe in *Ymir*
+means that the error can be managed, and has to be managed in fact, as
+we will see in the chapter on [Error
+handling](https://gnu-ymir.github.io/Documentations/en/errors/main.html)). In
+the following example, two objects are stored in the variable **`x`**
+and **`y`**, whose type are **`&Foo`**. The first cast at line **`18`**
+works, because the variable **`x`** indeed contains an object of type
+**`&Bar`**, however the cast at line **`19`** does not work, the
+variable **`y`** stores an object of type **`&Foo`**.
+
+```ymir
+import std::conv;
+
+class Foo {
+    pub self () {}
+}
+
+class Bar over Foo {
+    pub self () {}
+}
+
+
+def main ()
+    throws &CastFailure // the possible errors are rethrown, so the program ends if there is an error 
+{
+    let x : &Foo = Bar::new ();
+    let y : &Foo = Foo::new ();
+    
+    let _ : &Bar = x.to!(&Bar) (); // possibly throw a &CastFailure
+    let _ : &Bar = y.to!(&Bar) (); // here as well, (and actually throw it)
+}
+```
+
+<br> 
+
+The following result happens because an error is thrown by the main
+function, and then unmanaged by the program. The stacktrace is printed
+because the program was compiled in debug mode. We can see in this
+trace (at line **`11`**) that the error was effectively thrown by the
+conversion at line **`19`**. 
+
+```
+Unhandled exception
+Exception in file "/home/emile/gcc/gcc-install/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/include/ymir/std/conv.yr", at line 820, in function "std::conv::to(&(main::Bar),&(main::Foo))::to", of type std::conv::CastFailure.
+╭  Stack trace :
+╞═ bt ╕ #1
+│     ╘═> /lib/libgyruntime.so:??
+╞═ bt ╕ #2
+│     ╘═> /lib/libgyruntime.so:??
+╞═ bt ╕ #3 in function std::conv::toNP94main3BarNP94main3Foo::to (...)
+│     ╘═> /home/emile/gcc/gcc-install/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/include/ymir/std/conv.yr:820
+╞═ bt ╕ #4 in function main (...)
+│     ╘═> /home/emile/Documents/test/ymir/main.yr:19
+╞═ bt ╕ #5
+│     ╘═> /lib/libgyruntime.so:??
+╞═ bt ╕ #6 in function main
+│     ╘═> /home/emile/Documents/test/ymir/main.yr:12
+╞═ bt ╕ #7
+│     ╘═> /lib/x86_64-linux-gnu/libc.so.6:??
+╞═ bt ═ #8 in function _start
+╰
+Aborted (core dumped)
+```
+
+
+

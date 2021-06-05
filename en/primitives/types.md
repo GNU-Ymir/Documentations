@@ -759,3 +759,46 @@ The following table lists the attributes specific to option types.
 | Name | Meaning | 
 | --- | --- |
 | `err` | An empty option value | 
+
+## Cast 
+
+Some value can be transformed to create value of another type. This
+operation is done with the **`cast`** keywords, whose syntax is
+presented in the code block below.
+
+```grammar
+cast_expression := 'cast' '!' ('{' type '}' | type) expression
+```
+
+<br>
+
+In the following example, a cast of a value of type **`i32`** to a
+value of type **`i64`** is made. As said earlier, implicit casting is
+not allowed. The mutability of the casted value is always lower or
+equal to the mutability of the original value (for obvious reason).
+**Warning** cast can cause loss of precision, or even sign problems.
+
+```ymir
+let a = 0;
+let b : i64 = cast!i64 (a);
+```
+
+<br>
+
+The following table list the authorized casts of the primitive types : 
+
+| From | To |
+| --- | --- |
+| `i8` `i16` `i32` `i64` `isize` | `i8` `i16` `i32` `i64` `u8` `u16` `u32` `u64` `isize` `usize` |
+| `u8` `u16` `u32` `u64` `usize` | `i8` `i16` `i32` `i64` `u8` `u16` `u32` `u64` `isize` `usize` `c8` `c32` |
+| `f32` `f64` | `f32` `f64` |
+| `c8` | `c8` `c32` `u8` |
+| `c32` | `c8` `c32` `u32` |
+| `&(X)` for `X` = any type | `&(void)` |
+
+
+Cast if a very basic type transformation, and must be used with
+precaution for basic operations. We will see in a forthecoming chapter
+(*cf*. [Dynamic conversion]()) a complex system of conversion, provided
+by the standard library. This conversion system can be used to
+transform value of very different type and encoding.

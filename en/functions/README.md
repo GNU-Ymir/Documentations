@@ -561,7 +561,7 @@ class Foo {
     pub self () {}
     
     pub def foo (self) -> void {
-	println (self.i);
+		println (self.i);
     }
 }
 
@@ -689,4 +689,46 @@ def main () {
 Results:
 ```
 main::Foo(42)
+```
+
+<br>
+
+### Polymorphic delegate
+
+Method delegates respect the polyphormism introduced by class inheritance. 
+
+```ymir
+import std::io;
+
+class Foo {
+    pub self () {}
+    
+    pub def foo (self) {
+        println ("Bar");
+    }
+}
+
+class Bar over Foo {
+    pub self () {}
+
+    pub over foo (self) {
+        println ("Bar");
+    }
+}
+
+
+def main ()
+{
+    let x : &Foo = Bar::new ();
+    let d = &(x.foo);
+    d ();
+}
+```
+
+<br>
+
+Results:
+
+```
+Bar
 ```

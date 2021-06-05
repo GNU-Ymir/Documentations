@@ -13,5 +13,17 @@
 	    "isRewritePageTitle" : false,
 	    "toolTipMode" : "click"
 	}
+    },
+    "pdf": {
+        "pageNumbers": true,
+        "fontFamily": "Arial",
+        "fontSize": 10,
+        "paperSize": "a4",
+        "margin": {
+            "right": 10,
+            "left": 10,
+            "top": 56,
+            "bottom": 30
+        }
     }
 }

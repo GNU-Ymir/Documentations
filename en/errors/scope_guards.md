@@ -1,137 +1,277 @@
 # Scope guards
 
-The scope guards, are defined thanks to a new syntax. 
+Scope guards are expressions attached to a scope (block of code), that
+are executed on specific cases in the scope that is guarded. There are
+four different scope guards, **`exit`**, **`failure`**, **`success`**
+and **`catch`**. This chapter does not discuss the *catch* scope
+guard, that will be discussed in the next chapter.
 
-```ymir
-on exit => {
-	println ("End of scope");
-}
+
+The syntax of *exit*, *success* and *failure* scope guards is the following: 
+
+```grammar
+guarded_scope := '{' expression ((';')? expression)* (';')? '}' guards
+guards := (Guard expression)* ('catch' catching_expression)? (Guard expression)*
+Guard := 'exit' | 'success' | 'failure'
 ```
 
-There are three different scope guards, `success` and `failure` and `exit`.
+## Success guard
 
-## Scope success
-
-The instructions defined in a scope `success`, are executed at the exit of the scope, if no error has occurred.
+Scope guards are associate with expressions, that are executed when a
+specific events occurs in the scope that is guarded. In the case of
+*success* scope guard, the event that triggers the guard expression,
+is when no error occured (nothing was thrown in the scope). 
 
 ```ymir
+import std::io;
+
+def foo (i : i32)
+	throws &AssertError
 {
-	on success => println ("Scope end");
-	println ("Inside scope");
+	println ("I : ", i);
+	assert (i < 10, "i must be lower than 10");
+} success {
+	println ("Nothing was thrown !!");
 }
-println ("After scope");
-```
 
-Will generate the following execution: 
-
-```
-Inside scope
-Scope end
-After scope
-```
-
-scope guards are very useful to ensure that an instruction will be executed, such as that a mutex has been released at the output of a scope.
-
-```ymir
+def main () 
+	throws &AssertError
 {
-	mutex.lock ();
-	on sucess => mutex.unlock ();
-
-	some_atomic_computing ();
-}	
+	foo (1);
+	foo (20);
+}
 ```
 
-## Scope failure
+<br>
+Results: 
 
-Scope `failure` are a sequence of instructions carried out when an error has occurred. 
-The syntax is a little different, a form of matching is performed on the type of error.
+```
+I : 1
+Nothing was thrown !!
+I : 20
+Unhandled exception
+Exception in file "/home/emile/ymir/Runtime/midgard/core/exception.yr", at line 84, in function "core::exception::abort", of type core::exception::AssertError.
+╭  Stack trace :
+╞═ bt ╕ #1
+│     ╘═> /lib/libgyruntime.so:??
+╞═ bt ╕ #2
+│     ╘═> /lib/libgyruntime.so:??
+╞═ bt ╕ #3 in function core::exception::abort (...)
+│     ╘═> /home/emile/ymir/Runtime/midgard/core/exception.yr:84
+╞═ bt ╕ #4 in function main::foo (...)
+│     ╘═> /home/emile/Documents/test/ymir/main.yr:8
+╞═ bt ╕ #5 in function main (...)
+│     ╘═> /home/emile/Documents/test/ymir/main.yr:12
+╞═ bt ╕ #6
+│     ╘═> /lib/libgyruntime.so:??
+╞═ bt ╕ #7 in function main
+│     ╘═> /home/emile/Documents/test/ymir/main.yr:12
+╞═ bt ╕ #8
+│     ╘═> /lib/x86_64-linux-gnu/libc.so.6:??
+╞═ bt ═ #9 in function _start
+╰
+Aborted (core dumped)
+```
+
+<br>
+
+This scope guard can be used on scope that never throw exceptions, in
+that case it is always executed. This goal of this scope guard is to
+execute operation at the end of a scope, only when the operation
+succeded (e.g. writting logs, sending acknolegement, etc.). It can be
+coupled with other scope guards, to perform different operation when
+the scope didn't succeded.
+
+## Failure guard
+
+The *failure* scope guard does the opposite of the *success* scope
+guard, meaning that the associated expression is only executed when an
+exception was thrown in the scope that is guarded. This scope guard is
+really useful to perform operation without recovering from the
+error. Indeed, the *failure* guard is not a *catch* guard, and the
+execption that is thrown in the guarded scope continue its journey,
+but the expression in the scope guard are guaranteed to be executed
+(e.g. logging the error, closing a socket, unlocking a mutex, etc.).
+
+```ymir
+import std::io;
+
+def foo (i : i32)
+	throws &AssertError
+{
+	println ("I : ", i);
+	assert (i < 10, "i must be lower than 10");
+} failure {
+	println ("Well there was an error...");
+}
+
+def main () 
+	throws &AssertError
+{
+	foo (1);
+	foo (20);
+}
+```
+
+<br>
+Results:
+```
+I : 1
+I : 20
+Well there was an error...
+Unhandled exception
+Exception in file "/home/emile/ymir/Runtime/midgard/core/exception.yr", at line 84, in function "core::exception::abort", of type core::exception::AssertError.
+╭  Stack trace :
+╞═ bt ╕ #1
+│     ╘═> /lib/libgyruntime.so:??
+╞═ bt ╕ #2
+│     ╘═> /lib/libgyruntime.so:??
+╞═ bt ╕ #3
+│     ╘═> /lib/libgyruntime.so:??
+╞═ bt ╕ #4 in function main::foo (...)
+│     ╘═> /home/emile/Documents/test/ymir/main.yr:8
+╞═ bt ╕ #5 in function main (...)
+│     ╘═> /home/emile/Documents/test/ymir/main.yr:12
+╞═ bt ╕ #6
+│     ╘═> /lib/libgyruntime.so:??
+╞═ bt ╕ #7 in function main
+│     ╘═> /home/emile/Documents/test/ymir/main.yr:12
+╞═ bt ╕ #8
+│     ╘═> /lib/x86_64-linux-gnu/libc.so.6:??
+╞═ bt ═ #9 in function _start
+╰
+Aborted (core dumped)
+```
+
+
+## Exit guard
+
+The *exit* scope guard is the combination of the *success* and
+*failure* guards. The operation contained in the guards are always
+executed, no matter what happened in the scope that is guarded. It can
+be seen as a shortcut for the *success* and *failure* guards doing the
+same operations, but avoiding code repetition.
 
 
 ```ymir
-def foo () {
-	throw 10;
+import std::io;
+
+def foo (i : i32)
+	throws &AssertError
+{
+	println ("I : ", i);
+	assert (i < 10, "i must be lower than 10");
+} exit {
+	println ("The scope is exited, with an error or not, who knows");
 }
 
-
-foo ();
-on failure {
-	x : i32 => { 
-		println ("Catch i32 : ", x); 
-	}
-	x : f32 => { 
-		println ("Catch i32 : ", x); 
-	}
-	_ => println ("Catch anything");
+def main () 
+	throws &AssertError
+{
+	foo (1);
+	foo (20);
 }
 ```
- 
-If the scope guard is not able to retrieve the exception, it continues on its way.
-Scope failures can perform polymorphic matching on objects.
 
+<br>
+
+Results:
+```
+I : 1
+The scope is exited, with an error or not, who knows
+I : 20
+The scope is exited, with an error or not, who knows
+Unhandled exception
+Exception in file "/home/emile/ymir/Runtime/midgard/core/exception.yr", at line 84, in function "core::exception::abort", of type core::exception::AssertError.
+╭  Stack trace :
+╞═ bt ╕ #1
+│     ╘═> /lib/libgyruntime.so:??
+╞═ bt ╕ #2
+│     ╘═> /lib/libgyruntime.so:??
+╞═ bt ╕ #3
+│     ╘═> /lib/libgyruntime.so:??
+╞═ bt ╕ #4 in function main::foo (...)
+│     ╘═> /home/emile/Documents/test/ymir/main.yr:8
+╞═ bt ╕ #5 in function main (...)
+│     ╘═> /home/emile/Documents/test/ymir/main.yr:12
+╞═ bt ╕ #6
+│     ╘═> /lib/libgyruntime.so:??
+╞═ bt ╕ #7 in function main
+│     ╘═> /home/emile/Documents/test/ymir/main.yr:12
+╞═ bt ╕ #8
+│     ╘═> /lib/x86_64-linux-gnu/libc.so.6:??
+╞═ bt ═ #9 in function _start
+╰
+Aborted (core dumped)
+```
+
+## Scope guard priority
+
+It is possible to use multiple scope guards for the same scope. In
+that case, the order of execution of the scopes is the following :
+
+- 1) for the scope guards of same nature (e.g. two *failure* guards),
+  the execution is done is the order they are written.
+  
 ```ymir
-type A impl (i32) {
-    self (a : i32) self.0 = a;
-    def foo (self) println ("A : ", self.0);
-}
+import std::io;
 
-type B over A {
-    self (a : i32) self.super::init (a);
-    over foo (self) println ("B :  ", self.0);
-}
-
-def foo () {
-    throw B::init (12);
-}
-
-def main () {
-    foo ();
-
-    on failure {
-        x : A => { x.foo (); } // B : 12
+def main () 
+{
+    {
+        println ("Scope operation");
+    } exit {
+        println ("Exit 1"); 
+    } exit {
+        println ("Exit 2");
     }
 }
 ```
 
-Scope `failure` without matching stops the progress of any exception.
-
-
-```ymir
-on failure => println ("Failure");
-
-// is a shortcut for 
-on failure {
-	_ => println ("Failure");
-}
+<br>
+Results: 
+```
+Scope operation
+Exit 1
+Exit 2
 ```
 
-## Scope exit
+<br>
 
-scope `exit` works the same way as `success` scope, but ensures that when an error has occurred the scope guard instructions are still executed.
-
-Unlike the `failure` scope, it does not stop the propagation of exceptions.
-
+- 2) If there is an *exit* guard and a *success* or a *failure* guard,
+  then the *success* and *failure* guards are executed first.
+  
 ```ymir
-def some_atomic_unsafe_computing () {
-	throw 42;
-}
+import std::io;
 
+def main () 
 {
-	mutex.lock ();
-	on exit => {
-		println ("unlocking mutex");
-		mutex.unlock ();
-	}
-
-	some_atomic_unsafe_computing ();
-}	
-println ("Will never append");
+    {
+        println ("Scope operation");
+    } success {
+        println ("Success");
+    } exit {
+        println ("Exit 1"); 
+    } exit {
+        println ("Exit 2");
+    } success {
+        println ("Success 2");
+    } 
+}
 ```
 
-Will generate the following execution: 
+<br>
+Results: 
 
-```sh
-unlock mutex
-Unhandled exception
-Exception in file "main.yr", at line 2.
-Aborted (core dumped)
 ```
+Scope operation
+Success
+Success 2
+Exit 1
+Exit 2
+```
+
+<br>
+
+- 3) The priority between *failure* and *success* is not defined, they
+  simply cannot happen at the same time.

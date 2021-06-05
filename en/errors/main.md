@@ -1,55 +1,156 @@
 # Error handling
 
-This section will introduce error handling in the *Ymir*
-language. As with many languages, we have opted for error handling by
-throwing exceptions. Error recovery is done in a localized way at the
-scope thanks to a system called scope guard.
+This section will introduce error handling in the *Ymir* language. As
+with many languages, error are managed by throwing
+exceptions. Exception can be recovered thanks to scope guards that
+manage the errors in different manners. The keyword `throw` is used to
+throw an exception when an error occurs in the program. An exception
+is a class that inherits the core class `core::exception::Exception`.
+Exceptions are always recoverable, and must be managed by the user,
+who cannot simply ignore them. *Ymir* does not allow the possibility
+to ignore that an exception is thrown in a function, and may cause the
+function to exit prematurely. To avoid this possibility, excpetion
+must be written in the definition of the function, or managed
+directly.
 
-The keyword `throw` is used to throw an exception when an error occurs
-in the program. An exception is a class that inherits the core class
-`core::exception::Exception`. 
 
-Exception are followed by the compiler, that will not allow you to
-forget the possibility that they may occur, and will force you to
-handle them. There are two possibilities for error handling, either
-you rethrow it in the function level by using the `throws` keyword,
-either you catch it with the keyword `catch`.
+```ymir
+// Exception is defined in a core module, so does not need import 
+class MyError over Exception {
+	pub self () {}
+}
+
+def main () 
+	throws &MyError
+{
+	throw MyError::new ();
+}
+```
 
 ## Rethrowing 
 
-The error rethrowing is a way of defining that a function may throw an
-exception, and that this exception must be taking into account by a
-caller function. It is a system relativelly similar to error
-rethrowing in Java, apart that the specific name of the exception
-must be written in the possible rethrowed exception. That is to say,
-you can't write that you want to rethrow any kind of exception, by
-writting `throws Exception`. 
+The error rethrowing is a way of defining that a function could throw
+an exception, and that this exception must be taking into account by
+the caller functions. It is a system relatively close to error
+rethrowing of the Java language, apart that the specific name of the
+exception must be written in the possible rethrowed exceptions. That
+is to say, it is impossible to write that a function throws a parent
+class of the actually thrown exception (e.g. **`&Exception`**, when
+the function actually throws **`&AssertError`**). Thanks to that, the
+compiler is always able to check the type of the exceptions, and can
+force the user to handle them.
 
-Thanks to that, the compiler will always be able to check each kind of
-exceptions, and force the user to handle them.
+In the following example, the function **`foo`** is an unsafe function
+that can throw the exception **`&AssertError`**. This exception is
+thrown by the function **`assert`** at line **`6`**, and is not
+managed by the function **`foo`**. Because the **`main`** function
+calls the **`foo`** function, it is also unsafe, and also throws the
+exception **`&AssertError`**. In this example, the program stops,
+because of an unhandled exception. 
 
 ```ymir
 import std::io
 
 def foo (i : i32) 
-	throws AssertError
+	throws &AssertError
 {
 	assert (i < 10, "i is not lower than ten");
 	println (i);
 }
 
 def main () 
-	throws AssertError
-//  ^^^^^^^^^^^^^^^^^^
-// Try to remove this above line
+	throws &AssertError
 {
 	foo (10);
 }
 ```
 
+<br>
+
+Results (in debug mode, *-g* option): 
+
+```
+Unhandled exception
+Exception in file "/home/emile/ymir/Runtime/midgard/core/exception.yr", at line 84, in function "core::exception::abort", of type core::exception::AssertError.
+╭  Stack trace :
+╞═ bt ╕ #1
+│     ╘═> /lib/libgyruntime.so:??
+╞═ bt ╕ #2
+│     ╘═> /lib/libgyruntime.so:??
+╞═ bt ╕ #3 in function core::exception::abort (...)
+│     ╘═> /home/emile/ymir/Runtime/midgard/core/exception.yr:84
+╞═ bt ╕ #4 in function main::foo (...)
+│     ╘═> /home/emile/Documents/test/ymir/main.yr:7
+╞═ bt ╕ #5 in function main (...)
+│     ╘═> /home/emile/Documents/test/ymir/main.yr:10
+╞═ bt ╕ #6
+│     ╘═> /lib/libgyruntime.so:??
+╞═ bt ╕ #7 in function main
+│     ╘═> /home/emile/Documents/test/ymir/main.yr:10
+╞═ bt ╕ #8
+│     ╘═> /lib/x86_64-linux-gnu/libc.so.6:??
+╞═ bt ═ #9 in function _start
+╰
+Aborted (core dumped)
+```
+
+<br>
+
+The compiler does not allow to forget the possibility of a error
+throwing, and requires the user to write it down. In the following
+example, the function **`foo`** call the function **`assert`** that
+could throw an **`&AssertError`** if the test fails. In that case the
+function **`foo`** can also throw an error, and that must be written
+in the prototype of the function. Otherwise the compiler gives an
+error.
+
+```ymir
+import std::io
+
+def foo (i : i32) 
+{
+	assert (i < 10, "i is not lower than ten");
+	println (i);
+}
+```
+
+<br>
+
+Errors: 
+
+```error
+Error : the function main::foo might throw an exception of type &(core::exception::AssertError), but that is not declared in its prototype
+ --> main.yr:(3,5)
+ 3  ┃ def foo (i : i32) 
+    ╋     ^^^
+    ┃ Note : 
+    ┃  --> main.yr:(5,2)
+    ┃  5  ┃ 	assert (i < 10, "i is not lower than ten");
+    ┃     ╋ 	^
+    ┗━━━━━┻━ 
+
+
+ymir1: fatal error: 
+compilation terminated.
+```
+
+<br>
+
 As previously stated, the name of the exceptions specified in the
 prototype function must be the actual name of the exception, not the
-name of an ancestor.
+name of an ancestor. In the following example, the class
+**`ParentException`** and **`ChildException`** are two throwable
+class. The function **`foo`** throws an object of type
+**`ChildException`**, but the prototype declares that the function
+throws a **`ParentException`** object. To avoid losing accuracy, the
+*Ymir* language does not allow that. This is however still possible to
+perform this kind of behavior (necessary when the function throw
+multiple kind of errors, all deriving from **`ParentException`** for
+example), by using a **`cast`**, that we have seen in chapter [Cast
+and Dynamic
+typing](https://gnu-ymir.github.io/Documentations/en/cast/). That way,
+there is a loss of accuracy, but properly defined and intended by the
+user.
 
 ```ymir
 
@@ -62,250 +163,40 @@ class ChildException over Exception {
 }
 
 def foo () 
-	throws ChildException
-//         ^^^^^
-// Try to replace by Parent, or to remove just Exception
+	throws &ParentException
 {
-	throws ChildException::new ()
-}
-
-
-def main () 
-	throws ChildException
-//         ^^^^^
-//  Try to do the same here
-{
-	foo ()
+	throw ChildException::new ()
 }
 ```
 
-This system assure that, if a function is not marked as a throwing
-function, it is safe, and the program won't crash when calling
-it. Therefore, if the `main` function of a program is safe, then the
-program can't crash.
+<br>
 
-## Catching exception
+Errors: 
 
-The keyword `catch` define a catching block. It must follow a scope
-defined by `{}`, and must catch all the exception that may occur in
-that scope. The syntax of catching exception is similar to the pattern
-matching.
+```error
+Error : the function main::foo might throw an exception of type &(main::ChildException), but that is not declared in its prototype
+ --> main.yr:(9,5)
+ 9  ┃ def foo () 
+    ╋     ^^^
+    ┃ Note : 
+    ┃  --> main.yr:(12,5)
+    ┃ 12  ┃     throw ChildException::new ()
+    ┃     ╋     ^^^^^
+    ┗━━━━━┻━ 
 
-```ymir
-import std::io
+Error : the function main::foo prototype informs about a possible throw of an exception of type &(main::ParentException), but this is not true
+ --> main.yr:(9,5)
+ 9  ┃ def foo () 
+    ╋     ^^^
+    ┃ Note : 
+    ┃  --> main.yr:(10,12)
+    ┃ 10  ┃     throws &ParentException
+    ┃     ╋            ^
+    ┗━━━━━┻━ 
 
-def foo () 
-	throws AssertError
-{
-	assert (false);
-}
-
-def main () {
-	foo ();
-} catch {
-	_ : AssertError => {
-		println ("Assert occured");
-	}
-}
-```
-
-There are no implicit rethrowing of exception in a catch block, it is
-up to the user to force the rethrowing.
-
-```ymir
-import std::io
-
-def foo (i : i32) 
-    throws AssertError
-{
-    
-    assert (i < 10);
-}
-
-def bar () -> i32
-    throws OutOfArray
-{
-    let i = [1];
-    i [9]
-}
-
-def main () 
-    throws OutOfArray
-{
-    foo (8);
-    bar ();
-} catch {
-    _ : AssertError => {
-		println ("Assert occured");
-    }
-    x : OutOfArray => {
-		throw x;
-    }
-	// Try to remove this second pattern match
-}
-```
-
-### Recovering with catch 
-
-In *Ymir* everything has a values, that is not different for a catch
-block. When an error occurs, you may wan't to provide a default value,
-that will help to recover from an error. The value of a catch block is
-the value of the pattern matching it contains, and must have the same
-type as the value of the block to which it is attached.
-
-```ymir
-import std::io
-
-def foo ()-> i32 {
-	let i = [1];
-	i [9]
-} catch {
-	_ : OutOfArray => {
-		println ("Out of array !")
-		42
-	}
-}
-
-def main () {
-	let x = foo (); // Call foo is safe
-	println (x);
-}
-```
-
-## Mixin with type option
-
-The standard library provide an option type, in `std::option`. An
-option type is a monadic type, that may contain a value, or not. This
-is mainly used to handle errors when a computation might fail and
-return nothing.
-
-```ymir
-import std::io
-
-def foo (i : i32) -> Option!i32 {
-	if (i < 10) {
-		Some::new (42)
-	} else None!(i32)::new ()
-}
-
-def main () {
-	println (foo (7));
-}
-```
-
-In *Ymir* you can easily transform an exception into an option type,
-by returning a `None` value, when an error occured. The function
-`toOption` defined in the module `std::option` takes a function as
-template argument, and transform the result of this function into a
-option type. If the function throws an exception, the value `None` is
-returned.
-
-```ymir
-import std::option
-import std::io
-    
-def foo (i : i32) -> i32 
-    throws AssertError 
-{
-    assert (i < 10);
-    42
-}
-
-def main () {
-    let x = toOption!foo (12);
-    println (x);
-}
-```
-
-Throwing function are unsafe function, therefore they cannot be used
-as function pointer. In addition closure function (or lambda
-functions) must be safe, and the compiler won't allow you to define a
-function pointer that may throw an exception. For example, with the
-following example, you should get an error :
-
-```ymir
-def main () {
-	let x = |i : i32| => {
-		assert (i < 10);
-		42
-	};	
-}
-```
-
-```
-Error : lambda functions must be safe, but there are exceptions that are not caught
- --> main.yr:(2,13)
-    | 
- 2  |     let x = |i : i32| => {
-    |             ^
-    | Note : core::exception::AssertError
-    |  --> main.yr:(3,2)
-    |     | 
-    |  3  | 	assert (i < 10);
-    |     | 	^
-    |------------------------------ 
 
 ymir1: fatal error: 
 compilation terminated.
 ```
 
-For the same reason, the following code will also result in a
-compilation error :
-
-```ymir
-import std::option
-import std::io
-    
-def foo (i : i32) -> i32 
-    throws AssertError 
-{
-    assert (i < 10);
-    42
-}
-
-def main () {
-    let ptr = &foo;
-    println (ptr (12));
-}
-```
-
-```
-Error : can't create a function pointer from function main::foo (i : i32)-> i32 that might throw exception
- --> main.yr:(12,15)
-    | 
-12  |     let ptr = &foo;
-    |               ^
-    | Note : throws core::exception::AssertError
-    |------------------------------ 
-
-Error : undefined symbol ptr
- --> main.yr:(13,14)
-    | 
-13  |     println (ptr (12));
-    |              ^^^
-
-ymir1: fatal error: 
-compilation terminated.
-```
-
-Thanksfully, the standard function `toOption`, allows you to avoid
-that error, and transform the function into a safe one that will return
-an option type.
-
-```ymir
-import std::option
-import std::io
-    
-def foo (i : i32) -> i32 
-    throws AssertError 
-{
-    assert (i < 10);
-    42
-}
-
-def main () {
-    let ptr = &toOption!(foo);
-    println (ptr (12));
-}
-```
 

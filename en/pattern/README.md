@@ -23,7 +23,8 @@ pattern_tuple := '(' (pattern_expression (',' pattern_expression)*)? ')'
 pattern_option := pattern_expression ('|' pattern_expression)*
 pattern_range := pattern_expression ('..' | '...') pattern_expression 
 pattern_var := (Identifier | '_') ':' (type | '_') ('=' pattern_expression)?
-pattern_call := (type | '_') pattern_tuple 
+pattern_call := (type | '_') '(' (pattern_argument (',' pattern_argument)*)? ')'
+pattern_arguments := (Identifier '->')? pattern_expression
 ```
 
 <br>
@@ -135,7 +136,15 @@ def main () {
 
 A variable declaration can be used to store a value during the pattern
 matching. The variable is declared like a standard variable
-declaration but with keyword **`let`** ommitted. 
+declaration but with keyword **`let`** ommitted. The variable pattern
+can also be used to match over the type of the expression that is
+tested, when the type of the variable can be dynamic (e.g. on class
+inheritance). In all other cases the test is done during the
+compilation, and the type of the newly declared variable must in any
+case be fully compatible with the type of the value that is tested. In
+the following example, the type of the variable patterns is always
+**`i32`**, because it is the only compatible type with the type of the
+value.
 
 ```ymir
 import std::io
@@ -161,9 +170,7 @@ def main () {
 <br>
 
 In the above example, every pattern tests are valid, but only the first pattern
-is evaluated. 
-
-Results : 
+is evaluated, leading to the following result. 
 
 ```
 It is a i32, but I don't care about the value
@@ -201,6 +208,73 @@ x == 42
 
 <br>
 
+### Matching over type
+
+When the type of the value that is tested can be dynamic (i.e. class
+inheritance, which is the only possibility), then the type of the
+variable in the test can be used to test the type of the value. In the
+following example, the class **`Bar`** and **`Baz`** inherit from the
+abstract class **`Foo`**. The variable **`x`** declared in the
+**`main`** function, is of type **`Foo`** meaning that it can contains
+either a **`Bar`** or a **`Baz`** value. The *match* expression then
+make a test over the type of the variable **`x`**.
+
+```ymir
+import std::io;
+
+class @abstract Foo {
+	self () {}
+}
+
+class Bar over Foo {
+	pub self () {}
+}
+
+class Baz over Foo {
+	pub self () {}
+}
+
+def foo ()-> &Foo {
+	Bar::new ()
+}
+
+def main () {
+	let x = foo ();
+	match x {
+		_ : &Bar => println ("Contains a Bar");
+		_ : &Baz => println ("Contains a Baz");		
+	}
+}
+```
+
+<br>
+
+Results: 
+
+```
+Contains a Bar
+```
+
+<br>
+
+There is another pattern that can be used to test a dynamic type, that
+is presented in a following sub section (*cf*. Destructuring class),
+but pattern matching is the only way to cast a value whose type is an
+ancestor class to an heir class, and this way is **safe**. In many
+language like Java, D or C++, it is possible to use the casting
+system, that has a undefined behavior in C++, makes the program crash
+in Java, and returns the value `null` in D. These three behaviors are
+not acceptable since they are not safe. By using the pattern matching,
+the failing case is let to the discretion of the user. And as we have
+seen in the introduction of this chapter, because a match can't have a
+value if there is a possibility that none of the branch were entered,
+then the user has to write a default case when the cast failed if they
+want to retreive a value from the matching. This default case can of
+course be used to throw an exception (*cf* [Error
+handling](https://gnu-ymir.github.io/Documentations/en/errors/main.html)).
+
+### Reference variable
+
 A mutable value can be updated inside a pattern, by using a reference
 variable. This works exactly like variable referencing (as presented
 in chapter
@@ -225,11 +299,26 @@ def main () {
 
 ## Destructuring patterns
 
-There are two types of destructuring patters, for tuple by using
-pattern inside parenthese, or for structure and classes by using a
-Call syntax. When you want to destructure a tuple, you will just have
-to use parentheses that will surround any patterns, that are presented
-in this section.
+Destructuring patterns are patterns that divide the values contained
+in a value is type is a compound type. Compound types are 1) tuple, 2)
+structures and 3) classes. 
+
+
+### Destructuring a tuple
+
+To destructure a tuple, parentheses surrounding other patterns are
+used. The arity of the destructuring pattern must be the same as the
+arity of the tuple that is destructured. In the following example, a
+tuple of arity **`3`**, and type **`(i32, c32, f64)`** is
+destructured, using two different patterns. The first pattern only
+check the first value of the tuple (the other are always true, using
+the token **`_`**), by verifying that the value is equals to **`1`**
+and putting it in the variable **`i`**. The second pattern does not do
+any tests but associate the values of the tuple to the variable
+**`x`**, **`y`** and **`z`**. As one can note from that test, any
+pattern can be used to test inner values of the tuple, (another
+destructuring pattern if the inner value is a compound type, a range
+pattern, etc.)
 
 ```ymir
 import std::io
@@ -238,8 +327,8 @@ def main () {
 	let tuple = (1, 'x', 3.14)
 	
 	match tuple {
-		(_ : i32 = 1, _, _) => {
-			println ("This tuple has an arity of three and its first element is an i32, whose value is 1");
+		(i : i32 = 1, _, _) => {
+			println ("This tuple has an arity of three and its first element is an i32, whose value ", i, " == 1");
 		} 
 		(x : _, y : _, z : _) => {
 			println ("This tuple has an arity of three, and its values are : (", x, ", ", y, ", ", z, ")");
@@ -248,11 +337,23 @@ def main () {
 }
 ```
 
+<br>
+
+Results: 
+
+```
+This tuple has an arity of three and its first element is an i32, whose value 1 == 1
+```
+
 ### Destructuring structure
 
-The destructurating of a structure is made like a call of the
-structure. But you don't have to secify all the fields, but only those
-you want to check.
+Destructuring structure is made by using a *call* expression. The
+argument of the call expressions are patterns. Unlike tuple
+destructuring, there is no need to test all the values of the
+structure, but only those which are relevant. The order of the fields
+is respected in the destructuring (i.e. the pattern, at line 15 of the
+following example, tests the value of the field **`x`**). *Named
+expressions* can be used to test specific fields of the structure.
 
 ```ymir
 import std::io
@@ -279,9 +380,15 @@ def main () {
 }
 ```
 
-You can of course with a variable pattern refer to the values later in
-the pattern, for both the structure or even its fields. Reference
-variable works the same as well.
+
+<br>
+
+Of course, any kind of pattern can be used inside a structure
+destructuring, for example a variable pattern, that refers to the
+values later in the content of the pattern. In the following example,
+a variable **`p`** is declared to refer to the value contained in the
+variable **`point`**, and a variable **`y`** is declared to refer to
+the value contained in the field **`point.y`**.
 
 ```ymir
 import std::io
@@ -305,16 +412,21 @@ def main () {
 ### Destructuring class
 
 The syntax for destructuring object is the same as the syntax for
-destructuring structure. However, the parameters inside the
-parentheses will referes to object attributes that must be public in
-the context of the pattern matching.
+destructuring structure. However, only *named expressions* are
+admitted, and this expressions refer to object fields that must be
+public in the context of the pattern matching. For example, in the
+source code below, the field **`x`** of the class **`Point`** is
+public from the context of the **`main`** function, for that reason it
+is accessible inside the class destructuring pattern. On the other
+hand the field **`_y`** is private for the **`main`** function, thus
+cannot be used.
 
 ```ymir
 import std::io
 
 class Point {
 	pub let x : i32 = 1;
-	let y : i32 = 2;
+	let _y : i32 = 2;
 	
 	pub self () {}
 }
@@ -323,17 +435,42 @@ def main () {
 	let p = Point::new ();
 	
 	match p {
-		Point (x-> 1) => {
-		//     ^
-		// Try to replace with y
-			println (p.x, " is a equal to 1");
+		Point (x-> 1, _y-> 2) => {
+		    println (p.x, " is a equal to 1");
 		}
 	}
 }
 ```
 
-Unlike structure destructuring, the type of the object is also
-checked. It can be useful when dealing with inheritance. 
+<br>
+
+Errors: 
+```error
+Error : undefined field _y for element &(main::Point)
+ --> main.yr:(14,17)
+14  ┃ 		Point (x-> 1, _y-> 2) => {
+    ╋ 		              ^
+    ┃ Note : i32 --> main.yr:(5,11) : _y is private within this context
+    ┗━━━━━━ 
+
+
+ymir1: fatal error: 
+compilation terminated.
+```
+
+<br>
+
+We have seen in a previous section (*cf*. Matching over type), that
+because class types are dynamic when there is inheritance, pattern
+matching can be used to test the type of the values. Class
+destructuring is an alternative way to check the type of a value,
+whose type is a class that have heirs. The following example,
+demonstrate the use of the pattern matching to retreive the center of
+a **`Shape`** when it is a **`Circle`**. In this example, the
+**`foo`** function lied, and returned a **`Rectangle`** instead of a
+**`Circle`**, in order to be compilable the source code must manage
+that case, otherwise the variable **`center`** declared at line
+**`28`** could be unset, and that is prohibited by the language.
 
 ```ymir
 import std::io
@@ -343,74 +480,117 @@ class @abstract Shape {
 }
 
 class Rectangle over Shape {
-	self () {}
-}
-
-class Circle over Shape {
-	self () {}
-}
-
-def foo () -> Shape {
-	Circle::new ()
-}
-
-def main () {
-	let s = foo ();
-	match s {
-		Circle () => {
-			println ("Foo returned a circle");
-		}
-		Rectangle () => {
-			println ("Foo returned a rectangle");
-		}
-	}
-}
-```
-
-It is the only way to check a inheritance in *Ymir*, and this way is
-safe. In many language like Java, D or C++, you will have the right to
-use the casting system, that will have a undefined behavior in C++,
-and make a program crash in Java, and will return the value `null` in
-D. Those three behavior are not acceptable since they are not
-safe. The pattern matching will allow you to specify the behavior when
-the cast has failed, for example, if you want to get the center of
-circle :
-
-```ymir
-import std::io
-
-import std::io
-
-class @abstract Shape {
-	self () {}
-}
-
-class Rectangle over Shape {
-	self () {}
+	pub self () {}
 }
 
 class Circle over Shape {
 	pub let center : i32 ;
 
-	self (center : i32) with center = center {}
+	pub self (center : i32) with center = center {}
 }
 
 /**
  * Don't worry I will return you a circle
 */
-def foo () -> Shape {
+def foo () -> &Shape {
 	Rectangle::new ()
 }
 
 def main () {
 	let circle = foo ();
 	let center = match circle {
-		Circle (center-> center : _) => center
+		Circle (center-> c : _) => c
+	};
+	println ("The center of the circle is : ", center);
+}
+```
+
+<br>
+
+Errors: 
+```error
+Error : match of type i32 has no default match case
+ --> main.yr:(28,15)
+28  ┃ 	let center = match circle {
+    ╋ 	             ^^^^^
+
+Error : undefined symbol center
+ --> main.yr:(31,45)
+31  ┃ 	println ("The center of the circle is : ", center);
+    ╋ 	                                           ^^^^^^
+
+
+ymir1: fatal error: 
+compilation terminated.
+```
+
+<br>
+
+This can be corrected by adding a default case to the *match*
+expression. The following source codes are two possibilities.
+
+- 1) Setting a default value : 
+
+```ymir
+def main () {
+	let circle = foo ();
+	let center = match circle {
+		Circle (center-> c : _) => c
 		_ => {
-			println ("That's not a circle, foo lied!");
-			0 // No need to have confidence in foo 
+			println ("Foo lied ....");
+			0 // center is equal to 0, if foo returned something other than a Circle
 		}
 	};
 	println ("The center of the circle is : ", center);
 }
+```
+
+- 2) Throwing an error (*cf*. [Error
+handling](https://gnu-ymir.github.io/Documentations/en/errors/main.html))
+
+```ymir
+def main ()
+    throws &AssertError
+{
+    let circle = foo ();
+    let center = match circle {
+		Circle (center-> c : _) => c
+        _ => {
+            throw AssertError::new ("Foo lied...");
+        }
+    };
+    println ("The center of the circle is : ", center);
+}
+```
+
+<br>
+
+A pattern using an ancestor class, will succeed if the object instance
+that is used is a heir class. That is to say, if the pattern tries to
+get a **`Shape`** value, when giving a **`Circle`** value to the
+pattern, the pattern test succeeds. So the order has to be carefully
+set (putting heir class tests first). The phenomenon is the same with
+variable patterns. **Contribution** Add verification when a pattern
+test cannot be entered because previous test is always valid.
+
+```ymir
+def main () {
+	let circle : &Shape = Circle::new (); // Important to have a &Shape, and not a &Circle
+	match circle {
+		Shape () => {
+			println ("Shape");
+		}
+		Circle () => {
+			println ("Circle");
+		}
+	}
+}
+```
+
+<br>
+
+Results: 
+
+```
+Shape
 ```
