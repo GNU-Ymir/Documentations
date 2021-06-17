@@ -274,8 +274,8 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#variabloj-kaj-&#x15D;an&#x11D;ebleco"><b>1. </b>Variabloj kaj &#x15C;an&#x11D;ebleco</a></li><ul><li><span class="title-icon "></span><a href="#tipo-de-variablo"><b>1.1. </b>Tipo de variablo</a></li></ul></ul></div><a href="#variabloj-kaj-&#x15D;an&#x11D;ebleco" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="variabloj-kaj-&#x15D;an&#x11D;ebleco"><a name="variabloj-kaj-&#x15D;an&#x11D;ebleco" class="anchor-navigation-ex-anchor" href="#variabloj-kaj-&#x15D;an&#x11D;ebleco"><i class="fa fa-link" aria-hidden="true"></i></a>1. Variabloj kaj &#x15C;an&#x11D;ebleco</h1>
-<p>Oni deklaras variabloj per la vorto <strong><code>let</code></strong>. La sintakso de deklaroj
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#variabloj-kaj-&#x15D;an&#x11D;ebleco"><b>1. </b>Variabloj kaj &#x15C;an&#x11D;ebleco</a></li><ul><li><span class="title-icon "></span><a href="#tipo-de-variablo"><b>1.1. </b>Tipo de variablo</a></li><li><span class="title-icon "></span><a href="#&#x15D;an&#x11D;ebleco-de-variablo"><b>1.2. </b>&#x15C;an&#x11D;ebleco de variablo</a></li><li><span class="title-icon "></span><a href="#unua-valoro"><b>1.3. </b>Unua valoro</a></li><li><span class="title-icon "></span><a href="#mallokaj-variabloj"><b>1.4. </b>Mallokaj variabloj</a></li><ul><li><span class="title-icon "></span><a href="#ordo-de-inicoj"><b>1.4.1. </b>Ordo de inicoj</a></li></ul><li><span class="title-icon "></span><a href="#ombreco-kaj-amplekso"><b>1.5. </b>Ombreco kaj amplekso</a></li><ul><li><span class="title-icon "></span><a href="#vivda&#x16D;ro"><b>1.5.1. </b>Vivda&#x16D;ro</a></li></ul></ul></ul></div><a href="#variabloj-kaj-&#x15D;an&#x11D;ebleco" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="variabloj-kaj-&#x15D;an&#x11D;ebleco"><a name="variabloj-kaj-&#x15D;an&#x11D;ebleco" class="anchor-navigation-ex-anchor" href="#variabloj-kaj-&#x15D;an&#x11D;ebleco"><i class="fa fa-link" aria-hidden="true"></i></a>1. Variabloj kaj &#x15C;an&#x11D;ebleco</h1>
+<p>Oni deklaras variablojn per la vorto <strong><code>let</code></strong>. La sintakso de deklaroj
 de variablo estas prezentata en la sekva bloko da kodo.</p>
 <pre class="language-"><code class="lang-grammar"><span class="token path">var_deklaro</span> <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token string">&apos;let&apos;</span> ena_var_dekl <span class="token punctuation">(</span><span class="token string">&apos;,&apos;</span> ena_var_decl<span class="token punctuation">)</span><span class="token operator">*</span>
 <span class="token path">ena_var_dekl</span>  <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token punctuation">(</span>dekoracio<span class="token punctuation">)</span><span class="token operator">*</span> Nomo <span class="token punctuation">(</span><span class="token string">&apos;:&apos;</span> tipo<span class="token punctuation">)</span>? <span class="token string">&apos;=&apos;</span> esprimo
@@ -283,15 +283,264 @@ de variablo estas prezentata en la sekva bloko da kodo.</p>
 <span class="token path">Nomo</span> <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token punctuation">(</span><span class="token string">&apos;_&apos;</span><span class="token punctuation">)</span><span class="token operator">*</span> <span class="token punctuation">[</span>A<span class="token operator">-</span>z<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token punctuation">[</span>A<span class="token operator">-</span>z0<span class="token operator">-</span>9_<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">*</span>
 </code></pre>
 <p><br></p>
-<p>Deklaro de variablo estas komponita de kvar partoj, 1) Iu nomo, kiu
-estas uzita por referenci la variablon, 2) dekoracioj, kiu donas
+<p>Deklaro de variablo konsistas el kvar partoj, 1) Iu nomo, kiu
+estas uzita por referenci la variablon, 2) dekoracioj, kiuj donas
 malsimilajn kondutojn al la programo rilate al la variablo, 3) valoro,
 kiu estas la unua valoro de la variablo, 4) tipo, opcia parto de la
 deklaro kiu, kiam &#x11D;i mankas, estas induktita de la tipo de la unua
 valoro asociita al la variablo. Alie, kiam la tipo estas donita, &#x11D;i
-estas kontrolita kaj devas kongrui kun la tipo de la unua valoro de la
-variablo.</p>
+estas kontrolita kaj devas kongrui kun la tipo de la unua valoro.</p>
 <h2 id="tipo-de-variablo"><a name="tipo-de-variablo" class="anchor-navigation-ex-anchor" href="#tipo-de-variablo"><i class="fa fa-link" aria-hidden="true"></i></a>1.1. Tipo de variablo</h2>
+<p>La tipo de la variablo, kiel prezentata je la enkonduko, estas
+indikata je la deklaro de la variablo. Tio implicas statikan tipon por
+&#x109;iuj variabloj, kies rezulto estas ke oni ne povas &#x15D;an&#x11D;i la tipon de
+variablo dum &#x11D;ia vivda&#x16D;ro. Por ilustri tiun ideon, la sekva fontkodo
+deklaras variablon, kies tipo estas <strong><code>i32</code></strong>, kaj provas meti valoron
+kies tipo estas <strong><code>f32</code></strong> en &#x11D;i. La programlingvo ne akceptas tion, do
+la kompililo &#x135;etas eraron.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> <span class="token other-keyword">mut</span> x <span class="token operator">=</span> <span class="token number">12</span><span class="token punctuation">;</span> <span class="token comment">// 12 estas litero kun tipo i32</span>
+    <span class="token comment">//  ^^^ tiu dekoracio, prezentata en la sekva sekcio, ne gravas por la momento</span>
+
+    x <span class="token operator">=</span> <span class="token number">89</span><span class="token punctuation">.</span>0f<span class="token punctuation">;</span> <span class="token comment">// 89.0f estas litero kies tipo estas f32 (valoro kun flosanta punkto)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br> La kompililo, pro ke la fontkodo estas neakceptebla <em>Ymir</em>
+programo, &#x135;etas eraron. La eraro, prezentata je la sekva bloko da
+kodo, informas ke la variablo <strong><code>x</code></strong> de tipo <strong><code>i32</code></strong>, estas
+malkongrua kun la valoro de tipo <strong><code>f32</code></strong>.</p>
+<pre class="language-"><code class="lang-error"><span class="token path">Error</span> : incompatible types mut i32 and f32
+ <span class="token comment">--&gt; main.yr:(5,4)</span>
+ 5  &#x2503;     x = 89.0f; // 89.0f estas litero kies tipo estas f32 (valoro kun flosanta punkto)
+    &#x254B;       ^
+
+
+ymir1: <span class="token path">fatal error</span>: 
+compilation terminated.
+</code></pre>
+<p><br></p>
+<h2 id="&#x15D;an&#x11D;ebleco-de-variablo"><a name="&#x15D;an&#x11D;ebleco-de-variablo" class="anchor-navigation-ex-anchor" href="#&#x15D;an&#x11D;ebleco-de-variablo"><i class="fa fa-link" aria-hidden="true"></i></a>1.2. &#x15C;an&#x11D;ebleco de variablo</h2>
+<p>Dekoracioj estas uzitaj por difini kiel trakti variablojn. La
+&#x109;efvortoj <strong><code>ref</code></strong> kaj <strong><code>dmut</code></strong> estos priskribitaj en alia &#x109;apitro
+(<em>kp.</em> <a href="https://gnu-ymir.github.io/Documentations/eo/advanced/" target="_blank">Ligoj kaj
+Referencoj</a>). Por
+la momento, ni nur parolos pri la vorto <strong><code>mut</code></strong>. Tiu &#x109;efvorto estas
+uzita por difini ke la valoro de variablo estas &#x15D;an&#x11D;ebla. Variablo,
+kiu estas deklarita sen tiu vorto <strong><code>mut</code></strong>, estas apriore
+mal&#x15D;an&#x11D;ebla, farante ke &#x11D;ia valoro estas definitiva.</p>
+<p>Alivorte, se variablo estas deklarita kiel mal&#x15D;an&#x11D;ebla, tiam &#x11D;i estas
+ligita al valoro, kiun la variablo ne povas &#x15D;an&#x11D;i dum sia tuta
+vivda&#x16D;ro. La ideo malanta&#x16D; la apriora mal&#x15D;an&#x11D;ebleco estas malhelpi
+nedeziratajn erarojn, per devigi la uzantojn, ke ili difinu kiujn
+variablojn estas &#x15D;an&#x11D;eblaj, kun la uzo de intece pli multvorta
+sintakso, dum &#x109;iuj la aliaj variabloj estas mal&#x15D;an&#x11D;eblaj.</p>
+<p>En la sekva fontkodo variablo <strong><code>x</code></strong>, kies tipo estas <strong><code>i32</code></strong>,
+estas deklarita. Tiu variablo estas mal&#x15D;an&#x11D;ebla, (&#x109;ar la dekoracio
+<strong><code>mut</code></strong> ne estas uzata). Poste la linio <strong>7</strong>, kiu konsistas el
+provi &#x15D;an&#x11D;i la valoron de la variablo <strong><code>x</code></strong>, estas malakceptita per
+la programlingvo, do anka&#x16D; per la kompililo, kiu &#x135;etas eraron.</p>
+<p><br></p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>    
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;X valoras : &quot;</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+
+    x <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span> 
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;X valoras : &quot;</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br></p>
+<p>De la supra fontkodo, la kompililo &#x135;etas la sekvan eraron. Tiu eraro
+informas ke la atribuo ne estas permesata, pro la naturo de la
+variablo <strong><code>x</code></strong>, kiu estas mal&#x15D;an&#x11D;ebla. En <em>Ymir</em>, variabla
+&#x15D;an&#x11D;ebleco, kaj tipa &#x15D;an&#x11D;ebleco certigas, per statikaj kontroloj, ke
+kiam variablo estas deklarita kiel ne havanta skriban permeson al
+valoro, do estas neniu maniero por gajni skriban permeson al tiu
+valoro trans tiu variablo. Kvankam, tio povas esti kelkfoje frustra
+por la uzanto.</p>
+<pre class="language-"><code class="lang-error"><span class="token path">Error</span> : left operand of type i32 is immutable
+ <span class="token comment">--&gt; main.yr:(7,2)</span>
+    &#x2503; 
+ 7  &#x2503;     x = 3; 
+    &#x2503;     ^
+
+
+ymir1: <span class="token path">fatal error</span>: 
+compilation terminated.
+</code></pre>
+<p><br></p>
+<p>Oni povas &#x15D;an&#x11D;i la anta&#x16D;an ekzemplon por farigi la variablon <strong><code>x</code></strong>
+&#x15D;an&#x11D;ebla. Tiu &#x15D;an&#x11D;o implicas la uzon de la &#x109;efvorto <strong><code>mut</code></strong>, kiu &#x2014;
+metita anta&#x16D; la nomo de la variablo, je la deklaro &#x2014; farigas &#x11D;in
+&#x15D;an&#x11D;ebla. Danke al tiu &#x15D;an&#x11D;o, la sekva fontkodo estas nun akceptebla
+programo, do estas akceptita de la kompililo.</p>
+<p><br></p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> <span class="token other-keyword">mut</span> x <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>    
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;X valoras : &quot;</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+
+    x <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span> 
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;X valoras : &quot;</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br>
+Rezultoj:</p>
+<pre class="language-"><code>X valoras : 2
+X valoras : 3
+</code></pre><p><br> Fakte, &#x15D;an&#x11D;ebleco ne rilatas al variabloj, sed al tipoj. La
+<em>Ymir</em> programlingvo proponas kompleksan sistemon de tipa &#x15D;an&#x11D;ebleco,
+kies kompreno bezonas ke oni komprenas bone la datumajn tipojn
+anta&#x16D;e. En la sekvaj sekcioj kaj &#x109;apitroj, pro tiu kialo, ni prezentos
+la tipan sistemon (kaj la diversajn bazajn tipojn de datumo, kiujn oni
+povas krei en <em>Ymir</em> - <em>kp.</em> <a href="https://gnu-ymir.github.io/Documentations/eo/primitives/types.html" target="_blank">Datumaj
+tipoj</a>),
+anta&#x16D; ol ni revenos al &#x15D;an&#x11D;ebleco, kaj ol ni havos tutan vidon de la
+&#x15D;an&#x11D;ebleca sistemo en la &#x109;apitro <a href="https://gnu-ymir.github.io/Documentations/eo/advanced/" target="_blank">Ligoj kaj
+Referencoj</a>.</p>
+<h2 id="unua-valoro"><a name="unua-valoro" class="anchor-navigation-ex-anchor" href="#unua-valoro"><i class="fa fa-link" aria-hidden="true"></i></a>1.3. Unua valoro</h2>
+<p>Variablo <strong>&#x109;iam</strong> estas deklarita kun valoro. La celo estas ke oni
+povu certigi ke &#x109;iuj datumoj venas de ie, kaj ne venas de hazarda
+stato de memoro de la ma&#x15D;ino kiu plenumas la programon (kiel eblas en
+<em>C</em> programlingvo).</p>
+<p>Oni povas argumenti ke statikaj kontroloj povas esti uzitaj por
+certigi ke variablo estu valorigita anta&#x16D; ol &#x11D;i estas uzita, kaj
+argumenti ke devigi unuan valoron, ke &#x11D;i ekzistu, ne estas la plej
+bona maniero por plenumi datuman validecon. Se temas pli pri opinio ol
+scienca rezono, ni pensas ke disigi la inicon de variablo, farigas
+programon pli malfacila por legi. Plie, mal&#x15D;an&#x11D;eblaj variabloj estus
+&#x15D;an&#x11D;eblaj dum unu asigno, farante la konduton de la programo ankora&#x16D;
+pli malfacila por kompreni.</p>
+<p>En la sekva tabulo estas montras du ekzemplojn de fontkodo, kies
+kondutoj estas similaj. Je la maldekstra parto, valida fontkodo
+akceptebla de la <em>Ymir</em> programlingvo, kaj je la dekstra parto,
+fontkodo malakceptebla pro la argumentoj, kiujn ni prezentis.</p>
+<table>
+<tr>
+<th> A </th>
+<th> B </th>
+</tr>
+<tr>
+<td style="width: 50%;"><pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token other-keyword">true</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token number">42</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token number">7</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></td>
+<td style="width: 50%;"><pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> i <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token other-keyword">true</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        i <span class="token operator">=</span> <span class="token number">42</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        i <span class="token operator">=</span> <span class="token number">7</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></td>
+</tr>
+</table>
+
+<p>Oni povas noti de la maldekstra programo, ke la <strong><code>if</code></strong> esprimo havas
+valoron. Valoro komputita kiel la rezulto de la esprimo (je tiu okazo
+la valoro <strong><code>42</code></strong> de tipo <strong><code>i32</code></strong>). Fakte, &#x109;iuj esprimoj povas havi
+valoron en <em>Ymir</em>, forigante la limon, kiun ni enkondukis per la
+devigo de unua valoro.</p>
+<h2 id="mallokaj-variabloj"><a name="mallokaj-variabloj" class="anchor-navigation-ex-anchor" href="#mallokaj-variabloj"><i class="fa fa-link" aria-hidden="true"></i></a>1.4. Mallokaj variabloj</h2>
+<p>Kvankam mallokaj variabloj havas relative malbonan reputacion pro
+multe da bonaj kialoj, ni decidis lasi la eblon difini ilin, pro tio
+ke malgra&#x16D; &#x109;io, ili permesas paradigmojn de programado, kiuj estus
+maleblaj alie.</p>
+<p>Mallokaj variabloj estas difinitaj kiel lokaj variabloj, krom ke oni
+anstata&#x16D;igas la &#x109;efvorton <strong><code>let</code></strong> per la vorto <strong><code>static</code></strong>. La
+sekva fontkodo prezentas uzon de mal&#x15D;an&#x11D;ebla malloka variablo. Tio
+estas nur ekzemplo, &#x109;ar uzo de enumeracio (<em>kp.</em>
+<a href="https://gnu-ymir.github.io/Documentations/eo/types/enum.html" target="_blank">Enumeracio</a>)
+estus probable pli bona por tiu speciala afero.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
+
+<span class="token keyword">static</span> pi <span class="token operator">=</span> <span class="token number">3.14159265359</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;La valoro de Pi estas : &quot;</span><span class="token punctuation">,</span> pi<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br></p>
+<p>&#x108;iuj informoj pri lokaj variabloj estas validaj por mallokaj
+variabloj. Temas pri statika tipado, &#x15D;an&#x11D;ebleco, kaj unuaj valoroj. Ne
+estas limoj pri la valoroj, kiuj povas esti uzitaj kiel unuaj valoroj
+de mallokaj variabloj, nek estas limoj pri la formo de la inico. Voko
+de funkcioj, kondi&#x109;a esprimoj, kreo de objektoj, ktp. nenio estis
+forgesita.</p>
+<p>Mallokaj variabloj estas inicitaj anta&#x16D; la komenco de la programo mem,
+tio volas diri anta&#x16D; ol la funkcio <strong><code>main</code></strong> estas vokita. Por
+ilustri tiun punkton, la sekva fontkodo kreas mallokan variablon kies
+tipo estas <strong><code>i32</code></strong>, kaj kiu estas inicita per voko de la funkcio
+<strong><code>foo</code></strong>. Tiu funkcio <strong><code>foo</code></strong> per voki la funkcion <strong><code>println</code></strong>
+skribas mesa&#x11D;on sur la <strong><code>&#x15D;elo</code></strong>, poste la funkcion <strong><code>main</code></strong> faras
+same.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
+
+<span class="token keyword">static</span> __GLOBAL__ <span class="token operator">=</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">/**</span>
+<span class="token comment">  * Tiu funkcio skribas la mesa&#x11D;on &quot;foo&quot;, kaj returnas la valoron 42</span>
+<span class="token comment">  */</span>
+<span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span> <span class="token punctuation">{</span>
+  <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;foo&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token number">42</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;__GLOBAL__ = &quot;</span><span class="token punctuation">,</span> __GLOBAL__<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br></p>
+<p>Rezultoj:</p>
+<pre class="language-"><code>foo
+__GLOBAL__ = 42
+</code></pre><h3 id="ordo-de-inicoj"><a name="ordo-de-inicoj" class="anchor-navigation-ex-anchor" href="#ordo-de-inicoj"><i class="fa fa-link" aria-hidden="true"></i></a>1.4.1. Ordo de inicoj</h3>
+<p>Estas neniu garantio pri la ordo de la inicoj de mallokaj
+variabloj. Tiu estas ver&#x15D;ajne la unua granda limo, kiun oni povas noti
+pri la programlingvo <em>Ymir</em>. <strong>Kontribuo</strong>, permesi tian garantion
+estus tute bonvena kontribuo, sed &#x15D;ajnas malver&#x15D;ajne ke tio estas ebla
+kiam la mallokaj variabloj estas difinitaj en malsamaj paka&#x135;oj (<em>kp.</em>
+<a href="https://gnu-ymir.github.io/Documentations/eo/modules" target="_blank">Paka&#x135;oj</a>).</p>
+<p>Por la momento, &#x109;ar ne eblas certigi bonan ordon de inicoj de mallokaj
+variabloj, anta&#x16D; ol la program komencos, ne estas permesita inici
+mallokan variablon per la valoro de alia malloka variablo. Tamen, tiu
+kontrolo estas tre lima, &#x109;ar la valoro de malloka variablo povas esti
+kreita per voko de funkcio, kaj tiu funkcio povas uzi la valoron de
+alia malloka variablo. La sekva fontkodo ilustras tiun konduton.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">static</span> __A__ <span class="token operator">=</span> <span class="token number">42</span><span class="token punctuation">;</span>
+<span class="token keyword">static</span> __B__ <span class="token operator">=</span> __A__<span class="token punctuation">;</span> 
+<span class="token keyword">static</span> __C__ <span class="token operator">=</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span> <span class="token punctuation">{</span>
+    __A__
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br></p>
+<p>La kompililo beda&#x16D;rinde nur kapablas vidi la dependan inicon de
+<strong><code>__B__</code></strong>, kaj lasos la inicon de <strong><code>__C__</code></strong> funkcii. E&#x109; se je tiu
+speciala okazo la dependeco estas tre klare videbla, tio povas esti
+pli malfacila se la funkcio <strong><code>foo</code></strong> estus difinita en malsama
+paka&#x135;o, kaj se oni nur havus &#x11D;ian prototipon.</p>
+<h2 id="ombreco-kaj-amplekso"><a name="ombreco-kaj-amplekso" class="anchor-navigation-ex-anchor" href="#ombreco-kaj-amplekso"><i class="fa fa-link" aria-hidden="true"></i></a>1.5. Ombreco kaj amplekso</h2>
+<h3 id="vivda&#x16D;ro"><a name="vivda&#x16D;ro" class="anchor-navigation-ex-anchor" href="#vivda&#x16D;ro"><i class="fa fa-link" aria-hidden="true"></i></a>1.5.1. Vivda&#x16D;ro</h3>
+<p>La vivda&#x16D;ro de variablo estas difinita per &#x11D;ia amplekso. Kunmetanta
+esprimojn apartigitaj per punktokomoj, inter kunigaj krampoj, amplekso
+estas semantika elemento, kiu estas bone konita en programlingvoj. &#x11C;i
+havas kelkajn speciala&#x135;ojn en <em>Ymir</em>, sed tiuj estos prezentitaj en
+venontaj &#x109;apitroj (<em>kp.</em>
+<a href="https://gnu-ymir.github.io/Documentations/eo/primitives/functions.html" target="_blank">Funkcioj</a>,
+<a href="https://gnu-ymir.github.io/Documentations/eo/errors/scope.html" target="_blank">Gardanto de
+amplekso</a>),
+kaj ne interesas nin por la momento.</p>
 
                                 
                                 </section>
@@ -335,7 +584,7 @@ variablo.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Variabloj kaj Ŝanĝebleco","level":"1.3.1","depth":2,"next":{"title":"Datumaj tipoj","level":"1.3.2","depth":2,"path":"primitives/types.md","ref":"primitives/types.md","articles":[]},"previous":{"title":"Bazaj konceptoj","level":"1.3","depth":1,"path":"primitives/README.md","ref":"primitives/README.md","articles":[{"title":"Variabloj kaj Ŝanĝebleco","level":"1.3.1","depth":2,"path":"primitives/variables.md","ref":"primitives/variables.md","articles":[]},{"title":"Datumaj tipoj","level":"1.3.2","depth":2,"path":"primitives/types.md","ref":"primitives/types.md","articles":[]},{"title":"Funkcioj","level":"1.3.3","depth":2,"path":"primitives/functions.md","ref":"primitives/functions.md","articles":[]},{"title":"Regaj fluoj","level":"1.3.4","depth":2,"path":"primitives/control.md","ref":"primitives/control.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"eo","gitbook":"*"},"file":{"path":"primitives/variables.md","mtime":"2021-05-31T15:40:16.853Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-05T04:09:09.325Z"},"basePath":"..","book":{"language":"eo"}});
+            gitbook.page.hasChanged({"page":{"title":"Variabloj kaj Ŝanĝebleco","level":"1.3.1","depth":2,"next":{"title":"Datumaj tipoj","level":"1.3.2","depth":2,"path":"primitives/types.md","ref":"primitives/types.md","articles":[]},"previous":{"title":"Bazaj konceptoj","level":"1.3","depth":1,"path":"primitives/README.md","ref":"primitives/README.md","articles":[{"title":"Variabloj kaj Ŝanĝebleco","level":"1.3.1","depth":2,"path":"primitives/variables.md","ref":"primitives/variables.md","articles":[]},{"title":"Datumaj tipoj","level":"1.3.2","depth":2,"path":"primitives/types.md","ref":"primitives/types.md","articles":[]},{"title":"Funkcioj","level":"1.3.3","depth":2,"path":"primitives/functions.md","ref":"primitives/functions.md","articles":[]},{"title":"Regaj fluoj","level":"1.3.4","depth":2,"path":"primitives/control.md","ref":"primitives/control.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"eo","gitbook":"*"},"file":{"path":"primitives/variables.md","mtime":"2021-06-16T11:56:38.997Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-17T05:03:31.114Z"},"basePath":"..","book":{"language":"eo"}});
         });
     </script>
 </div>

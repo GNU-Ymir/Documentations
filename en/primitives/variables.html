@@ -224,6 +224,19 @@
             
         </li>
     
+        <li class="chapter " data-level="1.3.5" data-path="operator.html">
+            
+                <a href="operator.html">
+            
+                    
+                    Operator priority
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -584,7 +597,7 @@
                 <a href="../templates/special.html">
             
                     
-                    Specialization
+                    Template types
             
                 </a>
             
@@ -597,7 +610,7 @@
                 <a href="../templates/cte.html">
             
                     
-                    Compile time execution
+                    Template values
             
                 </a>
             
@@ -610,7 +623,7 @@
                 <a href="../templates/values.html">
             
                     
-                    Template as values
+                    Compilation time execution
             
                 </a>
             
@@ -824,8 +837,8 @@ compiler returns an error.</p>
 <span class="token punctuation">}</span>
 </code></pre>
 <p><br></p>
-<p>The compiler, because the source code is not an acceptable Ymir
-program, will return an error. The error presented in the following
+<p>The compiler, because the source code is not an acceptable <em>Ymir</em>
+program, returns an error. The error presented in the following
 block, informs that the variable <strong><code>x</code></strong> of type <strong><code>i32</code></strong>, is
 incompatible with a value of type <strong><code>f32</code></strong>.</p>
 <pre class="language-"><code class="lang-error"><span class="token path">Error</span> : incompatible types mut i32 and f32
@@ -837,6 +850,7 @@ incompatible with a value of type <strong><code>f32</code></strong>.</p>
 ymir1: <span class="token path">fatal error</span>: 
 compilation terminated.
 </code></pre>
+<p><br></p>
 <h2 id="variable-mutability"><a name="variable-mutability" class="anchor-navigation-ex-anchor" href="#variable-mutability"><i class="fa fa-link" aria-hidden="true"></i></a>1.2. Variable mutability</h2>
 <p>The decorators are used to determine the behavior to adopt with the
 variable. The keyword <strong><code>ref</code></strong> and <strong><code>dmut</code></strong> will be discussed in
@@ -847,8 +861,8 @@ is used to define a mutable variable, whose value can be changed. A
 variable declared without the <strong><code>mut</code></strong> keyword is declared immutable
 by default, making its value definitive.</p>
 <p>In another word, if a variable is declared immutable, then it is bound
-the a value, that will not change at any time throughout the life of
-the variable. The idea behind default immutability is to avoid
+the a value, that the variable cannot change throughout the
+life of the variable. The idea behind default immutability is to avoid
 unwanted behavior or errors, by forcing the developpers to determine
 which variables are mutable with the use of a deliberately more
 verbose syntax, while making all the other variables immutable.</p>
@@ -869,13 +883,14 @@ that&apos;s why the compiler does not accept to compile the program.
 <span class="token punctuation">}</span>
 </code></pre>
 <p><br></p>
-<p>For the given source file, the compiler will generate the following
+<p>For the given source file, the compiler generates the following
 error. This error informs that the affectation is not allowed, due to
-the nature of the variable <strong><code>x</code></strong>, which is not mutable. In Ymir,
+the nature of the variable <strong><code>x</code></strong>, which is not mutable. In <em>Ymir</em>,
 variable mutability and, type mutability ensure, through static
-checks, that when one declares that the value of a variable will not
-change, it will really never change. Although this can sometimes be
-frustrating for the user. </p>
+checks, that when one declares that a variable has no write access to
+a value, there is no way to get write access to the value through
+this variable. Although this can sometimes be frustrating for the
+user.</p>
 <pre class="language-"><code class="lang-error"><span class="token path">Error</span> : left operand of type i32 is immutable
  <span class="token comment">--&gt; main.yr:(7,2)</span>
     &#x2503; 
@@ -911,10 +926,10 @@ X is equal to : 3
 types. This language proposes a complex type mutability system, whose
 understanding requires the comprehension of data types beforehand. In
 the following sections, we will, for that reason, present the type
-system, (and the different types of data that can be created in Ymir &#x2014; <em>cf.</em>  chapter <a href="https://gnu-ymir.github.io/Documentations/primitives/types.html" target="_blank">Data
+system, (and the different types of data that can be created in <em>Ymir</em> &#x2014; <em>cf.</em>  chapter <a href="https://gnu-ymir.github.io/Documentations/en/primitives/types.html" target="_blank">Data
 types</a>),
 before coming back to the data mutability, &#x2014; and have a full overview
-of the mutability system in chapter <a href="https://gnu-ymir.github.io/Documentations/advanced/" target="_blank">Aliases and
+of the mutability system in chapter <a href="https://gnu-ymir.github.io/Documentations/en/advanced/" target="_blank">Aliases and
 references</a>.</p>
 <h2 id="initial-value"><a name="initial-value" class="anchor-navigation-ex-anchor" href="#initial-value"><i class="fa fa-link" aria-hidden="true"></i></a>1.3. Initial value</h2>
 <p>A variable is <strong>always</strong> declared with a value. The objective is to
@@ -970,7 +985,7 @@ Ymir, removing the limitation, introduced by the forcing of an initial
 value to variables.</p>
 <h2 id="global-variables"><a name="global-variables" class="anchor-navigation-ex-anchor" href="#global-variables"><i class="fa fa-link" aria-hidden="true"></i></a>1.4. Global variables</h2>
 <p>Even if global variables have a rather bad reputation for many
-justified reasons. We choose to let the possibility to define them,
+justified reasons, we choose to let the possibility to define them,
 since in spite of all, they allow some programmation paradigms that
 would be undoable otherwise.</p>
 <p>Global variables are defined as any local variable, except that the
@@ -1025,7 +1040,7 @@ __GLOBAL__ = 42
 </code></pre><h3 id="initialization-order"><a name="initialization-order" class="anchor-navigation-ex-anchor" href="#initialization-order"><i class="fa fa-link" aria-hidden="true"></i></a>1.4.1. Initialization order</h3>
 <p>There is no warranty on the order of initialization of global
 variables. This is probably, the first limitation that we can point
-out on the Ymir languages. Contribution, to allow such warranty would
+out on the Ymir languages. <strong>Contribution</strong>, to allow such warranty would
 be very welcomed, but seems unlikely to be possible when global
 variables come from multiple modules (<em>cf.</em>
 <a href="https://gnu-ymir.github.io/Documentations/en/modules" target="_blank">Modules</a>).</p>
@@ -1044,6 +1059,7 @@ variable. In the following source code, this behavior is illustrated.</p>
     __A__
 <span class="token punctuation">}</span>
 </code></pre>
+<p><br></p>
 <p>The compiler will unfortunetaly be able to see only the dependent
 initialization of <strong><code>__B__</code></strong>, and will let the initialization of
 <strong><code>__C__</code></strong> from the function <strong><code>foo</code></strong> occur. Even if in that
@@ -1203,7 +1219,7 @@ variables, behavior illustrated in the following example.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Variable and Mutability","level":"1.3.1","depth":2,"next":{"title":"Data types","level":"1.3.2","depth":2,"path":"primitives/types.md","ref":"primitives/types.md","articles":[]},"previous":{"title":"Basic programming concepts","level":"1.3","depth":1,"path":"primitives/README.md","ref":"primitives/README.md","articles":[{"title":"Variable and Mutability","level":"1.3.1","depth":2,"path":"primitives/variables.md","ref":"primitives/variables.md","articles":[]},{"title":"Data types","level":"1.3.2","depth":2,"path":"primitives/types.md","ref":"primitives/types.md","articles":[]},{"title":"Functions","level":"1.3.3","depth":2,"path":"primitives/functions.md","ref":"primitives/functions.md","articles":[]},{"title":"Control flows","level":"1.3.4","depth":2,"path":"primitives/control.md","ref":"primitives/control.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"primitives/variables.md","mtime":"2021-05-31T15:40:16.845Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-05T04:09:09.325Z"},"basePath":"..","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Variable and Mutability","level":"1.3.1","depth":2,"next":{"title":"Data types","level":"1.3.2","depth":2,"path":"primitives/types.md","ref":"primitives/types.md","articles":[]},"previous":{"title":"Basic programming concepts","level":"1.3","depth":1,"path":"primitives/README.md","ref":"primitives/README.md","articles":[{"title":"Variable and Mutability","level":"1.3.1","depth":2,"path":"primitives/variables.md","ref":"primitives/variables.md","articles":[]},{"title":"Data types","level":"1.3.2","depth":2,"path":"primitives/types.md","ref":"primitives/types.md","articles":[]},{"title":"Functions","level":"1.3.3","depth":2,"path":"primitives/functions.md","ref":"primitives/functions.md","articles":[]},{"title":"Control flows","level":"1.3.4","depth":2,"path":"primitives/control.md","ref":"primitives/control.md","articles":[]},{"title":"Operator priority","level":"1.3.5","depth":2,"path":"primitives/operator.md","ref":"primitives/operator.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"primitives/variables.md","mtime":"2021-06-16T11:45:19.759Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-17T05:03:31.114Z"},"basePath":"..","book":{"language":"en"}});
         });
     </script>
 </div>

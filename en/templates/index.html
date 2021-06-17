@@ -224,6 +224,19 @@
             
         </li>
     
+        <li class="chapter " data-level="1.3.5" data-path="../primitives/operator.html">
+            
+                <a href="../primitives/operator.html">
+            
+                    
+                    Operator priority
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -584,7 +597,7 @@
                 <a href="special.html">
             
                     
-                    Specialization
+                    Template types
             
                 </a>
             
@@ -597,7 +610,7 @@
                 <a href="cte.html">
             
                     
-                    Compile time execution
+                    Template values
             
                 </a>
             
@@ -610,7 +623,7 @@
                 <a href="values.html">
             
                     
-                    Template as values
+                    Compilation time execution
             
                 </a>
             
@@ -791,134 +804,276 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#templates"><b>1. </b>Templates</a></li><ul><li><span class="title-icon "></span><a href="#template-argument-syntax"><b>1.1. </b>Template argument syntax</a></li><li><span class="title-icon "></span><a href="#template-definition-syntax"><b>1.2. </b>Template definition syntax</a></li><li><span class="title-icon "></span><a href="#template-instanciation"><b>1.3. </b>Template instanciation</a></li><ul><li><span class="title-icon "></span><a href="#template-class-instanciation"><b>1.3.1. </b>Template class instanciation</a></li></ul></ul></ul></div><a href="#templates" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="templates"><a name="templates" class="anchor-navigation-ex-anchor" href="#templates"><i class="fa fa-link" aria-hidden="true"></i></a>1. Templates</h1>
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#templates"><b>1. </b>Templates</a></li><ul><li><span class="title-icon "></span><a href="#template-definition-syntax"><b>1.1. </b>Template definition syntax</a></li><li><span class="title-icon "></span><a href="#template-argument-syntax"><b>1.2. </b>Template argument syntax</a></li><ul><li><span class="title-icon "></span><a href="#template-instanciation"><b>1.2.1. </b>Template instanciation</a></li><li><span class="title-icon "></span><a href="#multiple-template-parameters"><b>1.2.2. </b>Multiple template parameters</a></li><li><span class="title-icon "></span><a href="#template-class-instanciation"><b>1.2.3. </b>Template class instanciation</a></li></ul></ul></ul></div><a href="#templates" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="templates"><a name="templates" class="anchor-navigation-ex-anchor" href="#templates"><i class="fa fa-link" aria-hidden="true"></i></a>1. Templates</h1>
 <p>The templates system provide the possibility to reuse source code,
 that is valid for multiple types. The template system of <em>Ymir</em> is
-powerful, and allows you to generate code, that will be used
-many times for many purpose, by writting minimal source code. </p>
-<h2 id="template-argument-syntax"><a name="template-argument-syntax" class="anchor-navigation-ex-anchor" href="#template-argument-syntax"><i class="fa fa-link" aria-hidden="true"></i></a>1.1. Template argument syntax</h2>
-<p>The template arguments are declared using the token <code>!</code>, followed by
-one are multiple arguments, enclosed inside parentheses. Template
-arguments are elements that must be known by the compiler at compile
-time, in order to produce the template specialization and symbol
-definition. </p>
-<pre class="language-"><code class="lang-ymir">foo<span class="token operator">!</span><span class="token basic-types">i32</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// One template argument (i32)</span>
-<span class="token function">foo!</span><span class="token punctuation">(</span><span class="token basic-types">i32</span><span class="token punctuation">,</span> f64<span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Two template arguments</span>
-</code></pre>
-<p>When the arguments, are also template, the parentheses are mandatory
-even if there is only one parameter, to avoid ambiguity.</p>
-<pre class="language-"><code class="lang-ymir"><span class="token function">foo!</span><span class="token punctuation">(</span>foo<span class="token operator">!</span><span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Ok</span>
-foo<span class="token operator">!</span>foo<span class="token operator">!</span><span class="token basic-types">i32</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// No</span>
-</code></pre>
-<h2 id="template-definition-syntax"><a name="template-definition-syntax" class="anchor-navigation-ex-anchor" href="#template-definition-syntax"><i class="fa fa-link" aria-hidden="true"></i></a>1.2. Template definition syntax</h2>
-<p>Multiple symbols in <em>Ymir</em> can be templates. Every template symbol
-has a name, and the template parameters are following that name. For
-example, function can be templates :</p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>T<span class="token punctuation">)</span> <span class="token punctuation">(</span>a <span class="token punctuation">:</span> T<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+powerful, and allows the generation of code, that will be used many
+times for many purpose, by writting minimal source code, and
+conditional compilation. Templates is a main part of the <em>Ymir</em>
+language, and almost everything in the standard library is written
+using templates. It is important to understand the template system, to
+use the language.</p>
+<h2 id="template-definition-syntax"><a name="template-definition-syntax" class="anchor-navigation-ex-anchor" href="#template-definition-syntax"><i class="fa fa-link" aria-hidden="true"></i></a>1.1. Template definition syntax</h2>
+<p>Multiple symbols in <em>Ymir</em> can be templates. Every template symbol has
+a name, and the template parameters are following that name enclosed
+between curly brackets (this time they are always mandatory). For
+example, a function can be a template, as it can be seen in the
+following example. In this example, the function <strong><code>foo</code></strong> takes a
+type as template parameter, and this type is named <strong><code>T</code></strong> in the
+function symbol, and is used as the type of the first parameter of the
+function (i.e. the type of the parameter <strong><code>a</code></strong>). By convention, the
+identifiers of the template parameters are in upper case, however that
+is not mandatory.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> foo <span class="token punctuation">{</span>T<span class="token punctuation">}</span> <span class="token punctuation">(</span>a <span class="token punctuation">:</span> T<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>In the above example, we can see two set of parentheses, the first one
-define the template parameters, and the second one the parameters of
-the function <code>foo</code>. Structure, class, enum, traits and internal
-modules, can also be templates.</p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">class</span> <span class="token function">A</span> <span class="token punctuation">(</span>T<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<p><br></p>
+<p>Other symbols can also be templates. These symbols are : </p>
+<ul>
+<li>Classes</li>
+<li>Structures</li>
+<li>Enumerations</li>
+<li>Local modules</li>
+<li>Traits</li>
+<li>Aka</li>
+</ul>
+<p>The templates arguments always follows the name of the symbol. In the
+following example, templates are defined for various symbols.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">class</span> A <span class="token punctuation">{</span>T<span class="token punctuation">}</span> <span class="token punctuation">{</span>
     <span class="token keyword">let</span> value <span class="token punctuation">:</span> T<span class="token punctuation">;</span>
-    <span class="token comment">// ...</span>
+
+    <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span>v <span class="token punctuation">:</span> T<span class="token punctuation">)</span> <span class="token keyword">with</span> value <span class="token operator">=</span> v <span class="token punctuation">{</span><span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 
 <span class="token keyword">struct</span> 
 <span class="token operator">|</span> x <span class="token punctuation">:</span> T
-<span class="token punctuation">-&gt;</span> <span class="token function">S</span> <span class="token punctuation">(</span>T<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">-&gt;</span> S <span class="token punctuation">{</span>T<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
 <span class="token keyword">enum</span> 
 <span class="token operator">|</span> X <span class="token operator">=</span> cast<span class="token operator">!</span><span class="token function">T</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span>
-<span class="token punctuation">-&gt;</span> <span class="token function">F</span> <span class="token punctuation">(</span>T<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">-&gt;</span> F <span class="token punctuation">{</span>T<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-<span class="token keyword">mod</span> <span class="token function">Inner</span> <span class="token punctuation">(</span>T<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">mod</span> Inner <span class="token punctuation">{</span>T<span class="token punctuation">}</span> <span class="token punctuation">{</span>
     <span class="token other-keyword">pub</span> <span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>a <span class="token punctuation">:</span> T<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token comment">// ...</span>
+        <span class="token function">println</span> <span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 
-<span class="token keyword">trait</span> <span class="token function">Z</span> <span class="token punctuation">(</span>T<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">trait</span> Z <span class="token punctuation">{</span>T<span class="token punctuation">}</span> <span class="token punctuation">{</span>
     <span class="token other-keyword">pub</span> <span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">,</span> a <span class="token punctuation">:</span> T<span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> T<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
+
+<span class="token keyword">aka</span> X <span class="token punctuation">{</span>T<span class="token punctuation">}</span> <span class="token operator">=</span> cast<span class="token operator">!</span><span class="token function">T</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
-<h2 id="template-instanciation"><a name="template-instanciation" class="anchor-navigation-ex-anchor" href="#template-instanciation"><i class="fa fa-link" aria-hidden="true"></i></a>1.3. Template instanciation</h2>
-<p>When a template symbol is defined, and the syntax of template call is
-used, a specialization is performed. The symbol, that match the most
-the template arguments to the template parameter is chosen, and
-instanciated. </p>
+<p><br></p>
+<h2 id="template-argument-syntax"><a name="template-argument-syntax" class="anchor-navigation-ex-anchor" href="#template-argument-syntax"><i class="fa fa-link" aria-hidden="true"></i></a>1.2. Template argument syntax</h2>
+<p>The <em>template call</em> syntax is declared using the token <code>!</code>, followed
+by one are multiple arguments, enclosed inside curly
+brackets. Template arguments are elements that must be known by the
+compiler at compile time, in order to produce a valid template
+specialization and create a symbol that can be used and is fully
+validated (i.e. where every types are correctly defined). The
+following code block present the syntax of the <em>template
+call</em>. <em>Template call</em> is a high priority expression, that has a even
+higher level of priority than the <strong><code>::</code></strong> operator, and unary
+operators. Operator priority is presented in the chapter <a href="https://gnu-ymir.github.io/Documentations/en/primitives/operator.html" target="_blank">Operator
+priority</a>.</p>
+<pre class="language-"><code class="lang-grammar"><span class="token path">template_call</span> <span class="token punctuation">:</span><span class="token operator">=</span> expression <span class="token punctuation">(</span>single_arg <span class="token operator">|</span> multiple_args<span class="token punctuation">)</span> 
+<span class="token path">single_arg</span> <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token string">&apos;!&apos;</span> expression 
+<span class="token path">multiple_args</span> <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token string">&apos;!&apos;</span> <span class="token string">&apos;{&apos;</span> <span class="token punctuation">(</span>expression <span class="token operator">|</span> template_call<span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token string">&apos;,&apos;</span> <span class="token punctuation">(</span>expression <span class="token operator">|</span> template_call<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">*</span><span class="token punctuation">)</span>? <span class="token string">&apos;}&apos;</span>
+</code></pre>
+<p><br></p>
+<p>And the following code block presents example of <em>template call</em> on a
+function named <strong><code>foo</code></strong>.</p>
+<pre class="language-"><code class="lang-ymir">foo<span class="token operator">!</span><span class="token basic-types">i32</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// One template argument (i32)</span>
+<span class="token function">foo!</span><span class="token punctuation">(</span><span class="token basic-types">i32</span><span class="token punctuation">,</span> f32<span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// One template tuple (i32, f32)</span>
+foo<span class="token operator">!</span><span class="token punctuation">{</span><span class="token basic-types">i32</span><span class="token punctuation">,</span> f64<span class="token punctuation">}</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Two template arguments, types i32 and f64</span>
+</code></pre>
+<p><br></p>
+<p>When the arguments, are also template, the curly brackets are
+mandatory even if there is only one parameter, to avoid ambiguity.</p>
+<pre class="language-"><code class="lang-ymir">foo<span class="token operator">!</span><span class="token punctuation">{</span>foo<span class="token operator">!</span><span class="token basic-types">i32</span><span class="token punctuation">}</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Ok</span>
+foo<span class="token operator">!</span>foo<span class="token operator">!</span><span class="token basic-types">i32</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// No</span>
+</code></pre>
+<p><br></p>
+<h3 id="template-instanciation"><a name="template-instanciation" class="anchor-navigation-ex-anchor" href="#template-instanciation"><i class="fa fa-link" aria-hidden="true"></i></a>1.2.1. Template instanciation</h3>
+<p>When a template symbol is defined, the <em>template call</em> is used to
+reference it, and make a specialization. The arguments used in the
+<em>template call</em> are associated to the template parameters of the
+template symbol, in the order they are defined. In the following
+example, a function <strong><code>foo</code></strong> has a template argument, that must be a
+type, and is named <strong><code>T</code></strong>. The <strong><code>main</code></strong> function use the <em>template
+call</em> syntax to use that symbol, and associate to <strong><code>T</code></strong> the type
+<strong><code>i32</code></strong>. The symbol with a <strong><code>i32</code></strong> is then created by the
+compiler, and the <strong><code>main</code></strong> function calls it using the standard call
+syntax using the parentheses operator.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
 
-<span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>T<span class="token punctuation">)</span> <span class="token punctuation">(</span>a <span class="token punctuation">:</span> T<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">def</span> foo <span class="token punctuation">{</span>T<span class="token punctuation">}</span> <span class="token punctuation">(</span>a <span class="token punctuation">:</span> T<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token function">println</span> <span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token function">foo!</span><span class="token punctuation">(</span><span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    foo<span class="token operator">!</span><span class="token basic-types">i32</span> <span class="token punctuation">(</span><span class="token number">42</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
+<p><br>
+Results: </p>
+<pre class="language-"><code>42
+</code></pre><p><br></p>
 <p>When the template symbol is a function, it can happened that the
 template parameters can be infered from the parameters of the
 function. For example in the above example, there is no need to
-specify a template call, and you can write as follows :</p>
+specify a <em>template call</em>, and the <em>standard call</em> expression is
+sufficient.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
 
-<span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>T<span class="token punctuation">)</span> <span class="token punctuation">(</span>a <span class="token punctuation">:</span> T<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">def</span> foo <span class="token punctuation">{</span>T<span class="token punctuation">}</span> <span class="token punctuation">(</span>a <span class="token punctuation">:</span> T<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token function">println</span> <span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// T, will be infered to i32</span>
-    <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token string">&quot;Hi !!&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// T, will be infered to [c32]</span>
+    <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token number">42</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// T, is infered as i32</span>
+    <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token string">&quot;Hi !!&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// T, is infered as a [c32]</span>
 <span class="token punctuation">}</span>
 </code></pre>
+<p><br>
+Results: </p>
+<pre class="language-"><code>42
+Hi !!
+</code></pre><p><br></p>
 <p>This cannot be done for structure or module. However, this is possible
 to do on classes, and this will be presented a little later, in the
-following section of the document.</p>
-<p>When a template call is made on a function that take only one
-argument, you can use the DotCall syntax and forget the parameter
-parentheses. This can be used to simplify the syntax that is obvious
-anyway.</p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>T<span class="token punctuation">,</span> X<span class="token punctuation">)</span> <span class="token punctuation">(</span>_ <span class="token punctuation">:</span> X<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+following section of the chapter. </p>
+<p>We have seen in the chapter about
+function (<em>cf</em>.
+<a href="https://gnu-ymir.github.io/Documentations/en/primitives/functions.html" target="_blank">Functions</a>),
+the <em>uniform call syntax</em>. This syntax is also applicable on template
+functions. In the following example, a function that takes two types
+as template parameters is called in the <strong><code>main</code></strong> function.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
+
+<span class="token keyword">def</span> foo <span class="token punctuation">{</span>T<span class="token punctuation">}</span> <span class="token punctuation">(</span>a <span class="token punctuation">:</span> T<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">.</span>foo<span class="token operator">!</span><span class="token basic-types">i32</span><span class="token punctuation">;</span> 
-    <span class="token comment">// It is exaclty the same as : </span>
-    <span class="token comment">// (12).foo!(i32) (); </span>
+    <span class="token punctuation">(</span><span class="token number">42</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
 <span class="token punctuation">}</span>
 </code></pre>
-<p>You can note that only one argument has been passed to the template
-function. The second one is optionnal, since it can be infered from
-the function parameter. If the function definition was <code>foo (X, T)
-(_ : X)</code>, the inference could no more be done, the template call is
-checked first, so X will be set to <code>i32</code>, and <code>T</code> could not be infered
-from anything, so you should get the following error :</p>
-<pre class="language-"><code>Error : call operator is not defined for type foo (T)(_ : X)-&gt; void and {i32}
- --&gt; main.yr:(5,9)
-    | 
- 5  |     (12).foo!i32; 
-    |         ^
-    | Note : candidate foo --&gt; main.yr:(1,5) : foo (T)(_ : X)-&gt; void
-    | Error : unresolved template
-    |  --&gt; main.yr:(1,13)
-    |     | 
-    |  1  | def foo (X, T) (_ : X) {
-    |     |             ^
-    |------------------------------ 
+<h3 id="multiple-template-parameters"><a name="multiple-template-parameters" class="anchor-navigation-ex-anchor" href="#multiple-template-parameters"><i class="fa fa-link" aria-hidden="true"></i></a>1.2.2. Multiple template parameters</h3>
+<p>As said earlier the parameters are specialized using the arguments of
+the <em>template call</em> syntax in the order they are presented. For
+example, in the following example, the <em>template call</em> syntax at line
+<strong><code>1</code></strong> creates a symbol where <strong><code>T=i32</code></strong>, and <strong><code>U=f64</code></strong>.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> foo <span class="token punctuation">{</span>T<span class="token punctuation">,</span> U<span class="token punctuation">}</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
 
-ymir1: fatal error: 
-compilation terminated.
-</code></pre><h3 id="template-class-instanciation"><a name="template-class-instanciation" class="anchor-navigation-ex-anchor" href="#template-class-instanciation"><i class="fa fa-link" aria-hidden="true"></i></a>1.3.1. Template class instanciation</h3>
-<p>When a class template is declared, the compiler is sometimes able to
-infer the type of the templates from the argument passed to the
-constructors. The rule is the same as for function
-instanciation. </p>
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    foo<span class="token operator">!</span><span class="token punctuation">{</span><span class="token basic-types">i32</span><span class="token punctuation">,</span> f64<span class="token punctuation">}</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br></p>
+<p>It is not necessary to put all the argument in the other template
+parameters can be infered from the previous template arguments, or by
+the parameters of the function. We will see in a next chapter some way
+to determine the kind of type that can be used in a template symbol,
+but briefly in the following example, the <strong><code>foo</code></strong> function only
+accepts types that are slices of <strong><code>U</code></strong>, where <strong><code>U</code></strong> can
+be any type. In that case, because <strong><code>T</code></strong> can be used to infer the
+type of <strong><code>U</code></strong>, there is no need to specify the type of <strong><code>U</code></strong>
+explicitly.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
 
-<span class="token keyword">class</span> <span class="token function">X</span> <span class="token punctuation">(</span>T<span class="token punctuation">,</span> U<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">def</span> foo <span class="token punctuation">{</span>T of <span class="token punctuation">[</span>U<span class="token punctuation">]</span><span class="token punctuation">,</span> U<span class="token punctuation">}</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;T=&quot;</span><span class="token punctuation">,</span> <span class="token path">T</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">typeid</span><span class="token punctuation">,</span> <span class="token string">&quot; U=&quot;</span><span class="token punctuation">,</span> <span class="token path">U</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">typeid</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">foo!</span><span class="token punctuation">[</span><span class="token basic-types">i32</span><span class="token function">]</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br>
+Results: </p>
+<pre class="language-"><code>T=[i32] U=i32
+</code></pre><p><br></p>
+<p>The same behavior can be observed when the type can be infered from a
+standard parameter of the function. In the following example, the type
+<strong><code>T</code></strong> is defined by the <em>template call</em> syntax, but the type <strong><code>U</code></strong>
+is defined by the first argument of the <em>standard call</em>. Thus, type
+<strong><code>T</code></strong> is <strong><code>i32</code></strong>, and type <strong><code>U</code></strong> is <strong><code>f64</code></strong>.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
+
+<span class="token keyword">def</span> foo <span class="token punctuation">{</span>T<span class="token punctuation">,</span> U<span class="token punctuation">}</span> <span class="token punctuation">(</span>a <span class="token punctuation">:</span> U<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;T=&quot;</span><span class="token punctuation">,</span> <span class="token path">T</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">typeid</span><span class="token punctuation">,</span> <span class="token string">&quot; U=&quot;</span><span class="token punctuation">,</span> <span class="token path">U</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">typeid</span><span class="token punctuation">,</span> <span class="token string">&quot; a=&quot;</span><span class="token punctuation">,</span> a<span class="token punctuation">,</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    foo<span class="token operator">!</span><span class="token basic-types">i32</span> <span class="token punctuation">(</span><span class="token number">3.14</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br>
+Results:</p>
+<pre class="language-"><code>T=i32 U=f64 a=3.140000
+</code></pre><p><br></p>
+<p>One can note that the type <strong><code>T</code></strong> cannot be infered from anything
+aside the <em>template call</em>. Thus it has to be the first template
+parameter, otherwise the <em>template call</em> would have defined the type
+<strong><code>U</code></strong>. In the following example, the parameter <strong><code>T</code></strong> and <strong><code>U</code></strong>
+have been reversed, but the call is the same. In that case, the
+compiler fails to create a valid symbol and throws an error.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
+
+<span class="token keyword">def</span> foo <span class="token punctuation">{</span>U<span class="token punctuation">,</span> T<span class="token punctuation">}</span> <span class="token punctuation">(</span>a <span class="token punctuation">:</span> U<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;T=&quot;</span><span class="token punctuation">,</span> <span class="token path">T</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">typeid</span><span class="token punctuation">,</span> <span class="token string">&quot; U=&quot;</span><span class="token punctuation">,</span> <span class="token path">U</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">typeid</span><span class="token punctuation">,</span> <span class="token string">&quot; a=&quot;</span><span class="token punctuation">,</span> a<span class="token punctuation">,</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    foo<span class="token operator">!</span><span class="token basic-types">i32</span> <span class="token punctuation">(</span><span class="token number">3.14</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// set U to i32, and T cannot be infered</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br>
+Errors (in this error, we can see that <strong><code>U</code></strong> is set to <strong><code>i32</code></strong> at line <strong><code>10</code></strong>, and that the compiler failed to set <strong><code>T</code></strong>) :</p>
+<pre class="language-"><code class="lang-error"><span class="token path">Error</span> : the call operator is not defined for foo {T}(a : U)-&gt; void and {f64}
+ <span class="token comment">--&gt; main.yr:(8,10)</span>
+ 8  &#x2503;     foo!i32 (3.14);
+    &#x254B;             ^    ^
+    &#x2503; <span class="token other-keyword">Note</span> : candidate foo <span class="token comment">--&gt; main.yr:(3,5) : foo {T}(a : U)-&gt; void</span>
+    &#x2503;     &#x2503; <span class="token path">Error</span> : unresolved template
+    &#x2503;     &#x2503;  <span class="token comment">--&gt; main.yr:(3,13)</span>
+    &#x2503;     &#x2503;  3  &#x2503; def foo {U, T} (a : U) {
+    &#x2503;     &#x2503;     &#x254B;             ^
+    &#x2503;     &#x2503; <span class="token other-keyword">Note</span> : for : foo <span class="token comment">--&gt; main.yr:(3,5) with (U = i32)</span>
+    &#x2503;     &#x2517;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501; 
+    &#x2517;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x253B;&#x2501; 
+
+
+ymir1: <span class="token path">fatal error</span>: 
+compilation terminated.
+</code></pre>
+<p><br></p>
+<p>Using the <em>template call</em> syntax to set only a part of the template
+symbols is named a <em>two time template validation</em>. We will see in the
+next chapter, that template specialization can be very powerful and
+can be used to choose between multiple template symbols. Refering to a
+template symbol without using the <em>template call</em> syntax can be seen
+as a special case of <em>two time validation</em>, where the <em>template call</em>
+is made but with no arguments. </p>
+<h3 id="template-class-instanciation"><a name="template-class-instanciation" class="anchor-navigation-ex-anchor" href="#template-class-instanciation"><i class="fa fa-link" aria-hidden="true"></i></a>1.2.3. Template class instanciation</h3>
+<p>When a class template is declared, the compiler is sometimes able to
+infer the type of the templates from the argument passed to the
+constructors. The rule is the same as for function instanciation. In
+the following example, the class <strong><code>X</code></strong> is a template class that
+takes two types as template parameters. The <strong><code>main</code></strong> function
+instanciate a <strong><code>X</code></strong> class at line <strong><code>10</code></strong> without using the
+<em>template call</em> syntax. This is possible, because the constructor of
+the class at line <strong><code>6</code></strong> is sufficient to infer the types <strong><code>T</code></strong> and
+<strong><code>U</code></strong> exactly as it would be done if it was a function
+template. Because <strong><code>T</code></strong> and <strong><code>U</code></strong> has no restriction any type can
+be used.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> X <span class="token punctuation">{</span>T<span class="token punctuation">,</span> U<span class="token punctuation">}</span> <span class="token punctuation">{</span>
     <span class="token keyword">let</span> x <span class="token punctuation">:</span> T<span class="token punctuation">,</span> y <span class="token punctuation">:</span> U<span class="token punctuation">;</span>
 
     <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> T<span class="token punctuation">,</span> y <span class="token punctuation">:</span> U<span class="token punctuation">)</span> <span class="token keyword">with</span> x <span class="token operator">=</span> x<span class="token punctuation">,</span> y <span class="token operator">=</span> y <span class="token punctuation">{</span><span class="token punctuation">}</span>    
@@ -932,13 +1087,19 @@ instanciation. </p>
     <span class="token function">println</span> <span class="token punctuation">(</span><span class="token path">b</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">typeinfo</span><span class="token punctuation">.</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>Like functions you can make a two times validation of the templates of
-a class. You don&apos;t have to give all the template parameters when
-invoking a template call, but all the templates must be validated at
-the end.</p>
+<p><br></p>
+<p>Results: </p>
+<pre class="language-"><code>main::X(i32,c32)::X
+main::X([i32],[c32])::X
+</code></pre><p><br></p>
+<p>A <em>two time validation</em> can also be used to set the types of a part of
+the template parameters, and let the other be infered by the
+constructor call. In the following example, the type <strong><code>T</code></strong> is set by
+the <em>template call</em> syntax, and the type <strong><code>U</code></strong> is infered from the
+type of the parameter <strong><code>y</code></strong> of the constructor (here <strong><code>c32</code></strong>).</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
 
-<span class="token keyword">class</span> <span class="token function">X</span> <span class="token punctuation">(</span>T<span class="token punctuation">,</span> U<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">class</span> X <span class="token punctuation">{</span>T<span class="token punctuation">,</span> U<span class="token punctuation">}</span> <span class="token punctuation">{</span>
     <span class="token keyword">let</span> y <span class="token punctuation">:</span> U<span class="token punctuation">;</span>
 
     <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span>y <span class="token punctuation">:</span> U<span class="token punctuation">)</span> <span class="token keyword">with</span> y <span class="token operator">=</span> y <span class="token punctuation">{</span><span class="token punctuation">}</span>    
@@ -949,6 +1110,15 @@ the end.</p>
     <span class="token function">println</span> <span class="token punctuation">(</span><span class="token path">x</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">typeinfo</span><span class="token punctuation">.</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
+<p><br>
+Results: </p>
+<pre class="language-"><code>main::X(i32,c32)::X
+</code></pre><p><strong>Contribution</strong> other template symbols cannot be called without
+<em>template call</em>. This is normal for modules, traits, and enumeration,
+as nothing can be used to infer the types. But structures are called
+using arguments, that are used to set the values of the fields, this
+is thus possible to infer the templates types in that case. Has to be
+done, though.</p>
 
                                 
                                 </section>
@@ -981,7 +1151,7 @@ the end.</p>
                 </a>
                 
                 
-                <a href="special.html" class="navigation navigation-next " aria-label="Next page: Specialization">
+                <a href="special.html" class="navigation navigation-next " aria-label="Next page: Template types">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -992,7 +1162,7 @@ the end.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Templates","level":"1.11","depth":1,"next":{"title":"Specialization","level":"1.11.1","depth":2,"path":"templates/special.md","ref":"templates/special.md","articles":[]},"previous":{"title":"Unsafe function pointer","level":"1.10.4","depth":2,"path":"errors/fptr_closure.md","ref":"errors/fptr_closure.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"templates/README.md","mtime":"2021-05-31T15:40:16.845Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-05T04:09:09.325Z"},"basePath":"..","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Templates","level":"1.11","depth":1,"next":{"title":"Template types","level":"1.11.1","depth":2,"path":"templates/special.md","ref":"templates/special.md","articles":[]},"previous":{"title":"Unsafe function pointer","level":"1.10.4","depth":2,"path":"errors/fptr_closure.md","ref":"errors/fptr_closure.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"templates/README.md","mtime":"2021-06-11T07:29:38.031Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-17T05:03:31.114Z"},"basePath":"..","book":{"language":"en"}});
         });
     </script>
 </div>

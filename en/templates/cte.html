@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Compile time execution · GitBook</title>
+        <title>Template values · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -217,6 +217,19 @@
             
                     
                     Control flows
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../primitives/operator.html">
+            
+                <a href="../primitives/operator.html">
+            
+                    
+                    Operator priority
             
                 </a>
             
@@ -584,7 +597,7 @@
                 <a href="special.html">
             
                     
-                    Specialization
+                    Template types
             
                 </a>
             
@@ -597,7 +610,7 @@
                 <a href="cte.html">
             
                     
-                    Compile time execution
+                    Template values
             
                 </a>
             
@@ -610,7 +623,7 @@
                 <a href="values.html">
             
                     
-                    Template as values
+                    Compilation time execution
             
                 </a>
             
@@ -776,7 +789,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Compile time execution</a>
+        <a href=".." >Template values</a>
     </h1>
 </div>
 
@@ -791,172 +804,360 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#compilation-time-execution"><b>1. </b>Compilation time execution</a></li><ul><li><span class="title-icon "></span><a href="#compilation-time-values"><b>1.1. </b>Compilation time values</a></li><li><span class="title-icon "></span><a href="#is-operator"><b>1.2. </b>Is operator</a></li><li><span class="title-icon "></span><a href="#template-function-test"><b>1.3. </b>Template function test</a></li><li><span class="title-icon "></span><a href="#compilation-time-condition"><b>1.4. </b>Compilation time condition</a></li><li><span class="title-icon "></span><a href="#class-compilation-test"><b>1.5. </b>Class compilation test</a></li></ul></ul></div><a href="#compilation-time-execution" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="compilation-time-execution"><a name="compilation-time-execution" class="anchor-navigation-ex-anchor" href="#compilation-time-execution"><i class="fa fa-link" aria-hidden="true"></i></a>1. Compilation time execution</h1>
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#template-values"><b>1. </b>Template values</a></li><ul><li><span class="title-icon "></span><a href="#compilation-time-values"><b>1.1. </b>Compilation time values</a></li><li><span class="title-icon "></span><a href="#values-as-template-parameter"><b>1.2. </b>Values as template parameter</a></li><ul><li><span class="title-icon "></span><a href="#template-literal"><b>1.2.1. </b>Template literal</a></li><li><span class="title-icon "></span><a href="#template-variable"><b>1.2.2. </b>Template variable</a></li><li><span class="title-icon "></span><a href="#template-type-for-template-variable"><b>1.2.3. </b>Template type for template variable</a></li></ul><li><span class="title-icon "></span><a href="#function-pointers"><b>1.3. </b>Function pointers</a></li></ul></ul></div><a href="#template-values" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="template-values"><a name="template-values" class="anchor-navigation-ex-anchor" href="#template-values"><i class="fa fa-link" aria-hidden="true"></i></a>1. Template values</h1>
 <p>In <em>Ymir</em>, templates are seen as compilation time execution
-parameters. They can be used to create values, symbols, are to make
-the compiler take decisions. </p>
+parameters. These parameters can be either types or values. When
+dealing with values, as with any values, decisions and program
+branching can be made, but because these values are known at
+compilation time, the decisions can also be made at compilation
+time. This system is called <em>compilation time execution</em> or <em>cte</em> for
+short. The keyword <strong><code>cte</code></strong> is used to ensure that a part of the code
+is executed at compilation time, and generates a value (that can be
+<strong><code>void</code></strong>) at compilation as well, to save time at execution time and
+have a better optimized executable.</p>
 <h2 id="compilation-time-values"><a name="compilation-time-values" class="anchor-navigation-ex-anchor" href="#compilation-time-values"><i class="fa fa-link" aria-hidden="true"></i></a>1.1. Compilation time values</h2>
-<p>Basically, every values can be know at compilation time as long as they do
-not implies variable, or dynamic branching. For example this value
-<code>foo ()</code> acquired from the following source code can be known at
-compilation time.</p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span>
+<p>Basically, every values can be known at compilation time as long as
+they do not implies variable, or dynamic branching. For example, the
+value of the <strong><code>foo</code></strong> function in the following source code can be
+knwon at compilation time. Indeed, it implies only constants, that can
+be computed by the compiler directly. The <strong><code>main</code></strong> function uses the
+keyword <strong><code>cte</code></strong> to force the compiler to call the function <strong><code>foo</code></strong>
+during the compilation. If the keyword is omitted then the function
+<strong><code>foo</code></strong> is called at execution time.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
+
+<span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span> <span class="token punctuation">{</span>
     <span class="token function">bar</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token function">baz</span> <span class="token punctuation">(</span><span class="token punctuation">)</span>
-
-<span class="token keyword">def</span> <span class="token function">bar</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span> 
-    <span class="token number">12</span>
-
-<span class="token keyword">def</span> <span class="token function">baz</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span>
-    <span class="token number">30</span>
-</code></pre>
-<p>To see if a value can be known at compilation time a simple test is to use
-it as a template parameter. Or by using the keyword <code>cte</code>.</p>
-<p><strong>Exercise :</strong> Try to compile the
-following source code with the option <code>-fdump-tree-gimple</code>.</p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
-
-<span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span>
-    <span class="token function">bar</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token function">baz</span> <span class="token punctuation">(</span><span class="token punctuation">)</span>
-
-<span class="token keyword">def</span> <span class="token function">bar</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span> 
-    <span class="token number">12</span>
-
-<span class="token keyword">def</span> <span class="token function">baz</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span>
-    <span class="token number">30</span>
-
-<span class="token keyword">def</span> <span class="token function">printTemplate</span> <span class="token punctuation">(</span>V <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> void <span class="token punctuation">{</span>
-    <span class="token function">println</span> <span class="token punctuation">(</span>V<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
+<span class="token keyword">def</span> <span class="token function">bar</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span> 
+    <span class="token number">12</span>
+
+<span class="token keyword">def</span> <span class="token function">baz</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span>
+    <span class="token number">30</span>
+
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token function">printTemplate!</span><span class="token punctuation">(</span><span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">let</span> z <span class="token operator">=</span> cte <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">println</span> <span class="token punctuation">(</span>z<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>This will generate a file named <code>main.yr.004t.gimple</code> containing a
-precompiled version of the code. You should get in this file a
-definition of the function <code>printTemplate</code>, that prints the value
-<code>42</code>.</p>
-<pre class="language-"><code>// ...
-
-main::printTemplate(42)::printTemplate ()
-{
-  {
-    _Y3std2io11printlnNi327printlnFi32Zv (42);
-  }
-}
-
-main ()
+<p><br> To verify that the <em>compilation time execution</em> effectively
+happened, the option <strong><code>-fdump-tree-gimple</code></strong> can be used. This option
+creates alternative files, that give information about the
+compilation, and can be used to see what the frontend of the <em>Ymir</em>
+compiler gave to the <strong>gcc</strong> compiler (source code close the <em>C
+language</em>). The following block of code presents a part of the content
+of this file. One can note that the <strong><code>main</code></strong> function does not call
+the <strong><code>foo</code></strong> function, but only the <strong><code>println</code></strong> function with the
+value <strong><code>42</code></strong>.</p>
+<pre class="language-"><code>main ()
 {
   {
     signed int z;
 
-    _Y4main16printTemplateN4213printTemplateFZv ();
     z = 42;
     _Y3std2io11printlnNi327printlnFi32Zv (z);
   }
 }
-</code></pre><p>This chapter does not cover compilation time values, which will be
-detailed in the next chapter, but it is important to know what a
-compilation time value is in order to understand the following
-sections.</p>
-<h2 id="is-operator"><a name="is-operator" class="anchor-navigation-ex-anchor" href="#is-operator"><i class="fa fa-link" aria-hidden="true"></i></a>1.2. Is operator</h2>
-<p>The <code>is</code> operator is used to perform a template test that will be
-evaluated to a bool value. This is useful for all of the following
-principles. The syntax is the following : </p>
-<p><code>is ! template_arguments templates_parameters</code></p>
+</code></pre><h2 id="values-as-template-parameter"><a name="values-as-template-parameter" class="anchor-navigation-ex-anchor" href="#values-as-template-parameter"><i class="fa fa-link" aria-hidden="true"></i></a>1.2. Values as template parameter</h2>
+<p>We have seen in the previous chapter that templates parameters are
+used to accept types. They also can be used to accept values, in that
+case the syntax - described in the following code block - is a bit
+different. The syntax for template values is close to variable
+declaration, using the token <strong><code>:</code></strong>, or by using directly the literal
+that is accepted.</p>
+<pre class="language-"><code class="lang-grammar"><span class="token path">template_value</span> <span class="token punctuation">:</span><span class="token operator">=</span> literal <span class="token operator">|</span> Identifier <span class="token string">&apos;:&apos;</span> <span class="token punctuation">(</span>Identifier <span class="token operator">|</span> type<span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token string">&apos;=&apos;</span> literal<span class="token punctuation">)</span>?
+</code></pre>
+<h3 id="template-literal"><a name="template-literal" class="anchor-navigation-ex-anchor" href="#template-literal"><i class="fa fa-link" aria-hidden="true"></i></a>1.2.1. Template literal</h3>
+<p>A literal that can be known at compilation time can be used to make a
+template specialization. The types that can be knwon at compilation
+time are the following :</p>
+<ul>
+<li>string ([c8] or [c32])</li>
+<li>char (c8 or c32)</li>
+<li>integer (signed or unsigned)</li>
+<li>float</li>
+</ul>
+<p><strong>Contribution</strong>: tuple, and struct are not compilation time knowable,
+but this seems possible if they only contains <em>cte</em> values, same for
+slice that are not strings.</p>
+<p>In the following example, there are three different definition of the
+function <strong><code>foo</code></strong>. The first one at line <strong><code>3</code></strong> can be called using
+a the <em>cte</em> value <strong><code>3</code></strong>, the second one at line <strong><code>8</code></strong> using the
+value <strong><code>2</code></strong>, and so on. The <strong><code>main</code></strong> function calls the function
+<strong><code>foo</code></strong> using the value <strong><code>5 - 2</code></strong>, so the first definition at line
+<strong><code>3</code></strong> is used.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
 
-<span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>T<span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> isI32 <span class="token operator">=</span> <span class="token other-keyword">is</span><span class="token operator">!</span><span class="token punctuation">(</span>T<span class="token punctuation">)</span> <span class="token punctuation">(</span>X of <span class="token basic-types">i32</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">println</span> <span class="token punctuation">(</span>isI32<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">def</span> foo <span class="token punctuation">{</span><span class="token number">3</span><span class="token punctuation">}</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;3&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    foo<span class="token operator">!</span><span class="token function">2</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> foo <span class="token punctuation">{</span><span class="token number">2</span><span class="token punctuation">}</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;2&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    foo<span class="token operator">!</span><span class="token function">1</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> foo <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">}</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;1&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    foo<span class="token operator">!</span><span class="token function">0</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> foo <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">}</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Go !&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    foo<span class="token operator">!</span><span class="token basic-types">i32</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    foo<span class="token operator">!</span><span class="token function">f32</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    foo<span class="token operator">!</span><span class="token punctuation">{</span><span class="token number">5</span> <span class="token operator">-</span> <span class="token number">2</span><span class="token punctuation">}</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<h2 id="template-function-test"><a name="template-function-test" class="anchor-navigation-ex-anchor" href="#template-function-test"><i class="fa fa-link" aria-hidden="true"></i></a>1.3. Template function test</h2>
-<p>When declaring a function with the keyword <code>def</code>, you can add a test
-that will be evaluated at compilation time, that will force the compiler
-to decide wether or not the symbol must be declared. </p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">traits</span><span class="token punctuation">;</span>
-
-<span class="token keyword">def</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>isIntegral<span class="token operator">!</span>T<span class="token punctuation">)</span> <span class="token function">foo</span> <span class="token punctuation">(</span>T<span class="token punctuation">)</span> <span class="token punctuation">(</span>a <span class="token punctuation">:</span> T<span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> T
-    a <span class="token operator">+</span> cast<span class="token operator">!</span><span class="token function">T</span><span class="token punctuation">(</span><span class="token number">30</span><span class="token punctuation">)</span>
-
-
-<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token function">foo</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     
-<span class="token punctuation">}</span>
-</code></pre>
-<p>The function <code>isIntegral</code> is declared within the module
-<code>std::traits</code>. This module contains a list of compilation time definitions
-that are designed to help for the specialization of templates . Each
-value that can be known at compilation time can be used in the test of a
-model function.</p>
-<h2 id="compilation-time-condition"><a name="compilation-time-condition" class="anchor-navigation-ex-anchor" href="#compilation-time-condition"><i class="fa fa-link" aria-hidden="true"></i></a>1.4. Compilation time condition</h2>
-<p>The keyword <code>cte</code> in front of a <code>if</code> condition defines that the
-condition test must be performed at compilation time. Only the block of
-the condition that is satisfied will be compiled.</p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">traits</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
-
-<span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>T<span class="token punctuation">)</span> <span class="token punctuation">(</span>a <span class="token punctuation">:</span> T<span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> T <span class="token punctuation">{</span>
-    cte <span class="token keyword">if</span> <span class="token punctuation">(</span>isIntegral<span class="token operator">!</span>T<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        a <span class="token operator">+</span> <span class="token number">30</span>
-    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
-        <span class="token comment">// Inconsistent operation on integrals</span>
-        a <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token function">foo</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-</code></pre>
-<p>Any condition that can be known at compilation time can be used as a test
-of a compilation time condition. </p>
-<h2 id="class-compilation-test"><a name="class-compilation-test" class="anchor-navigation-ex-anchor" href="#class-compilation-test"><i class="fa fa-link" aria-hidden="true"></i></a>1.5. Class compilation test</h2>
-<p>The keyword <code>cte</code> can also be used inside class definition to make
-decision at compilation time. The syntax is the same as a compilation
-time condition.</p>
+<p><br>
+Results: </p>
+<pre class="language-"><code>3
+2
+1
+Go !
+</code></pre><p><br></p>
+<p>Literal string can also be used as template parameter. We will see in
+a forthcoming chapter that those are used for operator overloading
+(<em>cf</em>. <a href="https://gnu-ymir.github.io/Documentations/en/templates/operators.html" target="_blank">Operator
+overloading</a>). A
+simple example is presented in the following source code, where the
+<strong><code>foo</code></strong> function accepts the literal <strong><code>Hi I&apos;m foo !</code></strong>, and is called
+by the <strong><code>main</code></strong> function using different ways.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
 
-<span class="token keyword">class</span> <span class="token function">Container</span> <span class="token punctuation">(</span>T<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    cte <span class="token keyword">if</span> <span class="token operator">!</span><span class="token punctuation">(</span><span class="token other-keyword">is</span><span class="token operator">!</span><span class="token punctuation">(</span>T<span class="token punctuation">)</span><span class="token punctuation">(</span>X of void<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token other-keyword">pub</span> <span class="token keyword">let</span> value <span class="token punctuation">:</span> T<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+<span class="token keyword">def</span> foo <span class="token punctuation">{</span><span class="token string">&quot;Hi I&apos;m foo !&quot;</span><span class="token punctuation">}</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Yes that&apos;s true !&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-    cte <span class="token keyword">if</span> <span class="token operator">!</span><span class="token punctuation">(</span><span class="token other-keyword">is</span><span class="token operator">!</span><span class="token punctuation">(</span>T<span class="token punctuation">)</span><span class="token punctuation">(</span>X of void<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> T<span class="token punctuation">)</span> <span class="token keyword">with</span> value <span class="token operator">=</span> x <span class="token punctuation">{</span><span class="token punctuation">}</span>
-    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
-        <span class="token other-keyword">pub</span> <span class="token keyword">self</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token other-keyword">impl</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">Printable</span> <span class="token punctuation">{</span>
-        <span class="token other-keyword">pub</span> <span class="token keyword">over</span> <span class="token function">print</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            cte <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token other-keyword">is</span><span class="token operator">!</span><span class="token punctuation">(</span>T<span class="token punctuation">)</span><span class="token punctuation">(</span>X of void<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                <span class="token function">print</span> <span class="token punctuation">(</span><span class="token string">&quot;Container!(void)&quot;</span><span class="token punctuation">)</span>
-            <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
-                <span class="token function">print</span> <span class="token punctuation">(</span><span class="token string">&quot;Container::value (&quot;</span><span class="token punctuation">,</span> <span class="token keyword">self</span><span class="token punctuation">.</span>value<span class="token punctuation">,</span> <span class="token string">&quot;)&quot;</span><span class="token punctuation">)</span>
-            <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
+<span class="token keyword">def</span> <span class="token function">bar</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token punctuation">[</span><span class="token basic-types">c32</span><span class="token punctuation">]</span> <span class="token punctuation">{</span>
+    <span class="token string">&quot;I&apos;m foo !&quot;</span>
 <span class="token punctuation">}</span>
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token function">Container!</span><span class="token punctuation">(</span>void<span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">let</span> b <span class="token operator">=</span> <span class="token path">Container</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token other-keyword">new</span> <span class="token punctuation">(</span><span class="token number">42</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    foo<span class="token operator">!</span><span class="token string">&quot;Hi I&apos;m foo !&quot;</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    foo<span class="token operator">!</span><span class="token punctuation">{</span><span class="token string">&quot;Hi &quot;</span> ~ <span class="token function">bar</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br>
+Results: </p>
+<pre class="language-"><code>Yes that&apos;s true !
+Yes that&apos;s true !
+</code></pre><h3 id="template-variable"><a name="template-variable" class="anchor-navigation-ex-anchor" href="#template-variable"><i class="fa fa-link" aria-hidden="true"></i></a>1.2.2. Template variable</h3>
+<p>Because it would be utterly exhausting to write every definitions of
+the template function with every possible literals (and even
+impossible when dealing with infinite types such as slice), we
+introduced the possibilty of writing template variables. Unlike real
+variables those are evaluated at compilation time, and can be defined
+only inside template parameters. The definition syntax of template
+variable is close to the definition of a standard parameter, with the
+difference that the type can be a template type (containing root
+identifiers, foundable inside the template parameters). The following
+example presents the definition of a function that make a countdown to
+<strong><code>0</code></strong> (the generalization of the function <strong><code>foo</code></strong> presented in the
+first example of the previous section). For the recursivity to stop,
+the definition of a final case is mandatory, here it is achieved by
+the function <strong><code>foo</code></strong> at line <strong><code>8</code></strong>.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
 
+<span class="token keyword">def</span> foo <span class="token punctuation">{</span>n <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">}</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    foo<span class="token operator">!</span><span class="token punctuation">{</span>n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">}</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> foo <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">}</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Go !&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    foo<span class="token operator">!</span><span class="token function">12</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br>
+Results:</p>
+<pre class="language-"><code>12
+11
+10
+9
+8
+7
+6
+5
+4
+3
+2
+1
+Go !
+</code></pre><p><br></p>
+<p><strong>Limitation</strong>: to avoid infinite loops, the compiler uses a very
+simple verification. It is impossible to make more that <strong><code>300</code></strong>
+recursive call. For that reason, make the following call <strong><code>foo!300
+()</code></strong> is impossible and generate a compilation error :</p>
+<pre class="language-"><code class="lang-error"><span class="token path">Error</span> : undefined template operator for foo and {300}
+ <span class="token comment">--&gt; main.yr:(13,5)</span>
+13  &#x2503;     foo!300 ();
+    &#x254B;        ^
+    &#x2503; <span class="token path">Error</span> : undefined template operator for foo and {300}
+    &#x2503;  <span class="token comment">--&gt; main.yr:(13,5)</span>
+    &#x2503; 13  &#x2503;     foo!300 ();
+    &#x2503;     &#x254B;        ^
+    &#x2503;     &#x2503; <span class="token other-keyword">Note</span> : in template specialization
+    &#x2503;     &#x2503;  <span class="token comment">--&gt; main.yr:(13,5)</span>
+    &#x2503;     &#x2503; 13  &#x2503;     foo!300 ();
+    &#x2503;     &#x2503;     &#x254B;        ^
+    &#x2503;     &#x2503; <span class="token other-keyword">Note</span> : foo <span class="token comment">--&gt; main.yr:(3,5) -&gt; foo</span>
+    &#x2503;     &#x2503; <span class="token path">Error</span> : undefined template operator for foo and {299}
+    &#x2503;     &#x2503;  <span class="token comment">--&gt; main.yr:(5,5)</span>
+    &#x2503;     &#x2503;  5  &#x2503;     foo!{n - 1} ();
+    &#x2503;     &#x2503;     &#x254B;        ^
+    &#x2503;     &#x2503;     &#x2503; <span class="token path">Error</span> : undefined template operator for foo and {299}
+    &#x2503;     &#x2503;     &#x2503;  <span class="token comment">--&gt; main.yr:(5,5)</span>
+    &#x2503;     &#x2503;     &#x2503;  5  &#x2503;     foo!{n - 1} ();
+    &#x2503;     &#x2503;     &#x2503;     &#x254B;        ^
+    &#x2503;     &#x2503;     &#x2503;     &#x2503;      : ...
+    &#x2503;     &#x2503;     &#x2503;     &#x2503; <span class="token other-keyword">Note</span> : there are other errors, use option -v to show them
+    &#x2503;     &#x2503;     &#x2503;     &#x2503; <span class="token path">Error</span> : undefined template operator for foo and {2}
+    &#x2503;     &#x2503;     &#x2503;     &#x2503;  <span class="token comment">--&gt; main.yr:(5,5)</span>
+    &#x2503;     &#x2503;     &#x2503;     &#x2503;  5  &#x2503;     foo!{n - 1} ();
+    &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x254B;        ^
+    &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x2503; <span class="token other-keyword">Note</span> : in template specialization
+    &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x2503;  <span class="token comment">--&gt; main.yr:(5,5)</span>
+    &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x2503;  5  &#x2503;     foo!{n - 1} ();
+    &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x254B;        ^
+    &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x2503; <span class="token other-keyword">Note</span> : foo <span class="token comment">--&gt; main.yr:(3,5) -&gt; foo</span>
+    &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x2503; <span class="token path">Error</span> : undefined template operator for foo and {1}
+    &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x2503;  <span class="token comment">--&gt; main.yr:(5,5)</span>
+    &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x2503;  5  &#x2503;     foo!{n - 1} ();
+    &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x254B;        ^
+    &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x2503; <span class="token path">Error</span> : undefined template operator for foo and {1}
+    &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x2503;  <span class="token comment">--&gt; main.yr:(5,5)</span>
+    &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x2503;  5  &#x2503;     foo!{n - 1} ();
+    &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x254B;        ^
+    &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x2503; <span class="token other-keyword">Note</span> : in template specialization
+    &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x2503;  <span class="token comment">--&gt; main.yr:(5,5)</span>
+    &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x2503;  5  &#x2503;     foo!{n - 1} ();
+    &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x254B;        ^
+    &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x2503; <span class="token other-keyword">Note</span> : foo <span class="token comment">--&gt; main.yr:(3,5) -&gt; foo</span>
+    &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x2503; <span class="token path">Error</span> : limit of template recursion reached 300
+    &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x2503;  <span class="token comment">--&gt; main.yr:(3,5)</span>
+    &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x2503;  3  &#x2503; def foo {n : i32} () {
+    &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x254B;     ^^^
+    &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x2517;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x253B;&#x2501; 
+    &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x2517;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x253B;&#x2501; 
+    &#x2503;     &#x2503;     &#x2503;     &#x2503;     &#x2517;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x253B;&#x2501; 
+    &#x2503;     &#x2503;     &#x2503;     &#x2517;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x253B;&#x2501; 
+    &#x2503;     &#x2503;     &#x2517;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x253B;&#x2501; 
+    &#x2503;     &#x2517;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x253B;&#x2501; 
+    &#x2517;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x253B;&#x2501; 
+
+
+ymir1: <span class="token path">fatal error</span>: 
+compilation terminated.
+</code></pre>
+<p><br> <strong>Contribution</strong>: add an option to the compiler to change this
+value of <strong><code>300</code></strong>.</p>
+<h3 id="template-type-for-template-variable"><a name="template-type-for-template-variable" class="anchor-navigation-ex-anchor" href="#template-type-for-template-variable"><i class="fa fa-link" aria-hidden="true"></i></a>1.2.3. Template type for template variable</h3>
+<p>The type of a <em>cte</em> variable can be a template. In that case the used
+template identifiers must be roots of the template parameters (exactly
+the same behavior as the <em>of filter</em>). In the following example, the
+function <strong><code>foo</code></strong> takes a value as template parameter, the type of
+this value can be anything as long as it can be known at compile time.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
+
+<span class="token keyword">def</span> foo <span class="token punctuation">{</span>N <span class="token punctuation">:</span> T<span class="token punctuation">,</span> T<span class="token punctuation">}</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token path">T</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">typeid</span><span class="token punctuation">,</span> <span class="token string">&quot;(&quot;</span><span class="token punctuation">,</span> N<span class="token punctuation">,</span> <span class="token string">&quot;)&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    foo<span class="token operator">!</span><span class="token function">42</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    foo<span class="token operator">!</span><span class="token string">&quot;Hi !&quot;</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br>
+Results: </p>
+<pre class="language-"><code>i32(42)
+[c32](Hi !)
+</code></pre><p><br> Compilation time values, can also be used to get the size of a
+static array at compilation time, and make a template function that
+accepts arrays of any size. This evidently works only on static
+arrays, and not on slice, because the size of the array has to be
+knwon at compilation time. However, this would not be necessary when
+using slice, because function accepting slice as parameter already
+accepts slices of any size.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
+
+<span class="token keyword">def</span> foo <span class="token punctuation">{</span>ARRAY of <span class="token punctuation">[</span>T<span class="token punctuation">;</span> N<span class="token punctuation">]</span><span class="token punctuation">,</span> T<span class="token punctuation">,</span> N <span class="token punctuation">:</span> <span class="token type">usize</span><span class="token punctuation">}</span> <span class="token punctuation">(</span>a <span class="token punctuation">:</span> <span class="token type">ARRAY</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Got an array of &quot;</span><span class="token punctuation">,</span> <span class="token path">T</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">typeid</span><span class="token punctuation">,</span> <span class="token string">&quot; of size : &quot;</span><span class="token punctuation">,</span> N<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">println</span> <span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">println</span> <span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> array <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">;</span> <span class="token number">10u64</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token function">foo</span> <span class="token punctuation">(</span>array<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
+<p><br>
+Results: </p>
+<pre class="language-"><code>Got an array of i32 of size : 10
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+</code></pre><h2 id="function-pointers"><a name="function-pointers" class="anchor-navigation-ex-anchor" href="#function-pointers"><i class="fa fa-link" aria-hidden="true"></i></a>1.3. Function pointers</h2>
+<p>Lambda functions and function pointers can be compile time knwon
+values. This is not the case for closure, and method delegates. Unlike
+function pointers, template function are statically written in the
+generated executable, thus more efficient (even if we are talking of
+marginal gain). To accept a function pointer, a template variable must
+be defined in the template parameters. In the following example, the
+function <strong><code>foo</code></strong> accepts a function pointer, that takes two
+parameters, and return a value of the same type of the
+parameters. This type seems to be unknown and is not inferable from
+the lambda function that is passed to the function at line <strong><code>13</code></strong>,
+but is infered from the execution time parameters passed to the
+function. At line <strong><code>14</code></strong>, one can note that a standard function can
+be used as a template variable.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
 
+
+<span class="token keyword">def</span> foo <span class="token punctuation">{</span>F <span class="token punctuation">:</span> <span class="token keyword">fn</span> <span class="token punctuation">(</span>X<span class="token punctuation">,</span> X<span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> X<span class="token punctuation">,</span> X<span class="token punctuation">}</span> <span class="token punctuation">(</span>a <span class="token punctuation">:</span> X<span class="token punctuation">,</span> b <span class="token punctuation">:</span> X<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Foo : &quot;</span><span class="token punctuation">,</span> <span class="token function">F</span> <span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">bar</span> <span class="token punctuation">(</span>a <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">,</span> b <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span> <span class="token punctuation">{</span>
+    a <span class="token operator">*</span> b
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    foo<span class="token operator">!</span><span class="token punctuation">{</span><span class="token operator">|</span>x<span class="token punctuation">,</span> y<span class="token operator">|</span> <span class="token operator">=</span><span class="token operator">&gt;</span> x <span class="token operator">+</span> y<span class="token punctuation">}</span> <span class="token punctuation">(</span><span class="token number">11</span><span class="token punctuation">,</span> <span class="token number">31</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    foo<span class="token operator">!</span><span class="token function">bar</span> <span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br>
+Results</p>
+<pre class="language-"><code>Foo : 42
+Foo : 42
+</code></pre><p><br> In the following example, the function pointer this time return a
+different type from the type of the parameters it takes. This function
+<strong><code>foo</code></strong> applies this function pointer to all element of the slice it
+takes as parameters.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
+
+<span class="token keyword">def</span> foo <span class="token punctuation">{</span>F <span class="token punctuation">:</span> <span class="token keyword">fn</span> <span class="token punctuation">(</span>X<span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> Y<span class="token punctuation">,</span> X<span class="token punctuation">,</span> Y<span class="token punctuation">}</span> <span class="token punctuation">(</span>a <span class="token punctuation">:</span> <span class="token punctuation">[</span>X<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> a <span class="token punctuation">{</span>
+        <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Foo : &quot;</span><span class="token punctuation">,</span> <span class="token function">F</span> <span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    foo<span class="token operator">!</span><span class="token punctuation">{</span><span class="token operator">|</span>x<span class="token operator">|</span> <span class="token operator">=</span><span class="token operator">&gt;</span> cast<span class="token operator">!</span><span class="token basic-types">i64</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">12i64</span><span class="token punctuation">}</span> <span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br>
+Results:</p>
+<pre class="language-"><code>Foo : 13
+Foo : 14
+Foo : 15
+</code></pre>
                                 
                                 </section>
                             
@@ -983,12 +1184,12 @@ time condition.</p>
 
             
                 
-                <a href="special.html" class="navigation navigation-prev " aria-label="Previous page: Specialization">
+                <a href="special.html" class="navigation navigation-prev " aria-label="Previous page: Template types">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="values.html" class="navigation navigation-next " aria-label="Next page: Template as values">
+                <a href="values.html" class="navigation navigation-next " aria-label="Next page: Compilation time execution">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -999,7 +1200,7 @@ time condition.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Compile time execution","level":"1.11.2","depth":2,"next":{"title":"Template as values","level":"1.11.3","depth":2,"path":"templates/values.md","ref":"templates/values.md","articles":[]},"previous":{"title":"Specialization","level":"1.11.1","depth":2,"path":"templates/special.md","ref":"templates/special.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"templates/cte.md","mtime":"2021-05-31T15:40:16.845Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-05T04:09:09.325Z"},"basePath":"..","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Template values","level":"1.11.2","depth":2,"next":{"title":"Compilation time execution","level":"1.11.3","depth":2,"path":"templates/values.md","ref":"templates/values.md","articles":[]},"previous":{"title":"Template types","level":"1.11.1","depth":2,"path":"templates/special.md","ref":"templates/special.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"templates/cte.md","mtime":"2021-06-14T09:12:35.245Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-17T05:03:31.114Z"},"basePath":"..","book":{"language":"en"}});
         });
     </script>
 </div>
