@@ -42,8 +42,8 @@ def main () {
 
 <br>
 
-The compiler, because the source code is not an acceptable Ymir
-program, will return an error. The error presented in the following
+The compiler, because the source code is not an acceptable *Ymir*
+program, returns an error. The error presented in the following
 block, informs that the variable **`x`** of type **`i32`**, is
 incompatible with a value of type **`f32`**.
 
@@ -58,6 +58,8 @@ ymir1: fatal error:
 compilation terminated.
 ```
 
+<br>
+
 ## Variable mutability 
 
 The decorators are used to determine the behavior to adopt with the
@@ -70,8 +72,8 @@ variable declared without the **`mut`** keyword is declared immutable
 by default, making its value definitive.
 
 In another word, if a variable is declared immutable, then it is bound
-the a value, that will not change at any time throughout the life of
-the variable. The idea behind default immutability is to avoid
+the a value, that the variable cannot change throughout the
+life of the variable. The idea behind default immutability is to avoid
 unwanted behavior or errors, by forcing the developpers to determine
 which variables are mutable with the use of a deliberately more
 verbose syntax, while making all the other variables immutable.
@@ -97,13 +99,14 @@ def main () {
 
 <br>
 
-For the given source file, the compiler will generate the following
+For the given source file, the compiler generates the following
 error. This error informs that the affectation is not allowed, due to
-the nature of the variable **`x`**, which is not mutable. In Ymir,
+the nature of the variable **`x`**, which is not mutable. In *Ymir*,
 variable mutability and, type mutability ensure, through static
-checks, that when one declares that the value of a variable will not
-change, it will really never change. Although this can sometimes be
-frustrating for the user. 
+checks, that when one declares that a variable has no write access to
+a value, there is no way to get write access to the value through
+this variable. Although this can sometimes be frustrating for the
+user.
 
 ```error
 Error : left operand of type i32 is immutable
@@ -151,11 +154,11 @@ X is equal to : 3
 types. This language proposes a complex type mutability system, whose
 understanding requires the comprehension of data types beforehand. In
 the following sections, we will, for that reason, present the type
-system, (and the different types of data that can be created in Ymir — *cf.*  chapter [Data
-types](https://gnu-ymir.github.io/Documentations/primitives/types.html)),
+system, (and the different types of data that can be created in *Ymir* — *cf.*  chapter [Data
+types](https://gnu-ymir.github.io/Documentations/en/primitives/types.html)),
 before coming back to the data mutability, — and have a full overview
 of the mutability system in chapter [Aliases and
-references](https://gnu-ymir.github.io/Documentations/advanced/).
+references](https://gnu-ymir.github.io/Documentations/en/advanced/).
 
 
 ## Initial value
@@ -219,7 +222,7 @@ value to variables.
 ## Global variables
 
 Even if global variables have a rather bad reputation for many
-justified reasons. We choose to let the possibility to define them,
+justified reasons, we choose to let the possibility to define them,
 since in spite of all, they allow some programmation paradigms that
 would be undoable otherwise.
 
@@ -290,7 +293,7 @@ __GLOBAL__ = 42
 
 There is no warranty on the order of initialization of global
 variables. This is probably, the first limitation that we can point
-out on the Ymir languages. Contribution, to allow such warranty would
+out on the Ymir languages. **Contribution**, to allow such warranty would
 be very welcomed, but seems unlikely to be possible when global
 variables come from multiple modules (*cf.*
 [Modules](https://gnu-ymir.github.io/Documentations/en/modules)).
@@ -312,6 +315,8 @@ def foo () -> i32 {
 	__A__
 }
 ```
+
+<br>
 
 The compiler will unfortunetaly be able to see only the dependent
 initialization of **`__B__`**, and will let the initialization of

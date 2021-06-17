@@ -291,7 +291,7 @@ def main () {
 <br>
 Errors: 
 
-```
+```error
 Error : the type mut fn (any)-> any is not complete
  --> main.yr:(2,10)
  2  ┃ 	let x = |x| x + 1;
@@ -329,6 +329,8 @@ def main () {
 	println (x (30));
 }
 ```
+
+<br>
 
 **Contribution**: Resolve that problem when it seems obvious, for
 example in the previous example, maybe the type of the block can be

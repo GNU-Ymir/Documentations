@@ -155,11 +155,11 @@ def main () {
 		foo ([]); 
 	} catch {
 	    err : &AssertError => {
-		println ("Foo failed : ", err);
+			println ("Foo failed : ", err);
 	    }
-            OutOfArray () => {
-                println ("Foo failed, the slice was empty");
-            }
+		OutOfArray () => {
+			println ("Foo failed, the slice was empty");
+		}
 	}
 	println ("After foo");
 }
