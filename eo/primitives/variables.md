@@ -1,6 +1,6 @@
 # Variabloj kaj Ŝanĝebleco
 
-Oni deklaras variablojn per la vorto **`let`**. La sintakso de deklaroj
+Oni deklaras variablojn per la vorto **`let`**. La sintakso de deklaro
 de variablo estas prezentata en la sekva bloko da kodo.
 
 ```grammar
@@ -32,7 +32,7 @@ la kompililo ĵetas eraron.
 
 ```ymir
 def main () {
-	let mut x = 12; // 12 estas litero kun tipo i32
+	let mut x = 12; // 12 estas litero de tipo i32 (integrala valoro sur 32 bitoj)
 	//  ^^^ tiu dekoracio, prezentata en la sekva sekcio, ne gravas por la momento
 	
 	x = 89.0f; // 89.0f estas litero kies tipo estas f32 (valoro kun flosanta punkto)
@@ -59,12 +59,12 @@ compilation terminated.
 
 ## Ŝanĝebleco de variablo
 
-Dekoracioj estas uzitaj por difini kiel trakti variablojn. La
+Dekoracioj estas uzataj por difini kiel trakti variablojn. La
 ĉefvortoj **`ref`** kaj **`dmut`** estos priskribitaj en alia ĉapitro
 (*kp.* [Ligoj kaj
 Referencoj](https://gnu-ymir.github.io/Documentations/eo/advanced/)). Por
 la momento, ni nur parolos pri la vorto **`mut`**. Tiu ĉefvorto estas
-uzita por difini ke la valoro de variablo estas ŝanĝebla. Variablo,
+uzata por difini ke la valoro de variablo estas ŝanĝebla. Variablo,
 kiu estas deklarita sen tiu vorto **`mut`**, estas apriore
 malŝanĝebla, farante ke ĝia valoro estas definitiva.
 
@@ -168,15 +168,15 @@ stato de memoro de la maŝino kiu plenumas la programon (kiel eblas en
 
 Oni povas argumenti ke statikaj kontroloj povas esti uzitaj por
 certigi ke variablo estu valorigita antaŭ ol ĝi estas uzita, kaj
-argumenti ke devigi unuan valoron, ke ĝi ekzistu, ne estas la plej
-bona maniero por plenumi datuman validecon. Se temas pli pri opinio ol
-scienca rezono, ni pensas ke disigi la inicon de variablo, farigas
-programon pli malfacila por legi. Plie, malŝanĝeblaj variabloj estus
-ŝanĝeblaj dum unu asigno, farante la konduton de la programo ankoraŭ
-pli malfacila por kompreni.
+argumenti ke trudi unuan valoron, ne estas la plej bona maniero por
+plenumi datuman validecon. Se temas pli pri opinio ol scienca rezono,
+ni pensas ke disigi la inicon de variablo farigas programon pli
+malfacila por legi. Plie, malŝanĝeblaj variabloj estus ŝanĝeblaj dum
+unu asigno, farante la konduton de la programo ankoraŭ pli malfacila
+por kompreni.
 
 
-En la sekva tabulo estas montras du ekzemplojn de fontkodo, kies
+La sekva tabulo montras du ekzemplojn de fontkodo, kies
 kondutoj estas similaj. Je la maldekstra parto, valida fontkodo
 akceptebla de la *Ymir* programlingvo, kaj je la dekstra parto,
 fontkodo malakceptebla pro la argumentoj, kiujn ni prezentis.
@@ -213,7 +213,7 @@ Oni povas noti de la maldekstra programo, ke la **`if`** esprimo havas
 valoron. Valoro komputita kiel la rezulto de la esprimo (je tiu okazo
 la valoro **`42`** de tipo **`i32`**). Fakte, ĉiuj esprimoj povas havi
 valoron en *Ymir*, forigante la limon, kiun ni enkondukis per la
-devigo de unua valoro.
+trudo de unua valoro.
 
 
 
@@ -245,20 +245,20 @@ def main () {
 <br>
 
 Ĉiuj informoj pri lokaj variabloj estas validaj por mallokaj
-variabloj. Temas pri statika tipado, ŝanĝebleco, kaj unuaj valoroj. Ne
+variabloj. Temas pri statika tipigado, ŝanĝebleco, kaj unuaj valoroj. Ne
 estas limoj pri la valoroj, kiuj povas esti uzitaj kiel unuaj valoroj
 de mallokaj variabloj, nek estas limoj pri la formo de la inico. Voko
-de funkcioj, kondiĉa esprimoj, kreo de objektoj, ktp. nenio estis
+de funkcioj, kondiĉaj esprimoj, kreo de objektoj, ktp. nenio estis
 forgesita.
 
 
 Mallokaj variabloj estas inicitaj antaŭ la komenco de la programo mem,
-tio volas diri antaŭ ol la funkcio **`main`** estas vokita. Por
+tio volas diri antaŭ ol la funkcio **`main`** estos vokita. Por
 ilustri tiun punkton, la sekva fontkodo kreas mallokan variablon kies
 tipo estas **`i32`**, kaj kiu estas inicita per voko de la funkcio
 **`foo`**. Tiu funkcio **`foo`** per voki la funkcion **`println`**
-skribas mesaĝon sur la **`ŝelo`**, poste la funkcion **`main`** faras
-same.
+skribas mesaĝon sur la ŝelo (komputila terminalo), poste la funkcio
+**`main`** faras same.
 
 ```ymir
 import std::io;
@@ -291,12 +291,12 @@ __GLOBAL__ = 42
 Estas neniu garantio pri la ordo de la inicoj de mallokaj
 variabloj. Tiu estas verŝajne la unua granda limo, kiun oni povas noti
 pri la programlingvo *Ymir*. **Kontribuo**, permesi tian garantion
-estus tute bonvena kontribuo, sed ŝajnas malverŝajne ke tio estas ebla
-kiam la mallokaj variabloj estas difinitaj en malsamaj pakaĵoj (*kp.*
+estus tute bonvena kontribuo, sed tio estas malverŝajne ebla kiam la
+mallokaj variabloj estas difinitaj en malsamaj pakaĵoj (*kp.*
 [Pakaĵoj](https://gnu-ymir.github.io/Documentations/eo/modules)).
 
 Por la momento, ĉar ne eblas certigi bonan ordon de inicoj de mallokaj
-variabloj, antaŭ ol la program komencos, ne estas permesita inici
+variabloj, antaŭ ol la programo komencos, ne estas permesita inici
 mallokan variablon per la valoro de alia malloka variablo. Tamen, tiu
 kontrolo estas tre lima, ĉar la valoro de malloka variablo povas esti
 kreita per voko de funkcio, kaj tiu funkcio povas uzi la valoron de
@@ -320,7 +320,27 @@ speciala okazo la dependeco estas tre klare videbla, tio povas esti
 pli malfacila se la funkcio **`foo`** estus difinita en malsama
 pakaĵo, kaj se oni nur havus ĝian prototipon.
 
+```error
+Error : the global var main::__B__ cannot be initialized from the value of main::__A__
+ --> main.yr:(2,8)
+ 2  ┃ static __B__ = __A__; 
+    ╋        ^^^^^
+    ┃ Note : 
+    ┃  --> main.yr:(1,8)
+    ┃  1  ┃ static __A__ = 42;
+    ┃     ╋        ^^^^^
+    ┃ Note : 
+    ┃  --> main.yr:(2,16)
+    ┃  2  ┃ static __B__ = __A__; 
+    ┃     ╋                ^^^^^
+    ┗━━━━━┻━ 
 
+
+ymir1: fatal error: 
+compilation terminated.
+```
+
+<br>
 
 ## Ombreco kaj amplekso
 
@@ -337,4 +357,117 @@ amplekso](https://gnu-ymir.github.io/Documentations/eo/errors/scope.html)),
 kaj ne interesas nin por la momento.
 
 
+```ymir
+import std::io;
 
+def main () {
+    {
+		let x = 12;
+    } // x ne plu ekzistas post la fino de tiu amplekso
+    println (x);
+}
+```
+
+<br>
+
+Se variablo estas deklarita en amplekso, kaj neniam estas uzita dum
+ĝia vivdaŭro, la kompililo ĵetas eraron. Por eviti tian eraron, la
+variablo povas nomiĝi **`_`**. Se ŝajnas senutila deklari variablon
+kiun oni ne uzas, povas esti utila kelkfoje (ekzemple kiam oni
+deklaras parametroj de homonima funkcio, *kp.* [Klasa
+heredeco](https://gnu-ymir.github.io/Documentations/eo/objects/inheritance.html)).
+
+Variablo, kiu nomiĝas **`_`**, estas anonima, tiam ne estas maniero
+por retrovi ĝian valoron.
+
+```ymir
+import std::io;
+
+def main () {
+    let _ = 12; // deklaras anoniman valoron
+}
+```
+
+### Ombreco
+
+Du variabloj, kun la sama nomo, ne povas ekzisti en koliziantaj
+ampleksoj, t.e. se variablo havas la saman nomon ol vivanta variablo
+je la aktuala amplekso, la fontkodo ne estas akceptebla programo, kaj
+la kompilo ĵetas eraron pro ombreco. La sekva fontkodo ilustras tiun
+punkton, kie du variabloj estas deklaritaj en la sama amplekso kun la
+sama nomo **`x`**.
+
+```ymir
+def main () {
+	let x = 1;	
+	let x = 2;	
+	{ 
+		let x = 3; 
+	}
+}
+```
+
+<br> La kompililo ĵetas la sekvan eraron. Eĉ la deklaro de la lasta
+variablo en la amplekso malfermita je la linio **`4`** estas
+malpermesita. Multe da eraroj povas esti evitataj per simple forlasi
+tiun eblon. Eblo kiu, laŭ nia opinio, ne alportas iun ajn avantaĝo.
+
+```error
+Error : declaration of x shadows another declaration
+ --> main.yr:(3,9)
+ 3  ┃     let x = 2;    
+    ╋         ^
+    ┃ Note : 
+    ┃  --> main.yr:(2,9)
+    ┃  2  ┃     let x = 1;    
+    ┃     ╋         ^
+    ┗━━━━━┻━ 
+
+Error : declaration of x shadows another declaration
+ --> main.yr:(5,13)
+ 5  ┃         let x = 3; 
+    ╋             ^
+    ┃ Note : 
+    ┃  --> main.yr:(2,9)
+    ┃  2  ┃     let x = 1;    
+    ┃     ╋         ^
+    ┗━━━━━┻━ 
+
+
+ymir1: fatal error: 
+compilation terminated.
+```
+
+<br>
+
+Mallokaj variabloj ne kreas ombron sur lokaj variabloj. Malloka
+variablo estas malloka simbolo, kaj estas atingebla per la pakaĵo kiu
+deklaras ĝin (*kp.*
+[Pakaĵoj](https://gnu-ymir.github.io/Documentations/en/modules/)). Lokaj
+variabloj aliflanke, estas atingeblaj nur de la funkcio kiu deklaris
+ilin. Simbola atingo donas prioritaton al lokaj variabloj. Tiun
+konduton prezentas la sekva fontkodo.
+
+```ymir
+mod Main; // Deklaracio de pakaĵo nomita Main
+
+import std::io;
+
+static pi = 3.14159265359
+
+def main ()
+    throws &AssertError
+{
+    {
+		let pi = 3;
+		assert (pi == 3); // uzas la loka pi
+    } // Per fermi tiun amplekson, loka pi ne plu ekzistas
+	
+    // ĉar loka pi ne plu ekzistas
+	// malloka pi estas atingebla
+    assert (pi == 3.14159265359);
+	
+	// malloka pi estas ankaŭ atingebla trans ĝia gepatra pakaĵo
+    assert (Main::pi == 3.14159265359);
+}
+```

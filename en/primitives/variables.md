@@ -325,6 +325,28 @@ specific case, the dependency appears very clearly, it may not be that
 clear when the function **`foo`** come from an external module, that
 only provides its prototype.
 
+```error
+Error : the global var main::__B__ cannot be initialized from the value of main::__A__
+ --> main.yr:(2,8)
+ 2  ┃ static __B__ = __A__; 
+    ╋        ^^^^^
+    ┃ Note : 
+    ┃  --> main.yr:(1,8)
+    ┃  1  ┃ static __A__ = 42;
+    ┃     ╋        ^^^^^
+    ┃ Note : 
+    ┃  --> main.yr:(2,16)
+    ┃  2  ┃ static __B__ = __A__; 
+    ┃     ╋                ^^^^^
+    ┗━━━━━┻━ 
+
+
+ymir1: fatal error: 
+compilation terminated.
+```
+
+<br>
+
 ## Shadowing and scope
 
 ### Lifetime
