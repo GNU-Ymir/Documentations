@@ -27,6 +27,22 @@ def main ()
 }
 ```
 
+## Assert 
+
+We have seen in previous section the *assert* expression. This simple
+expression throws an **`&AssertError`** value when the condition is
+not valid. **`AssertError`** is a common exception defined in a core
+file (that does not need to be imported).
+
+```ymir
+def main () 
+	throws &AssertError
+{
+	let i = 11;
+	assert (i < 10, "i must be lower than 10")
+}
+```
+
 ## Rethrowing 
 
 The error rethrowing is a way of defining that a function could throw

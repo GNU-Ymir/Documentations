@@ -9,4 +9,5 @@
   * [Datumaj tipoj](primitives/types.md)
   * [Funkcioj](primitives/functions.md)
   * [Regaj fluoj](primitives/control.md)
-  
+  * [Prioritato de operatoroj](primitives/operator.md)
+* [Ligo kaj Referencoj](advanced/README.md)

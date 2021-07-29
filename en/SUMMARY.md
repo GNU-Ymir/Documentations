@@ -44,6 +44,12 @@
   * [Hashable](traits/hashable.md)
   * [Packable and Serializable](traits/serialize.md)
 * [Operator overloading](templates/operators.md)
+  * [Unary, binary and Comparison](templates/binary.md)
+  * [Access, contains and iteration](templates/complex_operators.md)
 * [Version](version/README.md)
-* [Documentation]()
+* [Macro](macros/README.md)
+  * [Std and Core macros](macros/std.md)
+* [Documentation](documentation/README.md)
+  * [Types](documentation/types.md)
+  * [Symbols](documentation/symbols.md)
  

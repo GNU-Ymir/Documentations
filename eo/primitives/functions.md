@@ -1,7 +1,7 @@
 # Funkcioj
 
-Funkcioj estas vaste akceptita koncepto por dividi programon al etaj
-partoj. *Ymir* programo ĉiam komencas per la **`main`** (*ĉefa*
+Funkcioj estas vaste akceptita koncepto por dividi programon en etajn
+partojn. *Ymir* programo ĉiam komencas per la **`main`** (*ĉefa*
 esperante) funkcio, kiun ni jam vidis en antaŭaj ĉapitroj. Ĉiuj
 funkcioj estas deklaritaj per la vorto **`def`** sekvita per nomo, kaj
 listo da parametroj. Oni vokas funkcion per ĝia nomo sekvita de listo
@@ -381,3 +381,224 @@ ymir1: fatal error:
 compilation terminated.
 ```
 
+## Tipo de redona valoro de funkcio
+
+Kiam la valoro de la korpo de funkcio ne estas de tipo **`void`**, la
+funkcio havas valoron, kaj tipon. Tiu tipo devas esti deklarita je la
+prototipo de la funkcio, tiel ke ĝi estas videbla de la aliaj funkcioj
+kiuj povas voki ĝin. La deklaro de la tipo estas farita uzante la
+signo sago **`->`** tuj post la deklaro de la parametroj de la
+funkcio. La redona tipo de la funkcio povas esti forgestia se la
+valoro de la korpo de la funkcio estas de tipo **`void`**, sed devas
+ĉiam esti deklarita alie.
+
+```ymir
+def foo (x : i32)-> i32 
+	x + 1
+	
+def bar (x : i32, y : i32) -> i32 {
+	let z = x + y;
+	println ("La valoro de z : ", z);
+	foo (z)
+}
+```
+
+<br>
+
+Ne ĉiam estas facila deklari korpo de funkcio tiel maniere ke ĝi
+gvidas al la bona valoro, kiam estas multe da branĉoj. Por eviti
+multvorteco, kaj redoni valoron anticipe, la ĉefvorto **`return`**
+(redoni) povas esti uzita. Ĝi fermas la funkcion kaj redonas valoron
+kiu oni deklaras en la esprimo tuj post la ĉefvorto. La **`return`**
+esprimo ankaŭ povas redoni **`void`** valoro en **`void`** funkcio,
+kiam ĝia asociita esprimo estas de tipo **`void`**. La tipo de la
+valoro de la esprimo asociita al *redona esprimo* devas esti de la
+sama tipo ol la tipo deklarita en la prototipo de la funkcio.
+
+```ymir
+def estasDividebla (x : i32, z : i32) -> bool {
+	if (z == 0) return false; 
+	
+	(x % z) == 0
+}
+```
+
+<br>
+
+La kompililo certigas ke ĉiuj branĉoj de la funkcia korpo gvidas al
+*redona esprimo* aŭ al valoro kies tipo estas la sama ol la tipo de la
+funkcio. Se la korpo de la funkcio povas gvidi al valoro kies tipo
+estas malsama ol la tipo de la funkcio, kaj eblas ke neniu *redona
+esprimo* estas uzita, tiam la kompililo ĵetas eraron.
+
+
+```ymir
+import std::io
+
+def aldoni_unu (x : i32)-> i32 {
+    x + 1; // La valoro de la bloko estas void, pro la ';' 
+}
+
+def main () {
+    let x = aldoni_unu (5); 
+    println ("La valoro de x : ", x);
+}
+```
+
+<br>
+
+En la supra fontkodo, la funkcio *aldoni_unu* havas korpon de tipo
+**`void`**, kiam la prototipo de la funkcio deklaras ke la funkcio
+redonas valoron de tipo **`i32`**, aldone ne estas redona esprimo en
+la funkcio, do la kompililo ĵetas eraron.
+
+
+```error
+Error : incompatible types i32 and void
+ --> main.yr:(3,32)
+ 3  ┃ def aldoni_unu (x : i32)-> i32 {
+    ╋                                ^
+    ┃ Note : 
+    ┃  --> main.yr:(5,1)
+    ┃  5  ┃ }
+    ┃     ╋ ^
+    ┗━━━━━┻━ 
+
+
+ymir1: fatal error: 
+compilation terminated.
+```
+
+## Lokaj deklaracioj
+
+Kodbloko ankaŭ malfermas ia loka pakaĵo, en kiu oni povas deklari
+simbolojn. Tiuj deklaracioj povas esti aliaj funkcioj, strukturoj,
+klasoj, enumeracioj, ktp. Tiuj deklaracioj, kiujn oni faras en loka
+kodbloko, *ne* povas atingi la lokajn variablojn, kiuj ankaŭ estas
+deklaritaj en la loka kodbloko. Atingebleco estas ebla per uzi
+tegaĵojn (*kp.* [Altnivela
+funkcioj](https://gnu-ymir.github.io/Documentations/eo/functions)),
+sed tio ne estas prezentata en tiu ĉapitro.
+
+```ymir
+def foo () {
+    import std::io;	 // importo estas loka al foo
+    let x = 12;
+    {
+		def bar () -> i32 {
+			println (x);
+			12
+		}
+		println (x + bar ());
+    }
+    
+    // bar ne plu estas atingebla
+	bar (); // malkompilebla
+}
+
+def main () {
+    foo ();
+    
+    bar ();
+    println ("En la main funkcio !");
+}
+```
+
+<br>
+
+En la lasta ekzemplo, la **`bar`** funkcio estas atingebla en la
+amplekso malfermita al la linio **4**, ĝi la linio **10**. Pro tiu
+kialo, la funkcio **`main`** ne povas atingi ĝin. Aldone, la *import
+deklaro* farita je la linio **2** (importante la funkcion
+**`println`**) estas nur atingebla en la amplekso malfermita je la
+linio **1**, do pro tiu kialo la funkcio **`main`** ne povas voki la
+funkcion **`println`**. La ekzemplo tial havas kvin erarojn, kiujn la
+kompililo ĵetas.
+
+```error
+Error : undefined symbol x
+ --> main.yr:(6,15)
+ 6  ┃ 	    println (x);
+    ╋ 	             ^
+
+Error : undefined symbol bar
+ --> main.yr:(9,15)
+ 9  ┃ 	println (x + bar ());
+    ╋ 	             ^^^
+
+Error : undefined symbol bar
+ --> main.yr:(13,5)
+13  ┃     bar (); // malkompilebla
+    ╋     ^^^
+
+Error : undefined symbol bar
+ --> main.yr:(19,5)
+19  ┃     bar ();
+    ╋     ^^^
+
+Error : undefined symbol println
+ --> main.yr:(20,5)
+20  ┃     println ("En la main funkcio !");
+    ╋     ^^^^^^^
+
+
+ymir1: fatal error: 
+compilation terminated.
+```
+
+<br>
+
+Funkcioj ne estas pakaĵoj, ili nur povas deklari privatajn
+simbolojn. En venonta ĉapitro ni prezentos manieron por deklari
+publikajn simbolojn atingeblaj de aliaj funkcioj, kaj fremdaj pakaĵoj
+(*kp.*
+[Pakaĵoj](https://gnu-ymir.github.io/Documentations/eo/modules/)).
+
+## Unuforma sintakso de voko
+
+La *unuforma sintakso de voko* estas la sintakso kiu permesas voki
+funkciojn per la punkta operatoro **`.`**. La *unuforma sintakso de
+voko* lokas la unuan argumenton de la funkcio je la maldekstro de la
+punkta operatoro, kaj la ceterajn argumentojn post la nomo de la
+funkcio inter rondaj krampoj apartigitaj per komoj.
+
+```grammar
+ufc := esprimo '.' esprimo '(' (esprimo (',' esprimo)*)? ')'
+```
+
+Oni uzas tiun sintakson por plenumi kontinuajn traktadojn de datumo
+kaj farigi la fontkodon pli legebla. La sintakson estas nomata
+*unuforma sintakso de voko* ĉar ĝi estas simila al la sintakso uzita
+por voki metodojn kun objektojn (*kp.*
+[Objektoj](https://gnu-ymir.github.io/Documentations/eo/objects/)).
+
+```ymir
+import std::io;
+
+def plusUnu (i : i32) -> i32
+	i + 1
+
+def plusDu (i : i32) -> i32
+	i + 2
+
+def main () {
+	let x = 12;
+	x.plusUnu ()
+	 .plusDu ()
+	 .println ();
+}
+```
+
+<br>
+
+Rezultoj: 
+
+```
+15
+```
+
+<br>
+
+La *unuforma sintakso de voko* ankaŭ permesas ke oni deklaru
+ekvivalento al metodoj por strukturo. Ĉar strukturo estas prezentataj
+en venonta ĉapitro, ni ne prezentas tion ĉi tie.

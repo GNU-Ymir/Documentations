@@ -4,7 +4,7 @@ When writing a program, the ability to decide to execute part of the
 code conditionally, or to repeat part of the code, is a basic scheme
 that is necessary. 
 
-# If expression
+## If expression
 
 An **`if`** expression is a control flow allowing to branch into the
 program code by making decisions based on conditions. An `else` can be
@@ -220,11 +220,12 @@ decorator := 'ref' | 'mut' | 'dmut'
 
 <br> 
 
-**1) Iteration over a range.** In the following example, the *for loop* is
-used to iterate over two ranges. The first loop at line **4**,
-iterates between **0** and **8** (not included), by a step of
-**2**. When the second loop iterate between the value **10** and **0**
-(not included) with a step of **-1**.
+**1) Iteration over a range.** In the following example, the *for
+loop* is used to iterate over three ranges. The first loop at line
+**4**, iterates between **0** and **8** (not included), by a step of
+**2**. The second loop iterate between the value **10** and **0** (not
+included) with a step of **-1**. The third loop iterates between the
+value **1** and **6** (included this time).
 
 ```ymir
 import std::io
@@ -235,7 +236,11 @@ def main () {
     }	
 	
 	for i in 10 .. 0 {
-		println (i, "!");
+		println (i);
+	}
+	
+	for i in 1 ... 6 {
+		println (i);
 	}
 }
 ```
@@ -307,4 +312,25 @@ reason, the *for loop* is not really dynamic, but flattened at
 compilation time. This does not change anything from a user
 perspective, but is worth mentioning, to avoid miscomprehension of
 static type system, there is no hidden dynamicity here.
+
+## Assertion
+
+The expression *assert* is an expression that verify the validity of a
+condition and throws an exception if the condition is false. Error are
+presented in the chapter [Error
+Handling](https://gnu-ymir.github.io/Documentations/en/errors/main.html),
+thus no detail are given in this section.
+
+```ymir
+def foo (i : i32) throws &AssertError 
+{
+	assert (i < 10, "i must be lower than 10")
+}
+
+def main () 
+	throws &AssertError
+{
+	foo (11);
+}
+```
 

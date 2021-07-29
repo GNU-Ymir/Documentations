@@ -130,6 +130,68 @@ Is a static array
 I don't know ...
 ```
 
+<br>
+
+**Warning** An is expression is not a complete template
+specialization, it is not attached to any code block. Thus the
+variable declared inside the expression are not accessible from
+anywhere. It is a volontary limitation, if the variable are to be used
+a declaration such as a function, must be made.
+
+## Cte assert
+
+The keyword **`cte`** can be used on an **`assert`** expression. In
+that case the condition of the assertion must be known at compilation
+time. If the value of the condition is false, then an error is thrown
+by the compiler, with the associated message. In the following
+example, the assert test wether the template class **`T`** implements
+the traits **`Hashable`**, and throws an explicit error message.
+
+```ymir
+trait Useless {}
+
+class X {class T} {
+    cte assert (is!T {U impl Useless}, T::typeid ~ " does not implement Useless");
+    
+    pub self () {}	
+}
+
+class B {}
+
+def main () {
+    let _ = X!{&B}::new ();
+}
+```
+
+<br>
+Errors:
+
+```error
+Note : 
+ --> main.yr:(12,14)
+12  ┃     let _ = X!{&B}::new ();
+    ╋              ^
+    ┃ Error : undefined template operator for X and {&(main::B)}
+    ┃  --> main.yr:(12,14)
+    ┃ 12  ┃     let _ = X!{&B}::new ();
+    ┃     ╋              ^
+    ┃     ┃ Note : in template specialization
+    ┃     ┃  --> main.yr:(12,14)
+    ┃     ┃ 12  ┃     let _ = X!{&B}::new ();
+    ┃     ┃     ╋              ^
+    ┃     ┃ Note : X --> main.yr:(3,7) -> X
+    ┃     ┃ Error : assertion failed : main::B does not implement Useless
+    ┃     ┃  --> main.yr:(4,9)
+    ┃     ┃  4  ┃     cte assert (is!T {U impl Useless}, T::typeid ~ " does not implement Useless");
+    ┃     ┃     ╋         ^^^^^^
+    ┃     ┗━━━━━┻━ 
+    ┗━━━━━┻━ 
+
+
+ymir1: fatal error: 
+compilation terminated.
+```
+
 ## Condition on template definition
 
 Every template symbol can have a complex condition that is executed at

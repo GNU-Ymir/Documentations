@@ -406,7 +406,7 @@ def bar (x : i32, y : i32) -> i32 {
 
 <br>
 
-It is not always convinient to define a body of a function in a way
+It is not always convenient to define a body of a function in a way
 that leads to return the right value, when many branches are
 possible. To avoid verbosity, and return function prematuraly, the
 keyword **`return`**, close a function and return the value of the
@@ -446,7 +446,7 @@ def main () {
 
 <br>
 
-In the above source code, the function add_one has a body of type
+In the above source code, the function *add_one* has a body of type
 **`void`**, when the function prototype claims that the function
 returns a **`i32`**, and no return statement can be encountered inside
 the function, thus the compiler returns the following error.  
@@ -479,41 +479,76 @@ but this is not be presented inside this chapter.
 
 ```ymir
 def foo () {
-	import std::io;	 // importation is local to foo
-	let x = 12;
-	{
-		def bar () -> i32 {
-			// Try to add the following line 
-			// println (x);
-			12
-		}
-		println (x + bar ());
+    import std::io;	 // imporation is local to foo
+    let x = 12;
+    {
+	def bar () -> i32 {
+	    println (x);
+	    12
 	}
-	
-	// bar is no longer accessible
-	// bar (); // will not compile
+	println (x + bar ());
+    }
+    
+    // bar is not accessible anymore
+    bar (); // does not compile
 }
 
 def main () {
-	foo ();
-	
-	// Try to add the following lines : 
-	// bar ();
-	// println ("In the main function !");
+    foo ();
+    
+    bar ();
+    println ("In the main function !");
 }
 ```
 
 <br>
 
 In the above example, the **`bar`** function is available in the scope
-opened at line **4**, until its end at line **11**. For that reason,
+opened at line **4**, until its end at line **10**. For that reason,
 it is also not available inside the **`main`** function. Moreover, the
 *import statement* made at line **2** (importing the **`println`**
 function) is only available in the scope opened at line **1**, and for
-that reason not available in the **`main`** function. Functions are
-not modules, this way of defining is used to define private symbols
-only, in a future chapter we will see a way to define public symbols
-available for other functions, and foreign modules (*cf.*
+that reason not available in the **`main`** function. For these
+reasons, the above example contains five errors, that are thrown by
+the compiler.
+
+```error
+Error : undefined symbol x
+ --> main.yr:(6,15)
+ 6  ┃ 	    println (x);
+    ╋ 	             ^
+
+Error : undefined symbol bar
+ --> main.yr:(9,15)
+ 9  ┃ 	println (x + bar ());
+    ╋ 	             ^^^
+
+Error : undefined symbol bar
+ --> main.yr:(13,5)
+13  ┃     bar (); // does not compile
+    ╋     ^^^
+
+Error : undefined symbol bar
+ --> main.yr:(19,5)
+19  ┃     bar ();
+    ╋     ^^^
+
+Error : undefined symbol println
+ --> main.yr:(20,5)
+20  ┃     println ("In the main function !");
+    ╋     ^^^^^^^
+
+
+ymir1: fatal error: 
+compilation terminated.
+```
+
+<br>
+
+Functions are not modules, this way of defining is used to define
+private symbols only, in a future chapter we will see a way to define
+public symbols available for other functions, and foreign modules
+(*cf.*
 [Modules](https://gnu-ymir.github.io/Documentations/en/modules/)).
 
 ## Uniform call syntax
@@ -533,7 +568,7 @@ This syntax is used to perform continuous data processing and to make
 the source code easier to read. This syntax is named *uniform call
 syntax* because it is similar to the the syntax used to call methods
 on class objects
-(cf. [Objects](https://gnu-ymir.github.io/Documentations/en/objects/));
+(*cf.* [Objects](https://gnu-ymir.github.io/Documentations/en/objects/)).
 
 ```ymir
 import std::io
@@ -551,6 +586,9 @@ def main () {
 	 .println ();	 	 
 }	
 ```
+
+<br>
+
 Results:
 ```
 15
@@ -559,6 +597,7 @@ Results:
 <br>
 
 The *uniform call syntax* can also be useful to define equivalent of
-methods on structures. 
+methods on structures. Because structures are presented in a future
+chapter, we do not present this possibility here.
 
 

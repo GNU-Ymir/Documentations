@@ -1,18 +1,18 @@
 # Regaj fluoj
 
-Kiam oni skribas programkodon, la kapablo de decidi ĉu parto de kodo
-ruliĝos, aŭ de ripeti parton de la kodo, estas baza skemo, kiu estas
-necesa.
+Kiam oni skribas programkodon, la kapablo de decidi ĉu ruli parton de
+kodo, aŭ ĉu ripeti parton de kodo, estas baza skemo, kiu estas necesa.
 
 ## 'If' esprimo
 
 La **`if`** vorto (*'se' esperante*), difinas esprimon kiu ebligas
-disbranĉigi la programon per fari decidojn, bazitaj sur kondiĉoj. La
+disbranĉigon de la programo farante decidojn, bazitaj sur kondiĉoj. La
 **`else`** vorto (*'alie' esperante*) povas esti lokita malantaŭ *if*
 esprimo, por ruli parton de kodo, se la kondiĉo de la *if* esprimo ne
 estas vera.
 
 La sintakso de la *if* esprimo estas prezentata malsupre.
+
 ```grammar
 if_esprimo := 'if' esprimo esprimo ('else' esprimo)?
 ```
@@ -21,11 +21,11 @@ if_esprimo := 'if' esprimo esprimo ('else' esprimo)?
 
 La sekva programkodo prezentas bazan uzon de la *if* esprimo. En ĉi
 tiu ekzemplo, la valoro de la variablo **`x`** estas testita. Se ĝia
-valoro estas malpli granda ol `5`, tiam la kodo je la linio `5` estos
+valoro estas malpli granda ol `5`, tiam la kodo je la linio `5` estas
 rulita, alikaze se ĝia valoro estas egala al `5` la kodo je la linio
-`7` estos plenumita. Se ambaŭ tiuj testoj malsukcesas, la linio `9`
-estos rulita. En ĉi tiu ekzemplo, **`x`** egalas `5`, do la rezulto
-estos `X estas ekzakte 5`.
+`7` estas plenumita. Se ambaŭ tiuj testoj malsukcesas, la linio `9`
+estas rulita. En ĉi tiu ekzemplo, **`x`** egalas `5`, do la rezulto
+estas `X estas ekzakte 5`.
 
 ```ymir
 def main () {
@@ -44,7 +44,7 @@ def main () {
 <br>
 
 La valoro de *if* esprimo estas komputita kiel la valoro de la bloko
-da kodo kiu estas rulita, kiam la programo elektas branĉon je
+da kodo kiu estas rulita, kiam la programo elektas branĉon laŭ
 kondiĉo. Ĉiuj branĉoj de la *if* esprimo devas havi valorojn, kies
 tipoj estas similaj. Alie la kompililo ĵetas eraron, pro ke la tipo de
 la *if* esprimo ne povas esti induktita. La tipo de *if* esprimo
@@ -53,8 +53,8 @@ valoro.
 
 ```ymir
 def main () {
-	let condition = true;
-	let x = if condition {
+	let kondicxo = true;
+	let x = if kondicxo {
 		5 
 	} else {
 		7
@@ -64,8 +64,8 @@ def main () {
 
 <br>
 
-Se eblas ke neniu el la branĉoj de *if* esprimo estas rulita, tiam la
-tipo de la esprimo devas esti **`void`**. Ekzemple, en la sekva
+Se eblas ke neniu el la branĉoj de *if* esprimo estus rulita, tiam la
+tipo de la esprimo devus esti **`void`**. Ekzemple, en la sekva
 programkodo, la variablo **`kondicxo`** povas enhavi ambaŭ la valorojn
 **`true`** aŭ **`false`**. Se ĝia valoro estas **`false`**, tiam la
 kondiĉo de la *if* esprimo estas malvera, kaj en la solan branĉon de
@@ -118,8 +118,8 @@ loop_esprimo := 'loop' esprimo
 
 <br>
 
-En la sekva ekzemplo, la programo neniam finos, kaj presos, senfina
-nombro da fojoj, la ĉenon `"Mi estos presita senfine"`.
+En la sekva ekzemplo, la programo neniam finos, kaj presos, senfinan
+nombron da fojoj, la ĉenon `"Mi estos presita senfine"`.
 
 ```ymir
 def main () {
@@ -165,7 +165,7 @@ Rezulto: 11
 
 <br>
 
-### Bulkiĝi dum kondiĉo estas plenumita
+### Bukli dum kondiĉo estas plenumita
 
 La vorto **`while`** (*'dum' esperante*) kreas buklon, kiu ripetiĝas
 ĝis kondiĉo ne plu etas plenumita. Kiel por la *loop* esprimo, *break*
@@ -175,7 +175,7 @@ eblas ke oni neniam eniris tiajn buklojn. La *break* deklaroj en tiaj
 buklojn devas sekvi tiun regulon, do la valoroj asociataj al *break*
 deklaroj en *while* esprimoj, ĉiam estas **`void`** valoroj.
 *Kontribuo:* Ni planas aldoni **`else`** blokon al *while* bukloj, por
-doni valoro al tiaj bukloj, kiam ĝi ne estas eniritaj.
+doni valoron al tiaj bukloj, kiam ĝi ne estas eniritaj.
 
 La sintakso de *while* buklo estas prezentata en la sekva bloko da kodo.
 
@@ -186,7 +186,7 @@ while_esprimo := 'while' esprimo esprimo
 <br>
 
 La sekva ekzemplo, presentas uzon de *while* buklon, kie la buklon
-iteracias 10 fojoj, dum la valoro de **`i`** estas malpli granda ol
+iteracias 10 fojojn, dum la valoro de **`i`** estas malpli granda ol
 **10**.
 
 ```ymir
@@ -214,7 +214,7 @@ I estas : 10
 La lasta speco de buklo estas la *for* buklo (*'por' esperante*),
 deklarita per la vorto **`for`**. Kiel por *while* bukloj, la valoro
 de *for* buklo ĉiam estas **`void`**, pro ke ne eblas garantii ke la
-buklo eĉ unu foje estos enirita. *Kontribuo:* ankoraŭ kiel por la
+buklo eĉ unu fojon estos enirita. *Kontribuo:* ankoraŭ kiel por la
 *while* buklo, ni planas aldoni *else* bloko al *for* buklo por doni
 valoron al bukloj, kiuj neniam estas enirita.
 
@@ -236,10 +236,11 @@ dekoracio := 'ref' | 'mut' | 'dmut'
 <br>
 
 **1) Iteracio trans intervalo.** En la sekva ekzemplo, la *for* buklo
-estas uzita por iteracii trans du intervaloj. La unua buklo je la
+estas uzita por iteracii trans tri intervaloj. La unua buklo je la
 kvara linio, iteracias inter la valoroj **0** kaj **8**
-(malinkluzivita), je paŝo de **2**. Kiam la dua buklo iteracias inter
-la valoroj **10** kaj **0** (malinkluzivita) per paŝo de **-1**.
+(malinkluzivita), je paŝo de **2**. La dua buklo iteracias inter la
+valoroj **10** kaj **0** (malinkluzivita) per paŝo de **-1**. La tria
+buklo interacias inter la valoro **1** kaj **6** (inkluzivita ĉi-foje).
 
 ```ymir
 import std::io
@@ -250,7 +251,11 @@ def main () {
     }	
 	
 	for i in 10 .. 0 {
-		println (i, "!");
+		println (i);
+	}
+	
+	for i in 1 ... 6 {
+		println (i);
 	}
 }
 ```
@@ -259,10 +264,10 @@ def main () {
 
 **2) Iteracio trans tranĉoj kaj statikaj tabuloj.** Tranĉoj estas
 iteracieblaj tipoj. Ili povas esti iteraciita uzante unu aŭ du
-variabloj. Kiam oni uzas nur unu variablo, tiu variablo estas asociita
-al la valoroj enhavitaj en la tranĉo. Kiam du variabloj estas uzitaj,
-la unua estas asociita al la nuna indekso de iteracio, kaj la dua
-estas asociita al la valoroj enhavitaj en la tranĉo. Iteracioj
+variabloj. Kiam oni uzas nur unu variablon, tiu variablo estas
+asociata al la valoroj enhavitaj de la tranĉo. Kiam du variabloj estas
+uzitaj, la unua estas asociata al la nuna indekso de la iteracio, kaj
+la dua estas asociata al la valoroj enhavitaj de la tranĉo. Iteracioj
 trans statikaj tabuloj funkcias simile.
 
 ```ymir
@@ -299,7 +304,7 @@ Rezultoj:
 **3) Iteracio trans opoj.** Opoj estas iteracieblaj tipoj. Sed malkiel
 tranĉoj aŭ intervaloj, la *for* buklo estas disvolvita dum la
 kompilado. La opoj estas iteracieblaj kun nur unu variablo, kiu estas
-asociita al la valoroj enhavitaj en la opoj.
+asociata al la valoroj enhavitaj de la opoj.
 
 ```ymir 
 import std::io 
@@ -319,9 +324,9 @@ def main () {
 <br>
 
 Oni povas noti ke la tipo de la variablo **`i`**, en la *for* buklo de
-la supra ekzemplo, ŝanĝas de unu iteracio al alia, estinte **`i32`**
-tipo, kaj sekve **`c32`** tipo je la sekva iteracio. Pro tiu kialo,
-kaj por malgraŭe esti ebla, *for* bukloj trans opoj ne estas
+la supra ekzemplo, ŝanĝas de unu iteracio al la alia, estinte
+**`i32`** tipo, kaj poste **`c32`** tipo je la sekva iteracio. Pro tiu
+kialo, kaj por malgraŭe esti ebla, *for* bukloj trans opoj ne estas
 malstatikaj, sed nur disvolvitaj dum kompilado. Tiu ŝanĝas nenion por
 la uzantoj, sed valoras mencion, por malhelpi miskomprenon pri la
 statika sistemo de tipoj, kiu povas ŝajni malstatika tie, sed tute ne

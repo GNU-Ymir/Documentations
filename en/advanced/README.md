@@ -8,11 +8,11 @@ important to understand how memory works in *Ymir*, in order to
 understand the error message you might get when you try to move data
 from one variable to another.
 
-It is important to understand that *Ymir* is a high level
-programming language, and that you will never have to worry about
-memory management (memory leaks), the language using a garbage
-collector. However, in terms of mutability and access rights, the
-language provides an expressive system for managing memory movements.
+*Ymir* is a high level programming language, thus there is no need to
+worry about memory management (memory leaks), the language using a
+garbage collector. However, in terms of mutability and access rights,
+the language provides an expressive system for managing memory
+movements.
 
 ## Standard and Aliasable types
 

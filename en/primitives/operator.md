@@ -24,6 +24,6 @@ in the table.
 | 12 | Keyword and Scope operators | `{` `if` `while` `assert` `break` `do` `for` `match` `let` `return` `fn` `dg` `loop` `throw` `__version` `__pragma` `with` `atomic` | This operators have a specific syntax that must be closed, to be completed |
 | 13 | Postfix operators | `.` `(` `[` `:.` `#[` `#(` `#{` | `(` `[` `#{` `#[` `#(` must be closed by a balanced `]`, `)` or `}` to be completed |
 | 14 | Path operator | `::` | |
-| 15 | Literal operators | `(` `!` `[` <code>&#124;</code> `cast` `move` | In that case `(` `[` <code>&#124;</code> start a new expression, `move`  and <code>&#124;</code> start a lambda litertal, `(` a tuple, or a 0 priority expression, `[` a slice or array literal, `!` a template call|
+| 15 | Literal operators | `(` `!` `[` <code>&#124;</code> `cast` `move` | In that case `(` `[` <code>&#124;</code> start a new expression, `move`  and <code>&#124;</code> start a lambda literal, `(` a tuple, or a 0 priority expression, `[` a slice or array literal, `!` a template call|
 | 16 | Decorated expression | `ref` `const` `mut` `dmut` `cte` | |
-| 17 | Anything | | A variable, a literal, etc. |
+| 17 | Anything else | | A variable, a literal, etc. |

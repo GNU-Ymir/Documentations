@@ -34,22 +34,22 @@ let a = i32::init;  // i32 (0)
 <br>
 
 All primitive types have common attributes that are listed in the
-table below. Attributes can be surrounded by `_`, to avoid some
+table below. Attributes can be surrounded by the token **`_`**, to avoid some
 ambiguity for some types (*cf.*
 [Enumeration](https://gnu-ymir.github.io/Documentations/en/types/enum.html)). For
-example, the attribute `typeid` is equivalent to `__typeid__`, or
+example, the attribute **`typeid`** is equivalent to `__typeid__`, or
 `_typeid`.
 
 | Name | Meaning |
 | --- | --- |
-| `init` | The initial value of the struct, where each field are set to init if they don't have default value |
+| `init` | The initial value of the type |
 | `typeid` |  The name of the type stored in a value of type **`[c32]`** |
 | `typeinfo` | A structure of type TypeInfo, containing information about the type |
 
 All the information about TypeInfo are presented in chapter [Dynamic
 types](https://gnu-ymir.github.io/Documentations/en/types_advanced/).
 
-## Typeof and Sizeof
+## *typeof* and *sizeof*
 
 1) The keyword **`typeof`** retreives the type of a value at
 compilation time. This type can be used in any context, to retreive
@@ -73,6 +73,9 @@ def main () {
 	println (typeof (x)::typeid, " (", x, ")");
 }
 ```
+
+<br>
+
 Results: 
 ```
 i32 (42)
@@ -94,10 +97,15 @@ def main () {
 	println (x, " ", sizeof (typeof (x)));
 }
 ```
+<br>
+
 Results: (on a x86-64 arch)
+
 ```
 4 8
 ```
+
+<br>
 
 ## Scalar types
 
@@ -243,16 +251,16 @@ The following table lists the attributes specific to boolean type.
 ### Character type 
 
 The **`c8`** and **`c32`** are the types used to encode the
-characters.  As with literal integers, it is necessary to add a prefix
+characters. The **`c32`** character has a size of four bytes and can
+store any unicode value.  Literal characters can have two forms, and
+are always surrounded by the token **`'`**. The first form is the
+character itself for example **`'r'`**, and the second is the unicode
+value in the integer form `\u{12}` or `\u{0xB}`.
+
+As with literal integers, it is necessary to add a prefix
 to define the type of a literal. The prefix used to specify the type
 of a literal character is **`c8`**, if nothing is specified, the
 character type will be **`c32`**.
-
-The **`c32`** character has a size of four bytes and can store any
-unicode value.  Literal characters can have two forms, and are always
-surrounded by the token **`'`**. The first form is the character
-itself, and the second is the unicode value in the integer
-form `\u{12}` or `\u{0xB}`.
 
 ```ymir
 def main () {
@@ -260,6 +268,8 @@ def main () {
 	let y = '\u{0x263A}';
 }
 ```
+
+<br>
 
 If the loaded literal is too long to be stored in the character type,
 an error will be returned by the compiler. For example :
@@ -270,8 +280,10 @@ def main () {
 }
 ```
 
+<br>
+
 The error will be the following. This error means that you will need
-at least 3 **`c8`** to store the value, so it doesn't fit into one
+at least 3 **`c8`** (or bytes) to store the value, so it doesn't fit into one
 **`c8`** :
 
 ```error
@@ -296,14 +308,14 @@ The following table lists the attributes specific to character types.
 ### Pointers
 
 Pointer are values that stores an address of memory. They can be used
-to store the location of a data in memory. In **`Ymir`**, pointers are
+to store the location of a data in memory. In *Ymir*, pointers are
 considered low level programming and are mainly used in the std, and
 runtime to interface with machine level semantics. You can perfectly
 write any program without needing pointers, and for that reason we
 recomand to not use them.
 
-Pointers are defined using the `&` keyword on types, or on
-values. They are aliasable types, as they borrow memory (cf [Aliasable
+Pointers are defined using the token **`&`** on types, or on
+values. They are aliasable types, as they borrow memory (*cf.* [Aliasable
 and
 References](https://gnu-ymir.github.io/Documentations/en/advanced/)).
 
@@ -346,7 +358,7 @@ The following table lists the attributes specific to pointer types.
 
 ## Compound types 
 
-Unlike scalar types, the compound contains multiple values.  There are
+Unlike scalar types, the compound can contain multiple values.  There are
 three types of compounds: the tuple, the range and the arrays.
 
 ### Tuple 
@@ -371,10 +383,10 @@ def main () {
 
 <br>
 
-The tuple `t`, is a single element, and can be used as a function
-parameter or as a return value of a function. It can also be
-destructured, to retrieve the values of its component elements. There
-are three ways of tuple destructuring.
+In the above example, the tuple `t`, is a single element, and can be
+used as a function parameter or as a return value of a function. It
+can also be destructured, to retrieve the values of its component
+elements. There are three ways of tuple destructuring.
 
 1) the dot operator **`.`**, followed by an integer value, whose value
 is known at compilation time. This value can be computed by a complex
@@ -432,12 +444,13 @@ def add (a : i32, b : i32) -> i32
 def main () {
     let x = (1, 2);
 	println (add (expand x)); 
-	
+	// ^^^^^^^^^^^^^^^^^^^^^^
 	// Will be rewritten into : 	
-	println (add (x.0, x.1));
+	// println (add (x.0, x.1));
 	
-	// rewritter into : (1, x.0, x.1)
 	let j : (i32, i32, i32) = (1, expand x);	
+	// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+	// rewritten into : (1, x.0, x.1)
 }
 ```
 
@@ -454,11 +467,11 @@ attributes specific to tuple types.
 
 ### Ranges
 
-Ranges are types that contain two values defining a range. A range is
+Ranges are types that contain values defining an interval. A range is
 named **`r!T`**, where **`T`** is the type of the range limits. They
 are created by the token **`..`** and **`...`**. A range consists of
 four values, which are stored in the fields shown in the following
-table. These fields can be accessed using the dot operator **`.`**. 
+table. These fields can be accessed using the dot operator **`.`**.
 
 | name | type | value | 
 | --- | --- | --- |
@@ -474,14 +487,19 @@ def main () {
 }
 ```
 
-The `step_by` function takes a range as a parameter and returns a
-new range, with a modified step.
+<br>
+
+The `step_by` function takes a range as a parameter and returns a new
+range, with a modified step. This function is a core function, thus
+there is nothing to import.
 
 ```ymir
 def main () { 
 	let range = (1 .. 8).step_by (2); 
 } 
 ```
+
+<br>
 
 The [Control
 flows](https://gnu-ymir.github.io/Documentations/en/primitives/control.html)
@@ -493,11 +511,12 @@ An array is a collection of values of the same type, stored in
 contiguous memory.  Unlike tuples, the size of an array is unknown at
 compile time, and in *Ymir*, they are similar to slices, and will be
 refered as such. Slices are defined with a syntax close to the one of
-tuple, but with brackets instead of parentheses, for example **`[1, 2, 3]`**. 
-The type of a slice is also defined using the brackets, for example **`[i32]`**, meaning a slice containing **`i32`** values.
+tuple, but with brackets instead of parentheses, for example **`[1, 2,
+3]`**.  The type of a slice is also defined using the brackets, for
+example **`[i32]`**, meaning a slice containing **`i32`** values.
 
 String literals, enclosed between double quotes are a special case of
-slice literals. There is no string type in Ymir, but only slices
+slice literals. There is no string type in *Ymir*, but only slices
 type. Because of this, string values are typed **`[c32]`** or
 **`[c8]`** depending on the type of values contained in the
 slice. String literals can be prefixed with the keyword **`s8`** or
@@ -515,18 +534,18 @@ def main () {
 ```
 <br>
 
-**Warning**: The length of a [c8] literals can seem incorrect
-due to the encoding system. For example, the slice `"☺"s8` will have a
+**Warning**: The length of a **`[c8]`** literals can seem incorrect
+due to the encoding system. For example, the slice **`"☺"s8`** have a
 length of **`3`**. To summarize, **`[c8]`** slices are utf-8 encoded
 string literals, when **`[c32]`** are encoded in utf-32.
  
 A slice is a two-word object, the first word is the length of the
 slice, and the second is a pointer to the data stored in the slice. A
 slice is an aliasable type, its mutability is a bit more complicated
-than the mutability of scalar types, because it borrows memory which
-is not automatically copied when an assignment is made. This section
-will not discuss the mutability of internal types or aliasable
-types. This is discussed in the chapter [Aliases and
+than the mutability of scalar types (except pointers), because it
+borrows memory which is not automatically copied when an assignment is
+made. This section will not discuss the mutability of internal types
+or aliasable types. This is discussed in the chapter [Aliases and
 References](https://gnu-ymir.github.io/Documentations/en/advanced/).
  
 The field **`len`** records the length of the slice and can be
@@ -543,6 +562,8 @@ def main () {
 }
 ```
 
+<br>
+
 Similarly, the **`ptr`** field, gives access to the pointer of the
 slice and its types depend on the inner type of the slice, and is
 never mutable. Pointer type are absolutely not important for a
@@ -554,7 +575,7 @@ To access the elements of an array, the **`[]`** operator is used. It
 takes either an integer value or a range value as parameter. If a
 range value is given, a second slice that borrows a section of the
 first is created. For now, the step of the range does not affect the
-borrowing of the array. A contribution can be made here. On the other
+borrowing of the array. *Contribution* can be made here. On the other
 hand if an integer value **`i`** is given as parameter, the value at
 the index **`i`** is returned.
  
@@ -603,10 +624,18 @@ def main ()  {
 }
 ```
 
+<br>
+Results: 
+```
+[1, 2, 3, 8, 7, 6]
+```
+
+<br>
+
 The tilde token was chosen to avoid some ambiguity. In some languages
 such as Java, the concatenation is made using the token **`+`** that
 sometimes creates some ambiguity when concatenating strings, and other
-elements such as integers. For example, the expression `"foo" + 1 + 2`, is ambiguous. 
+elements such as integers. For example, the expression **`"foo" + 1 + 2`**, is ambiguous. 
 One can note however, that since concatenation only works on slices of
 the same type, the following expression `"foo" ~ 2`, is invalid as
 "foo" is of type **`[c32]`**, and **`2`** of type **`i32`**.
@@ -670,6 +699,8 @@ def main ()
 }
 ```
 
+<br>
+
 A static array can be transformed into a slice using the `alias`,
 `copy` and `dcopy` keywords. The chapter [Aliases and
 references](https://gnu-ymir.github.io/Documentations/en/advanced/)
@@ -679,14 +710,16 @@ explains the difference between these keywords.
 import std::io
 
 def main () {
-	let x = [0; 12];
+	let x : [i32; 12] = [0; 12];
 	
-	let a = alias x;
+	let a : [i32] = alias x;
 	let b = copy x;
 	
 	println (a, " ", b);
 }
 ```
+
+<br>
 
 One can argue that slice literals should be of static array type. We
 made the choice to create slices from array literals rather than
@@ -722,6 +755,8 @@ def main () {
 }
 ```
 
+<br>
+
 The value of an option type can be retreived using functions in the
 std, or pattern matching. In this chapter, we only focus on the
 **`unwrap`** function, pattern matching being left for a future
@@ -729,7 +764,7 @@ chapter (*cf.* [Pattern
 matchin](https://gnu-ymir.github.io/Documentations/en/pattern)).  The
 function **`unwrap`** from the module **`std::conv`**, get the value
 contained inside an option type. If no value is contained inside the
-option, the function throws an error of type **`CastFailure`**.
+option, the function throws an error of type **`&CastFailure`**.
 
 ```ymir
 import std::io;
