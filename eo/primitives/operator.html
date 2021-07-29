@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Bazaj konceptoj · GitBook</title>
+        <title>Prioritato de operatoroj · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -81,10 +81,10 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="variables.html" />
+    <link rel="next" href="../advanced/" />
     
     
-    <link rel="prev" href="../hello-world/commentaires.html" />
+    <link rel="prev" href="control.html" />
     
 
     </head>
@@ -158,7 +158,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.3" data-path="./">
+        <li class="chapter " data-level="1.3" data-path="./">
             
                 <a href="./">
             
@@ -224,7 +224,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.5" data-path="operator.html">
+        <li class="chapter active" data-level="1.3.5" data-path="operator.html">
             
                 <a href="operator.html">
             
@@ -285,7 +285,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Bazaj konceptoj</a>
+        <a href=".." >Prioritato de operatoroj</a>
     </h1>
 </div>
 
@@ -300,10 +300,132 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#bazaj-konceptoj"><b>1. </b>Bazaj konceptoj</a></li></ul></div><a href="#bazaj-konceptoj" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="bazaj-konceptoj"><a name="bazaj-konceptoj" class="anchor-navigation-ex-anchor" href="#bazaj-konceptoj"><i class="fa fa-link" aria-hidden="true"></i></a>1. Bazaj konceptoj</h1>
-<p>Tiu &#x109;apitro prezentas la bazajn konceptojn de la programlingvo
-<em>Ymir</em>. Konkrete, oni tie lernas pri variabloj, malkonstanteco,
-denaskaj tipoj, funkcioj kaj regaj fluoj.</p>
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#prioritato-de-operatoroj"><b>1. </b>Prioritato de operatoroj</a></li></ul></div><a href="#prioritato-de-operatoroj" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="prioritato-de-operatoroj"><a name="prioritato-de-operatoroj" class="anchor-navigation-ex-anchor" href="#prioritato-de-operatoroj"><i class="fa fa-link" aria-hidden="true"></i></a>1. Prioritato de operatoroj</h1>
+<p>La sekva tabulo prezentas la prioritaton de la operatoroj, kaj
+literoj. La tabulo prezentas la prioritato de la operatoroj, sed ne
+kiel la operatoroj devas esti uzataj, nek iliaj specifaj
+sintaksoj. Ekzemple, estas unuaraj operatoroj, kaj duaraj operatoroj,
+kiu respektive necesigas unu, kaj du argumentojn.</p>
+<table>
+<thead>
+<tr>
+<th>Prioritato</th>
+<th>Priskribo</th>
+<th>Operatoroj</th>
+<th>Komentoj</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Atribuigaj operatoroj</td>
+<td><code>=</code> <code>/=</code> <code>-=</code> <code>+=</code> <code>*=</code> <code>%=</code> <code>~=</code> <code>&lt;&lt;=</code> <code>&gt;&gt;=</code></td>
+<td></td>
+</tr>
+<tr>
+<td>1</td>
+<td>Logika A&#x16D;</td>
+<td><code>||</code></td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>Logika Kaj</td>
+<td><code>&amp;&amp;</code></td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td>Komparantaj operatoroj</td>
+<td><code>&lt;</code> <code>&gt;</code> <code>&lt;=</code> <code>&gt;=</code> <code>!=</code> <code>==</code> <code>of</code> <code>is</code> <code>in</code> <code>!of</code> <code>!is</code> <code>!in</code></td>
+<td>Ne &#x109;enigebla</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Intervalaj operatoroj</td>
+<td><code>..</code> <code>...</code></td>
+<td></td>
+</tr>
+<tr>
+<td>5</td>
+<td>Bitmovaj operatoroj</td>
+<td><code>&lt;&lt;</code> <code>&gt;&gt;</code></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>Bitaj operatoroj</td>
+<td><code>|</code> <code>^</code> <code>&amp;</code></td>
+<td>Averto, estas neniu prioritato inter la &apos;a&#x16D;&apos; kaj &apos;kaj&apos; bitaj operatoroj</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Aldonanta operatoroj</td>
+<td><code>+</code> <code>~</code> <code>-</code></td>
+<td><code>~</code> estas interliga operatoro</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Multiplika operatoroj</td>
+<td><code>*</code> <code>/</code> <code>%</code></td>
+<td></td>
+</tr>
+<tr>
+<td>9</td>
+<td>Potenca operatoro</td>
+<td><code>^^</code></td>
+<td></td>
+</tr>
+<tr>
+<td>10</td>
+<td>Unuara operatoro</td>
+<td><code>-</code> <code>&amp;</code> <code>*</code> <code>!</code></td>
+<td>&#x108;iam prefikso</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Opcia operatoro</td>
+<td><code>?</code></td>
+<td>&#x108;iam postfikso</td>
+</tr>
+<tr>
+<td>12</td>
+<td>&#x108;efvortoj kaj ampleksa operatoroj</td>
+<td><code>{</code> <code>if</code> <code>while</code> <code>assert</code> <code>break</code> <code>do</code> <code>for</code> <code>match</code> <code>let</code> <code>return</code> <code>fn</code> <code>dg</code> <code>loop</code> <code>throw</code> <code>__version</code> <code>__pragma</code> <code>with</code> <code>atomic</code></td>
+<td>Tiuj operatoroj havas specifan sintakson, kiun oni devas fermi, por ke la operatoro estu kompleta</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Postaj operatoroj</td>
+<td><code>.</code> <code>(</code> <code>[</code> <code>:.</code> <code>#[</code> <code>#(</code> <code>#{</code></td>
+<td><code>(</code> <code>[</code> <code>#{</code> <code>#[</code> <code>#(</code> devas esti fermita per konforma <code>]</code>, <code>)</code> a&#x16D; <code>}</code> por esti kompleta</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Voja operatoro</td>
+<td><code>::</code></td>
+<td></td>
+</tr>
+<tr>
+<td>15</td>
+<td>Literaj operatoroj</td>
+<td><code>(</code> <code>!</code> <code>[</code> <code>|</code> <code>cast</code> <code>move</code></td>
+<td>En tiu kialo <code>(</code> <code>[</code> <code>|</code> komencas novan esprimon, <code>move</code>  kaj <code>|</code> komencas lambdan literon, <code>(</code> opon, a&#x16D; esprimo kun 0 prioritato, <code>[</code> tran&#x109;on a&#x16D; statika tabulo, <code>!</code> &#x15D;ablan vokon</td>
+</tr>
+<tr>
+<td>16</td>
+<td>Dekoraciaj operatoroj</td>
+<td><code>ref</code> <code>const</code> <code>mut</code> <code>dmut</code> <code>cte</code></td>
+<td></td>
+</tr>
+<tr>
+<td>17</td>
+<td>Io ajn alia</td>
+<td></td>
+<td>Variablo, litero, ktp.</td>
+</tr>
+</tbody>
+</table>
 
                                 
                                 </section>
@@ -331,12 +453,12 @@ denaskaj tipoj, funkcioj kaj regaj fluoj.</p>
 
             
                 
-                <a href="../hello-world/commentaires.html" class="navigation navigation-prev " aria-label="Previous page: Komentoj">
+                <a href="control.html" class="navigation navigation-prev " aria-label="Previous page: Regaj fluoj">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="variables.html" class="navigation navigation-next " aria-label="Next page: Variabloj kaj Ŝanĝebleco">
+                <a href="../advanced/" class="navigation navigation-next " aria-label="Next page: Ligo kaj Referencoj">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -347,7 +469,7 @@ denaskaj tipoj, funkcioj kaj regaj fluoj.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Bazaj konceptoj","level":"1.3","depth":1,"next":{"title":"Variabloj kaj Ŝanĝebleco","level":"1.3.1","depth":2,"path":"primitives/variables.md","ref":"primitives/variables.md","articles":[]},"previous":{"title":"Komentoj","level":"1.2.1","depth":2,"path":"hello-world/commentaires.md","ref":"hello-world/commentaires.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"eo","gitbook":"*"},"file":{"path":"primitives/README.md","mtime":"2021-06-17T06:30:48.378Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-07-29T15:21:12.835Z"},"basePath":"..","book":{"language":"eo"}});
+            gitbook.page.hasChanged({"page":{"title":"Prioritato de operatoroj","level":"1.3.5","depth":2,"next":{"title":"Ligo kaj Referencoj","level":"1.4","depth":1,"path":"advanced/README.md","ref":"advanced/README.md","articles":[]},"previous":{"title":"Regaj fluoj","level":"1.3.4","depth":2,"path":"primitives/control.md","ref":"primitives/control.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"eo","gitbook":"*"},"file":{"path":"primitives/operator.md","mtime":"2021-07-16T13:39:22.057Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-07-29T15:21:12.835Z"},"basePath":"..","book":{"language":"eo"}});
         });
     </script>
 </div>

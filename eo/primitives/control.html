@@ -81,6 +81,8 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
+    <link rel="next" href="operator.html" />
+    
     
     <link rel="prev" href="functions.html" />
     
@@ -183,9 +185,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.2" data-path="types.md">
+        <li class="chapter " data-level="1.3.2" data-path="types.html">
             
-                <span>
+                <a href="types.html">
             
                     
                     Datumaj tipoj
@@ -222,8 +224,34 @@
             
         </li>
     
+        <li class="chapter " data-level="1.3.5" data-path="operator.html">
+            
+                <a href="operator.html">
+            
+                    
+                    Prioritato de operatoroj
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../advanced/">
+            
+                <a href="../advanced/">
+            
+                    
+                    Ligo kaj Referencoj
+            
+                </a>
+            
+
             
         </li>
     
@@ -272,13 +300,12 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#regaj-fluoj"><b>1. </b>Regaj fluoj</a></li><ul><li><span class="title-icon "></span><a href="#if-esprimo"><b>1.1. </b>&apos;If&apos; esprimo</a></li><li><span class="title-icon "></span><a href="#bukloj"><b>1.2. </b>Bukloj</a></li><ul><li><span class="title-icon "></span><a href="#senfinaj-ripetoj"><b>1.2.1. </b>Senfinaj ripetoj</a></li><li><span class="title-icon "></span><a href="#bulki&#x11D;i-dum-kondi&#x109;o-estas-plenumita"><b>1.2.2. </b>Bulki&#x11D;i dum kondi&#x109;o estas plenumita</a></li><li><span class="title-icon "></span><a href="#iteracii-trans-valoro"><b>1.2.3. </b>Iteracii trans valoro</a></li></ul></ul></ul></div><a href="#regaj-fluoj" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="regaj-fluoj"><a name="regaj-fluoj" class="anchor-navigation-ex-anchor" href="#regaj-fluoj"><i class="fa fa-link" aria-hidden="true"></i></a>1. Regaj fluoj</h1>
-<p>Kiam oni skribas programkodon, la kapablo de decidi &#x109;u parto de kodo
-ruli&#x11D;os, a&#x16D; de ripeti parton de la kodo, estas baza skemo, kiu estas
-necesa.</p>
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#regaj-fluoj"><b>1. </b>Regaj fluoj</a></li><ul><li><span class="title-icon "></span><a href="#if-esprimo"><b>1.1. </b>&apos;If&apos; esprimo</a></li><li><span class="title-icon "></span><a href="#bukloj"><b>1.2. </b>Bukloj</a></li><ul><li><span class="title-icon "></span><a href="#senfinaj-ripetoj"><b>1.2.1. </b>Senfinaj ripetoj</a></li><li><span class="title-icon "></span><a href="#bukli-dum-kondi&#x109;o-estas-plenumita"><b>1.2.2. </b>Bukli dum kondi&#x109;o estas plenumita</a></li><li><span class="title-icon "></span><a href="#iteracii-trans-valoro"><b>1.2.3. </b>Iteracii trans valoro</a></li></ul></ul></ul></div><a href="#regaj-fluoj" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="regaj-fluoj"><a name="regaj-fluoj" class="anchor-navigation-ex-anchor" href="#regaj-fluoj"><i class="fa fa-link" aria-hidden="true"></i></a>1. Regaj fluoj</h1>
+<p>Kiam oni skribas programkodon, la kapablo de decidi &#x109;u ruli parton de
+kodo, a&#x16D; &#x109;u ripeti parton de kodo, estas baza skemo, kiu estas necesa.</p>
 <h2 id="if-esprimo"><a name="if-esprimo" class="anchor-navigation-ex-anchor" href="#if-esprimo"><i class="fa fa-link" aria-hidden="true"></i></a>1.1. &apos;If&apos; esprimo</h2>
 <p>La <strong><code>if</code></strong> vorto (<em>&apos;se&apos; esperante</em>), difinas esprimon kiu ebligas
-disbran&#x109;igi la programon per fari decidojn, bazitaj sur kondi&#x109;oj. La
+disbran&#x109;igon de la programo farante decidojn, bazitaj sur kondi&#x109;oj. La
 <strong><code>else</code></strong> vorto (<em>&apos;alie&apos; esperante</em>) povas esti lokita malanta&#x16D; <em>if</em>
 esprimo, por ruli parton de kodo, se la kondi&#x109;o de la <em>if</em> esprimo ne
 estas vera.</p>
@@ -288,11 +315,11 @@ estas vera.</p>
 <p><br></p>
 <p>La sekva programkodo prezentas bazan uzon de la <em>if</em> esprimo. En &#x109;i
 tiu ekzemplo, la valoro de la variablo <strong><code>x</code></strong> estas testita. Se &#x11D;ia
-valoro estas malpli granda ol <code>5</code>, tiam la kodo je la linio <code>5</code> estos
+valoro estas malpli granda ol <code>5</code>, tiam la kodo je la linio <code>5</code> estas
 rulita, alikaze se &#x11D;ia valoro estas egala al <code>5</code> la kodo je la linio
-<code>7</code> estos plenumita. Se amba&#x16D; tiuj testoj malsukcesas, la linio <code>9</code>
-estos rulita. En &#x109;i tiu ekzemplo, <strong><code>x</code></strong> egalas <code>5</code>, do la rezulto
-estos <code>X estas ekzakte 5</code>.</p>
+<code>7</code> estas plenumita. Se amba&#x16D; tiuj testoj malsukcesas, la linio <code>9</code>
+estas rulita. En &#x109;i tiu ekzemplo, <strong><code>x</code></strong> egalas <code>5</code>, do la rezulto
+estas <code>X estas ekzakte 5</code>.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
 
@@ -307,15 +334,15 @@ estos <code>X estas ekzakte 5</code>.</p>
 </code></pre>
 <p><br></p>
 <p>La valoro de <em>if</em> esprimo estas komputita kiel la valoro de la bloko
-da kodo kiu estas rulita, kiam la programo elektas bran&#x109;on je
+da kodo kiu estas rulita, kiam la programo elektas bran&#x109;on la&#x16D;
 kondi&#x109;o. &#x108;iuj bran&#x109;oj de la <em>if</em> esprimo devas havi valorojn, kies
 tipoj estas similaj. Alie la kompililo &#x135;etas eraron, pro ke la tipo de
 la <em>if</em> esprimo ne povas esti induktita. La tipo de <em>if</em> esprimo
 evidente povas esti <strong><code>void</code></strong>, kiu estas la tipo uzita kiam ne estas
 valoro.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> condition <span class="token operator">=</span> <span class="token other-keyword">true</span><span class="token punctuation">;</span>
-    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token keyword">if</span> condition <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> kondicxo <span class="token operator">=</span> <span class="token other-keyword">true</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token keyword">if</span> kondicxo <span class="token punctuation">{</span>
         <span class="token number">5</span> 
     <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
         <span class="token number">7</span>
@@ -323,8 +350,8 @@ valoro.</p>
 <span class="token punctuation">}</span>
 </code></pre>
 <p><br></p>
-<p>Se eblas ke neniu el la bran&#x109;oj de <em>if</em> esprimo estas rulita, tiam la
-tipo de la esprimo devas esti <strong><code>void</code></strong>. Ekzemple, en la sekva
+<p>Se eblas ke neniu el la bran&#x109;oj de <em>if</em> esprimo estus rulita, tiam la
+tipo de la esprimo devus esti <strong><code>void</code></strong>. Ekzemple, en la sekva
 programkodo, la variablo <strong><code>kondicxo</code></strong> povas enhavi amba&#x16D; la valorojn
 <strong><code>true</code></strong> a&#x16D; <strong><code>false</code></strong>. Se &#x11D;ia valoro estas <strong><code>false</code></strong>, tiam la
 kondi&#x109;o de la <em>if</em> esprimo estas malvera, kaj en la solan bran&#x109;on de
@@ -365,8 +392,8 @@ bloko da kodo devas esti ripetata senfine. La sintakso de la
 <pre class="language-"><code class="lang-grammar"><span class="token path">loop_esprimo</span> <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token string">&apos;loop&apos;</span> esprimo
 </code></pre>
 <p><br></p>
-<p>En la sekva ekzemplo, la programo neniam finos, kaj presos, senfina
-nombro da fojoj, la &#x109;enon <code>&quot;Mi estos presita senfine&quot;</code>.</p>
+<p>En la sekva ekzemplo, la programo neniam finos, kaj presos, senfinan
+nombron da fojoj, la &#x109;enon <code>&quot;Mi estos presita senfine&quot;</code>.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     loop <span class="token punctuation">{</span> 
         <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Mi estos presita senfine&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -400,7 +427,7 @@ tipoj.</p>
 <p>Rezulto: </p>
 <pre class="language-"><code>Rezulto: 11
 </code></pre><p><br></p>
-<h3 id="bulki&#x11D;i-dum-kondi&#x109;o-estas-plenumita"><a name="bulki&#x11D;i-dum-kondi&#x109;o-estas-plenumita" class="anchor-navigation-ex-anchor" href="#bulki&#x11D;i-dum-kondi&#x109;o-estas-plenumita"><i class="fa fa-link" aria-hidden="true"></i></a>1.2.2. Bulki&#x11D;i dum kondi&#x109;o estas plenumita</h3>
+<h3 id="bukli-dum-kondi&#x109;o-estas-plenumita"><a name="bukli-dum-kondi&#x109;o-estas-plenumita" class="anchor-navigation-ex-anchor" href="#bukli-dum-kondi&#x109;o-estas-plenumita"><i class="fa fa-link" aria-hidden="true"></i></a>1.2.2. Bukli dum kondi&#x109;o estas plenumita</h3>
 <p>La vorto <strong><code>while</code></strong> (<em>&apos;dum&apos; esperante</em>) kreas buklon, kiu ripeti&#x11D;as
 &#x11D;is kondi&#x109;o ne plu etas plenumita. Kiel por la <em>loop</em> esprimo, <em>break</em>
 deklaroj povas esti uzitaj por haltigi &#x11D;in. Krome, malkiel <em>loop</em>
@@ -409,13 +436,13 @@ eblas ke oni neniam eniris tiajn buklojn. La <em>break</em> deklaroj en tiaj
 buklojn devas sekvi tiun regulon, do la valoroj asociataj al <em>break</em>
 deklaroj en <em>while</em> esprimoj, &#x109;iam estas <strong><code>void</code></strong> valoroj.
 <em>Kontribuo:</em> Ni planas aldoni <strong><code>else</code></strong> blokon al <em>while</em> bukloj, por
-doni valoro al tiaj bukloj, kiam &#x11D;i ne estas eniritaj.</p>
+doni valoron al tiaj bukloj, kiam &#x11D;i ne estas eniritaj.</p>
 <p>La sintakso de <em>while</em> buklo estas prezentata en la sekva bloko da kodo.</p>
 <pre class="language-"><code class="lang-grammar"><span class="token path">while_esprimo</span> <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token string">&apos;while&apos;</span> esprimo esprimo
 </code></pre>
 <p><br></p>
 <p>La sekva ekzemplo, presentas uzon de <em>while</em> buklon, kie la buklon
-iteracias 10 fojoj, dum la valoro de <strong><code>i</code></strong> estas malpli granda ol
+iteracias 10 fojojn, dum la valoro de <strong><code>i</code></strong> estas malpli granda ol
 <strong>10</strong>.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
@@ -435,7 +462,7 @@ Rezulto:</p>
 <p>La lasta speco de buklo estas la <em>for</em> buklo (<em>&apos;por&apos; esperante</em>),
 deklarita per la vorto <strong><code>for</code></strong>. Kiel por <em>while</em> bukloj, la valoro
 de <em>for</em> buklo &#x109;iam estas <strong><code>void</code></strong>, pro ke ne eblas garantii ke la
-buklo e&#x109; unu foje estos enirita. <em>Kontribuo:</em> ankora&#x16D; kiel por la
+buklo e&#x109; unu fojon estos enirita. <em>Kontribuo:</em> ankora&#x16D; kiel por la
 <em>while</em> buklo, ni planas aldoni <em>else</em> bloko al <em>for</em> buklo por doni
 valoron al bukloj, kiuj neniam estas enirita.</p>
 <p><em>for</em> bukloj iteracias trans valoro, kies tipo estas iteraciebla. La
@@ -451,10 +478,11 @@ kaj statikaj tabuloj.</p>
 </code></pre>
 <p><br></p>
 <p><strong>1) Iteracio trans intervalo.</strong> En la sekva ekzemplo, la <em>for</em> buklo
-estas uzita por iteracii trans du intervaloj. La unua buklo je la
+estas uzita por iteracii trans tri intervaloj. La unua buklo je la
 kvara linio, iteracias inter la valoroj <strong>0</strong> kaj <strong>8</strong>
-(malinkluzivita), je pa&#x15D;o de <strong>2</strong>. Kiam la dua buklo iteracias inter
-la valoroj <strong>10</strong> kaj <strong>0</strong> (malinkluzivita) per pa&#x15D;o de <strong>-1</strong>.</p>
+(malinkluzivita), je pa&#x15D;o de <strong>2</strong>. La dua buklo iteracias inter la
+valoroj <strong>10</strong> kaj <strong>0</strong> (malinkluzivita) per pa&#x15D;o de <strong>-1</strong>. La tria
+buklo interacias inter la valoro <strong>1</strong> kaj <strong>6</strong> (inkluzivita &#x109;i-foje).</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -463,17 +491,21 @@ la valoroj <strong>10</strong> kaj <strong>0</strong> (malinkluzivita) per pa&#x
     <span class="token punctuation">}</span>    
 
     <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token number">10</span> <span class="token punctuation">..</span> <span class="token number">0</span> <span class="token punctuation">{</span>
-        <span class="token function">println</span> <span class="token punctuation">(</span>i<span class="token punctuation">,</span> <span class="token string">&quot;!&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">println</span> <span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token number">1</span> <span class="token punctuation">...</span> <span class="token number">6</span> <span class="token punctuation">{</span>
+        <span class="token function">println</span> <span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre>
 <p><br></p>
 <p><strong>2) Iteracio trans tran&#x109;oj kaj statikaj tabuloj.</strong> Tran&#x109;oj estas
 iteracieblaj tipoj. Ili povas esti iteraciita uzante unu a&#x16D; du
-variabloj. Kiam oni uzas nur unu variablo, tiu variablo estas asociita
-al la valoroj enhavitaj en la tran&#x109;o. Kiam du variabloj estas uzitaj,
-la unua estas asociita al la nuna indekso de iteracio, kaj la dua
-estas asociita al la valoroj enhavitaj en la tran&#x109;o. Iteracioj
+variabloj. Kiam oni uzas nur unu variablon, tiu variablo estas
+asociata al la valoroj enhavitaj de la tran&#x109;o. Kiam du variabloj estas
+uzitaj, la unua estas asociata al la nuna indekso de la iteracio, kaj
+la dua estas asociata al la valoroj enhavitaj de la tran&#x109;o. Iteracioj
 trans statikaj tabuloj funkcias simile.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
 
@@ -500,7 +532,7 @@ trans statikaj tabuloj funkcias simile.</p>
 <p><strong>3) Iteracio trans opoj.</strong> Opoj estas iteracieblaj tipoj. Sed malkiel
 tran&#x109;oj a&#x16D; intervaloj, la <em>for</em> buklo estas disvolvita dum la
 kompilado. La opoj estas iteracieblaj kun nur unu variablo, kiu estas
-asociita al la valoroj enhavitaj en la opoj.</p>
+asociata al la valoroj enhavitaj de la opoj.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span> 
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -516,9 +548,9 @@ asociita al la valoroj enhavitaj en la opoj.</p>
 </code></pre>
 <p><br></p>
 <p>Oni povas noti ke la tipo de la variablo <strong><code>i</code></strong>, en la <em>for</em> buklo de
-la supra ekzemplo, &#x15D;an&#x11D;as de unu iteracio al alia, estinte <strong><code>i32</code></strong>
-tipo, kaj sekve <strong><code>c32</code></strong> tipo je la sekva iteracio. Pro tiu kialo,
-kaj por malgra&#x16D;e esti ebla, <em>for</em> bukloj trans opoj ne estas
+la supra ekzemplo, &#x15D;an&#x11D;as de unu iteracio al la alia, estinte
+<strong><code>i32</code></strong> tipo, kaj poste <strong><code>c32</code></strong> tipo je la sekva iteracio. Pro tiu
+kialo, kaj por malgra&#x16D;e esti ebla, <em>for</em> bukloj trans opoj ne estas
 malstatikaj, sed nur disvolvitaj dum kompilado. Tiu &#x15D;an&#x11D;as nenion por
 la uzantoj, sed valoras mencion, por malhelpi miskomprenon pri la
 statika sistemo de tipoj, kiu povas &#x15D;ajni malstatika tie, sed tute ne
@@ -550,10 +582,14 @@ estas.</p>
 
             
                 
-                <a href="functions.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Funkcioj">
+                <a href="functions.html" class="navigation navigation-prev " aria-label="Previous page: Funkcioj">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
+                
+                <a href="operator.html" class="navigation navigation-next " aria-label="Next page: Prioritato de operatoroj">
+                    <i class="fa fa-angle-right"></i>
+                </a>
                 
             
         
@@ -562,7 +598,7 @@ estas.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Regaj fluoj","level":"1.3.4","depth":2,"previous":{"title":"Funkcioj","level":"1.3.3","depth":2,"path":"primitives/functions.md","ref":"primitives/functions.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"eo","gitbook":"*"},"file":{"path":"primitives/control.md","mtime":"2021-06-17T05:03:47.376Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-17T06:30:34.719Z"},"basePath":"..","book":{"language":"eo"}});
+            gitbook.page.hasChanged({"page":{"title":"Regaj fluoj","level":"1.3.4","depth":2,"next":{"title":"Prioritato de operatoroj","level":"1.3.5","depth":2,"path":"primitives/operator.md","ref":"primitives/operator.md","articles":[]},"previous":{"title":"Funkcioj","level":"1.3.3","depth":2,"path":"primitives/functions.md","ref":"primitives/functions.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"eo","gitbook":"*"},"file":{"path":"primitives/control.md","mtime":"2021-07-16T13:21:02.437Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-07-29T15:21:12.835Z"},"basePath":"..","book":{"language":"eo"}});
         });
     </script>
 </div>

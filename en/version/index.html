@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Operator priority · GitBook</title>
+        <title>Version · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -81,10 +81,10 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../advanced/" />
+    <link rel="next" href="../macros/" />
     
     
-    <link rel="prev" href="control.html" />
+    <link rel="prev" href="../templates/complex_operators.html" />
     
 
     </head>
@@ -158,9 +158,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3" data-path="./">
+        <li class="chapter " data-level="1.3" data-path="../primitives/">
             
-                <a href="./">
+                <a href="../primitives/">
             
                     
                     Basic programming concepts
@@ -172,9 +172,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.3.1" data-path="variables.html">
+        <li class="chapter " data-level="1.3.1" data-path="../primitives/variables.html">
             
-                <a href="variables.html">
+                <a href="../primitives/variables.html">
             
                     
                     Variable and Mutability
@@ -185,9 +185,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.2" data-path="types.html">
+        <li class="chapter " data-level="1.3.2" data-path="../primitives/types.html">
             
-                <a href="types.html">
+                <a href="../primitives/types.html">
             
                     
                     Data types
@@ -198,9 +198,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.3" data-path="functions.html">
+        <li class="chapter " data-level="1.3.3" data-path="../primitives/functions.html">
             
-                <a href="functions.html">
+                <a href="../primitives/functions.html">
             
                     
                     Functions
@@ -211,9 +211,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.4" data-path="control.html">
+        <li class="chapter " data-level="1.3.4" data-path="../primitives/control.html">
             
-                <a href="control.html">
+                <a href="../primitives/control.html">
             
                     
                     Control flows
@@ -224,9 +224,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.3.5" data-path="operator.html">
+        <li class="chapter " data-level="1.3.5" data-path="../primitives/operator.html">
             
-                <a href="operator.html">
+                <a href="../primitives/operator.html">
             
                     
                     Operator priority
@@ -765,9 +765,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.14" data-path="../version/">
+        <li class="chapter active" data-level="1.14" data-path="./">
             
-                <a href="../version/">
+                <a href="./">
             
                     
                     Version
@@ -885,7 +885,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Operator priority</a>
+        <a href=".." >Version</a>
     </h1>
 </div>
 
@@ -900,133 +900,84 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#operator-priority"><b>1. </b>Operator priority</a></li></ul></div><a href="#operator-priority" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="operator-priority"><a name="operator-priority" class="anchor-navigation-ex-anchor" href="#operator-priority"><i class="fa fa-link" aria-hidden="true"></i></a>1. Operator priority</h1>
-<p>The following table present the precedence of the operators, and
-literals. This table presents the priority of the operators, but does
-not specify how the operators are used, and their specific syntax. For
-example, there are unary operators, and binary operators, that
-require respectively one and two operands, but that is not specified
-in the table.</p>
-<table>
-<thead>
-<tr>
-<th>Priority</th>
-<th>Description</th>
-<th>Operators</th>
-<th>Comments</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>Assignement operators</td>
-<td><code>=</code> <code>/=</code> <code>-=</code> <code>+=</code> <code>*=</code> <code>%=</code> <code>~=</code> <code>&lt;&lt;=</code> <code>&gt;&gt;=</code></td>
-<td></td>
-</tr>
-<tr>
-<td>1</td>
-<td>Logical Or</td>
-<td><code>||</code></td>
-<td></td>
-</tr>
-<tr>
-<td>2</td>
-<td>Logical And</td>
-<td><code>&amp;&amp;</code></td>
-<td></td>
-</tr>
-<tr>
-<td>3</td>
-<td>Comparison operators</td>
-<td><code>&lt;</code> <code>&gt;</code> <code>&lt;=</code> <code>&gt;=</code> <code>!=</code> <code>==</code> <code>of</code> <code>is</code> <code>in</code> <code>!of</code> <code>!is</code> <code>!in</code></td>
-<td>Cannot be chained</td>
-</tr>
-<tr>
-<td>4</td>
-<td>Range operators</td>
-<td><code>..</code> <code>...</code></td>
-<td></td>
-</tr>
-<tr>
-<td>5</td>
-<td>Bitshift operators</td>
-<td><code>&lt;&lt;</code> <code>&gt;&gt;</code></td>
-<td></td>
-</tr>
-<tr>
-<td>6</td>
-<td>Bit operators</td>
-<td><code>|</code> <code>^</code> <code>&amp;</code></td>
-<td>Warning there is no priority over these operators (or and and)</td>
-</tr>
-<tr>
-<td>7</td>
-<td>Additive operators</td>
-<td><code>+</code> <code>~</code> <code>-</code></td>
-<td><code>~</code> is the concatenation operator</td>
-</tr>
-<tr>
-<td>8</td>
-<td>Multiplicative operators</td>
-<td><code>*</code> <code>/</code> <code>%</code></td>
-<td></td>
-</tr>
-<tr>
-<td>9</td>
-<td>Power operator</td>
-<td><code>^^</code></td>
-<td></td>
-</tr>
-<tr>
-<td>10</td>
-<td>Unary operators</td>
-<td><code>-</code> <code>&amp;</code> <code>*</code> <code>!</code></td>
-<td>Always prefixed</td>
-</tr>
-<tr>
-<td>11</td>
-<td>Option operator</td>
-<td><code>?</code></td>
-<td>Always postfixed</td>
-</tr>
-<tr>
-<td>12</td>
-<td>Keyword and Scope operators</td>
-<td><code>{</code> <code>if</code> <code>while</code> <code>assert</code> <code>break</code> <code>do</code> <code>for</code> <code>match</code> <code>let</code> <code>return</code> <code>fn</code> <code>dg</code> <code>loop</code> <code>throw</code> <code>__version</code> <code>__pragma</code> <code>with</code> <code>atomic</code></td>
-<td>This operators have a specific syntax that must be closed, to be completed</td>
-</tr>
-<tr>
-<td>13</td>
-<td>Postfix operators</td>
-<td><code>.</code> <code>(</code> <code>[</code> <code>:.</code> <code>#[</code> <code>#(</code> <code>#{</code></td>
-<td><code>(</code> <code>[</code> <code>#{</code> <code>#[</code> <code>#(</code> must be closed by a balanced <code>]</code>, <code>)</code> or <code>}</code> to be completed</td>
-</tr>
-<tr>
-<td>14</td>
-<td>Path operator</td>
-<td><code>::</code></td>
-<td></td>
-</tr>
-<tr>
-<td>15</td>
-<td>Literal operators</td>
-<td><code>(</code> <code>!</code> <code>[</code> <code>|</code> <code>cast</code> <code>move</code></td>
-<td>In that case <code>(</code> <code>[</code> <code>|</code> start a new expression, <code>move</code>  and <code>|</code> start a lambda literal, <code>(</code> a tuple, or a 0 priority expression, <code>[</code> a slice or array literal, <code>!</code> a template call</td>
-</tr>
-<tr>
-<td>16</td>
-<td>Decorated expression</td>
-<td><code>ref</code> <code>const</code> <code>mut</code> <code>dmut</code> <code>cte</code></td>
-<td></td>
-</tr>
-<tr>
-<td>17</td>
-<td>Anything else</td>
-<td></td>
-<td>A variable, a literal, etc.</td>
-</tr>
-</tbody>
-</table>
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#version"><b>1. </b>Version</a></li><ul><li><span class="title-icon "></span><a href="#debug-version"><b>1.1. </b>Debug version</a></li><li><span class="title-icon "></span><a href="#predefined-versions"><b>1.2. </b>Predefined versions</a></li></ul></ul></div><a href="#version" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="version"><a name="version" class="anchor-navigation-ex-anchor" href="#version"><i class="fa fa-link" aria-hidden="true"></i></a>1. Version</h1>
+<p>Version is another conditional compilation process (in addition to
+<em>compile time execution</em> with templates), that select parts of the
+code that must be compiled or not. The following code block presents
+the grammar of the <em>version</em> declaration and expression.</p>
+<pre class="language-"><code class="lang-grammar"><span class="token path">version_decl</span> <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token string">&apos;__version&apos;</span> Identifier <span class="token string">&apos;{&apos;</span> declaration <span class="token string">&apos;}&apos;</span> <span class="token punctuation">(</span><span class="token string">&apos;else&apos;</span> declaration<span class="token punctuation">)</span>?
+<span class="token path">version_expr</span> <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token string">&apos;__version&apos;</span> Identifier block <span class="token punctuation">(</span><span class="token string">&apos;else&apos;</span> expression<span class="token punctuation">)</span>?
+</code></pre>
+<p><br></p>
+<p>The identifier used in the version block are in their own name space,
+meaning that they do not conflict with the other identifiers
+(variable, types, etc...). <strong>Warning</strong> the identifier of the version
+is not case sensitive, thus <strong><code>Demo</code></strong> and <strong><code>DEMO</code></strong> are
+identical. The version are activated by the command line using the
+option <strong><code>-fversion</code></strong>. In the following example the version
+<strong><code>Demo</code></strong>, and <strong><code>Full</code></strong> are used.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
+
+__version Demo <span class="token punctuation">{</span>
+    <span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Foo of the demo version&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    __version Full <span class="token punctuation">{</span>
+        <span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Foo of the full version&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>    
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br></p>
+<pre class="language-"><code class="lang-bash">$ gyc main.yr -fversion<span class="token operator">=</span>Demo
+$ ./a.out
+Foo of the demo version
+
+$ gyc main.yr -fversion<span class="token operator">=</span>Full
+$ ./a.out
+Foo of the full version
+</code></pre>
+<p><br></p>
+<p>To use multiple version, the option must be set for each version. </p>
+<pre class="language-"><code class="lang-bash">$ gyc main.yr -fversion<span class="token operator">=</span>Demo -fversion<span class="token operator">=</span>Full
+</code></pre>
+<h2 id="debug-version"><a name="debug-version" class="anchor-navigation-ex-anchor" href="#debug-version"><i class="fa fa-link" aria-hidden="true"></i></a>1.1. Debug version</h2>
+<p>The debug option of the command line <strong><code>-g</code></strong> activates the
+<strong><code>Debug</code></strong> version even without the option <strong><code>-fversion</code></strong>.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
+
+<span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    __version DEBUG <span class="token punctuation">{</span>
+        <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;Entering foo&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;foo&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br></p>
+<pre class="language-"><code class="lang-bash">$ gyc main.yr -g
+$ ./a.out
+Entering foo
+foo
+
+$ gyc main.yr
+$ ./a.out
+foo
+</code></pre>
+<h2 id="predefined-versions"><a name="predefined-versions" class="anchor-navigation-ex-anchor" href="#predefined-versions"><i class="fa fa-link" aria-hidden="true"></i></a>1.2. Predefined versions</h2>
+<p><strong>Contribution</strong> There is no predefined version for the moment, but it
+is a work in progress. These versions will depend on the compiler, os,
+etc..</p>
 
                                 
                                 </section>
@@ -1054,12 +1005,12 @@ in the table.</p>
 
             
                 
-                <a href="control.html" class="navigation navigation-prev " aria-label="Previous page: Control flows">
+                <a href="../templates/complex_operators.html" class="navigation navigation-prev " aria-label="Previous page: Access, contains and iteration">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="../advanced/" class="navigation navigation-next " aria-label="Next page: Alias and References">
+                <a href="../macros/" class="navigation navigation-next " aria-label="Next page: Macro">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -1070,7 +1021,7 @@ in the table.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Operator priority","level":"1.3.5","depth":2,"next":{"title":"Alias and References","level":"1.4","depth":1,"path":"advanced/README.md","ref":"advanced/README.md","articles":[{"title":"References","level":"1.4.1","depth":2,"path":"advanced/references.md","ref":"advanced/references.md","articles":[]},{"title":"Aliases","level":"1.4.2","depth":2,"path":"advanced/alias.md","ref":"advanced/alias.md","articles":[]},{"title":"Copy and Deep copy","level":"1.4.3","depth":2,"path":"advanced/copies.md","ref":"advanced/copies.md","articles":[]},{"title":"Best practice","level":"1.4.4","depth":2,"path":"advanced/best.md","ref":"advanced/best.md","articles":[]}]},"previous":{"title":"Control flows","level":"1.3.4","depth":2,"path":"primitives/control.md","ref":"primitives/control.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"primitives/operator.md","mtime":"2021-07-16T13:37:57.903Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-07-29T15:21:12.835Z"},"basePath":"..","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Version","level":"1.14","depth":1,"next":{"title":"Macro","level":"1.15","depth":1,"path":"macros/README.md","ref":"macros/README.md","articles":[{"title":"Std and Core macros","level":"1.15.1","depth":2,"path":"macros/std.md","ref":"macros/std.md","articles":[]}]},"previous":{"title":"Access, contains and iteration","level":"1.13.2","depth":2,"path":"templates/complex_operators.md","ref":"templates/complex_operators.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"version/README.md","mtime":"2021-07-29T14:28:43.878Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-07-29T15:21:12.835Z"},"basePath":"..","book":{"language":"en"}});
         });
     </script>
 </div>

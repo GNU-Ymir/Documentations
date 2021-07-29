@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Bazaj konceptoj · GitBook</title>
+        <title>Ligo kaj Referencoj · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -81,10 +81,8 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="variables.html" />
     
-    
-    <link rel="prev" href="../hello-world/commentaires.html" />
+    <link rel="prev" href="../primitives/operator.html" />
     
 
     </head>
@@ -158,9 +156,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.3" data-path="./">
+        <li class="chapter " data-level="1.3" data-path="../primitives/">
             
-                <a href="./">
+                <a href="../primitives/">
             
                     
                     Bazaj konceptoj
@@ -172,9 +170,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.3.1" data-path="variables.html">
+        <li class="chapter " data-level="1.3.1" data-path="../primitives/variables.html">
             
-                <a href="variables.html">
+                <a href="../primitives/variables.html">
             
                     
                     Variabloj kaj Ŝanĝebleco
@@ -185,9 +183,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.2" data-path="types.html">
+        <li class="chapter " data-level="1.3.2" data-path="../primitives/types.html">
             
-                <a href="types.html">
+                <a href="../primitives/types.html">
             
                     
                     Datumaj tipoj
@@ -198,9 +196,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.3" data-path="functions.html">
+        <li class="chapter " data-level="1.3.3" data-path="../primitives/functions.html">
             
-                <a href="functions.html">
+                <a href="../primitives/functions.html">
             
                     
                     Funkcioj
@@ -211,9 +209,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.4" data-path="control.html">
+        <li class="chapter " data-level="1.3.4" data-path="../primitives/control.html">
             
-                <a href="control.html">
+                <a href="../primitives/control.html">
             
                     
                     Regaj fluoj
@@ -224,9 +222,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.5" data-path="operator.html">
+        <li class="chapter " data-level="1.3.5" data-path="../primitives/operator.html">
             
-                <a href="operator.html">
+                <a href="../primitives/operator.html">
             
                     
                     Prioritato de operatoroj
@@ -242,9 +240,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4" data-path="../advanced/">
+        <li class="chapter active" data-level="1.4" data-path="./">
             
-                <a href="../advanced/">
+                <a href="./">
             
                     
                     Ligo kaj Referencoj
@@ -285,7 +283,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Bazaj konceptoj</a>
+        <a href=".." >Ligo kaj Referencoj</a>
     </h1>
 </div>
 
@@ -300,10 +298,17 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#bazaj-konceptoj"><b>1. </b>Bazaj konceptoj</a></li></ul></div><a href="#bazaj-konceptoj" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="bazaj-konceptoj"><a name="bazaj-konceptoj" class="anchor-navigation-ex-anchor" href="#bazaj-konceptoj"><i class="fa fa-link" aria-hidden="true"></i></a>1. Bazaj konceptoj</h1>
-<p>Tiu &#x109;apitro prezentas la bazajn konceptojn de la programlingvo
-<em>Ymir</em>. Konkrete, oni tie lernas pri variabloj, malkonstanteco,
-denaskaj tipoj, funkcioj kaj regaj fluoj.</p>
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#ligoj-kaj-referencoj"><b>1. </b>Ligoj kaj Referencoj</a></li></ul></div><a href="#ligoj-kaj-referencoj" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="ligoj-kaj-referencoj"><a name="ligoj-kaj-referencoj" class="anchor-navigation-ex-anchor" href="#ligoj-kaj-referencoj"><i class="fa fa-link" aria-hidden="true"></i></a>1. Ligoj kaj Referencoj</h1>
+<p>Ligoj kaj referencoj estas unu el la plej gravaj karakteristikoj de la
+<em>Ymir</em> programlingvo, kiuj permesas doni al &#x11D;i garantiojn pri la
+&#x15D;an&#x11D;ebleco de datumoj, kaj pri la movoj de la datumo kiuj fari&#x11D;as
+klaraj. Estas grava ke vi bone komprenu kiel memoro funkcias en
+<em>Ymir</em>, por kompreni la mesa&#x11D;ojn de eraroj kiujn vi eble akirus
+provante movi datumon de iu variablo al alia.</p>
+<p><em>Ymir</em> estas altnivela programlingvo, do ne bezonas zorgi pri
+administracio de memoro (memora liko), la lingvo uzante
+sunrubigon. Tamen, pri la &#x15D;an&#x11D;ebleco kaj la rajto de atingebleco, la
+lingvo proponas esprimplenan sistemon por gvidi la movon de la memoro.</p>
 
                                 
                                 </section>
@@ -331,14 +336,10 @@ denaskaj tipoj, funkcioj kaj regaj fluoj.</p>
 
             
                 
-                <a href="../hello-world/commentaires.html" class="navigation navigation-prev " aria-label="Previous page: Komentoj">
+                <a href="../primitives/operator.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Prioritato de operatoroj">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
-                
-                <a href="variables.html" class="navigation navigation-next " aria-label="Next page: Variabloj kaj Ŝanĝebleco">
-                    <i class="fa fa-angle-right"></i>
-                </a>
                 
             
         
@@ -347,7 +348,7 @@ denaskaj tipoj, funkcioj kaj regaj fluoj.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Bazaj konceptoj","level":"1.3","depth":1,"next":{"title":"Variabloj kaj Ŝanĝebleco","level":"1.3.1","depth":2,"path":"primitives/variables.md","ref":"primitives/variables.md","articles":[]},"previous":{"title":"Komentoj","level":"1.2.1","depth":2,"path":"hello-world/commentaires.md","ref":"hello-world/commentaires.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"eo","gitbook":"*"},"file":{"path":"primitives/README.md","mtime":"2021-06-17T06:30:48.378Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-07-29T15:21:12.835Z"},"basePath":"..","book":{"language":"eo"}});
+            gitbook.page.hasChanged({"page":{"title":"Ligo kaj Referencoj","level":"1.4","depth":1,"previous":{"title":"Prioritato de operatoroj","level":"1.3.5","depth":2,"path":"primitives/operator.md","ref":"primitives/operator.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"eo","gitbook":"*"},"file":{"path":"advanced/README.md","mtime":"2021-07-29T12:37:36.978Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-07-29T15:21:12.835Z"},"basePath":"..","book":{"language":"eo"}});
         });
     </script>
 </div>

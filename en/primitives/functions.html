@@ -731,11 +731,43 @@
             
 
             
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.13.1" data-path="../templates/binary.html">
+            
+                <a href="../templates/binary.html">
+            
+                    
+                    Unary, binary and Comparison
+            
+                </a>
+            
+
+            
         </li>
     
-        <li class="chapter " data-level="1.14" data-path="../version/README.md">
+        <li class="chapter " data-level="1.13.2" data-path="../templates/complex_operators.html">
             
-                <span>
+                <a href="../templates/complex_operators.html">
+            
+                    
+                    Access, contains and iteration
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="../version/">
+            
+                <a href="../version/">
             
                     
                     Version
@@ -746,16 +778,80 @@
             
         </li>
     
-        <li class="chapter " data-level="1.15" >
+        <li class="chapter " data-level="1.15" data-path="../macros/">
             
-                <span>
+                <a href="../macros/">
+            
+                    
+                    Macro
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.15.1" data-path="../macros/std.html">
+            
+                <a href="../macros/std.html">
+            
+                    
+                    Std and Core macros
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16" data-path="../documentation/">
+            
+                <a href="../documentation/">
             
                     
                     Documentation
             
-                </span>
+                </a>
             
 
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.16.1" data-path="../documentation/types.html">
+            
+                <a href="../documentation/types.html">
+            
+                    
+                    Types
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16.2" data-path="../documentation/symbols.html">
+            
+                <a href="../documentation/symbols.html">
+            
+                    
+                    Symbols
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
             
         </li>
     
@@ -1133,7 +1229,7 @@ otherwise.</p>
 <span class="token punctuation">}</span>
 </code></pre>
 <p><br></p>
-<p>It is not always convinient to define a body of a function in a way
+<p>It is not always convenient to define a body of a function in a way
 that leads to return the right value, when many branches are
 possible. To avoid verbosity, and return function prematuraly, the
 keyword <strong><code>return</code></strong>, close a function and return the value of the
@@ -1165,7 +1261,7 @@ statement is encountered, then the compiler returns an error.</p>
 <span class="token punctuation">}</span>
 </code></pre>
 <p><br></p>
-<p>In the above source code, the function add_one has a body of type
+<p>In the above source code, the function <em>add_one</em> has a body of type
 <strong><code>void</code></strong>, when the function prototype claims that the function
 returns a <strong><code>i32</code></strong>, and no return statement can be encountered inside
 the function, thus the compiler returns the following error.  </p>
@@ -1192,39 +1288,70 @@ is possible with the use of closures (<em>cf.</em> <a href="https://gnu-ymir.git
 advanced</a>),
 but this is not be presented inside this chapter.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>     <span class="token comment">// importation is local to foo</span>
+    <span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>     <span class="token comment">// imporation is local to foo</span>
     <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">12</span><span class="token punctuation">;</span>
     <span class="token punctuation">{</span>
-        <span class="token keyword">def</span> <span class="token function">bar</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span> <span class="token punctuation">{</span>
-            <span class="token comment">// Try to add the following line </span>
-            <span class="token comment">// println (x);</span>
-            <span class="token number">12</span>
-        <span class="token punctuation">}</span>
-        <span class="token function">println</span> <span class="token punctuation">(</span>x <span class="token operator">+</span> <span class="token function">bar</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">def</span> <span class="token function">bar</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span> <span class="token punctuation">{</span>
+        <span class="token function">println</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token number">12</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span>x <span class="token operator">+</span> <span class="token function">bar</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 
-    <span class="token comment">// bar is no longer accessible</span>
-    <span class="token comment">// bar (); // will not compile</span>
+    <span class="token comment">// bar is not accessible anymore</span>
+    <span class="token function">bar</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// does not compile</span>
 <span class="token punctuation">}</span>
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    <span class="token comment">// Try to add the following lines : </span>
-    <span class="token comment">// bar ();</span>
-    <span class="token comment">// println (&quot;In the main function !&quot;);</span>
+    <span class="token function">bar</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;In the main function !&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
 <p><br></p>
 <p>In the above example, the <strong><code>bar</code></strong> function is available in the scope
-opened at line <strong>4</strong>, until its end at line <strong>11</strong>. For that reason,
+opened at line <strong>4</strong>, until its end at line <strong>10</strong>. For that reason,
 it is also not available inside the <strong><code>main</code></strong> function. Moreover, the
 <em>import statement</em> made at line <strong>2</strong> (importing the <strong><code>println</code></strong>
 function) is only available in the scope opened at line <strong>1</strong>, and for
-that reason not available in the <strong><code>main</code></strong> function. Functions are
-not modules, this way of defining is used to define private symbols
-only, in a future chapter we will see a way to define public symbols
-available for other functions, and foreign modules (<em>cf.</em>
+that reason not available in the <strong><code>main</code></strong> function. For these
+reasons, the above example contains five errors, that are thrown by
+the compiler.</p>
+<pre class="language-"><code class="lang-error"><span class="token path">Error</span> : undefined symbol x
+ <span class="token comment">--&gt; main.yr:(6,15)</span>
+ 6  &#x2503;         println (x);
+    &#x254B;                  ^
+
+<span class="token path">Error</span> : undefined symbol bar
+ <span class="token comment">--&gt; main.yr:(9,15)</span>
+ 9  &#x2503;     println (x + bar ());
+    &#x254B;                  ^^^
+
+<span class="token path">Error</span> : undefined symbol bar
+ <span class="token comment">--&gt; main.yr:(13,5)</span>
+13  &#x2503;     bar (); // does not compile
+    &#x254B;     ^^^
+
+<span class="token path">Error</span> : undefined symbol bar
+ <span class="token comment">--&gt; main.yr:(19,5)</span>
+19  &#x2503;     bar ();
+    &#x254B;     ^^^
+
+<span class="token path">Error</span> : undefined symbol println
+ <span class="token comment">--&gt; main.yr:(20,5)</span>
+20  &#x2503;     println (&quot;In the main function !&quot;);
+    &#x254B;     ^^^^^^^
+
+
+ymir1: <span class="token path">fatal error</span>: 
+compilation terminated.
+</code></pre>
+<p><br></p>
+<p>Functions are not modules, this way of defining is used to define
+private symbols only, in a future chapter we will see a way to define
+public symbols available for other functions, and foreign modules
+(<em>cf.</em>
 <a href="https://gnu-ymir.github.io/Documentations/en/modules/" target="_blank">Modules</a>).</p>
 <h2 id="uniform-call-syntax"><a name="uniform-call-syntax" class="anchor-navigation-ex-anchor" href="#uniform-call-syntax"><i class="fa fa-link" aria-hidden="true"></i></a>1.5. Uniform call syntax</h2>
 <p>The <em>uniform call syntax</em> is a syntax that allows to call a function
@@ -1239,7 +1366,7 @@ inside parentheses. </p>
 the source code easier to read. This syntax is named <em>uniform call
 syntax</em> because it is similar to the the syntax used to call methods
 on class objects
-(cf. <a href="https://gnu-ymir.github.io/Documentations/en/objects/" target="_blank">Objects</a>);</p>
+(<em>cf.</em> <a href="https://gnu-ymir.github.io/Documentations/en/objects/" target="_blank">Objects</a>).</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
 <span class="token keyword">def</span> <span class="token function">plusOne</span> <span class="token punctuation">(</span>i <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span> 
@@ -1255,11 +1382,13 @@ on class objects
      <span class="token punctuation">.</span><span class="token function">println</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>          
 <span class="token punctuation">}</span>
 </code></pre>
+<p><br></p>
 <p>Results:</p>
 <pre class="language-"><code>15
 </code></pre><p><br></p>
 <p>The <em>uniform call syntax</em> can also be useful to define equivalent of
-methods on structures. </p>
+methods on structures. Because structures are presented in a future
+chapter, we do not present this possibility here.</p>
 
                                 
                                 </section>
@@ -1303,7 +1432,7 @@ methods on structures. </p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Functions","level":"1.3.3","depth":2,"next":{"title":"Control flows","level":"1.3.4","depth":2,"path":"primitives/control.md","ref":"primitives/control.md","articles":[]},"previous":{"title":"Data types","level":"1.3.2","depth":2,"path":"primitives/types.md","ref":"primitives/types.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"primitives/functions.md","mtime":"2021-06-17T05:03:47.364Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-17T06:30:34.719Z"},"basePath":"..","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Functions","level":"1.3.3","depth":2,"next":{"title":"Control flows","level":"1.3.4","depth":2,"path":"primitives/control.md","ref":"primitives/control.md","articles":[]},"previous":{"title":"Data types","level":"1.3.2","depth":2,"path":"primitives/types.md","ref":"primitives/types.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"primitives/functions.md","mtime":"2021-07-15T12:14:54.750Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-07-29T15:21:12.835Z"},"basePath":"..","book":{"language":"en"}});
         });
     </script>
 </div>

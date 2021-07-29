@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Operator priority · GitBook</title>
+        <title>Types · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -81,10 +81,10 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../advanced/" />
+    <link rel="next" href="symbols.html" />
     
     
-    <link rel="prev" href="control.html" />
+    <link rel="prev" href="./" />
     
 
     </head>
@@ -158,9 +158,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3" data-path="./">
+        <li class="chapter " data-level="1.3" data-path="../primitives/">
             
-                <a href="./">
+                <a href="../primitives/">
             
                     
                     Basic programming concepts
@@ -172,9 +172,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.3.1" data-path="variables.html">
+        <li class="chapter " data-level="1.3.1" data-path="../primitives/variables.html">
             
-                <a href="variables.html">
+                <a href="../primitives/variables.html">
             
                     
                     Variable and Mutability
@@ -185,9 +185,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.2" data-path="types.html">
+        <li class="chapter " data-level="1.3.2" data-path="../primitives/types.html">
             
-                <a href="types.html">
+                <a href="../primitives/types.html">
             
                     
                     Data types
@@ -198,9 +198,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.3" data-path="functions.html">
+        <li class="chapter " data-level="1.3.3" data-path="../primitives/functions.html">
             
-                <a href="functions.html">
+                <a href="../primitives/functions.html">
             
                     
                     Functions
@@ -211,9 +211,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.4" data-path="control.html">
+        <li class="chapter " data-level="1.3.4" data-path="../primitives/control.html">
             
-                <a href="control.html">
+                <a href="../primitives/control.html">
             
                     
                     Control flows
@@ -224,9 +224,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.3.5" data-path="operator.html">
+        <li class="chapter " data-level="1.3.5" data-path="../primitives/operator.html">
             
-                <a href="operator.html">
+                <a href="../primitives/operator.html">
             
                     
                     Operator priority
@@ -810,9 +810,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.16" data-path="../documentation/">
+        <li class="chapter " data-level="1.16" data-path="./">
             
-                <a href="../documentation/">
+                <a href="./">
             
                     
                     Documentation
@@ -824,9 +824,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.16.1" data-path="../documentation/types.html">
+        <li class="chapter active" data-level="1.16.1" data-path="types.html">
             
-                <a href="../documentation/types.html">
+                <a href="types.html">
             
                     
                     Types
@@ -837,9 +837,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.16.2" data-path="../documentation/symbols.html">
+        <li class="chapter " data-level="1.16.2" data-path="symbols.html">
             
-                <a href="../documentation/symbols.html">
+                <a href="symbols.html">
             
                     
                     Symbols
@@ -885,7 +885,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Operator priority</a>
+        <a href=".." >Types</a>
     </h1>
 </div>
 
@@ -900,130 +900,367 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#operator-priority"><b>1. </b>Operator priority</a></li></ul></div><a href="#operator-priority" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="operator-priority"><a name="operator-priority" class="anchor-navigation-ex-anchor" href="#operator-priority"><i class="fa fa-link" aria-hidden="true"></i></a>1. Operator priority</h1>
-<p>The following table present the precedence of the operators, and
-literals. This table presents the priority of the operators, but does
-not specify how the operators are used, and their specific syntax. For
-example, there are unary operators, and binary operators, that
-require respectively one and two operands, but that is not specified
-in the table.</p>
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#ymir-type"><b>1. </b>Ymir Type</a></li><ul><li><span class="title-icon "></span><a href="#integer"><b>1.1. </b>Integer</a></li><li><span class="title-icon "></span><a href="#void"><b>1.2. </b>Void</a></li><li><span class="title-icon "></span><a href="#boolean"><b>1.3. </b>Boolean</a></li><li><span class="title-icon "></span><a href="#floating"><b>1.4. </b>Floating</a></li><li><span class="title-icon "></span><a href="#char"><b>1.5. </b>Char</a></li><li><span class="title-icon "></span><a href="#array"><b>1.6. </b>Array</a></li><li><span class="title-icon "></span><a href="#slice"><b>1.7. </b>Slice</a></li><li><span class="title-icon "></span><a href="#tuple"><b>1.8. </b>Tuple</a></li><li><span class="title-icon "></span><a href="#struct"><b>1.9. </b>Struct</a></li><li><span class="title-icon "></span><a href="#enum"><b>1.10. </b>Enum</a></li><li><span class="title-icon "></span><a href="#pointer"><b>1.11. </b>Pointer</a></li><li><span class="title-icon "></span><a href="#classpointer"><b>1.12. </b>ClassPointer</a></li><li><span class="title-icon "></span><a href="#range"><b>1.13. </b>Range</a></li><li><span class="title-icon "></span><a href="#function-pointer"><b>1.14. </b>Function pointer</a></li><li><span class="title-icon "></span><a href="#closure"><b>1.15. </b>Closure</a></li><li><span class="title-icon "></span><a href="#delegate"><b>1.16. </b>Delegate</a></li><li><span class="title-icon "></span><a href="#option"><b>1.17. </b>Option</a></li><li><span class="title-icon "></span><a href="#unknown"><b>1.18. </b>Unknown</a></li></ul></ul></div><a href="#ymir-type" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="ymir-type"><a name="ymir-type" class="anchor-navigation-ex-anchor" href="#ymir-type"><i class="fa fa-link" aria-hidden="true"></i></a>1. Ymir Type</h1>
+<p>Ymir type are the value type (<em>cf</em>. <a href="https://gnu-ymir.github.io/Documentations/en/primitives/types.html" target="_blank">Data
+types</a>). They
+are not always validated for many reasons (templates, aka, ...). The
+<strong><code>type</code></strong> value contains the kind of type that is encoded,
+<strong><code>unknown</code></strong> means that the type cannot be validated, and is always
+associated with <strong><code>name</code></strong> that contains the string name of the type.</p>
+<p>Each type contains the attribute <strong><code>mut</code></strong> set to <strong><code>true</code></strong> or
+<strong><code>false</code></strong>.</p>
+<h2 id="integer"><a name="integer" class="anchor-navigation-ex-anchor" href="#integer"><i class="fa fa-link" aria-hidden="true"></i></a>1.1. Integer</h2>
 <table>
 <thead>
 <tr>
-<th>Priority</th>
-<th>Description</th>
-<th>Operators</th>
-<th>Comments</th>
+<th>Name</th>
+<th>Value</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>0</td>
-<td>Assignement operators</td>
-<td><code>=</code> <code>/=</code> <code>-=</code> <code>+=</code> <code>*=</code> <code>%=</code> <code>~=</code> <code>&lt;&lt;=</code> <code>&gt;&gt;=</code></td>
-<td></td>
+<td><code>type</code></td>
+<td><code>int</code></td>
 </tr>
 <tr>
-<td>1</td>
-<td>Logical Or</td>
-<td><code>||</code></td>
-<td></td>
+<td><code>name</code></td>
+<td><code>i8</code> V <code>u8</code> V <code>i32</code> etc...</td>
+</tr>
+</tbody>
+</table>
+<h2 id="void"><a name="void" class="anchor-navigation-ex-anchor" href="#void"><i class="fa fa-link" aria-hidden="true"></i></a>1.2. Void</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>type</code></td>
+<td><code>void</code></td>
 </tr>
 <tr>
-<td>2</td>
-<td>Logical And</td>
-<td><code>&amp;&amp;</code></td>
-<td></td>
+<td><code>name</code></td>
+<td><code>void</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="boolean"><a name="boolean" class="anchor-navigation-ex-anchor" href="#boolean"><i class="fa fa-link" aria-hidden="true"></i></a>1.3. Boolean</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>type</code></td>
+<td><code>bool</code></td>
 </tr>
 <tr>
-<td>3</td>
-<td>Comparison operators</td>
-<td><code>&lt;</code> <code>&gt;</code> <code>&lt;=</code> <code>&gt;=</code> <code>!=</code> <code>==</code> <code>of</code> <code>is</code> <code>in</code> <code>!of</code> <code>!is</code> <code>!in</code></td>
-<td>Cannot be chained</td>
+<td><code>name</code></td>
+<td><code>bool</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="floating"><a name="floating" class="anchor-navigation-ex-anchor" href="#floating"><i class="fa fa-link" aria-hidden="true"></i></a>1.4. Floating</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>type</code></td>
+<td><code>float</code></td>
 </tr>
 <tr>
-<td>4</td>
-<td>Range operators</td>
-<td><code>..</code> <code>...</code></td>
-<td></td>
+<td><code>name</code></td>
+<td><code>f32</code> V <code>f64</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="char"><a name="char" class="anchor-navigation-ex-anchor" href="#char"><i class="fa fa-link" aria-hidden="true"></i></a>1.5. Char</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>type</code></td>
+<td><code>char</code></td>
 </tr>
 <tr>
-<td>5</td>
-<td>Bitshift operators</td>
-<td><code>&lt;&lt;</code> <code>&gt;&gt;</code></td>
-<td></td>
+<td><code>name</code></td>
+<td><code>c8</code> V <code>c32</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="array"><a name="array" class="anchor-navigation-ex-anchor" href="#array"><i class="fa fa-link" aria-hidden="true"></i></a>1.6. Array</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>type</code></td>
+<td><code>array</code></td>
 </tr>
 <tr>
-<td>6</td>
-<td>Bit operators</td>
-<td><code>|</code> <code>^</code> <code>&amp;</code></td>
-<td>Warning there is no priority over these operators (or and and)</td>
+<td><code>size</code></td>
+<td>The size in a string</td>
 </tr>
 <tr>
-<td>7</td>
-<td>Additive operators</td>
-<td><code>+</code> <code>~</code> <code>-</code></td>
-<td><code>~</code> is the concatenation operator</td>
+<td><code>childs</code></td>
+<td>An array containing the inner type of the array</td>
+</tr>
+</tbody>
+</table>
+<h2 id="slice"><a name="slice" class="anchor-navigation-ex-anchor" href="#slice"><i class="fa fa-link" aria-hidden="true"></i></a>1.7. Slice</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>type</code></td>
+<td><code>slice</code></td>
 </tr>
 <tr>
-<td>8</td>
-<td>Multiplicative operators</td>
-<td><code>*</code> <code>/</code> <code>%</code></td>
-<td></td>
+<td><code>childs</code></td>
+<td>An array containing the inner type of the slice</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tuple"><a name="tuple" class="anchor-navigation-ex-anchor" href="#tuple"><i class="fa fa-link" aria-hidden="true"></i></a>1.8. Tuple</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>type</code></td>
+<td><code>tuple</code></td>
 </tr>
 <tr>
-<td>9</td>
-<td>Power operator</td>
-<td><code>^^</code></td>
-<td></td>
+<td><code>childs</code></td>
+<td>An array containing the list of inner type of the tuple</td>
+</tr>
+</tbody>
+</table>
+<h2 id="struct"><a name="struct" class="anchor-navigation-ex-anchor" href="#struct"><i class="fa fa-link" aria-hidden="true"></i></a>1.9. Struct</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>type</code></td>
+<td><code>struct</code></td>
 </tr>
 <tr>
-<td>10</td>
-<td>Unary operators</td>
-<td><code>-</code> <code>&amp;</code> <code>*</code> <code>!</code></td>
-<td>Always prefixed</td>
+<td><code>name</code></td>
+<td>The name of the structure</td>
+</tr>
+</tbody>
+</table>
+<h2 id="enum"><a name="enum" class="anchor-navigation-ex-anchor" href="#enum"><i class="fa fa-link" aria-hidden="true"></i></a>1.10. Enum</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>type</code></td>
+<td><code>enum</code></td>
 </tr>
 <tr>
-<td>11</td>
-<td>Option operator</td>
-<td><code>?</code></td>
-<td>Always postfixed</td>
+<td><code>name</code></td>
+<td>The name of the enum</td>
+</tr>
+</tbody>
+</table>
+<h2 id="pointer"><a name="pointer" class="anchor-navigation-ex-anchor" href="#pointer"><i class="fa fa-link" aria-hidden="true"></i></a>1.11. Pointer</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>type</code></td>
+<td><code>pointer</code></td>
 </tr>
 <tr>
-<td>12</td>
-<td>Keyword and Scope operators</td>
-<td><code>{</code> <code>if</code> <code>while</code> <code>assert</code> <code>break</code> <code>do</code> <code>for</code> <code>match</code> <code>let</code> <code>return</code> <code>fn</code> <code>dg</code> <code>loop</code> <code>throw</code> <code>__version</code> <code>__pragma</code> <code>with</code> <code>atomic</code></td>
-<td>This operators have a specific syntax that must be closed, to be completed</td>
+<td><code>childs</code></td>
+<td>An array containing the inner type of the pointer</td>
+</tr>
+</tbody>
+</table>
+<h2 id="classpointer"><a name="classpointer" class="anchor-navigation-ex-anchor" href="#classpointer"><i class="fa fa-link" aria-hidden="true"></i></a>1.12. ClassPointer</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>type</code></td>
+<td><code>class_pointer</code></td>
 </tr>
 <tr>
-<td>13</td>
-<td>Postfix operators</td>
-<td><code>.</code> <code>(</code> <code>[</code> <code>:.</code> <code>#[</code> <code>#(</code> <code>#{</code></td>
-<td><code>(</code> <code>[</code> <code>#{</code> <code>#[</code> <code>#(</code> must be closed by a balanced <code>]</code>, <code>)</code> or <code>}</code> to be completed</td>
+<td><code>childs</code></td>
+<td>An array containing the inner type of the pointer</td>
+</tr>
+</tbody>
+</table>
+<h2 id="range"><a name="range" class="anchor-navigation-ex-anchor" href="#range"><i class="fa fa-link" aria-hidden="true"></i></a>1.13. Range</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>type</code></td>
+<td><code>range</code></td>
 </tr>
 <tr>
-<td>14</td>
-<td>Path operator</td>
-<td><code>::</code></td>
-<td></td>
+<td><code>childs</code></td>
+<td>An array containing the inner type of the range</td>
+</tr>
+</tbody>
+</table>
+<h2 id="function-pointer"><a name="function-pointer" class="anchor-navigation-ex-anchor" href="#function-pointer"><i class="fa fa-link" aria-hidden="true"></i></a>1.14. Function pointer</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>type</code></td>
+<td><code>fn_pointer</code></td>
 </tr>
 <tr>
-<td>15</td>
-<td>Literal operators</td>
-<td><code>(</code> <code>!</code> <code>[</code> <code>|</code> <code>cast</code> <code>move</code></td>
-<td>In that case <code>(</code> <code>[</code> <code>|</code> start a new expression, <code>move</code>  and <code>|</code> start a lambda literal, <code>(</code> a tuple, or a 0 priority expression, <code>[</code> a slice or array literal, <code>!</code> a template call</td>
+<td><code>childs</code></td>
+<td>An array containing the parameter types of the function pointer</td>
 </tr>
 <tr>
-<td>16</td>
-<td>Decorated expression</td>
-<td><code>ref</code> <code>const</code> <code>mut</code> <code>dmut</code> <code>cte</code></td>
-<td></td>
+<td><code>ret_type</code></td>
+<td>The return type of the function pointer</td>
+</tr>
+</tbody>
+</table>
+<h2 id="closure"><a name="closure" class="anchor-navigation-ex-anchor" href="#closure"><i class="fa fa-link" aria-hidden="true"></i></a>1.15. Closure</h2>
+<p><strong>Warning</strong> the closure here is the element contained inside a delegate, not the delegate type</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>type</code></td>
+<td><code>closure</code></td>
 </tr>
 <tr>
-<td>17</td>
-<td>Anything else</td>
-<td></td>
-<td>A variable, a literal, etc.</td>
+<td><code>childs</code></td>
+<td>An array containing the inner types of the closure</td>
+</tr>
+</tbody>
+</table>
+<h2 id="delegate"><a name="delegate" class="anchor-navigation-ex-anchor" href="#delegate"><i class="fa fa-link" aria-hidden="true"></i></a>1.16. Delegate</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>type</code></td>
+<td><code>dg_pointer</code></td>
+</tr>
+<tr>
+<td><code>childs</code></td>
+<td>An array containing the parameter types of the delegate pointer</td>
+</tr>
+<tr>
+<td><code>ret_type</code></td>
+<td>The return type of the function pointer</td>
+</tr>
+</tbody>
+</table>
+<h2 id="option"><a name="option" class="anchor-navigation-ex-anchor" href="#option"><i class="fa fa-link" aria-hidden="true"></i></a>1.17. Option</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>type</code></td>
+<td><code>option</code></td>
+</tr>
+<tr>
+<td><code>childs</code></td>
+<td>An array containing the inner type of the option</td>
+</tr>
+</tbody>
+</table>
+<h2 id="unknown"><a name="unknown" class="anchor-navigation-ex-anchor" href="#unknown"><i class="fa fa-link" aria-hidden="true"></i></a>1.18. Unknown</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>type</code></td>
+<td><code>unknown</code></td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>The string name of the type</td>
 </tr>
 </tbody>
 </table>
@@ -1054,12 +1291,12 @@ in the table.</p>
 
             
                 
-                <a href="control.html" class="navigation navigation-prev " aria-label="Previous page: Control flows">
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: Documentation">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="../advanced/" class="navigation navigation-next " aria-label="Next page: Alias and References">
+                <a href="symbols.html" class="navigation navigation-next " aria-label="Next page: Symbols">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -1070,7 +1307,7 @@ in the table.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Operator priority","level":"1.3.5","depth":2,"next":{"title":"Alias and References","level":"1.4","depth":1,"path":"advanced/README.md","ref":"advanced/README.md","articles":[{"title":"References","level":"1.4.1","depth":2,"path":"advanced/references.md","ref":"advanced/references.md","articles":[]},{"title":"Aliases","level":"1.4.2","depth":2,"path":"advanced/alias.md","ref":"advanced/alias.md","articles":[]},{"title":"Copy and Deep copy","level":"1.4.3","depth":2,"path":"advanced/copies.md","ref":"advanced/copies.md","articles":[]},{"title":"Best practice","level":"1.4.4","depth":2,"path":"advanced/best.md","ref":"advanced/best.md","articles":[]}]},"previous":{"title":"Control flows","level":"1.3.4","depth":2,"path":"primitives/control.md","ref":"primitives/control.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"primitives/operator.md","mtime":"2021-07-16T13:37:57.903Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-07-29T15:21:12.835Z"},"basePath":"..","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Types","level":"1.16.1","depth":2,"next":{"title":"Symbols","level":"1.16.2","depth":2,"path":"documentation/symbols.md","ref":"documentation/symbols.md","articles":[]},"previous":{"title":"Documentation","level":"1.16","depth":1,"path":"documentation/README.md","ref":"documentation/README.md","articles":[{"title":"Types","level":"1.16.1","depth":2,"path":"documentation/types.md","ref":"documentation/types.md","articles":[]},{"title":"Symbols","level":"1.16.2","depth":2,"path":"documentation/symbols.md","ref":"documentation/symbols.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"documentation/types.md","mtime":"2021-07-29T14:23:13.546Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-07-29T15:21:12.835Z"},"basePath":"..","book":{"language":"en"}});
         });
     </script>
 </div>

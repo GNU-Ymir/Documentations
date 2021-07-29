@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Operator priority · GitBook</title>
+        <title>Symbols · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -81,10 +81,8 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../advanced/" />
     
-    
-    <link rel="prev" href="control.html" />
+    <link rel="prev" href="types.html" />
     
 
     </head>
@@ -158,9 +156,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3" data-path="./">
+        <li class="chapter " data-level="1.3" data-path="../primitives/">
             
-                <a href="./">
+                <a href="../primitives/">
             
                     
                     Basic programming concepts
@@ -172,9 +170,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.3.1" data-path="variables.html">
+        <li class="chapter " data-level="1.3.1" data-path="../primitives/variables.html">
             
-                <a href="variables.html">
+                <a href="../primitives/variables.html">
             
                     
                     Variable and Mutability
@@ -185,9 +183,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.2" data-path="types.html">
+        <li class="chapter " data-level="1.3.2" data-path="../primitives/types.html">
             
-                <a href="types.html">
+                <a href="../primitives/types.html">
             
                     
                     Data types
@@ -198,9 +196,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.3" data-path="functions.html">
+        <li class="chapter " data-level="1.3.3" data-path="../primitives/functions.html">
             
-                <a href="functions.html">
+                <a href="../primitives/functions.html">
             
                     
                     Functions
@@ -211,9 +209,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.4" data-path="control.html">
+        <li class="chapter " data-level="1.3.4" data-path="../primitives/control.html">
             
-                <a href="control.html">
+                <a href="../primitives/control.html">
             
                     
                     Control flows
@@ -224,9 +222,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.3.5" data-path="operator.html">
+        <li class="chapter " data-level="1.3.5" data-path="../primitives/operator.html">
             
-                <a href="operator.html">
+                <a href="../primitives/operator.html">
             
                     
                     Operator priority
@@ -810,9 +808,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.16" data-path="../documentation/">
+        <li class="chapter " data-level="1.16" data-path="./">
             
-                <a href="../documentation/">
+                <a href="./">
             
                     
                     Documentation
@@ -824,9 +822,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.16.1" data-path="../documentation/types.html">
+        <li class="chapter " data-level="1.16.1" data-path="types.html">
             
-                <a href="../documentation/types.html">
+                <a href="types.html">
             
                     
                     Types
@@ -837,9 +835,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.16.2" data-path="../documentation/symbols.html">
+        <li class="chapter active" data-level="1.16.2" data-path="symbols.html">
             
-                <a href="../documentation/symbols.html">
+                <a href="symbols.html">
             
                     
                     Symbols
@@ -885,7 +883,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Operator priority</a>
+        <a href=".." >Symbols</a>
     </h1>
 </div>
 
@@ -900,130 +898,549 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#operator-priority"><b>1. </b>Operator priority</a></li></ul></div><a href="#operator-priority" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="operator-priority"><a name="operator-priority" class="anchor-navigation-ex-anchor" href="#operator-priority"><i class="fa fa-link" aria-hidden="true"></i></a>1. Operator priority</h1>
-<p>The following table present the precedence of the operators, and
-literals. This table presents the priority of the operators, but does
-not specify how the operators are used, and their specific syntax. For
-example, there are unary operators, and binary operators, that
-require respectively one and two operands, but that is not specified
-in the table.</p>
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#symbols"><b>1. </b>Symbols</a></li><ul><li><span class="title-icon "></span><a href="#module"><b>1.1. </b>Module</a></li><li><span class="title-icon "></span><a href="#function"><b>1.2. </b>Function</a></li><li><span class="title-icon "></span><a href="#variable-declaration"><b>1.3. </b>Variable declaration</a></li><li><span class="title-icon "></span><a href="#aka"><b>1.4. </b>Aka</a></li><li><span class="title-icon "></span><a href="#structure"><b>1.5. </b>Structure</a></li><ul><li><span class="title-icon "></span><a href="#fields"><b>1.5.1. </b>Fields</a></li></ul><li><span class="title-icon "></span><a href="#enumeration"><b>1.6. </b>Enumeration</a></li><ul><li><span class="title-icon "></span><a href="#fields_1"><b>1.6.1. </b>Fields</a></li></ul><li><span class="title-icon "></span><a href="#class"><b>1.7. </b>Class</a></li><ul><li><span class="title-icon "></span><a href="#fields_2"><b>1.7.1. </b>Fields</a></li><li><span class="title-icon "></span><a href="#asserts"><b>1.7.2. </b>Asserts</a></li><li><span class="title-icon "></span><a href="#constructors"><b>1.7.3. </b>Constructors</a></li><li><span class="title-icon "></span><a href="#implementations"><b>1.7.4. </b>Implementations</a></li><li><span class="title-icon "></span><a href="#methods"><b>1.7.5. </b>Methods</a></li></ul><li><span class="title-icon "></span><a href="#traits"><b>1.8. </b>Traits</a></li><li><span class="title-icon "></span><a href="#templates"><b>1.9. </b>Templates</a></li><li><span class="title-icon "></span><a href="#macros"><b>1.10. </b>Macros</a></li><ul><li><span class="title-icon "></span><a href="#constructors-and-rules"><b>1.10.1. </b>Constructors and Rules</a></li></ul></ul></ul></div><a href="#symbols" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="symbols"><a name="symbols" class="anchor-navigation-ex-anchor" href="#symbols"><i class="fa fa-link" aria-hidden="true"></i></a>1. Symbols</h1>
+<p>Each element contains standard information : </p>
 <table>
 <thead>
 <tr>
-<th>Priority</th>
-<th>Description</th>
-<th>Operators</th>
-<th>Comments</th>
+<th>Name</th>
+<th>Value</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>0</td>
-<td>Assignement operators</td>
-<td><code>=</code> <code>/=</code> <code>-=</code> <code>+=</code> <code>*=</code> <code>%=</code> <code>~=</code> <code>&lt;&lt;=</code> <code>&gt;&gt;=</code></td>
-<td></td>
+<td><code>type</code></td>
+<td>The type of the symbol (<code>module</code>, <code>function</code>, etc..)</td>
 </tr>
 <tr>
-<td>1</td>
-<td>Logical Or</td>
-<td><code>||</code></td>
-<td></td>
+<td><code>name</code></td>
+<td>The name of the symbol</td>
 </tr>
 <tr>
-<td>2</td>
-<td>Logical And</td>
-<td><code>&amp;&amp;</code></td>
-<td></td>
+<td><code>loc_file</code></td>
+<td>The name of the file containing the symbol</td>
 </tr>
 <tr>
-<td>3</td>
-<td>Comparison operators</td>
-<td><code>&lt;</code> <code>&gt;</code> <code>&lt;=</code> <code>&gt;=</code> <code>!=</code> <code>==</code> <code>of</code> <code>is</code> <code>in</code> <code>!of</code> <code>!is</code> <code>!in</code></td>
-<td>Cannot be chained</td>
+<td><code>loc_line</code></td>
+<td>The number of the line at which the symbol is declared</td>
 </tr>
 <tr>
-<td>4</td>
-<td>Range operators</td>
-<td><code>..</code> <code>...</code></td>
-<td></td>
+<td><code>loc_column</code></td>
+<td>The number of the column at which the symbol is declared</td>
 </tr>
 <tr>
-<td>5</td>
-<td>Bitshift operators</td>
-<td><code>&lt;&lt;</code> <code>&gt;&gt;</code></td>
-<td></td>
+<td><code>doc</code></td>
+<td>The documentation associated with the symbol (user comments)</td>
 </tr>
 <tr>
-<td>6</td>
-<td>Bit operators</td>
-<td><code>|</code> <code>^</code> <code>&amp;</code></td>
-<td>Warning there is no priority over these operators (or and and)</td>
+<td><code>protection</code></td>
+<td>The protection of the symbol (<code>pub</code> V <code>prot</code> V <code>prv</code>)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="module"><a name="module" class="anchor-navigation-ex-anchor" href="#module"><i class="fa fa-link" aria-hidden="true"></i></a>1.1. Module</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>type</code></td>
+<td><code>module</code></td>
 </tr>
 <tr>
-<td>7</td>
-<td>Additive operators</td>
-<td><code>+</code> <code>~</code> <code>-</code></td>
-<td><code>~</code> is the concatenation operator</td>
+<td><code>childs</code></td>
+<td>The symbols declared inside the module</td>
+</tr>
+</tbody>
+</table>
+<h2 id="function"><a name="function" class="anchor-navigation-ex-anchor" href="#function"><i class="fa fa-link" aria-hidden="true"></i></a>1.2. Function</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>type</code></td>
+<td><code>function</code></td>
 </tr>
 <tr>
-<td>8</td>
-<td>Multiplicative operators</td>
-<td><code>*</code> <code>/</code> <code>%</code></td>
-<td></td>
+<td><code>attributes</code></td>
+<td>The custom attributes of the function</td>
 </tr>
 <tr>
-<td>9</td>
-<td>Power operator</td>
-<td><code>^^</code></td>
-<td></td>
+<td><code>params</code></td>
+<td>The list of parameters of the function</td>
 </tr>
 <tr>
-<td>10</td>
-<td>Unary operators</td>
-<td><code>-</code> <code>&amp;</code> <code>*</code> <code>!</code></td>
-<td>Always prefixed</td>
+<td><code>ret_type</code></td>
+<td>The return type of the function</td>
 </tr>
 <tr>
-<td>11</td>
-<td>Option operator</td>
-<td><code>?</code></td>
-<td>Always postfixed</td>
+<td><code>throwers</code></td>
+<td>The list of type that can be thrown by the function</td>
+</tr>
+</tbody>
+</table>
+<p>The parameters are defined according to the following table : </p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>The name of the parameter</td>
 </tr>
 <tr>
-<td>12</td>
-<td>Keyword and Scope operators</td>
-<td><code>{</code> <code>if</code> <code>while</code> <code>assert</code> <code>break</code> <code>do</code> <code>for</code> <code>match</code> <code>let</code> <code>return</code> <code>fn</code> <code>dg</code> <code>loop</code> <code>throw</code> <code>__version</code> <code>__pragma</code> <code>with</code> <code>atomic</code></td>
-<td>This operators have a specific syntax that must be closed, to be completed</td>
+<td><code>type</code></td>
+<td>The type of the parameter (ymir type)</td>
 </tr>
 <tr>
-<td>13</td>
-<td>Postfix operators</td>
-<td><code>.</code> <code>(</code> <code>[</code> <code>:.</code> <code>#[</code> <code>#(</code> <code>#{</code></td>
-<td><code>(</code> <code>[</code> <code>#{</code> <code>#[</code> <code>#(</code> must be closed by a balanced <code>]</code>, <code>)</code> or <code>}</code> to be completed</td>
+<td><code>mut</code></td>
+<td><code>true</code> V <code>false</code></td>
 </tr>
 <tr>
-<td>14</td>
-<td>Path operator</td>
-<td><code>::</code></td>
-<td></td>
+<td><code>ref</code></td>
+<td><code>true</code> V <code>false</code></td>
 </tr>
 <tr>
-<td>15</td>
-<td>Literal operators</td>
-<td><code>(</code> <code>!</code> <code>[</code> <code>|</code> <code>cast</code> <code>move</code></td>
-<td>In that case <code>(</code> <code>[</code> <code>|</code> start a new expression, <code>move</code>  and <code>|</code> start a lambda literal, <code>(</code> a tuple, or a 0 priority expression, <code>[</code> a slice or array literal, <code>!</code> a template call</td>
+<td><code>value</code></td>
+<td>Can be unset if the variable has no value, encoded in a string</td>
+</tr>
+</tbody>
+</table>
+<h2 id="variable-declaration"><a name="variable-declaration" class="anchor-navigation-ex-anchor" href="#variable-declaration"><i class="fa fa-link" aria-hidden="true"></i></a>1.3. Variable declaration</h2>
+<p>Declaration of a static global variable.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>type</code></td>
+<td><code>var</code></td>
 </tr>
 <tr>
-<td>16</td>
-<td>Decorated expression</td>
-<td><code>ref</code> <code>const</code> <code>mut</code> <code>dmut</code> <code>cte</code></td>
-<td></td>
+<td><code>mut</code></td>
+<td><code>true</code> V <code>false</code></td>
 </tr>
 <tr>
-<td>17</td>
-<td>Anything else</td>
-<td></td>
-<td>A variable, a literal, etc.</td>
+<td><code>var_type</code></td>
+<td>The ymir type of the variable</td>
+</tr>
+<tr>
+<td><code>value</code></td>
+<td>Can be unset if the variable has no value, encoded in a string</td>
+</tr>
+</tbody>
+</table>
+<h2 id="aka"><a name="aka" class="anchor-navigation-ex-anchor" href="#aka"><i class="fa fa-link" aria-hidden="true"></i></a>1.4. Aka</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>type</code></td>
+<td><code>aka</code></td>
+</tr>
+<tr>
+<td><code>value</code></td>
+<td>The value of the aka, encoded in a string</td>
+</tr>
+</tbody>
+</table>
+<p>The value of the aka is encoded in a string, because as <strong><code>aka</code></strong> are
+only evaluated when used, we can&apos;t have more information on them.</p>
+<h2 id="structure"><a name="structure" class="anchor-navigation-ex-anchor" href="#structure"><i class="fa fa-link" aria-hidden="true"></i></a>1.5. Structure</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>type</code></td>
+<td><code>struct</code></td>
+</tr>
+<tr>
+<td><code>attributes</code></td>
+<td><code>union</code>, <code>packed</code></td>
+</tr>
+<tr>
+<td><code>fields</code></td>
+<td>The list of fields of the structure</td>
+</tr>
+</tbody>
+</table>
+<h3 id="fields"><a name="fields" class="anchor-navigation-ex-anchor" href="#fields"><i class="fa fa-link" aria-hidden="true"></i></a>1.5.1. Fields</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>The name of the field</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>The ymir type of the field</td>
+</tr>
+<tr>
+<td><code>mut</code></td>
+<td><code>true</code> V <code>false</code></td>
+</tr>
+<tr>
+<td><code>doc</code></td>
+<td>The user documentation about the field</td>
+</tr>
+<tr>
+<td><code>value</code></td>
+<td>Set if the field has a default value, encoded in a string</td>
+</tr>
+</tbody>
+</table>
+<h2 id="enumeration"><a name="enumeration" class="anchor-navigation-ex-anchor" href="#enumeration"><i class="fa fa-link" aria-hidden="true"></i></a>1.6. Enumeration</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>type</code></td>
+<td><code>enum</code></td>
+</tr>
+<tr>
+<td><code>en_type</code></td>
+<td>The ymir type of the enumeration fields</td>
+</tr>
+<tr>
+<td><code>fields</code></td>
+<td>The fields of the enum</td>
+</tr>
+</tbody>
+</table>
+<h3 id="fields_1"><a name="fields_1" class="anchor-navigation-ex-anchor" href="#fields_1"><i class="fa fa-link" aria-hidden="true"></i></a>1.6.1. Fields</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>The name of the field</td>
+</tr>
+<tr>
+<td><code>doc</code></td>
+<td>The user comments about the field</td>
+</tr>
+<tr>
+<td><code>value</code></td>
+<td>The value associated with the field, in a string</td>
+</tr>
+</tbody>
+</table>
+<h2 id="class"><a name="class" class="anchor-navigation-ex-anchor" href="#class"><i class="fa fa-link" aria-hidden="true"></i></a>1.7. Class</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>type</code></td>
+<td><code>class</code></td>
+</tr>
+<tr>
+<td><code>ancestor</code></td>
+<td>Set if the class has an ancestor, ymir type</td>
+</tr>
+<tr>
+<td><code>abstract</code></td>
+<td><code>true</code> V <code>false</code></td>
+</tr>
+<tr>
+<td><code>final</code></td>
+<td><code>true</code> V <code>false</code></td>
+</tr>
+<tr>
+<td><code>fields</code></td>
+<td>The fields of the class</td>
+</tr>
+<tr>
+<td><code>asserts</code></td>
+<td>The list of static assertion inside the class</td>
+</tr>
+<tr>
+<td><code>cstrs</code></td>
+<td>The list of constructor of the class</td>
+</tr>
+<tr>
+<td><code>impls</code></td>
+<td>The list of implementation of the class</td>
+</tr>
+<tr>
+<td><code>methods</code></td>
+<td>The list of methods of the class</td>
+</tr>
+</tbody>
+</table>
+<h3 id="fields_2"><a name="fields_2" class="anchor-navigation-ex-anchor" href="#fields_2"><i class="fa fa-link" aria-hidden="true"></i></a>1.7.1. Fields</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>The name of the field</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>The ymir type of the field</td>
+</tr>
+<tr>
+<td><code>mut</code></td>
+<td><code>true</code> V <code>false</code></td>
+</tr>
+<tr>
+<td><code>doc</code></td>
+<td>The user comments about the field</td>
+</tr>
+<tr>
+<td><code>protection</code></td>
+<td><code>prv</code> V <code>prot</code> V <code>pub</code></td>
+</tr>
+<tr>
+<td><code>value</code></td>
+<td>Set if the field has a default value, inside a string</td>
+</tr>
+</tbody>
+</table>
+<h3 id="asserts"><a name="asserts" class="anchor-navigation-ex-anchor" href="#asserts"><i class="fa fa-link" aria-hidden="true"></i></a>1.7.2. Asserts</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>test</code></td>
+<td>The condition in a string</td>
+</tr>
+<tr>
+<td><code>msg</code></td>
+<td>The msg of the assert</td>
+</tr>
+<tr>
+<td><code>doc</code></td>
+<td>The user comment about the assertion</td>
+</tr>
+</tbody>
+</table>
+<h3 id="constructors"><a name="constructors" class="anchor-navigation-ex-anchor" href="#constructors"><i class="fa fa-link" aria-hidden="true"></i></a>1.7.3. Constructors</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>type</code></td>
+<td><code>cstr</code></td>
+</tr>
+<tr>
+<td><code>params</code></td>
+<td>The list of parameters of the constructor, identical to those of a function</td>
+</tr>
+<tr>
+<td><code>throws</code></td>
+<td>The list of ymir types thrown by the constructor</td>
+</tr>
+</tbody>
+</table>
+<h3 id="implementations"><a name="implementations" class="anchor-navigation-ex-anchor" href="#implementations"><i class="fa fa-link" aria-hidden="true"></i></a>1.7.4. Implementations</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>type</code></td>
+<td><code>impl</code></td>
+</tr>
+<tr>
+<td><code>trait</code></td>
+<td>The name of the trait, in a string</td>
+</tr>
+<tr>
+<td><code>childs</code></td>
+<td>The list of overriden methods, identical to methods</td>
+</tr>
+</tbody>
+</table>
+<h3 id="methods"><a name="methods" class="anchor-navigation-ex-anchor" href="#methods"><i class="fa fa-link" aria-hidden="true"></i></a>1.7.5. Methods</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>type</code></td>
+<td><code>method</code></td>
+</tr>
+<tr>
+<td><code>over</code></td>
+<td><code>true</code> V <code>false</code></td>
+</tr>
+<tr>
+<td><code>params</code></td>
+<td>The list of parameters of the method, identical to function</td>
+</tr>
+<tr>
+<td><code>ret_type</code></td>
+<td>The ymir type of the return type</td>
+</tr>
+<tr>
+<td><code>attributes</code></td>
+<td><code>virtual</code>, <code>final</code>, <code>mut</code></td>
+</tr>
+<tr>
+<td><code>throwers</code></td>
+<td>The list of types thrown by the method</td>
+</tr>
+</tbody>
+</table>
+<p>A virtual method is method with no body, and a mutable method is a
+method that accepts only a mutable object.</p>
+<h2 id="traits"><a name="traits" class="anchor-navigation-ex-anchor" href="#traits"><i class="fa fa-link" aria-hidden="true"></i></a>1.8. Traits</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>type</code></td>
+<td><code>trait</code></td>
+</tr>
+<tr>
+<td><code>childs</code></td>
+<td>The list of method inside the trait</td>
+</tr>
+</tbody>
+</table>
+<h2 id="templates"><a name="templates" class="anchor-navigation-ex-anchor" href="#templates"><i class="fa fa-link" aria-hidden="true"></i></a>1.9. Templates</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>type</code></td>
+<td><code>template</code></td>
+</tr>
+<tr>
+<td><code>test</code></td>
+<td>Set if the template has a test, in a string</td>
+</tr>
+<tr>
+<td><code>params</code></td>
+<td>The list of parameter of the template, in strings</td>
+</tr>
+<tr>
+<td><code>childs</code></td>
+<td>The list of symbol inside the template</td>
+</tr>
+</tbody>
+</table>
+<h2 id="macros"><a name="macros" class="anchor-navigation-ex-anchor" href="#macros"><i class="fa fa-link" aria-hidden="true"></i></a>1.10. Macros</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>type</code></td>
+<td><code>macro</code></td>
+</tr>
+<tr>
+<td><code>cstrs</code></td>
+<td>The list of constructor of the macro</td>
+</tr>
+<tr>
+<td><code>rules</code></td>
+<td>The list of rules of the macro</td>
+</tr>
+</tbody>
+</table>
+<h3 id="constructors-and-rules"><a name="constructors-and-rules" class="anchor-navigation-ex-anchor" href="#constructors-and-rules"><i class="fa fa-link" aria-hidden="true"></i></a>1.10.1. Constructors and Rules</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>rule</code></td>
+<td>The rule of the macro in a string</td>
+</tr>
+<tr>
+<td><code>skips</code></td>
+<td>The list of token skiped, list of string</td>
 </tr>
 </tbody>
 </table>
@@ -1054,14 +1471,10 @@ in the table.</p>
 
             
                 
-                <a href="control.html" class="navigation navigation-prev " aria-label="Previous page: Control flows">
+                <a href="types.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Types">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
-                
-                <a href="../advanced/" class="navigation navigation-next " aria-label="Next page: Alias and References">
-                    <i class="fa fa-angle-right"></i>
-                </a>
                 
             
         
@@ -1070,7 +1483,7 @@ in the table.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Operator priority","level":"1.3.5","depth":2,"next":{"title":"Alias and References","level":"1.4","depth":1,"path":"advanced/README.md","ref":"advanced/README.md","articles":[{"title":"References","level":"1.4.1","depth":2,"path":"advanced/references.md","ref":"advanced/references.md","articles":[]},{"title":"Aliases","level":"1.4.2","depth":2,"path":"advanced/alias.md","ref":"advanced/alias.md","articles":[]},{"title":"Copy and Deep copy","level":"1.4.3","depth":2,"path":"advanced/copies.md","ref":"advanced/copies.md","articles":[]},{"title":"Best practice","level":"1.4.4","depth":2,"path":"advanced/best.md","ref":"advanced/best.md","articles":[]}]},"previous":{"title":"Control flows","level":"1.3.4","depth":2,"path":"primitives/control.md","ref":"primitives/control.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"primitives/operator.md","mtime":"2021-07-16T13:37:57.903Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-07-29T15:21:12.835Z"},"basePath":"..","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Symbols","level":"1.16.2","depth":2,"previous":{"title":"Types","level":"1.16.1","depth":2,"path":"documentation/types.md","ref":"documentation/types.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"documentation/symbols.md","mtime":"2021-07-29T14:12:04.303Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-07-29T15:21:12.835Z"},"basePath":"..","book":{"language":"en"}});
         });
     </script>
 </div>

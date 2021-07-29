@@ -731,11 +731,43 @@
             
 
             
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.13.1" data-path="../templates/binary.html">
+            
+                <a href="../templates/binary.html">
+            
+                    
+                    Unary, binary and Comparison
+            
+                </a>
+            
+
+            
         </li>
     
-        <li class="chapter " data-level="1.14" data-path="../version/README.md">
+        <li class="chapter " data-level="1.13.2" data-path="../templates/complex_operators.html">
             
-                <span>
+                <a href="../templates/complex_operators.html">
+            
+                    
+                    Access, contains and iteration
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="../version/">
+            
+                <a href="../version/">
             
                     
                     Version
@@ -746,16 +778,80 @@
             
         </li>
     
-        <li class="chapter " data-level="1.15" >
+        <li class="chapter " data-level="1.15" data-path="../macros/">
             
-                <span>
+                <a href="../macros/">
+            
+                    
+                    Macro
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.15.1" data-path="../macros/std.html">
+            
+                <a href="../macros/std.html">
+            
+                    
+                    Std and Core macros
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16" data-path="../documentation/">
+            
+                <a href="../documentation/">
             
                     
                     Documentation
             
-                </span>
+                </a>
             
 
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.16.1" data-path="../documentation/types.html">
+            
+                <a href="../documentation/types.html">
+            
+                    
+                    Types
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16.2" data-path="../documentation/symbols.html">
+            
+                <a href="../documentation/symbols.html">
+            
+                    
+                    Symbols
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
             
         </li>
     
@@ -804,11 +900,11 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#control-flows"><b>1. </b>Control flows</a></li><li><span class="title-icon "></span><a href="#if-expression"><b>2. </b>If expression</a></li><ul><li><span class="title-icon "></span><a href="#loops"><b>2.1. </b>Loops</a></li><ul><li><span class="title-icon "></span><a href="#infinite-repetitions"><b>2.1.1. </b>Infinite repetitions</a></li><li><span class="title-icon "></span><a href="#loop-while-condition-is-met"><b>2.1.2. </b>Loop while condition is met</a></li><li><span class="title-icon "></span><a href="#iterate-over-a-value"><b>2.1.3. </b>Iterate over a value</a></li></ul></ul></ul></div><a href="#control-flows" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="control-flows"><a name="control-flows" class="anchor-navigation-ex-anchor" href="#control-flows"><i class="fa fa-link" aria-hidden="true"></i></a>1. Control flows</h1>
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#control-flows"><b>1. </b>Control flows</a></li><ul><li><span class="title-icon "></span><a href="#if-expression"><b>1.1. </b>If expression</a></li><li><span class="title-icon "></span><a href="#loops"><b>1.2. </b>Loops</a></li><ul><li><span class="title-icon "></span><a href="#infinite-repetitions"><b>1.2.1. </b>Infinite repetitions</a></li><li><span class="title-icon "></span><a href="#loop-while-condition-is-met"><b>1.2.2. </b>Loop while condition is met</a></li><li><span class="title-icon "></span><a href="#iterate-over-a-value"><b>1.2.3. </b>Iterate over a value</a></li></ul><li><span class="title-icon "></span><a href="#assertion"><b>1.3. </b>Assertion</a></li></ul></ul></div><a href="#control-flows" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="control-flows"><a name="control-flows" class="anchor-navigation-ex-anchor" href="#control-flows"><i class="fa fa-link" aria-hidden="true"></i></a>1. Control flows</h1>
 <p>When writing a program, the ability to decide to execute part of the
 code conditionally, or to repeat part of the code, is a basic scheme
 that is necessary. </p>
-<h1 id="if-expression"><a name="if-expression" class="anchor-navigation-ex-anchor" href="#if-expression"><i class="fa fa-link" aria-hidden="true"></i></a>2. If expression</h1>
+<h2 id="if-expression"><a name="if-expression" class="anchor-navigation-ex-anchor" href="#if-expression"><i class="fa fa-link" aria-hidden="true"></i></a>1.1. If expression</h2>
 <p>An <strong><code>if</code></strong> expression is a control flow allowing to branch into the
 program code by making decisions based on conditions. An <code>else</code> can be
 placed after an <em>if</em> expression, to execute a part of code, if the
@@ -879,9 +975,9 @@ ymir1: <span class="token path">fatal error</span>:
 compilation terminated.
 </code></pre>
 <p><br></p>
-<h2 id="loops"><a name="loops" class="anchor-navigation-ex-anchor" href="#loops"><i class="fa fa-link" aria-hidden="true"></i></a>2.1. Loops</h2>
+<h2 id="loops"><a name="loops" class="anchor-navigation-ex-anchor" href="#loops"><i class="fa fa-link" aria-hidden="true"></i></a>1.2. Loops</h2>
 <p>In <em>Ymir</em>, there are three kinds of loops: <code>loop</code>, <code>while</code> and <code>for</code>.</p>
-<h3 id="infinite-repetitions"><a name="infinite-repetitions" class="anchor-navigation-ex-anchor" href="#infinite-repetitions"><i class="fa fa-link" aria-hidden="true"></i></a>2.1.1. Infinite repetitions</h3>
+<h3 id="infinite-repetitions"><a name="infinite-repetitions" class="anchor-navigation-ex-anchor" href="#infinite-repetitions"><i class="fa fa-link" aria-hidden="true"></i></a>1.2.1. Infinite repetitions</h3>
 <p>The keyword <strong><code>loop</code></strong> is used to specify that a scope must be
 repeated endlessly. The syntax of the <strong><code>loop</code></strong> expression is the
 following:</p>
@@ -921,7 +1017,7 @@ same type. A loop can evidently be of type <strong><code>void</code></strong>.</
 <p>Results:</p>
 <pre class="language-"><code>Result : 11
 </code></pre><p><br></p>
-<h3 id="loop-while-condition-is-met"><a name="loop-while-condition-is-met" class="anchor-navigation-ex-anchor" href="#loop-while-condition-is-met"><i class="fa fa-link" aria-hidden="true"></i></a>2.1.2. Loop while condition is met</h3>
+<h3 id="loop-while-condition-is-met"><a name="loop-while-condition-is-met" class="anchor-navigation-ex-anchor" href="#loop-while-condition-is-met"><i class="fa fa-link" aria-hidden="true"></i></a>1.2.2. Loop while condition is met</h3>
 <p>The keyword <strong><code>while</code></strong> creates a loop, which repeats until a
 condition is no longer satisfied. As for the <em>loop</em>, it can be broken
 with the keyword <strong><code>break</code></strong>. Unlike <em>loop</em> the value of a while loop
@@ -954,7 +1050,7 @@ the loop iterates 10 times, while the value of <strong><code>i</code></strong> i
 <p>Results:</p>
 <pre class="language-"><code>I is : 10
 </code></pre><p><br></p>
-<h3 id="iterate-over-a-value"><a name="iterate-over-a-value" class="anchor-navigation-ex-anchor" href="#iterate-over-a-value"><i class="fa fa-link" aria-hidden="true"></i></a>2.1.3. Iterate over a value</h3>
+<h3 id="iterate-over-a-value"><a name="iterate-over-a-value" class="anchor-navigation-ex-anchor" href="#iterate-over-a-value"><i class="fa fa-link" aria-hidden="true"></i></a>1.2.3. Iterate over a value</h3>
 <p>The last type of loop is the <em>for loop</em> defined with the keyword
 <strong><code>for</code></strong>. Like for the <em>while loop</em> the value of a <em>for loop</em> is
 always <strong><code>void</code></strong> as it is impossible to garantee that the loop is
@@ -969,11 +1065,12 @@ arrays.</p>
 <span class="token path">decorator</span> <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token string">&apos;ref&apos;</span> <span class="token operator">|</span> <span class="token string">&apos;mut&apos;</span> <span class="token operator">|</span> <span class="token string">&apos;dmut&apos;</span>
 </code></pre>
 <p><br> </p>
-<p><strong>1) Iteration over a range.</strong> In the following example, the <em>for loop</em> is
-used to iterate over two ranges. The first loop at line <strong>4</strong>,
-iterates between <strong>0</strong> and <strong>8</strong> (not included), by a step of
-<strong>2</strong>. When the second loop iterate between the value <strong>10</strong> and <strong>0</strong>
-(not included) with a step of <strong>-1</strong>.</p>
+<p><strong>1) Iteration over a range.</strong> In the following example, the <em>for
+loop</em> is used to iterate over three ranges. The first loop at line
+<strong>4</strong>, iterates between <strong>0</strong> and <strong>8</strong> (not included), by a step of
+<strong>2</strong>. The second loop iterate between the value <strong>10</strong> and <strong>0</strong> (not
+included) with a step of <strong>-1</strong>. The third loop iterates between the
+value <strong>1</strong> and <strong>6</strong> (included this time).</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -982,7 +1079,11 @@ iterates between <strong>0</strong> and <strong>8</strong> (not included), by a 
     <span class="token punctuation">}</span>    
 
     <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token number">10</span> <span class="token punctuation">..</span> <span class="token number">0</span> <span class="token punctuation">{</span>
-        <span class="token function">println</span> <span class="token punctuation">(</span>i<span class="token punctuation">,</span> <span class="token string">&quot;!&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">println</span> <span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token number">1</span> <span class="token punctuation">...</span> <span class="token number">6</span> <span class="token punctuation">{</span>
+        <span class="token function">println</span> <span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre>
@@ -1040,6 +1141,23 @@ reason, the <em>for loop</em> is not really dynamic, but flattened at
 compilation time. This does not change anything from a user
 perspective, but is worth mentioning, to avoid miscomprehension of
 static type system, there is no hidden dynamicity here.</p>
+<h2 id="assertion"><a name="assertion" class="anchor-navigation-ex-anchor" href="#assertion"><i class="fa fa-link" aria-hidden="true"></i></a>1.3. Assertion</h2>
+<p>The expression <em>assert</em> is an expression that verify the validity of a
+condition and throws an exception if the condition is false. Error are
+presented in the chapter <a href="https://gnu-ymir.github.io/Documentations/en/errors/main.html" target="_blank">Error
+Handling</a>,
+thus no detail are given in this section.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>i <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token operator">&amp;</span><span class="token type">AssertError</span> 
+<span class="token punctuation">{</span>
+    <span class="token keyword">assert</span> <span class="token punctuation">(</span>i <span class="token operator">&lt;</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token string">&quot;i must be lower than 10&quot;</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> 
+    <span class="token keyword">throws</span> <span class="token operator">&amp;</span><span class="token type">AssertError</span>
+<span class="token punctuation">{</span>
+    <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token number">11</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
 
                                 
                                 </section>
@@ -1083,7 +1201,7 @@ static type system, there is no hidden dynamicity here.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Control flows","level":"1.3.4","depth":2,"next":{"title":"Operator priority","level":"1.3.5","depth":2,"path":"primitives/operator.md","ref":"primitives/operator.md","articles":[]},"previous":{"title":"Functions","level":"1.3.3","depth":2,"path":"primitives/functions.md","ref":"primitives/functions.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"primitives/control.md","mtime":"2021-06-17T05:03:47.364Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-17T06:30:34.719Z"},"basePath":"..","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Control flows","level":"1.3.4","depth":2,"next":{"title":"Operator priority","level":"1.3.5","depth":2,"path":"primitives/operator.md","ref":"primitives/operator.md","articles":[]},"previous":{"title":"Functions","level":"1.3.3","depth":2,"path":"primitives/functions.md","ref":"primitives/functions.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"primitives/control.md","mtime":"2021-07-29T13:21:10.973Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-07-29T15:21:12.835Z"},"basePath":"..","book":{"language":"en"}});
         });
     </script>
 </div>

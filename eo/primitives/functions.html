@@ -84,7 +84,7 @@
     <link rel="next" href="control.html" />
     
     
-    <link rel="prev" href="types.md" />
+    <link rel="prev" href="types.html" />
     
 
     </head>
@@ -185,9 +185,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.2" data-path="types.md">
+        <li class="chapter " data-level="1.3.2" data-path="types.html">
             
-                <span>
+                <a href="types.html">
             
                     
                     Datumaj tipoj
@@ -224,8 +224,34 @@
             
         </li>
     
+        <li class="chapter " data-level="1.3.5" data-path="operator.html">
+            
+                <a href="operator.html">
+            
+                    
+                    Prioritato de operatoroj
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../advanced/">
+            
+                <a href="../advanced/">
+            
+                    
+                    Ligo kaj Referencoj
+            
+                </a>
+            
+
             
         </li>
     
@@ -274,9 +300,9 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#funkcioj"><b>1. </b>Funkcioj</a></li><ul><li><span class="title-icon "></span><a href="#parametroj"><b>1.1. </b>Parametroj</a></li><ul><li><span class="title-icon "></span><a href="#apriora-valoro"><b>1.1.1. </b>Apriora valoro</a></li><li><span class="title-icon "></span><a href="#rikura-apriora-valoro"><b>1.1.2. </b>Rikura apriora valoro</a></li><li><span class="title-icon "></span><a href="#parametroj-de-la-funkcio-main"><b>1.1.3. </b>Parametroj de la funkcio &apos;main&apos;</a></li></ul><li><span class="title-icon "></span><a href="#korpo-de-funkcio"><b>1.2. </b>Korpo de funkcio</a></li></ul></ul></div><a href="#funkcioj" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="funkcioj"><a name="funkcioj" class="anchor-navigation-ex-anchor" href="#funkcioj"><i class="fa fa-link" aria-hidden="true"></i></a>1. Funkcioj</h1>
-<p>Funkcioj estas vaste akceptita koncepto por dividi programon al etaj
-partoj. <em>Ymir</em> programo &#x109;iam komencas per la <strong><code>main</code></strong> (<em>&#x109;efa</em>
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#funkcioj"><b>1. </b>Funkcioj</a></li><ul><li><span class="title-icon "></span><a href="#parametroj"><b>1.1. </b>Parametroj</a></li><ul><li><span class="title-icon "></span><a href="#apriora-valoro"><b>1.1.1. </b>Apriora valoro</a></li><li><span class="title-icon "></span><a href="#rikura-apriora-valoro"><b>1.1.2. </b>Rikura apriora valoro</a></li><li><span class="title-icon "></span><a href="#parametroj-de-la-funkcio-main"><b>1.1.3. </b>Parametroj de la funkcio &apos;main&apos;</a></li></ul><li><span class="title-icon "></span><a href="#korpo-de-funkcio"><b>1.2. </b>Korpo de funkcio</a></li><li><span class="title-icon "></span><a href="#tipo-de-redona-valoro-de-funkcio"><b>1.3. </b>Tipo de redona valoro de funkcio</a></li><li><span class="title-icon "></span><a href="#lokaj-deklaracioj"><b>1.4. </b>Lokaj deklaracioj</a></li><li><span class="title-icon "></span><a href="#unuforma-sintakso-de-voko"><b>1.5. </b>Unuforma sintakso de voko</a></li></ul></ul></div><a href="#funkcioj" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="funkcioj"><a name="funkcioj" class="anchor-navigation-ex-anchor" href="#funkcioj"><i class="fa fa-link" aria-hidden="true"></i></a>1. Funkcioj</h1>
+<p>Funkcioj estas vaste akceptita koncepto por dividi programon en etajn
+partojn. <em>Ymir</em> programo &#x109;iam komencas per la <strong><code>main</code></strong> (<em>&#x109;efa</em>
 esperante) funkcio, kiun ni jam vidis en anta&#x16D;aj &#x109;apitroj. &#x108;iuj
 funkcioj estas deklaritaj per la vorto <strong><code>def</code></strong> sekvita per nomo, kaj
 listo da parametroj. Oni vokas funkcion per &#x11D;ia nomo sekvita de listo
@@ -581,6 +607,186 @@ valoro estas deklareblaj, sed ilia tipo devas esti malplena opo, ne
 ymir1: <span class="token path">fatal error</span>: 
 compilation terminated.
 </code></pre>
+<h2 id="tipo-de-redona-valoro-de-funkcio"><a name="tipo-de-redona-valoro-de-funkcio" class="anchor-navigation-ex-anchor" href="#tipo-de-redona-valoro-de-funkcio"><i class="fa fa-link" aria-hidden="true"></i></a>1.3. Tipo de redona valoro de funkcio</h2>
+<p>Kiam la valoro de la korpo de funkcio ne estas de tipo <strong><code>void</code></strong>, la
+funkcio havas valoron, kaj tipon. Tiu tipo devas esti deklarita je la
+prototipo de la funkcio, tiel ke &#x11D;i estas videbla de la aliaj funkcioj
+kiuj povas voki &#x11D;in. La deklaro de la tipo estas farita uzante la
+signo sago <strong><code>-&gt;</code></strong> tuj post la deklaro de la parametroj de la
+funkcio. La redona tipo de la funkcio povas esti forgestia se la
+valoro de la korpo de la funkcio estas de tipo <strong><code>void</code></strong>, sed devas
+&#x109;iam esti deklarita alie.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span> 
+    x <span class="token operator">+</span> <span class="token number">1</span>
+
+<span class="token keyword">def</span> <span class="token function">bar</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">,</span> y <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> z <span class="token operator">=</span> x <span class="token operator">+</span> y<span class="token punctuation">;</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;La valoro de z : &quot;</span><span class="token punctuation">,</span> z<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">foo</span> <span class="token punctuation">(</span>z<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br></p>
+<p>Ne &#x109;iam estas facila deklari korpo de funkcio tiel maniere ke &#x11D;i
+gvidas al la bona valoro, kiam estas multe da bran&#x109;oj. Por eviti
+multvorteco, kaj redoni valoron anticipe, la &#x109;efvorto <strong><code>return</code></strong>
+(redoni) povas esti uzita. &#x11C;i fermas la funkcion kaj redonas valoron
+kiu oni deklaras en la esprimo tuj post la &#x109;efvorto. La <strong><code>return</code></strong>
+esprimo anka&#x16D; povas redoni <strong><code>void</code></strong> valoro en <strong><code>void</code></strong> funkcio,
+kiam &#x11D;ia asociita esprimo estas de tipo <strong><code>void</code></strong>. La tipo de la
+valoro de la esprimo asociita al <em>redona esprimo</em> devas esti de la
+sama tipo ol la tipo deklarita en la prototipo de la funkcio.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">estasDividebla</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">,</span> z <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token basic-types">bool</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>z <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token other-keyword">false</span><span class="token punctuation">;</span> 
+
+    <span class="token punctuation">(</span>x <span class="token operator">%</span> z<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br></p>
+<p>La kompililo certigas ke &#x109;iuj bran&#x109;oj de la funkcia korpo gvidas al
+<em>redona esprimo</em> a&#x16D; al valoro kies tipo estas la sama ol la tipo de la
+funkcio. Se la korpo de la funkcio povas gvidi al valoro kies tipo
+estas malsama ol la tipo de la funkcio, kaj eblas ke neniu <em>redona
+esprimo</em> estas uzita, tiam la kompililo &#x135;etas eraron.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
+
+<span class="token keyword">def</span> <span class="token function">aldoni_unu</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span> <span class="token punctuation">{</span>
+    x <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment">// La valoro de la bloko estas void, pro la &apos;;&apos; </span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token function">aldoni_unu</span> <span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;La valoro de x : &quot;</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br></p>
+<p>En la supra fontkodo, la funkcio <em>aldoni_unu</em> havas korpon de tipo
+<strong><code>void</code></strong>, kiam la prototipo de la funkcio deklaras ke la funkcio
+redonas valoron de tipo <strong><code>i32</code></strong>, aldone ne estas redona esprimo en
+la funkcio, do la kompililo &#x135;etas eraron.</p>
+<pre class="language-"><code class="lang-error"><span class="token path">Error</span> : incompatible types i32 and void
+ <span class="token comment">--&gt; main.yr:(3,32)</span>
+ 3  &#x2503; def aldoni_unu (x : i32)-&gt; i32 {
+    &#x254B;                                ^
+    &#x2503; <span class="token other-keyword">Note</span> : 
+    &#x2503;  <span class="token comment">--&gt; main.yr:(5,1)</span>
+    &#x2503;  5  &#x2503; }
+    &#x2503;     &#x254B; ^
+    &#x2517;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x253B;&#x2501; 
+
+
+ymir1: <span class="token path">fatal error</span>: 
+compilation terminated.
+</code></pre>
+<h2 id="lokaj-deklaracioj"><a name="lokaj-deklaracioj" class="anchor-navigation-ex-anchor" href="#lokaj-deklaracioj"><i class="fa fa-link" aria-hidden="true"></i></a>1.4. Lokaj deklaracioj</h2>
+<p>Kodbloko anka&#x16D; malfermas ia loka paka&#x135;o, en kiu oni povas deklari
+simbolojn. Tiuj deklaracioj povas esti aliaj funkcioj, strukturoj,
+klasoj, enumeracioj, ktp. Tiuj deklaracioj, kiujn oni faras en loka
+kodbloko, <em>ne</em> povas atingi la lokajn variablojn, kiuj anka&#x16D; estas
+deklaritaj en la loka kodbloko. Atingebleco estas ebla per uzi
+tega&#x135;ojn (<em>kp.</em> <a href="https://gnu-ymir.github.io/Documentations/eo/functions" target="_blank">Altnivela
+funkcioj</a>),
+sed tio ne estas prezentata en tiu &#x109;apitro.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>     <span class="token comment">// importo estas loka al foo</span>
+    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">12</span><span class="token punctuation">;</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">def</span> <span class="token function">bar</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span> <span class="token punctuation">{</span>
+            <span class="token function">println</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token number">12</span>
+        <span class="token punctuation">}</span>
+        <span class="token function">println</span> <span class="token punctuation">(</span>x <span class="token operator">+</span> <span class="token function">bar</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// bar ne plu estas atingebla</span>
+    <span class="token function">bar</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// malkompilebla</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">bar</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token string">&quot;En la main funkcio !&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br></p>
+<p>En la lasta ekzemplo, la <strong><code>bar</code></strong> funkcio estas atingebla en la
+amplekso malfermita al la linio <strong>4</strong>, &#x11D;i la linio <strong>10</strong>. Pro tiu
+kialo, la funkcio <strong><code>main</code></strong> ne povas atingi &#x11D;in. Aldone, la <em>import
+deklaro</em> farita je la linio <strong>2</strong> (importante la funkcion
+<strong><code>println</code></strong>) estas nur atingebla en la amplekso malfermita je la
+linio <strong>1</strong>, do pro tiu kialo la funkcio <strong><code>main</code></strong> ne povas voki la
+funkcion <strong><code>println</code></strong>. La ekzemplo tial havas kvin erarojn, kiujn la
+kompililo &#x135;etas.</p>
+<pre class="language-"><code class="lang-error"><span class="token path">Error</span> : undefined symbol x
+ <span class="token comment">--&gt; main.yr:(6,15)</span>
+ 6  &#x2503;         println (x);
+    &#x254B;                  ^
+
+<span class="token path">Error</span> : undefined symbol bar
+ <span class="token comment">--&gt; main.yr:(9,15)</span>
+ 9  &#x2503;     println (x + bar ());
+    &#x254B;                  ^^^
+
+<span class="token path">Error</span> : undefined symbol bar
+ <span class="token comment">--&gt; main.yr:(13,5)</span>
+13  &#x2503;     bar (); // malkompilebla
+    &#x254B;     ^^^
+
+<span class="token path">Error</span> : undefined symbol bar
+ <span class="token comment">--&gt; main.yr:(19,5)</span>
+19  &#x2503;     bar ();
+    &#x254B;     ^^^
+
+<span class="token path">Error</span> : undefined symbol println
+ <span class="token comment">--&gt; main.yr:(20,5)</span>
+20  &#x2503;     println (&quot;En la main funkcio !&quot;);
+    &#x254B;     ^^^^^^^
+
+
+ymir1: <span class="token path">fatal error</span>: 
+compilation terminated.
+</code></pre>
+<p><br></p>
+<p>Funkcioj ne estas paka&#x135;oj, ili nur povas deklari privatajn
+simbolojn. En venonta &#x109;apitro ni prezentos manieron por deklari
+publikajn simbolojn atingeblaj de aliaj funkcioj, kaj fremdaj paka&#x135;oj
+(<em>kp.</em>
+<a href="https://gnu-ymir.github.io/Documentations/eo/modules/" target="_blank">Paka&#x135;oj</a>).</p>
+<h2 id="unuforma-sintakso-de-voko"><a name="unuforma-sintakso-de-voko" class="anchor-navigation-ex-anchor" href="#unuforma-sintakso-de-voko"><i class="fa fa-link" aria-hidden="true"></i></a>1.5. Unuforma sintakso de voko</h2>
+<p>La <em>unuforma sintakso de voko</em> estas la sintakso kiu permesas voki
+funkciojn per la punkta operatoro <strong><code>.</code></strong>. La <em>unuforma sintakso de
+voko</em> lokas la unuan argumenton de la funkcio je la maldekstro de la
+punkta operatoro, kaj la ceterajn argumentojn post la nomo de la
+funkcio inter rondaj krampoj apartigitaj per komoj.</p>
+<pre class="language-"><code class="lang-grammar"><span class="token path">ufc</span> <span class="token punctuation">:</span><span class="token operator">=</span> esprimo <span class="token string">&apos;.&apos;</span> esprimo <span class="token string">&apos;(&apos;</span> <span class="token punctuation">(</span>esprimo <span class="token punctuation">(</span><span class="token string">&apos;,&apos;</span> esprimo<span class="token punctuation">)</span><span class="token operator">*</span><span class="token punctuation">)</span>? <span class="token string">&apos;)&apos;</span>
+</code></pre>
+<p>Oni uzas tiun sintakson por plenumi kontinuajn traktadojn de datumo
+kaj farigi la fontkodon pli legebla. La sintakson estas nomata
+<em>unuforma sintakso de voko</em> &#x109;ar &#x11D;i estas simila al la sintakso uzita
+por voki metodojn kun objektojn (<em>kp.</em>
+<a href="https://gnu-ymir.github.io/Documentations/eo/objects/" target="_blank">Objektoj</a>).</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
+
+<span class="token keyword">def</span> <span class="token function">plusUnu</span> <span class="token punctuation">(</span>i <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span>
+    i <span class="token operator">+</span> <span class="token number">1</span>
+
+<span class="token keyword">def</span> <span class="token function">plusDu</span> <span class="token punctuation">(</span>i <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token basic-types">i32</span>
+    i <span class="token operator">+</span> <span class="token number">2</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">12</span><span class="token punctuation">;</span>
+    x<span class="token punctuation">.</span><span class="token function">plusUnu</span> <span class="token punctuation">(</span><span class="token punctuation">)</span>
+     <span class="token punctuation">.</span><span class="token function">plusDu</span> <span class="token punctuation">(</span><span class="token punctuation">)</span>
+     <span class="token punctuation">.</span><span class="token function">println</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br></p>
+<p>Rezultoj: </p>
+<pre class="language-"><code>15
+</code></pre><p><br></p>
+<p>La <em>unuforma sintakso de voko</em> anka&#x16D; permesas ke oni deklaru
+ekvivalento al metodoj por strukturo. &#x108;ar strukturo estas prezentataj
+en venonta &#x109;apitro, ni ne prezentas tion &#x109;i tie.</p>
 
                                 
                                 </section>
@@ -608,7 +814,7 @@ compilation terminated.
 
             
                 
-                <a href="types.md" class="navigation navigation-prev " aria-label="Previous page: Datumaj tipoj">
+                <a href="types.html" class="navigation navigation-prev " aria-label="Previous page: Datumaj tipoj">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
@@ -624,7 +830,7 @@ compilation terminated.
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Funkcioj","level":"1.3.3","depth":2,"next":{"title":"Regaj fluoj","level":"1.3.4","depth":2,"path":"primitives/control.md","ref":"primitives/control.md","articles":[]},"previous":{"title":"Datumaj tipoj","level":"1.3.2","depth":2,"path":"primitives/types.md","ref":"primitives/types.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"eo","gitbook":"*"},"file":{"path":"primitives/functions.md","mtime":"2021-06-17T05:03:47.376Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-17T06:30:34.719Z"},"basePath":"..","book":{"language":"eo"}});
+            gitbook.page.hasChanged({"page":{"title":"Funkcioj","level":"1.3.3","depth":2,"next":{"title":"Regaj fluoj","level":"1.3.4","depth":2,"path":"primitives/control.md","ref":"primitives/control.md","articles":[]},"previous":{"title":"Datumaj tipoj","level":"1.3.2","depth":2,"path":"primitives/types.md","ref":"primitives/types.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"eo","gitbook":"*"},"file":{"path":"primitives/functions.md","mtime":"2021-07-15T12:14:27.798Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-07-29T15:21:12.835Z"},"basePath":"..","book":{"language":"eo"}});
         });
     </script>
 </div>
