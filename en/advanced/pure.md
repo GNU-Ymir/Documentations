@@ -3,15 +3,15 @@
 A pure value is a value that cannot change. In other word it is a
 value, that ensure that there is no variable in the program that has a
 mutable access to it. Pure values are different to const values, in
-the sense that const values just give the garantee that the current
-access is not mutable, however they does not garantee that there is no
+the sense that const values just give the guarantee that the current
+access is not mutable, however they does not guarantee that there is no
 other variable in the program with mutable access.
 
 The different guarantees on values can be listed as follows : 
 
-1. No garantee, the value is mutable **`mut`**
-2. Garantee that the value is no writable in the current context **`const`** 
-3. Garantee that the value is completely immutable in every context **`pure`**
+1. No guarantee, the value is mutable **`mut`**
+2. Guarantee that the value is no writable in the current context **`const`** 
+3. Guarantee that the value is completely immutable in every context **`pure`**
 
 ## Limitation of const values
 
@@ -124,7 +124,7 @@ Results:
 ## Purity and the pure keyword
 
 <br> In the above example, both variable **`b`** and **`d`** have no
-garantees, and there values are indeed modified. The **`pure`**
+guarantees, and there values are indeed modified. The **`pure`**
 keyword can be added to their definitions. In that case, the compiler
 checks the initialization of the values that are used, and ensure that
 they came from a deep copy, or another pure value.
@@ -207,6 +207,6 @@ Results:
 
 <br> One can note that not copy are needed to move the value contained
 in the variable **`c`** into the variable **`e`**. This is due to the
-fact that **`c`** is pure, so the garantee of purity is already
+fact that **`c`** is pure, so the guarantee of purity is already
 made. Thanks to the **`pure`** mechanism some copies can be avoided.
 
