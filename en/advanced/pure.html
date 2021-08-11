@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Alias, References and Purity · GitBook</title>
+        <title>Pure values · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -81,10 +81,10 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="references.html" />
+    <link rel="next" href="../modules/" />
     
     
-    <link rel="prev" href="../primitives/operator.html" />
+    <link rel="prev" href="best.html" />
     
 
     </head>
@@ -242,7 +242,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.4" data-path="./">
+        <li class="chapter " data-level="1.4" data-path="./">
             
                 <a href="./">
             
@@ -308,7 +308,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.5" data-path="pure.html">
+        <li class="chapter active" data-level="1.4.5" data-path="pure.html">
             
                 <a href="pure.html">
             
@@ -898,7 +898,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Alias, References and Purity</a>
+        <a href=".." >Pure values</a>
     </h1>
 </div>
 
@@ -913,209 +913,173 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#alias-and-references"><b>1. </b>Alias and References</a></li><ul><li><span class="title-icon "></span><a href="#standard-and-aliasable-types"><b>1.1. </b>Standard and Aliasable types</a></li><li><span class="title-icon "></span><a href="#mutability-level"><b>1.2. </b>Mutability level</a></li><ul><li><span class="title-icon "></span><a href="#deep-mutability"><b>1.2.1. </b>Deep mutability</a></li><li><span class="title-icon "></span><a href="#const-keyword"><b>1.2.2. </b>Const keyword</a></li><li><span class="title-icon "></span><a href="#string-literal"><b>1.2.3. </b>String literal</a></li></ul><li><span class="title-icon "></span><a href="#memory-borrowing"><b>1.3. </b>Memory borrowing</a></li></ul></ul></div><a href="#alias-and-references" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="alias-and-references"><a name="alias-and-references" class="anchor-navigation-ex-anchor" href="#alias-and-references"><i class="fa fa-link" aria-hidden="true"></i></a>1. Alias and References</h1>
-<p>The alias and reference is one of the most important characteristics
-of the <em>Ymir</em> language, which allows it to give guarantees on the
-mutability of the data, and the explicit movement of the memory. It is
-important to understand how memory works in <em>Ymir</em>, in order to
-understand the error message you might get when you try to move data
-from one variable to another.</p>
-<p><em>Ymir</em> is a high level programming language, thus there is no need to
-worry about memory management (memory leaks), the language using a
-garbage collector. However, in terms of mutability and access rights,
-the language provides an expressive system for managing memory
-movements.</p>
-<h2 id="standard-and-aliasable-types"><a name="standard-and-aliasable-types" class="anchor-navigation-ex-anchor" href="#standard-and-aliasable-types"><i class="fa fa-link" aria-hidden="true"></i></a>1.1. Standard and Aliasable types</h2>
-<p>In <em>Ymir</em>, there are two types, standard types and aliasable
-types. A value whose type is a standard type, can be copied without
-the need of explicitly inform the compiler. The standard types are all
-primitive scalar types. On the other hand, aliasable types are types
-that have borrowed data, which will not be copied unless it is
-explicitly written into the code, to avoid performance loss.</p>
-<p>To understand how data is represented in a program, you need to know
-the difference between heap and stack. The stack is a space allocated
-by the program when a function is entered, which is released when the
-function is exited. On the other hand, the heap is a space that is
-allocated when certain instructions in the program require it, such as
-allocating a new slice, allocating  a new object instance, and so on.</p>
-<p>When a slice is allocated, all its data is stored in the heap, and the
-address of this data is stored in the stack, where the variables are
-located. The following figure shows the data representation for this
-program:</p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-</code></pre>
-<p><br></p>
-<p><img src="https://gnu-ymir.github.io/Documentations/en/advanced/memory_x_foo.png" alt="drawing" height="500" style="display: block; margin-left: auto;  margin-right: auto;"></p>
-<h2 id="mutability-level"><a name="mutability-level" class="anchor-navigation-ex-anchor" href="#mutability-level"><i class="fa fa-link" aria-hidden="true"></i></a>1.2. Mutability level</h2>
-<p>We define the level of mutability as the deepest level of the type
-that is mutable. An example of a mutability level is shown in the
-following table:</p>
-<table>
-<thead>
-<tr>
-<th>Type</th>
-<th>Level</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>mut [i32]</td>
-<td>1</td>
-</tr>
-<tr>
-<td>[i32]</td>
-<td>0</td>
-</tr>
-<tr>
-<td>mut [mut i32]</td>
-<td>2</td>
-</tr>
-<tr>
-<td>dmut [[[i32]]]</td>
-<td>4</td>
-</tr>
-</tbody>
-</table>
-<p>This is mainly used to ensure that the borrowed data is not changed by
-another variable in a foreign part of the program. The users have full
-control over the data they have created. The example below shows
-how the mutability level is used to ensure that the content of a
-table is never changed.</p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
-
-<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> 
-    <span class="token keyword">throws</span> <span class="token operator">&amp;</span><span class="token type">OutOfArray</span>
-<span class="token punctuation">{</span>
-    <span class="token keyword">let</span> <span class="token other-keyword">mut</span> x <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-    x <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-
-    x <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">8</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-</code></pre>
-<p><br></p>
-<p>The type of <strong><code>x</code></strong> in the above example is <strong><code>mut [i32]</code></strong>. The
-mutability of the internal part of the slice (<strong><code>i32</code></strong> value) is not
-specified. The compiler, for security reasons, infered it as
-immutable. The line <strong>5</strong> of the previous example is accepted, because
-the variable <strong><code>x</code></strong> is mutable, however, the value pointed by the
-slice contained in <strong><code>x</code></strong> is not. For that reason the line <strong>9</strong> is
-not accepted and the compiler returns the following error.</p>
-<pre class="language-"><code class="lang-error"><span class="token path">Error</span> : left operand of type i32 is immutable
- <span class="token comment">--&gt; main.yr:(7,7)</span>
- 7  &#x2503;     x [0] = 8;
-    &#x254B;       ^
-
-
-ymir1: <span class="token path">fatal error</span>: 
-compilation terminated.
-</code></pre>
-<p><br></p>
-<p>If the mutability level defines the write permission of every data, it
-is assumed that every parts of the code that have access to a give
-value have read permission on it. For that reason, in the previous
-example, even if writting into <strong><code>x [0]</code></strong> is not permitted, reading
-its value is allowed.</p>
-<h3 id="deep-mutability"><a name="deep-mutability" class="anchor-navigation-ex-anchor" href="#deep-mutability"><i class="fa fa-link" aria-hidden="true"></i></a>1.2.1. Deep mutability</h3>
-<p>Earlier we introduced the keyword <strong><code>dmut</code></strong>, this keyword is used to
-avoid a very verbose type statement, and defines that every subtype
-are mutable. This keyword is applicable to all types, but will only
-have a different effect from the <strong><code>mut</code></strong> decorator on aliasable
-types. The following table gives an example of an slice type, using
-the keyword <code>dmut</code> :</p>
-<table>
-<thead>
-<tr>
-<th>Type</th>
-<th>Verbose equivalent</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>dmut [i32]</td>
-<td>mut [mut i32]</td>
-</tr>
-<tr>
-<td>dmut [[[i32]]]</td>
-<td>mut [mut [mut [mut i32]]]</td>
-</tr>
-</tbody>
-</table>
-<p>If we come back to our previous example, and change the type of the
-variable <strong><code>x</code></strong>, and use the keyword <strong><code>dmut</code></strong>. The variable <strong><code>x</code></strong>
-now borrows mutable datas, that can be modified, thus the expression
-at line <strong>9</strong> is accepted.</p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
-
-<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> 
-    <span class="token keyword">throws</span> <span class="token operator">&amp;</span><span class="token type">OutOfArray</span>
-<span class="token punctuation">{</span>
-    <span class="token keyword">let</span> <span class="token other-keyword">dmut</span> x <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-    x <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-
-    x <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">8</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-</code></pre>
-<h3 id="const-keyword"><a name="const-keyword" class="anchor-navigation-ex-anchor" href="#const-keyword"><i class="fa fa-link" aria-hidden="true"></i></a>1.2.2. Const keyword</h3>
-<p>The <strong><code>const</code></strong> keyword is the perfect opposite of the <strong><code>dmut</code></strong>
-keyword. This keyword has no interest when defining types directly
-(because they are immutable by default), but coupled with the keyword
-<strong><code>typeof</code></strong>, it can transform a mutable type into a immutable type.</p>
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-minus-circle"></i><ul><li><span class="title-icon "></span><a href="#pure-values"><b>1. </b>Pure values</a></li><ul><li><span class="title-icon "></span><a href="#limitation-of-const-values"><b>1.1. </b>Limitation of const values</a></li><li><span class="title-icon "></span><a href="#purity-and-the-pure-keyword"><b>1.2. </b>Purity and the pure keyword</a></li></ul></ul></div><a href="#pure-values" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="pure-values"><a name="pure-values" class="anchor-navigation-ex-anchor" href="#pure-values"><i class="fa fa-link" aria-hidden="true"></i></a>1. Pure values</h1>
+<p>A pure value is a value that cannot change. In other word it is a
+value, that ensure that there is no variable in the program that has a
+mutable access to it. Pure values are different to const values, in
+the sense that const values just give the garantee that the current
+access is not mutable, however they does not garantee that there is no
+other variable in the program with mutable access.</p>
+<p>The different guarantees on values can be listed as follows : </p>
+<ol>
+<li>No garantee, the value is mutable <strong><code>mut</code></strong></li>
+<li>Garantee that the value is no writable in the current context <strong><code>const</code></strong> </li>
+<li>Garantee that the value is completely immutable in every context <strong><code>pure</code></strong></li>
+</ol>
+<h2 id="limitation-of-const-values"><a name="limitation-of-const-values" class="anchor-navigation-ex-anchor" href="#limitation-of-const-values"><i class="fa fa-link" aria-hidden="true"></i></a>1.1. Limitation of const values</h2>
+<p>To understand the limitation of <strong><code>const</code></strong> values, the following
+program has two variable defined in the function <strong><code>main</code></strong>. The first
+one <strong><code>a</code></strong> has a mutable access to the value, and the variable
+<strong><code>b</code></strong> has a const access to the same value. Because the variable
+<strong><code>a</code></strong> modifies the value, the value pointed by <strong><code>b</code></strong> is also
+modified even if it was <strong><code>const</code></strong>. Thus, it is important to
+understand that <strong><code>const</code></strong> is only referering to the permission of
+the variable <strong><code>b</code></strong>.</p>
 <pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
 
 <span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> <span class="token other-keyword">mut</span> x <span class="token operator">=</span> <span class="token number">12</span><span class="token punctuation">;</span>
-    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">typeid</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">println</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>const <span class="token keyword">typeof</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">typeid</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-</code></pre>
-<p>Results:</p>
-<pre class="language-"><code>mut i32
-i32
-</code></pre><h3 id="string-literal"><a name="string-literal" class="anchor-navigation-ex-anchor" href="#string-literal"><i class="fa fa-link" aria-hidden="true"></i></a>1.2.3. String literal</h3>
-<p>Strings literal, unlike slice literals, are in the text segment of the
-program (read-only part of a program). This means that the type of a
-literal string is <strong><code>[c32]</code></strong> (or <strong><code>[c8]</code></strong> if the suffix <code>s8</code> is
-specified), while the type of a literal array (of <code>i32</code> for example)
-is <strong><code>mut [mut i32]</code></strong>. For that reason, it impossible to borrow the
-data into a deeply mutable variable.</p>
-<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span>
+    <span class="token keyword">let</span> <span class="token other-keyword">dmut</span> a <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> b <span class="token operator">=</span> a<span class="token punctuation">;</span>
 
-<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> <span class="token other-keyword">dmut</span> x <span class="token operator">=</span> <span class="token string">&quot;Try to make me mutable !?&quot;</span><span class="token punctuation">;</span>
+    a <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">98</span><span class="token punctuation">;</span>
+
+    <span class="token function">println</span> <span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
 <p><br></p>
-<p>The compiler returns an error. This error means that the mutability
-level of the right operand is <strong>1</strong>, here <code>mut [c32]</code>, (the reference
-of the array is mutable but not its content), and the code try to put
-the reference inside a variable of mutability level <strong>2</strong>, that is to
-say of type <code>mut [mut c32]</code>. If this was allowed the variable <code>x</code>
-would have the possibility to change data that has been marked as
-immutable at some point of the program, so the compiler does not allow
-it, and returns the following error.</p>
-<pre class="language-"><code class="lang-error"><span class="token path">Error</span> : discard the constant qualifier is prohibited, left operand mutability level is 2 but must be at most 1
- <span class="token comment">--&gt; main.yr:(4,11)</span>
- 4  &#x2503;     let dmut x = &quot;Try to make me mutable !?&quot;;
+<p>Results: </p>
+<pre class="language-"><code>[98, 2, 3]
+</code></pre><p><br></p>
+<p>We have seen in a previous chapter that the keywords <strong><code>copy</code></strong> and
+<strong><code>dcopy</code></strong> can be used to remove this limitation, and ensure that the
+value of <strong><code>b</code></strong> is the same as the value of <strong><code>a</code></strong>, but that
+modifying the value of <strong><code>a</code></strong> does not modify the value of
+<strong><code>b</code></strong>. This mechanism is the base of the one provided by <strong><code>pure</code></strong>
+values.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> 
+    <span class="token keyword">throws</span> <span class="token operator">&amp;</span><span class="token type">OutOfArray</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">let</span> <span class="token other-keyword">dmut</span> a <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> b <span class="token operator">=</span> <span class="token keyword">dcopy</span> a<span class="token punctuation">;</span>
+
+    a <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">98</span><span class="token punctuation">;</span>
+
+    <span class="token function">println</span> <span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br></p>
+<p>Results: </p>
+<pre class="language-"><code>[1, 2, 3]
+</code></pre><p><br></p>
+<p>Now let&apos;s add a third variable to the equation, and let&apos;s name it
+<strong><code>c</code></strong>. In this variable we want to store the value of <strong><code>b</code></strong>, and
+ensure that the variable is never modified. If the initialization of
+the variable <strong><code>b</code></strong> is made in an obscure way (for example in a
+function that is not readable, here the <strong><code>foo</code></strong> function), then the
+only way to ensure that the value of <strong><code>c</code></strong> is never modified, is to
+make a copy of it inside the value of <strong><code>c</code></strong>. If the memory movement
+are easy in the following example, it may not be the case in complex
+program with many variable and memory movement.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
+
+<span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>a <span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token basic-types">i32</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> <span class="token punctuation">[</span><span class="token basic-types">i32</span><span class="token punctuation">]</span> <span class="token punctuation">{</span>
+    a
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> 
+    <span class="token keyword">throws</span> <span class="token operator">&amp;</span><span class="token type">OutOfArray</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">let</span> <span class="token other-keyword">dmut</span> a <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> b <span class="token operator">=</span> <span class="token function">foo</span> <span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">let</span> c <span class="token operator">=</span> <span class="token keyword">dcopy</span> b<span class="token punctuation">;</span>
+    <span class="token keyword">let</span> d <span class="token operator">=</span> b<span class="token punctuation">;</span>
+
+    a <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">98</span><span class="token punctuation">;</span>
+
+    <span class="token function">println</span> <span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span>d<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br></p>
+<p>Results: </p>
+<pre class="language-"><code>[1, 2, 3]
+[98, 2, 3]
+</code></pre><h2 id="purity-and-the-pure-keyword"><a name="purity-and-the-pure-keyword" class="anchor-navigation-ex-anchor" href="#purity-and-the-pure-keyword"><i class="fa fa-link" aria-hidden="true"></i></a>1.2. Purity and the pure keyword</h2>
+<p><br> In the above example, both variable <strong><code>b</code></strong> and <strong><code>d</code></strong> have no
+garantees, and there values are indeed modified. The <strong><code>pure</code></strong>
+keyword can be added to their definitions. In that case, the compiler
+checks the initialization of the values that are used, and ensure that
+they came from a deep copy, or another pure value.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>a <span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token basic-types">i32</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">-&gt;</span> <span class="token punctuation">[</span><span class="token basic-types">i32</span><span class="token punctuation">]</span> <span class="token punctuation">{</span>
+    a
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> 
+    <span class="token keyword">throws</span> <span class="token operator">&amp;</span><span class="token type">OutOfArray</span> 
+<span class="token punctuation">{</span>
+    <span class="token keyword">let</span> <span class="token other-keyword">dmut</span> a <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">let</span> pure b <span class="token operator">=</span> <span class="token function">foo</span> <span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><br></p>
+<pre class="language-"><code class="lang-error"><span class="token path">Error</span> : discard the constant qualifier is prohibited
+ <span class="token comment">--&gt; main.yr:(10,11)</span>
+10  &#x2503;     let pure b = foo (a);
     &#x254B;              ^
-    &#x2503; <span class="token other-keyword">Note</span> : 
-    &#x2503;  <span class="token comment">--&gt; main.yr:(4,15)</span>
-    &#x2503;  4  &#x2503;     let dmut x = &quot;Try to make me mutable !?&quot;;
-    &#x2503;     &#x254B;                  ^
+    &#x2503; <span class="token other-keyword">Note</span> : implicit pure of type [i32] is not allowed, it will implicitly discard constant qualifier
+    &#x2503;  <span class="token comment">--&gt; main.yr:(10,19)</span>
+    &#x2503; 10  &#x2503;     let pure b = foo (a);
+    &#x2503;     &#x254B;                      ^
     &#x2517;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x253B;&#x2501; 
 
 
 ymir1: <span class="token path">fatal error</span>: 
 compilation terminated.
 </code></pre>
+<p><br> To avoid the above error, there is two possibilities. Either we
+add a <strong><code>dcopy</code></strong> on the function call of <strong><code>foo</code></strong>, or we add
+<strong><code>pure</code></strong> to the return type of <strong><code>foo</code></strong> and make a deep copy of the
+value of <strong><code>a</code></strong> in this function. The function <strong><code>bar</code></strong> of the
+following example perform the second possibility.</p>
+<pre class="language-"><code class="lang-ymir"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span>
+
+<span class="token keyword">def</span> <span class="token function">foo</span> <span class="token punctuation">(</span>a <span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token basic-types">i32</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> <span class="token punctuation">[</span><span class="token basic-types">i32</span><span class="token punctuation">]</span> <span class="token punctuation">{</span>
+    a
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">bar</span> <span class="token punctuation">(</span>a <span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token basic-types">i32</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">-&gt;</span> pure <span class="token punctuation">[</span><span class="token basic-types">i32</span><span class="token punctuation">]</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">dcopy</span> a<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> 
+    <span class="token keyword">throws</span> <span class="token operator">&amp;</span><span class="token type">OutOfArray</span> 
+<span class="token punctuation">{</span>
+    <span class="token keyword">let</span> <span class="token other-keyword">dmut</span> a <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> pure b <span class="token operator">=</span> <span class="token keyword">dcopy</span> <span class="token function">foo</span> <span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">let</span> pure c <span class="token operator">=</span> <span class="token function">bar</span> <span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">let</span> pure d <span class="token operator">=</span> b<span class="token punctuation">;</span>
+    <span class="token keyword">let</span> pure e <span class="token operator">=</span> c<span class="token punctuation">;</span>
+
+    a <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">98</span><span class="token punctuation">;</span>
+
+    <span class="token function">println</span> <span class="token punctuation">(</span>d<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">println</span> <span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
 <p><br></p>
-<h2 id="memory-borrowing"><a name="memory-borrowing" class="anchor-navigation-ex-anchor" href="#memory-borrowing"><i class="fa fa-link" aria-hidden="true"></i></a>1.3. Memory borrowing</h2>
-<p>When you want to make a copy of a value whose type is aliasable, you
-must tell the compiler how you want to make the copy. There are four
-ways to move or reference memory, which are provided with the four
-keywords <code>ref</code>, <code>alias</code>, <code>copy</code> and <code>dcopy</code>. The following chapters
-presents these keywords, and the semantic associated to them.</p>
+<p>Results: </p>
+<pre class="language-"><code>[1, 2, 3]
+[1, 2, 3]
+</code></pre><p><br> One can note that not copy are needed to move the value contained
+in the variable <strong><code>c</code></strong> into the variable <strong><code>e</code></strong>. This is due to the
+fact that <strong><code>c</code></strong> is pure, so the garantee of purity is already
+made. Thanks to the <strong><code>pure</code></strong> mechanism some copies can be avoided.</p>
 
                                 
                                 </section>
@@ -1143,12 +1107,12 @@ presents these keywords, and the semantic associated to them.</p>
 
             
                 
-                <a href="../primitives/operator.html" class="navigation navigation-prev " aria-label="Previous page: Operator priority">
+                <a href="best.html" class="navigation navigation-prev " aria-label="Previous page: Best practice">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="references.html" class="navigation navigation-next " aria-label="Next page: References">
+                <a href="../modules/" class="navigation navigation-next " aria-label="Next page: Modules">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -1159,7 +1123,7 @@ presents these keywords, and the semantic associated to them.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Alias, References and Purity","level":"1.4","depth":1,"next":{"title":"References","level":"1.4.1","depth":2,"path":"advanced/references.md","ref":"advanced/references.md","articles":[]},"previous":{"title":"Operator priority","level":"1.3.5","depth":2,"path":"primitives/operator.md","ref":"primitives/operator.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"advanced/README.md","mtime":"2021-07-29T15:21:26.737Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-08-11T08:33:50.893Z"},"basePath":"..","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Pure values","level":"1.4.5","depth":2,"next":{"title":"Modules","level":"1.5","depth":1,"path":"modules/README.md","ref":"modules/README.md","articles":[]},"previous":{"title":"Best practice","level":"1.4.4","depth":2,"path":"advanced/best.md","ref":"advanced/best.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"advanced/pure.md","mtime":"2021-08-11T08:28:15.126Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-08-11T08:33:50.893Z"},"basePath":"..","book":{"language":"en"}});
         });
     </script>
 </div>
