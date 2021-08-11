@@ -917,14 +917,14 @@
 <p>A pure value is a value that cannot change. In other word it is a
 value, that ensure that there is no variable in the program that has a
 mutable access to it. Pure values are different to const values, in
-the sense that const values just give the garantee that the current
-access is not mutable, however they does not garantee that there is no
+the sense that const values just give the guarantee that the current
+access is not mutable, however they does not guarantee that there is no
 other variable in the program with mutable access.</p>
 <p>The different guarantees on values can be listed as follows : </p>
 <ol>
-<li>No garantee, the value is mutable <strong><code>mut</code></strong></li>
-<li>Garantee that the value is no writable in the current context <strong><code>const</code></strong> </li>
-<li>Garantee that the value is completely immutable in every context <strong><code>pure</code></strong></li>
+<li>No guarantee, the value is mutable <strong><code>mut</code></strong></li>
+<li>Guarantee that the value is no writable in the current context <strong><code>const</code></strong> </li>
+<li>Guarantee that the value is completely immutable in every context <strong><code>pure</code></strong></li>
 </ol>
 <h2 id="limitation-of-const-values"><a name="limitation-of-const-values" class="anchor-navigation-ex-anchor" href="#limitation-of-const-values"><i class="fa fa-link" aria-hidden="true"></i></a>1.1. Limitation of const values</h2>
 <p>To understand the limitation of <strong><code>const</code></strong> values, the following
@@ -1009,7 +1009,7 @@ program with many variable and memory movement.</p>
 [98, 2, 3]
 </code></pre><h2 id="purity-and-the-pure-keyword"><a name="purity-and-the-pure-keyword" class="anchor-navigation-ex-anchor" href="#purity-and-the-pure-keyword"><i class="fa fa-link" aria-hidden="true"></i></a>1.2. Purity and the pure keyword</h2>
 <p><br> In the above example, both variable <strong><code>b</code></strong> and <strong><code>d</code></strong> have no
-garantees, and there values are indeed modified. The <strong><code>pure</code></strong>
+guarantees, and there values are indeed modified. The <strong><code>pure</code></strong>
 keyword can be added to their definitions. In that case, the compiler
 checks the initialization of the values that are used, and ensure that
 they came from a deep copy, or another pure value.</p>
@@ -1078,7 +1078,7 @@ following example perform the second possibility.</p>
 [1, 2, 3]
 </code></pre><p><br> One can note that not copy are needed to move the value contained
 in the variable <strong><code>c</code></strong> into the variable <strong><code>e</code></strong>. This is due to the
-fact that <strong><code>c</code></strong> is pure, so the garantee of purity is already
+fact that <strong><code>c</code></strong> is pure, so the guarantee of purity is already
 made. Thanks to the <strong><code>pure</code></strong> mechanism some copies can be avoided.</p>
 
                                 
@@ -1123,7 +1123,7 @@ made. Thanks to the <strong><code>pure</code></strong> mechanism some copies can
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Pure values","level":"1.4.5","depth":2,"next":{"title":"Modules","level":"1.5","depth":1,"path":"modules/README.md","ref":"modules/README.md","articles":[]},"previous":{"title":"Best practice","level":"1.4.4","depth":2,"path":"advanced/best.md","ref":"advanced/best.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"advanced/pure.md","mtime":"2021-08-11T08:34:07.848Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-08-11T08:35:41.719Z"},"basePath":"..","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Pure values","level":"1.4.5","depth":2,"next":{"title":"Modules","level":"1.5","depth":1,"path":"modules/README.md","ref":"modules/README.md","articles":[]},"previous":{"title":"Best practice","level":"1.4.4","depth":2,"path":"advanced/best.md","ref":"advanced/best.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","katex","codeblock-filename","spoiler","folding-menu","language-picker","anchor-nav-x","code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["themes/code.css"]},"spoiler":{},"language-picker":{"grid-columns":3},"search":{},"folding-menu":{"animationDuration":400,"sticky":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"isRewritePageTitle":false,"toolTipMode":"click"},"codeblock-filename":{},"anchor-nav-x":{"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"advanced/pure.md","mtime":"2021-08-11T10:20:27.049Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-08-11T10:21:04.967Z"},"basePath":"..","book":{"language":"en"}});
         });
     </script>
 </div>
