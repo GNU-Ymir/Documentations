@@ -172,6 +172,8 @@ the copy is recursive, and correctly keeps the structure.
 let c = dcopy a;
 ```
 
+<br>
+
 The following figure represents the memory state of the program after
 the deep copy.
 
