@@ -12,30 +12,27 @@ one.
 import std::io;
 
 class Foo {
-	let _type : [c8];
-	
-	pub self () with _type = "I am an original"s8 {}
-	
-	prot self (type : [c8]) with _type = type {}
-	
-	
-	impl Copiable {
-		pub over deepCopy (self)-> dmut &(Foo) {
-			Foo::new ("I am a copy"s8)
-		}
-	}
-
-
-	impl Streamable; // convinient for debugging
+    let mut _type : [c8];
+    
+    pub self () with _type = "I am an original"s8 {}
+    
+    pub def change (mut self) {
+        self._type = "I am modified"s8;
+    }
+    
+    impl Copiable;	
+    impl Streamable; // convinient for debugging
 }
 
 
 def main () {
-	let a = Foo::new ();
-	let dmut b = dcopy a; // same as alias (a.deepCopy ())
-	
-	println (a);
-	println (b);
+    let dmut a = Foo::new ();
+    let dmut b = dcopy a; // same as alias (a.deepCopy ())
+    
+    b:.change ();
+    
+    println (a);
+    println (b);
 }
 ```
 
@@ -44,5 +41,5 @@ def main () {
 Results: 
 ```
 main::Foo(I am an original)
-main::Foo(I am a copy)
+main::Foo(I am modified)
 ```

@@ -99,3 +99,80 @@ def main () {
     println (x, " ", y, " ", z);
 }
 ```
+
+<br>
+
+The structure of the copy respect the structure of the initial value
+that has been copied, meaning that even recursive values can be copied
+without any worries. To make recursive values, we need to use objects,
+that are described in the chapter
+[Objects](https://gnu-ymir.github.io/Documentations/en/objects/), and
+traits described in the chapter
+[Traits](https://gnu-ymir.github.io/Documentations/en/objects/traits.html)
+to make the objects deeply copiable. To avoid the scattering of the
+information, we will assume that you will have already read these
+chapters and came back here to understand the deep copy on objects.
+
+
+In the following example, the object **`A`** contains a field of type
+**`A`**. The initialization of this field is made using the either
+**`self`** or another object in the constructor defined at line
+**`1`** and **`2`**. Thus the state of the memory in the **`main`**
+function, at line **`1`** can be described by the figure depicted just
+underneath the source code.
+
+```ymir
+import std::io;
+
+class A {
+    
+    let _i : i32;
+    let dmut _a : &A;
+    
+    pub self (i : i32, dmut a : &A) with _a = alias a, _i = i {
+		self._a._a = alias self;
+    }
+    
+    pub self (i : i32) with _a = alias self, _i = i {}
+    
+    impl Copiable, Streamable; // to make A deep copiable, and printable
+}
+
+def main () {
+    let dmut a = A::new (1);
+    let dmut b = A::new (2, alias a);
+    
+    println (a);
+	println (b);
+}
+```
+
+<br>
+
+Results:
+
+```
+main::A(1, main::A(2, main::A(...)))
+main::A(2, main::A(1, main::A(...)))
+```
+
+<br>
+
+Memory state at line **`20`** : 
+
+<img src="https://gnu-ymir.github.io/Documentations/en/advanced/memory_recursive_main.png" alt="drawing" height="500"  style="display: block; margin-left: auto;  margin-right: auto;">
+
+
+Now let's add a deep copy of the value contained inside the variable
+**`a`** into a variable **`c`**. This deep copy copies the values of
+the object inside **`a`**, and the object inside the field **`_a`**,
+the copy is recursive, and correctly keeps the structure.
+
+```ymir
+let c = dcopy a;
+```
+
+The following figure represents the memory state of the program after
+the deep copy.
+
+<img src="https://gnu-ymir.github.io/Documentations/en/advanced/memory_recursive_main_copy.png" alt="drawing" height="500"  style="display: block; margin-left: auto;  margin-right: auto;">
