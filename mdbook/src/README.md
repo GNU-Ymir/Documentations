@@ -39,8 +39,8 @@ There are two ways to install the **gyc** (Gnu Ymir Compiler), natively or by us
 
 This compiler can be installed on linux debian system, by following those simple steps: 
 - First, you need to downloads the packages : 
-  - [libmidgard-9-dev](https://gitea.emile-cadorel.fr/Emile/Ymir-Docker/src/branch/master/builder_image/9/amd64/bin/libgmidgard_9.3.0_amd64.deb)
-  - [GYC](https://gitea.emile-cadorel.fr/Emile/Ymir-Docker/src/branch/master/builder_image/9/amd64/bin/gyc-9_9.3.0_amd64.deb)
+  - [libmidgard-9-dev](https://ymir-lang.org/release/gmidgard/9.3.0/libgmidgard_9.3.0_amd64.deb)
+  - [GYC](https://ymir-lang.org/release/gymir/9.3.0/gyc-9_9.3.0_amd64.deb)
 
 - And then, you need to install them using dpkg : 
 
