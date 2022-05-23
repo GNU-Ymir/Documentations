@@ -1,0 +1,6 @@
+[book]
+authors = ["Emile Cadorel"]
+language = "en"
+multilingual = false
+src = "src"
+title = "Ymir Tour"
