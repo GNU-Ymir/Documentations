@@ -4,7 +4,7 @@ The keyword**`ref`** is a keyword that is placed before the
 declaration of a variable. It is used to refer to a value, which is
 usually borrowed from another variable. They are performing similar
 operation as
-[Pointers](https://gnu-ymir.github.io/Documentations/en/primitives/types.html#pointers),
+[Pointers](https://ymir-lang.org/primitives/types.html#pointers),
 with the difference that they does not need to be dereferenced (this
 is done automatically), and pointer arithmetics is not possible with
 references. In *Ymir* references are always set, and are always set
@@ -25,11 +25,9 @@ def foo () {
 The above program can be represented in memory as shown in the
 following figure.
 
-<br>
+<img src="https://ymir-lang.org/advanced/memory_x__ref_y_foo.png" alt="drawing" width="1000" style="display: block; margin-left: auto;  margin-right: auto;">
 
-<img src="https://gnu-ymir.github.io/Documentations/en/advanced/memory_x__ref_y_foo.png" alt="drawing" height="500", style="display: block; margin-left: auto;  margin-right: auto;">
 
-<br>
 
 
 In this figure, one can note that **`y`**, is a pointer to x, which
@@ -108,7 +106,7 @@ def main () {
 
 The following figure shows the memory status of the previous code:
 
-<img src="https://gnu-ymir.github.io/Documentations/en/advanced/memory_x_main_ref_x_foo.png" alt="drawing" width="450" style="display: block; margin-left: auto;  margin-right: auto;">
+<img src="https://ymir-lang.org/advanced/memory_x_main_ref_x_foo.png" alt="drawing" width="450" style="display: block; margin-left: auto;  margin-right: auto;">
 
 The keyword `ref` is not always associated with a mutable variable, it
 can be used to pass a complex type to a function more efficiently,

@@ -2,7 +2,7 @@
 # Functions 
 
 We have seen in the chapter [Basic programming
-concepts](https://gnu-ymir.github.io/Documentations/en/primitives/functions.html)
+concepts](https://ymir-lang.org/primitives/functions.html)
 how functions are written. *Ymir* can be used as a functional
 language, thus functions can also be considered as values. In this
 chapter we will see more advanced function systems, named function
@@ -52,7 +52,7 @@ Results:
 ### Function pointer using reference
 
 We have seen that references is not a type, in the chapter [Alias and
-References](https://gnu-ymir.github.io/Documentations/en/advanced/references.html). However,
+References](https://ymir-lang.org/advanced/references.html). However,
 function prototype sometimes takes reference value as parameter. This
 must be replicated in the prototype of the function pointer. For that
 reason, the **`ref`** keyword can be used in the prototype of a
@@ -201,7 +201,7 @@ lambda function does not enclose the context of the function that have
 created it. In other words, lambda functions behave as normal local
 function, accessible only inside the function that have declared them
 (*cf.*  [Scope
-declaration](https://gnu-ymir.github.io/Documentations/en/primitives/functions.html#scope-declaration)).
+declaration](https://ymir-lang.org/primitives/functions.html#scope-declaration)).
 
 In many cases the type of the parameters and return type can be
 infered, and are therefore optional. The above example can then be
@@ -273,7 +273,7 @@ Results:
 Lambda function that are not typed are special element, that does not
 really have a value at runtime, and are closer to *compile time
 values* (presented in a future chapter [Compile time
-execution](https://gnu-ymir.github.io/Documentations/en/templates/cte.html)).
+execution](https://ymir-lang.org/templates/cte.html)).
 When the whole type of a lambda cannot be infered by the compiler
 (types of the parameters, and the type of the return type), then the
 value cannot be passed to a mutable variable. *Ymir* allows to put an
@@ -391,7 +391,7 @@ closure as an immutable access to all the variable declared inside the
 scope of the parent function. This closure is called a *copy closure*
 because the access of the variable is made by copy (a first level copy
 *cf.* [Copy and Deep
-copy](https://gnu-ymir.github.io/Documentations/en/advanced/copies.html)).
+copy](https://ymir-lang.org/advanced/copies.html)).
 Because closure captures a context in addition to a function pointer,
 the simple function pointer type is no more sufficient, and a new type
 is introduced. The syntax of the closure type is created with the
@@ -424,16 +424,11 @@ def main () {
 }
 ```
 
-<br>
-
 The above source code in the context of the **`foo`** function, can be
 illustrated by the following figure.
 
-<br>
+<img src="https://ymir-lang.org/functions/closure.png" alt="drawing" width="500" style="display: block; margin-left: auto;  margin-right: auto;">
 
-<img src="https://gnu-ymir.github.io/Documentations/en/functions/closure.png" alt="drawing" height="500", style="display: block; margin-left: auto;  margin-right: auto;">
-
-<br>
 
 As one can note, the variable **`i`** enclosed in the closure is not
 the same as the variable **`i`** of the **`main`** function. This has
@@ -532,7 +527,7 @@ In the above example, the *copy closure* access to the first index of
 the slice **`i`**. This is a unsafe operation, the slice can be empty,
 this is why a catch is made. Information about catch is not presented
 here, and will be discussed in a future chapter [Error
-handling](https://gnu-ymir.github.io/Documentations/en/errors/main.html). Here
+handling](https://ymir-lang.org/errors/main.html). Here
 because the slice is not empty when the closure is called, the access
 works.
 

@@ -28,7 +28,7 @@ def main () {
 
 This source code can be represented in memory by the following figure.
 
-<img src="https://gnu-ymir.github.io/Documentations/en/advanced/memory_x_alias_main.png" alt="drawing" height="500"  style="display: block; margin-left: auto;  margin-right: auto;">
+<img src="https://ymir-lang.org/advanced/memory_x_alias_main.png" alt="drawing" height="500"  style="display: block; margin-left: auto;  margin-right: auto;">
 
 The alias keyword is only mandatory when the variable that will borrow
 the data is mutable and may impact the value. It is obvious that one
@@ -218,12 +218,12 @@ a:.foo (12); // same as foo (alias a, 12);
 
 This operator is very usefull when dealing with classes, where the
 *uniform call syntax* is mandatory, as we will see in chapter
-[Class](https://gnu-ymir.github.io/Documentations/en/objects/class.html).
+[Class](https://ymir-lang.org/objects/class.html).
 
 ## Special case of struct and tuple
 
 In the chapter
-[Structure](https://gnu-ymir.github.io/Documentations/en/types/struct.html)
+[Structure](https://ymir-lang.org/types/struct.html)
 you will learn how to create a structure containing several fields of
 different types. You have already learned how to make tuples. These
 types are sometimes aliasable, depending on the internal type they
@@ -233,7 +233,7 @@ then the tuple or structure is also aliasable.
 The table below presents some examples of aliasable tuples : 
 
 | Type | Aliasable | Reason |
-| --- | --- |
+| --- | --- | --- |
 | (i32, i32) | false | i32 is not aliasable |
 | ([i32],) | true | [i32] is a slice, and hence aliasable |
 | ([i32], f64) | true | [i32] is a slice, and hence aliasable |
@@ -242,7 +242,7 @@ The table below presents some examples of aliasable tuples :
 
 In the introduction of this chapter we presented the notion of
 [Mutability
-level](https://gnu-ymir.github.io/Documentations/en/advanced/#mutability-level). One
+level](https://ymir-lang.org/advanced/#mutability-level). One
 can note that mutability level is not suitable for tuple, as aliasable
 tuple are trees of type and not simply a list. However, this does not
 change much, the compiler just check the mutability level of the inner

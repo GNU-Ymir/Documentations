@@ -10,16 +10,15 @@ decorator := 'mut' | 'dmut' | 'ref'
 identifier := ('_')* [A-z] ([A-z0-9_])*
 ```
 
-<br>
-
-The declaration of a variable is composed of four parts, 1) the
+The declaration of a variable is composed of four parts, **1)** the
 identifier that will be used to refer to the variable in the program,
-2) the decorators, that will give a different behavior to the program
-regarding the variable, 3) a value, that sets the initial value of the
-variable, and 4) a type, optional part of a variable declaration,
-which when omitted is infered from the type of the initial value of
-the variable. Conversely, when specified the type of a variable is
-statically checked and compared to the initial value of the variable.
+**2)** the decorators, that will give a different behavior to the
+program regarding the variable, **3)** a value, that sets the initial
+value of the variable, and **4)** a type, optional part of a variable
+declaration, which when omitted is infered from the type of the
+initial value of the variable. Conversely, when specified the type of
+a variable is statically checked and compared to the initial value of
+the variable.
 
 ## Variable type
 
@@ -40,12 +39,13 @@ def main () {
 }
 ```
 
-<br>
+
 
 The compiler, because the source code is not an acceptable *Ymir*
-program, returns an error. The error presented in the following
-block, informs that the variable **`x`** of type **`i32`**, is
-incompatible with a value of type **`f32`**.
+program, returns an error. The error presented in the following block,
+informs that the variable **`x`** of type **`i32`**, is incompatible
+with a value of type **`f32`**. The type of the variable **`x`**
+cannot be changed.
 
 ```error
 Error : incompatible types mut i32 and f32
@@ -58,32 +58,32 @@ ymir1: fatal error:
 compilation terminated.
 ```
 
-<br>
+
 
 ## Variable mutability 
 
 The decorators are used to determine the behavior to adopt with the
 variable. The keyword **`ref`** and **`dmut`** will be discussed in
 another chapter (*cf.* [Aliases and
-References](https://gnu-ymir.github.io/Documentations/en/advanced/)). For
+References](https://ymir-lang.org/advanced/index.html)). For
 the moment, we will be focusing on the keyword **`mut`**. This keyword
 is used to define a mutable variable, whose value can be changed. A
 variable declared without the **`mut`** keyword is declared immutable
-by default, making its value definitive.
+by default, making its value constant.
 
 In another word, if a variable is declared immutable, then it is bound
-the a value, that the variable cannot change throughout the
-life of the variable. The idea behind default immutability is to avoid
-unwanted behavior or errors, by forcing the developpers to determine
-which variables are mutable with the use of a deliberately more
-verbose syntax, while making all the other variables immutable.
+to a value, that the variable cannot change throughout the life of the
+variable. The idea behind default immutability is to avoid unwanted
+behavior or errors, by forcing the developpers to determine which
+variables are mutable with the use of a deliberately more verbose
+syntax, while making all the other variables immutable.
 
 In the following source code a variable **`x`** of type **`i32`** is
 declared. This variable is immutable, (as the decorator **`mut`** is
 not used). Then the line **7**, which consist in trying to modify the
 value of the variable **`x`** is not accepted by the language,
 that's why the compiler does not accept to compile the program.
-<br>
+
 
 ```ymir
 import std::io
@@ -97,16 +97,16 @@ def main () {
 }
 ```
 
-<br>
 
-For the given source file, the compiler generates the following
-error. This error informs that the affectation is not allowed, due to
-the nature of the variable **`x`**, which is not mutable. In *Ymir*,
-variable mutability and, type mutability ensure, through static
-checks, that when one declares that a variable has no write access to
-a value, there is no way to get write access to the value through
-this variable. Although this can sometimes be frustrating for the
-user.
+
+For the given source file, the compiler generates the error shown
+in the block below. This error informs that the affectation is not
+allowed, due to the nature of the variable **`x`**, which is not
+mutable. In *Ymir*, variable mutability and, type mutability ensure,
+through static checks, that when one declares that a variable has no
+write access to a value, there is no way to get write access to the
+value through this variable. Although this can sometimes be
+frustrating for the user.
 
 ```error
 Error : left operand of type i32 is immutable
@@ -120,7 +120,7 @@ ymir1: fatal error:
 compilation terminated.
 ```
 
-<br> 
+ 
 
 The above example can be modified to make the variable **`x`**
 mutable. This modification implies the use of the keyword **`mut`**,
@@ -128,7 +128,7 @@ which — placed ahead of a variable declaration — makes it
 mutable. Thanks to that modification, the following source code is an
 acceptable program, and thus will be accepted by the compiler.
 
-<br>
+
 
 ```ymir
 import std::io
@@ -142,23 +142,25 @@ def main () {
 }
 ```
 
-<br>
-Result:
+
+Because this time the variable **`x`** is declared mutable, its value
+can be changed. Thus the program compiles, and the following output is
+returned when executing it.
 
 ```
 X is equal to : 2
 X is equal to : 3
 ```
 
-<br> In reality, mutability is not related to variables, but to
+ In reality, mutability is not related to variables, but to
 types. This language proposes a complex type mutability system, whose
 understanding requires the comprehension of data types beforehand. In
 the following sections, we will, for that reason, present the type
 system, (and the different types of data that can be created in *Ymir* — *cf.*  chapter [Data
-types](https://gnu-ymir.github.io/Documentations/en/primitives/types.html)),
+types](https://ymir-lang.org/primitives/types.html)),
 before coming back to the data mutability, — and have a full overview
 of the mutability system in chapter [Aliases and
-references](https://gnu-ymir.github.io/Documentations/en/advanced/).
+references](https://ymir-lang.org/advanced/index.html).
 
 
 ## Initial value
@@ -231,7 +233,7 @@ keyword **`let`** is replaced by the keyword **`static`**. The
 following source code presents an utilization of an immutable global
 variable. This example is just a showcase, as the use of an
 enumeration (*cf.*
-[Enum](https://gnu-ymir.github.io/Documentations/en/types/enum.html))
+[Enum](https://ymir-lang.org/types/enum.html))
 would probably be more appropriate in this specific case.
 
 ```ymir
@@ -244,7 +246,7 @@ def main () {
 }
 ```
 
-<br>
+
 
 All information presented on local variables are relevant to the case
 of global variables. Here, we are refering to static typing,
@@ -280,7 +282,7 @@ def main () {
 }
 ```
 
-<br>
+
 
 Result:
 
@@ -296,7 +298,7 @@ variables. This is probably, the first limitation that we can point
 out on the Ymir languages. **Contribution**, to allow such warranty would
 be very welcomed, but seems unlikely to be possible when global
 variables come from multiple modules (*cf.*
-[Modules](https://gnu-ymir.github.io/Documentations/en/modules)).
+[Modules](https://ymir-lang.org/modules)).
 
 For the moment, because it is impossible to certify the good
 initialization of a global variable, before the start of the program, it
@@ -316,7 +318,7 @@ def foo () -> i32 {
 }
 ```
 
-<br>
+
 
 The compiler will unfortunetaly be able to see only the dependent
 initialization of **`__B__`**, and will let the initialization of
@@ -345,7 +347,7 @@ ymir1: fatal error:
 compilation terminated.
 ```
 
-<br>
+
 
 ## Shadowing and scope
 
@@ -356,9 +358,9 @@ expressions separated by semi-colons between curly brackets, a scope
 is a semantic component well known in programming languages. It has
 some particularities in Ymir, but these particularities will be
 presented in forthcoming chapters
-(*cf.* [Functions](https://gnu-ymir.github.io/Documentations/en/primitives/functions.html),
+(*cf.* [Functions](https://ymir-lang.org/primitives/functions.html),
 [Scope
-guards](https://gnu-ymir.github.io/Documentations/en/errors/scope.html))
+guards](https://ymir-lang.org/errors/scope.html))
 and are not of interest to us at this point.
 
 ```ymir
@@ -372,7 +374,7 @@ def main () {
 }
 ```
 
-<br>
+
 
 When a variable is declared inside a scope and is never used during
 its lifetime the compiler returns an error. To avoid this error, the
@@ -380,7 +382,7 @@ variable can be named **`_`**. If it may seem useless to declare a
 variable that is not used, it can be useful sometimes (for example
 when declaring function parameters of an overriden function, *cf.*
 [Class
-inheritence](https://gnu-ymir.github.io/Documentations/en/objects/inheritance.html)).
+inheritence](https://ymir-lang.org/objects/inheritance.html)).
 
 A variable whose name is **`_`**, is anonymus, then there is no way to
 retreive the value of this variable.
@@ -412,7 +414,7 @@ def main () {
 }
 ```
 
-<br>
+
 
 The compiler returns the following error. Even the last variable in
 the scope opened at line **4** is not authorized. Many errors can be
@@ -445,12 +447,11 @@ ymir1: fatal error:
 compilation terminated.
 ```
 
-<br>
 
 Global variables do not create variable shadowing problems on local
 variables. A global variable is a global symbol, and is accessible
 through its parent module definition (*cf.*
-[Modules](https://gnu-ymir.github.io/Documentations/en/modules/)). Local
+[Modules](https://ymir-lang.org/modules/)). Local
 variables on the other hand, are only accessible for the function in
 which they are declared. Symbol access gives the priority to local
 variables, behavior illustrated in the following example.

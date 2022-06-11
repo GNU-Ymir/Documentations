@@ -2,7 +2,7 @@
 
 
 We have seen in the chapter [Basic programming
-concept](https://gnu-ymir.github.io/Documentations/en/primitives/),
+concept](https://ymir-lang.org/primitives/),
 that the *Ymir* language have a primitive option type. This type has a
 really close relation with exceptions. Indeed, any value can be store
 inside an option type, and any failing scope can be used to create an

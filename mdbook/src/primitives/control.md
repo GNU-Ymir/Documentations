@@ -74,7 +74,9 @@ def main () {
 	   // but the variable x cannot be of type void
 }
 ```
+
 Errors: 
+
 ```error
 Error : incompatible types void and i32
  --> main.yr:(5,10)
@@ -323,7 +325,7 @@ static type system, there is no hidden dynamicity here.
 The expression *assert* is an expression that verify the validity of a
 condition and throws an exception if the condition is false. Error are
 presented in the chapter [Error
-Handling](https://gnu-ymir.github.io/Documentations/en/errors/main.html),
+Handling](https://ymir-lang.org/errors/main.html),
 thus no detail are given in this section.
 
 ```ymir

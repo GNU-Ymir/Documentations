@@ -10,7 +10,7 @@ same type.
 The complete grammar of an enumeration is presented in the following
 source block. As for struct declaration, templates can be used, but
 this functionnality will only be discussed in the
-[Templates](https://gnu-ymir.github.io/Documentations/en/templates/)
+[Templates](https://ymir-lang.org/templates/)
 chapter.
 
 ```grammar

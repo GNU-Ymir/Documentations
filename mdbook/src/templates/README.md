@@ -83,7 +83,7 @@ following code block present the syntax of the *template
 call*. *Template call* is a high priority expression, that has a even
 higher level of priority than the **`::`** operator, and unary
 operators. Operator priority is presented in the chapter [Operator
-priority](https://gnu-ymir.github.io/Documentations/en/primitives/operator.html).
+priority](https://ymir-lang.org/primitives/operator.html).
 
 ```grammar
 template_call := expression (single_arg | multiple_args) 
@@ -184,7 +184,7 @@ following section of the chapter.
 
 We have seen in the chapter about
 function (*cf*.
-[Functions](https://gnu-ymir.github.io/Documentations/en/primitives/functions.html)),
+[Functions](https://ymir-lang.org/primitives/functions.html)),
 the *uniform call syntax*. This syntax is also applicable on template
 functions. In the following example, a function that takes two types
 as template parameters is called in the **`main`** function.
@@ -298,6 +298,7 @@ def main () {
 
 <br>
 Errors (in this error, we can see that **`U`** is set to **`i32`** at line **`10`**, and that the compiler failed to set **`T`**) :
+
 ```error
 Error : the call operator is not defined for foo {T}(a : U)-> void and {f64}
  --> main.yr:(8,10)

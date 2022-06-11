@@ -66,7 +66,9 @@ These packages depend on :
 If one of them is not installed, you will get an error, that can be resolved by running the following command : 
 
 ```bash
-sudo apt --fix-broken install
+$ sudo apt --fix-broken install
+$ sudo dpkg -i libgmidgard_9.3.0_amd64.deb
+$ sudo dpkg -i gyc-9_9.3.0_amd64.deb
 ```
 <br>
 
@@ -93,8 +95,9 @@ $ dpkg -r libgmidgard-9-dev
 ```
 <br>
 
-**Caution** The uninstallation can remove your gcc installation.
-But you can still reinstall it easily if there is any problem, by typing : 
+**Caution** The uninstallation can sometime remove your gcc
+installation.  But you can still reinstall it easily if there is any
+problem, by typing :
 
 ```bash
 sudo apt install --reinstall gcc-9

@@ -51,7 +51,7 @@ the language, and are made only when the keyword **`copy`** is placed
 in the source code.
 
 
-<img src="https://gnu-ymir.github.io/Documentations/en/advanced/memory_x_copy_main.png" alt="drawing" height="500" style="display: block; margin-left: auto;  margin-right: auto;">
+<img src="https://ymir-lang.org/advanced/memory_x_copy_main.png" alt="drawing" height="500" style="display: block; margin-left: auto;  margin-right: auto;">
 
 **Exercise :** Modify `x` that is initialised with an imutable string literal : 
 
@@ -68,8 +68,9 @@ def main ()
 ```
 
 <div class="spoiler_head"> <strong>Correction</strong> (spoiler) : </div>
-{%s%}
-<pre class="language-" style="position: relative;" class="spoiler"><code class="lang-ymir">import std::io
+
+```ymir
+import std::io
 
 def main () 
     throws &OutOfArray, &AssertError
@@ -78,8 +79,7 @@ def main ()
 	x [0] = 'H'; // Well done
 	assert (x == "Hello !");
 }
-</code></pre>
-{%ends%}
+```
 
 ## Deep copy
 
@@ -106,9 +106,9 @@ The structure of the copy respect the structure of the initial value
 that has been copied, meaning that even recursive values can be copied
 without any worries. To make recursive values, we need to use objects,
 that are described in the chapter
-[Objects](https://gnu-ymir.github.io/Documentations/en/objects/), and
+[Objects](https://ymir-lang.org/objects/), and
 traits described in the chapter
-[Traits](https://gnu-ymir.github.io/Documentations/en/objects/traits.html)
+[Traits](https://ymir-lang.org/objects/traits.html)
 to make the objects deeply copiable. To avoid the scattering of the
 information, we will assume that you will have already read these
 chapters and came back here to understand the deep copy on objects.
@@ -160,7 +160,7 @@ main::A(2, main::A(1, main::A(...)))
 
 Memory state at line **`20`** : 
 
-<img src="https://gnu-ymir.github.io/Documentations/en/advanced/memory_recursive_main.png" alt="drawing" height="500"  style="display: block; margin-left: auto;  margin-right: auto;">
+<img src="https://ymir-lang.org/advanced/memory_recursive_main.png" alt="drawing" height="500"  style="display: block; margin-left: auto;  margin-right: auto;">
 
 
 Now let's add a deep copy of the value contained inside the variable
@@ -177,4 +177,4 @@ let c = dcopy a;
 The following figure represents the memory state of the program after
 the deep copy.
 
-<img src="https://gnu-ymir.github.io/Documentations/en/advanced/memory_recursive_main_copy.png" alt="drawing" height="500"  style="display: block; margin-left: auto;  margin-right: auto;">
+<img src="https://ymir-lang.org/advanced/memory_recursive_main_copy.png" alt="drawing" height="500"  style="display: block; margin-left: auto;  margin-right: auto;">

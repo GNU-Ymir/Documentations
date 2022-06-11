@@ -10,7 +10,7 @@ The complete grammar of structure definition is presented in the
 following code block. One can note the possibility to add templates to
 the definition of the structure. These templates will only be
 discussed in the chapter
-[Templates](https://gnu-ymir.github.io/Documentations/en/templates/),
+[Templates](https://ymir-lang.org/templates/),
 and are not of interest to us at the moment.
 
 
@@ -220,7 +220,7 @@ mutable, and the field containing the *aliasable* value is also
 mutable, and the element that will borrow the data is also
 mutable). To resolve the problem, the keywords `dcopy`, and `alias`
 presented in [Aliases and
-References](https://gnu-ymir.github.io/Documentations/en/advanced/)
+References](https://ymir-lang.org/advanced/)
 can be used.
 
 ```ymir

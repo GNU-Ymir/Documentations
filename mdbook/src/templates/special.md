@@ -165,6 +165,7 @@ def main () {
 ```
 
 <br>
+
 Errors: 
 
 ```error
@@ -268,7 +269,7 @@ Results:
 ## Implement filter
 
 We have seen in the chapter about traits
-(*cf*. [Traits](https://gnu-ymir.github.io/Documentations/en/objects/traits.html)),
+(*cf*. [Traits](https://ymir-lang.org/objects/traits.html)),
 that class type can implement a given trait. Implementing a trait
 gives specific method to a class type, that can be called. However
 traits lose most of their interest if it is impossible to accept a

@@ -24,7 +24,7 @@ modifier := 'final' | 'abstract'
 As many symbols, the class can be a template symbols. Templates are
 not presented in this chapter, and are left for a future chapter
 (*cf.*
-[Templates](https://gnu-ymir.github.io/Documentations/en/templates/)).
+[Templates](https://ymir-lang.org/templates/)).
 
 ## Fields 
 
@@ -157,7 +157,7 @@ list of argument to pass to the constructor. The constructor with the
 best affinity is choosed and called on a allocated instance of the
 class. Constructor affinity is computed as function affinity (based on
 type mutability, and type compatibility – *cf.* [Aliases and
-References](https://gnu-ymir.github.io/Documentations/en/advanced/)).
+References](https://ymir-lang.org/advanced/)).
 
 ```ymir
 import std::io
@@ -180,8 +180,9 @@ def main () {
 }
 ```
 
-<br>
+
 Results
+
 ```
 Int : 12
 Float : 12.000000
@@ -273,8 +274,8 @@ def main () {
 }
 ```
 
-<br>
 Results:
+
 ```
 Fst 12
 Scd 12

@@ -80,7 +80,7 @@ methods with default behavior, then it is never validated. Thus errors
 can be present in this trait, but still pass the compilation. One can
 see the trait as a kind of template, this problem being present in
 template symbol as well (*cf.*
-[Templates](https://gnu-ymir.github.io/Documentations/en/templates/)).
+[Templates](https://ymir-lang.org/templates/)).
 
 ## Inherit a Class implementing a Trait
 
@@ -132,8 +132,9 @@ def main () {
 	r.print ();
 }
 ```
-<br>
+
 Results: 
+
 ```
 main::Shape
 main::Rectangle
@@ -233,7 +234,9 @@ class Circle over Shape {
 ```
 
 <br>
+
 Errors: 
+
 ```error
 Error : when validating main::Circle
  --> main.yr:(18,7)
@@ -315,6 +318,7 @@ def foo  (a : Printable) {
 <br>
 
 Errors: 
+
 ```error
 Error : expression used as a type
  --> main.yr:(8,15)
@@ -333,7 +337,7 @@ still be implemented in the language. Traits gain interest when
 coupled with templates, and a template test can be used to check that
 a class implement a trait. More complete information, and example
 about templates, and traits specialization are presented in chapter
-[Templates](https://gnu-ymir.github.io/Documentations/en/templates/),
+[Templates](https://ymir-lang.org/templates/),
 but a brief example is presented in the following source code. In this
 example, two classes **`U`** and **`V`** implement the trait
 **`Printable`**. The function **`foo`** takes a parameter whose type
@@ -373,8 +377,8 @@ def main () {
 }
 ```
 
-<br>
 Results: 
+
 ```
 main::U
 main::V

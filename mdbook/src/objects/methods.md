@@ -3,7 +3,7 @@
 Methods are functions associated to object instances. Methods are
 described inside a class definition. Information about function
 presented in chapter
-[Functions](https://gnu-ymir.github.io/Documentations/en/primitives/functions.html)
+[Functions](https://ymir-lang.org/primitives/functions.html)
 are applicable to methods. The grammar of a method is presented in the
 following code block.
 
@@ -47,7 +47,6 @@ def main () {
 }
 ```
 
-<br>
 Results:
 
 ```
@@ -149,8 +148,8 @@ class A {
 }
 ```
 
-<br>
 Error: 
+
 ```error
 Error : when validating main::A
  --> main.yr:(1,7)
@@ -325,7 +324,6 @@ def main () {
 }
 ```
 
-<br>
 Results:
 
 ```

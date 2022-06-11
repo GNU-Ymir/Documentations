@@ -10,7 +10,7 @@ version_decl := '__version' Identifier '{' declaration '}' ('else' declaration)?
 version_expr := '__version' Identifier block ('else' expression)?
 ```
 
-<br>
+
 
 The identifier used in the version block are in their own name space,
 meaning that they do not conflict with the other identifiers
@@ -40,7 +40,7 @@ def main () {
 }
 ```
 
-<br>
+
 
 ```bash
 $ gyc main.yr -fversion=Demo
@@ -52,7 +52,7 @@ $ ./a.out
 Foo of the full version
 ```
 
-<br>
+
 
 To use multiple version, the option must be set for each version. 
 ```bash
@@ -80,7 +80,8 @@ def main () {
 }
 ```
 
-<br>
+
+
 ```bash
 $ gyc main.yr -g
 $ ./a.out

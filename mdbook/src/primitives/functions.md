@@ -61,7 +61,7 @@ function is defined after the `main` function (in the first example of
 this chapter), it's symbol is accessible, and hence callable by the
 `main` function. Further information about symbol declarations, and
 accesses are presented in chapter
-[Modules](https://gnu-ymir.github.io/Documentations/en/modules/).
+[Modules](https://ymir-lang.org/modules/).
 
 ## Parameters 
 
@@ -199,7 +199,7 @@ example, that means that the function `baz` must know the function
 function that calls it (here the function `main`) to know these
 symbols. Further explanation on symbol declarations and accesses are
 presented in chapter
-[Modules](https://gnu-ymir.github.io/Documentations/en/modules/).
+[Modules](https://ymir-lang.org/modules/).
 
 ### Recursive default value
 
@@ -230,6 +230,7 @@ def main () {
 ```
 
 Errors:
+
 ```error
 Error : the call operator is not defined for main::bar and {}
  --> main.yr:(3,28)
@@ -478,7 +479,7 @@ can be made. These declarations can be other functions, structures,
 classes, enumeration, etc. The declarations made inside a scope have
 no access to the local variables defined in the function. Such access
 is possible with the use of closures (*cf.* [Function
-advanced](https://gnu-ymir.github.io/Documentations/en/functions)),
+advanced](https://ymir-lang.org/functions)),
 but this is not be presented inside this chapter.
 
 ```ymir
@@ -553,7 +554,7 @@ Functions are not modules, this way of defining is used to define
 private symbols only, in a future chapter we will see a way to define
 public symbols available for other functions, and foreign modules
 (*cf.*
-[Modules](https://gnu-ymir.github.io/Documentations/en/modules/)).
+[Modules](https://ymir-lang.org/modules/)).
 
 ## Uniform call syntax
 
@@ -572,7 +573,7 @@ This syntax is used to perform continuous data processing and to make
 the source code easier to read. This syntax is named *uniform call
 syntax* because it is similar to the the syntax used to call methods
 on class objects
-(*cf.* [Objects](https://gnu-ymir.github.io/Documentations/en/objects/)).
+(*cf.* [Objects](https://ymir-lang.org/objects/)).
 
 ```ymir
 import std::io

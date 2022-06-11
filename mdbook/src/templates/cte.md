@@ -140,7 +140,7 @@ Go !
 Literal string can also be used as template parameter. We will see in
 a forthcoming chapter that those are used for operator overloading
 (*cf*. [Operator
-overloading](https://gnu-ymir.github.io/Documentations/en/templates/operators.html)). A
+overloading](https://ymir-lang.org/templates/operators.html)). A
 simple example is presented in the following source code, where the
 **`foo`** function accepts the literal **`Hi I'm foo !`**, and is called
 by the **`main`** function using different ways.

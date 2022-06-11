@@ -137,7 +137,7 @@ for i, j in a {
 }
 ```
 
-<br>
+
 ```ymir
 let a = A::new ();
 {

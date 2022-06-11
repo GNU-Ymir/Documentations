@@ -59,7 +59,7 @@ value of type **`&Foo`**, that does not necessarily mean that this is
 a pure **`&Foo`** value, but it can be a **`&Bar`**. In object
 oriented programming, this principle is denote polyphormism. In the
 chapter [Basic programming
-concepts](https://gnu-ymir.github.io/Documentations/en/primitives/),
+concepts](https://ymir-lang.org/primitives/),
 we have seen that every object has specific attributes. Object is no
 exception to the rule. The following table lists the default specific
 attributes of the object types.
@@ -174,7 +174,7 @@ be `null`**.
 In the following example, a pattern matching is used to check the type
 of the object that is returned by the **`foo`** function. This is
 discussed in chapter [Pattern
-Matching](https://gnu-ymir.github.io/Documentations/en/pattern/).
+Matching](https://ymir-lang.org/pattern/).
 
 ```ymir
 def foo ()-> &Object {
@@ -202,4 +202,4 @@ I got a Foo !
 Some function of the standard library uses the **`Object`** type to
 return values, when it is impossible statically to get more accurate
 information about the type (e.g. [Packable]
-(https://gnu-ymir.github.io/Documentations/en/traits/serialize.html).)
+(https://ymir-lang.org/traits/serialize.html).)

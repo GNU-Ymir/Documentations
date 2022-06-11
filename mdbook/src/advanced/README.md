@@ -43,7 +43,7 @@ def foo () {
 
 <br>
 
-<img src="https://gnu-ymir.github.io/Documentations/en/advanced/memory_x_foo.png" alt="drawing" height="500" style="display: block; margin-left: auto;  margin-right: auto;">
+<img src="https://ymir-lang.org/advanced/memory_x_foo.png" alt="drawing" height="500" style="display: block; margin-left: auto;  margin-right: auto;">
 
 ## Mutability level 
 

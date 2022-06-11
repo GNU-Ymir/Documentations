@@ -165,6 +165,7 @@ def main () {
 ```
 
 <br>
+
 Errors:
 
 ```error
@@ -257,7 +258,9 @@ def main () {
 ```
 
 <br>
+
 Errors:
+
 ```error
 Error : the call operator is not defined for foo {X}(x : X)-> void and {u64}
  --> main.yr:(10,6)
@@ -303,7 +306,9 @@ def main () {
 ```
 
 <br>
+
 Errors:
+
 ```error
 Error : {foo {X}(x : X)-> void, foo {X}(x : X)-> void} x 2 called with {i32} work with both
  --> main.yr:(12,6)

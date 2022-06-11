@@ -16,7 +16,7 @@ definition of a class **`A`**, and an heir class **`B`**. The class
 **4**, leading to a class **`B`** of size **8**.
 
 <br>
-<img src="https://gnu-ymir.github.io/Documentations/en/objects/UML.png" alt="drawing" height="400" style="display: block; margin-left: auto;  margin-right: auto;">
+<img src="https://ymir-lang.org/objects/UML.png" alt="drawing" height="400" style="display: block; margin-left: auto;  margin-right: auto;">
 <br>
 
 Because we want to following source code to be accepted (basic

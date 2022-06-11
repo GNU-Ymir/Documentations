@@ -1,7 +1,7 @@
 # Ymir Type
 
 Ymir type are the value type (*cf*. [Data
-types](https://gnu-ymir.github.io/Documentations/en/primitives/types.html)). They
+types](https://ymir-lang.org/primitives/types.html)). They
 are not always validated for many reasons (templates, aka, ...). The
 **`type`** value contains the kind of type that is encoded,
 **`unknown`** means that the type cannot be validated, and is always

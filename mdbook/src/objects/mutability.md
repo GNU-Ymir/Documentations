@@ -3,7 +3,7 @@
 Objects are aliasable types. The data being allocated on the heap, and
 not copied - for efficiency reasons - on affectations (*cf.* [Aliases
 and
-References](https://gnu-ymir.github.io/Documentations/en/advanced/)).
+References](https://ymir-lang.org/advanced/)).
 
 
 ## Object mutability
@@ -67,7 +67,7 @@ def main () {
 Because classes are aliasable types, the keyword **`alias`** has to be
 used when trying to make a mutable affectation. Information about
 aliasable types is presented in chapter
-[Aliases](https://gnu-ymir.github.io/Documentations/en/advanced/alias.html),
+[Aliases](https://ymir-lang.org/advanced/alias.html),
 and is not rediscussed here.
 
 ```ymir
@@ -92,7 +92,7 @@ However, unlike structures, classes are not copiable by default, but
 have to implement a specific traits. Trait and implementation is
 presented in a future chapter, and copy is discussed in there
 chapter. (*cf.*
-[Traits](https://gnu-ymir.github.io/Documentations/en/objects/traits.html)).
+[Traits](https://ymir-lang.org/objects/traits.html)).
 
 
 ```ymir
@@ -114,7 +114,9 @@ def main () {
 ```
 
 <br>
+
 Errors: 
+
 ```error
 Error : left operand of type i32 is immutable
  --> main.yr:(14,3)

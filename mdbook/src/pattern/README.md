@@ -272,14 +272,14 @@ value if there is a possibility that none of the branch were entered,
 then the user has to write a default case when the cast failed if they
 want to retreive a value from the matching. This default case can of
 course be used to throw an exception (*cf* [Error
-handling](https://gnu-ymir.github.io/Documentations/en/errors/main.html)).
+handling](https://ymir-lang.org/errors/main.html)).
 
 ### Reference variable
 
 A mutable value can be updated inside a pattern, by using a reference
 variable. This works exactly like variable referencing (as presented
 in chapter
-[References](https://gnu-ymir.github.io/Documentations/en/advanced/references.html)).
+[References](https://ymir-lang.org/advanced/references.html)).
 
 ```ymir
 import std::io
@@ -446,6 +446,7 @@ def main () {
 <br>
 
 Errors: 
+
 ```error
 Error : undefined field _y for element &(main::Point)
  --> main.yr:(14,17)
@@ -509,6 +510,7 @@ def main () {
 <br>
 
 Errors: 
+
 ```error
 Error : match of type i32 has no default match case
  --> main.yr:(28,15)
@@ -547,7 +549,7 @@ def main () {
 ```
 
 - 2) Throwing an error (*cf*. [Error
-handling](https://gnu-ymir.github.io/Documentations/en/errors/main.html))
+handling](https://ymir-lang.org/errors/main.html))
 
 ```ymir
 def main ()

@@ -7,7 +7,7 @@
 
 ```ymir
 def main () 
-	throws &AssertError // Not what's important for the moment
+	throws &AssertError // Not important for the moment
 {
     // This is an example of comment
 
@@ -29,11 +29,11 @@ def main ()
 
 In the above pogram, calling **`assert`** will throw an exception if
 the test is false. Errors are presented in the [Error
-Handling](https://gnu-ymir.github.io/Documentations/en/errors/main.html)
+Handling](https://ymir-lang.org/errors/main.html)
 chapter. For the moment, we can consider that the exception simply
 stops the program when the test fails.
 
 
 We will see in the
-[Documentation](https://gnu-ymir.github.io/Documentations/en/documentation/main.html)
+[Documentation](https://ymir-lang.org/documentation/main.html)
 chapter, that comments are very usefull, to generate documentations.

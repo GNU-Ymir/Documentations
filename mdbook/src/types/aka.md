@@ -7,6 +7,7 @@ confusion with **`alias`**, that has a completely different meaning in
 *Ymir*.
 
 The grammar of *akas* is presented in the following code block.
+
 ```grammar
 aka_decl := 'aka' Identifier (templates)? = expression (';')?
 ```
@@ -39,7 +40,6 @@ def main () {
 	println (CallFoo);
 }
 ```
-<br>
 
 Results:
 
@@ -70,8 +70,9 @@ def main () {
 }
 ```
 
-<br>
+
 Error: 
+
 ```error
 Error : undefined type x
  --> main.yr:(3,11)

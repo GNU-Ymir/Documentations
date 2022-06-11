@@ -345,7 +345,9 @@ class Bar over Foo {
 ```
 
 <br>
+
 Errors:
+
 ```error
 Error : when validating main::Bar
  --> main.yr:(9,7)
@@ -393,6 +395,7 @@ class Bar over Foo {
 <br>
 
 Errors:
+
 ```error
 Error : when validating main::Bar
  --> main.yr:(7,7)
@@ -439,7 +442,6 @@ class Baz over Bar {
 }
 ```
 
-<br>
 Errors:
 
 ```error
@@ -521,8 +523,9 @@ class Baz over Bar {
 }
 ```
 
-<br>
+
 Error:
+
 ```error
 Error : when validating main::Baz
  --> main.yr:(11,7)
@@ -570,8 +573,8 @@ class Bar over Foo {
 }
 ```
 
-<br>
 Error:
+
 ```error
 Error : the base class main::Foo is marked as final
  --> main.yr:(7,16)
@@ -595,7 +598,7 @@ In many languages (such as C++, D, Java, or Scala) polymorphism gives
 the possibility to cast an object of a base class into an object of an
 heir class. This is not possible in *Ymir* because this behavior is
 not safe. We will see in the chapter [Pattern
-matching](https://gnu-ymir.github.io/Documentations/en/pattern/) how
+matching](https://ymir-lang.org/pattern/) how
 to achieve a cast of an object into a heir class, in a safe way. 
 
 However, the *std* provides a safe shortcut that can be used to
@@ -604,7 +607,7 @@ achieve the cast. This shortcut is by using the template function
 **`CastFailure`** exception when the cast failed, (safe in *Ymir*
 means that the error can be managed, and has to be managed in fact, as
 we will see in the chapter on [Error
-handling](https://gnu-ymir.github.io/Documentations/en/errors/main.html)). In
+handling](https://ymir-lang.org/errors/main.html)). In
 the following example, two objects are stored in the variable **`x`**
 and **`y`**, whose type are **`&Foo`**. The first cast at line **`18`**
 works, because the variable **`x`** indeed contains an object of type

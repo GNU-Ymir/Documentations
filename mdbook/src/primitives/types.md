@@ -22,7 +22,7 @@ let mut y = [1, 2];
 
 To understand the difference between the type of **`x`** and the type
 of **`y`**, we invite you to read the chapter
-[Aliases and References](https://gnu-ymir.github.io/Documentations/en/advanced/).
+[Aliases and References](https://ymir-lang.org/advanced/).
 
 Each type has type attributes. Theses attributes are accessed using
 the double colon operator **`::`** on a type expression.
@@ -36,7 +36,7 @@ let a = i32::init;  // i32 (0)
 All primitive types have common attributes that are listed in the
 table below. Attributes can be surrounded by the token **`_`**, to avoid some
 ambiguity for some types (*cf.*
-[Enumeration](https://gnu-ymir.github.io/Documentations/en/types/enum.html)). For
+[Enumeration](https://ymir-lang.org/types/enum.html)). For
 example, the attribute **`typeid`** is equivalent to `__typeid__`, or
 `_typeid`.
 
@@ -47,7 +47,7 @@ example, the attribute **`typeid`** is equivalent to `__typeid__`, or
 | `typeinfo` | A structure of type TypeInfo, containing information about the type |
 
 All the information about TypeInfo are presented in chapter [Dynamic
-types](https://gnu-ymir.github.io/Documentations/en/types_advanced/).
+types](https://ymir-lang.org/types_advanced/).
 
 ## *typeof* and *sizeof*
 
@@ -318,7 +318,7 @@ recomand to not use them.
 Pointers are defined using the token **`&`** on types, or on
 values. They are aliasable types, as they borrow memory (*cf.* [Aliasable
 and
-References](https://gnu-ymir.github.io/Documentations/en/advanced/)).
+References](https://ymir-lang.org/advanced/)).
 
 ```ymir
 import std::io;
@@ -340,13 +340,13 @@ behavior depending on where it points. It can also sometimes raise a
 segmentation fault. In **`Ymir`**, segmentation fault are recovered,
 and an exception is thrown. Error handling is presented in chaper
 [Error
-Handling](https://gnu-ymir.github.io/Documentations/en/errors/main.html).
+Handling](https://ymir-lang.org/errors/main.html).
 
 **WARNING**, Note that the segmentation fault may not occur even if
   the pointer is not properly set. The easiest way to avoid undefined
   behavior is to not use pointers and use `std` verified functions, or
   other semantically verified elements (cf [Aliasable and
-  References](https://gnu-ymir.github.io/Documentations/en/advanced/)).
+  References](https://ymir-lang.org/advanced/)).
 
 <br>
 
@@ -393,7 +393,7 @@ elements. There are three ways of tuple destructuring.
 is known at compilation time. This value can be computed by a complex
 expression, as long as the compiler is able to retreive the value at
 compilation time (*cf.* [Compilation time
-execution](https://gnu-ymir.github.io/Documentations/en/templates/cte.html)).
+execution](https://ymir-lang.org/templates/cte.html)).
 
 ```ymir
 import std::io;
@@ -503,7 +503,7 @@ def main () {
 <br>
 
 The [Control
-flows](https://gnu-ymir.github.io/Documentations/en/primitives/control.html)
+flows](https://ymir-lang.org/primitives/control.html)
 section shows a use of these types.
 
 ### Arrays 
@@ -547,7 +547,7 @@ than the mutability of scalar types (except pointers), because it
 borrows memory which is not automatically copied when an assignment is
 made. This section will not discuss the mutability of internal types
 or aliasable types. This is discussed in the chapter [Aliases and
-References](https://gnu-ymir.github.io/Documentations/en/advanced/).
+References](https://ymir-lang.org/advanced/).
  
 The field **`len`** records the length of the slice and can be
 retrieved with the dot operator **`.`**.  The length of the slice is
@@ -603,7 +603,7 @@ used go beyond the slice length. With this in mind, slice access is
 considered unsafe, and can throw an exception of type
 **`&OutOfArray`**. The exception system, and error handling is
 detailed in the chapter [Error
-Handling](https://gnu-ymir.github.io/Documentations/en/errors/main.html).
+Handling](https://ymir-lang.org/errors/main.html).
 
 Slices can be concatenated, to form another slice. The concatenation
 is made using the operator tilde on two operands. To work properly and
@@ -611,7 +611,7 @@ be accepted by the language, the two slice used as operands must share
 the same type (but not necessarily mutability level, the mutability of
 the operand with the lowest mutability level is choosed for the result
 of the operation *cf.* [Aliases and
-References](https://gnu-ymir.github.io/Documentations/en/advanced/)).
+References](https://ymir-lang.org/advanced/)).
 
 ```ymir
 import std::io
@@ -705,7 +705,7 @@ def main ()
 
 A static array can be transformed into a slice using the `alias`,
 `copy` and `dcopy` keywords. The chapter [Aliases and
-references](https://gnu-ymir.github.io/Documentations/en/advanced/)
+references](https://ymir-lang.org/advanced/)
 explains the difference between these keywords.
 
 ```ymir
@@ -745,7 +745,7 @@ The following table lists the attributes specific to array types.
 The option typed values are values that may be set or not. They are
 defined using the token **`?`** on types or values. Further
 information on option type are given in the chapter [Error
-handling](https://gnu-ymir.github.io/Documentations/en/errors/main.html),
+handling](https://ymir-lang.org/errors/main.html),
 as they are completely related to error management system. 
 
 ```ymir
@@ -763,7 +763,7 @@ The value of an option type can be retreived using functions in the
 std, or pattern matching. In this chapter, we only focus on the
 **`unwrap`** function, pattern matching being left for a future
 chapter (*cf.* [Pattern
-matchin](https://gnu-ymir.github.io/Documentations/en/pattern)).  The
+matchin](https://ymir-lang.org/pattern)).  The
 function **`unwrap`** from the module **`std::conv`**, get the value
 contained inside an option type. If no value is contained inside the
 option, the function throws an error of type **`&CastFailure`**.

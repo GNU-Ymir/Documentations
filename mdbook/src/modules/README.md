@@ -19,12 +19,11 @@ Lets have a look at the following file hierarchy :
 1 directory, 3 files
 ```
 
-<br>
-In this file hierarchy there are three files, which contain modules, the
-first module in the file `main.yr` will be named `main`. The second
-one in the `extern_modules/bar.yr` file will be named `extern_modules::bar`,
-and the third one in the `extern_modules/foo.yr` file will be named
-`extern_modules::foo`.
+In this file hierarchy there are three files, which contain
+modules, the first module in the file `main.yr` will be named
+`main`. The second one in the `extern_modules/bar.yr` file will be
+named `extern_modules::bar`, and the third one in the
+`extern_modules/foo.yr` file will be named `extern_modules::foo`.
 
 To be properly importable, the module must be defined from the
 relative path of the compilation, i.e. if the file is located in
@@ -113,7 +112,7 @@ nor *A::Y::baz*. The symbol *A::X::bar*, has access to every symbols
 
 <br>
 
-<img src="https://gnu-ymir.github.io/Documentations/en/modules/tree.png" alt="drawing" height="300" style="display: block; margin-left: auto;  margin-right: auto;">
+<img src="https://ymir-lang.org/modules/tree.png" alt="drawing" height="300" style="display: block; margin-left: auto;  margin-right: auto;">
 
 <br>
 
@@ -166,7 +165,9 @@ def main () {
 	bar (); // however, bar is private thus not accessible
 }
 ```
+
 Errors:
+
 ```error
 Error : undefined symbol bar
  --> main.yr:(7,5)
@@ -236,7 +237,9 @@ def main () {
 	foo ();
 }
 ```
+
 Errors:
+
 ```error
 Error : {extern_modules::bar::foo ()-> void, extern_modules::foo::foo ()-> void, mod extern_modules::foo} x 3 called with {} work with both
  --> main.yr:(4,6)

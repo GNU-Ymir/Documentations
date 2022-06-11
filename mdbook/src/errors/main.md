@@ -164,7 +164,7 @@ perform this kind of behavior (necessary when the function throw
 multiple kind of errors, all deriving from **`ParentException`** for
 example), by using a **`cast`**, that we have seen in chapter [Cast
 and Dynamic
-typing](https://gnu-ymir.github.io/Documentations/en/cast/). That way,
+typing](https://ymir-lang.org/cast/). That way,
 there is a loss of accuracy, but properly defined and intended by the
 user.
 

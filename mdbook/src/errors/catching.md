@@ -9,7 +9,7 @@ match over an exception that has been caught. The following code block
 present the grammar of the *catch* scope guard. The
 *pattern_expression* used in this code block are those defined in the
 chapter [Pattern
-matching](https://gnu-ymir.github.io/Documentations/en/pattern/).
+matching](https://ymir-lang.org/pattern/).
  
 ```grammar
 guarded_scope := '{' expression ((';')? expression)* (';')? '}' guards
@@ -203,6 +203,7 @@ def main () {
 <br>
 
 Errors:
+
 ```error
 Error : the exception &(core::array::OutOfArray) might be thrown but is not caught
  --> main.yr:(13,7)

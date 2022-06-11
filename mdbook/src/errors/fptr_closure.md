@@ -56,7 +56,7 @@ To avoid that problem, every exception must be caught inside the lambda function
 Sometimes it can be usefull to create function pointer from functions
 that are not safe (for example the function **`foo`** in the following
 example). To do that, the core modules, define a template function
-(*cf*. [Templates](https://gnu-ymir.github.io/Documentations/en/templates/),
+(*cf*. [Templates](https://ymir-lang.org/templates/),
 named **`toOption`** that transform a function symbol, into another
 function symbol that returns an option value. This other function
 symbol can be used to create a function pointer, using the ampersand
