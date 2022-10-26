@@ -1,0 +1,432 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Metodoj - Ymir Tour</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <base href="../">
+
+        <link rel="stylesheet" href="book.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <link rel="shortcut icon" href="favicon.png">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme -->
+        
+        <link rel="stylesheet" href="custom.css">
+        
+
+        
+
+        <!-- Fetch Clipboard.js from CDN but have a local fallback -->
+        <script src="https://cdn.jsdelivr.net/clipboard.js/1.6.1/clipboard.min.js"></script>
+        <script>
+            if (typeof Clipboard == 'undefined') {
+                document.write(unescape("%3Cscript src='clipboard.min.js'%3E%3C/script%3E"));
+            }
+        </script>
+
+        <!-- Fetch JQuery from CDN but have a local fallback -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script>
+            if (typeof jQuery == 'undefined') {
+                document.write(unescape("%3Cscript src='jquery.js'%3E%3C/script%3E"));
+            }
+        </script>
+
+        <!-- Fetch store.js from local - TODO add CDN when 2.x.x is available on cdnjs -->
+        <script src="store.js"></script>
+
+    </head>
+    <body class="light">
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme = store.get('mdbook-theme');
+            if (theme === null || theme === undefined) { theme = 'light'; }
+            $('body').removeClass().addClass(theme);
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var sidebar = store.get('mdbook-sidebar');
+            if (sidebar === "hidden") { $("html").addClass("sidebar-hidden") }
+            else if (sidebar === "visible") { $("html").addClass("sidebar-visible") }
+        </script>
+
+        <div id="sidebar" class="sidebar">
+            <ul class="chapter"><li><a href="README.html"><strong>1.</strong> Antaŭparolo</a></li><li><a href="hello-world/README.html"><strong>2.</strong> Bonan tagon mondo</a></li><li><ul class="section"><li><a href="hello-world/commentaires.html"><strong>2.1.</strong> Komentoj</a></li></ul></li><li><a href="primitives/README.html"><strong>3.</strong> Bazaj konceptoj de programado</a></li><li><ul class="section"><li><a href="primitives/variables.html"><strong>3.1.</strong> Variablo kaj Ŝanĝebleco</a></li><li><a href="primitives/types.html"><strong>3.2.</strong> Datenaj tipoj</a></li><li><a href="primitives/functions.html"><strong>3.3.</strong> Funkcioj</a></li><li><a href="primitives/control.html"><strong>3.4.</strong> Kontrolaj fluoj</a></li><li><a href="primitives/operator.html"><strong>3.5.</strong> Prioritato de operacioj</a></li></ul></li><li><a href="advanced/README.html"><strong>4.</strong> Alnomoj, Referencoj kaj pureco</a></li><li><ul class="section"><li><a href="advanced/references.html"><strong>4.1.</strong> Referencoj</a></li><li><a href="advanced/alias.html"><strong>4.2.</strong> Alnomoj</a></li><li><a href="advanced/copies.html"><strong>4.3.</strong> Kopio kaj profunda kopio</a></li><li><a href="advanced/best.html"><strong>4.4.</strong> Plej bonaj kutimoj</a></li><li><a href="advanced/pure.html"><strong>4.5.</strong> Puraj valoroj</a></li></ul></li><li><a href="modules/README.html"><strong>5.</strong> Pakaĵoj</a></li><li><a href="types/README.html"><strong>6.</strong> Tipoj difinitaj de la uzanto</a></li><li><ul class="section"><li><a href="types/struct.html"><strong>6.1.</strong> Strukturo</a></li><li><a href="types/enum.html"><strong>6.2.</strong> Enumeracio</a></li><li><a href="types/aka.html"><strong>6.3.</strong> Kaŝnomo</a></li></ul></li><li><a href="objects/README.html"><strong>7.</strong> Objektoj</a></li><li><ul class="section"><li><a href="objects/class.html"><strong>7.1.</strong> Klaso</a></li><li><a href="objects/mutability.html"><strong>7.2.</strong> Ŝanĝebleco</a></li><li><a href="objects/methods.html" class="active"><strong>7.3.</strong> Metodoj</a></li><li><a href="objects/inheritance.html"><strong>7.4.</strong> Heredeco</a></li><li><a href="objects/traits.html"><strong>7.5.</strong> Trajto</a></li><li><a href="objects/cast.html"><strong>7.6.</strong> Tipŝanĝo, kaj dinamikaj tipoj</a></li></ul></li><li><a href="functions/README.html"><strong>8.</strong> Funkcioj pli kompleksaj</a></li><li><a href="pattern/README.html"><strong>9.</strong> Skema kongruo</a></li><li><a href="errors/main.html"><strong>10.</strong> Traktado de Eraroj</a></li><li><ul class="section"><li><a href="errors/scope_guards.html"><strong>10.1.</strong> Regionaj gardantoj</a></li><li><a href="errors/catching.html"><strong>10.2.</strong> Kapti erarojn</a></li><li><a href="errors/option.html"><strong>10.3.</strong> Esceptoj kaj opcia tipo</a></li><li><a href="errors/fptr_closure.html"><strong>10.4.</strong> Montrilo de Malsekuraj Funkcioj</a></li></ul></li><li><a href="templates/README.html"><strong>11.</strong> Ŝablonoj</a></li><li><ul class="section"><li><a href="templates/special.html"><strong>11.1.</strong> Ŝablonaj tipoj</a></li><li><a href="templates/cte.html"><strong>11.2.</strong> Ŝablonaj valoroj</a></li><li><a href="templates/values.html"><strong>11.3.</strong> Plenumo dum kompilado</a></li></ul></li><li><a href="objects/common_traits.html"><strong>12.</strong> Ordinaraj trajtoj</a></li><li><ul class="section"><li><a href="traits/streamable.html"><strong>12.1.</strong> &quot;Streamable&quot;</a></li><li><a href="traits/copiable.html"><strong>12.2.</strong> &quot;Copiable&quot;</a></li><li><a href="traits/disposable.html"><strong>12.3.</strong> &quot;With&quot; gardanto kaj &quot;Disposable&quot;</a></li><li><a href="traits/hashable.html"><strong>12.4.</strong> &quot;Hashable&quot;</a></li><li><a href="traits/serialize.html"><strong>12.5.</strong> &quot;Packable&quot; kaj &quot;Serializable&quot;</a></li></ul></li><li><a href="templates/operators.html"><strong>13.</strong> Transŝargo de Operacisimboloj</a></li><li><ul class="section"><li><a href="templates/binary.html"><strong>13.1.</strong> Unuopaj, duopaj kaj komparaj operacioj</a></li><li><a href="templates/complex_operators.html"><strong>13.2.</strong> Aliraj, Enhavaj kaj iteraciaj operacioj</a></li></ul></li><li><a href="version/README.html"><strong>14.</strong> Versioj</a></li><li><a href="macros/README.html"><strong>15.</strong> Makrooj</a></li><li><ul class="section"><li><a href="macros/std.html"><strong>15.1.</strong> Normaj kaj kernaj makrooj</a></li></ul></li><li><a href="documentation/README.html"><strong>16.</strong> Dokumentaro</a></li><li><ul class="section"><li><a href="documentation/types.html"><strong>16.1.</strong> Tipoj</a></li><li><a href="documentation/symbols.html"><strong>16.2.</strong> Simboloj</a></li></ul></li></ul>
+        </div>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page" tabindex="-1">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div class="left-buttons">
+                        <i id="sidebar-toggle" class="fa fa-bars" title="Toggle sidebar"></i>
+                        <i id="theme-toggle" class="fa fa-paint-brush" title="Change theme"></i>
+                    </div>
+
+                    <h1 class="menu-title">Ymir Tour</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html">
+                            <i id="print-button" class="fa fa-print" title="Print this book"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="content" class="content">
+                    <a class="header" href="objects/methods.html#methods" id="methods"><h1>Methods</h1></a>
+<p>Methods are functions associated to object instances. Methods are
+described inside a class definition. Information about function
+presented in chapter
+<a href="https://gnu-ymir.github.io/Documentations/en/primitives/functions.html">Functions</a>
+are applicable to methods. The grammar of a method is presented in the
+following code block.</p>
+<pre><code class="language-grammar">method := simple_method | template_method
+
+simple_method := 'def' Identifier method_params ('-&gt;' type)? expression
+template_method := 'def' ('if' expression)? Identifier templates  ('-&gt;' type)? expression
+
+method_params := '(' ('mut')? 'self' (',' param_decl)* ')'
+</code></pre>
+<p><br></p>
+<p>Methods are accessible using an object instance, of the dot binary
+operator <strong><code>.</code></strong>. Once accessed, a method can be called using a list
+of arguments separated by comas inside parentheses. The first
+parameter of a method is the object instance, and is the left operand
+of the dot operator, so it must not be repeated inside the
+parentheses.</p>
+<pre><code class="language-ymir">import std::io
+
+class A {
+    let _a : i32;
+
+    pub self (a : i32) with _a = a {}
+    
+    
+    pub def foo (self, x : i32) -&gt; i32 {
+        println (&quot;Foo &quot;, self._a);
+        x + self._a 
+    }
+}
+
+def main () {
+    let a = A::new (29);
+    println (a.foo (13));
+}
+</code></pre>
+<p><br>
+Results:</p>
+<pre><code>Foo 29
+42
+</code></pre>
+<p><br></p>
+<p>The access to the fields, and to the methods of the object instance
+inside the body of a method is made using the first parameter of the
+method, the variable <strong><code>self</code></strong>. Unlike some object oriented language,
+such as <em>Java</em>, <em>C++</em>, <em>Scala</em>, <em>D</em>, etc. <strong><code>self</code></strong> is never
+implicit, e.g. accessing to the field <strong><code>_a</code></strong> in the above example,
+cannot be made by just writing <strong><code>_a</code></strong>, but must be accessed by
+writing <strong><code>self._a</code></strong>. This is a conceptual choice, whose purpose is
+to improve code readability and sharing, by avoiding useless and
+preventable search for the source of the variables.</p>
+<a class="header" href="objects/methods.html#privacy" id="privacy"><h2>Privacy</h2></a>
+<p>Methods are protected by default. Meaning that only the class that
+have defined them, and its heir class have acces to them. The keyword
+<strong><code>pub</code></strong> and <strong><code>prv</code></strong> can be used to change the privacy of a
+method. A public method is accessible everywhere, using an object
+instance, and private methods are only accessible by the class that
+have defined them. Unlike protected methods, private methods are not
+accessible by heir classes. Privacy of methods is the same as privacy
+of fields.</p>
+<pre><code class="language-ymir">import std::io
+
+class A {
+
+    pub self () {}
+    
+    pub def foo (self) {
+        println (&quot;Foo&quot;);
+        self.bar ();
+    }
+    
+    prv def bar (self) {
+        println (&quot;bar&quot;);
+    }
+}
+
+
+def main () {
+    let a = A::new ();
+    a.foo ();
+    a.bar ();
+}
+</code></pre>
+<p><br></p>
+<p>Because the method <strong><code>bar</code></strong> is private in the context of the
+<strong><code>main</code></strong> function, the compiler returns the following error. One
+can note, that the compiler tried to rewrite the expression into a
+<em>uniform call syntax</em> (i.e. <strong><code>bar (a)</code></strong>), but failed, because the
+function <strong><code>bar</code></strong> does not exists.</p>
+<pre><code class="language-error">Error : undefined field bar for element &amp;(main::A)
+ --&gt; main.yr:(21,3)
+21  ┃ 	a.bar ();
+    ╋ 	 ^^^^
+    ┃ Note : bar --&gt; main.yr:(12,10) : (const self) =&gt; main::A::bar ()-&gt; void is private within this context
+    ┃ Note : when using uniform function call syntax
+    ┃ Error : undefined symbol bar
+    ┃  --&gt; main.yr:(21,4)
+    ┃ 21  ┃ 	a.bar ();
+    ┃     ╋ 	  ^^^
+    ┗━━━━━┻━ 
+
+
+ymir1: fatal error: 
+compilation terminated.
+</code></pre>
+<a class="header" href="objects/methods.html#method-mutability" id="method-mutability"><h2>Method mutability</h2></a>
+<p>The mutability of the object instance must be defined in the prototype
+of the method. By default the object instance refered to by <strong><code>self</code></strong>
+is immutable, meaning that the instance cannot be modified.</p>
+<pre><code class="language-ymir">class A {
+    
+    let mut _x : i32;
+    
+    pub self (x : i32) with _x = x {}
+    
+    pub def setX (self, x : i32) {
+        self._x = x;
+    }	
+    
+}
+</code></pre>
+<p><br>
+Error:</p>
+<pre><code class="language-error">Error : when validating main::A
+ --&gt; main.yr:(1,7)
+ 1  ┃ class A {
+    ╋       ^
+    ┃ Error : left operand of type i32 is immutable
+    ┃  --&gt; main.yr:(8,7)
+    ┃  8  ┃ 		self._x = x;
+    ┃     ╋ 		    ^
+    ┗━━━━━┻━ 
+
+
+ymir1: fatal error: 
+compilation terminated.
+</code></pre>
+<p><br> By using the keyword <strong><code>mut</code></strong>, the method can be applicable to
+mutable instance. In that case the instance refered to by <strong><code>self</code></strong>
+is mutable, and its mutable fields can be modified. Such methods can
+be accessed only using mutable object instance - not only mutable
+reference, the borrowed data located on the heap must be mutable. To
+call such method, aliases is necessary and cannot be implicit.</p>
+<pre><code class="language-ymir">class A {
+    let mut _x : i32;
+    
+    pub self (x : i32) with _x = x {}
+    
+    pub def setX (mut self, x : i32) {
+        self._x = x;
+    }	
+    
+}
+
+def main () {
+    let a = A::new (12);
+    a.setX (42); 
+    
+    let dmut b = A::new (12);
+    b.setX (42);
+    
+    (alias b).setX (42);	
+}
+</code></pre>
+<p><br></p>
+<p>The first call at line <strong>14</strong> is not possible, <strong><code>a</code></strong> having only
+read access to the object instance it contains. The second error, the
+call at line <strong>17</strong>, is due to the fact that even <strong><code>b</code></strong> have write
+permission to the object instance it contains, it cannot be passed to
+the method implicitely, and have to be aliased, in order to certify
+explicitely that the user is aware that the value of the object
+contained in <strong><code>b</code></strong> will be modified by calling the method. The
+errors returned by the compiler are the following.</p>
+<pre><code class="language-error">Error : the call operator is not defined for (a).setX and {i32}
+ --&gt; main.yr:(14,9)
+14  ┃ 	a.setX (42); 
+    ╋ 	       ^  ^
+    ┃ Error : discard the constant qualifier is prohibited, left operand mutability level is 2 but must be at most 1
+    ┃  --&gt; main.yr:(14,9)
+    ┃ 14  ┃ 	a.setX (42); 
+    ┃     ╋ 	       ^
+    ┃     ┃ Note : implicit alias of type &amp;(main::A) is not allowed, it will implicitly discard constant qualifier
+    ┃     ┃  --&gt; main.yr:(14,2)
+    ┃     ┃ 14  ┃ 	a.setX (42); 
+    ┃     ┃     ╋ 	^
+    ┃     ┗━━━━━┻━ 
+    ┗━━━━━┻━ 
+
+Error : the call operator is not defined for (b).setX and {i32}
+ --&gt; main.yr:(17,9)
+17  ┃ 	b.setX (42);
+    ╋ 	       ^  ^
+    ┃ Error : discard the constant qualifier is prohibited, left operand mutability level is 2 but must be at most 1
+    ┃  --&gt; main.yr:(17,9)
+    ┃ 17  ┃ 	b.setX (42);
+    ┃     ╋ 	       ^
+    ┃     ┃ Note : implicit alias of type mut &amp;(mut main::A) is not allowed, it will implicitly discard constant qualifier
+    ┃     ┃  --&gt; main.yr:(17,2)
+    ┃     ┃ 17  ┃ 	b.setX (42);
+    ┃     ┃     ╋ 	^
+    ┃     ┗━━━━━┻━ 
+    ┗━━━━━┻━ 
+
+
+ymir1: fatal error: 
+compilation terminated.
+</code></pre>
+<p><br></p>
+<p>We have seen in the chapter about function, and more specifically
+about <em>uniform call syntax</em> that the operator <strong><code>:.</code></strong> can be used to
+pass a aliased value as the first parameter of a function. This
+operator is also applicable for method calls, and is to be prefered to
+the syntax <strong><code>(alias obj).method</code></strong> which is a bit verbose.</p>
+<pre><code class="language-ymir">def main () {
+    let dmut a = A::new (12);
+    
+    a:.setX (42); // same as (alias a).setX (42)
+}
+</code></pre>
+<p><br></p>
+<p>Method mutability is also applicable inside the body of a method. In
+the example below, the method <strong><code>foo</code></strong> is mutable, and call another
+mutable method <strong><code>bar</code></strong>, it also calls a immutable method
+<strong><code>baz</code></strong>. Implicit aliasing is mandatory when calling the method
+<strong><code>bar</code></strong>, but not when calling the method <strong><code>baz</code></strong>.</p>
+<pre><code class="language-ymir">class A {
+    let _x : i32;
+    pub self (x : i32) with _x = x {}
+
+    pub def foo (mut self, x : i32) {
+        self:.bar (x); // :. is mandatory
+        self.baz (x);
+    }
+    
+    pub def bar (mut self, x : i32) {
+        self._x = x;
+    }
+
+    pub def baz (self) {
+        println (&quot;X : &quot;, self._x);
+    }
+}
+</code></pre>
+<p><br></p>
+<p><em>Contribution</em>: Calling a immutable method with explicit alias is
+possible. Maybe that is not a good idea, and will lead to the use of
+the operator <strong><code>:.</code></strong> all the time, and misleading read of the code.</p>
+<a class="header" href="objects/methods.html#method-mutability-override" id="method-mutability-override"><h2>Method mutability override</h2></a>
+<p>It is possible to define two methods with the same prototype, with the
+only exception that one of them is mutable and not the other. In that
+case the method with the best affinity is choosed when called. That is
+to say, the mutable method is called on explicitly aliased object
+instances, and the immutable method the rest of the time.</p>
+<pre><code class="language-ymir">import std::io
+
+class A {
+
+    pub self () {}
+    
+    pub def foo (mut self) {
+        println (&quot;Mutable&quot;);
+    }
+    
+    pub def foo (self) {
+        println (&quot;Const&quot;);
+    }   	
+}
+
+def main () {
+    let dmut a = A::new ();
+    a.foo ();
+    a:.foo ();
+}
+</code></pre>
+<p><br>
+Results:</p>
+<pre><code>Const
+Mutable
+</code></pre>
+
+                </div>
+
+                <!-- Mobile navigation buttons -->
+                
+                    <a rel="prev" href="objects/mutability.html" class="mobile-nav-chapters previous" title="Previous chapter">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="objects/inheritance.html" class="mobile-nav-chapters next" title="Next chapter">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+
+            </div>
+
+            
+                <a href="objects/mutability.html" class="nav-chapters previous" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+            
+
+            
+                <a href="objects/inheritance.html" class="nav-chapters next" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            
+
+        </div>
+
+
+        <!-- Local fallback for Font Awesome -->
+        <script>
+            if ($(".fa").css("font-family") !== "FontAwesome") {
+                $('<link rel="stylesheet" type="text/css" href="_FontAwesome/css/font-awesome.css">').prependTo('head');
+            }
+        </script>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        
+
+        
+
+        
+
+        
+
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS script -->
+        
+        <script type="text/javascript" src="custom.js"></script>
+        
+
+    </body>
+</html>

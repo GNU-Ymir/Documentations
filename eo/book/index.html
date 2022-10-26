@@ -1,0 +1,258 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Antaŭparolo - Ymir Tour</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+        <link rel="stylesheet" href="book.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <link rel="shortcut icon" href="favicon.png">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme -->
+        
+        <link rel="stylesheet" href="custom.css">
+        
+
+        
+
+        <!-- Fetch Clipboard.js from CDN but have a local fallback -->
+        <script src="https://cdn.jsdelivr.net/clipboard.js/1.6.1/clipboard.min.js"></script>
+        <script>
+            if (typeof Clipboard == 'undefined') {
+                document.write(unescape("%3Cscript src='clipboard.min.js'%3E%3C/script%3E"));
+            }
+        </script>
+
+        <!-- Fetch JQuery from CDN but have a local fallback -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script>
+            if (typeof jQuery == 'undefined') {
+                document.write(unescape("%3Cscript src='jquery.js'%3E%3C/script%3E"));
+            }
+        </script>
+
+        <!-- Fetch store.js from local - TODO add CDN when 2.x.x is available on cdnjs -->
+        <script src="store.js"></script>
+
+    </head>
+    <body class="light">
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme = store.get('mdbook-theme');
+            if (theme === null || theme === undefined) { theme = 'light'; }
+            $('body').removeClass().addClass(theme);
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var sidebar = store.get('mdbook-sidebar');
+            if (sidebar === "hidden") { $("html").addClass("sidebar-hidden") }
+            else if (sidebar === "visible") { $("html").addClass("sidebar-visible") }
+        </script>
+
+        <div id="sidebar" class="sidebar">
+            <ul class="chapter"><li><a href="README.html" class="active"><strong>1.</strong> Antaŭparolo</a></li><li><a href="hello-world/README.html"><strong>2.</strong> Bonan tagon mondo</a></li><li><ul class="section"><li><a href="hello-world/commentaires.html"><strong>2.1.</strong> Komentoj</a></li></ul></li><li><a href="primitives/README.html"><strong>3.</strong> Bazaj konceptoj de programado</a></li><li><ul class="section"><li><a href="primitives/variables.html"><strong>3.1.</strong> Variablo kaj Ŝanĝebleco</a></li><li><a href="primitives/types.html"><strong>3.2.</strong> Datenaj tipoj</a></li><li><a href="primitives/functions.html"><strong>3.3.</strong> Funkcioj</a></li><li><a href="primitives/control.html"><strong>3.4.</strong> Kontrolaj fluoj</a></li><li><a href="primitives/operator.html"><strong>3.5.</strong> Prioritato de operacioj</a></li></ul></li><li><a href="advanced/README.html"><strong>4.</strong> Alnomoj, Referencoj kaj pureco</a></li><li><ul class="section"><li><a href="advanced/references.html"><strong>4.1.</strong> Referencoj</a></li><li><a href="advanced/alias.html"><strong>4.2.</strong> Alnomoj</a></li><li><a href="advanced/copies.html"><strong>4.3.</strong> Kopio kaj profunda kopio</a></li><li><a href="advanced/best.html"><strong>4.4.</strong> Plej bonaj kutimoj</a></li><li><a href="advanced/pure.html"><strong>4.5.</strong> Puraj valoroj</a></li></ul></li><li><a href="modules/README.html"><strong>5.</strong> Pakaĵoj</a></li><li><a href="types/README.html"><strong>6.</strong> Tipoj difinitaj de la uzanto</a></li><li><ul class="section"><li><a href="types/struct.html"><strong>6.1.</strong> Strukturo</a></li><li><a href="types/enum.html"><strong>6.2.</strong> Enumeracio</a></li><li><a href="types/aka.html"><strong>6.3.</strong> Kaŝnomo</a></li></ul></li><li><a href="objects/README.html"><strong>7.</strong> Objektoj</a></li><li><ul class="section"><li><a href="objects/class.html"><strong>7.1.</strong> Klaso</a></li><li><a href="objects/mutability.html"><strong>7.2.</strong> Ŝanĝebleco</a></li><li><a href="objects/methods.html"><strong>7.3.</strong> Metodoj</a></li><li><a href="objects/inheritance.html"><strong>7.4.</strong> Heredeco</a></li><li><a href="objects/traits.html"><strong>7.5.</strong> Trajto</a></li><li><a href="objects/cast.html"><strong>7.6.</strong> Tipŝanĝo, kaj dinamikaj tipoj</a></li></ul></li><li><a href="functions/README.html"><strong>8.</strong> Funkcioj pli kompleksaj</a></li><li><a href="pattern/README.html"><strong>9.</strong> Skema kongruo</a></li><li><a href="errors/main.html"><strong>10.</strong> Traktado de Eraroj</a></li><li><ul class="section"><li><a href="errors/scope_guards.html"><strong>10.1.</strong> Regionaj gardantoj</a></li><li><a href="errors/catching.html"><strong>10.2.</strong> Kapti erarojn</a></li><li><a href="errors/option.html"><strong>10.3.</strong> Esceptoj kaj opcia tipo</a></li><li><a href="errors/fptr_closure.html"><strong>10.4.</strong> Montrilo de Malsekuraj Funkcioj</a></li></ul></li><li><a href="templates/README.html"><strong>11.</strong> Ŝablonoj</a></li><li><ul class="section"><li><a href="templates/special.html"><strong>11.1.</strong> Ŝablonaj tipoj</a></li><li><a href="templates/cte.html"><strong>11.2.</strong> Ŝablonaj valoroj</a></li><li><a href="templates/values.html"><strong>11.3.</strong> Plenumo dum kompilado</a></li></ul></li><li><a href="objects/common_traits.html"><strong>12.</strong> Ordinaraj trajtoj</a></li><li><ul class="section"><li><a href="traits/streamable.html"><strong>12.1.</strong> &quot;Streamable&quot;</a></li><li><a href="traits/copiable.html"><strong>12.2.</strong> &quot;Copiable&quot;</a></li><li><a href="traits/disposable.html"><strong>12.3.</strong> &quot;With&quot; gardanto kaj &quot;Disposable&quot;</a></li><li><a href="traits/hashable.html"><strong>12.4.</strong> &quot;Hashable&quot;</a></li><li><a href="traits/serialize.html"><strong>12.5.</strong> &quot;Packable&quot; kaj &quot;Serializable&quot;</a></li></ul></li><li><a href="templates/operators.html"><strong>13.</strong> Transŝargo de Operacisimboloj</a></li><li><ul class="section"><li><a href="templates/binary.html"><strong>13.1.</strong> Unuopaj, duopaj kaj komparaj operacioj</a></li><li><a href="templates/complex_operators.html"><strong>13.2.</strong> Aliraj, Enhavaj kaj iteraciaj operacioj</a></li></ul></li><li><a href="version/README.html"><strong>14.</strong> Versioj</a></li><li><a href="macros/README.html"><strong>15.</strong> Makrooj</a></li><li><ul class="section"><li><a href="macros/std.html"><strong>15.1.</strong> Normaj kaj kernaj makrooj</a></li></ul></li><li><a href="documentation/README.html"><strong>16.</strong> Dokumentaro</a></li><li><ul class="section"><li><a href="documentation/types.html"><strong>16.1.</strong> Tipoj</a></li><li><a href="documentation/symbols.html"><strong>16.2.</strong> Simboloj</a></li></ul></li></ul>
+        </div>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page" tabindex="-1">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div class="left-buttons">
+                        <i id="sidebar-toggle" class="fa fa-bars" title="Toggle sidebar"></i>
+                        <i id="theme-toggle" class="fa fa-paint-brush" title="Change theme"></i>
+                    </div>
+
+                    <h1 class="menu-title">Ymir Tour</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html">
+                            <i id="print-button" class="fa fa-print" title="Print this book"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="content" class="content">
+                    <a class="header" href="README.html#antaŭparolo" id="antaŭparolo"><h1>Antaŭparolo</h1></a>
+<p><em>Ymir</em> estas altnivela programlingvo kies tipoj estas statikaj,
+formita tiel ke ĝi helpu programistojn savi tempon donante fortan kaj
+sekuran semantikon.</p>
+<p><em>Ymir</em> is a high-level, statically typed programming language
+designed to help developers to save time by providing strong and
+safe semantic. The semantic of this language is oriented towards
+safety, concurrency and speed of execution. These objectives are
+achieved thanks to its high expressiveness and its direct
+compilation into an efficient native machine language.</p>
+<p>This documentation explores the main concepts of <em>Ymir</em>, providing a
+set of examples that demonstrate the strengths of this new
+language. It also presents an introduction to the standard library.</p>
+<a class="header" href="README.html#important" id="important"><h1>Important</h1></a>
+<p>Before starting to discuss the language, please keep in mind that it
+is still under development and that sometimes things may not work as
+expected. If you encounter errors that you do not understand or think
+are incorrect, please contact us at: <a href="mailto:gnu.ymir@mail.com">gnu.ymir@mail.com</a>. We look
+forward to receiving your mails!</p>
+<p>Even more, all contributions are very welcome, whether to improve the
+documentation, to propose improvements to the language or std, to the
+runtime, or even to the automatic release generation procedure. All
+code repositories are available on
+<a href="https://github.com/GNU-Ymir">github</a>. In this documentation, known
+limitations of the language are sometimes highlighted, and calls for
+contribution.</p>
+<a class="header" href="README.html#installation" id="installation"><h2>Installation</h2></a>
+<p>The reference compiler of <em>Ymir</em> is based on the compiler <strong>GCC</strong>,
+which offer strong static optimization, as well as a vast set of
+supported target architectures.</p>
+<p>There are two ways to install the <strong>gyc</strong> (Gnu Ymir Compiler), natively or by using a docker container.</p>
+<a class="header" href="README.html#native-installation" id="native-installation"><h3>Native installation</h3></a>
+<p>This compiler can be installed on linux debian system, by following those simple steps:</p>
+<ul>
+<li>
+<p>First, you need to downloads the packages :</p>
+<ul>
+<li><a href="https://ymir-lang.org/release/gmidgard/9.3.0/libgmidgard_9.3.0_amd64.deb">libmidgard-9-dev</a></li>
+<li><a href="https://ymir-lang.org/release/gymir/9.3.0/gyc-9_9.3.0_amd64.deb">GYC</a></li>
+</ul>
+</li>
+<li>
+<p>And then, you need to install them using dpkg :</p>
+</li>
+</ul>
+<pre><code class="language-bash">$ sudo dpkg -i libgmidgard_9.3.0_amd64.deb
+$ sudo dpkg -i gyc-9_9.3.0_amd64.deb
+</code></pre>
+<p><br></p>
+<p>These packages depend on :</p>
+<ul>
+<li>g++-9</li>
+<li>gcc-9-base</li>
+<li>libc6 &gt;= 2.21</li>
+<li>libgmp10 &gt;= 2:5.0.1~</li>
+<li>libmpc3</li>
+<li>libmpfr6 &gt;= 3.1.3</li>
+<li>zlib1g &gt;= 1:1.1.4</li>
+<li>libgcc1</li>
+<li>zlib1g-dev</li>
+<li>zlib1g &gt;= 1:1.2.0</li>
+<li>libgc-dev &gt;= 1:7.4.2</li>
+</ul>
+<p>If one of them is not installed, you will get an error, that can be resolved by running the following command :</p>
+<pre><code class="language-bash">sudo apt --fix-broken install
+</code></pre>
+<p><br></p>
+<p>And then reinstall the package that has previously failed (dpkg).
+The compiler is now installed and is named <code>gyc</code></p>
+<pre><code class="language-bash">$ gyc --version
+
+gyc-9 (GCC) 9.3.0
+Copyright (C) 2018 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+</code></pre>
+<p><br></p>
+<a class="header" href="README.html#uninstallation-of-the-native-version" id="uninstallation-of-the-native-version"><h3>Uninstallation of the native version</h3></a>
+<p>As for any debian package, the uninstall is done as follows :</p>
+<pre><code class="language-bash">$ dpkg -r gyc-9
+$ dpkg -r libgmidgard-9-dev
+</code></pre>
+<p><br></p>
+<p><strong>Caution</strong> The uninstallation can remove your gcc installation.
+But you can still reinstall it easily if there is any problem, by typing :</p>
+<pre><code class="language-bash">sudo apt install --reinstall gcc-9
+</code></pre>
+<a class="header" href="README.html#docker-installation" id="docker-installation"><h2>Docker installation</h2></a>
+<p>To start you have to install docker.</p>
+<pre><code class="language-bash">$ sudo apt install docker.io
+</code></pre>
+<p><br></p>
+<p>Then retrieve the docker image from the repository :</p>
+<pre><code class="language-bash">$ docker pull gnuymir/9.3.0-amd64
+</code></pre>
+<p>The compiler is now accessible via the container.</p>
+<pre><code class="language-bash">$ docker run -t -v $(pwd):/tmp -w /tmp gnuymir/9.3.0-amd64 --version 
+gyc-9 (GCC) 9.3.0
+Copyright (C) 2018 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+</code></pre>
+<p><br></p>
+<p>To make it easier to use, you can add an alias in the <code>~/.local/bin</code> directory.
+First open the file <code>~/.local/bin/gyc</code> and paste the following line :</p>
+<pre><code class="language-bash">docker run -t -v $(pwd):/tmp -w /tmp gnuymir/9.3.0-amd64 $*
+</code></pre>
+<p><br></p>
+<p>Make sure, that your <code>PATH</code> contains the <code>~/.local/bin</code>directory, and
+then open a new shell, and run the following commands :</p>
+<pre><code class="language-bash">$ chmod +x ~/.local/bin/gyc
+$ gyc --version
+
+gyc (GCC) 9.3.0
+Copyright (C) 2019 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+</code></pre>
+
+                </div>
+
+                <!-- Mobile navigation buttons -->
+                
+
+                
+                    <a rel="next" href="hello-world/README.html" class="mobile-nav-chapters next" title="Next chapter">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+
+            </div>
+
+            
+
+            
+                <a href="hello-world/README.html" class="nav-chapters next" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            
+
+        </div>
+
+
+        <!-- Local fallback for Font Awesome -->
+        <script>
+            if ($(".fa").css("font-family") !== "FontAwesome") {
+                $('<link rel="stylesheet" type="text/css" href="_FontAwesome/css/font-awesome.css">').prependTo('head');
+            }
+        </script>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        
+
+        
+
+        
+
+        
+
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS script -->
+        
+        <script type="text/javascript" src="custom.js"></script>
+        
+
+    </body>
+</html>

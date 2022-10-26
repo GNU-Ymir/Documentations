@@ -1,0 +1,247 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Streamable - Ymir Tour</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <base href="../">
+
+        <link rel="stylesheet" href="book.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <link rel="shortcut icon" href="favicon.png">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme -->
+        
+        <link rel="stylesheet" href="custom.css">
+        
+
+        
+
+        <!-- Fetch Clipboard.js from CDN but have a local fallback -->
+        <script src="https://cdn.jsdelivr.net/clipboard.js/1.6.1/clipboard.min.js"></script>
+        <script>
+            if (typeof Clipboard == 'undefined') {
+                document.write(unescape("%3Cscript src='clipboard.min.js'%3E%3C/script%3E"));
+            }
+        </script>
+
+        <!-- Fetch JQuery from CDN but have a local fallback -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script>
+            if (typeof jQuery == 'undefined') {
+                document.write(unescape("%3Cscript src='jquery.js'%3E%3C/script%3E"));
+            }
+        </script>
+
+        <!-- Fetch store.js from local - TODO add CDN when 2.x.x is available on cdnjs -->
+        <script src="store.js"></script>
+
+    </head>
+    <body class="light">
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme = store.get('mdbook-theme');
+            if (theme === null || theme === undefined) { theme = 'light'; }
+            $('body').removeClass().addClass(theme);
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var sidebar = store.get('mdbook-sidebar');
+            if (sidebar === "hidden") { $("html").addClass("sidebar-hidden") }
+            else if (sidebar === "visible") { $("html").addClass("sidebar-visible") }
+        </script>
+
+        <div id="sidebar" class="sidebar">
+            <ul class="chapter"><li><a href="README.html"><strong>1.</strong> Introduction</a></li><li><a href="hello-world/README.html"><strong>2.</strong> Hello World</a></li><li><ul class="section"><li><a href="hello-world/commentaires.html"><strong>2.1.</strong> Comments</a></li></ul></li><li><a href="primitives/README.html"><strong>3.</strong> Basic programming concepts</a></li><li><ul class="section"><li><a href="primitives/variables.html"><strong>3.1.</strong> Variable and Mutability</a></li><li><a href="primitives/types.html"><strong>3.2.</strong> Data types</a></li><li><a href="primitives/functions.html"><strong>3.3.</strong> Functions</a></li><li><a href="primitives/control.html"><strong>3.4.</strong> Control flows</a></li><li><a href="primitives/operator.html"><strong>3.5.</strong> Operator priority</a></li></ul></li><li><a href="advanced/README.html"><strong>4.</strong> Alias, References and Purity</a></li><li><ul class="section"><li><a href="advanced/references.html"><strong>4.1.</strong> References</a></li><li><a href="advanced/alias.html"><strong>4.2.</strong> Aliases</a></li><li><a href="advanced/copies.html"><strong>4.3.</strong> Copy and Deep copy</a></li><li><a href="advanced/best.html"><strong>4.4.</strong> Best practice</a></li><li><a href="advanced/pure.html"><strong>4.5.</strong> Pure values</a></li></ul></li><li><a href="modules/README.html"><strong>5.</strong> Modules</a></li><li><a href="types/README.html"><strong>6.</strong> User defined types</a></li><li><ul class="section"><li><a href="types/struct.html"><strong>6.1.</strong> Structure</a></li><li><a href="types/enum.html"><strong>6.2.</strong> Enum</a></li><li><a href="types/aka.html"><strong>6.3.</strong> Aka</a></li></ul></li><li><a href="objects/README.html"><strong>7.</strong> Objects</a></li><li><ul class="section"><li><a href="objects/class.html"><strong>7.1.</strong> Class</a></li><li><a href="objects/mutability.html"><strong>7.2.</strong> Mutability</a></li><li><a href="objects/methods.html"><strong>7.3.</strong> Methods</a></li><li><a href="objects/inheritance.html"><strong>7.4.</strong> Inheritance</a></li><li><a href="objects/traits.html"><strong>7.5.</strong> Traits</a></li><li><a href="objects/cast.html"><strong>7.6.</strong> Cast, and dynamic typing</a></li></ul></li><li><a href="functions/README.html"><strong>8.</strong> Function advanced</a></li><li><a href="pattern/README.html"><strong>9.</strong> Pattern matching</a></li><li><a href="errors/main.html"><strong>10.</strong> Error handling</a></li><li><ul class="section"><li><a href="errors/scope_guards.html"><strong>10.1.</strong> Scope guards</a></li><li><a href="errors/catching.html"><strong>10.2.</strong> Catching</a></li><li><a href="errors/option.html"><strong>10.3.</strong> Exception and option type</a></li><li><a href="errors/fptr_closure.html"><strong>10.4.</strong> Unsafe function pointer</a></li></ul></li><li><a href="templates/README.html"><strong>11.</strong> Templates</a></li><li><ul class="section"><li><a href="templates/special.html"><strong>11.1.</strong> Template types</a></li><li><a href="templates/cte.html"><strong>11.2.</strong> Template values</a></li><li><a href="templates/values.html"><strong>11.3.</strong> Compilation time execution</a></li></ul></li><li><a href="objects/common_traits.html"><strong>12.</strong> Common traits</a></li><li><ul class="section"><li><a href="traits/streamable.html" class="active"><strong>12.1.</strong> Streamable</a></li><li><a href="traits/copiable.html"><strong>12.2.</strong> Copiable</a></li><li><a href="traits/disposable.html"><strong>12.3.</strong> With guard and Disposable</a></li><li><a href="traits/hashable.html"><strong>12.4.</strong> Hashable</a></li><li><a href="traits/serialize.html"><strong>12.5.</strong> Packable and Serializable</a></li></ul></li><li><a href="templates/operators.html"><strong>13.</strong> Operator overloading</a></li><li><ul class="section"><li><a href="templates/binary.html"><strong>13.1.</strong> Unary, binary and Comparison</a></li><li><a href="templates/complex_operators.html"><strong>13.2.</strong> Access, contains and iteration</a></li></ul></li><li><a href="version/README.html"><strong>14.</strong> Version</a></li><li><a href="macros/README.html"><strong>15.</strong> Macro</a></li><li><ul class="section"><li><a href="macros/std.html"><strong>15.1.</strong> Std and Core macros</a></li></ul></li><li><a href="documentation/README.html"><strong>16.</strong> Documentation</a></li><li><ul class="section"><li><a href="documentation/types.html"><strong>16.1.</strong> Types</a></li><li><a href="documentation/symbols.html"><strong>16.2.</strong> Symbols</a></li></ul></li></ul>
+        </div>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page" tabindex="-1">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div class="left-buttons">
+                        <i id="sidebar-toggle" class="fa fa-bars" title="Toggle sidebar"></i>
+                        <i id="theme-toggle" class="fa fa-paint-brush" title="Change theme"></i>
+                    </div>
+
+                    <h1 class="menu-title">Ymir Tour</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html">
+                            <i id="print-button" class="fa fa-print" title="Print this book"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="content" class="content">
+                    <a class="header" href="traits/streamable.html#streamable" id="streamable"><h1>Streamable</h1></a>
+<p>Streamable objects are objects that can be put inside a
+<strong><code>StringStream</code></strong>. These objects are also printable, using the
+standard <strong><code>print</code></strong> or <strong><code>println</code></strong> functions. <em>Streamable</em> trait
+has a default behavior, that consist in writting the typeid of the
+class, followed by every fields (private and protected included) of
+the class inside the stream.</p>
+<a class="header" href="traits/streamable.html#print-objects-to-stdout" id="print-objects-to-stdout"><h2>Print objects to stdout</h2></a>
+<p>In the following example, two classes implements the traits
+<strong><code>Streamable</code></strong>, and are printed to stdout. The first class <strong><code>Foo</code></strong>
+does not redefine the behavior of the trait, on the other hand
+<strong><code>Bar</code></strong> does.</p>
+<pre><code class="language-ymir">import std::io; // the trait is accessible from std::io, or std::stream
+
+class Foo {
+    
+    let _i = 12;
+    let _j = &quot;Foo&quot;;
+
+    pub self () {}
+    
+    impl Streamable;
+}
+
+class Bar {
+    pub self () {}
+    
+    impl Streamable {
+        pub over toStream (self, dmut stream : &amp;StringStream)-&gt; void {
+            stream:.write (&quot;{I am a Bar}&quot;s8);
+        }
+    }	
+}
+
+def main () {
+    let a = Foo::new ();
+    let b = Bar::new ();
+    
+    println (a);
+    println (b);
+}
+</code></pre>
+<p><br></p>
+<p>Results:</p>
+<pre><code>main::Foo(12, Foo)
+{I am a Bar}
+</code></pre>
+<a class="header" href="traits/streamable.html#write-objects-to-stringstream" id="write-objects-to-stringstream"><h2>Write objects to StringStream</h2></a>
+<p>The <strong><code>Streamable</code></strong> trait is originaly used to transform an object
+into a <strong><code>[c8]</code></strong>, inside a <strong><code>&amp;StringStream</code></strong>. <strong><code>StringStream</code></strong> is
+a class provided by the module <strong><code>std::stream</code></strong> that transform types
+into a growing string, in a efficient manner, to avoid unefficient
+string concatenation.  In the following example, instead of using the
+<strong><code>print</code></strong> function, provided by <strong><code>std::io</code></strong>, the objects are added
+to a <strong><code>StringStream</code></strong>, that is then printed to stdout.</p>
+<pre><code class="language-ymir">import std::io; // io publically import std::stream
+                
+
+class Foo {
+    
+    let _i = 12;
+    let _j = &quot;Foo&quot;;
+
+    pub self () {}
+    
+    impl Streamable;
+}
+
+class Bar {
+    pub self () {}
+    
+    impl Streamable {
+        pub over toStream (self, dmut stream : &amp;StringStream)-&gt; void {
+            stream:.write (&quot;{I am a Bar}&quot;s8);
+        }
+    }	
+}
+
+def main () {
+    let a = Foo::new ();
+    let b = Bar::new ();
+
+    let dmut stream = StringStream::new ();
+
+    a.toStream (alias stream); 
+    stream:.write (&quot;\n&quot;s8)	 // write returns the stream
+          :.writeln (b) // the method write of a stringstream call the method toStream
+          :.write (&quot;Hello : &quot;, 42); // everything can be added inside a stringstream
+    
+    println (stream []); // the operator [], gets the slice [c8] contained inside the stream (without copying it).
+}
+</code></pre>
+<p><br></p>
+<p>Results:</p>
+<pre><code>main::Foo(12, Foo)
+{I am a Bar}
+Hello : 42
+</code></pre>
+
+                </div>
+
+                <!-- Mobile navigation buttons -->
+                
+                    <a rel="prev" href="objects/common_traits.html" class="mobile-nav-chapters previous" title="Previous chapter">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="traits/copiable.html" class="mobile-nav-chapters next" title="Next chapter">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+
+            </div>
+
+            
+                <a href="objects/common_traits.html" class="nav-chapters previous" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+            
+
+            
+                <a href="traits/copiable.html" class="nav-chapters next" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            
+
+        </div>
+
+
+        <!-- Local fallback for Font Awesome -->
+        <script>
+            if ($(".fa").css("font-family") !== "FontAwesome") {
+                $('<link rel="stylesheet" type="text/css" href="_FontAwesome/css/font-awesome.css">').prependTo('head');
+            }
+        </script>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        
+
+        
+
+        
+
+        
+
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS script -->
+        
+        <script type="text/javascript" src="custom.js"></script>
+        
+
+    </body>
+</html>

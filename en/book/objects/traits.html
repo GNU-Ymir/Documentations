@@ -1,0 +1,474 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Traits - Ymir Tour</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <base href="../">
+
+        <link rel="stylesheet" href="book.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <link rel="shortcut icon" href="favicon.png">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme -->
+        
+        <link rel="stylesheet" href="custom.css">
+        
+
+        
+
+        <!-- Fetch Clipboard.js from CDN but have a local fallback -->
+        <script src="https://cdn.jsdelivr.net/clipboard.js/1.6.1/clipboard.min.js"></script>
+        <script>
+            if (typeof Clipboard == 'undefined') {
+                document.write(unescape("%3Cscript src='clipboard.min.js'%3E%3C/script%3E"));
+            }
+        </script>
+
+        <!-- Fetch JQuery from CDN but have a local fallback -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script>
+            if (typeof jQuery == 'undefined') {
+                document.write(unescape("%3Cscript src='jquery.js'%3E%3C/script%3E"));
+            }
+        </script>
+
+        <!-- Fetch store.js from local - TODO add CDN when 2.x.x is available on cdnjs -->
+        <script src="store.js"></script>
+
+    </head>
+    <body class="light">
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme = store.get('mdbook-theme');
+            if (theme === null || theme === undefined) { theme = 'light'; }
+            $('body').removeClass().addClass(theme);
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var sidebar = store.get('mdbook-sidebar');
+            if (sidebar === "hidden") { $("html").addClass("sidebar-hidden") }
+            else if (sidebar === "visible") { $("html").addClass("sidebar-visible") }
+        </script>
+
+        <div id="sidebar" class="sidebar">
+            <ul class="chapter"><li><a href="README.html"><strong>1.</strong> Introduction</a></li><li><a href="hello-world/README.html"><strong>2.</strong> Hello World</a></li><li><ul class="section"><li><a href="hello-world/commentaires.html"><strong>2.1.</strong> Comments</a></li></ul></li><li><a href="primitives/README.html"><strong>3.</strong> Basic programming concepts</a></li><li><ul class="section"><li><a href="primitives/variables.html"><strong>3.1.</strong> Variable and Mutability</a></li><li><a href="primitives/types.html"><strong>3.2.</strong> Data types</a></li><li><a href="primitives/functions.html"><strong>3.3.</strong> Functions</a></li><li><a href="primitives/control.html"><strong>3.4.</strong> Control flows</a></li><li><a href="primitives/operator.html"><strong>3.5.</strong> Operator priority</a></li></ul></li><li><a href="advanced/README.html"><strong>4.</strong> Alias, References and Purity</a></li><li><ul class="section"><li><a href="advanced/references.html"><strong>4.1.</strong> References</a></li><li><a href="advanced/alias.html"><strong>4.2.</strong> Aliases</a></li><li><a href="advanced/copies.html"><strong>4.3.</strong> Copy and Deep copy</a></li><li><a href="advanced/best.html"><strong>4.4.</strong> Best practice</a></li><li><a href="advanced/pure.html"><strong>4.5.</strong> Pure values</a></li></ul></li><li><a href="modules/README.html"><strong>5.</strong> Modules</a></li><li><a href="types/README.html"><strong>6.</strong> User defined types</a></li><li><ul class="section"><li><a href="types/struct.html"><strong>6.1.</strong> Structure</a></li><li><a href="types/enum.html"><strong>6.2.</strong> Enum</a></li><li><a href="types/aka.html"><strong>6.3.</strong> Aka</a></li></ul></li><li><a href="objects/README.html"><strong>7.</strong> Objects</a></li><li><ul class="section"><li><a href="objects/class.html"><strong>7.1.</strong> Class</a></li><li><a href="objects/mutability.html"><strong>7.2.</strong> Mutability</a></li><li><a href="objects/methods.html"><strong>7.3.</strong> Methods</a></li><li><a href="objects/inheritance.html"><strong>7.4.</strong> Inheritance</a></li><li><a href="objects/traits.html" class="active"><strong>7.5.</strong> Traits</a></li><li><a href="objects/cast.html"><strong>7.6.</strong> Cast, and dynamic typing</a></li></ul></li><li><a href="functions/README.html"><strong>8.</strong> Function advanced</a></li><li><a href="pattern/README.html"><strong>9.</strong> Pattern matching</a></li><li><a href="errors/main.html"><strong>10.</strong> Error handling</a></li><li><ul class="section"><li><a href="errors/scope_guards.html"><strong>10.1.</strong> Scope guards</a></li><li><a href="errors/catching.html"><strong>10.2.</strong> Catching</a></li><li><a href="errors/option.html"><strong>10.3.</strong> Exception and option type</a></li><li><a href="errors/fptr_closure.html"><strong>10.4.</strong> Unsafe function pointer</a></li></ul></li><li><a href="templates/README.html"><strong>11.</strong> Templates</a></li><li><ul class="section"><li><a href="templates/special.html"><strong>11.1.</strong> Template types</a></li><li><a href="templates/cte.html"><strong>11.2.</strong> Template values</a></li><li><a href="templates/values.html"><strong>11.3.</strong> Compilation time execution</a></li></ul></li><li><a href="objects/common_traits.html"><strong>12.</strong> Common traits</a></li><li><ul class="section"><li><a href="traits/streamable.html"><strong>12.1.</strong> Streamable</a></li><li><a href="traits/copiable.html"><strong>12.2.</strong> Copiable</a></li><li><a href="traits/disposable.html"><strong>12.3.</strong> With guard and Disposable</a></li><li><a href="traits/hashable.html"><strong>12.4.</strong> Hashable</a></li><li><a href="traits/serialize.html"><strong>12.5.</strong> Packable and Serializable</a></li></ul></li><li><a href="templates/operators.html"><strong>13.</strong> Operator overloading</a></li><li><ul class="section"><li><a href="templates/binary.html"><strong>13.1.</strong> Unary, binary and Comparison</a></li><li><a href="templates/complex_operators.html"><strong>13.2.</strong> Access, contains and iteration</a></li></ul></li><li><a href="version/README.html"><strong>14.</strong> Version</a></li><li><a href="macros/README.html"><strong>15.</strong> Macro</a></li><li><ul class="section"><li><a href="macros/std.html"><strong>15.1.</strong> Std and Core macros</a></li></ul></li><li><a href="documentation/README.html"><strong>16.</strong> Documentation</a></li><li><ul class="section"><li><a href="documentation/types.html"><strong>16.1.</strong> Types</a></li><li><a href="documentation/symbols.html"><strong>16.2.</strong> Symbols</a></li></ul></li></ul>
+        </div>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page" tabindex="-1">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div class="left-buttons">
+                        <i id="sidebar-toggle" class="fa fa-bars" title="Toggle sidebar"></i>
+                        <i id="theme-toggle" class="fa fa-paint-brush" title="Change theme"></i>
+                    </div>
+
+                    <h1 class="menu-title">Ymir Tour</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html">
+                            <i id="print-button" class="fa fa-print" title="Print this book"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="content" class="content">
+                    <a class="header" href="objects/traits.html#trait" id="trait"><h1>Trait</h1></a>
+<p>Traits are used to define as their name suggest traits that can be
+implemented by a class. To define them, the keyword <strong><code>trait</code></strong> is
+used. A <em>trait</em> is not a type, and can only be implemented by class,
+for that reason, a variable or a value cannot be of a <em>trait</em> type.</p>
+<p>An example of a trait, is presented in the following source block. The
+idea of this trait, is to ensure that every class, implementing it,
+have a public method named <strong><code>print</code></strong> that can be called without
+parameters.</p>
+<pre><code class="language-ymir">trait Printable {
+    pub def print (self);	
+}
+</code></pre>
+<p><br></p>
+<p>When a class implements a trait, all the method declared in the trait
+are added in the definition of the class. If the class is not abstract
+all the method of the traits must have a body. For example, if a non
+abstract class implement the trait <strong><code>Printable</code></strong>, thus it must
+override the method <strong><code>print</code></strong> to add a body to it.</p>
+<pre><code class="language-ymir">import std::io
+
+class Point {
+    // ... Constructors and attributes
+    
+    impl Printable {
+        // Try to remove the following definition
+        pub over print (self) {
+            print (&quot;Point {&quot;, self._x, &quot;, &quot;, self._y, &quot;}&quot;);
+        }
+    }	
+}
+</code></pre>
+<p><br></p>
+<p>A trait can provide a default behavior for the method it defines. The
+body of the method is validated for each implementation. In the
+following example, the method <strong><code>print</code></strong> defined in the trait
+<strong><code>Printable</code></strong>, prints the typeid of the class that implement the
+traits. One can note, that the behavior of this function is different
+for each class that implements it, that is why it is only validated
+when a class implement the trait.</p>
+<pre><code class="language-ymir">mod main; 
+
+trait Printable {
+    pub def print (self) {
+        import std::io;
+        print (typeof (self)::typeid);
+        // Here we don't know the type yet
+    }
+}
+
+class Point {
+    // ... Constructors and attributes
+
+    impl Printable;  // 'print' method prints (&quot;main::Point&quot;)
+}
+
+class Line {
+    // ... Constructors and attributes
+
+    impl Printable;  // 'print' method prints (&quot;main::Line&quot;)
+}
+</code></pre>
+<p><br></p>
+<p><strong>Warning</strong>: If a trait is never implemented by any class, and have
+methods with default behavior, then it is never validated. Thus errors
+can be present in this trait, but still pass the compilation. One can
+see the trait as a kind of template, this problem being present in
+template symbol as well (<em>cf.</em>
+<a href="https://gnu-ymir.github.io/Documentations/en/templates/">Templates</a>).</p>
+<a class="header" href="objects/traits.html#inherit-a-class-implementing-a-trait" id="inherit-a-class-implementing-a-trait"><h2>Inherit a Class implementing a Trait</h2></a>
+<p>The methods of a trait can be overriden by heir classes. In order to
+do this, heir classes must reimplement the trait, and override the
+methods.</p>
+<a class="header" href="objects/traits.html#simple-reimplementation" id="simple-reimplementation"><h3>Simple reimplementation</h3></a>
+<p>In the following example, the class <strong><code>Shape</code></strong> implements
+the trait <strong><code>Printable</code></strong>, this trait has a method <strong><code>print</code></strong> with a
+default behavior. The class <strong><code>Circle</code></strong> does not reimplement the
+trait, thus when calling the method print of a <strong><code>Circle</code></strong> value, the
+value <strong><code>main::Shape</code></strong> is printed on the stdout. On the other hand,
+the class <strong><code>Rectange</code></strong> reimplement the traits, thus the value
+<strong><code>main::Rectangle</code></strong> is printed.</p>
+<pre><code class="language-ymir">mod main;
+
+trait Printable {
+    pub def print (self) {
+        import std::io;
+        println (typeof (self)::typeid);
+    }
+}
+
+class @abstract Shape {
+    self () {}
+    
+    impl Printable;
+}
+
+class Circle over Shape {
+    pub self () {}
+}
+
+class Rectangle over Shape {
+    pub self () {}
+    
+    impl Printable; // reimplement the method print with typeof (self) being main::Rectangle
+}
+
+def main () {
+    let c = Circle::new ();
+    c.print ();
+    
+    let r = Rectangle::new ();
+    r.print ();
+}
+</code></pre>
+<p><br>
+Results:</p>
+<pre><code>main::Shape
+main::Rectangle
+</code></pre>
+<a class="header" href="objects/traits.html#override-implemented-method" id="override-implemented-method"><h3>Override implemented method</h3></a>
+<p>Implemented method cannot be overriden without reimplementing the
+trait. In the following example, a class <strong><code>Shape</code></strong> implement the
+trait <strong><code>Printable</code></strong>, and the class <strong><code>Circle</code></strong> inherits
+<strong><code>Shape</code></strong>, and tries to override the method <strong><code>print</code></strong>.</p>
+<pre><code class="language-ymir">mod main;
+import std::io;
+
+trait Printable {
+    pub def print (self);
+}
+
+class @abstract Shape {
+    self () {}
+    
+    impl Printable {
+        pub over print (self) {
+            println (&quot;main::Shape&quot;);
+        }
+    }
+}
+
+class Circle over Shape {
+    pub self () {}
+    
+    pub over print (self) {}
+}
+</code></pre>
+<p><br>
+Errors:</p>
+<pre><code class="language-error">Error : when validating main::Circle
+ --&gt; main.yr:(18,7)
+18  ┃ class Circle over Shape {
+    ╋       ^^^^^^
+    ┃ Error : cannot override the trait method (const self) =&gt; main::Shape::print ()-&gt; void outside the implementation of the trait
+    ┃  --&gt; main.yr:(21,14)
+    ┃ 21  ┃     pub over print (self) {}
+    ┃     ╋              ^^^^^
+    ┃     ┃ Note : 
+    ┃     ┃  --&gt; main.yr:(12,18)
+    ┃     ┃ 12  ┃         pub over print (self) {
+    ┃     ┃     ╋                  ^^^^^
+    ┃     ┗━━━━━┻━ 
+    ┗━━━━━┻━ 
+
+
+ymir1: fatal error: 
+compilation terminated.
+</code></pre>
+<p><br></p>
+<p>To prevent the previous error, the class <strong><code>Circle</code></strong> have to
+reimplement the trait <strong><code>Printable</code></strong>. When reimplementing a trait in
+a heir class, the parent overriding is not taken into account, and the
+method of the trait is used. In the following example, the class
+<strong><code>Shape</code></strong> implement the trait <strong><code>Printable</code></strong>, that have a method
+<strong><code>print</code></strong> with no default behavior. The class <strong><code>Circle</code></strong> tries to
+reimplement the trait, but without overriding the <strong><code>print</code></strong>
+method. This source code is rejected by the compiler, the class
+<strong><code>Circle</code></strong> is not abstract, but has a method with no body.</p>
+<pre><code class="language-ymir">mod main;
+import std::io;
+
+trait Printable {
+    pub def print (self);
+}
+
+class @abstract Shape {
+    self () {}
+    
+    impl Printable {
+        pub over print (self) {
+            println (&quot;main::Shape&quot;);
+        }
+    }
+}
+
+class Circle over Shape {
+    pub self () {}
+    
+    impl Printable;
+}
+</code></pre>
+<p><br>
+Errors:</p>
+<pre><code class="language-error">Error : when validating main::Circle
+ --&gt; main.yr:(18,7)
+18  ┃ class Circle over Shape {
+    ╋       ^^^^^^
+    ┃ Error : the class main::Circle is not abstract, but does not override the empty parent method (const self) =&gt; main::Printable::print ()-&gt; void
+    ┃  --&gt; main.yr:(18,7)
+    ┃ 18  ┃ class Circle over Shape {
+    ┃     ╋       ^^^^^^
+    ┃     ┃ Note : 
+    ┃     ┃  --&gt; main.yr:(5,10)
+    ┃     ┃  5  ┃ 	pub def print (self);
+    ┃     ┃     ╋ 	        ^^^^^
+    ┃     ┗━━━━━┻━ 
+    ┗━━━━━┻━ 
+
+
+ymir1: fatal error: 
+compilation terminated.
+</code></pre>
+<p><br></p>
+<p>To resolve that problem, the class <strong><code>Circle</code></strong> must add a body to the
+method <strong><code>print</code></strong>. It can happen that a trait defines multiple
+methods, and that only some have to be reimplemented by the heir
+class. In that case, there is no magical solution, <strong>maybe a
+contribution can enhance that</strong>, but every methods must be
+reimplemented. In order to mimic the behavior of the parent
+implementation, the <strong><code>super</code></strong> keyword can be used.</p>
+<pre><code class="language-ymir">class Circle over Shape {
+    pub self () {}	
+
+    impl Printable {
+    
+        pub over print (self)-&gt; void { 
+            self::super.print (); // call the print method of the super class 		
+        }
+    }	
+}
+</code></pre>
+<p><br></p>
+<a class="header" href="objects/traits.html#trait-privacy" id="trait-privacy"><h2>Trait privacy</h2></a>
+<p>Trait implementation is always public. For that reason, privacy
+specifier (<strong><code>pub</code></strong>, <strong><code>prot</code></strong> and <strong><code>prv</code></strong>) have no meaning on
+implementation.</p>
+<p>On the other hand, the trait methods implementation follows the same
+rule as the overriding of a parent method. That is to say, the privacy
+defined inside the trait must be the same as the privacy defined
+inside the implementation.</p>
+<a class="header" href="objects/traits.html#trait-usage" id="trait-usage"><h2>Trait usage</h2></a>
+<p>As said in the beginning of this chapter, traits do not define
+types, thus they cannot be used to define the type of a variable. For
+example, the following source code has no meaning, <strong><code>Printable</code></strong>
+does not define a type.</p>
+<pre><code class="language-ymir">mod main;
+import std::io;
+
+trait Printable {
+    pub def print (self);
+}
+
+def foo  (a : Printable) {
+    a.print ();
+}
+</code></pre>
+<p><br></p>
+<p>Errors:</p>
+<pre><code class="language-error">Error : expression used as a type
+ --&gt; main.yr:(8,15)
+ 8  ┃ def foo  (a : Printable) {
+    ╋               ^^^^^^^^^
+
+
+ymir1: fatal error: 
+compilation terminated.
+</code></pre>
+<p><br></p>
+<p>If the previous example, is not a valid <em>ymir</em> code, the behavior can
+still be implemented in the language. Traits gain interest when
+coupled with templates, and a template test can be used to check that
+a class implement a trait. More complete information, and example
+about templates, and traits specialization are presented in chapter
+<a href="https://gnu-ymir.github.io/Documentations/en/templates/">Templates</a>,
+but a brief example is presented in the following source code. In this
+example, two classes <strong><code>U</code></strong> and <strong><code>V</code></strong> implement the trait
+<strong><code>Printable</code></strong>. The function <strong><code>foo</code></strong> takes a parameter whose type
+is not specified but must implement the trait <strong><code>Printable</code></strong>. Thus
+the function is callable with both <strong><code>U</code></strong> or <strong><code>V</code></strong> as argument.</p>
+<pre><code class="language-ymir">mod main;
+import std::io;
+
+trait Printable {
+    pub def print (self) {
+        println (typeof (self)::typeid);
+    }
+}
+
+class U {
+    pub self () {}
+    impl Printable;
+}
+
+class V {
+    pub self () {}
+    impl Printable;
+}
+
+/**
+ * Accept every type, that implements the trait Printable 
+ */
+def foo {I impl Printable} (a : I) {
+    a.print ();
+}
+
+def main () {
+    foo (U::new ());
+    foo (V::new ());
+}
+</code></pre>
+<p><br>
+Results:</p>
+<pre><code>main::U
+main::V
+</code></pre>
+
+                </div>
+
+                <!-- Mobile navigation buttons -->
+                
+                    <a rel="prev" href="objects/inheritance.html" class="mobile-nav-chapters previous" title="Previous chapter">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="objects/cast.html" class="mobile-nav-chapters next" title="Next chapter">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+
+            </div>
+
+            
+                <a href="objects/inheritance.html" class="nav-chapters previous" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+            
+
+            
+                <a href="objects/cast.html" class="nav-chapters next" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            
+
+        </div>
+
+
+        <!-- Local fallback for Font Awesome -->
+        <script>
+            if ($(".fa").css("font-family") !== "FontAwesome") {
+                $('<link rel="stylesheet" type="text/css" href="_FontAwesome/css/font-awesome.css">').prependTo('head');
+            }
+        </script>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        
+
+        
+
+        
+
+        
+
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS script -->
+        
+        <script type="text/javascript" src="custom.js"></script>
+        
+
+    </body>
+</html>

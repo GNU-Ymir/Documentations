@@ -1,0 +1,320 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Pure values - Ymir Tour</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <base href="../">
+
+        <link rel="stylesheet" href="book.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <link rel="shortcut icon" href="favicon.png">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme -->
+        
+        <link rel="stylesheet" href="custom.css">
+        
+
+        
+
+        <!-- Fetch Clipboard.js from CDN but have a local fallback -->
+        <script src="https://cdn.jsdelivr.net/clipboard.js/1.6.1/clipboard.min.js"></script>
+        <script>
+            if (typeof Clipboard == 'undefined') {
+                document.write(unescape("%3Cscript src='clipboard.min.js'%3E%3C/script%3E"));
+            }
+        </script>
+
+        <!-- Fetch JQuery from CDN but have a local fallback -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script>
+            if (typeof jQuery == 'undefined') {
+                document.write(unescape("%3Cscript src='jquery.js'%3E%3C/script%3E"));
+            }
+        </script>
+
+        <!-- Fetch store.js from local - TODO add CDN when 2.x.x is available on cdnjs -->
+        <script src="store.js"></script>
+
+    </head>
+    <body class="light">
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme = store.get('mdbook-theme');
+            if (theme === null || theme === undefined) { theme = 'light'; }
+            $('body').removeClass().addClass(theme);
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var sidebar = store.get('mdbook-sidebar');
+            if (sidebar === "hidden") { $("html").addClass("sidebar-hidden") }
+            else if (sidebar === "visible") { $("html").addClass("sidebar-visible") }
+        </script>
+
+        <div id="sidebar" class="sidebar">
+            <ul class="chapter"><li><a href="README.html"><strong>1.</strong> Introduction</a></li><li><a href="hello-world/README.html"><strong>2.</strong> Hello World</a></li><li><ul class="section"><li><a href="hello-world/commentaires.html"><strong>2.1.</strong> Comments</a></li></ul></li><li><a href="primitives/README.html"><strong>3.</strong> Basic programming concepts</a></li><li><ul class="section"><li><a href="primitives/variables.html"><strong>3.1.</strong> Variable and Mutability</a></li><li><a href="primitives/types.html"><strong>3.2.</strong> Data types</a></li><li><a href="primitives/functions.html"><strong>3.3.</strong> Functions</a></li><li><a href="primitives/control.html"><strong>3.4.</strong> Control flows</a></li><li><a href="primitives/operator.html"><strong>3.5.</strong> Operator priority</a></li></ul></li><li><a href="advanced/README.html"><strong>4.</strong> Alias, References and Purity</a></li><li><ul class="section"><li><a href="advanced/references.html"><strong>4.1.</strong> References</a></li><li><a href="advanced/alias.html"><strong>4.2.</strong> Aliases</a></li><li><a href="advanced/copies.html"><strong>4.3.</strong> Copy and Deep copy</a></li><li><a href="advanced/best.html"><strong>4.4.</strong> Best practice</a></li><li><a href="advanced/pure.html" class="active"><strong>4.5.</strong> Pure values</a></li></ul></li><li><a href="modules/README.html"><strong>5.</strong> Modules</a></li><li><a href="types/README.html"><strong>6.</strong> User defined types</a></li><li><ul class="section"><li><a href="types/struct.html"><strong>6.1.</strong> Structure</a></li><li><a href="types/enum.html"><strong>6.2.</strong> Enum</a></li><li><a href="types/aka.html"><strong>6.3.</strong> Aka</a></li></ul></li><li><a href="objects/README.html"><strong>7.</strong> Objects</a></li><li><ul class="section"><li><a href="objects/class.html"><strong>7.1.</strong> Class</a></li><li><a href="objects/mutability.html"><strong>7.2.</strong> Mutability</a></li><li><a href="objects/methods.html"><strong>7.3.</strong> Methods</a></li><li><a href="objects/inheritance.html"><strong>7.4.</strong> Inheritance</a></li><li><a href="objects/traits.html"><strong>7.5.</strong> Traits</a></li><li><a href="objects/cast.html"><strong>7.6.</strong> Cast, and dynamic typing</a></li></ul></li><li><a href="functions/README.html"><strong>8.</strong> Function advanced</a></li><li><a href="pattern/README.html"><strong>9.</strong> Pattern matching</a></li><li><a href="errors/main.html"><strong>10.</strong> Error handling</a></li><li><ul class="section"><li><a href="errors/scope_guards.html"><strong>10.1.</strong> Scope guards</a></li><li><a href="errors/catching.html"><strong>10.2.</strong> Catching</a></li><li><a href="errors/option.html"><strong>10.3.</strong> Exception and option type</a></li><li><a href="errors/fptr_closure.html"><strong>10.4.</strong> Unsafe function pointer</a></li></ul></li><li><a href="templates/README.html"><strong>11.</strong> Templates</a></li><li><ul class="section"><li><a href="templates/special.html"><strong>11.1.</strong> Template types</a></li><li><a href="templates/cte.html"><strong>11.2.</strong> Template values</a></li><li><a href="templates/values.html"><strong>11.3.</strong> Compilation time execution</a></li></ul></li><li><a href="objects/common_traits.html"><strong>12.</strong> Common traits</a></li><li><ul class="section"><li><a href="traits/streamable.html"><strong>12.1.</strong> Streamable</a></li><li><a href="traits/copiable.html"><strong>12.2.</strong> Copiable</a></li><li><a href="traits/disposable.html"><strong>12.3.</strong> With guard and Disposable</a></li><li><a href="traits/hashable.html"><strong>12.4.</strong> Hashable</a></li><li><a href="traits/serialize.html"><strong>12.5.</strong> Packable and Serializable</a></li></ul></li><li><a href="templates/operators.html"><strong>13.</strong> Operator overloading</a></li><li><ul class="section"><li><a href="templates/binary.html"><strong>13.1.</strong> Unary, binary and Comparison</a></li><li><a href="templates/complex_operators.html"><strong>13.2.</strong> Access, contains and iteration</a></li></ul></li><li><a href="version/README.html"><strong>14.</strong> Version</a></li><li><a href="macros/README.html"><strong>15.</strong> Macro</a></li><li><ul class="section"><li><a href="macros/std.html"><strong>15.1.</strong> Std and Core macros</a></li></ul></li><li><a href="documentation/README.html"><strong>16.</strong> Documentation</a></li><li><ul class="section"><li><a href="documentation/types.html"><strong>16.1.</strong> Types</a></li><li><a href="documentation/symbols.html"><strong>16.2.</strong> Symbols</a></li></ul></li></ul>
+        </div>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page" tabindex="-1">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div class="left-buttons">
+                        <i id="sidebar-toggle" class="fa fa-bars" title="Toggle sidebar"></i>
+                        <i id="theme-toggle" class="fa fa-paint-brush" title="Change theme"></i>
+                    </div>
+
+                    <h1 class="menu-title">Ymir Tour</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html">
+                            <i id="print-button" class="fa fa-print" title="Print this book"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="content" class="content">
+                    <a class="header" href="advanced/pure.html#pure-values" id="pure-values"><h1>Pure values</h1></a>
+<p>A pure value is a value that cannot change. In other word it is a
+value, that ensure that there is no variable in the program that has a
+mutable access to it. Pure values are different to const values, in
+the sense that const values just give the guarantee that the current
+access is not mutable, however they does not guarantee that there is no
+other variable in the program with mutable access.</p>
+<p>The different guarantees on values can be listed as follows :</p>
+<ol>
+<li>No guarantee, the value is mutable <strong><code>mut</code></strong></li>
+<li>Guarantee that the value is no writable in the current context <strong><code>const</code></strong></li>
+<li>Guarantee that the value is completely immutable in every context <strong><code>pure</code></strong></li>
+</ol>
+<a class="header" href="advanced/pure.html#limitation-of-const-values" id="limitation-of-const-values"><h2>Limitation of const values</h2></a>
+<p>To understand the limitation of <strong><code>const</code></strong> values, the following
+program has two variable defined in the function <strong><code>main</code></strong>. The first
+one <strong><code>a</code></strong> has a mutable access to the value, and the variable
+<strong><code>b</code></strong> has a const access to the same value. Because the variable
+<strong><code>a</code></strong> modifies the value, the value pointed by <strong><code>b</code></strong> is also
+modified even if it was <strong><code>const</code></strong>. Thus, it is important to
+understand that <strong><code>const</code></strong> is only referering to the permission of
+the variable <strong><code>b</code></strong>.</p>
+<pre><code class="language-ymir">import std::io;
+
+def main () {
+    let dmut a = [1, 2, 3];
+    let b = a;
+    
+    a [0] = 98;
+    
+    println (b);
+}
+</code></pre>
+<p><br></p>
+<p>Results:</p>
+<pre><code>[98, 2, 3]
+</code></pre>
+<p><br></p>
+<p>We have seen in a previous chapter that the keywords <strong><code>copy</code></strong> and
+<strong><code>dcopy</code></strong> can be used to remove this limitation, and ensure that the
+value of <strong><code>b</code></strong> is the same as the value of <strong><code>a</code></strong>, but that
+modifying the value of <strong><code>a</code></strong> does not modify the value of
+<strong><code>b</code></strong>. This mechanism is the base of the one provided by <strong><code>pure</code></strong>
+values.</p>
+<pre><code class="language-ymir">import std::io;
+
+def main () 
+    throws &amp;OutOfArray
+{
+    let dmut a = [1, 2, 3];
+    let b = dcopy a;
+    
+    a [0] = 98;
+    
+    println (b);
+}
+</code></pre>
+<p><br></p>
+<p>Results:</p>
+<pre><code>[1, 2, 3]
+</code></pre>
+<p><br></p>
+<p>Now let's add a third variable to the equation, and let's name it
+<strong><code>c</code></strong>. In this variable we want to store the value of <strong><code>b</code></strong>, and
+ensure that the variable is never modified. If the initialization of
+the variable <strong><code>b</code></strong> is made in an obscure way (for example in a
+function that is not readable, here the <strong><code>foo</code></strong> function), then the
+only way to ensure that the value of <strong><code>c</code></strong> is never modified, is to
+make a copy of it inside the value of <strong><code>c</code></strong>. If the memory movement
+are easy in the following example, it may not be the case in complex
+program with many variable and memory movement.</p>
+<pre><code class="language-ymir">import std::io;
+
+def foo (a : [i32])-&gt; [i32] {
+    a
+}
+
+def main () 
+    throws &amp;OutOfArray
+{
+    let dmut a = [1, 2, 3];
+    let b = foo (a);
+    
+    let c = dcopy b;
+    let d = b;
+    
+    a [0] = 98;
+    
+    println (c);
+    println (d);
+}
+</code></pre>
+<p><br></p>
+<p>Results:</p>
+<pre><code>[1, 2, 3]
+[98, 2, 3]
+</code></pre>
+<a class="header" href="advanced/pure.html#purity-and-the-pure-keyword" id="purity-and-the-pure-keyword"><h2>Purity and the pure keyword</h2></a>
+<p><br> In the above example, both variable <strong><code>b</code></strong> and <strong><code>d</code></strong> have no
+guarantees, and there values are indeed modified. The <strong><code>pure</code></strong>
+keyword can be added to their definitions. In that case, the compiler
+checks the initialization of the values that are used, and ensure that
+they came from a deep copy, or another pure value.</p>
+<pre><code class="language-ymir">def foo (a : [i32]) -&gt; [i32] {
+    a
+}
+
+def main () 
+    throws &amp;OutOfArray 
+{
+    let dmut a = [1, 2, 3];
+    
+    let pure b = foo (a);
+}
+</code></pre>
+<p><br></p>
+<pre><code class="language-error">Error : discard the constant qualifier is prohibited
+ --&gt; main.yr:(10,11)
+10  ┃ 	let pure b = foo (a);
+    ╋ 	         ^
+    ┃ Note : implicit pure of type [i32] is not allowed, it will implicitly discard constant qualifier
+    ┃  --&gt; main.yr:(10,19)
+    ┃ 10  ┃ 	let pure b = foo (a);
+    ┃     ╋ 	                 ^
+    ┗━━━━━┻━ 
+
+
+ymir1: fatal error: 
+compilation terminated.
+</code></pre>
+<p><br> To avoid the above error, there is two possibilities. Either we
+add a <strong><code>dcopy</code></strong> on the function call of <strong><code>foo</code></strong>, or we add
+<strong><code>pure</code></strong> to the return type of <strong><code>foo</code></strong> and make a deep copy of the
+value of <strong><code>a</code></strong> in this function. The function <strong><code>bar</code></strong> of the
+following example perform the second possibility.</p>
+<pre><code class="language-ymir">import std::io;
+
+def foo (a : [i32])-&gt; [i32] {
+    a
+}
+
+def bar (a : [i32])-&gt; pure [i32] {
+    return dcopy a;
+}
+
+def main () 
+    throws &amp;OutOfArray 
+{
+    let dmut a = [1, 2, 3];
+    let pure b = dcopy foo (a);
+    
+    let pure c = bar (a);
+    
+    let pure d = b;
+    let pure e = c;
+    
+    a [0] = 98;
+    
+    println (d);
+    println (e);
+}	
+</code></pre>
+<p><br></p>
+<p>Results:</p>
+<pre><code>[1, 2, 3]
+[1, 2, 3]
+</code></pre>
+<p><br> One can note that not copy are needed to move the value contained
+in the variable <strong><code>c</code></strong> into the variable <strong><code>e</code></strong>. This is due to the
+fact that <strong><code>c</code></strong> is pure, so the guarantee of purity is already
+made. Thanks to the <strong><code>pure</code></strong> mechanism some copies can be avoided.</p>
+
+                </div>
+
+                <!-- Mobile navigation buttons -->
+                
+                    <a rel="prev" href="advanced/best.html" class="mobile-nav-chapters previous" title="Previous chapter">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="modules/README.html" class="mobile-nav-chapters next" title="Next chapter">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+
+            </div>
+
+            
+                <a href="advanced/best.html" class="nav-chapters previous" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+            
+
+            
+                <a href="modules/README.html" class="nav-chapters next" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            
+
+        </div>
+
+
+        <!-- Local fallback for Font Awesome -->
+        <script>
+            if ($(".fa").css("font-family") !== "FontAwesome") {
+                $('<link rel="stylesheet" type="text/css" href="_FontAwesome/css/font-awesome.css">').prependTo('head');
+            }
+        </script>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        
+
+        
+
+        
+
+        
+
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS script -->
+        
+        <script type="text/javascript" src="custom.js"></script>
+        
+
+    </body>
+</html>

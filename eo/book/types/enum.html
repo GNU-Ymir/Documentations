@@ -1,0 +1,406 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Enumeracio - Ymir Tour</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <base href="../">
+
+        <link rel="stylesheet" href="book.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <link rel="shortcut icon" href="favicon.png">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme -->
+        
+        <link rel="stylesheet" href="custom.css">
+        
+
+        
+
+        <!-- Fetch Clipboard.js from CDN but have a local fallback -->
+        <script src="https://cdn.jsdelivr.net/clipboard.js/1.6.1/clipboard.min.js"></script>
+        <script>
+            if (typeof Clipboard == 'undefined') {
+                document.write(unescape("%3Cscript src='clipboard.min.js'%3E%3C/script%3E"));
+            }
+        </script>
+
+        <!-- Fetch JQuery from CDN but have a local fallback -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script>
+            if (typeof jQuery == 'undefined') {
+                document.write(unescape("%3Cscript src='jquery.js'%3E%3C/script%3E"));
+            }
+        </script>
+
+        <!-- Fetch store.js from local - TODO add CDN when 2.x.x is available on cdnjs -->
+        <script src="store.js"></script>
+
+    </head>
+    <body class="light">
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme = store.get('mdbook-theme');
+            if (theme === null || theme === undefined) { theme = 'light'; }
+            $('body').removeClass().addClass(theme);
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var sidebar = store.get('mdbook-sidebar');
+            if (sidebar === "hidden") { $("html").addClass("sidebar-hidden") }
+            else if (sidebar === "visible") { $("html").addClass("sidebar-visible") }
+        </script>
+
+        <div id="sidebar" class="sidebar">
+            <ul class="chapter"><li><a href="README.html"><strong>1.</strong> Antaŭparolo</a></li><li><a href="hello-world/README.html"><strong>2.</strong> Bonan tagon mondo</a></li><li><ul class="section"><li><a href="hello-world/commentaires.html"><strong>2.1.</strong> Komentoj</a></li></ul></li><li><a href="primitives/README.html"><strong>3.</strong> Bazaj konceptoj de programado</a></li><li><ul class="section"><li><a href="primitives/variables.html"><strong>3.1.</strong> Variablo kaj Ŝanĝebleco</a></li><li><a href="primitives/types.html"><strong>3.2.</strong> Datenaj tipoj</a></li><li><a href="primitives/functions.html"><strong>3.3.</strong> Funkcioj</a></li><li><a href="primitives/control.html"><strong>3.4.</strong> Kontrolaj fluoj</a></li><li><a href="primitives/operator.html"><strong>3.5.</strong> Prioritato de operacioj</a></li></ul></li><li><a href="advanced/README.html"><strong>4.</strong> Alnomoj, Referencoj kaj pureco</a></li><li><ul class="section"><li><a href="advanced/references.html"><strong>4.1.</strong> Referencoj</a></li><li><a href="advanced/alias.html"><strong>4.2.</strong> Alnomoj</a></li><li><a href="advanced/copies.html"><strong>4.3.</strong> Kopio kaj profunda kopio</a></li><li><a href="advanced/best.html"><strong>4.4.</strong> Plej bonaj kutimoj</a></li><li><a href="advanced/pure.html"><strong>4.5.</strong> Puraj valoroj</a></li></ul></li><li><a href="modules/README.html"><strong>5.</strong> Pakaĵoj</a></li><li><a href="types/README.html"><strong>6.</strong> Tipoj difinitaj de la uzanto</a></li><li><ul class="section"><li><a href="types/struct.html"><strong>6.1.</strong> Strukturo</a></li><li><a href="types/enum.html" class="active"><strong>6.2.</strong> Enumeracio</a></li><li><a href="types/aka.html"><strong>6.3.</strong> Kaŝnomo</a></li></ul></li><li><a href="objects/README.html"><strong>7.</strong> Objektoj</a></li><li><ul class="section"><li><a href="objects/class.html"><strong>7.1.</strong> Klaso</a></li><li><a href="objects/mutability.html"><strong>7.2.</strong> Ŝanĝebleco</a></li><li><a href="objects/methods.html"><strong>7.3.</strong> Metodoj</a></li><li><a href="objects/inheritance.html"><strong>7.4.</strong> Heredeco</a></li><li><a href="objects/traits.html"><strong>7.5.</strong> Trajto</a></li><li><a href="objects/cast.html"><strong>7.6.</strong> Tipŝanĝo, kaj dinamikaj tipoj</a></li></ul></li><li><a href="functions/README.html"><strong>8.</strong> Funkcioj pli kompleksaj</a></li><li><a href="pattern/README.html"><strong>9.</strong> Skema kongruo</a></li><li><a href="errors/main.html"><strong>10.</strong> Traktado de Eraroj</a></li><li><ul class="section"><li><a href="errors/scope_guards.html"><strong>10.1.</strong> Regionaj gardantoj</a></li><li><a href="errors/catching.html"><strong>10.2.</strong> Kapti erarojn</a></li><li><a href="errors/option.html"><strong>10.3.</strong> Esceptoj kaj opcia tipo</a></li><li><a href="errors/fptr_closure.html"><strong>10.4.</strong> Montrilo de Malsekuraj Funkcioj</a></li></ul></li><li><a href="templates/README.html"><strong>11.</strong> Ŝablonoj</a></li><li><ul class="section"><li><a href="templates/special.html"><strong>11.1.</strong> Ŝablonaj tipoj</a></li><li><a href="templates/cte.html"><strong>11.2.</strong> Ŝablonaj valoroj</a></li><li><a href="templates/values.html"><strong>11.3.</strong> Plenumo dum kompilado</a></li></ul></li><li><a href="objects/common_traits.html"><strong>12.</strong> Ordinaraj trajtoj</a></li><li><ul class="section"><li><a href="traits/streamable.html"><strong>12.1.</strong> &quot;Streamable&quot;</a></li><li><a href="traits/copiable.html"><strong>12.2.</strong> &quot;Copiable&quot;</a></li><li><a href="traits/disposable.html"><strong>12.3.</strong> &quot;With&quot; gardanto kaj &quot;Disposable&quot;</a></li><li><a href="traits/hashable.html"><strong>12.4.</strong> &quot;Hashable&quot;</a></li><li><a href="traits/serialize.html"><strong>12.5.</strong> &quot;Packable&quot; kaj &quot;Serializable&quot;</a></li></ul></li><li><a href="templates/operators.html"><strong>13.</strong> Transŝargo de Operacisimboloj</a></li><li><ul class="section"><li><a href="templates/binary.html"><strong>13.1.</strong> Unuopaj, duopaj kaj komparaj operacioj</a></li><li><a href="templates/complex_operators.html"><strong>13.2.</strong> Aliraj, Enhavaj kaj iteraciaj operacioj</a></li></ul></li><li><a href="version/README.html"><strong>14.</strong> Versioj</a></li><li><a href="macros/README.html"><strong>15.</strong> Makrooj</a></li><li><ul class="section"><li><a href="macros/std.html"><strong>15.1.</strong> Normaj kaj kernaj makrooj</a></li></ul></li><li><a href="documentation/README.html"><strong>16.</strong> Dokumentaro</a></li><li><ul class="section"><li><a href="documentation/types.html"><strong>16.1.</strong> Tipoj</a></li><li><a href="documentation/symbols.html"><strong>16.2.</strong> Simboloj</a></li></ul></li></ul>
+        </div>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page" tabindex="-1">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div class="left-buttons">
+                        <i id="sidebar-toggle" class="fa fa-bars" title="Toggle sidebar"></i>
+                        <i id="theme-toggle" class="fa fa-paint-brush" title="Change theme"></i>
+                    </div>
+
+                    <h1 class="menu-title">Ymir Tour</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html">
+                            <i id="print-button" class="fa fa-print" title="Print this book"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="content" class="content">
+                    <a class="header" href="types/enum.html#enumeration" id="enumeration"><h1>Enumeration</h1></a>
+<p>Enumerations are user-defined types that enumerates a list of
+values. The keyword <code>enum</code> is used to define an enumeration type. The
+type of the fields can be inferred from the value associated to the
+fields. This type can be forced using the type operator <strong><code>:</code></strong>, after
+the keyword <strong><code>enum</code></strong>. All the fields of an enumeration shares the
+same type.</p>
+<p>The complete grammar of an enumeration is presented in the following
+source block. As for struct declaration, templates can be used, but
+this functionnality will only be discussed in the
+<a href="https://gnu-ymir.github.io/Documentations/en/templates/">Templates</a>
+chapter.</p>
+<pre><code class="language-grammar">enum_type := 'enum' (':' type)? (inner_value)+ '-&gt;' identifier (templates)?;
+inner_value := '|' identifier '=' expression
+identifier := ('_')* [A-z] ([A-z0-9_])*	
+</code></pre>
+<p><br></p>
+<p>In the following source code, an example of an enumeration of type
+<strong><code>[c32]</code></strong> is presented. This enumeration lists the names of the
+days.</p>
+<pre><code class="language-ymir">import std::io
+
+enum
+| MONDAY = &quot;Mon&quot;
+| TUESDAY = &quot;Tue&quot;
+| WEDNESDAY = &quot;Wed&quot;
+| THURSDAY = &quot;Thu&quot;
+| FRIDAY = &quot;Fri&quot;
+| SATURDAY = &quot;Sat&quot;
+| SUNDAY = &quot;Sun&quot;
+ -&gt; Day;
+
+def foo (day : Day) {
+    println (day);
+}
+
+def main () {
+    let d = Day::MONDAY;
+    foo (d);
+}
+</code></pre>
+<a class="header" href="types/enum.html#value-access" id="value-access"><h2>Value access</h2></a>
+<p>The values of an enumeration are accessible using the double colon
+binary operator <strong><code>::</code></strong>. In practice, access a value of the
+enumeration will past the content value of the field at the caller
+location. The value - result of the expression - is of the type of the
+enumeration (for example the type <strong><code>Day</code></strong> in the example below).</p>
+<a class="header" href="types/enum.html#value-types" id="value-types"><h3>Value types</h3></a>
+<p>An example of enumeration access is presented in the following source
+code. In this example, implicit casting is perform from a <strong><code>Day</code></strong> to
+a <strong><code>[c32]</code></strong>, when calling the function <strong><code>foo</code></strong>, at line
+<strong>23</strong>. This implicit cast is allowed.</p>
+<pre><code class="language-ymir">import std::io
+
+enum : [c32] // the type is optional
+| MONDAY = &quot;Mon&quot;
+| TUESDAY = &quot;Tue&quot;
+| WEDNESDAY = &quot;Wed&quot;
+| THURSDAY = &quot;Thu&quot;
+| FRIDAY = &quot;Fri&quot;
+| SATURDAY = &quot;Sat&quot;
+| SUNDAY = &quot;Sun&quot;
+ -&gt; Day;
+
+def foo (day : [c32]) {
+    println (day);
+}
+
+def bar (day : Day) {
+    println (day);
+}
+
+def main () {
+    // the internal type Day is of type [c32], so it can be implicitely casted into [c32]
+    foo (Day::MONDAY);
+    
+    bar (Day::MONDAY);
+
+    // However, it is impossible to transform a [c32] into a Day implicitely
+    bar (&quot;Mon&quot;)
+}
+</code></pre>
+<p><br></p>
+<p>However, the contrary is not allowed, because the source code tries to
+cast a <strong><code>[c32]</code></strong> into a <strong><code>Day</code></strong> at line <strong>28</strong>, the compiler
+returns an error. The error is presented in the code block below. Such
+cast is forbidden, to avoid enumeration value to contain a value that
+is actually not defined in the list of the field of the
+enumeration. For example, if this was accepted, the string
+<strong><code>&quot;NotADay&quot;</code></strong> would be castable into a <strong><code>Day</code></strong> (<em>note:</em> the value
+of the string being possibly unknown at compilation time).</p>
+<pre><code class="language-error">Error : the call operator is not defined for main::bar and {mut [c32]}
+ --&gt; main.yr:(28,9)
+28  ┃     bar (&quot;Mon&quot;)
+    ╋         ^     ^
+    ┃ Note : candidate bar --&gt; main.yr:(17,5) : main::bar (day : main::Day([c32]))-&gt; void
+    ┃     ┃ Error : incompatible types main::Day and mut [c32]
+    ┃     ┃  --&gt; main.yr:(28,10)
+    ┃     ┃ 28  ┃     bar (&quot;Mon&quot;)
+    ┃     ┃     ╋          ^
+    ┃     ┃ Note : for parameter day --&gt; main.yr:(17,10) of main::bar (day : main::Day([c32]))-&gt; void
+    ┃     ┗━━━━━━ 
+    ┗━━━━━┻━ 
+
+
+ymir1: fatal error: 
+compilation terminated.
+</code></pre>
+<p><br></p>
+<a class="header" href="types/enum.html#value-constructions" id="value-constructions"><h3>Value constructions</h3></a>
+<p>Enumeration values can be more complex than literals. Any kind of
+value can be used, for example call functions, condition block, scope
+guards, etc. In the following example, an enumeration creating
+structure from function call is presented. The type of the enumeration
+is <strong><code>Ipv4Addr</code></strong>.</p>
+<pre><code class="language-ymir">import std::io
+
+struct
+| a : i32
+| b : i32
+| c : i32
+| d : i32
+ -&gt; Ipv4Addr;
+
+enum
+| LOCALHOST = localhost ()
+| BROADCAST = broadcast ()
+ -&gt; KnownAddr;
+
+def localhost ()-&gt; Ipv4Addr {
+    println (&quot;Call localhost&quot;);
+    Ipv4Addr (127, 0, 0, 1)
+}
+
+def broadcast ()-&gt; Ipv4Addr {
+    println (&quot;Call broadcast&quot;);	
+    Ipv4Addr (255, 255, 255, 255)
+}
+
+def main ()
+    throws &amp;AssertError
+{
+    let addr = KnownAddr::LOCALHOST; // will call localhost here
+
+    assert (KnownAddr::LOCALHOST.a == 127); // a second time here
+    assert (KnownAddr::BROADCAST.d == 255); // call broadcast here
+    assert (addr.a == 127);
+}
+</code></pre>
+<p><br></p>
+<p>The enumeration value of a field is constructed at each access, this
+means for example that when enumeration values are constructed using
+function call, the function is called each time the enumeration field
+is accessed. Thus the result of the execution of the compiled source
+code above is the following:</p>
+<pre><code>Call localhost
+Call localhost
+Call broadcast
+</code></pre>
+<p><br></p>
+<a class="header" href="types/enum.html#value-context" id="value-context"><h3>Value context</h3></a>
+<p>If the value of the enumeration seems to be passed at the caller
+location, they don't share the context of the caller. In other words,
+the fields of an enumeration have access to the symbol accessible from
+the enumeration context, and not from the caller context. An example,
+of enumeration trying to access symbols is presented in the source
+code bellow.</p>
+<pre><code class="language-ymir">import std::io
+
+static __GLOB__ = true;
+
+enum 
+| FOO = (if (x) { 42 } else { 11 })
+| BAR = (if (__GLOB__) { 42 } else { 11 })
+ -&gt; ErrorEnum;
+ 
+def main () {
+    let x = false;
+    
+    println (ErrorEnum::FOO); 
+}
+</code></pre>
+<p><br></p>
+<p>From the above example, the compiler returns an error. In this error,
+the compiler informs that the variable <strong><code>x</code></strong> is not defined from the
+context of the enumeration. Even if the variable is declared inside
+the <strong><code>main</code></strong> function, it is not accessible from the enumeration
+context. The global variable <strong><code>__GLOB__</code></strong> is accessible from the
+enumeration context, and thus accessing it is not an issue.</p>
+<pre><code class="language-error">Note : 
+ --&gt; main.yr:(6,3)
+ 6  ┃ | FOO = (if (x) { 42 } else { 11 })
+    ╋   ^^^
+    ┃ Error : undefined symbol x
+    ┃  --&gt; main.yr:(6,14)
+    ┃  6  ┃ | FOO = (if (x) { 42 } else { 11 })
+    ┃     ╋              ^
+    ┗━━━━━┻━ 
+
+Note : 
+ --&gt; main.yr:(13,11)
+13  ┃ 	println (ErrorEnum::FOO); 
+    ╋ 	         ^^^^^^^^^
+    ┃ Error : the type main::ErrorEnum is not complete due to previous errors
+    ┃  --&gt; main.yr:(8,5)
+    ┃  8  ┃  -&gt; ErrorEnum;
+    ┃     ╋     ^^^^^^^^^
+    ┃     ┃ Note : 
+    ┃     ┃  --&gt; main.yr:(13,11)
+    ┃     ┃ 13  ┃ 	println (ErrorEnum::FOO); 
+    ┃     ┃     ╋ 	         ^^^^^^^^^
+    ┃     ┗━━━━━┻━ 
+    ┗━━━━━┻━ 
+
+
+ymir1: fatal error: 
+compilation terminated.
+</code></pre>
+<a class="header" href="types/enum.html#enumeration-specific-attributes" id="enumeration-specific-attributes"><h2>Enumeration specific attributes</h2></a>
+<p>As for any type, enumeration have specific type attributes. The table
+below lists the enumeration type specific attributes.</p>
+<table><thead><tr><th> Name </th><th> Meaning </th></tr></thead><tbody>
+<tr><td> <code>members</code> </td><td> A slice containing all the values of the enumeration </td></tr>
+<tr><td> <code>member_names</code> </td><td> A slice of [c32], containing all the names of the fields of the enumeration (same order than <code>members</code>)</td></tr>
+<tr><td> <code>typeid</code> </td><td> The type identifier of the enumeration type in a <code>[c32]</code> typed value </td></tr>
+<tr><td> <code>typeinfo</code> </td><td> The typeinfo of the inner type of the enumeration (cf. <a href="">Dynamic types</a>) </td></tr>
+<tr><td> <code>inner</code> </td><td> The inner type of the enumeration </td></tr>
+</tbody></table>
+<p><br></p>
+<p>One may note that the operator to access specific attributes and field
+is the same (double colon binary operator <strong><code>::</code></strong>), and therefore
+that if an enumeration have a field named as a specific attributes
+there is a conflict. To avoid conflict, the priority is given to the
+fields of the enumeration, and specific attributes can be accessed
+using their identifier surrounded by <strong><code>_</code></strong> tokens. For example,
+accessing the <code>members</code> specific attributes can be made using the
+identifier <code>__members__</code>. An example of the principle is presented in
+the following source code. The specific attribute surrounding is
+applicable to all types, but can be really usefull here.</p>
+<pre><code class="language-ymir">mod main;
+
+enum
+| typeid       = 1
+| typeinfo     = 2
+| members      = 3
+| member_names = 4
+| inner        = 5
+ -&gt; AnnoyingEnum;
+
+def main ()
+    throws &amp;AssertError
+{
+    assert (AnnoyingEnum::typeid == 1);
+    assert (AnnoyingEnum::__typeid == AnnoyingEnum::__typeid__);
+    assert (AnnoyingEnum::__typeid == &quot;main::AnnoyingEnum&quot;);	
+}
+</code></pre>
+
+                </div>
+
+                <!-- Mobile navigation buttons -->
+                
+                    <a rel="prev" href="types/struct.html" class="mobile-nav-chapters previous" title="Previous chapter">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="types/aka.html" class="mobile-nav-chapters next" title="Next chapter">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+
+            </div>
+
+            
+                <a href="types/struct.html" class="nav-chapters previous" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+            
+
+            
+                <a href="types/aka.html" class="nav-chapters next" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            
+
+        </div>
+
+
+        <!-- Local fallback for Font Awesome -->
+        <script>
+            if ($(".fa").css("font-family") !== "FontAwesome") {
+                $('<link rel="stylesheet" type="text/css" href="_FontAwesome/css/font-awesome.css">').prependTo('head');
+            }
+        </script>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        
+
+        
+
+        
+
+        
+
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS script -->
+        
+        <script type="text/javascript" src="custom.js"></script>
+        
+
+    </body>
+</html>

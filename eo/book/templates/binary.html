@@ -1,0 +1,496 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Unuopaj, duopaj kaj komparaj operacioj - Ymir Tour</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <base href="../">
+
+        <link rel="stylesheet" href="book.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <link rel="shortcut icon" href="favicon.png">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme -->
+        
+        <link rel="stylesheet" href="custom.css">
+        
+
+        
+
+        <!-- Fetch Clipboard.js from CDN but have a local fallback -->
+        <script src="https://cdn.jsdelivr.net/clipboard.js/1.6.1/clipboard.min.js"></script>
+        <script>
+            if (typeof Clipboard == 'undefined') {
+                document.write(unescape("%3Cscript src='clipboard.min.js'%3E%3C/script%3E"));
+            }
+        </script>
+
+        <!-- Fetch JQuery from CDN but have a local fallback -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script>
+            if (typeof jQuery == 'undefined') {
+                document.write(unescape("%3Cscript src='jquery.js'%3E%3C/script%3E"));
+            }
+        </script>
+
+        <!-- Fetch store.js from local - TODO add CDN when 2.x.x is available on cdnjs -->
+        <script src="store.js"></script>
+
+    </head>
+    <body class="light">
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme = store.get('mdbook-theme');
+            if (theme === null || theme === undefined) { theme = 'light'; }
+            $('body').removeClass().addClass(theme);
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var sidebar = store.get('mdbook-sidebar');
+            if (sidebar === "hidden") { $("html").addClass("sidebar-hidden") }
+            else if (sidebar === "visible") { $("html").addClass("sidebar-visible") }
+        </script>
+
+        <div id="sidebar" class="sidebar">
+            <ul class="chapter"><li><a href="README.html"><strong>1.</strong> Antaŭparolo</a></li><li><a href="hello-world/README.html"><strong>2.</strong> Bonan tagon mondo</a></li><li><ul class="section"><li><a href="hello-world/commentaires.html"><strong>2.1.</strong> Komentoj</a></li></ul></li><li><a href="primitives/README.html"><strong>3.</strong> Bazaj konceptoj de programado</a></li><li><ul class="section"><li><a href="primitives/variables.html"><strong>3.1.</strong> Variablo kaj Ŝanĝebleco</a></li><li><a href="primitives/types.html"><strong>3.2.</strong> Datenaj tipoj</a></li><li><a href="primitives/functions.html"><strong>3.3.</strong> Funkcioj</a></li><li><a href="primitives/control.html"><strong>3.4.</strong> Kontrolaj fluoj</a></li><li><a href="primitives/operator.html"><strong>3.5.</strong> Prioritato de operacioj</a></li></ul></li><li><a href="advanced/README.html"><strong>4.</strong> Alnomoj, Referencoj kaj pureco</a></li><li><ul class="section"><li><a href="advanced/references.html"><strong>4.1.</strong> Referencoj</a></li><li><a href="advanced/alias.html"><strong>4.2.</strong> Alnomoj</a></li><li><a href="advanced/copies.html"><strong>4.3.</strong> Kopio kaj profunda kopio</a></li><li><a href="advanced/best.html"><strong>4.4.</strong> Plej bonaj kutimoj</a></li><li><a href="advanced/pure.html"><strong>4.5.</strong> Puraj valoroj</a></li></ul></li><li><a href="modules/README.html"><strong>5.</strong> Pakaĵoj</a></li><li><a href="types/README.html"><strong>6.</strong> Tipoj difinitaj de la uzanto</a></li><li><ul class="section"><li><a href="types/struct.html"><strong>6.1.</strong> Strukturo</a></li><li><a href="types/enum.html"><strong>6.2.</strong> Enumeracio</a></li><li><a href="types/aka.html"><strong>6.3.</strong> Kaŝnomo</a></li></ul></li><li><a href="objects/README.html"><strong>7.</strong> Objektoj</a></li><li><ul class="section"><li><a href="objects/class.html"><strong>7.1.</strong> Klaso</a></li><li><a href="objects/mutability.html"><strong>7.2.</strong> Ŝanĝebleco</a></li><li><a href="objects/methods.html"><strong>7.3.</strong> Metodoj</a></li><li><a href="objects/inheritance.html"><strong>7.4.</strong> Heredeco</a></li><li><a href="objects/traits.html"><strong>7.5.</strong> Trajto</a></li><li><a href="objects/cast.html"><strong>7.6.</strong> Tipŝanĝo, kaj dinamikaj tipoj</a></li></ul></li><li><a href="functions/README.html"><strong>8.</strong> Funkcioj pli kompleksaj</a></li><li><a href="pattern/README.html"><strong>9.</strong> Skema kongruo</a></li><li><a href="errors/main.html"><strong>10.</strong> Traktado de Eraroj</a></li><li><ul class="section"><li><a href="errors/scope_guards.html"><strong>10.1.</strong> Regionaj gardantoj</a></li><li><a href="errors/catching.html"><strong>10.2.</strong> Kapti erarojn</a></li><li><a href="errors/option.html"><strong>10.3.</strong> Esceptoj kaj opcia tipo</a></li><li><a href="errors/fptr_closure.html"><strong>10.4.</strong> Montrilo de Malsekuraj Funkcioj</a></li></ul></li><li><a href="templates/README.html"><strong>11.</strong> Ŝablonoj</a></li><li><ul class="section"><li><a href="templates/special.html"><strong>11.1.</strong> Ŝablonaj tipoj</a></li><li><a href="templates/cte.html"><strong>11.2.</strong> Ŝablonaj valoroj</a></li><li><a href="templates/values.html"><strong>11.3.</strong> Plenumo dum kompilado</a></li></ul></li><li><a href="objects/common_traits.html"><strong>12.</strong> Ordinaraj trajtoj</a></li><li><ul class="section"><li><a href="traits/streamable.html"><strong>12.1.</strong> &quot;Streamable&quot;</a></li><li><a href="traits/copiable.html"><strong>12.2.</strong> &quot;Copiable&quot;</a></li><li><a href="traits/disposable.html"><strong>12.3.</strong> &quot;With&quot; gardanto kaj &quot;Disposable&quot;</a></li><li><a href="traits/hashable.html"><strong>12.4.</strong> &quot;Hashable&quot;</a></li><li><a href="traits/serialize.html"><strong>12.5.</strong> &quot;Packable&quot; kaj &quot;Serializable&quot;</a></li></ul></li><li><a href="templates/operators.html"><strong>13.</strong> Transŝargo de Operacisimboloj</a></li><li><ul class="section"><li><a href="templates/binary.html" class="active"><strong>13.1.</strong> Unuopaj, duopaj kaj komparaj operacioj</a></li><li><a href="templates/complex_operators.html"><strong>13.2.</strong> Aliraj, Enhavaj kaj iteraciaj operacioj</a></li></ul></li><li><a href="version/README.html"><strong>14.</strong> Versioj</a></li><li><a href="macros/README.html"><strong>15.</strong> Makrooj</a></li><li><ul class="section"><li><a href="macros/std.html"><strong>15.1.</strong> Normaj kaj kernaj makrooj</a></li></ul></li><li><a href="documentation/README.html"><strong>16.</strong> Dokumentaro</a></li><li><ul class="section"><li><a href="documentation/types.html"><strong>16.1.</strong> Tipoj</a></li><li><a href="documentation/symbols.html"><strong>16.2.</strong> Simboloj</a></li></ul></li></ul>
+        </div>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page" tabindex="-1">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div class="left-buttons">
+                        <i id="sidebar-toggle" class="fa fa-bars" title="Toggle sidebar"></i>
+                        <i id="theme-toggle" class="fa fa-paint-brush" title="Change theme"></i>
+                    </div>
+
+                    <h1 class="menu-title">Ymir Tour</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html">
+                            <i id="print-button" class="fa fa-print" title="Print this book"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="content" class="content">
+                    <a class="header" href="templates/binary.html#simple-operator-overloading" id="simple-operator-overloading"><h1>Simple operator overloading</h1></a>
+<p>This chapter presents the standard operator overloading : <em>unary</em>, <em>binary</em> and <em>comparison</em>.</p>
+<a class="header" href="templates/binary.html#unary-operator" id="unary-operator"><h2>Unary operator</h2></a>
+<p>Unary operators are operators that are applied to only one
+operand. The overloading of the operator is made by defining a
+template method inside the class definition. The name of the template
+method must be <strong><code>opUnary</code></strong>, and must take a template value as first
+argument. The table bellow lists the rewrite operations that are done
+by the compiler to call the correct template method for operator
+overloading.</p>
+<table><thead><tr><th> expression </th><th> rewrite </th></tr></thead><tbody>
+<tr><td> -e </td><td> e.opUnary!(&quot;-&quot;) </td></tr>
+<tr><td> *e </td><td> e.opUnary!(&quot;*&quot;) </td></tr>
+<tr><td> !e </td><td> e.opUnary!(&quot;!&quot;) </td></tr>
+</tbody></table>
+<p>In the following example, the class <strong><code>A</code></strong> has two <strong><code>opUnary</code></strong>
+methods. The first one at line <strong>8</strong>, is applicable with the operator
+<strong><code>-</code></strong>, and the second one at line <strong>12</strong> is applicable with any
+other operators.</p>
+<pre><code class="language-ymir">import std::io;
+
+class A  {
+    let _a : f32;
+    
+    pub self (a : f32) with _a = a {} 
+    
+    pub def opUnary {&quot;-&quot;} (self) -&gt; &amp;A {
+        A::new (-self._a)
+    }
+    
+    pub def opUnary {op : [c32]} (self) -&gt; &amp;A {
+        cte if (op == &quot;!&quot;) // op is compile time known
+            A::new (1.f / self._a)
+        else // operator '+'
+            self
+    }
+
+    impl Streamable;
+}
+
+def main () {
+    let a = A::new (10.0f);
+    println (!a); 
+}
+</code></pre>
+<p><br></p>
+<p>This example, call the method defined at line <strong>12</strong> by using the
+operator <strong><code>!</code></strong>. In this method the value of <strong><code>op</code></strong> is known at
+compile time, and thus can be compared (also at compile time). The
+<strong><code>!</code></strong> unary operator is defined for the class <strong>A</strong> as giving the
+inverse of the value stored in the object, thus the result is the
+following :</p>
+<pre><code>main::A(0.10000)
+</code></pre>
+<a class="header" href="templates/binary.html#binary-operator" id="binary-operator"><h2>Binary operator</h2></a>
+<p>Binary operators are also overloadable. As for unary operators, the
+overloading of binary operators is made by code rewritting at compile
+time. In the case of binary operators, the operation involves two
+different operands, one of them must be an object instance.</p>
+<p>The following operators are overloadable. The use indicated in the
+left column is only an indication and corresponds to the common use of
+these operators, but they can of course be used for other purposes.</p>
+<table>
+<tbody>
+<tr>
+<td align="left"><bold>Math</bold></td>
+<td align="center"><code>+</code></td>
+<td align="center"><code>-</code></td>
+<td align="center"><code>*</code></td>
+<td align="center"><code>/</code></td>
+<td align="center"><code>%</code></td>
+<td align="center"><code>^^</code></td>
+</tr>
+<tr>
+<td align="left"><bold>Bitwise</bold></td>
+<td align="center"><code>|</code></td>
+<td align="center"><code>&</code></td>
+<td align="center"><code>^</code></td>
+<td align="center"><code> << </code></td>
+<td align="center"><code> >> </code></td>
+</tr>
+<tr>
+<td align="left"><bold>Array</bold></td>
+<td align="center"><code>~</code></td>
+</tr>
+</tbody>
+</table>
+<!-- |     |     |      |      |     |      | -->
+<!-- | --- | --- | ---- | --- | --- | ---- | -->
+<!-- | `+` |	`-`	| `*`  | `/` |	`%` | `^^` | -->
+<!-- | `\|` | `^` | `<<` | `>>` |	`~` | `&`  | -->
+<p>The following example presents a class <strong><code>A</code></strong> that overload the
+operator <strong><code>+</code></strong> and <strong><code>-</code></strong> using a <strong><code>i32</code></strong> as a second operand.</p>
+<pre><code class="language-ymir">import std::io;
+
+class A {
+    let _a : i32;
+
+    pub self (a : i32) with _a = a {}
+
+    pub def opBinary {&quot;+&quot;} (self, a : i32) -&gt; &amp;A {
+        A::new (self._a + a)
+    }
+
+    pub def opBinary {&quot;-&quot;} (self, a : i32) -&gt; &amp;A {
+        A::new (self._a - a)
+    }
+    
+    impl Streamable;
+}
+
+def main () {
+    let a = A::new (12);
+    println (a - 30);
+}
+</code></pre>
+<p><br></p>
+<p>Results:</p>
+<pre><code>main::A(-18)
+</code></pre>
+<p><br></p>
+<p>Because there are two operands (sometimes of different types), binary
+operation can sometimes be not commutative (for example the math
+binary operator <strong><code>-</code></strong>). To resolve that problem the rewritting is
+made in two different steps, the first step tries to rewritte the
+operation using the method <strong><code>opBinary</code></strong>, if this first rewritte
+failed a second rewritte is made, but this time using the right
+operand and by calling the method <strong><code>opBinaryRight</code></strong>. If the right
+operator is not defined, the compiler <strong>does not</strong> try to make the
+operation commutative, the two methods must be defined.</p>
+<pre><code class="language-ymir">import std::io;
+
+class A {
+    let _a : i32;
+
+    pub self (a : i32) with _a = a {}
+
+    pub def opBinaryRight {&quot;-&quot;} (self, a : i32) -&gt; &amp;A {
+        A::new (a - self._a)
+    }
+    
+    impl Streamable;
+}
+
+def main () {
+    let a = A::new (12);
+    println (54 - a);
+}
+</code></pre>
+<p><br>
+Results:</p>
+<pre><code>main::A(42)
+</code></pre>
+<a class="header" href="templates/binary.html#limitations" id="limitations"><h2>Limitations</h2></a>
+<p>For the moment, templates method cannot be overriden by children
+classes. For that reason, it is impossible to override the behavior of
+the binary operator of an ancestor class. The limitation is the same
+for unary operators. However, to allow such behavior, the overloading
+method can call a standard method (without template), that is
+overridable by a children class. An example is presented in the
+following source code.</p>
+<pre><code class="language-ymir">import std::io
+
+class A {
+
+    let _i : i32;
+    pub self (i : i32) with _i = i {}
+    
+    pub def opBinary {&quot;+&quot;} (self, i : i32) -&gt; &amp;A {
+        self.add (i)
+    }
+
+    pub def add (self, i : i32)-&gt; &amp;A {
+        A::new (i + self._i)
+    }
+
+    impl Streamable;
+}
+
+class B over A {
+    pub self (i : i32) with super (i) {}
+
+    pub over add (self, i : i32)-&gt; &amp;A {
+        B::new (i * self._i)
+    }
+
+    impl Streamable;
+}
+
+def main () {
+    let mi = B::new (8);
+    println (mi + 8);
+}
+</code></pre>
+<p><strong>Contribution</strong> How to override template method is currently under
+discussion ! But it seems impossible for many reasons that are not
+discussed here, you can contact us for more information.</p>
+<a class="header" href="templates/binary.html#comparison-operators" id="comparison-operators"><h2>Comparison operators</h2></a>
+<p>The equality and comparison are treated via two different methods
+<code>opEquals</code> and <code>opCmp</code>. Because while almost all types can be compared
+for equality, only some have meaningful order comparison.</p>
+<p>The <code>opCmp</code> method is used for the operators <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code> and <code>&gt;=</code>
+only. And the method <code>opEquals</code> is used for the operator <code>==</code> and
+<code>!=</code>. When the method <code>opEquals</code> is not defined for the type, the
+compiler will try to use the method <code>opCmp</code> instead. When both the
+methods are defined, <strong>it is up to the user to ensure that these two
+functions are consistent</strong>.</p>
+<p>Indeed, it is impossible to verify that in a general case. For example
+the operator <strong><code>&lt;</code></strong> can be used on a set object, where the operator
+<code>x &lt; y</code> stand for <code>x</code> is a strict subset of <code>y</code>. Therefore, even if
+neither <code>x &lt; y</code> and <code>y &lt; x</code> are true, the equality <code>x == y</code> is not
+implied.</p>
+<a class="header" href="templates/binary.html#overloading--and-" id="overloading--and-"><h3>Overloading == and !=</h3></a>
+<p>The method <strong><code>opEquals</code></strong> is a simple method, that does not take
+template arguments. Expressions of the form <code>a != b</code>, are rewritten
+into <code>!(a == b)</code>, therefore there is only one method to define.</p>
+<pre><code class="language-ymir">import std::io
+
+class Point {
+
+    let x : i32, y : i32;
+    
+    pub self (x : i32, y : i32) with x = x, y = y {}
+    
+    pub def opEquals (self, other : &amp;Point) -&gt; bool {
+        self.x == other.x &amp;&amp; self.y == other.y
+    }
+    
+}
+
+def main () 
+    throws &amp;AssertError 
+{
+    let a = Point::new (1, 2);
+    let b = Point::new (2, 3);
+    let c = Point::new (1, 2);
+    assert (a == c);
+    assert (a != b);
+}
+</code></pre>
+<p><br></p>
+<p>The operator <code>opEquals</code> is assumed <strong>commutative</strong>, thus when the
+operator is only defined for the type on the right operand, the
+operation will simply be rewritten reversely. The following example
+presents such a case, where the operator <strong><code>opEquals</code></strong> is only
+defined by the class <strong><code>A</code></strong>. The line <strong>19</strong> is simple rewritten into
+<strong><code>mi.opEquals (8)</code></strong>.</p>
+<pre><code class="language-ymir">import std::io
+
+class MyInt {
+
+    let i : i32;
+    
+    pub self (i : i32) with i = i {}
+    
+    pub def opEquals (self, i : i32) -&gt; bool {
+    self.i == i
+    }
+    
+}
+
+def main ()
+    throws &amp;AssertError
+{
+    let mi = MyInt::new (8);
+    assert (8 == mi);
+}
+</code></pre>
+<a class="header" href="templates/binary.html#overloading----and--" id="overloading----and--"><h3>Overloading &lt;, &gt;, &lt;= and  &gt;=</h3></a>
+<p>The method <strong><code>opCmp</code></strong> is used to compare an object to another
+value. The comparison unlike equality evaluation, gives a comparison
+order between two values. The method <strong><code>opCmp</code></strong> does not take any
+template parameter, but returns an integer value. A negative value
+meaning that the left operand is lower than the right operand, an
+positive value, that the left operand is higher than the right one,
+and a nul value that both operands are equals.</p>
+<p>The following table lists the possible rewritting of the comparison
+operators. As we can see in this table, the operator is assumed to be
+not commutative, thus if the first rewritting fails to compile (for
+type reason), then the second rewritting is used.</p>
+<table><thead><tr><th> comparison </th><th> rewrite 1 </th><th> rewrite 2 </th></tr></thead><tbody>
+<tr><td> a &lt; b </td><td> a.opCmp (b) &lt; 0 </td><td> b.opCmp (a) &gt; 0 </td></tr>
+<tr><td> a &gt; b </td><td> a.opCmp (b) &gt; 0 </td><td> b.opCmp (a) &lt; 0 </td></tr>
+<tr><td> a &lt;= b </td><td> a.opCmp (b) &lt;= 0 </td><td> b.opCmp (a) &gt;= 0 </td></tr>
+<tr><td> a &gt;= b </td><td> a.opCmp (b) &gt;= 0 </td><td> b.opCmp (a) &gt;= 0 </td></tr>
+</tbody></table>
+<p>In the following example, a comparison operator is used at line
+<strong><code>19</code></strong>, the rewritting <strong><code>(7).opCmp (mi) &lt; 0</code></strong> does not compile,
+because <strong><code>7</code></strong> is not an object value, and thus does not have any
+method. The second rewritting is thus used, <strong><code>mi.opCmp (7) &gt; 0</code></strong>.</p>
+<pre><code class="language-ymir">import std::io
+
+class MyInt {
+
+    let i : i32;
+    
+    pub self (i : i32) with i = i {}
+    
+    pub def opCmp (self, i : i32) -&gt; i32 {
+        self.i - i
+    }
+    
+}
+
+def main ()
+    throws &amp;AssertError
+{
+    let mi = MyInt::new (8);
+    assert (7 &lt; mi);
+}
+</code></pre>
+<a class="header" href="templates/binary.html#assignment" id="assignment"><h2>Assignment</h2></a>
+<p>The assignment operator is not overloadable, it will always perform
+the same operation. However, the shortcut operators <strong><code>+=</code>, <code>-=</code>,
+<code>*=</code></strong> etc, are usable on object when oveloading the binary
+operator. This operation is simply rewritten at compilation time, for
+example the expression <strong><code>a += 12</code></strong> is rewritten into <strong><code>a = a.opBinary!{&quot;+&quot;}(12)</code></strong>. The following example presents an utilisation
+example of the <strong><code>+=</code></strong> shortcut.</p>
+<pre><code class="language-ymir">import std::io
+
+class MyInt {
+
+    let _i : i32;
+    
+    pub self (i : i32) with _i = i {}
+
+    pub def opBinary {&quot;+&quot;} (self, a : i32)-&gt; &amp;MyInt {
+        MyInt::new (self._i + a)
+    }
+    
+    impl Streamable;
+}
+
+def main () {
+    let mut mi = MyInt::new (8);
+    mi += 9;
+    println (mi);
+}
+</code></pre>
+<p><br></p>
+<p>Results:</p>
+<pre><code>main::MyInt(17)
+</code></pre>
+<p><br></p>
+<p>One can note that the instance of the object stored in the variable
+<strong><code>mi</code></strong> is changed after the affectation. This is the standard
+behavior of the <strong><code>=</code></strong> operator.</p>
+
+                </div>
+
+                <!-- Mobile navigation buttons -->
+                
+                    <a rel="prev" href="templates/operators.html" class="mobile-nav-chapters previous" title="Previous chapter">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="templates/complex_operators.html" class="mobile-nav-chapters next" title="Next chapter">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+
+            </div>
+
+            
+                <a href="templates/operators.html" class="nav-chapters previous" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+            
+
+            
+                <a href="templates/complex_operators.html" class="nav-chapters next" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            
+
+        </div>
+
+
+        <!-- Local fallback for Font Awesome -->
+        <script>
+            if ($(".fa").css("font-family") !== "FontAwesome") {
+                $('<link rel="stylesheet" type="text/css" href="_FontAwesome/css/font-awesome.css">').prependTo('head');
+            }
+        </script>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        
+
+        
+
+        
+
+        
+
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS script -->
+        
+        <script type="text/javascript" src="custom.js"></script>
+        
+
+    </body>
+</html>

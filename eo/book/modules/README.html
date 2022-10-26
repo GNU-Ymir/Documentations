@@ -1,0 +1,503 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Pakaĵoj - Ymir Tour</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <base href="../">
+
+        <link rel="stylesheet" href="book.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <link rel="shortcut icon" href="favicon.png">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme -->
+        
+        <link rel="stylesheet" href="custom.css">
+        
+
+        
+
+        <!-- Fetch Clipboard.js from CDN but have a local fallback -->
+        <script src="https://cdn.jsdelivr.net/clipboard.js/1.6.1/clipboard.min.js"></script>
+        <script>
+            if (typeof Clipboard == 'undefined') {
+                document.write(unescape("%3Cscript src='clipboard.min.js'%3E%3C/script%3E"));
+            }
+        </script>
+
+        <!-- Fetch JQuery from CDN but have a local fallback -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script>
+            if (typeof jQuery == 'undefined') {
+                document.write(unescape("%3Cscript src='jquery.js'%3E%3C/script%3E"));
+            }
+        </script>
+
+        <!-- Fetch store.js from local - TODO add CDN when 2.x.x is available on cdnjs -->
+        <script src="store.js"></script>
+
+    </head>
+    <body class="light">
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme = store.get('mdbook-theme');
+            if (theme === null || theme === undefined) { theme = 'light'; }
+            $('body').removeClass().addClass(theme);
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var sidebar = store.get('mdbook-sidebar');
+            if (sidebar === "hidden") { $("html").addClass("sidebar-hidden") }
+            else if (sidebar === "visible") { $("html").addClass("sidebar-visible") }
+        </script>
+
+        <div id="sidebar" class="sidebar">
+            <ul class="chapter"><li><a href="README.html"><strong>1.</strong> Antaŭparolo</a></li><li><a href="hello-world/README.html"><strong>2.</strong> Bonan tagon mondo</a></li><li><ul class="section"><li><a href="hello-world/commentaires.html"><strong>2.1.</strong> Komentoj</a></li></ul></li><li><a href="primitives/README.html"><strong>3.</strong> Bazaj konceptoj de programado</a></li><li><ul class="section"><li><a href="primitives/variables.html"><strong>3.1.</strong> Variablo kaj Ŝanĝebleco</a></li><li><a href="primitives/types.html"><strong>3.2.</strong> Datenaj tipoj</a></li><li><a href="primitives/functions.html"><strong>3.3.</strong> Funkcioj</a></li><li><a href="primitives/control.html"><strong>3.4.</strong> Kontrolaj fluoj</a></li><li><a href="primitives/operator.html"><strong>3.5.</strong> Prioritato de operacioj</a></li></ul></li><li><a href="advanced/README.html"><strong>4.</strong> Alnomoj, Referencoj kaj pureco</a></li><li><ul class="section"><li><a href="advanced/references.html"><strong>4.1.</strong> Referencoj</a></li><li><a href="advanced/alias.html"><strong>4.2.</strong> Alnomoj</a></li><li><a href="advanced/copies.html"><strong>4.3.</strong> Kopio kaj profunda kopio</a></li><li><a href="advanced/best.html"><strong>4.4.</strong> Plej bonaj kutimoj</a></li><li><a href="advanced/pure.html"><strong>4.5.</strong> Puraj valoroj</a></li></ul></li><li><a href="modules/README.html" class="active"><strong>5.</strong> Pakaĵoj</a></li><li><a href="types/README.html"><strong>6.</strong> Tipoj difinitaj de la uzanto</a></li><li><ul class="section"><li><a href="types/struct.html"><strong>6.1.</strong> Strukturo</a></li><li><a href="types/enum.html"><strong>6.2.</strong> Enumeracio</a></li><li><a href="types/aka.html"><strong>6.3.</strong> Kaŝnomo</a></li></ul></li><li><a href="objects/README.html"><strong>7.</strong> Objektoj</a></li><li><ul class="section"><li><a href="objects/class.html"><strong>7.1.</strong> Klaso</a></li><li><a href="objects/mutability.html"><strong>7.2.</strong> Ŝanĝebleco</a></li><li><a href="objects/methods.html"><strong>7.3.</strong> Metodoj</a></li><li><a href="objects/inheritance.html"><strong>7.4.</strong> Heredeco</a></li><li><a href="objects/traits.html"><strong>7.5.</strong> Trajto</a></li><li><a href="objects/cast.html"><strong>7.6.</strong> Tipŝanĝo, kaj dinamikaj tipoj</a></li></ul></li><li><a href="functions/README.html"><strong>8.</strong> Funkcioj pli kompleksaj</a></li><li><a href="pattern/README.html"><strong>9.</strong> Skema kongruo</a></li><li><a href="errors/main.html"><strong>10.</strong> Traktado de Eraroj</a></li><li><ul class="section"><li><a href="errors/scope_guards.html"><strong>10.1.</strong> Regionaj gardantoj</a></li><li><a href="errors/catching.html"><strong>10.2.</strong> Kapti erarojn</a></li><li><a href="errors/option.html"><strong>10.3.</strong> Esceptoj kaj opcia tipo</a></li><li><a href="errors/fptr_closure.html"><strong>10.4.</strong> Montrilo de Malsekuraj Funkcioj</a></li></ul></li><li><a href="templates/README.html"><strong>11.</strong> Ŝablonoj</a></li><li><ul class="section"><li><a href="templates/special.html"><strong>11.1.</strong> Ŝablonaj tipoj</a></li><li><a href="templates/cte.html"><strong>11.2.</strong> Ŝablonaj valoroj</a></li><li><a href="templates/values.html"><strong>11.3.</strong> Plenumo dum kompilado</a></li></ul></li><li><a href="objects/common_traits.html"><strong>12.</strong> Ordinaraj trajtoj</a></li><li><ul class="section"><li><a href="traits/streamable.html"><strong>12.1.</strong> &quot;Streamable&quot;</a></li><li><a href="traits/copiable.html"><strong>12.2.</strong> &quot;Copiable&quot;</a></li><li><a href="traits/disposable.html"><strong>12.3.</strong> &quot;With&quot; gardanto kaj &quot;Disposable&quot;</a></li><li><a href="traits/hashable.html"><strong>12.4.</strong> &quot;Hashable&quot;</a></li><li><a href="traits/serialize.html"><strong>12.5.</strong> &quot;Packable&quot; kaj &quot;Serializable&quot;</a></li></ul></li><li><a href="templates/operators.html"><strong>13.</strong> Transŝargo de Operacisimboloj</a></li><li><ul class="section"><li><a href="templates/binary.html"><strong>13.1.</strong> Unuopaj, duopaj kaj komparaj operacioj</a></li><li><a href="templates/complex_operators.html"><strong>13.2.</strong> Aliraj, Enhavaj kaj iteraciaj operacioj</a></li></ul></li><li><a href="version/README.html"><strong>14.</strong> Versioj</a></li><li><a href="macros/README.html"><strong>15.</strong> Makrooj</a></li><li><ul class="section"><li><a href="macros/std.html"><strong>15.1.</strong> Normaj kaj kernaj makrooj</a></li></ul></li><li><a href="documentation/README.html"><strong>16.</strong> Dokumentaro</a></li><li><ul class="section"><li><a href="documentation/types.html"><strong>16.1.</strong> Tipoj</a></li><li><a href="documentation/symbols.html"><strong>16.2.</strong> Simboloj</a></li></ul></li></ul>
+        </div>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page" tabindex="-1">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div class="left-buttons">
+                        <i id="sidebar-toggle" class="fa fa-bars" title="Toggle sidebar"></i>
+                        <i id="theme-toggle" class="fa fa-paint-brush" title="Change theme"></i>
+                    </div>
+
+                    <h1 class="menu-title">Ymir Tour</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html">
+                            <i id="print-button" class="fa fa-print" title="Print this book"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="content" class="content">
+                    <a class="header" href="modules/README.html#modules" id="modules"><h1>Modules</h1></a>
+<p>When creating a large project, it is very important to organize your
+code. <em>Ymir</em> offers a system of modules, which is used to manage
+different parts of the code that have different purposes. Each source
+file in <em>Ymir</em> is a module.</p>
+<a class="header" href="modules/README.html#file-hierarchy" id="file-hierarchy"><h2>File hierarchy</h2></a>
+<p>Lets have a look at the following file hierarchy :</p>
+<pre><code>.
+├── main.yr
+└── extern_modules
+    ├── bar.yr
+    └── foo.yr
+
+1 directory, 3 files
+</code></pre>
+<p><br>
+In this file hierarchy there are three files, which contain modules, the
+first module in the file <code>main.yr</code> will be named <code>main</code>. The second
+one in the <code>extern_modules/bar.yr</code> file will be named <code>extern_modules::bar</code>,
+and the third one in the <code>extern_modules/foo.yr</code> file will be named
+<code>extern_modules::foo</code>.</p>
+<p>To be properly importable, the module must be defined from the
+relative path of the compilation, i.e. if the file is located in
+<code>$(pwd)/relative/path/to/file</code>, its module name must be
+<code>relative::path::to::file</code>.</p>
+<p>The name of a module is defined by the first line of the source code,
+by keyword <code>mod</code>. If this line is not given by the user, the path of
+the module will only be the file name, so you will not always be able
+to import the module, depending on its relative path. You can consider
+this line mandatory for the moment.</p>
+<p>For example, in the file <code>foo.yr</code>, the first line must look like :</p>
+<pre><code class="language-ymir">mod extern_modules::foo
+</code></pre>
+<p><br></p>
+<p>And, it will therefore be importable everywhere, for example in the
+<code>main</code> module, when writing the import declaration :</p>
+<pre><code class="language-ymir">import extern_modules::foo
+</code></pre>
+<p><br></p>
+<p>The syntax of the import statement is the following :</p>
+<pre><code class="language-grammar">import_statement := 'import' path (',' path)* (';')?
+path := Identifier ('::' Identifier)* ('::' '_')?
+</code></pre>
+<a class="header" href="modules/README.html#sub-modules" id="sub-modules"><h2>Sub modules</h2></a>
+<p>Sub modules are local modules, declared inside a global modules, are
+inside another sub module. Unlike global module, the access to the
+symbols defined inside them is not implicit. For that reason they have
+to be explicitely mentionned when trying to access to their
+symbols. This mention is done with the double colon binary operator
+<strong><code>::</code></strong>, where the first operand is the name of the module, and the
+second the name of the symbol to access.</p>
+<pre><code class="language-ymir">mod main
+import std::io;
+
+mod InnerModule {
+
+    pub def foo () {
+        println (&quot;Foo&quot;);
+    }
+
+}
+
+def main () {
+    InnerModule::foo (); // access of the function declared in InnerModule
+}
+</code></pre>
+<p>The access operator <strong><code>::</code></strong>, can also be used to access to symbols
+declared inside global modules. This will be discussed after talking
+about privacy of symbols.</p>
+<a class="header" href="modules/README.html#privacy" id="privacy"><h2>Privacy</h2></a>
+<p>All symbols defined in a module are private by default. The privacy of
+a given symbol <em>s</em> refer to the possibility for foreign modules, and
+symbols to access to this given symbol <em>s</em>. When a symbol <em>s</em> is
+declared private in a module <em>s</em>, then only the other symbols of the
+module <em>m</em> have access to it. Module privacy can be seen as a tree,
+where a global module is a root, and module symbols are the branches
+and leaves of the tree. In such a tree, symbols have access to their
+parent, siblings, and the siblings of their parents.</p>
+<p>In the following figure an example of a module tree is presented,
+where a global module named <em>A</em>, has three symbols, 2 sub modules
+<em>A::X</em> and <em>A::Y</em>, and a function <em>A::foo</em>. In this tree, we assume
+that every symbols are declared private. For that reason, the function
+<em>A::foo</em> has access to <em>A</em>, <em>A::X</em>, <em>A::Y</em>, but not to <em>A::X::bar</em>,
+nor <em>A::Y::baz</em>. The symbol <em>A::X::bar</em>, has access to every symbols
+(<em>A</em>, <em>A::X</em>, <em>A::Y</em>, <em>A::foo</em>), except <em>A::Y::baz</em>.</p>
+<p><br></p>
+<p><img src="https://gnu-ymir.github.io/Documentations/en/modules/tree.png" alt="drawing" height="300" style="display: block; margin-left: auto;  margin-right: auto;"></p>
+<p><br></p>
+<p>Global modules are always tree roots, for that reason they don't have
+parents. For example, the module <strong><code>extern_modules::foo</code></strong>, does not
+have access to the symbols declared inside the module
+<strong><code>extern_modules</code></strong>, (if they are privates).</p>
+<p>The keyword <strong><code>pub</code></strong> flag a symbol as <em>public</em>, and accessible by
+foreign modules. This keyword can be used as a block, or for only one
+symbol. Its syntax grammar is presented in the following code block.</p>
+<pre><code class="language-grammar">pub :=   'pub' '{' symbol* '}' 
+       | 'pub' symbol	
+</code></pre>
+<a class="header" href="modules/README.html#example" id="example"><h3>Example</h3></a>
+<ol>
+<li>Module <em><code>extern_modules/foo.yr</code></em></li>
+</ol>
+<pre><code class="language-ymir">mod extern_modules::foo;
+
+/**
+ * foo is public, it can be accessed from foreign modules
+ */
+pub def foo () {}
+
+/**
+ * The bar function is private by default
+ * Thus only usable in this module
+ */
+def bar () {}
+</code></pre>
+<p><br></p>
+<ol start="2">
+<li>Module <em><code>main.yr</code></em></li>
+</ol>
+<pre><code class="language-ymir">/**
+ * This importation will give access to all the symbols in the module
+ * 'extern_modules::foo' that have been declared 'public'
+ */
+import extern_modules::foo
+
+def main () {
+    foo (); // foo is public we can call it
+    bar (); // however, bar is private thus not accessible
+}
+</code></pre>
+<p>Errors:</p>
+<pre><code class="language-error">Error : undefined symbol bar
+ --&gt; main.yr:(7,5)
+ 7  ┃     bar (); // however, bar is private thus not accessible
+    ╋     ^^^
+    ┃ Note : bar --&gt; extern_modules/foo.yr:(8,5) : extern_modules::foo::bar is private within this context
+    ┗━━━━━━ 
+
+
+ymir1: fatal error: 
+compilation terminated.
+</code></pre>
+<p><br></p>
+<a class="header" href="modules/README.html#symbol-conflict-resolution" id="symbol-conflict-resolution"><h2>Symbol conflict resolution</h2></a>
+<p>When two external global modules declare two symbols with the same
+name, it may be impossible to know which symbol the user is refereing
+to. In this case, the double colon operator <strong><code>::</code></strong> can be used with
+the name of the module declaring the symbol to resolve the
+ambiguity. To give an example of symbol conflict, let's say that we
+have two module <code>extern_modules::foo</code> and <code>extern_modules::bar</code>
+declaring a function with the same signature <code>foo</code>.</p>
+<ol>
+<li>Module <em><code>extern_modules/bar.yr</code></em></li>
+</ol>
+<pre><code class="language-ymir">mod extern_modules::bar
+import std::io
+
+pub def foo () {
+    println (&quot;Bar&quot;);
+}
+</code></pre>
+<p><br></p>
+<ol start="2">
+<li>Module <em><code>extern_modules/foo.yr</code></em></li>
+</ol>
+<pre><code class="language-ymir">mod extern_modules::foo
+import std::io
+
+pub def foo () {
+    println (&quot;Foo&quot;);
+}
+</code></pre>
+<p><br></p>
+<p>In the <code>main</code> module, both modules <code>extern_modules::bar</code> and
+<code>extern_modules::foo</code>, are imported. The main function presented below
+refers to the symbol <strong><code>foo</code></strong>. In that case, there is no way to tell
+which function will be used, <code>extern_modules::foo::foo</code> or
+<code>extern_modules::bar::foo</code>. The compiler returns an error. One can
+note that this errors occurs only because the signature of the two
+function <code>foo</code> are the same (taking no parameters), and they are both
+public. If there was a difference in their prototypes, for example if
+the function in the module <code>extern_modules::bar</code> would take a value of
+type <code>i32</code> as parameter, the conflict would be resolved by itself, as
+the call expression will be different.</p>
+<ol start="3">
+<li>Module <em><code>main.yr</code></em></li>
+</ol>
+<pre><code class="language-ymir">import extern_modules::bar, extern_modules::foo
+
+def main () {
+    foo ();
+}
+</code></pre>
+<p>Errors:</p>
+<pre><code class="language-error">Error : {extern_modules::bar::foo ()-&gt; void, extern_modules::foo::foo ()-&gt; void, mod extern_modules::foo} x 3 called with {} work with both
+ --&gt; main.yr:(4,6)
+ 4  ┃ 	foo ();
+    ╋ 	    ^
+    ┃ Note : candidate foo --&gt; extern_modules/bar.yr:(4,9) : extern_modules::bar::foo ()-&gt; void
+    ┃ Note : candidate foo --&gt; extern_modules/foo.yr:(4,9) : extern_modules::foo::foo ()-&gt; void
+    ┗━━━━━━ 
+
+
+ymir1: fatal error: 
+compilation terminated.
+</code></pre>
+<p><br></p>
+<p>.page-inner {
+width: 95%;
+}
+In the above error, we can see that three modules are presented. The
+two functions <strong><code>foo</code></strong> — in <strong><code>extern_modules::bar</code></strong>, and
+<strong><code>extern_modules::foo</code></strong> — and the <strong><code>extern_modules::foo</code></strong> module
+itself. Obviously, it is not possible to use the call operator
+<strong><code>()</code></strong> on a module, that is why it is not presented as a possible
+canditate in the notes of the error.</p>
+<p>The conflict problem can be resolved by changing the calling
+expression, and using the double colon operator <strong><code>::</code></strong>. In the
+following example, the full name of the module is used. This is not
+always necessary, as <strong><code>bar::foo</code></strong> is sufficient to refer to
+<strong><code>extern_modules::bar::foo</code></strong>, and <strong><code>foo::foo</code></strong> for function
+<strong><code>foo</code></strong> in <strong><code>extern_modules::foo</code></strong>.</p>
+<pre><code class="language-ymir">import extern_modules::bar, extern_modules::foo
+
+def main () {
+    extern_modules::bar::foo (); 
+    extern_modules::foo::foo (); 
+    
+    foo::foo (); 
+    bar::foo ();
+}
+</code></pre>
+<p>Results:</p>
+<pre><code>Bar
+Foo
+Foo
+Bar
+</code></pre>
+<p><br></p>
+<a class="header" href="modules/README.html#public-importation" id="public-importation"><h2>Public importation</h2></a>
+<p>As for all declaration, importation are private. It means that the
+importation is not recursive. For example, if the module
+<code>extern_modules::foo</code> imports the module <code>extern_modules::bar</code>, and the
+module <code>main</code> import the module <code>extern_modules::foo</code>, all the public
+symbols declared in <code>extern_modules::bar</code> will not be accessible in the
+module <code>main</code>.</p>
+<p>You can of course, make a <code>pub</code> importation, to make the symbols of
+the module <code>extern_modules::bar</code> visible for the module <code>main</code>.</p>
+<ol>
+<li>Module <em><code>extern_modules/bar.yr</code></em></li>
+</ol>
+<pre><code class="language-ymir">mod extern_modules::bar
+import std::io
+
+pub def bar () {
+    println (&quot;Bar&quot;);
+}
+</code></pre>
+<p><br></p>
+<ol start="2">
+<li>Module <em><code>extern_modules/foo.yr</code></em></li>
+</ol>
+<pre><code class="language-ymir">mod extern_modules::foo
+
+pub import extern_modules::bar
+</code></pre>
+<p><br></p>
+<ol start="3">
+<li>Module <em><code>main.yr</code></em></li>
+</ol>
+<pre><code class="language-ymir">mod main
+import extern_modules::foo;
+
+def main () {
+    bar ();
+}
+</code></pre>
+<p><br></p>
+<p>In the example above, the function <strong><code>bar</code></strong> defined in the module
+<strong><code>extern_modules::bar</code></strong>, is imported (because the function is public
+is public) by the module <strong><code>extern_modules::foo</code></strong>. This importation
+is public, thus when the module <strong><code>main</code></strong> imports the module
+<strong><code>extern_modules::foo</code></strong>, it also imports the module
+<strong><code>extern_modules::bar</code></strong>, and has access to the function <strong><code>bar</code></strong>.</p>
+<a class="header" href="modules/README.html#best-practice" id="best-practice"><h3>Best practice</h3></a>
+<p>Public importation must be used with caution, to avoid polluting other
+modules. A good practice, is to define some modules only to make
+public importations. These modules should be named <strong><code>_</code></strong>. For
+example, with our previous file hierarchy, a file
+<strong><code>extern_modules/_.yr</code></strong> would be added, and no public imports made
+in the modules <strong><code>extern_modules::foo</code></strong>, nor in the module
+<strong><code>extern_modules::bar</code></strong>.</p>
+<pre><code class="language-ymir">mod extern_modules::_;
+
+pub import extern_modules::foo;
+pub import extern_modules::bar;
+</code></pre>
+<p><br></p>
+<p>These modules are not automatically generated by <em>Ymir</em> — even if it
+seems trivial —, to allow importing only a subset of the modules
+contained in a sub directory. These importation modules are optional
+and left to the choice of the user.</p>
+<a class="header" href="modules/README.html#include-directory" id="include-directory"><h2>Include directory</h2></a>
+<p>You can use the <code>-I</code> option, to add a path to the include
+directory. This path will be used as if it was the current <code>$(pwd)</code>. In
+other words, if you add the <code>I -path/to/modules</code> option, and you have a
+file in <code>path/to/modules/relative/to/my/file</code>, the name of the module
+must be <code>relative::to::my::file</code>.</p>
+<pre><code class="language-bash">gyc -I ~/libs/ main.yr
+</code></pre>
+<p>This is how the standard library is included in the build, and how you
+can access modules in <code>std::</code> that are not located in <code>$(pwd)/std/</code>.</p>
+<a class="header" href="modules/README.html#compilation-of-modules" id="compilation-of-modules"><h2>Compilation of modules</h2></a>
+<p>All modules must be compiled, the <code>import</code> declaration is just a
+directive of for symbols access, but does not compile the imported
+symbols. For example, in the following example, there are two modules,
+one declaring a function <strong><code>foo</code></strong>, and the other importing it and
+calling it.</p>
+<ol>
+<li>Module <em><code>main.yr</code></em></li>
+</ol>
+<pre><code class="language-ymir">mod main
+import extern_modules::foo;
+
+def main () {
+    foo ();
+}
+</code></pre>
+<p><br></p>
+<ol start="2">
+<li>Module <em><code>extern_modules/foo.yr</code></em></li>
+</ol>
+<pre><code class="language-ymir">mod extern_modules::foo
+
+pub def foo () {}
+</code></pre>
+<p><br></p>
+<p>By compiling only the <strong><code>main</code></strong> function, the compiler returns a link
+error. This error means that the symbol <code>foo</code> declared in the module
+<code>extern_modules::foo</code> was not found during the symbol linkage.</p>
+<pre><code>$ gyc main.yr
+/tmp/ccCOeXDq.o: In function `_Y4mainFZv':
+main.yr:(.text+0x3e): undefined reference to `_Y14extern_modules3foo3fooFZv'
+collect2: error: ld returned 1 exit status
+</code></pre>
+<p><br></p>
+<p>To avoid this error, and create a valid executable, where all symbols
+can be found, the module <strong><code>extern_modules::foo</code></strong> has to be compiled
+as well. <em>GYC</em> is able to manage object files (containing pre compiled
+symbols), and compiled libraries. The way <em>GYC</em> manage these kind of
+objects is similar to all compiler of the <em>GCC suite</em>, and is not
+presented in this documentation (<em>cf.</em> <a href="https://gcc.gnu.org/onlinedocs/gcc-9.3.0/gcc/Link-Options.html#Link-Options">GCC options for linking</a>).</p>
+<pre><code>$ gyc main.yr extern_modules/foo.yr
+</code></pre>
+
+                </div>
+
+                <!-- Mobile navigation buttons -->
+                
+                    <a rel="prev" href="advanced/pure.html" class="mobile-nav-chapters previous" title="Previous chapter">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="types/README.html" class="mobile-nav-chapters next" title="Next chapter">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+
+            </div>
+
+            
+                <a href="advanced/pure.html" class="nav-chapters previous" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+            
+
+            
+                <a href="types/README.html" class="nav-chapters next" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            
+
+        </div>
+
+
+        <!-- Local fallback for Font Awesome -->
+        <script>
+            if ($(".fa").css("font-family") !== "FontAwesome") {
+                $('<link rel="stylesheet" type="text/css" href="_FontAwesome/css/font-awesome.css">').prependTo('head');
+            }
+        </script>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        
+
+        
+
+        
+
+        
+
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS script -->
+        
+        <script type="text/javascript" src="custom.js"></script>
+        
+
+    </body>
+</html>

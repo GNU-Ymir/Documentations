@@ -1,0 +1,542 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Variable and Mutability - Ymir Tour</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <base href="../">
+
+        <link rel="stylesheet" href="book.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <link rel="shortcut icon" href="favicon.png">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme -->
+        
+        <link rel="stylesheet" href="custom.css">
+        
+
+        
+
+        <!-- Fetch Clipboard.js from CDN but have a local fallback -->
+        <script src="https://cdn.jsdelivr.net/clipboard.js/1.6.1/clipboard.min.js"></script>
+        <script>
+            if (typeof Clipboard == 'undefined') {
+                document.write(unescape("%3Cscript src='clipboard.min.js'%3E%3C/script%3E"));
+            }
+        </script>
+
+        <!-- Fetch JQuery from CDN but have a local fallback -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script>
+            if (typeof jQuery == 'undefined') {
+                document.write(unescape("%3Cscript src='jquery.js'%3E%3C/script%3E"));
+            }
+        </script>
+
+        <!-- Fetch store.js from local - TODO add CDN when 2.x.x is available on cdnjs -->
+        <script src="store.js"></script>
+
+    </head>
+    <body class="light">
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme = store.get('mdbook-theme');
+            if (theme === null || theme === undefined) { theme = 'light'; }
+            $('body').removeClass().addClass(theme);
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var sidebar = store.get('mdbook-sidebar');
+            if (sidebar === "hidden") { $("html").addClass("sidebar-hidden") }
+            else if (sidebar === "visible") { $("html").addClass("sidebar-visible") }
+        </script>
+
+        <div id="sidebar" class="sidebar">
+            <ul class="chapter"><li><a href="README.html"><strong>1.</strong> Introduction</a></li><li><a href="hello-world/README.html"><strong>2.</strong> Hello World</a></li><li><ul class="section"><li><a href="hello-world/commentaires.html"><strong>2.1.</strong> Comments</a></li></ul></li><li><a href="primitives/README.html"><strong>3.</strong> Basic programming concepts</a></li><li><ul class="section"><li><a href="primitives/variables.html" class="active"><strong>3.1.</strong> Variable and Mutability</a></li><li><a href="primitives/types.html"><strong>3.2.</strong> Data types</a></li><li><a href="primitives/functions.html"><strong>3.3.</strong> Functions</a></li><li><a href="primitives/control.html"><strong>3.4.</strong> Control flows</a></li><li><a href="primitives/operator.html"><strong>3.5.</strong> Operator priority</a></li></ul></li><li><a href="advanced/README.html"><strong>4.</strong> Alias, References and Purity</a></li><li><ul class="section"><li><a href="advanced/references.html"><strong>4.1.</strong> References</a></li><li><a href="advanced/alias.html"><strong>4.2.</strong> Aliases</a></li><li><a href="advanced/copies.html"><strong>4.3.</strong> Copy and Deep copy</a></li><li><a href="advanced/best.html"><strong>4.4.</strong> Best practice</a></li><li><a href="advanced/pure.html"><strong>4.5.</strong> Pure values</a></li></ul></li><li><a href="modules/README.html"><strong>5.</strong> Modules</a></li><li><a href="types/README.html"><strong>6.</strong> User defined types</a></li><li><ul class="section"><li><a href="types/struct.html"><strong>6.1.</strong> Structure</a></li><li><a href="types/enum.html"><strong>6.2.</strong> Enum</a></li><li><a href="types/aka.html"><strong>6.3.</strong> Aka</a></li></ul></li><li><a href="objects/README.html"><strong>7.</strong> Objects</a></li><li><ul class="section"><li><a href="objects/class.html"><strong>7.1.</strong> Class</a></li><li><a href="objects/mutability.html"><strong>7.2.</strong> Mutability</a></li><li><a href="objects/methods.html"><strong>7.3.</strong> Methods</a></li><li><a href="objects/inheritance.html"><strong>7.4.</strong> Inheritance</a></li><li><a href="objects/traits.html"><strong>7.5.</strong> Traits</a></li><li><a href="objects/cast.html"><strong>7.6.</strong> Cast, and dynamic typing</a></li></ul></li><li><a href="functions/README.html"><strong>8.</strong> Function advanced</a></li><li><a href="pattern/README.html"><strong>9.</strong> Pattern matching</a></li><li><a href="errors/main.html"><strong>10.</strong> Error handling</a></li><li><ul class="section"><li><a href="errors/scope_guards.html"><strong>10.1.</strong> Scope guards</a></li><li><a href="errors/catching.html"><strong>10.2.</strong> Catching</a></li><li><a href="errors/option.html"><strong>10.3.</strong> Exception and option type</a></li><li><a href="errors/fptr_closure.html"><strong>10.4.</strong> Unsafe function pointer</a></li></ul></li><li><a href="templates/README.html"><strong>11.</strong> Templates</a></li><li><ul class="section"><li><a href="templates/special.html"><strong>11.1.</strong> Template types</a></li><li><a href="templates/cte.html"><strong>11.2.</strong> Template values</a></li><li><a href="templates/values.html"><strong>11.3.</strong> Compilation time execution</a></li></ul></li><li><a href="objects/common_traits.html"><strong>12.</strong> Common traits</a></li><li><ul class="section"><li><a href="traits/streamable.html"><strong>12.1.</strong> Streamable</a></li><li><a href="traits/copiable.html"><strong>12.2.</strong> Copiable</a></li><li><a href="traits/disposable.html"><strong>12.3.</strong> With guard and Disposable</a></li><li><a href="traits/hashable.html"><strong>12.4.</strong> Hashable</a></li><li><a href="traits/serialize.html"><strong>12.5.</strong> Packable and Serializable</a></li></ul></li><li><a href="templates/operators.html"><strong>13.</strong> Operator overloading</a></li><li><ul class="section"><li><a href="templates/binary.html"><strong>13.1.</strong> Unary, binary and Comparison</a></li><li><a href="templates/complex_operators.html"><strong>13.2.</strong> Access, contains and iteration</a></li></ul></li><li><a href="version/README.html"><strong>14.</strong> Version</a></li><li><a href="macros/README.html"><strong>15.</strong> Macro</a></li><li><ul class="section"><li><a href="macros/std.html"><strong>15.1.</strong> Std and Core macros</a></li></ul></li><li><a href="documentation/README.html"><strong>16.</strong> Documentation</a></li><li><ul class="section"><li><a href="documentation/types.html"><strong>16.1.</strong> Types</a></li><li><a href="documentation/symbols.html"><strong>16.2.</strong> Symbols</a></li></ul></li></ul>
+        </div>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page" tabindex="-1">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div class="left-buttons">
+                        <i id="sidebar-toggle" class="fa fa-bars" title="Toggle sidebar"></i>
+                        <i id="theme-toggle" class="fa fa-paint-brush" title="Change theme"></i>
+                    </div>
+
+                    <h1 class="menu-title">Ymir Tour</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html">
+                            <i id="print-button" class="fa fa-print" title="Print this book"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="content" class="content">
+                    <a class="header" href="primitives/variables.html#variables-and-mutability" id="variables-and-mutability"><h1>Variables and Mutability</h1></a>
+<p>Variables are declared with the keyword <strong><code>let</code></strong>. The grammar of a
+variable declaration is presented in the following code block.</p>
+<pre><code class="language-grammar">var_declaration := 'let' inner_var_decl (',' inner_var_decl)*
+inner_var_decl  := (decorator)* identifier (':' type)? '=' expression
+decorator := 'mut' | 'dmut' | 'ref'
+identifier := ('_')* [A-z] ([A-z0-9_])*
+</code></pre>
+<p><br></p>
+<p>The declaration of a variable is composed of four parts, 1) the
+identifier that will be used to refer to the variable in the program,</p>
+<ol start="2">
+<li>the decorators, that will give a different behavior to the program
+regarding the variable, 3) a value, that sets the initial value of the
+variable, and 4) a type, optional part of a variable declaration,
+which when omitted is infered from the type of the initial value of
+the variable. Conversely, when specified the type of a variable is
+statically checked and compared to the initial value of the variable.</li>
+</ol>
+<a class="header" href="primitives/variables.html#variable-type" id="variable-type"><h2>Variable type</h2></a>
+<p>The type of the variable, as presented in the introduction, is
+specified in the variable declaration. This implies a static typing of
+each variable, whereby a variable cannot change its type during its
+lifetime. To illustrate this point, the following source code declares
+a variable of type <strong><code>i32</code></strong>, and tries to put a value of type
+<strong><code>f32</code></strong> in it. The language does not accept this behavior, and the
+compiler returns an error.</p>
+<pre><code class="language-ymir">def main () {
+    let mut x = 12; // 12 is a literal of type i32
+    //  ^^^ this decorator, presented in the following sub section, is not the point of this example
+    
+    x = 89.0f; // 89.0f is a literal of type f32 (floating point value)
+}
+</code></pre>
+<p><br></p>
+<p>The compiler, because the source code is not an acceptable <em>Ymir</em>
+program, returns an error. The error presented in the following
+block, informs that the variable <strong><code>x</code></strong> of type <strong><code>i32</code></strong>, is
+incompatible with a value of type <strong><code>f32</code></strong>.</p>
+<pre><code class="language-error">Error : incompatible types mut i32 and f32
+ --&gt; main.yr:(5,4)
+ 5  ┃ 	x = 89.0f; // 89.0f is a literal of type f32 (floating point value)
+    ╋ 	  ^
+
+
+ymir1: fatal error: 
+compilation terminated.
+</code></pre>
+<p><br></p>
+<a class="header" href="primitives/variables.html#variable-mutability" id="variable-mutability"><h2>Variable mutability</h2></a>
+<p>The decorators are used to determine the behavior to adopt with the
+variable. The keyword <strong><code>ref</code></strong> and <strong><code>dmut</code></strong> will be discussed in
+another chapter (<em>cf.</em> <a href="https://gnu-ymir.github.io/Documentations/en/advanced/">Aliases and
+References</a>). For
+the moment, we will be focusing on the keyword <strong><code>mut</code></strong>. This keyword
+is used to define a mutable variable, whose value can be changed. A
+variable declared without the <strong><code>mut</code></strong> keyword is declared immutable
+by default, making its value definitive.</p>
+<p>In another word, if a variable is declared immutable, then it is bound
+the a value, that the variable cannot change throughout the
+life of the variable. The idea behind default immutability is to avoid
+unwanted behavior or errors, by forcing the developpers to determine
+which variables are mutable with the use of a deliberately more
+verbose syntax, while making all the other variables immutable.</p>
+<p>In the following source code a variable <strong><code>x</code></strong> of type <strong><code>i32</code></strong> is
+declared. This variable is immutable, (as the decorator <strong><code>mut</code></strong> is
+not used). Then the line <strong>7</strong>, which consist in trying to modify the
+value of the variable <strong><code>x</code></strong> is not accepted by the language,
+that's why the compiler does not accept to compile the program.
+<br></p>
+<pre><code class="language-ymir">import std::io
+
+def main () {
+    let x = 2;	
+    println (&quot;X is equal to : &quot;, x); 
+    
+    x = 3; 
+    println (&quot;X is equal to : &quot;, x);
+}
+</code></pre>
+<p><br></p>
+<p>For the given source file, the compiler generates the following
+error. This error informs that the affectation is not allowed, due to
+the nature of the variable <strong><code>x</code></strong>, which is not mutable. In <em>Ymir</em>,
+variable mutability and, type mutability ensure, through static
+checks, that when one declares that a variable has no write access to
+a value, there is no way to get write access to the value through
+this variable. Although this can sometimes be frustrating for the
+user.</p>
+<pre><code class="language-error">Error : left operand of type i32 is immutable
+ --&gt; main.yr:(7,2)
+    ┃ 
+ 7  ┃ 	x = 3; 
+    ┃ 	^
+
+
+ymir1: fatal error: 
+compilation terminated.
+</code></pre>
+<p><br></p>
+<p>The above example can be modified to make the variable <strong><code>x</code></strong>
+mutable. This modification implies the use of the keyword <strong><code>mut</code></strong>,
+which — placed ahead of a variable declaration — makes it
+mutable. Thanks to that modification, the following source code is an
+acceptable program, and thus will be accepted by the compiler.</p>
+<p><br></p>
+<pre><code class="language-ymir">import std::io
+
+def main () {
+    let mut x = 2;	
+    println (&quot;X is equal to : &quot;, x); 
+    
+    x = 3; 
+    println (&quot;X is equal to : &quot;, x);
+}
+</code></pre>
+<p><br>
+Result:</p>
+<pre><code>X is equal to : 2
+X is equal to : 3
+</code></pre>
+<p><br> In reality, mutability is not related to variables, but to
+types. This language proposes a complex type mutability system, whose
+understanding requires the comprehension of data types beforehand. In
+the following sections, we will, for that reason, present the type
+system, (and the different types of data that can be created in <em>Ymir</em> — <em>cf.</em>  chapter <a href="https://gnu-ymir.github.io/Documentations/en/primitives/types.html">Data
+types</a>),
+before coming back to the data mutability, — and have a full overview
+of the mutability system in chapter <a href="https://gnu-ymir.github.io/Documentations/en/advanced/">Aliases and
+references</a>.</p>
+<a class="header" href="primitives/variables.html#initial-value" id="initial-value"><h2>Initial value</h2></a>
+<p>A variable is <strong>always</strong> declared with a value. The objective is to
+ensure that any data in the program came from somewhere, and are not
+initialized from a random memory state of the machine executing the
+program (as we can have in C language).</p>
+<p>One can argue, that static verification can be used to ensure that a
+variable is set before being used, and argue that forcing an initial
+value to a variable is not the best way to achieve data validity.  If
+at this point, this is more a matter of opinion than of sound
+scientific reasoning, we think that scattering the initialization of a
+variable, makes programs more difficult to read. More, immutable
+variables would be mutable for one affectation, making the
+behavior of a program even more difficult to grasp.</p>
+<p>In the following table, is presented two examples of source code, with
+the same behavior. On the left, a valid source code accepted by the
+Ymir language, and on the right, a source code that is not accepted
+based on the arguments we put forward.</p>
+<table>
+<tr>
+<th> A </th>
+<th> B </th>
+</tr>
+<tr>
+<td style="width: 50%;"><pre class="language-"><code class="lang-ymir"><span class="code-line"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
+<span class="code-line">    <span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token other-keyword">true</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
+<span class="code-line">        <span class="token number">42</span></span>
+<span class="code-line">    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span></span>
+<span class="code-line">        <span class="token number">7</span></span>
+<span class="code-line">    <span class="token punctuation">}</span><span class="token punctuation">;</span></span>
+<span class="code-line"><span class="token punctuation">}</span></span></code></i></pre></td>
+<td style="width: 50%;"><pre class="language-"><code class="lang-ymir"><span class="code-line"><span class="token keyword">import</span> <span class="token path">std</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token path">io</span><span class="token punctuation">;</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="token keyword">def</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
+<span class="code-line">    <span class="token keyword">let</span> i <span class="token punctuation">:</span> <span class="token basic-types">i32</span><span class="token punctuation">;</span></span>
+<span class="code-line">    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token other-keyword">true</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
+<span class="code-line">        i <span class="token operator">=</span> <span class="token number">42</span><span class="token punctuation">;</span></span>
+<span class="code-line">    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span></span>
+<span class="code-line">        i <span class="token operator">=</span> <span class="token number">7</span><span class="token punctuation">;</span></span>
+<span class="code-line">    <span class="token punctuation">}</span><span class="token punctuation">;</span></span>
+<span class="code-line"><span class="token punctuation">}</span></span></code></pre></td>
+</tr>
+</table>
+<p>One can note from the left
+program, that an <strong><code>if</code></strong> expression has a value. Value computed by
+the result of the expression (in that case the value <strong><code>42</code></strong> of type
+<strong><code>i32</code></strong>). In point of fact, every expression can have a value in
+Ymir, removing the limitation, introduced by the forcing of an initial
+value to variables.</p>
+<a class="header" href="primitives/variables.html#global-variables" id="global-variables"><h2>Global variables</h2></a>
+<p>Even if global variables have a rather bad reputation for many
+justified reasons, we choose to let the possibility to define them,
+since in spite of all, they allow some programmation paradigms that
+would be undoable otherwise.</p>
+<p>Global variables are defined as any local variable, except that the
+keyword <strong><code>let</code></strong> is replaced by the keyword <strong><code>static</code></strong>. The
+following source code presents an utilization of an immutable global
+variable. This example is just a showcase, as the use of an
+enumeration (<em>cf.</em>
+<a href="https://gnu-ymir.github.io/Documentations/en/types/enum.html">Enum</a>)
+would probably be more appropriate in this specific case.</p>
+<pre><code class="language-ymir">import std::io
+
+static pi = 3.14159265359
+
+def main () {
+    println (&quot;Pi value is : &quot;, pi);
+}
+</code></pre>
+<p><br></p>
+<p>All information presented on local variables are relevant to the case
+of global variables. Here, we are refering to static typing,
+mutability behavior, and default value initialization. No limitation
+exists on the value that can be stored inside a global variable, nor
+there exists on the nature of the initialization. Call of functions,
+conditional expressions, class initializations, etc., nothing was left
+out.</p>
+<p>Global variables are initialized before the start of the program,
+before the call of the <code>main</code> function. To illustrate that, the
+following source code, creates a global variable of type <strong><code>i32</code></strong>
+initialized from the value of the function <strong><code>foo</code></strong>. This function
+<strong><code>foo</code></strong> by making a call of the function <strong><code>println</code></strong>, prints a
+message to the console, and the <strong><code>main</code></strong> function also does it.</p>
+<pre><code class="language-ymir">import std::io;
+
+static __GLOBAL__ = foo ();
+
+/**
+  * This function print the message &quot;foo&quot;, and returns the value 42
+  */
+def foo ()-&gt; i32 {
+  println (&quot;foo&quot;);
+  42
+}
+
+def main () {
+    println (&quot;__GLOBAL__ = &quot;, __GLOBAL__);
+}
+</code></pre>
+<p><br></p>
+<p>Result:</p>
+<pre><code>foo
+__GLOBAL__ = 42
+</code></pre>
+<a class="header" href="primitives/variables.html#initialization-order" id="initialization-order"><h3>Initialization order</h3></a>
+<p>There is no warranty on the order of initialization of global
+variables. This is probably, the first limitation that we can point
+out on the Ymir languages. <strong>Contribution</strong>, to allow such warranty would
+be very welcomed, but seems unlikely to be possible when global
+variables come from multiple modules (<em>cf.</em>
+<a href="https://gnu-ymir.github.io/Documentations/en/modules">Modules</a>).</p>
+<p>For the moment, because it is impossible to certify the good
+initialization of a global variable, before the start of the program, it
+is not allowed to initialize a global variable from the value of
+another global variable. However, this verification is very limited,
+as the value of a global variable can be used inside a function, and
+this same function used to initialize the value of another global
+variable. In the following source code, this behavior is illustrated.</p>
+<pre><code class="language-ymir">static __A__ = 42;
+static __B__ = __A__; 
+static __C__ = foo ();
+
+def foo () -&gt; i32 {
+    __A__
+}
+</code></pre>
+<p><br></p>
+<p>The compiler will unfortunetaly be able to see only the dependent
+initialization of <strong><code>__B__</code></strong>, and will let the initialization of
+<strong><code>__C__</code></strong> from the function <strong><code>foo</code></strong> occur. Even if in that
+specific case, the dependency appears very clearly, it may not be that
+clear when the function <strong><code>foo</code></strong> come from an external module, that
+only provides its prototype.</p>
+<pre><code class="language-error">Error : the global var main::__B__ cannot be initialized from the value of main::__A__
+ --&gt; main.yr:(2,8)
+ 2  ┃ static __B__ = __A__; 
+    ╋        ^^^^^
+    ┃ Note : 
+    ┃  --&gt; main.yr:(1,8)
+    ┃  1  ┃ static __A__ = 42;
+    ┃     ╋        ^^^^^
+    ┃ Note : 
+    ┃  --&gt; main.yr:(2,16)
+    ┃  2  ┃ static __B__ = __A__; 
+    ┃     ╋                ^^^^^
+    ┗━━━━━┻━ 
+
+
+ymir1: fatal error: 
+compilation terminated.
+</code></pre>
+<p><br></p>
+<a class="header" href="primitives/variables.html#shadowing-and-scope" id="shadowing-and-scope"><h2>Shadowing and scope</h2></a>
+<a class="header" href="primitives/variables.html#lifetime" id="lifetime"><h3>Lifetime</h3></a>
+<p>The lifetime of a variable is defined by a scope. Regrouping
+expressions separated by semi-colons between curly brackets, a scope
+is a semantic component well known in programming languages. It has
+some particularities in Ymir, but these particularities will be
+presented in forthcoming chapters
+(<em>cf.</em> <a href="https://gnu-ymir.github.io/Documentations/en/primitives/functions.html">Functions</a>,
+<a href="https://gnu-ymir.github.io/Documentations/en/errors/scope.html">Scope
+guards</a>)
+and are not of interest to us at this point.</p>
+<pre><code class="language-ymir">import std::io;
+
+def main () {
+    {
+        let x = 12;
+    } // x does not exists past this scope end
+    println (x);
+}
+</code></pre>
+<p><br></p>
+<p>When a variable is declared inside a scope and is never used during
+its lifetime the compiler returns an error. To avoid this error, the
+variable can be named <strong><code>_</code></strong>. If it may seem useless to declare a
+variable that is not used, it can be useful sometimes (for example
+when declaring function parameters of an overriden function, <em>cf.</em>
+<a href="https://gnu-ymir.github.io/Documentations/en/objects/inheritance.html">Class
+inheritence</a>).</p>
+<p>A variable whose name is <strong><code>_</code></strong>, is anonymus, then there is no way to
+retreive the value of this variable.</p>
+<pre><code class="language-ymir">import std::io;
+
+def main () {
+    let _ = 12; // declare a anonymus variable
+}
+</code></pre>
+<a class="header" href="primitives/variables.html#shadowing" id="shadowing"><h3>Shadowing</h3></a>
+<p>Two variables with the same name cannot be declared in colliding
+scopes, i.e. if a variable is declared with the name of a living
+variable in the current scope, the program is not acceptable, and the
+compiler returns a shadowing error. The following source code
+illustrates this point, where two variables are declared in the same
+scope with the same name <strong><code>x</code></strong>.</p>
+<pre><code class="language-ymir">def main () {
+    let x = 1;	
+    let x = 2;	
+    { 
+        let x = 3; 
+    }
+}
+</code></pre>
+<p><br></p>
+<p>The compiler returns the following error. Even the last variable in
+the scope opened at line <strong>4</strong> is not authorized. Many errors can be
+avoided, by simply removing this possibility. Possibility, in our
+opinion, that is not likely to bring anything of any benefit.</p>
+<pre><code class="language-error">Error : declaration of x shadows another declaration
+ --&gt; main.yr:(3,9)
+ 3  ┃     let x = 2;    
+    ╋         ^
+    ┃ Note : 
+    ┃  --&gt; main.yr:(2,9)
+    ┃  2  ┃     let x = 1;    
+    ┃     ╋         ^
+    ┗━━━━━┻━ 
+
+Error : declaration of x shadows another declaration
+ --&gt; main.yr:(5,13)
+ 5  ┃         let x = 3; 
+    ╋             ^
+    ┃ Note : 
+    ┃  --&gt; main.yr:(2,9)
+    ┃  2  ┃     let x = 1;    
+    ┃     ╋         ^
+    ┗━━━━━┻━ 
+
+
+ymir1: fatal error: 
+compilation terminated.
+</code></pre>
+<p><br></p>
+<p>Global variables do not create variable shadowing problems on local
+variables. A global variable is a global symbol, and is accessible
+through its parent module definition (<em>cf.</em>
+<a href="https://gnu-ymir.github.io/Documentations/en/modules/">Modules</a>). Local
+variables on the other hand, are only accessible for the function in
+which they are declared. Symbol access gives the priority to local
+variables, behavior illustrated in the following example.</p>
+<pre><code class="language-ymir">mod Main; // declaration of a module named Main
+
+import std::io;
+
+static pi = 3.14159265359
+
+def main ()
+    throws &amp;AssertError
+{
+    {
+        let pi = 3;
+        assert (pi == 3); // using local pi
+    } // by closing the scope, local pi does not exist anymore
+    
+    // because local pi does no longer exists
+    // global pi is accessible
+    assert (pi == 3.14159265359);
+    
+    // global pi can also be accessed from its parent module
+    assert (Main::pi == 3.14159265359);
+}
+</code></pre>
+
+                </div>
+
+                <!-- Mobile navigation buttons -->
+                
+                    <a rel="prev" href="primitives/README.html" class="mobile-nav-chapters previous" title="Previous chapter">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="primitives/types.html" class="mobile-nav-chapters next" title="Next chapter">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+
+            </div>
+
+            
+                <a href="primitives/README.html" class="nav-chapters previous" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+            
+
+            
+                <a href="primitives/types.html" class="nav-chapters next" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            
+
+        </div>
+
+
+        <!-- Local fallback for Font Awesome -->
+        <script>
+            if ($(".fa").css("font-family") !== "FontAwesome") {
+                $('<link rel="stylesheet" type="text/css" href="_FontAwesome/css/font-awesome.css">').prependTo('head');
+            }
+        </script>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        
+
+        
+
+        
+
+        
+
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS script -->
+        
+        <script type="text/javascript" src="custom.js"></script>
+        
+
+    </body>
+</html>
