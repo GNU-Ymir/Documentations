@@ -1,0 +1,40 @@
+\tikzstyle{every picture}+=[remember picture]
+\tikzstyle{mProjectPP}=[circle,fill=yellow!70, minimum size=20pt,inner sep=0pt]
+\tikzstyle{label}=[rectangle, fill=white, minimum size=40pt, inner sep=0pt]
+\tikzstyle{Box}=[rectangle, fill=white, minimum size=40pt, inner sep=0pt]
+\tikzstyle{Box2}=[rectangle, fill=white, minimum size=20pt, inner sep=0pt]
+\definecolor{applegreen}{rgb}{0.55, 0.71, 0.0}
+\definecolor{antiquebrass}{rgb}{0.8, 0.58, 0.46}
+
+\begin{tikzpicture}
+  % ================ Axis ========================
+  \draw (0, 0) -- coordinate (LEFT) (0, 0);
+
+  % ================ Modules ========================
+  \draw[Box] ($(LEFT.east)+(1.5, 5.5)$) -- ($(LEFT.east)+(1.5, 5.5)$) node[anchor=center]{\textbf{\textit{A}}};
+  \draw[line width=1pt] ($(LEFT.east)+(0.3, 5.9)$) rectangle ($(LEFT.east)+(2.8, 5.1)$);
+  \draw[line width=1pt] ($(LEFT.east)+(0.5,5.1)$) -- ($(LEFT.east)+(0.5,3.5)$) -- ($(LEFT.east)+(1.2,3.5)$);
+  \draw[line width=1pt] ($(LEFT.east)+(0.5,5.1)$) -- ($(LEFT.east)+(0.5,1.5)$) -- ($(LEFT.east)+(1.2,1.5)$);
+  
+  \draw[Box] ($(LEFT.east)+(2.5, 3.5)$) -- ($(LEFT.east)+(2.5, 3.5)$) node[anchor=center]{\textbf{\textit{X}}};
+  \draw[line width=1pt] ($(LEFT.east)+(1.3, 3.9)$) rectangle ($(LEFT.east)+(3.8, 3.1)$);
+
+  
+  \draw[Box] ($(LEFT.east)+(2.5, 1.5)$) -- ($(LEFT.east)+(2.5, 1.5)$) node[anchor=center]{\textbf{\textit{Y}}};
+  \draw[line width=1pt] ($(LEFT.east)+(1.3, 1.9)$) rectangle ($(LEFT.east)+(3.8, 1.1)$);
+
+
+  % ================ Functions ========================
+
+  \draw[Box] ($(LEFT.east)+(2.5, 4.5)$) -- ($(LEFT.east)+(2.5, 4.5)$) node[anchor=center]{\textbf{\textit{foo}}};
+  \draw[line width=1pt] ($(LEFT.east)+(0.5,5.1)$) -- ($(LEFT.east)+(0.5,4.5)$) -- ($(LEFT.east)+(2.1,4.5)$);  
+  \draw[line width=1pt] ($(LEFT.east)+(1.5,3.1)$) -- ($(LEFT.east)+(1.5,2.5)$) -- ($(LEFT.east)+(3.1,2.5)$);
+  \draw[line width=1pt] ($(LEFT.east)+(1.5,1.1)$) -- ($(LEFT.east)+(1.5,0.5)$) -- ($(LEFT.east)+(3.1,0.5)$);
+  
+  \draw[Box] ($(LEFT.east)+(3.5, 2.5)$) -- ($(LEFT.east)+(3.5, 2.5)$) node[anchor=center]{\textbf{\textit{bar}}};
+
+  \draw[Box] ($(LEFT.east)+(3.5, 0.5)$) -- ($(LEFT.east)+(3.5, 0.5)$) node[anchor=center]{\textbf{\textit{baz}}};
+  
+\end{tikzpicture}
+
+% \end{figure}
