@@ -42,8 +42,8 @@ $( document ).ready(function() {
 	var current_lang_pos = page.search ("/");
 	if (current_lang_pos != 0) {
 	    var current_lang = page.substring (0, current_lang_pos);
-	    if (current_lang == "en/") { page = page.substring (current_lang_pos + 1); }
-	    else if (current_lang == "eo/") { page = page.substring (current_lang_pos + 1); }
+	    if (current_lang == "en") { page = page.substring (current_lang_pos + 1); }
+	    else if (current_lang == "eo") { page = page.substring (current_lang_pos + 1); }
 	}
 
 	n_page = protocol + domain + "/" + lang + "/" + page;

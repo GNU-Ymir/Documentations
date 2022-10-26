@@ -1,62 +1,59 @@
 # Antaŭparolo
 
-*Ymir* estas altnivela programlingvo kies tipoj estas statikaj,
-formita tiel ke ĝi helpu programistojn savi tempon donante fortan kaj
-sekuran semantikon.
+*Ymir* estas altnivela programlingvo kies tipoj estas statikaj, kaj
+kiu estas formita tiel ke ĝi helpu programistojn savi tempon donante
+fortan kaj sekuran semantikon. La semantiko de tiu programlingvo estas
+direktita al sekureco, kunrulado kaj rapideco. Tiuj celoj estas
+plenumitaj danke al ĝia granda esprimpleneco, kaj ĝia direkta traduko
+al efika denaska maŝinlingvo.
 
-*Ymir* is a high-level, statically typed programming language
-  designed to help developers to save time by providing strong and
-  safe semantic. The semantic of this language is oriented towards
-  safety, concurrency and speed of execution. These objectives are
-  achieved thanks to its high expressiveness and its direct
-  compilation into an efficient native machine language.
+Tiu dokumento esploras la ĉefajn konceptojn de *Ymir*, provizante aron
+da ekzemploj kiuj demonstras la fortojn de tiu nova programlingvo. Ĝi
+ankaŭ prezentas kelkajn elementojn de la norma biblioteko.
 
-This documentation explores the main concepts of *Ymir*, providing a
-set of examples that demonstrate the strengths of this new
-language. It also presents an introduction to the standard library.
+# Gravaĵo
 
-# Important
+Antaŭ ol oni komencu paroli pri la programlingvo, bonvolu ne forgesi
+ke ĝi estas laboro kiu ankoraŭ povas progresi, kaj ke kelkfoje aĵoj
+povas ne funkcii laŭvole. Se vi renkontas aĵon kiun vi ne komprenas aŭ
+kiu estas eraro laŭ vi, bonvolu kontakti nin je retmesaĝo
+<gnu.ymir@mail.com>. Ni jam ĝojos pri legi viajn mesaĝojn!
 
-Before starting to discuss the language, please keep in mind that it
-is still under development and that sometimes things may not work as
-expected. If you encounter errors that you do not understand or think
-are incorrect, please contact us at: <gnu.ymir@mail.com>. We look
-forward to receiving your mails!
+Aldone, ĉiuj kontribuaĵoj estas varme bonvenaj, ĉu temas pri plibonigi
+la dokumentaron, proponi plibonigon de la programlingvo mem aŭ de la
+norma biblioteko, de la kerno aŭ eĉ de la aŭtomata procedo de kreado
+de nova versio. La fonto estas dispona je
+[github](https://github.com/GNU-Ymir). En tiu ĉi dokumento, konataj
+limoj de la programlingvo estas kelkfoje emfazitaj, kaj vokas
+kontribuaĵojn.
 
-Even more, all contributions are very welcome, whether to improve the
-documentation, to propose improvements to the language or std, to the
-runtime, or even to the automatic release generation procedure. All
-code repositories are available on
-[github](https://github.com/GNU-Ymir). In this documentation, known
-limitations of the language are sometimes highlighted, and calls for
-contribution.
+## Instalo
 
-## Installation
+La referenca tradukilo de *Ymir* estas bazita je la tradukilo **GCC**
+kiu oferas fortan statikan optimumigon, kaj vastan aron da subtenitaj
+celaj arĥitekturoj.
 
-The reference compiler of *Ymir* is based on the compiler **GCC**,
-which offer strong static optimization, as well as a vast set of
-supported target architectures.
+Estas du manieroj por instali la **gyc** (GNU Ymir Compiler), denaske
+aŭ per uzi Docker'a kontenero.
 
-There are two ways to install the **gyc** (Gnu Ymir Compiler), natively or by using a docker container.
+### Denaska instalo
 
-### Native installation 
+Tiu tradukilo povas esti instalita je linux sistemo per sekvi tiujn simplajn etapojn:
+- Unue, vi bezonos elŝuti tiujn pakaĵojn : 
+  - [libmidgard-11-dev](https://ymir-lang.org/release/gmidgard/11.3.0/libgmidgard_11.3.0_amd64.deb)
+  - [GYC](https://ymir-lang.org/release/gymir/11.3.0/gyc-11_11.3.0_amd64.deb)
 
-This compiler can be installed on linux debian system, by following those simple steps: 
-- First, you need to downloads the packages : 
-  - [libmidgard-9-dev](https://ymir-lang.org/release/gmidgard/9.3.0/libgmidgard_9.3.0_amd64.deb)
-  - [GYC](https://ymir-lang.org/release/gymir/9.3.0/gyc-9_9.3.0_amd64.deb)
-
-- And then, you need to install them using dpkg : 
+- Kaj poste, vi povas instali ilin uzante `dpkg` aŭ `apt-get`: 
 
 ```bash
-$ sudo dpkg -i libgmidgard_9.3.0_amd64.deb
-$ sudo dpkg -i gyc-9_9.3.0_amd64.deb
+$ sudo apt-get install ./libgmidgard_11.3.0_amd64.deb
+$ sudo apt-get install ./gyc-11_11.3.0_amd64.deb
 ```
 <br>
 
-These packages depend on : 
-- g++-9
-- gcc-9-base
+Tiuj pakaĵoj dependas de : 
+- g++-11
+- gcc-11-base
 - libc6 >= 2.21
 - libgmp10 >= 2:5.0.1~
 - libmpc3
@@ -67,83 +64,75 @@ These packages depend on :
 - zlib1g >= 1:1.2.0
 - libgc-dev >= 1:7.4.2
 
-If one of them is not installed, you will get an error, that can be resolved by running the following command : 
+Se almenaŭ unu el tiuj ne estas instalita, vi akiros eraron, kiu povas esti solvita per lanĉi la sekvan ordonon:
 
 ```bash
 sudo apt --fix-broken install
 ```
 <br>
 
-And then reinstall the package that has previously failed (dpkg).
-The compiler is now installed and is named `gyc`
+Kaj poste reinstali la pakaĵon kiu malsukcesis (uzante `dpkg` aŭ `apt-get`)
+La tradukilo estas nun instalita je la nomo `gyc`.
 
 ```bash
 $ gyc --version
 
-gyc-9 (GCC) 9.3.0
-Copyright (C) 2018 Free Software Foundation, Inc.
+gyc (GCC) 11.3.0
+Copyright (C) 2021 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 ```
 <br>
 
-### Uninstallation of the native version
+### Malinstali denaskan version
 
-As for any debian package, the uninstall is done as follows : 
+Kiel por iu ajn debian'a pakaĵo, la malinstalo estas farita kiel sekve : 
 
 ```bash
-$ dpkg -r gyc-9
-$ dpkg -r libgmidgard-9-dev
+$ dpkg -r gyc-11
+$ dpkg -r libgmidgard-11-dev
 ```
 <br>
 
-**Caution** The uninstallation can remove your gcc installation.
-But you can still reinstall it easily if there is any problem, by typing : 
+## Docker'a instalo
 
-```bash
-sudo apt install --reinstall gcc-9
-```
-
-## Docker installation
-
-To start you have to install docker.
+Por komenci, vi bezonas instali docker'n:
 ```bash
 $ sudo apt install docker.io
 ```
 <br>
 
-Then retrieve the docker image from the repository :
+Tiam elŝuti la docker'an bildon de la deponejo: 
 ```bash
-$ docker pull gnuymir/9.3.0-amd64
+$ docker pull gnuymir/11.3.0-amd64
 ```
 
-The compiler is now accessible via the container.
+La tradukilo estas nun atingebla tra la kontenero:
 ```bash
-$ docker run -t -v $(pwd):/tmp -w /tmp gnuymir/9.3.0-amd64 --version 
-gyc-9 (GCC) 9.3.0
-Copyright (C) 2018 Free Software Foundation, Inc.
+$ docker run -t -v $(pwd):/tmp -w /tmp gnuymir/11.3.0-amd64 --version
+
+gyc (GCC) 11.3.0
+Copyright (C) 2021 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 ```
 <br>
 
-To make it easier to use, you can add an alias in the `~/.local/bin` directory.
-First open the file `~/.local/bin/gyc` and paste the following line :
-
+Por ke ĝi estu pli facila por uzi, vi povas aldoni la sekvan alnomon je la `~/.local/bin` dosierujo.
+Unue malfermu la tekstan dosieron `~/.local/bin/gyc` kaj kopiu la sekvan linion : 
 ```bash
-docker run -t -v $(pwd):/tmp -w /tmp gnuymir/9.3.0-amd64 $*
+docker run -t -v $(pwd):/tmp -w /tmp gnuymir/11.3.0-amd64 $*
 ```
 <br>
 
-Make sure, that your `PATH` contains the `~/.local/bin`directory, and
-then open a new shell, and run the following commands :
+Certigu ke vian `PATH` enhavas la dosierujon `~/.local/bin`, kaj malfermu novan ŝelon, kaj lanĉi la sekvan ordonon :
 
 ```bash
 $ chmod +x ~/.local/bin/gyc
 $ gyc --version
 
-gyc (GCC) 9.3.0
-Copyright (C) 2019 Free Software Foundation, Inc.
+gyc (GCC) 11.3.0
+Copyright (C) 2021 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 ```

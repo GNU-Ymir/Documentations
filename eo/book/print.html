@@ -89,58 +89,56 @@
 
                 <div id="content" class="content">
                     <a class="header" href="print.html#antaŭparolo" id="antaŭparolo"><h1>Antaŭparolo</h1></a>
-<p><em>Ymir</em> estas altnivela programlingvo kies tipoj estas statikaj,
-formita tiel ke ĝi helpu programistojn savi tempon donante fortan kaj
-sekuran semantikon.</p>
-<p><em>Ymir</em> is a high-level, statically typed programming language
-designed to help developers to save time by providing strong and
-safe semantic. The semantic of this language is oriented towards
-safety, concurrency and speed of execution. These objectives are
-achieved thanks to its high expressiveness and its direct
-compilation into an efficient native machine language.</p>
-<p>This documentation explores the main concepts of <em>Ymir</em>, providing a
-set of examples that demonstrate the strengths of this new
-language. It also presents an introduction to the standard library.</p>
-<a class="header" href="print.html#important" id="important"><h1>Important</h1></a>
-<p>Before starting to discuss the language, please keep in mind that it
-is still under development and that sometimes things may not work as
-expected. If you encounter errors that you do not understand or think
-are incorrect, please contact us at: <a href="mailto:gnu.ymir@mail.com">gnu.ymir@mail.com</a>. We look
-forward to receiving your mails!</p>
-<p>Even more, all contributions are very welcome, whether to improve the
-documentation, to propose improvements to the language or std, to the
-runtime, or even to the automatic release generation procedure. All
-code repositories are available on
-<a href="https://github.com/GNU-Ymir">github</a>. In this documentation, known
-limitations of the language are sometimes highlighted, and calls for
-contribution.</p>
-<a class="header" href="print.html#installation" id="installation"><h2>Installation</h2></a>
-<p>The reference compiler of <em>Ymir</em> is based on the compiler <strong>GCC</strong>,
-which offer strong static optimization, as well as a vast set of
-supported target architectures.</p>
-<p>There are two ways to install the <strong>gyc</strong> (Gnu Ymir Compiler), natively or by using a docker container.</p>
-<a class="header" href="print.html#native-installation" id="native-installation"><h3>Native installation</h3></a>
-<p>This compiler can be installed on linux debian system, by following those simple steps:</p>
+<p><em>Ymir</em> estas altnivela programlingvo kies tipoj estas statikaj, kaj
+kiu estas formita tiel ke ĝi helpu programistojn savi tempon donante
+fortan kaj sekuran semantikon. La semantiko de tiu programlingvo estas
+direktita al sekureco, kunrulado kaj rapideco. Tiuj celoj estas
+plenumitaj danke al ĝia granda esprimpleneco, kaj ĝia direkta traduko
+al efika denaska maŝinlingvo.</p>
+<p>Tiu dokumento esploras la ĉefajn konceptojn de <em>Ymir</em>, provizante aron
+da ekzemploj kiuj demonstras la fortojn de tiu nova programlingvo. Ĝi
+ankaŭ prezentas kelkajn elementojn de la norma biblioteko.</p>
+<a class="header" href="print.html#gravaĵo" id="gravaĵo"><h1>Gravaĵo</h1></a>
+<p>Antaŭ ol oni komencu paroli pri la programlingvo, bonvolu ne forgesi
+ke ĝi estas laboro kiu ankoraŭ povas progresi, kaj ke kelkfoje aĵoj
+povas ne funkcii laŭvole. Se vi renkontas aĵon kiun vi ne komprenas aŭ
+kiu estas eraro laŭ vi, bonvolu kontakti nin je retmesaĝo
+<a href="mailto:gnu.ymir@mail.com">gnu.ymir@mail.com</a>. Ni jam ĝojos pri legi viajn mesaĝojn!</p>
+<p>Aldone, ĉiuj kontribuaĵoj estas varme bonvenaj, ĉu temas pri plibonigi
+la dokumentaron, proponi plibonigon de la programlingvo mem aŭ de la
+norma biblioteko, de la kerno aŭ eĉ de la aŭtomata procedo de kreado
+de nova versio. La fonto estas dispona je
+<a href="https://github.com/GNU-Ymir">github</a>. En tiu ĉi dokumento, konataj
+limoj de la programlingvo estas kelkfoje emfazitaj, kaj vokas
+kontribuaĵojn.</p>
+<a class="header" href="print.html#instalo" id="instalo"><h2>Instalo</h2></a>
+<p>La referenca tradukilo de <em>Ymir</em> estas bazita je la tradukilo <strong>GCC</strong>
+kiu oferas fortan statikan optimumigon, kaj vastan aron da subtenitaj
+celaj arĥitekturoj.</p>
+<p>Estas du manieroj por instali la <strong>gyc</strong> (GNU Ymir Compiler), denaske
+aŭ per uzi Docker'a kontenero.</p>
+<a class="header" href="print.html#denaska-instalo" id="denaska-instalo"><h3>Denaska instalo</h3></a>
+<p>Tiu tradukilo povas esti instalita je linux sistemo per sekvi tiujn simplajn etapojn:</p>
 <ul>
 <li>
-<p>First, you need to downloads the packages :</p>
+<p>Unue, vi bezonos elŝuti tiujn pakaĵojn :</p>
 <ul>
-<li><a href="https://ymir-lang.org/release/gmidgard/9.3.0/libgmidgard_9.3.0_amd64.deb">libmidgard-9-dev</a></li>
-<li><a href="https://ymir-lang.org/release/gymir/9.3.0/gyc-9_9.3.0_amd64.deb">GYC</a></li>
+<li><a href="https://ymir-lang.org/release/gmidgard/11.3.0/libgmidgard_11.3.0_amd64.deb">libmidgard-11-dev</a></li>
+<li><a href="https://ymir-lang.org/release/gymir/11.3.0/gyc-11_11.3.0_amd64.deb">GYC</a></li>
 </ul>
 </li>
 <li>
-<p>And then, you need to install them using dpkg :</p>
+<p>Kaj poste, vi povas instali ilin uzante <code>dpkg</code> aŭ <code>apt-get</code>:</p>
 </li>
 </ul>
-<pre><code class="language-bash">$ sudo dpkg -i libgmidgard_9.3.0_amd64.deb
-$ sudo dpkg -i gyc-9_9.3.0_amd64.deb
+<pre><code class="language-bash">$ sudo apt-get install ./libgmidgard_11.3.0_amd64.deb
+$ sudo apt-get install ./gyc-11_11.3.0_amd64.deb
 </code></pre>
 <p><br></p>
-<p>These packages depend on :</p>
+<p>Tiuj pakaĵoj dependas de :</p>
 <ul>
-<li>g++-9</li>
-<li>gcc-9-base</li>
+<li>g++-11</li>
+<li>gcc-11-base</li>
 <li>libc6 &gt;= 2.21</li>
 <li>libgmp10 &gt;= 2:5.0.1~</li>
 <li>libmpc3</li>
@@ -151,58 +149,54 @@ $ sudo dpkg -i gyc-9_9.3.0_amd64.deb
 <li>zlib1g &gt;= 1:1.2.0</li>
 <li>libgc-dev &gt;= 1:7.4.2</li>
 </ul>
-<p>If one of them is not installed, you will get an error, that can be resolved by running the following command :</p>
+<p>Se almenaŭ unu el tiuj ne estas instalita, vi akiros eraron, kiu povas esti solvita per lanĉi la sekvan ordonon:</p>
 <pre><code class="language-bash">sudo apt --fix-broken install
 </code></pre>
 <p><br></p>
-<p>And then reinstall the package that has previously failed (dpkg).
-The compiler is now installed and is named <code>gyc</code></p>
+<p>Kaj poste reinstali la pakaĵon kiu malsukcesis (uzante <code>dpkg</code> aŭ <code>apt-get</code>)
+La tradukilo estas nun instalita je la nomo <code>gyc</code>.</p>
 <pre><code class="language-bash">$ gyc --version
 
-gyc-9 (GCC) 9.3.0
-Copyright (C) 2018 Free Software Foundation, Inc.
+gyc (GCC) 11.3.0
+Copyright (C) 2021 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 </code></pre>
 <p><br></p>
-<a class="header" href="print.html#uninstallation-of-the-native-version" id="uninstallation-of-the-native-version"><h3>Uninstallation of the native version</h3></a>
-<p>As for any debian package, the uninstall is done as follows :</p>
-<pre><code class="language-bash">$ dpkg -r gyc-9
-$ dpkg -r libgmidgard-9-dev
+<a class="header" href="print.html#malinstali-denaskan-version" id="malinstali-denaskan-version"><h3>Malinstali denaskan version</h3></a>
+<p>Kiel por iu ajn debian'a pakaĵo, la malinstalo estas farita kiel sekve :</p>
+<pre><code class="language-bash">$ dpkg -r gyc-11
+$ dpkg -r libgmidgard-11-dev
 </code></pre>
 <p><br></p>
-<p><strong>Caution</strong> The uninstallation can remove your gcc installation.
-But you can still reinstall it easily if there is any problem, by typing :</p>
-<pre><code class="language-bash">sudo apt install --reinstall gcc-9
-</code></pre>
-<a class="header" href="print.html#docker-installation" id="docker-installation"><h2>Docker installation</h2></a>
-<p>To start you have to install docker.</p>
+<a class="header" href="print.html#dockera-instalo" id="dockera-instalo"><h2>Docker'a instalo</h2></a>
+<p>Por komenci, vi bezonas instali docker'n:</p>
 <pre><code class="language-bash">$ sudo apt install docker.io
 </code></pre>
 <p><br></p>
-<p>Then retrieve the docker image from the repository :</p>
-<pre><code class="language-bash">$ docker pull gnuymir/9.3.0-amd64
+<p>Tiam elŝuti la docker'an bildon de la deponejo:</p>
+<pre><code class="language-bash">$ docker pull gnuymir/11.3.0-amd64
 </code></pre>
-<p>The compiler is now accessible via the container.</p>
-<pre><code class="language-bash">$ docker run -t -v $(pwd):/tmp -w /tmp gnuymir/9.3.0-amd64 --version 
-gyc-9 (GCC) 9.3.0
-Copyright (C) 2018 Free Software Foundation, Inc.
+<p>La tradukilo estas nun atingebla tra la kontenero:</p>
+<pre><code class="language-bash">$ docker run -t -v $(pwd):/tmp -w /tmp gnuymir/11.3.0-amd64 --version
+
+gyc (GCC) 11.3.0
+Copyright (C) 2021 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 </code></pre>
 <p><br></p>
-<p>To make it easier to use, you can add an alias in the <code>~/.local/bin</code> directory.
-First open the file <code>~/.local/bin/gyc</code> and paste the following line :</p>
-<pre><code class="language-bash">docker run -t -v $(pwd):/tmp -w /tmp gnuymir/9.3.0-amd64 $*
+<p>Por ke ĝi estu pli facila por uzi, vi povas aldoni la sekvan alnomon je la <code>~/.local/bin</code> dosierujo.
+Unue malfermu la tekstan dosieron <code>~/.local/bin/gyc</code> kaj kopiu la sekvan linion :</p>
+<pre><code class="language-bash">docker run -t -v $(pwd):/tmp -w /tmp gnuymir/11.3.0-amd64 $*
 </code></pre>
 <p><br></p>
-<p>Make sure, that your <code>PATH</code> contains the <code>~/.local/bin</code>directory, and
-then open a new shell, and run the following commands :</p>
+<p>Certigu ke vian <code>PATH</code> enhavas la dosierujon <code>~/.local/bin</code>, kaj malfermu novan ŝelon, kaj lanĉi la sekvan ordonon :</p>
 <pre><code class="language-bash">$ chmod +x ~/.local/bin/gyc
 $ gyc --version
 
-gyc (GCC) 9.3.0
-Copyright (C) 2019 Free Software Foundation, Inc.
+gyc (GCC) 11.3.0
+Copyright (C) 2021 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 </code></pre>
