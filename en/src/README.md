@@ -33,35 +33,24 @@ The reference compiler of *Ymir* is based on the compiler **GCC**,
 which offer strong static optimization, as well as a vast set of
 supported target architectures.
 
-There are two ways to install the **gyc** (Gnu Ymir Compiler), natively or by using a docker container.
-
-### Native installation 
-
 This compiler can be installed on linux debian system, by following those simple steps: 
-- First, you need to downloads the packages : 
-  - [libmidgard-9-dev](https://ymir-lang.org/release/gmidgard/9.3.0/libgmidgard_9.3.0_amd64.deb)
-  - [GYC](https://ymir-lang.org/release/gymir/9.3.0/gyc-9_9.3.0_amd64.deb)
+- First, you need to download the package :
+  - [gyc-11](https://ymir-lang.org/release/gyc/11.3.0/gyc_11.3.0_amd64.deb)
 
-- And then, you need to install them using dpkg : 
+Other gyc versions using other gcc backend versions are available at
+[release](https://ymir-lang.org/release/).
+
+- And then, you need to install it using dpkg : 
 
 ```bash
-$ sudo dpkg -i libgmidgard_9.3.0_amd64.deb
-$ sudo dpkg -i gyc-9_9.3.0_amd64.deb
+$ sudo dpkg -i gyc-11_11.3.0_amd64.deb
 ```
 <br>
 
-These packages depend on : 
-- g++-9
-- gcc-9-base
-- libc6 >= 2.21
-- libgmp10 >= 2:5.0.1~
-- libmpc3
-- libmpfr6 >= 3.1.3
-- zlib1g >= 1:1.1.4
-- libgcc1
-- zlib1g-dev
-- zlib1g >= 1:1.2.0
-- libgc-dev >= 1:7.4.2
+This package depends on : 
+- g++-11
+- gcc-11
+- libgc-dev
 
 If one of them is not installed, you will get an error, that can be resolved by running the following command : 
 
@@ -76,70 +65,17 @@ The compiler is now installed and is named `gyc`
 ```bash
 $ gyc --version
 
-gyc-9 (GCC) 9.3.0
-Copyright (C) 2018 Free Software Foundation, Inc.
+gyc (GCC) 11.3.0
+Copyright (C) 2021 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 ```
 <br>
 
-### Uninstallation of the native version
+### Uninstallation 
 
 As for any debian package, the uninstall is done as follows : 
 
 ```bash
-$ dpkg -r gyc-9
-$ dpkg -r libgmidgard-9-dev
-```
-<br>
-
-**Caution** The uninstallation can remove your gcc installation.
-But you can still reinstall it easily if there is any problem, by typing : 
-
-```bash
-sudo apt install --reinstall gcc-9
-```
-
-## Docker installation
-
-To start you have to install docker.
-```bash
-$ sudo apt install docker.io
-```
-<br>
-
-Then retrieve the docker image from the repository :
-```bash
-$ docker pull gnuymir/9.3.0-amd64
-```
-
-The compiler is now accessible via the container.
-```bash
-$ docker run -t -v $(pwd):/tmp -w /tmp gnuymir/9.3.0-amd64 --version 
-gyc-9 (GCC) 9.3.0
-Copyright (C) 2018 Free Software Foundation, Inc.
-This is free software; see the source for copying conditions.  There is NO
-warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-```
-<br>
-
-To make it easier to use, you can add an alias in the `~/.local/bin` directory.
-First open the file `~/.local/bin/gyc` and paste the following line :
-
-```bash
-docker run -t -v $(pwd):/tmp -w /tmp gnuymir/9.3.0-amd64 $*
-```
-<br>
-
-Make sure, that your `PATH` contains the `~/.local/bin`directory, and
-then open a new shell, and run the following commands :
-
-```bash
-$ chmod +x ~/.local/bin/gyc
-$ gyc --version
-
-gyc (GCC) 9.3.0
-Copyright (C) 2019 Free Software Foundation, Inc.
-This is free software; see the source for copying conditions.  There is NO
-warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+$ dpkg -r gyc
 ```

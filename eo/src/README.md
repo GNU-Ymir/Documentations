@@ -33,36 +33,24 @@ La referenca tradukilo de *Ymir* estas bazita je la tradukilo **GCC**
 kiu oferas fortan statikan optimumigon, kaj vastan aron da subtenitaj
 celaj arĥitekturoj.
 
-Estas du manieroj por instali la **gyc** (GNU Ymir Compiler), denaske
-aŭ per uzi Docker'a kontenero.
-
-### Denaska instalo
-
 Tiu tradukilo povas esti instalita je linux sistemo per sekvi tiujn simplajn etapojn:
-- Unue, vi bezonos elŝuti tiujn pakaĵojn : 
-  - [libmidgard-11-dev](https://ymir-lang.org/release/gmidgard/11.3.0/libgmidgard_11.3.0_amd64.deb)
-  - [GYC](https://ymir-lang.org/release/gymir/11.3.0/gyc-11_11.3.0_amd64.deb)
+- Unue, vi bezonos elŝuti tiun pakaĵon : 
+  - [gyc-11](https://ymir-lang.org/release/gyc/11.3.0/gyc_11.3.0_amd64.deb)
 
-- Kaj poste, vi povas instali ilin uzante `dpkg` aŭ `apt-get`: 
+Aliaj versioj de gyc uzante aliaj versioj de gcc estas disponeblaj je
+[release](https://ymir-lang.org/release/).
+
+- Kaj poste, vi povas instali ĝin uzante `dpkg` aŭ `apt-get`: 
 
 ```bash
-$ sudo apt-get install ./libgmidgard_11.3.0_amd64.deb
-$ sudo apt-get install ./gyc-11_11.3.0_amd64.deb
+$ sudo dpkg -i gyc_11.3.0_amd64.deb
 ```
 <br>
 
-Tiuj pakaĵoj dependas de : 
+Tiu pakaĵo dependas de : 
 - g++-11
-- gcc-11-base
-- libc6 >= 2.21
-- libgmp10 >= 2:5.0.1~
-- libmpc3
-- libmpfr6 >= 3.1.3
-- zlib1g >= 1:1.1.4
-- libgcc1
-- zlib1g-dev
-- zlib1g >= 1:1.2.0
-- libgc-dev >= 1:7.4.2
+- gcc-11
+- libgc-dev
 
 Se almenaŭ unu el tiuj ne estas instalita, vi akiros eraron, kiu povas esti solvita per lanĉi la sekvan ordonon:
 
@@ -84,55 +72,11 @@ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 ```
 <br>
 
-### Malinstali denaskan version
+### Malinstali
 
 Kiel por iu ajn debian'a pakaĵo, la malinstalo estas farita kiel sekve : 
 
 ```bash
-$ dpkg -r gyc-11
-$ dpkg -r libgmidgard-11-dev
-```
-<br>
-
-## Docker'a instalo
-
-Por komenci, vi bezonas instali docker'n:
-```bash
-$ sudo apt install docker.io
-```
-<br>
-
-Tiam elŝuti la docker'an bildon de la deponejo: 
-```bash
-$ docker pull gnuymir/11.3.0-amd64
+$ dpkg -r gyc
 ```
 
-La tradukilo estas nun atingebla tra la kontenero:
-```bash
-$ docker run -t -v $(pwd):/tmp -w /tmp gnuymir/11.3.0-amd64 --version
-
-gyc (GCC) 11.3.0
-Copyright (C) 2021 Free Software Foundation, Inc.
-This is free software; see the source for copying conditions.  There is NO
-warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-```
-<br>
-
-Por ke ĝi estu pli facila por uzi, vi povas aldoni la sekvan alnomon je la `~/.local/bin` dosierujo.
-Unue malfermu la tekstan dosieron `~/.local/bin/gyc` kaj kopiu la sekvan linion : 
-```bash
-docker run -t -v $(pwd):/tmp -w /tmp gnuymir/11.3.0-amd64 $*
-```
-<br>
-
-Certigu ke vian `PATH` enhavas la dosierujon `~/.local/bin`, kaj malfermu novan ŝelon, kaj lanĉi la sekvan ordonon :
-
-```bash
-$ chmod +x ~/.local/bin/gyc
-$ gyc --version
-
-gyc (GCC) 11.3.0
-Copyright (C) 2021 Free Software Foundation, Inc.
-This is free software; see the source for copying conditions.  There is NO
-warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-```
