@@ -4,7 +4,7 @@
 * [Bonan tagon mondo](hello-world/README.md)
     * [Komentoj](hello-world/commentaires.md)
 * [Bazaj konceptoj de programado](primitives/README.md)
-    * [Variablo kaj Ŝanĝebleco](primitives/variables.md)
+    * [Variabloj kaj Ŝanĝebleco](primitives/variables.md)
     * [Datenaj tipoj](primitives/types.md)
     * [Funkcioj](primitives/functions.md)
     * [Kontrolaj fluoj](primitives/control.md)

@@ -1,39 +1,39 @@
-# Comments
+# Komentoj
 
-*Ymir* offers different types of comments. 
+*Ymir* proponas du malsamajn manierojn por komenti fontkodon. 
 
-* > `// A line of comment that stop at the end of the line`
-* > `/* Multi-line comment that stops at the final delimiter */`
+* > `// Linio de komento kiu finiĝas je la fino de la linio`
+* > `/* Komento de multaj linioj kiu finiĝas je la limiga signo */`
 
 ```ymir
 def main () 
-	throws &AssertError // Not what's important for the moment
+	throws &AssertError // tiu malgravas por la momento
 {
-    // This is an example of comment
+    // Tio estas ekzemplo de komento
 
     /* 
-     * This is another example of comment
-     * Where, the stars are optionnal
+     * Tio estas alia ekzemplo de komento
+     * Kie staroj estas nedevigaj
      */
 
     /*
-	And this is the proof
+	Kaj tio estas pruvo
     */
 
-    // None of the comment lines have an influence on the compilation
+    // Neniu el tiuj linioj havas influo al la traduko
 
     let x = 1 + /* 2 + */  3;
     assert (x == 4); 
 }
 ```
 
-In the above pogram, calling **`assert`** will throw an exception if
-the test is false. Errors are presented in the [Error
-Handling](https://gnu-ymir.github.io/Documentations/en/errors/main.html)
-chapter. For the moment, we can consider that the exception simply
-stops the program when the test fails.
+En la antaŭa programo, la voko de la funkcio **`assert`** ĵetas
+escepton se la testo pasita kiel parametro estas malvera. Eraroj estas
+prezentataj en la ĉapitro [Error
+Handling](https://ymir-lang.org/eo/errors/main.html). Por
+la momento, ni nur konsiderus ke la programa finiĝas se la testo estas
+malvera.
 
-
-We will see in the
-[Documentation](https://gnu-ymir.github.io/Documentations/en/documentation/main.html)
-chapter, that comments are very usefull, to generate documentations.
+Ni vidos en la ĉapitro
+[Documentation](https://ymir-lang.org/eo/documentation/README.html), ke
+komentoj estas utilaj por produkti dokumentaron aŭtomate.

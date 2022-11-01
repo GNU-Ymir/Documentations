@@ -1,46 +1,46 @@
-# Hello World
+# Bonan tagon mondo
 
-The following source code is the *Ymir* version of the famous program "Hello world !"
+La sekva fontkodo estas la Ymir'a versio de la fama programo "Bonan tagon mondo!".
 
 ```ymir
-import std::io // importation of the module containing io functions
+import std::io // importo de la pakaĵo enhavanta io (en/el) funkcioj
 
-// This is a comment 
+// Tiu estas komento
 
-/** This is a function declaration
-  * The main function, is the first one to be called
+/** Tiu estas deklaro de funkcio
+  * La 'main' funkcio estas la unua vokata funkcio 
   */
 def main () {
-    // Print 'Hello World !!' to the console
-    println ("Hello World !!");
+    // Skribas 'Bonan tagon mondo !!' je la ŝelo
+    println ("Bonan tagon mondo !!");
 }
 ```
 
-A binary can be generated using **GYC**.
+Binaro estas kreita uzante la programo **gyc**.
 
 ```bash
-$ gyc hello.yr
+$ gyc bonan_tagon.yr
 ``` 
 
-This command produces a binary `a.out` that can be executed.
+Tiu ordono kreas la binaron `a.out` kiu povas esti rulita.
 
 ```bash
 $ ./a.out
-Hello World !!
+Bonan tagon mondo !!
 ```
 
-The command line options of gyc are the same as those of all [gcc
+La ordonlinia opcioj de gyc estas preskaŭ la samaj ol tiuj de [gcc
 suite
 compilers](https://gcc.gnu.org/onlinedocs/gcc/Overall-Options.html#Overall-Options),
-with few exceptions that will be clarified in this documentation.
+krom kelkaj esceptoj kiuj estos prezentitaj en tiu dokumentaro.
 
-The option **`-o`** can be used to define the name of the output executable.
+La opcio **`-o`** estas uzata por difini la nomon de la kreita programo.
 
 ```bash
-$ gyc hello.yr -o hello
+$ gyc bonan_tagon.yr -o bonan_tagon
 $ ls
-hello  hello.yr
-$ ./hello
-Hello World !!
+bonan_tagon  bonan_tagon.yr
+$ ./bonan_tagon
+Bonan tagon mondo !!
 ```
 
