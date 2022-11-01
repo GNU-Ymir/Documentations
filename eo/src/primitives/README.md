@@ -1,6 +1,7 @@
-# Basic programming concepts
+# Bazaj konceptoj de programado
 
-This chapter covers the basic concepts of *Ymir* programming
-language. Specifically, you will learn about variables, mutability,
-native types, functions and control flows.
+Tiu ĉapitro kovras la bazajn konceptojn de la programlingvo
+*Ymir*. Speciale, vi lernos pri variabloj, ŝanĝebleco, denaskaj tipoj,
+funkcioj, operacioj kaj kontrolaj fluoj.
+
 

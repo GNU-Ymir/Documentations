@@ -1,56 +1,53 @@
-# Variables and Mutability
+# Variabloj kaj ŝanĝebleco
 
-Variables are declared with the keyword **`let`**. The grammar of a
-variable declaration is presented in the following code block.
+Oni deklaras variablojn uzante la ĉefvorton **`let`** (estu). La
+gramatiko de variabla deklaracio estas priskribita en la sekva bloko el
+kodo.
 
 ```grammar
-var_declaration := 'let' inner_var_decl (',' inner_var_decl)*
-inner_var_decl  := (decorator)* identifier (':' type)? '=' expression
-decorator := 'mut' | 'dmut' | 'ref'
-identifier := ('_')* [A-z] ([A-z0-9_])*
+var_deklaro := 'let' en_var_dekl (',' en_var_dekl)*
+en_var_dekl  := (dekoro)* identigo (':' tipo)? '=' esprimo
+dekoro := 'mut' | 'dmut' | 'ref'
+identigo := ('_')* [A-z] ([A-z0-9_])*
 ```
 
-<br>
+Variabla deklaro estas komponita el kvar partoj, 1) la identigo kiu
+estos uzita por krei referencon al la variablo ie alia en la programo, 2) la dekoroj, kiuj donos malsamajn sintenojn al la programo kiam ĝi
+uzas la variablon, 3) valoro, kiu difinas la komencan valoron de la
+variablo, kaj 4) tipo, maldeviga parto, kiu kiam ĝi ne estas skribita,
+estas deduktita uzante la tipon de la komenca valoro de la
+variablo. Male, kiam le tipo estas skribe difinita, la tipo de la
+variablo estas statike certigita kaj komparita al la tipo de la
+komenca valoro de la variablo.
 
-The declaration of a variable is composed of four parts, 1) the
-identifier that will be used to refer to the variable in the program,
-2) the decorators, that will give a different behavior to the program
-regarding the variable, 3) a value, that sets the initial value of the
-variable, and 4) a type, optional part of a variable declaration,
-which when omitted is infered from the type of the initial value of
-the variable. Conversely, when specified the type of a variable is
-statically checked and compared to the initial value of the variable.
+## Tipo de variablo
 
-## Variable type
-
-The type of the variable, as presented in the introduction, is
-specified in the variable declaration. This implies a static typing of
-each variable, whereby a variable cannot change its type during its
-lifetime. To illustrate this point, the following source code declares
-a variable of type **`i32`**, and tries to put a value of type
-**`f32`** in it. The language does not accept this behavior, and the
-compiler returns an error.
+La tipo de la variablo, kiel prezentita je la enkonduko de tiu ĉi
+ĉapitro, estas specifita je la deklaro de la variablo. Tio implicas ke
+ĉiuj tipoj de ĉiuj variabloj estas statike difinitaj, do variablo ne
+povas ŝanĝi sian tipon dum ĝia vivdaŭro. Por ilustri tiun ideon, la
+sekva fontkodo deklaras variablon kies tipo estas **`i32`** kaj provas
+meti valoron kies tipo estas **`f32`** en ĝi. Ymir programlingvo ne
+permesas ke tio okazas, do la tradukilo redonos eraron.
 
 ```ymir
 def main () {
-	let mut x = 12; // 12 is a literal of type i32
-	//  ^^^ this decorator, presented in the following sub section, is not the point of this example
+	let mut x = 12; // 12 estas litero de tipo i32 (fikskoma valoro)
+	//  ^^^ tiu dekoro, prezentita je la malantaŭa sekcio malgravas por la momento
 	
-	x = 89.0f; // 89.0f is a literal of type f32 (floating point value)
+	x = 89.0f; // 89.0f estas litero de tipo f32 (glitkoma valoro)
 }
 ```
 
-<br>
-
-The compiler, because the source code is not an acceptable *Ymir*
-program, returns an error. The error presented in the following
-block, informs that the variable **`x`** of type **`i32`**, is
-incompatible with a value of type **`f32`**.
+La tradukilo, ĉar la fontkodo ne estas akceptebla *Ymir* programo,
+redonas eraron. La eraro prezentita je la sekva bloko, informas ke la
+variablo **`x`** de tipo **`i32`** malkongruas kun la valoro de tipo
+**`f32`**.
 
 ```error
 Error : incompatible types mut i32 and f32
  --> main.yr:(5,4)
- 5  ┃ 	x = 89.0f; // 89.0f is a literal of type f32 (floating point value)
+ 5  ┃ 	x = 89.0f; // 89.0f estas litero de tipo f32 (glitkoma valoro)
     ╋ 	  ^
 
 
@@ -58,55 +55,51 @@ ymir1: fatal error:
 compilation terminated.
 ```
 
-<br>
+## Ŝanĝebleco de variablo 
 
-## Variable mutability 
+La dekoroj estas uzitaj por difini la sintenon kiu devas esti adoptita
+pri la variablo.  La ĉefvorto **`ref`** kaj **`dmut`** estos
+prezentitaj en alia ĉapitro (*cf.* [Alnomoj, Referencoj kaj
+pureco](https://ymir-lang.org/en/advanced/README.html)). Por la
+momento, ni nur parolos pri la ĉevorto **`mut`**. Tiu ĉefvorto estas
+uzata por specifi ke la valoro de variablo estas ŝanĝebla. La valoro
+de variablo deklarita sen tiu ĉefvorto estas malŝanĝebla, farante ke
+ĝi estas definitiva.
 
-The decorators are used to determine the behavior to adopt with the
-variable. The keyword **`ref`** and **`dmut`** will be discussed in
-another chapter (*cf.* [Aliases and
-References](https://gnu-ymir.github.io/Documentations/en/advanced/)). For
-the moment, we will be focusing on the keyword **`mut`**. This keyword
-is used to define a mutable variable, whose value can be changed. A
-variable declared without the **`mut`** keyword is declared immutable
-by default, making its value definitive.
+Alie, se variablo estas deklarita malŝanĝebla, tiam ĝi estas ligita al
+valoro, kiun la variablo ne povas ŝanĝi dum sia vivdaŭro. La ideo
+malantaŭ tiu implicita malŝanĝebleco estas ke tio permesas eviti
+erarojn, per devigi programistoj difini la variablojn kiuj estas
+ŝanĝeblaj per sintakso intence pli parolema, dum ĉiuj aliaj variabloj
+estas malŝanĝeblaj.
 
-In another word, if a variable is declared immutable, then it is bound
-the a value, that the variable cannot change throughout the
-life of the variable. The idea behind default immutability is to avoid
-unwanted behavior or errors, by forcing the developpers to determine
-which variables are mutable with the use of a deliberately more
-verbose syntax, while making all the other variables immutable.
-
-In the following source code a variable **`x`** of type **`i32`** is
-declared. This variable is immutable, (as the decorator **`mut`** is
-not used). Then the line **7**, which consist in trying to modify the
-value of the variable **`x`** is not accepted by the language,
-that's why the compiler does not accept to compile the program.
-<br>
+En la sekva fontkodo, la variable **`x`** kies tipo estas **`i32`**
+estas deklarita.  Tiu variablo estas malŝanĝebla, (ĉar la dekoro
+**`mut`** ne estas uzita). Tiam je la linio **7**, kiu provas ŝanĝi la
+valoron de la variablo **`x`** estas malakceptebla por la
+programlingvo, do la tradukilo redonas eraron.
 
 ```ymir
 import std::io
 
 def main () {
 	let x = 2;	
-	println ("X is equal to : ", x); 
+	println ("X valoras : ", x); 
 	
 	x = 3; 
-	println ("X is equal to : ", x);
+	println ("X valoras : ", x);
 }
 ```
 
-<br>
-
-For the given source file, the compiler generates the following
-error. This error informs that the affectation is not allowed, due to
-the nature of the variable **`x`**, which is not mutable. In *Ymir*,
-variable mutability and, type mutability ensure, through static
-checks, that when one declares that a variable has no write access to
-a value, there is no way to get write access to the value through
-this variable. Although this can sometimes be frustrating for the
-user.
+Por tiu fontkodo, la tradukilo redonas la sekvan eraron. Tiu eraro
+informas ke la asigno estas malpermesita, pro la eco de la variablo
+**`x`** kiu estas malŝanĝebla. In *Ymir*, variabla ŝanĝebleco, kaj
+tipa ŝanĝebleco certigas, tra statikaj kontroloj, ke kiam oni deklaras
+variablon malŝanĝebla, estas neniu maniero por ŝanĝi la valoron de tiu
+ĉi variablo uzante ĝin. Eĉ se tio povas esti frustra por la
+programisto. Ni vidos en alia ĉapitro ke malŝanĝebla variablo povas
+kelkfoje ne sufiĉi, sed ke estas aliaj manieroj por certigi ke valoro
+neniam ŝanĝas por variablo.
 
 ```error
 Error : left operand of type i32 is immutable
@@ -120,67 +113,63 @@ ymir1: fatal error:
 compilation terminated.
 ```
 
-<br> 
-
-The above example can be modified to make the variable **`x`**
-mutable. This modification implies the use of the keyword **`mut`**,
-which — placed ahead of a variable declaration — makes it
-mutable. Thanks to that modification, the following source code is an
-acceptable program, and thus will be accepted by the compiler.
-
-<br>
+La antaŭa ekzemplo povas esti ŝanĝita por fari ke la variablo **`x`**
+estu ŝanĝebla. Tiu ŝanĝo implikas la ĉefvorton **`mut`**, kiu — kiam
+lokita antaŭ variabla identigo — faras ke ĝi estu ŝanĝebla. Danke al
+tiu ŝango, la sekva fontkodo stas nun akceptebla, kaj tiam akceptita
+de la tradukilo.
 
 ```ymir
 import std::io
 
 def main () {
 	let mut x = 2;	
-	println ("X is equal to : ", x); 
+	println ("X valoras : ", x); 
 	
 	x = 3; 
-	println ("X is equal to : ", x);
+	println ("X valoras : ", x);
 }
 ```
 
-<br>
-Result:
+Rezulto:
 
 ```
-X is equal to : 2
-X is equal to : 3
+X valoras : 2
+X valoras : 3
 ```
 
-<br> In reality, mutability is not related to variables, but to
-types. This language proposes a complex type mutability system, whose
-understanding requires the comprehension of data types beforehand. In
-the following sections, we will, for that reason, present the type
-system, (and the different types of data that can be created in *Ymir* — *cf.*  chapter [Data
-types](https://gnu-ymir.github.io/Documentations/en/primitives/types.html)),
-before coming back to the data mutability, — and have a full overview
-of the mutability system in chapter [Aliases and
-references](https://gnu-ymir.github.io/Documentations/en/advanced/).
+Fakte, ŝanĝebleco ne vere rilatas al variabloj sed pli al
+tipoj. *Ymir* programlingvo havas kompleksan sistemon pri ŝanĝebleco
+de tipo, kies kompreno necesas antaŭe la komprenon de datenaj
+tipoj. En la sekvaj ĉapitroj, pro tiu kialo, ni prezentos la sistemon
+de tipo, (kaj ĉiujn la tipojn kiuj povas esti kreita en *Ymir* — *cf.*
+ĉapitro [Datenaj
+tipoj](https://ymir-lang.org/eo/primitives/types.html)), antaŭ ol ni
+revenos al la prezento de datena ŝanĝebleco - kaj ol ni havos
+kompletan bildon pri la sistemo de ŝanĝebleco en la ĉapitro [Alnomoj,
+Referencoj kaj pureco](https://ymir-lang.org/eo/advanced/README.html).
 
+## Komenca valoro
 
-## Initial value
+Variabloj estas **ĉiam** deklaritaj kun valoro. La celo estas certigi
+ke ĉiuj valoroj de programo venas de ie, kaj ne estas asignitaj per
+hazarda stato de la memoro de la maŝino kiu rulas la programon (kiel
+povas esti en C lingvo).
 
-A variable is **always** declared with a value. The objective is to
-ensure that any data in the program came from somewhere, and are not
-initialized from a random memory state of the machine executing the
-program (as we can have in C language). 
+Oni povas argumenti ke statika kontrolo povas esti uzita por certigi
+ke la valoro de variablo estas ĉiam difinita antaŭ ol ĝi estas uzita,
+kaj argumenti ke devigi ke oni difinas valoron je la deklaro de la
+variablo ne estas la plej bona maniero por certigi tiun aferon. Se tio
+pli temas pri opinio ol scienca argumento, ni pensas ke disigi la
+komencasignojn de la variabloj igas la fontkodon pli malfacilaj por
+legi. Plie malŝanĝeblaj variabloj estus ŝanĝeblaj por unu asigno kaj
+unu sole, farigante la sintenon de la programo ankoraŭ pli malfacila
+por kompreni.
 
-One can argue, that static verification can be used to ensure that a
-variable is set before being used, and argue that forcing an initial
-value to a variable is not the best way to achieve data validity.  If
-at this point, this is more a matter of opinion than of sound
-scientific reasoning, we think that scattering the initialization of a
-variable, makes programs more difficult to read. More, immutable
-variables would be mutable for one affectation, making the
-behavior of a program even more difficult to grasp. 
-
-In the following table, is presented two examples of source code, with
-the same behavior. On the left, a valid source code accepted by the
-Ymir language, and on the right, a source code that is not accepted
-based on the arguments we put forward. 
+La sekva tabelo prezentas du ekzemplojn de fontkodo, kiuj havas la
+saman sintenon. Je la maldekstra parto, akceptabla fontkodo, kaj je la
+dekstra parto malakceptabla fontkodo pro la argumentojn kiujn ni
+priskribis.
 
 <table>
 <tr>
@@ -210,29 +199,25 @@ based on the arguments we put forward.
 </tr>
 </table>
 
+Oni povas noti - pro la maldekstra ekzemplo - ke **`if`** (se) esprimo
+havas valoron. La valoro estas komputita kiel la rezulto de la esprimo
+(en tiu ĉi okazo la valoro estas **`42`** de tipo **`i32`**). Fakte
+ĉiuj esprimoj en *Ymir* havas valoron, forigante la limon enkondukita
+per la devigo de komenca valoro dum variabla deklaro.
 
-One can note from the left
-program, that an **`if`** expression has a value. Value computed by
-the result of the expression (in that case the value **`42`** of type
-**`i32`**). In point of fact, every expression can have a value in
-Ymir, removing the limitation, introduced by the forcing of an initial
-value to variables.
+## Mallokaj variabloj
 
+Eĉ se mallokaj variabloj havas relative malbonan reputacion pro multe
+da pravigeblaj kialoj, ni decidis lasi la eblon deklari ilin, pro ke
+krome ili permesas kelkajn programajn paradigmojn kiuj estus maleblaj
+alie.
 
-## Global variables
-
-Even if global variables have a rather bad reputation for many
-justified reasons, we choose to let the possibility to define them,
-since in spite of all, they allow some programmation paradigms that
-would be undoable otherwise.
-
-Global variables are defined as any local variable, except that the
-keyword **`let`** is replaced by the keyword **`static`**. The
-following source code presents an utilization of an immutable global
-variable. This example is just a showcase, as the use of an
-enumeration (*cf.*
-[Enum](https://gnu-ymir.github.io/Documentations/en/types/enum.html))
-would probably be more appropriate in this specific case.
+Mallokaj variabloj estas deklaritaj kiel lokaj variabloj, krom ke la
+ĉefvorto **`let`** estas anstataŭita per la ĉefvorto **`static`**
+(statika). La sekva fontkodo prezentas uzon de malŝanĝebla malloka
+variablo. Tiu estas nur ekzemplo, fakte en tiu ĉi okazo la uzo de
+enumeracio (*cf.*  [Enum](https://ymir-lang.org/eo/types/enum.html))
+estus probable pli konvena.
 
 ```ymir
 import std::io
@@ -240,27 +225,24 @@ import std::io
 static pi = 3.14159265359
 
 def main () {
-	println ("Pi value is : ", pi);
+	println ("Pi valoro estas : ", pi);
 }
 ```
 
-<br>
+Ĉiuj informoj prezentitaj pri lokaj variabloj koncernas mallokaj
+variabloj -- statika tipo, ŝanĝebleco, kaj komenca valoro. Neniu limo
+ekzistas pri la valoro kiun oni povas uzi en malloka variablo, kaj
+neniu limo ekzistas pri la formo de la komencasigno de malloka
+valoro. Voko de funkcio, kontrola fluo, kreo de klaso, ktp. nenio
+estis forgesita.
 
-All information presented on local variables are relevant to the case
-of global variables. Here, we are refering to static typing,
-mutability behavior, and default value initialization. No limitation
-exists on the value that can be stored inside a global variable, nor
-there exists on the nature of the initialization. Call of functions,
-conditional expressions, class initializations, etc., nothing was left
-out.
-
-Global variables are initialized before the start of the program,
-before the call of the `main` function. To illustrate that, the
-following source code, creates a global variable of type **`i32`**
-initialized from the value of the function **`foo`**. This function
-**`foo`** by making a call of the function **`println`**, prints a
-message to the console, and the **`main`** function also does it.
-
+La komenca valoro de mallokaj variabloj estas asignitaj antaŭ ol la
+pogramo mem komencas, alivorte antaŭ ol la funkcio **`main`** estu
+vokita. Por ilustri tiun ideon, la sekva fontkodo kreas mallokan
+variablon kies tipo estas **`i32`** kaj kiu estas asignita komence per
+la redona valoro de la funkcio **`foo`**. Tiu funkcio **`foo`**
+vokante la funkcion **`println`** skribas mesaĝon je la ŝelo, kaj
+poste la **`main`** funkcio faras la saman aĵon.
 
 ```ymir
 import std::io;
@@ -268,7 +250,7 @@ import std::io;
 static __GLOBAL__ = foo ();
 
 /**
-  * This function print the message "foo", and returns the value 42
+  * Tiu funkcio skribas la mesaĝon "foo", kaj redonas la valoron 42
   */
 def foo ()-> i32 {
   println ("foo");
@@ -280,31 +262,31 @@ def main () {
 }
 ```
 
-<br>
 
-Result:
+
+Rezulto:
 
 ```
 foo
 __GLOBAL__ = 42
 ```
 
-### Initialization order
+### Ordo de komencasigno
 
-There is no warranty on the order of initialization of global
-variables. This is probably, the first limitation that we can point
-out on the Ymir languages. **Contribution**, to allow such warranty would
-be very welcomed, but seems unlikely to be possible when global
-variables come from multiple modules (*cf.*
-[Modules](https://gnu-ymir.github.io/Documentations/en/modules)).
+Estas neniu garantio pri la ordo de la komencasignoj de mallokaj
+variabloj. Tio eble estas la unua granda limo de
+*Ymir*. **Kontribuo**, permesi garantion estus vere bonvena, sed estas
+vere malprobabla ke tio estus farebla kiam mallokaj variabloj venas de
+malsamaj pakaĵoj.(*cf.*
+[Pakaĵoj](https://ymir-lang.org/eo/modules/README.html)).
 
-For the moment, because it is impossible to certify the good
-initialization of a global variable, before the start of the program, it
-is not allowed to initialize a global variable from the value of
-another global variable. However, this verification is very limited,
-as the value of a global variable can be used inside a function, and
-this same function used to initialize the value of another global
-variable. In the following source code, this behavior is illustrated.
+Por la momento ĉar estas malebla certigi ke malloka variablo estas jam
+asignita kiam referenci ĝin antaŭ la komenco de la programo, estas
+malakceptebla uzi mallokan variablon por komencasigni alian mallokan
+variablon. Bedaŭrinde tiu kontrolo estas tre limigita ĉar la valoron
+de malloka variablo povas esti uzita kiel redona valoro de funkcio,
+kaj esti do uzita kiel komencvaloro de alia malloka variablo. La sekva
+fontkodo ilustras tiun ideon.
 
 ```ymir
 static __A__ = 42;
@@ -316,14 +298,13 @@ def foo () -> i32 {
 }
 ```
 
-<br>
-
-The compiler will unfortunetaly be able to see only the dependent
-initialization of **`__B__`**, and will let the initialization of
-**`__C__`** from the function **`foo`** occur. Even if in that
-specific case, the dependency appears very clearly, it may not be that
-clear when the function **`foo`** come from an external module, that
-only provides its prototype.
+La tradukilo bedaŭrinde nur kapablas vidi ke la komencasigno de la
+variablo **`__B__`** dependas de la komencasigno de la variablo
+**`__A__`**, kaj permesos la komencasignon de la variablo **`__C__`**
+tra la funkcio **`foo`** malgraŭ ĝia dependo al la variablo
+**`__A__`**. Eĉ se en ĉi tiu okazo la dependo estas relative evidenta,
+ĝi povas esti multe pli malevidenta kiam la funkcio **`foo`** venas de
+eksteran pakaĵon, kiu eksponas nur prototipon.
 
 ```error
 Error : the global var main::__B__ cannot be initialized from the value of main::__A__
@@ -345,21 +326,18 @@ ymir1: fatal error:
 compilation terminated.
 ```
 
-<br>
+## Ombro kaj regionoj
 
-## Shadowing and scope
+### Vivdaŭro
 
-### Lifetime
-
-The lifetime of a variable is defined by a scope. Regrouping
-expressions separated by semi-colons between curly brackets, a scope
-is a semantic component well known in programming languages. It has
-some particularities in Ymir, but these particularities will be
-presented in forthcoming chapters
-(*cf.* [Functions](https://gnu-ymir.github.io/Documentations/en/primitives/functions.html),
-[Scope
-guards](https://gnu-ymir.github.io/Documentations/en/errors/scope.html))
-and are not of interest to us at this point.
+La vivdaŭro de variablo estas difinita per ĝia regiono. Kunmentante
+esprimojn apartigitaj per punktokomoj inter kunigaj krampoj, regiono
+estas semantika komponaĵo fama en programlingvoj. Ĝi havas kelkajn
+apartaĵojn en *Ymir*, sed tiuj apartaĵojn estos priskribitaj en aliaj
+ĉapitroj (*cf.*
+[Funkcioj](https://ymir-lang.org/eo/primitives/functions.html),
+[Regionaj gardantoj](https://ymir-lang.org/eo/errors/scope.html)) kaj
+ne interesas nin por la momento.
 
 ```ymir
 import std::io;
@@ -367,40 +345,37 @@ import std::io;
 def main () {
     {
 		let x = 12;
-    } // x does not exists past this scope end
+    } // x ne plu ekzistas post tiu fermsigno
     println (x);
 }
 ```
 
-<br>
+Kiam variablo estas deklarita en regiono sed neniam uzita dum ĝia
+vivdaŭro, la tradukila redonas eraron. Por eviti tiun eraron, la
+variablo povas esti nomata **`_`**. Eĉ se ŝajnas senutila krei
+variablon kiun oni neniam uzas, tio estas kelkfoje utila (ekzemple
+kiam oni deklaras parametrojn de funkcio transŝarĝanta *cf.*
+[Heredeco de
+klaso](https://ymir-lang.org/eo/objects/inheritance.html)).
 
-When a variable is declared inside a scope and is never used during
-its lifetime the compiler returns an error. To avoid this error, the
-variable can be named **`_`**. If it may seem useless to declare a
-variable that is not used, it can be useful sometimes (for example
-when declaring function parameters of an overriden function, *cf.*
-[Class
-inheritence](https://gnu-ymir.github.io/Documentations/en/objects/inheritance.html)).
-
-A variable whose name is **`_`**, is anonymus, then there is no way to
-retreive the value of this variable.
+Variablo kies nomo estas **`_`**, estas anonima, tial estas neniu
+maniero por referenci ĝin aŭ ĝia valoro.
 
 ```ymir
 import std::io;
 
 def main () {
-    let _ = 12; // declare a anonymus variable
+    let _ = 12; // deklaras anoniman variablon
 }
 ```
 
-### Shadowing
+### Ombreco
 
-Two variables with the same name cannot be declared in colliding
-scopes, i.e. if a variable is declared with the name of a living
-variable in the current scope, the program is not acceptable, and the
-compiler returns a shadowing error. The following source code
-illustrates this point, where two variables are declared in the same
-scope with the same name **`x`**.
+Oni ne povas deklari du variablojn kun la sama nomo en koliziantaj
+regionoj, t.e. se variablo estas deklarita per la nomo de vivanta
+variablo, la programo ne estos akceptebla, kaj la tradukilo redonos
+eraron pri ombreco. La sekva fontkodo ilustras tiu ideo, per deklari
+tri variablojn kun la sama nomo **`x`**.
 
 ```ymir
 def main () {
@@ -412,12 +387,10 @@ def main () {
 }
 ```
 
-<br>
-
-The compiler returns the following error. Even the last variable in
-the scope opened at line **4** is not authorized. Many errors can be
-avoided, by simply removing this possibility. Possibility, in our
-opinion, that is not likely to bring anything of any benefit.
+La tradukilo redonas la sekvan eraron. Eĉ la deklaro de la lasta
+variablo en la regiono malfermita je la linio **4** esta
+malpermesa. Multe da eraroj povas esti evitaj per simple forigi tiun
+eblon. Eblo kiu laŭ nia opinio ne permesas gajni ion aŭ ian ajn bona.
 
 ```error
 Error : declaration of x shadows another declaration
@@ -445,18 +418,16 @@ ymir1: fatal error:
 compilation terminated.
 ```
 
-<br>
-
-Global variables do not create variable shadowing problems on local
-variables. A global variable is a global symbol, and is accessible
-through its parent module definition (*cf.*
-[Modules](https://gnu-ymir.github.io/Documentations/en/modules/)). Local
-variables on the other hand, are only accessible for the function in
-which they are declared. Symbol access gives the priority to local
-variables, behavior illustrated in the following example.
+Mallokaj variabloj ne kreas ombrecan problemon kiam ili kolizias kun
+lokaj variabloj. Malloka variablo estas malloka simbolo kaj estas
+atingebla de ĝia patra pakaĵo (*cf.*
+[Pakaĵoj](https://ymir-lang.org/eo/modules/README.html)). Lokaj
+variabloj aliflanke estas atingeblaj nur en la funkcio kiu deklaris
+ilin. La prioritato estas donita al lokaj simboloj antaŭ mallokaj,
+sinteno ilustrita en la sekva fontkodo.
 
 ```ymir
-mod Main; // declaration of a module named Main
+mod Main; // deklaro de la pakaĵo 'Main'
 
 import std::io;
 
@@ -468,13 +439,13 @@ def main ()
     {
 		let pi = 3;
 		assert (pi == 3); // using local pi
-    } // by closing the scope, local pi does not exist anymore
+    } // per malfermi la regiono, loka 'pi' ne plu ekzistas
 	
-    // because local pi does no longer exists
-	// global pi is accessible
+    // ĉar loka pi ne plu ekzistas
+	// malloka pi estas atingebla
     assert (pi == 3.14159265359);
 	
-	// global pi can also be accessed from its parent module
+	// malloka pi ĉiam povas esti atingita uzante la nomo de ĝia patra pakaĵo
     assert (Main::pi == 3.14159265359);
 }
 ```
