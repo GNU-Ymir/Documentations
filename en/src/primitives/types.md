@@ -18,11 +18,11 @@ let mut x : [mut i32] = [1, 2];
 let mut y = [1, 2];
 ```
 
-<br>
+
 
 To understand the difference between the type of **`x`** and the type
 of **`y`**, we invite you to read the chapter
-[Aliases and References](https://gnu-ymir.github.io/Documentations/en/advanced/).
+[Aliases and References](https://ymir-lang.org/en/advanced/README.html).
 
 Each type has type attributes. Theses attributes are accessed using
 the double colon operator **`::`** on a type expression.
@@ -31,12 +31,12 @@ the double colon operator **`::`** on a type expression.
 let a = i32::init;  // i32 (0)
 ```
 
-<br>
+
 
 All primitive types have common attributes that are listed in the
 table below. Attributes can be surrounded by the token **`_`**, to avoid some
 ambiguity for some types (*cf.*
-[Enumeration](https://gnu-ymir.github.io/Documentations/en/types/enum.html)). For
+[Enumeration](https://ymir-lang.org/en/types/enum.html)). For
 example, the attribute **`typeid`** is equivalent to `__typeid__`, or
 `_typeid`.
 
@@ -44,10 +44,10 @@ example, the attribute **`typeid`** is equivalent to `__typeid__`, or
 | --- | --- |
 | `init` | The initial value of the type |
 | `typeid` |  The name of the type stored in a value of type **`[c32]`** |
-| `typeinfo` | A structure of type TypeInfo, containing information about the type |
+| `typeinfo` | A structure of type **`TypeInfo`**, containing information about the type |
 
-All the information about TypeInfo are presented in chapter [Dynamic
-types](https://gnu-ymir.github.io/Documentations/en/types_advanced/).
+All the information about **`TypeInfo`** are presented in chapter [Dynamic
+types](https://ymir-lang.org/en/objects/cast.html).
 
 ## *typeof* and *sizeof*
 
@@ -74,7 +74,7 @@ def main () {
 }
 ```
 
-<br>
+
 
 Results: 
 
@@ -82,7 +82,7 @@ Results:
 i32 (42)
 ```
 
-<br>
+
 
 2) The keyword **`sizeof`** retreive the size of a type in bytes at
 compilation time. It is applicable only on types, not on value, but
@@ -98,7 +98,7 @@ def main () {
 	println (x, " ", sizeof (typeof (x)));
 }
 ```
-<br>
+
 
 Results: (on a x86-64 arch)
 
@@ -106,7 +106,7 @@ Results: (on a x86-64 arch)
 4 8
 ```
 
-<br>
+
 
 ## Scalar types
 
@@ -133,7 +133,7 @@ size.
 | 64 bits | i64 | u64 |
 | arch | isize | usize |
 
-The `usize` and `isize` types are architecture dependent, and have the
+The **`usize`** and **`isize`** types are architecture dependent, and have the
 size of a pointer, depending on the architecture targeted.
 
 Each type of signed integer can store values ranging from *-(2
@@ -143,8 +143,9 @@ numbers ranging from *0* to *2 <sup>n</sup> - 1*. For example, type
 **`i8`**, can store values from *-128* to *127*, and type **`u8`** can
 store values from *0* to *255*.
 
-You can write an integer in two forms, decimal `9_234` and hexadecimal
-`0x897A`. The `_` token, is simply ignored in a literal integer.
+You can write an integer in two forms, decimal **`9_234`** and
+hexadecimal **`0x897A`**. The **`_`** token, is simply ignored in a
+literal integer.
 
 To make sure a literal value has the right type, a prefix can be added
 at the end of it. For example, to get a **`i8`** with the value *7*,
@@ -186,7 +187,7 @@ ymir1: fatal error:
 compilation terminated.
 ```
 
-<br>
+
 
 **WARNING** However, if the value cannot be known at compile time, the
 overflow is not checked and can lead to strange behavior. For example,
@@ -241,7 +242,7 @@ def main () {
 }
 ```
 
-<br>
+
 
 The following table lists the attributes specific to boolean type.
 
@@ -270,7 +271,7 @@ def main () {
 }
 ```
 
-<br>
+
 
 If the loaded literal is too long to be stored in the character type,
 an error will be returned by the compiler. For example :
@@ -281,7 +282,7 @@ def main () {
 }
 ```
 
-<br>
+
 
 The error will be the following. This error means that you will need
 at least 3 **`c8`** (or bytes) to store the value, so it doesn't fit into one
@@ -298,7 +299,7 @@ ymir1: fatal error:
 compilation terminated.
 ```
 
-<br>
+
 
 The following table lists the attributes specific to character types.
 
@@ -318,7 +319,7 @@ recomand to not use them.
 Pointers are defined using the token **`&`** on types, or on
 values. They are aliasable types, as they borrow memory (*cf.* [Aliasable
 and
-References](https://gnu-ymir.github.io/Documentations/en/advanced/)).
+References](https://ymir-lang.org/en/advanced/README.html)).
 
 ```ymir
 import std::io;
@@ -333,22 +334,22 @@ def main ()
 }
 ```
 
-<br>
+
 
 Pointers are unsafe, and dereferencing a pointer can result in undefined
 behavior depending on where it points. It can also sometimes raise a
 segmentation fault. In **`Ymir`**, segmentation fault are recovered,
 and an exception is thrown. Error handling is presented in chaper
 [Error
-Handling](https://gnu-ymir.github.io/Documentations/en/errors/main.html).
+Handling](https://ymir-lang.org/en/errors/main.html).
 
 **WARNING**, Note that the segmentation fault may not occur even if
   the pointer is not properly set. The easiest way to avoid undefined
   behavior is to not use pointers and use `std` verified functions, or
   other semantically verified elements (cf [Aliasable and
-  References](https://gnu-ymir.github.io/Documentations/en/advanced/)).
+  References](https://ymir-lang.org/en/advanced/README.html)).
 
-<br>
+
 
 The following table lists the attributes specific to pointer types.
 
@@ -382,7 +383,7 @@ def main () {
 }
 ```
 
-<br>
+
 
 In the above example, the tuple `t`, is a single element, and can be
 used as a function parameter or as a return value of a function. It
@@ -393,7 +394,7 @@ elements. There are three ways of tuple destructuring.
 is known at compilation time. This value can be computed by a complex
 expression, as long as the compiler is able to retreive the value at
 compilation time (*cf.* [Compilation time
-execution](https://gnu-ymir.github.io/Documentations/en/templates/cte.html)).
+execution](https://ymir-lang.org/en/templates/cte.html)).
 
 ```ymir
 import std::io;
@@ -406,7 +407,7 @@ def main () {
 }
 ```
 
-<br>
+
 
 2) the tuple destructuring syntax. This syntax, close to variable
 declaration, creates new variables that contains parts of the tuple
@@ -426,7 +427,7 @@ def main () {
 }
 ```
 
-<br>
+
 
 3) the keyword **`expand`**. this keyword is a compile-time rewrite,
 that expands the values of a tuple into a list of values. This list is
@@ -455,7 +456,7 @@ def main () {
 }
 ```
 
-<br>
+
 
 There is two other ways to destructurate a tuple. These ways are
 presented in forthcoming chapters. The following table lists the
@@ -488,7 +489,7 @@ def main () {
 }
 ```
 
-<br>
+
 
 The `step_by` function takes a range as a parameter and returns a new
 range, with a modified step. This function is a core function, thus
@@ -500,10 +501,10 @@ def main () {
 } 
 ```
 
-<br>
+
 
 The [Control
-flows](https://gnu-ymir.github.io/Documentations/en/primitives/control.html)
+flows](https://ymir-lang.org/en/primitives/control.html)
 section shows a use of these types.
 
 ### Arrays 
@@ -533,7 +534,7 @@ def main () {
 	let z = "Hello World !!"s8; // a [c8] slice
 }
 ```
-<br>
+
 
 **Warning**: The length of a **`[c8]`** literals can seem incorrect
 due to the encoding system. For example, the slice **`"☺"s8`** have a
@@ -547,7 +548,7 @@ than the mutability of scalar types (except pointers), because it
 borrows memory which is not automatically copied when an assignment is
 made. This section will not discuss the mutability of internal types
 or aliasable types. This is discussed in the chapter [Aliases and
-References](https://gnu-ymir.github.io/Documentations/en/advanced/).
+References](https://ymir-lang.org/en/advanced/README.html).
  
 The field **`len`** records the length of the slice and can be
 retrieved with the dot operator **`.`**.  The length of the slice is
@@ -563,7 +564,7 @@ def main () {
 }
 ```
 
-<br>
+
 
 Similarly, the **`ptr`** field, gives access to the pointer of the
 slice and its types depend on the inner type of the slice, and is
@@ -594,7 +595,7 @@ def main ()
 }
 ```
 
-<br>
+
 
 The length of a slice is unknown at compilation time, and access can
 be made with dynamic integers whose values are also unknown at
@@ -603,7 +604,7 @@ used go beyond the slice length. With this in mind, slice access is
 considered unsafe, and can throw an exception of type
 **`&OutOfArray`**. The exception system, and error handling is
 detailed in the chapter [Error
-Handling](https://gnu-ymir.github.io/Documentations/en/errors/main.html).
+Handling](https://ymir-lang.org/en/errors/main.html).
 
 Slices can be concatenated, to form another slice. The concatenation
 is made using the operator tilde on two operands. To work properly and
@@ -611,7 +612,7 @@ be accepted by the language, the two slice used as operands must share
 the same type (but not necessarily mutability level, the mutability of
 the operand with the lowest mutability level is choosed for the result
 of the operation *cf.* [Aliases and
-References](https://gnu-ymir.github.io/Documentations/en/advanced/)).
+References](https://ymir-lang.org/en/advanced/README.html)).
 
 ```ymir
 import std::io
@@ -625,14 +626,14 @@ def main ()  {
 }
 ```
 
-<br>
+
 Results: 
 
 ```
 [1, 2, 3, 8, 7, 6]
 ```
 
-<br>
+
 
 The tilde token was chosen to avoid some ambiguity. In some languages
 such as Java, the concatenation is made using the token **`+`** that
@@ -660,7 +661,7 @@ def main () {
 }
 ```
 
-<br>
+
 
 The following table lists the attributes specific to slice types.
 
@@ -701,11 +702,11 @@ def main ()
 }
 ```
 
-<br>
+
 
 A static array can be transformed into a slice using the `alias`,
 `copy` and `dcopy` keywords. The chapter [Aliases and
-references](https://gnu-ymir.github.io/Documentations/en/advanced/)
+references](https://ymir-lang.org/en/advanced/README.html)
 explains the difference between these keywords.
 
 ```ymir
@@ -721,7 +722,7 @@ def main () {
 }
 ```
 
-<br>
+
 
 One can argue that slice literals should be of static array type. We
 made the choice to create slices from array literals rather than
@@ -730,7 +731,7 @@ commonly used than arrays with a static size. We are for the moment
 considering the possibility to prefix slice literals, to define static
 array literals, but the question is not yet decided.
 
-<br>
+
 
 The following table lists the attributes specific to array types.
 
@@ -745,7 +746,7 @@ The following table lists the attributes specific to array types.
 The option typed values are values that may be set or not. They are
 defined using the token **`?`** on types or values. Further
 information on option type are given in the chapter [Error
-handling](https://gnu-ymir.github.io/Documentations/en/errors/main.html),
+handling](https://ymir-lang.org/en/errors/main.html),
 as they are completely related to error management system. 
 
 ```ymir
@@ -757,13 +758,13 @@ def main () {
 }
 ```
 
-<br>
+
 
 The value of an option type can be retreived using functions in the
 std, or pattern matching. In this chapter, we only focus on the
 **`unwrap`** function, pattern matching being left for a future
 chapter (*cf.* [Pattern
-matchin](https://gnu-ymir.github.io/Documentations/en/pattern)).  The
+matchin](https://ymir-lang.org/en/pattern/README.html)).  The
 function **`unwrap`** from the module **`std::conv`**, get the value
 contained inside an option type. If no value is contained inside the
 option, the function throws an error of type **`&CastFailure`**.
@@ -789,7 +790,7 @@ def main ()
 }
 ```
 
-<br>
+
 
 The following table lists the attributes specific to option types.
 
@@ -807,7 +808,7 @@ presented in the code block below.
 cast_expression := 'cast' '!' ('{' type '}' | type) expression
 ```
 
-<br>
+
 
 In the following example, a cast of a value of type **`i32`** to a
 value of type **`i64`** is made. As said earlier, implicit casting is
@@ -820,7 +821,7 @@ let a = 0;
 let b : i64 = cast!i64 (a);
 ```
 
-<br>
+
 
 The following table list the authorized casts of the primitive types : 
 

@@ -1,60 +1,57 @@
-# Primitives types
+# Bazaj datenaj tipoj
 
-In *Ymir* language, each value has a certain type of data, which
-indicates how the program must behave and how it should operate with
-the value. *Ymir* is a statically typed language, which means that
-all types of all values must be known at compile time. Usually, the
-compiler is able to infer the data types from the values, and it is
-not necessary to specify them when declaring a variable. But
-sometimes, when it comes to the mutability of a variable or the
-inheritance of a class for example, the inference can be wrong and
-the behavior not adapted to what you might want to do.
+En *Ymir* programlingvo, ĉiuj valoroj havas statikan tipon de dateno,
+kiu indikas kiel la programo devas funkcii kaj kiel ĝi devas operacii
+kun la valoro. *Ymir* estas statike tipa programlingvo, tio volas diri
+ke ĉiuj tipoj de ĉiuj valoroj estas konataj je la momento de la
+traduko. Ĝenerale la tradukilo kapablas dedukti la tipojn de la
+detanoj per ĝiaj valoroj, kaj ne necesas specifi la tipojn kiam oni
+deklaras la variablojn. Sed kelkfoje, kiam temas pri ŝanĝebleco aŭ
+heredeco de klaso ekzemple, la dedukto povas esti malvera kaj la
+sinteno de la programo povas ne konveni al tio kion oni volas fari.
 
-Therefore, the type may be added when declaring a variable, as in the
-following code.
+Pro tiu kialo, la tipo povas esti aldonita kiam oni deklaras
+variablon, kiel ilustrita je la sekva fontkodo.
 
 ```ymir
 let mut x : [mut i32] = [1, 2];
 let mut y = [1, 2];
 ```
 
-<br>
+Por kompreni la diferencon inter la tipo de la variablo **`x`** kaj la
+tipo de la variablo **`y`**, ni invitas vin legi la ĉapitron [Alnomoj,
+Referencoj kaj pureco](https://ymir-lang.org/eo/advanced/README.html).
 
-To understand the difference between the type of **`x`** and the type
-of **`y`**, we invite you to read the chapter
-[Aliases and References](https://gnu-ymir.github.io/Documentations/en/advanced/).
-
-Each type has type attributes. Theses attributes are accessed using
-the double colon operator **`::`** on a type expression.
+Ĉiuj tipoj havas tipan atributon. Tiuj atributoj estas atingeblaj
+uzante la operacisimbolon dupunktoj **`::`** post la esprimo de tipo.
 
 ```ymir
 let a = i32::init;  // i32 (0)
 ```
 
-<br>
+Ĉiuj bazaj tipoj havas komunajn atributojn kiuj estas listitaj en la
+tabelo sube. Atributoj povas esti ĉirkaŭitaj de la signo **`_`**, por
+eviti ambiguecon por kelkaj tipoj (*cf.*
+[Enumeracio](https://ymir-lang.org/eo/types/enum.html). Ekzemple, la
+atributo **`typeid`** (identigilo de tipo) estas ekvivalenta al
+**`__typeid__`** aŭ al **`_typeid`**.
 
-All primitive types have common attributes that are listed in the
-table below. Attributes can be surrounded by the token **`_`**, to avoid some
-ambiguity for some types (*cf.*
-[Enumeration](https://gnu-ymir.github.io/Documentations/en/types/enum.html)). For
-example, the attribute **`typeid`** is equivalent to `__typeid__`, or
-`_typeid`.
-
-| Name | Meaning |
+| Nomo | Senco |
 | --- | --- |
-| `init` | The initial value of the type |
-| `typeid` |  The name of the type stored in a value of type **`[c32]`** |
-| `typeinfo` | A structure of type TypeInfo, containing information about the type |
+| `init` | La norma valoro por la tipo (ekz. 0 por i32) |
+| `typeid` |  la nomo de la tipo en **`[c32]`** valoro |
+| `typeinfo` | Strukturo de tipo **`TypeInfo`** (informo pri tipo), enhavanta informojn pri la tipo |
 
-All the information about TypeInfo are presented in chapter [Dynamic
-types](https://gnu-ymir.github.io/Documentations/en/types_advanced/).
+La tipo **`TypeInfo`** estas priskribita en la ĉapitro [Dinamikaj
+tipoj](https://ymir-lang.org/eo/objects/cast.html).
 
-## *typeof* and *sizeof*
+## *typeof* kaj *sizeof*
 
-1) The keyword **`typeof`** retreives the type of a value at
-compilation time. This type can be used in any context, to retreive
-type information. For example, in a variable declaration, a function
-parameter, or return type, structure fields, etc..
+1) La ĉefvorto **`typeof`** (tipo de) permesas retrovi la tipon de
+valoro je la momento de la traduko. Tiu tipo povas esti uzita kiel
+ĉiuj ajn aliaj tipoj, por retrovi informi pri tipo. Ekzemple por
+deklari variablon, deklari redonan tipon, aŭ deklari kampon de
+strukturo, ktp..
 
 ```ymir
 import std::io;
@@ -74,21 +71,17 @@ def main () {
 }
 ```
 
-<br>
-
-Results: 
+Rezulto : 
 
 ```
 i32 (42)
 ```
 
-<br>
-
-2) The keyword **`sizeof`** retreive the size of a type in bytes at
-compilation time. It is applicable only on types, not on value, but
-the type of a value can be retreive using the **`typeof`**
-keyword. This size is given in a value of type **`usize`** (this
-scalar type is presented below).
+2) La ĉefvorto **`sizeof`** retrovas la dimension de tipo en bitokoj
+je la momento de la traduko. Tio estas aplikebla nur al tipoj, ne al
+valoroj, sed la tipo ĉiam povas esti retrovita per la ĉefvorto
+**`typeof`**.  La dimensio de la tipo estas redonita en valoro de tipo
+**`usize`** (tiu skalara tipo estas prezentita sube).
 
 ```ymir
 import std::io;
@@ -98,67 +91,68 @@ def main () {
 	println (x, " ", sizeof (typeof (x)));
 }
 ```
-<br>
 
-Results: (on a x86-64 arch)
+Rezulto: (se oni rulas la programon sur x86-64 arĥitekturo)
 
 ```
 4 8
 ```
 
-<br>
+## Skalaraj tipoj
 
-## Scalar types
+Skalara tipo priskribas ĉiuj la tipoj enhavantaj nur unu
+valoron. *Ymir* programlingvo havas kvin bazajn skalarajn tipojn:
+fikskomaj, glitkomaj, tekstaj, bulea kaj adresaj tipoj. Ili povas havi
+malsamajn dimensiojn depende de la sinteno kiun oni volas.
 
-Scalar types represent all types containing a single value. *Ymir*
-has five primitive scalar types: integers, floating point, characters,
-booleans, and pointers. They can have different sizes for different
-purposes.
+### Fikskomaj tipoj
 
-### Integer types
+Fikskoma tipo estas entjero kaj ili estas ĝenerale kontraŭstaritaj al
+glitkomaj tipoj. Estas pluraj fikskomaj tipoj en *Ymir* programlingvo
+kun aŭ sen signumo. Kun signumo aŭ sen signumo temas pri la ebleco por
+entjero esti negativa. Fikskomaj tipoj jkn signumo komencas per la
+litero **`i`**, kiam fikskomaj tipoj sen signumo komencas per la
+litero **`u`**. La sekva tabelo listas la fikskomajn tipojn, ordigante
+ilin laŭ datena dimensio.
 
-An integer is a number without decimal points. There are different
-types of integers in *Ymir*, the signed one and the unsigned
-one. Signed and unsigned refers to the possibility for a number to be
-negative. Signed integer types begin with the letter **`i`**, while
-unsigned integers begin with the letter **`u`**. The following table
-lists all the different types of integers, and sorts them by memory
-size.
 
-| size | signed | unsigned |
+| dimensio | kun signumo | sen signumo |
 | --- | --- | --- |
-| 8 bits | i8 | u8 |
-| 16 bits | i16 | u16 |
-| 32 bits | i32 | u32 |
-| 64 bits | i64 | u64 |
-| arch | isize | usize |
+| 8 bitoj | i8 | u8 |
+| 16 bitoj | i16 | u16 |
+| 32 bitoj | i32 | u32 |
+| 64 bitoj | i64 | u64 |
+| arĥ | isize | usize |
 
-The `usize` and `isize` types are architecture dependent, and have the
-size of a pointer, depending on the architecture targeted.
+La tipoj **`usize`** kaj **`isize`** havas la saman dimension ol
+adrestipon, kies dimensio dependas de la cela arĥitekturo (ekzemple 64
+bitoj sur x86_64).
 
-Each type of signed integer can store values ranging from *-(2
-<sup>n - 1</sup>)* to *2 <sup>n - 1</sup> - 1*, where *n* is the size
-of the integer in memory. Unsigned types, on the other hand, can store
-numbers ranging from *0* to *2 <sup>n</sup> - 1*. For example, type
-**`i8`**, can store values from *-128* to *127*, and type **`u8`** can
-store values from *0* to *255*.
+Fikskomaj tipoj kun signumo povas konservi valoron etendiĝante de *-(2
+<sup>n - 1</sup>)* al *2 <sup>n - 1</sup> - 1*, kie *n* estas la
+dimensio de la tipo je bitoj en memoro. Aliflanke fikskomaj tipoj sen
+signumo povas konservi valoron etendiĝante de *0* al *2 <sup>n</sup> -
+1*. Ekzemple la tipo **`i8`** povas konservi valoron etendiĝante de
+*-128* al *127*, kaj tipo **`u8`** povas konservi valoron kurante
+gamon de *0* al *255*.
 
-You can write an integer in two forms, decimal `9_234` and hexadecimal
-`0x897A`. The `_` token, is simply ignored in a literal integer.
+Oni povas skribi entjeron je du malsimilaj formoj, decimala `9_234`
+kaj deksesuma `0x897A`. La litero **`_`** estas simple ignorita kiam
+estante en entjero.
 
-To make sure a literal value has the right type, a prefix can be added
-at the end of it. For example, to get a **`i8`** with the value *7*,
-the right literal is written `7i8`. By default, if no prefix is added
-at the end of the literal, the language defines its type as a
-**`i32`**.
+Por certigi ke la litera valoro havu la ĝustan tipon, prefikso povas
+esti aldonita je ĝia fino. Ekzemple por krei **`i8`**'n kun la valoro
+**`7`**, la ĝusta litero estas **`7i8`**. Kiam neniu prefikso estas
+aldonita je la fino de la litero, la programlingvo ĉiam elektas la
+tipon **`i32`**.
 
-As indicated above, each type has attributes, the following table
-lists the integer-specific attributes:
+Kiel oni indikis pli frue, ĉiuj tipoj havas atributojn. La sekva
+tabelo listas la atributojn proprajn al fikskomaj tipoj.
 
 | Name | Meaning |
 | --- | --- |
-| `max` | The maximal value |
-| `min` | The minimal value |
+| `max` | La plej granda valoro kiun la tipon povas konservi |
+| `min` | La plaj malgranda valoro kiun la tipon povas konservi |
 
 An overflow check is performed on literals at compilation time, and an
 error is returned by the compiler if the type of integer choosed to
@@ -318,7 +312,7 @@ recomand to not use them.
 Pointers are defined using the token **`&`** on types, or on
 values. They are aliasable types, as they borrow memory (*cf.* [Aliasable
 and
-References](https://gnu-ymir.github.io/Documentations/en/advanced/)).
+References](https://ymir-lang.org/eo/advanced/)).
 
 ```ymir
 import std::io;
@@ -340,13 +334,13 @@ behavior depending on where it points. It can also sometimes raise a
 segmentation fault. In **`Ymir`**, segmentation fault are recovered,
 and an exception is thrown. Error handling is presented in chaper
 [Error
-Handling](https://gnu-ymir.github.io/Documentations/en/errors/main.html).
+Handling](https://ymir-lang.org/eo/errors/main.html).
 
 **WARNING**, Note that the segmentation fault may not occur even if
   the pointer is not properly set. The easiest way to avoid undefined
   behavior is to not use pointers and use `std` verified functions, or
   other semantically verified elements (cf [Aliasable and
-  References](https://gnu-ymir.github.io/Documentations/en/advanced/)).
+  References](https://ymir-lang.org/eo/advanced/)).
 
 <br>
 
@@ -393,7 +387,7 @@ elements. There are three ways of tuple destructuring.
 is known at compilation time. This value can be computed by a complex
 expression, as long as the compiler is able to retreive the value at
 compilation time (*cf.* [Compilation time
-execution](https://gnu-ymir.github.io/Documentations/en/templates/cte.html)).
+execution](https://ymir-lang.org/eo/templates/cte.html)).
 
 ```ymir
 import std::io;
@@ -503,7 +497,7 @@ def main () {
 <br>
 
 The [Control
-flows](https://gnu-ymir.github.io/Documentations/en/primitives/control.html)
+flows](https://ymir-lang.org/eo/primitives/control.html)
 section shows a use of these types.
 
 ### Arrays 
@@ -547,7 +541,7 @@ than the mutability of scalar types (except pointers), because it
 borrows memory which is not automatically copied when an assignment is
 made. This section will not discuss the mutability of internal types
 or aliasable types. This is discussed in the chapter [Aliases and
-References](https://gnu-ymir.github.io/Documentations/en/advanced/).
+References](https://ymir-lang.org/eo/advanced/).
  
 The field **`len`** records the length of the slice and can be
 retrieved with the dot operator **`.`**.  The length of the slice is
@@ -603,7 +597,7 @@ used go beyond the slice length. With this in mind, slice access is
 considered unsafe, and can throw an exception of type
 **`&OutOfArray`**. The exception system, and error handling is
 detailed in the chapter [Error
-Handling](https://gnu-ymir.github.io/Documentations/en/errors/main.html).
+Handling](https://ymir-lang.org/eo/errors/main.html).
 
 Slices can be concatenated, to form another slice. The concatenation
 is made using the operator tilde on two operands. To work properly and
@@ -611,7 +605,7 @@ be accepted by the language, the two slice used as operands must share
 the same type (but not necessarily mutability level, the mutability of
 the operand with the lowest mutability level is choosed for the result
 of the operation *cf.* [Aliases and
-References](https://gnu-ymir.github.io/Documentations/en/advanced/)).
+References](https://ymir-lang.org/eo/advanced/)).
 
 ```ymir
 import std::io
@@ -705,7 +699,7 @@ def main ()
 
 A static array can be transformed into a slice using the `alias`,
 `copy` and `dcopy` keywords. The chapter [Aliases and
-references](https://gnu-ymir.github.io/Documentations/en/advanced/)
+references](https://ymir-lang.org/eo/advanced/)
 explains the difference between these keywords.
 
 ```ymir
@@ -745,7 +739,7 @@ The following table lists the attributes specific to array types.
 The option typed values are values that may be set or not. They are
 defined using the token **`?`** on types or values. Further
 information on option type are given in the chapter [Error
-handling](https://gnu-ymir.github.io/Documentations/en/errors/main.html),
+handling](https://ymir-lang.org/eo/errors/main.html),
 as they are completely related to error management system. 
 
 ```ymir
@@ -763,7 +757,7 @@ The value of an option type can be retreived using functions in the
 std, or pattern matching. In this chapter, we only focus on the
 **`unwrap`** function, pattern matching being left for a future
 chapter (*cf.* [Pattern
-matchin](https://gnu-ymir.github.io/Documentations/en/pattern)).  The
+matchin](https://ymir-lang.org/eo/pattern)).  The
 function **`unwrap`** from the module **`std::conv`**, get the value
 contained inside an option type. If no value is contained inside the
 option, the function throws an error of type **`&CastFailure`**.

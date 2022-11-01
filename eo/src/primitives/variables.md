@@ -92,7 +92,7 @@ def main () {
 ```
 
 Por tiu fontkodo, la tradukilo redonas la sekvan eraron. Tiu eraro
-informas ke la asigno estas malpermesita, pro la eco de la variablo
+informas ke la atribuo estas malpermesita, pro la eco de la variablo
 **`x`** kiu estas malŝanĝebla. In *Ymir*, variabla ŝanĝebleco, kaj
 tipa ŝanĝebleco certigas, tra statikaj kontroloj, ke kiam oni deklaras
 variablon malŝanĝebla, estas neniu maniero por ŝanĝi la valoron de tiu
@@ -152,7 +152,7 @@ Referencoj kaj pureco](https://ymir-lang.org/eo/advanced/README.html).
 ## Komenca valoro
 
 Variabloj estas **ĉiam** deklaritaj kun valoro. La celo estas certigi
-ke ĉiuj valoroj de programo venas de ie, kaj ne estas asignitaj per
+ke ĉiuj valoroj de programo venas de ie, kaj ne estas atribuitaj per
 hazarda stato de la memoro de la maŝino kiu rulas la programon (kiel
 povas esti en C lingvo).
 
@@ -161,8 +161,8 @@ ke la valoro de variablo estas ĉiam difinita antaŭ ol ĝi estas uzita,
 kaj argumenti ke devigi ke oni difinas valoron je la deklaro de la
 variablo ne estas la plej bona maniero por certigi tiun aferon. Se tio
 pli temas pri opinio ol scienca argumento, ni pensas ke disigi la
-komencasignojn de la variabloj igas la fontkodon pli malfacilaj por
-legi. Plie malŝanĝeblaj variabloj estus ŝanĝeblaj por unu asigno kaj
+komencatribuojn de la variabloj igas la fontkodon pli malfacilaj por
+legi. Plie malŝanĝeblaj variabloj estus ŝanĝeblaj por unu atribuo kaj
 unu sole, farigante la sintenon de la programo ankoraŭ pli malfacila
 por kompreni.
 
@@ -232,14 +232,14 @@ def main () {
 Ĉiuj informoj prezentitaj pri lokaj variabloj koncernas mallokaj
 variabloj -- statika tipo, ŝanĝebleco, kaj komenca valoro. Neniu limo
 ekzistas pri la valoro kiun oni povas uzi en malloka variablo, kaj
-neniu limo ekzistas pri la formo de la komencasigno de malloka
+neniu limo ekzistas pri la formo de la komencatribuo de malloka
 valoro. Voko de funkcio, kontrola fluo, kreo de klaso, ktp. nenio
 estis forgesita.
 
-La komenca valoro de mallokaj variabloj estas asignitaj antaŭ ol la
+La komenca valoro de mallokaj variabloj estas atribuitaj antaŭ ol la
 pogramo mem komencas, alivorte antaŭ ol la funkcio **`main`** estu
 vokita. Por ilustri tiun ideon, la sekva fontkodo kreas mallokan
-variablon kies tipo estas **`i32`** kaj kiu estas asignita komence per
+variablon kies tipo estas **`i32`** kaj kiu estas atribuita komence per
 la redona valoro de la funkcio **`foo`**. Tiu funkcio **`foo`**
 vokante la funkcion **`println`** skribas mesaĝon je la ŝelo, kaj
 poste la **`main`** funkcio faras la saman aĵon.
@@ -271,9 +271,9 @@ foo
 __GLOBAL__ = 42
 ```
 
-### Ordo de komencasigno
+### Ordo de komencatribuo
 
-Estas neniu garantio pri la ordo de la komencasignoj de mallokaj
+Estas neniu garantio pri la ordo de la komencatribuoj de mallokaj
 variabloj. Tio eble estas la unua granda limo de
 *Ymir*. **Kontribuo**, permesi garantion estus vere bonvena, sed estas
 vere malprobabla ke tio estus farebla kiam mallokaj variabloj venas de
@@ -281,8 +281,8 @@ malsamaj pakaĵoj.(*cf.*
 [Pakaĵoj](https://ymir-lang.org/eo/modules/README.html)).
 
 Por la momento ĉar estas malebla certigi ke malloka variablo estas jam
-asignita kiam referenci ĝin antaŭ la komenco de la programo, estas
-malakceptebla uzi mallokan variablon por komencasigni alian mallokan
+atribuita kiam referenci ĝin antaŭ la komenco de la programo, estas
+malakceptebla uzi mallokan variablon por komencatribui alian mallokan
 variablon. Bedaŭrinde tiu kontrolo estas tre limigita ĉar la valoron
 de malloka variablo povas esti uzita kiel redona valoro de funkcio,
 kaj esti do uzita kiel komencvaloro de alia malloka variablo. La sekva
@@ -298,9 +298,9 @@ def foo () -> i32 {
 }
 ```
 
-La tradukilo bedaŭrinde nur kapablas vidi ke la komencasigno de la
-variablo **`__B__`** dependas de la komencasigno de la variablo
-**`__A__`**, kaj permesos la komencasignon de la variablo **`__C__`**
+La tradukilo bedaŭrinde nur kapablas vidi ke la komencatribuo de la
+variablo **`__B__`** dependas de la komencatribuo de la variablo
+**`__A__`**, kaj permesos la komencatribuon de la variablo **`__C__`**
 tra la funkcio **`foo`** malgraŭ ĝia dependo al la variablo
 **`__A__`**. Eĉ se en ĉi tiu okazo la dependo estas relative evidenta,
 ĝi povas esti multe pli malevidenta kiam la funkcio **`foo`** venas de
@@ -445,7 +445,7 @@ def main ()
 	// malloka pi estas atingebla
     assert (pi == 3.14159265359);
 	
-	// malloka pi ĉiam povas esti atingita uzante la nomo de ĝia patra pakaĵo
+	// malloka pi ĉiam povas esti atingita uzante la nomon de ĝia patra pakaĵo
     assert (Main::pi == 3.14159265359);
 }
 ```
