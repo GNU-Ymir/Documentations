@@ -149,15 +149,15 @@ tipon **`i32`**.
 Kiel oni indikis pli frue, ĉiuj tipoj havas atributojn. La sekva
 tabelo listas la atributojn proprajn al fikskomaj tipoj.
 
-| Name | Meaning |
+| Nomo | Signifo |
 | --- | --- |
 | `max` | La plej granda valoro kiun la tipon povas konservi |
 | `min` | La plaj malgranda valoro kiun la tipon povas konservi |
 
-An overflow check is performed on literals at compilation time, and an
-error is returned by the compiler if the type of integer choosed to
-encode the literal is not large enough to contain the value. For
-example:
+Kiam oni povas koni la valoron de la literoj je la momento de traduko,
+la tradukilo kontrolas ĉu la valoro ne superŝutas la kapablon de la
+tipo kiu estis elektita por enteni ĝin. Ekzemple en la sekva
+fontkodo, la tipo ne taŭgas por la valoro :
 
 ```ymir
 def main () {
@@ -165,9 +165,9 @@ def main () {
 }
 ```
 
-Because a i8 can only store value ranging from `-127` to `128`, the
-value `934` would not fit. For that reason the compiler returns the
-following error.
+Ĉar i8 nur povas enhavi valoron kurante gamon de `-127` ĝis `128`, la
+valoro tipo ne taŭgas por `934`, do la tradukilo redonas la sekvan
+eraron.
 
 ```error
 Error : overflow capacity for type i8 = 943
@@ -180,16 +180,14 @@ ymir1: fatal error:
 compilation terminated.
 ```
 
-<br>
+**Atentu** Kiam la valoron oni ne povas koni je la momento de la
+traduko, la kontrolo ne povas esti farita kaj povas krei strangan
+konduton. Ekzemple, se oni provas aldoni `1` al variablo de tipo `i16`
+kies valoro estas `32767`, la rezulto estos `-32768`. *Kontribuo:*
+Trovi manieron por dinamike kontrili kiam valoroj superfluas (almenaŭ
+en *Debug* modo).
 
-**WARNING** However, if the value cannot be known at compile time, the
-overflow is not checked and can lead to strange behavior. For example,
-if you try to add 1 to a variable of type **`i16`** that contains the
-value `32767`, the result will be `-32768`. *Contribution:* Provide a
-dynamic way to verify the overflow of arithmetic operation (at least
-in debug mode).
-
-### Floating-point types
+### Glitkomaj tipoj
 
 Floating-point types, refer to numbers with a decimal
 part. *Ymir* provides two types of floating point numbers, **`f32`**
@@ -243,19 +241,23 @@ The following table lists the attributes specific to boolean type.
 | --- | --- |
 | `init` | The initial value - `false` | 
 
-### Character type 
+### Tekstaj tipoj
 
-The **`c8`** and **`c32`** are the types used to encode the
-characters. The **`c32`** character has a size of four bytes and can
-store any unicode value.  Literal characters can have two forms, and
-are always surrounded by the token **`'`**. The first form is the
-character itself for example **`'r'`**, and the second is the unicode
-value in the integer form `\u{12}` or `\u{0xB}`.
+La tipo **`c8`** and **`c32`** estas la tipoj uzitaj por kodigi la
+tekstajn signokodojn. La dimensio de la **`c32`** estas kvar bitokoj,
+kaj povas esti uzita por konservi unikodan valoron. Literaj signokodoj
+povas esti skribita laŭ du malsamaj formoj, sed estas ĉiam
+ĉirkaŭigitaj de la signo **`'`**. La unua formo estas la signokodo
+mem, ekzemple `'r'`, kaj la dua estas uzante la unikodan valoron
+ekzemple `\u{12}` aŭ `\u{0xB}`. Kiam la dua formo estas uzita, ambaŭ
+decimala kaj deksesuma formoj povas esti uzitaj por priskribi la
+unikodan valoron. Kiel por fikskomaj literoj deksesuma litero ĉiam
+komencas per `0x`.
 
-As with literal integers, it is necessary to add a prefix
-to define the type of a literal. The prefix used to specify the type
-of a literal character is **`c8`**, if nothing is specified, the
-character type will be **`c32`**.
+Kiel por alias literoj kiel fikskomaj literoj, necesas aldoni
+prefikson je la fino de la litero por difini ke temas pri **`c8`**
+anstataŭ **`c32`**. Se oni aldonas neniun prefikson la programlingvo
+ĉiam elektas **`c32`**.
 
 ```ymir
 def main () {
@@ -264,10 +266,8 @@ def main () {
 }
 ```
 
-<br>
-
-If the loaded literal is too long to be stored in the character type,
-an error will be returned by the compiler. For example :
+Se la litero estas tro granda por taŭgi en la tipo, la tradukilo ĵetas
+eraron, ekzemple:
 
 ```ymir
 def main () {
@@ -275,11 +275,9 @@ def main () {
 }
 ```
 
-<br>
-
-The error will be the following. This error means that you will need
-at least 3 **`c8`** (or bytes) to store the value, so it doesn't fit into one
-**`c8`** :
+Le tradukilo ĵetas la sekvan eraron. Tiu eraro volas diri ke oni
+bezonas tri bitokoj por konservi la valoron, sed nur unu estas
+disponebla en la tipo **`c8`**, do ĝi ne taŭgas.
 
 ```error
 Error : malformed literal, number of c8 is 3
@@ -292,13 +290,11 @@ ymir1: fatal error:
 compilation terminated.
 ```
 
-<br>
+Le sekva tabelo listas la atributojn proprajn al tekstaj tipoj.
 
-The following table lists the attributes specific to character types.
-
-| Name | Meaning | 
+| Nomo | Signifo | 
 | --- | --- |
-| `init` | The initial value - `\u{0}` | 
+| `init` | La unua valoro - `\u{0}` | 
 
 ### Pointers
 

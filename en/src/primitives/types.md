@@ -256,8 +256,11 @@ The **`c8`** and **`c32`** are the types used to encode the
 characters. The **`c32`** character has a size of four bytes and can
 store any unicode value.  Literal characters can have two forms, and
 are always surrounded by the token **`'`**. The first form is the
-character itself for example **`'r'`**, and the second is the unicode
-value in the integer form `\u{12}` or `\u{0xB}`.
+character itself for example `'r'`, and the second is the unicode
+value in the integer form `\u{12}` or `\u{0xB}`. In the case of the
+second form either decimal and hexadecimal form can be used to
+describe the unicode value. When using hexadecimal form, the value
+must start with `0x`.
 
 As with literal integers, it is necessary to add a prefix
 to define the type of a literal. The prefix used to specify the type
